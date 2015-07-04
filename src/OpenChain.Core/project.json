@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0-*",
+  "description": "",
+  "authors": [ "" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "compilationOptions": { "languageVersion": "csharp6", "allowUnsafe": false },
+
+  "dependencies": {
+    "protobuf-net": "2.0.0.668"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.Xml": "4.0.0.0"
+      },
+      "dependencies": {
+
+      }
+    },
+    "net46": {
+      "frameworkAssemblies": {
+        "System.Data": "4.0.0.0",
+        "System.Xml": "4.0.0.0"
+      },
+      "dependencies": {
+
+      }
+    }
+    //"dnxcore50": {
+    //  "dependencies": {
+    //    "System.Collections": "4.0.10-beta-22816",
+    //    "System.Linq": "4.0.0-beta-22816",
+    //    "System.Threading": "4.0.10-beta-22816",
+    //    "Microsoft.CSharp": "4.0.0-beta-22816"
+    //  }
+    //}
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "locked": false,
+  "version": -9998,
+  "projectFileDependencyGroups": {
+    "": [
+      "Microsoft.Data.SQLite >= 1.0.0-beta1",
+      "OpenChain.Core >= 1.0.0-*"
+    ],
+    "DNX,Version=v4.5.1": [
+      "framework/System.Data >= 4.0.0.0",
+      "framework/System.Xml >= 4.0.0.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "framework/System.Data >= 4.0.0.0",
+      "framework/System.Xml >= 4.0.0.0"
+    ]
+  },
+  "libraries": {
+    "Microsoft.Data.SQLite/1.0.0-beta1": {
+      "serviceable": false,
+      "sha": "Lgx+43A8cUn24jaehz0IuDNYVGc2EaSjp37xvbvh6ljSkyqrRDHIvuhX2HrHZnHg0k4LDydleKiCI9jwSUbStQ==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "System.Data.Common": "1.0.0-beta1"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/aspnet50/Microsoft.Data.SQLite.dll"
+          ],
+          "compileAssemblies": [
+            "lib/aspnet50/Microsoft.Data.SQLite.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {
+            "System.Data.Common": "1.0.0-beta1"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net451/Microsoft.Data.SQLite.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net451/Microsoft.Data.SQLite.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.Data.SQLite.1.0.0-beta1.nupkg",
+        "Microsoft.Data.SQLite.1.0.0-beta1.nupkg.sha512",
+        "Microsoft.Data.SQLite.nuspec",
+        "build/net451/Microsoft.Data.SQLite.targets",
+        "lib/aspnet50/Microsoft.Data.SQLite.dll",
+        "lib/aspnet50/Microsoft.Data.SQLite.xml",
+        "lib/aspnetcore50/Microsoft.Data.SQLite.dll",
+        "lib/aspnetcore50/Microsoft.Data.SQLite.xml",
+        "lib/net451/Microsoft.Data.SQLite.dll",
+        "lib/net451/Microsoft.Data.SQLite.xml",
+        "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.dll",
+        "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.xml",
+        "redist/x86/sqlite3.dll"
+      ]
+    },
+    "protobuf-net/2.0.0.668": {
+      "serviceable": false,
+      "sha": "Lgj+Kf1+RV0utKxX9u1WEcymPGrbWrj/AwFmFADFLLa/LLdc1ji2MIGcecFRAGUu6UO8BRbdjZAIYWvLlN1B/A==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ]
+        }
+      },
+      "files": [
+        "protobuf-net.2.0.0.668.nupkg",
+        "protobuf-net.2.0.0.668.nupkg.sha512",
+        "protobuf-net.nuspec",
+        "lib/net20/protobuf-net.dll",
+        "lib/net20/protobuf-net.pdb",
+        "lib/net20/protobuf-net.xml",
+        "lib/net20-cf/protobuf-net.dll",
+        "lib/net20-cf/protobuf-net.pdb",
+        "lib/net20-cf/protobuf-net.xml",
+        "lib/net30/protobuf-net.dll",
+        "lib/net30/protobuf-net.pdb",
+        "lib/net30/protobuf-net.xml",
+        "lib/net35/protobuf-net.dll",
+        "lib/net35/protobuf-net.pdb",
+        "lib/net35/protobuf-net.xml",
+        "lib/net35-cf/protobuf-net.dll",
+        "lib/net35-cf/protobuf-net.pdb",
+        "lib/net35-cf/protobuf-net.xml",
+        "lib/net40/protobuf-net.dll",
+        "lib/net40/protobuf-net.pdb",
+        "lib/net40/protobuf-net.xml",
+        "lib/net40-cf/protobuf-net.dll",
+        "lib/net40-cf/protobuf-net.pdb",
+        "lib/net40-cf/protobuf-net.xml",
+        "lib/netcore45/protobuf-net.dll",
+        "lib/netcore45/protobuf-net.pdb",
+        "lib/netcore45/protobuf-net.pri",
+        "lib/netcore45/protobuf-net.XML",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.dll",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.pdb",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.xml",
+        "lib/sl3-wp/protobuf-net.dll",
+        "lib/sl3-wp/protobuf-net.pdb",
+        "lib/sl3-wp/protobuf-net.xml",
+        "lib/sl4/protobuf-net.dll",
+        "lib/sl4/protobuf-net.pdb",
+        "lib/sl4/protobuf-net.xml",
+        "lib/sl4-windowsphone71/protobuf-net.dll",
+        "lib/sl4-windowsphone71/protobuf-net.pdb",
+        "lib/sl4-windowsphone71/protobuf-net.xml",
+        "lib/windowsphone8/protobuf-net.dll",
+        "lib/windowsphone8/protobuf-net.pdb",
+        "lib/windowsphone8/protobuf-net.xml"
+      ]
+    },
+    "System.Data.Common/1.0.0-beta1": {
+      "serviceable": false,
+      "sha": "cuIEw5cNVZZBYz2STud08Q5VBP+GKvDJPPP3AoApL72tlYhl9uHoW54Q3QTi5tElsXFCnFw868atiHqrGS7GIw==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [
+            "System.Data",
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/aspnet50/System.Data.Common.dll"
+          ],
+          "compileAssemblies": [
+            "lib/aspnet50/System.Data.Common.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [
+            "System.Data",
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net451/System.Data.Common.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net451/System.Data.Common.dll"
+          ]
+        }
+      },
+      "files": [
+        "System.Data.Common.1.0.0-beta1.nupkg",
+        "System.Data.Common.1.0.0-beta1.nupkg.sha512",
+        "System.Data.Common.nuspec",
+        "lib/aspnet50/System.Data.Common.dll",
+        "lib/aspnet50/System.Data.Common.xml",
+        "lib/aspnetcore50/System.Data.Common.dll",
+        "lib/aspnetcore50/System.Data.Common.xml",
+        "lib/net451/System.Data.Common.dll",
+        "lib/net451/System.Data.Common.xml",
+        "lib/portable-net451+win81+wpa81/System.Data.Common.dll",
+        "lib/portable-net451+win81+wpa81/System.Data.Common.xml"
+      ]
+    }
+  }
+}

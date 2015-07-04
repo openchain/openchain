@@ -1,0 +1,119 @@
+{
+  "locked": false,
+  "version": -9998,
+  "projectFileDependencyGroups": {
+    "": [
+      "OpenChain.Core >= 1.0.0-*",
+      "MongoDB.Bson >= 2.0.1"
+    ],
+    "DNX,Version=v4.5.1": [],
+    ".NETFramework,Version=v4.6": []
+  },
+  "libraries": {
+    "MongoDB.Bson/2.0.1": {
+      "serviceable": false,
+      "sha": "dr8KYpTt5VIqGWQ5Bzud2BA/lH2csIfL5WLrfc90UzSWGF378ugvEo5tx4J0eZohvHzsRRiMS2YTmJOTRN+iYg==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "MongoDB.Bson.2.0.1.nupkg",
+        "MongoDB.Bson.2.0.1.nupkg.sha512",
+        "MongoDB.Bson.nuspec",
+        "lib/net45/MongoDB.Bson.dll",
+        "lib/net45/MongoDB.Bson.XML"
+      ]
+    },
+    "protobuf-net/2.0.0.668": {
+      "serviceable": false,
+      "sha": "Lgj+Kf1+RV0utKxX9u1WEcymPGrbWrj/AwFmFADFLLa/LLdc1ji2MIGcecFRAGUu6UO8BRbdjZAIYWvLlN1B/A==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net40/protobuf-net.dll"
+          ]
+        }
+      },
+      "files": [
+        "protobuf-net.2.0.0.668.nupkg",
+        "protobuf-net.2.0.0.668.nupkg.sha512",
+        "protobuf-net.nuspec",
+        "lib/net20/protobuf-net.dll",
+        "lib/net20/protobuf-net.pdb",
+        "lib/net20/protobuf-net.xml",
+        "lib/net20-cf/protobuf-net.dll",
+        "lib/net20-cf/protobuf-net.pdb",
+        "lib/net20-cf/protobuf-net.xml",
+        "lib/net30/protobuf-net.dll",
+        "lib/net30/protobuf-net.pdb",
+        "lib/net30/protobuf-net.xml",
+        "lib/net35/protobuf-net.dll",
+        "lib/net35/protobuf-net.pdb",
+        "lib/net35/protobuf-net.xml",
+        "lib/net35-cf/protobuf-net.dll",
+        "lib/net35-cf/protobuf-net.pdb",
+        "lib/net35-cf/protobuf-net.xml",
+        "lib/net40/protobuf-net.dll",
+        "lib/net40/protobuf-net.pdb",
+        "lib/net40/protobuf-net.xml",
+        "lib/net40-cf/protobuf-net.dll",
+        "lib/net40-cf/protobuf-net.pdb",
+        "lib/net40-cf/protobuf-net.xml",
+        "lib/netcore45/protobuf-net.dll",
+        "lib/netcore45/protobuf-net.pdb",
+        "lib/netcore45/protobuf-net.pri",
+        "lib/netcore45/protobuf-net.XML",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.dll",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.pdb",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.xml",
+        "lib/sl3-wp/protobuf-net.dll",
+        "lib/sl3-wp/protobuf-net.pdb",
+        "lib/sl3-wp/protobuf-net.xml",
+        "lib/sl4/protobuf-net.dll",
+        "lib/sl4/protobuf-net.pdb",
+        "lib/sl4/protobuf-net.xml",
+        "lib/sl4-windowsphone71/protobuf-net.dll",
+        "lib/sl4-windowsphone71/protobuf-net.pdb",
+        "lib/sl4-windowsphone71/protobuf-net.xml",
+        "lib/windowsphone8/protobuf-net.dll",
+        "lib/windowsphone8/protobuf-net.pdb",
+        "lib/windowsphone8/protobuf-net.xml"
+      ]
+    }
+  }
+}
