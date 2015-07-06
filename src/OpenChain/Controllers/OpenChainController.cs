@@ -14,11 +14,13 @@ using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
+using Microsoft.AspNet.Cors.Core;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenChain.Controllers
 {
+    [EnableCors("Any")]
     [Route("")]
     public class OpenChainController : Controller
     {
@@ -26,7 +28,7 @@ namespace OpenChain.Controllers
         
         public OpenChainController()
         {
-            ITransactionStore store = new SqliteTransactionStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\Server\src\OpenChain.Console\ledger.db");
+            ITransactionStore store = new SqliteTransactionStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\src\OpenChain.Console\ledger.db");
             this.controller = new LedgerController(store, new BasicValidator(store));
         }
 

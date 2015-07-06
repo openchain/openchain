@@ -1,5 +1,5 @@
 {
-  "webroot": "wwwroot",
+  "webroot": "",
   "version": "1.0.0-*",
   "compilationOptions": { "languageVersion": "csharp6" },
 
@@ -10,6 +10,7 @@
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta4",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta4",
     "Microsoft.AspNet.Http": "1.0.0-beta4",
+    "Microsoft.AspNet.Cors": "1.0.0-beta4",
     "OpenChain.Core": "1.0.0-*",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Server": "1.0.0-*",
