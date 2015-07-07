@@ -2,15 +2,15 @@ package OpenChain;
 
 message Transaction {
 
-	message AccountEntry {
-	   required string account = 1;
-	   required string asset = 2;
-	   required sint64 amount = 3;
-	   required bytes version = 4;
-	}
+    message AccountEntry {
+        required string account = 1;
+        required string asset = 2;
+        required sint64 amount = 3;
+        required bytes version = 4;
+    }
 
-   repeated AccountEntry account_entries = 1;
-   required bytes metadata = 2;
+    repeated AccountEntry account_entries = 1;
+    required bytes metadata = 2;
 }
 
 message LedgerRecord {

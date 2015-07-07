@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Initialization
+namespace OpenChain.Models
 {
-    public static class StorageConfigurator
+    public static class ConfigurationParser
     {
         public static ILedgerStore CreateLedgerStore(IServiceProvider serviceProvider)
         {

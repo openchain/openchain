@@ -21,6 +21,7 @@ using Microsoft.Framework.Logging;
 
 namespace OpenChain.Controllers
 {
+    [EnableCors("Any")]
     [Route("")]
     public class OpenChainController : Controller
     {

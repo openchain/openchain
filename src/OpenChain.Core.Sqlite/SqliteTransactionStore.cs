@@ -59,25 +59,17 @@ namespace OpenChain.Core.Sqlite
 
         private async Task<Tuple<BinaryData, long>> GetLedgerStatus(SQLiteTransaction context)
         {
-            SQLiteCommand ledgerVersion = connection.CreateCommand();
-            ledgerVersion.CommandText = @"
-                SELECT  LedgerHeight, LedgerHash
-                FROM    Ledgers
-                WHERE   Id = 0";
+            var result = await ExecuteAsync(@"
+                    SELECT  LedgerHeight, LedgerHash
+                    FROM    Ledgers
+                    WHERE   Id = 0",
+                reader => Tuple.Create(new BinaryData((byte[])reader.GetValue(1) ?? new byte[0]), reader.GetInt64(0)),
+                new Dictionary<string, object>());
 
-            BinaryData lastTransactionHash;
-            long ledgerHeight;
-            using (DbDataReader reader = await ledgerVersion.ExecuteReaderAsync())
-            {
-                bool ledgerFound = await reader.ReadAsync();
-                if (!ledgerFound)
-                    throw new InvalidOperationException();
+            if (result.Count == 0)
+                throw new InvalidOperationException();
 
-                ledgerHeight = reader.GetInt64(0);
-                lastTransactionHash = new BinaryData((byte[])reader.GetValue(1) ?? new byte[0]);
-            }
-
-            return Tuple.Create(lastTransactionHash, ledgerHeight);
+            return result[0];
         }
 
         private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord, long id)
@@ -93,29 +85,29 @@ namespace OpenChain.Core.Sqlite
 
             await UpdateAccounts(TransactionSerializer.DeserializeTransaction(rawTransaction), transactionHash);
 
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"
-                INSERT INTO Transactions
-                (Id, TransactionHash, RecordHash, PreviousRecordHash, RawData)
-                VALUES (@id, @transactionHash, @recordHash, @previousRecordHash, @rawData)";
+            await ExecuteAsync(@"
+                    INSERT INTO Transactions
+                    (Id, TransactionHash, RecordHash, PreviousRecordHash, RawData)
+                    VALUES (@id, @transactionHash, @recordHash, @previousRecordHash, @rawData)",
+                new Dictionary<string, object>()
+                {
+                    { "@id", id },
+                    { "@transactionHash", transactionHash },
+                    { "@recordHash", recordHash },
+                    { "@previousRecordHash", ledgerRecord.PreviousRecordHash.ToArray() },
+                    { "@rawData", rawLedgerRecord }
+                });
 
-            command.Parameters.AddWithValue("@id", id);
-            command.Parameters.AddWithValue("@transactionHash", transactionHash);
-            command.Parameters.AddWithValue("@recordHash", recordHash);
-            command.Parameters.AddWithValue("@previousRecordHash", ledgerRecord.PreviousRecordHash.ToArray());
-            command.Parameters.AddWithValue("@rawData", rawLedgerRecord);
+            await ExecuteAsync(@"
+                    UPDATE  Ledgers
+                    SET     LedgerHash = @ledgerHash,
+                            LedgerHeight = LedgerHeight + 1
+                    WHERE   Id = 0",
+                new Dictionary<string, object>()
+                {
+                    { "@ledgerHash", recordHash }
+                });
 
-            await command.ExecuteNonQueryAsync();
-
-            SQLiteCommand updateLedgerHash = connection.CreateCommand();
-            updateLedgerHash.CommandText = @"
-                UPDATE  Ledgers
-                SET     LedgerHash = @ledgerHash,
-                        LedgerHeight = LedgerHeight + 1
-                WHERE   Id = 0";
-            updateLedgerHash.Parameters.AddWithValue("@ledgerHash", recordHash);
-            await updateLedgerHash.ExecuteNonQueryAsync();
-            
             return recordHash;
         }
 
@@ -131,37 +123,37 @@ namespace OpenChain.Core.Sqlite
             {
                 if (!entry.Version.Equals(BinaryData.Empty))
                 {
-                    SQLiteCommand insertAccount = connection.CreateCommand();
-                    insertAccount.CommandText = @"
+                    int count = await ExecuteAsync(@"
                             UPDATE  Accounts
                             SET     Balance = Balance + @balance, Version = @version
-                            WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion";
-                    insertAccount.Parameters.AddWithValue("@account", entry.AccountKey.Account);
-                    insertAccount.Parameters.AddWithValue("@asset", entry.AccountKey.Asset);
-                    insertAccount.Parameters.AddWithValue("@previousVersion", entry.Version.Value.ToArray());
-                    insertAccount.Parameters.AddWithValue("@balance", entry.Amount);
-                    insertAccount.Parameters.AddWithValue("@version", transactionHash);
-
-                    int count = await insertAccount.ExecuteNonQueryAsync();
+                            WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion",
+                        new Dictionary<string, object>()
+                        {
+                            { "@account", entry.AccountKey.Account },
+                            { "@asset", entry.AccountKey.Asset },
+                            { "@previousVersion", entry.Version.Value.ToArray() },
+                            { "@balance", entry.Amount },
+                            { "@version", transactionHash }
+                        });
 
                     if (count == 0)
                         throw new AccountModifiedException(entry);
                 }
                 else
                 {
-                    SQLiteCommand insertAccount = connection.CreateCommand();
-                    insertAccount.CommandText = @"
-                            INSERT INTO Accounts
-                            (Account, Asset, Balance, Version)
-                            VALUES (@account, @asset, @balance, @version)";
-                    insertAccount.Parameters.AddWithValue("@account", entry.AccountKey.Account);
-                    insertAccount.Parameters.AddWithValue("@asset", entry.AccountKey.Asset);
-                    insertAccount.Parameters.AddWithValue("@balance", entry.Amount);
-                    insertAccount.Parameters.AddWithValue("@version", transactionHash);
-
                     try
                     {
-                        await insertAccount.ExecuteNonQueryAsync();
+                        await ExecuteAsync(@"
+                            INSERT INTO Accounts
+                            (Account, Asset, Balance, Version)
+                            VALUES (@account, @asset, @balance, @version)",
+                        new Dictionary<string, object>()
+                        {
+                            { "@account", entry.AccountKey.Account },
+                            { "@asset", entry.AccountKey.Asset },
+                            { "@balance", entry.Amount },
+                            { "@version", transactionHash }
+                        });
                     }
                     catch (SQLiteException exception) when (exception.Message == "constraint failed")
                     {
@@ -202,30 +194,27 @@ namespace OpenChain.Core.Sqlite
 
         public async Task<IReadOnlyList<BinaryData>> GetTransactionStream(BinaryData from)
         {
-            SQLiteCommand query = connection.CreateCommand();
+            Func<DbDataReader, BinaryData> selector = reader => new BinaryData((byte[])reader.GetValue(0));
             if (from != null)
             {
-                query.CommandText = @"
-                    SELECT  RawData
-                    FROM    Transactions
-                    WHERE   Id > (SELECT Id FROM Transactions WHERE RecordHash = @recordHash)";
-                query.Parameters.AddWithValue("@recordHash", from.ToArray());
+                return await ExecuteAsync(@"
+                        SELECT  RawData
+                        FROM    Transactions
+                        WHERE   Id > (SELECT Id FROM Transactions WHERE RecordHash = @recordHash)",
+                    selector,
+                    new Dictionary<string, object>()
+                    {
+                        { "@recordHash", from.ToArray() }
+                    });
             }
             else
             {
-                query.CommandText = @"
-                    SELECT  RawData
-                    FROM    Transactions";
+                return await ExecuteAsync(@"
+                        SELECT  RawData
+                        FROM    Transactions",
+                    selector,
+                    new Dictionary<string, object>());
             }
-
-            List<BinaryData> result = new List<BinaryData>();
-            using (DbDataReader reader = await query.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                    result.Add(new BinaryData((byte[])reader.GetValue(0)));
-            }
-
-            return result.AsReadOnly();
         }
 
         public async Task OpenDatabase()
@@ -276,7 +265,36 @@ namespace OpenChain.Core.Sqlite
 
         public Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount)
         {
-            throw new NotSupportedException();
+            throw new NotImplementedException();
+        }
+
+        private async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
+        {
+            SQLiteCommand query = connection.CreateCommand();
+            query.CommandText = commandText;
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+                query.Parameters.AddWithValue(parameter.Key, parameter.Value);
+
+            List<T> result = new List<T>();
+            using (DbDataReader reader = await query.ExecuteReaderAsync())
+            {
+                while (await reader.ReadAsync())
+                    result.Add(selector(reader));
+            }
+
+            return result.AsReadOnly();
+        }
+
+        private async Task<int> ExecuteAsync(string commandText, IDictionary<string, object> parameters)
+        {
+            SQLiteCommand query = connection.CreateCommand();
+            query.CommandText = commandText;
+
+            foreach (KeyValuePair<string, object> parameter in parameters)
+                query.Parameters.AddWithValue(parameter.Key, parameter.Value);
+
+            return await query.ExecuteNonQueryAsync();
         }
     }
 }

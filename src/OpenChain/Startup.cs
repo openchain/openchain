@@ -14,9 +14,9 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using OpenChain.Core;
-using OpenChain.Initialization;
 using OpenChain.Models;
 using Microsoft.AspNet.WebSockets.Server;
+using Microsoft.AspNet.Cors.Core;
 
 namespace OpenChain
 {
@@ -41,8 +41,10 @@ namespace OpenChain
             
             // CORS Headers
             services.AddCors();
+            CorsPolicy policy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().Build();
+            services.ConfigureCors(options => options.AddPolicy("Any", policy));
 
-            services.AddTransient<ILedgerStore>(StorageConfigurator.CreateLedgerStore);
+            services.AddTransient<ILedgerStore>(ConfigurationParser.CreateLedgerStore);
         }
 
         // Configure is called after ConfigureServices is called.
@@ -60,7 +62,7 @@ namespace OpenChain
 
             // Configure the HTTP request pipeline.
             //app.UseStaticFiles();
-            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            //app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             // Add MVC to the request pipeline.
             app.UseMvc();
