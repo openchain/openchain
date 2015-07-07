@@ -6,15 +6,16 @@
       "Microsoft.AspNet.Mvc >= 6.0.0-beta4",
       "Microsoft.AspNet.Server.IIS >= 1.0.0-beta4",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta4",
-      "Microsoft.AspNet.StaticFiles >= 1.0.0-beta4",
-      "Microsoft.AspNet.WebSockets.Server >= 1.0.0-beta4",
       "Microsoft.AspNet.Http >= 1.0.0-beta4",
       "Microsoft.AspNet.Cors >= 1.0.0-beta4",
+      "Microsoft.AspNet.WebSockets.Server >= 1.0.0-beta4",
       "OpenChain.Core >= 1.0.0-*",
       "Newtonsoft.Json >= 7.0.1",
       "OpenChain.Server >= 1.0.0-*",
       "OpenChain.Core.Sqlite >= 1.0.0-*",
-      "System.Text.Encoding >= 4.0.10-beta-22816"
+      "System.Text.Encoding >= 4.0.10-beta-22816",
+      "Microsoft.Framework.Logging.Console >= 1.0.0-beta4",
+      "Microsoft.Net.Http.Client >= 1.0.0-beta6-10079"
     ],
     "DNX,Version=v4.5.1": []
   },
@@ -1355,49 +1356,6 @@
         "lib/dnxcore50/Microsoft.AspNet.Server.WebListener.xml"
       ]
     },
-    "Microsoft.AspNet.StaticFiles/1.0.0-beta4": {
-      "serviceable": true,
-      "sha": "jWxWQB8uTGOyVddlxP0kloTYtaQqnzUg+kMgUcNir4l58FbSTymbVTczOqjuy3Kdt3xy9nh/+kKGWpkCc3xf8g==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "Microsoft.AspNet.Http.Extensions": "1.0.0-beta4",
-            "Microsoft.AspNet.Http.Interfaces": "1.0.0-beta4",
-            "Microsoft.AspNet.FileProviders.Interfaces": "1.0.0-beta4",
-            "Microsoft.AspNet.Hosting.Interfaces": "1.0.0-beta4",
-            "Microsoft.Framework.Logging": "1.0.0-beta4",
-            "Microsoft.Framework.WebEncoders": "1.0.0-beta4"
-          },
-          "frameworkAssemblies": [
-            "mscorlib",
-            "System",
-            "System.Core",
-            "Microsoft.CSharp"
-          ],
-          "runtimeAssemblies": [
-            "lib/dnx451/Microsoft.AspNet.StaticFiles.dll"
-          ],
-          "compileAssemblies": [
-            "lib/dnx451/Microsoft.AspNet.StaticFiles.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "Microsoft.AspNet.StaticFiles.1.0.0-beta4.nupkg",
-        "Microsoft.AspNet.StaticFiles.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.AspNet.StaticFiles.nuspec",
-        "lib/dnx451/Microsoft.AspNet.StaticFiles.dll",
-        "lib/dnx451/Microsoft.AspNet.StaticFiles.xml",
-        "lib/dnxcore50/Microsoft.AspNet.StaticFiles.dll",
-        "lib/dnxcore50/Microsoft.AspNet.StaticFiles.xml"
-      ]
-    },
     "Microsoft.AspNet.WebSockets.Protocol/1.0.0-beta4": {
       "serviceable": true,
       "sha": "ugTW8cKNmiEtOnBxTrgLVr03DMDXXxipQ9ZF5m5vuVb8OytNqRRkhUYhwIfbsTY9h82kF4JYTVTPplwjBMovbA==",
@@ -2069,6 +2027,57 @@
         "lib/portable-net451+win81+wpa81/Microsoft.Framework.Logging.xml"
       ]
     },
+    "Microsoft.Framework.Logging.Console/1.0.0-beta4": {
+      "serviceable": true,
+      "sha": "8EC3z+rmENBeYWc4o57ZdmytUrzpT/6NvHIIM8sNpj3v/zMopqMs6Ie4LAKk/TxUjPPvxcR0vyajQB8z6TLCiA==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "Microsoft.Framework.Logging.Interfaces": "1.0.0-beta4"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/dnx451/Microsoft.Framework.Logging.Console.dll"
+          ],
+          "compileAssemblies": [
+            "lib/dnx451/Microsoft.Framework.Logging.Console.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {
+            "Microsoft.Framework.Logging.Interfaces": "1.0.0-beta4"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net45/Microsoft.Framework.Logging.Console.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/Microsoft.Framework.Logging.Console.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.Framework.Logging.Console.1.0.0-beta4.nupkg",
+        "Microsoft.Framework.Logging.Console.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.Logging.Console.nuspec",
+        "lib/dnx451/Microsoft.Framework.Logging.Console.dll",
+        "lib/dnx451/Microsoft.Framework.Logging.Console.xml",
+        "lib/dnxcore50/Microsoft.Framework.Logging.Console.dll",
+        "lib/dnxcore50/Microsoft.Framework.Logging.Console.xml",
+        "lib/net45/Microsoft.Framework.Logging.Console.dll",
+        "lib/net45/Microsoft.Framework.Logging.Console.xml"
+      ]
+    },
     "Microsoft.Framework.Logging.Interfaces/1.0.0-beta4": {
       "serviceable": true,
       "sha": "OK8v8gpDYfH01Gy1tvT4mS1r6ZWMAz1HXo872v7pswishE6oyTQwC44BpYM+Obq8GW7E6Ai/Vj3wE/CuLUDJGA==",
@@ -2388,6 +2397,55 @@
         "lib/dnxcore50/Microsoft.Framework.WebEncoders.Core.xml",
         "lib/net45/Microsoft.Framework.WebEncoders.Core.dll",
         "lib/net45/Microsoft.Framework.WebEncoders.Core.xml"
+      ]
+    },
+    "Microsoft.Net.Http.Client/1.0.0-beta6-10079": {
+      "serviceable": false,
+      "sha": "cCEgqyC3RIvgl2BbFYg3aMVB+JioIse0TsEqOocVhYuUAxBxDXo6/CSmJFScu+seTHo1AUjwIq4fNAioeAJbHA==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [
+            "System.Net.Http",
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/dnx451/Microsoft.Net.Http.Client.dll"
+          ],
+          "compileAssemblies": [
+            "lib/dnx451/Microsoft.Net.Http.Client.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [
+            "System.Net.Http",
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net45/Microsoft.Net.Http.Client.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/Microsoft.Net.Http.Client.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg",
+        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg.sha512",
+        "Microsoft.Net.Http.Client.nuspec",
+        "lib/dnx451/Microsoft.Net.Http.Client.dll",
+        "lib/dnx451/Microsoft.Net.Http.Client.xml",
+        "lib/dnxcore50/Microsoft.Net.Http.Client.dll",
+        "lib/dnxcore50/Microsoft.Net.Http.Client.xml",
+        "lib/net45/Microsoft.Net.Http.Client.dll",
+        "lib/net45/Microsoft.Net.Http.Client.xml"
       ]
     },
     "Microsoft.Net.Http.Headers/1.0.0-beta4": {

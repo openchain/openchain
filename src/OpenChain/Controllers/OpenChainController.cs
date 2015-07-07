@@ -9,71 +9,55 @@ using OpenChain.Server;
 using OpenChain.Core.Sqlite;
 using Microsoft.AspNet.Http;
 using OpenChain.Models;
-using Microsoft.AspNet.WebSockets.Server;
 using System.Net;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using Microsoft.AspNet.Cors.Core;
+using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Framework.Logging;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenChain.Controllers
 {
-    [EnableCors("Any")]
     [Route("")]
     public class OpenChainController : Controller
     {
-        private readonly LedgerController controller;
+        private readonly ILedgerStore store;
         
-        public OpenChainController()
+        public OpenChainController(IConfiguration configuration, ILedgerStore store)
         {
-            ITransactionStore store = new SqliteTransactionStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\src\OpenChain.Console\ledger.db");
-            this.controller = new LedgerController(store, new BasicValidator(store));
+            this.store = store;
         }
 
-        [HttpGet("transactionstream")]
+        [HttpGet("stream")]
         public async Task<ActionResult> GetStream(string from)
         {
+            IConfigurationSourceRoot configuration = (IConfigurationSourceRoot)this.Context.ApplicationServices.GetService(typeof(IConfigurationSourceRoot));
+
             BinaryData ledgerRecordHash;
             if (string.IsNullOrEmpty(from))
                 ledgerRecordHash = null;
             else
                 ledgerRecordHash = BinaryData.Parse(from);
 
-            IReadOnlyList<BinaryData> records = await this.controller.Store.GetTransactionStream(ledgerRecordHash);
+            IReadOnlyList<BinaryData> records = await this.store.GetTransactionStream(ledgerRecordHash);
 
             return Json(records.Select(record => new { raw = record.ToString() }).ToArray());
-
-            ////TransactionStreamWebSocketHandler handler = new TransactionStreamWebSocketHandler(ledgerRecordHash);
-            ////WebSocketMiddleware webSocket = new WebSocketMiddleware(handler.Process, new WebSocketOptions());
-
-            ////await webSocket.Invoke(this.Request.HttpContext);
-
-            //if (Context.IsWebSocketRequest)
-            //{
-            //    WebSocket webSocket = await this.Context.AcceptWebSocketAsync();
-            //    ArraySegment<byte> segment = new ArraySegment<byte>(Encoding.UTF8.GetBytes("\"Hello world\""));
-            //    await webSocket.SendAsync(segment, WebSocketMessageType.Text, false, CancellationToken.None);
-            //}
-
-            ////return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
-            //return new HttpStatusCodeResult((int)HttpStatusCode.SwitchingProtocols);
         }
 
-        // POST api/values
         [HttpPost("submit")]
-        public async Task<JObject> Post([FromBody]string transaction)
+        public async Task<ActionResult> Post([FromBody]JObject body)
         {
-            JObject body = JObject.Parse(transaction);
-
             BinaryData parsedTransaction = BinaryData.Parse((string)body["raw"]);
+
             // Validate deserialization
             Transaction deserializedTransaction = TransactionSerializer.DeserializeTransaction(parsedTransaction.ToArray());
 
-            BinaryData ledgerRecord = await this.controller.PostTransaction(parsedTransaction, null);
+            BinaryData ledgerRecord = await this.store.AddTransaction(parsedTransaction, DateTime.UtcNow, BinaryData.Empty);
 
-            return new JObject(new
+            return Json(new
             {
                 ledger_record = ledgerRecord.ToString()
             });

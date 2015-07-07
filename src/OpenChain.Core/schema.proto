@@ -1,0 +1,21 @@
+package OpenChain;
+
+message Transaction {
+
+	message AccountEntry {
+	   required string account = 1;
+	   required string asset = 2;
+	   required sint64 amount = 3;
+	   required bytes version = 4;
+	}
+
+   repeated AccountEntry account_entries = 1;
+   required bytes metadata = 2;
+}
+
+message LedgerRecord {
+   required bytes transaction = 1;
+   required int64 timestamp = 2;
+   required bytes external_metadata = 3;
+   required bytes previous_record = 4;
+}

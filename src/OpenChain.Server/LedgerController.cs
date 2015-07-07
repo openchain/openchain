@@ -12,13 +12,13 @@ namespace OpenChain.Server
     {
         private readonly ITransactionValidator validator;
 
-        public LedgerController(ITransactionStore store, ITransactionValidator validator)
+        public LedgerController(ILedgerStore store, ITransactionValidator validator)
         {
             this.Store = store;
             this.validator = validator;
         }
 
-        public ITransactionStore Store { get; }
+        public ILedgerStore Store { get; }
 
         public async Task<BinaryData> PostTransaction(BinaryData rawTransaction, IEnumerable<AuthenticationEvidence> authentication)
         {

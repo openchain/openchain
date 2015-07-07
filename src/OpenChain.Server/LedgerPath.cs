@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace OpenChain.Server
 {
     public class LedgerPath
     {
+        // Only allow alphanumeric characters and characters in the following set: "$-_.+!*'(),".
+        private static readonly Regex invalidCharacter = new Regex(@"[^\w\$_\.\+!*'\(\),-]", RegexOptions.Compiled);
+
         private LedgerPath(string path, IEnumerable<string> segments, bool isDirectory)
         {
             this.FullPath = path;
@@ -50,7 +54,8 @@ namespace OpenChain.Server
 
         public static bool IsValidPathSegment(string path)
         {
-            return !path.Contains("\0") && !path.Contains("/");
+            //return !path.Contains("\0") && !path.Contains("/");
+            return !invalidCharacter.IsMatch(path);
         }
 
         public string FullPath { get; }

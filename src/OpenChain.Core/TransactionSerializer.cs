@@ -50,7 +50,7 @@ namespace OpenChain.Core
                     new BinaryData(result.Metadata));
             }
         }
-        
+
         public static byte[] SerializeLedgerRecord(this LedgerRecord record)
         {
             SerializableLedgerRecord serializableRecord = new SerializableLedgerRecord()

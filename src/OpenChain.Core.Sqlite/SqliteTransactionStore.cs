@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Core.Sqlite
 {
-    public class SqliteTransactionStore : ITransactionStore
+    public class SqliteTransactionStore : ILedgerStore, ILedgerQueries
     {
         private readonly SQLiteConnection connection;
 
@@ -91,6 +91,8 @@ namespace OpenChain.Core.Sqlite
                 transactionHash = hash.ComputeHash(rawTransaction);
             }
 
+            await UpdateAccounts(TransactionSerializer.DeserializeTransaction(rawTransaction), transactionHash);
+
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = @"
                 INSERT INTO Transactions
@@ -113,8 +115,6 @@ namespace OpenChain.Core.Sqlite
                 WHERE   Id = 0";
             updateLedgerHash.Parameters.AddWithValue("@ledgerHash", recordHash);
             await updateLedgerHash.ExecuteNonQueryAsync();
-
-            await UpdateAccounts(TransactionSerializer.DeserializeTransaction(rawTransaction), transactionHash);
             
             return recordHash;
         }
@@ -263,6 +263,7 @@ namespace OpenChain.Core.Sqlite
 
             await command.ExecuteNonQueryAsync();
 
+            // Insert the ledger master record
             command = connection.CreateCommand();
             command.CommandText = @"
                 INSERT OR IGNORE INTO Ledgers
@@ -271,6 +272,11 @@ namespace OpenChain.Core.Sqlite
             ";
 
             await command.ExecuteNonQueryAsync();
+        }
+
+        public Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount)
+        {
+            throw new NotSupportedException();
         }
     }
 }

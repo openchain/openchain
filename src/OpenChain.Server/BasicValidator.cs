@@ -9,9 +9,9 @@ namespace OpenChain.Server
 {
     public class BasicValidator : ITransactionValidator
     {
-        private readonly ITransactionStore store;
+        private readonly ILedgerQueries store;
 
-        public BasicValidator(ITransactionStore store)
+        public BasicValidator(ILedgerQueries store)
         {
             this.store = store;
         }
