@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.ConfigurationModel;
 using Newtonsoft.Json.Linq;
 using OpenChain.Core;
 using OpenChain.Server;
-using OpenChain.Core.Sqlite;
-using Microsoft.AspNet.Http;
-using OpenChain.Models;
-using System.Net;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading;
-using Microsoft.AspNet.Cors.Core;
-using Microsoft.Framework.ConfigurationModel;
-using Microsoft.Framework.Logging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,10 +17,12 @@ namespace OpenChain.Controllers
     public class OpenChainController : Controller
     {
         private readonly ILedgerStore store;
-        
-        public OpenChainController(IConfiguration configuration, ILedgerStore store)
+        private readonly TransactionValidator validator;
+
+        public OpenChainController(IConfiguration configuration, ILedgerStore store, IRulesValidator validator)
         {
             this.store = store;
+            this.validator = new TransactionValidator(store, validator);
         }
 
         [HttpGet("stream")]
@@ -53,14 +46,11 @@ namespace OpenChain.Controllers
         {
             BinaryData parsedTransaction = BinaryData.Parse((string)body["raw"]);
 
-            // Validate deserialization
-            Transaction deserializedTransaction = TransactionSerializer.DeserializeTransaction(parsedTransaction.ToArray());
-
-            BinaryData ledgerRecord = await this.store.AddTransaction(parsedTransaction, DateTime.UtcNow, BinaryData.Empty);
+            BinaryData ledgerRecordHash = await validator.PostTransaction(parsedTransaction, new AuthenticationEvidence[0]);
 
             return Json(new
             {
-                ledger_record = ledgerRecord.ToString()
+                ledger_record = ledgerRecordHash.ToString()
             });
         }
     }

@@ -4,10 +4,10 @@ namespace OpenChain.Core
 {
     public class LedgerRecord
     {
-        public LedgerRecord(BinaryData payload, DateTime timestamp, BinaryData externalMetadata, BinaryData previousRecordHash)
+        public LedgerRecord(BinaryData transaction, DateTime timestamp, BinaryData externalMetadata, BinaryData previousRecordHash)
         {
-            if (payload == null)
-                throw new ArgumentNullException(nameof(payload));
+            if (transaction == null)
+                throw new ArgumentNullException(nameof(transaction));
 
             if (externalMetadata == null)
                 throw new ArgumentNullException(nameof(externalMetadata));
@@ -15,13 +15,13 @@ namespace OpenChain.Core
             if (previousRecordHash == null)
                 throw new ArgumentNullException(nameof(previousRecordHash));
 
-            this.Payload = payload;
+            this.Transaction = transaction;
             this.Timestamp = timestamp;
             this.ExternalMetadata = externalMetadata;
             this.PreviousRecordHash = previousRecordHash;
         }
 
-        public BinaryData Payload { get; }
+        public BinaryData Transaction { get; }
 
         public DateTime Timestamp { get; }
 

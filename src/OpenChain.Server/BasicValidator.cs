@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization;
 
 namespace OpenChain.Server
 {
-    public class BasicValidator : ITransactionValidator
+    public class BasicValidator : IRulesValidator
     {
         private readonly ILedgerQueries store;
 
@@ -16,7 +16,7 @@ namespace OpenChain.Server
             this.store = store;
         }
 
-        public async Task<bool> IsValid(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task Validate(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             //BsonSerializer.Deserialize<LedgerRecordMetadata>(record.ExternalMetadata.Value.ToArray());
             IReadOnlyDictionary<AccountKey, AccountEntry> accounts =
@@ -27,25 +27,23 @@ namespace OpenChain.Server
                 LedgerPath accountPath;
                 LedgerPath assetPath;
                 if (!LedgerPath.TryParse(entry.AccountKey.Account, out accountPath) || !LedgerPath.TryParse(entry.AccountKey.Asset, out assetPath))
-                    return false;
+                    throw new TransactionInvalidException("InvalidPathFormat");
 
                 if (entry.Version.Equals(BinaryData.Empty))
                     if (!await CheckCanCreate(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
-                        return false;
+                        throw new TransactionInvalidException("AccountCannotBeCreated");
 
                 if (entry.Amount > 0)
                 {
                     if (!CheckCanReceive(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
-                        return false;
+                        throw new TransactionInvalidException("AccountCannotReceive");
                 }
                 else if (entry.Amount < 0)
                 {
                     if (!CheckCanSend(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
-                        return false;
+                        throw new TransactionInvalidException("AccountCannotSend");
                 }
             }
-
-            return true;
         }
 
         private bool CheckCanSend(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)

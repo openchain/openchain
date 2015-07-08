@@ -58,6 +58,11 @@ namespace OpenChain.Server
             return !invalidCharacter.IsMatch(path);
         }
 
+        public static bool IsValidPath(string path)
+        {
+            return path.StartsWith("/", StringComparison.Ordinal) && path.Split('/').All(IsValidPathSegment);
+        }
+
         public string FullPath { get; }
 
         public IReadOnlyList<string> Segments { get; }

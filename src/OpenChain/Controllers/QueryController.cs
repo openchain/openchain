@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Framework.Internal;
+using OpenChain.Server;
 
 namespace OpenChain.Controllers
 {
@@ -32,7 +33,16 @@ namespace OpenChain.Controllers
         [HttpGet("subaccounts")]
         public async Task<ActionResult> GetSubaccounts(string account)
         {
-            IReadOnlyDictionary<AccountKey, AccountEntry> accounts = await this.store.GetSubaccounts(account);
+            LedgerPath path;
+            if (!LedgerPath.TryParse(account, out path))
+                return HttpBadRequest();
+
+            if (path.IsDirectory)
+                return HttpBadRequest();
+
+            LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray(), true);
+
+            IReadOnlyDictionary<AccountKey, AccountEntry> accounts = await this.store.GetSubaccounts(directory.FullPath);
 
             return Json(accounts.Values.Select(GetAccountJson).ToArray());
         }

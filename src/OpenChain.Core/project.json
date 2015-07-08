@@ -8,7 +8,7 @@
   "compilationOptions": { "languageVersion": "csharp6", "allowUnsafe": false },
 
   "dependencies": {
-    "protobuf-net": "2.0.0.668"
+    "Google.ProtocolBuffers": "2.4.1.555"
   },
 
   "frameworks": {

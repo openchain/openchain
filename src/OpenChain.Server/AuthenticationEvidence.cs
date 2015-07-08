@@ -9,20 +9,12 @@ namespace OpenChain.Server
 {
     public class AuthenticationEvidence
     {
-        public AuthenticationEvidence(string account, string asset, string identity, byte[] evidence)
+        public AuthenticationEvidence(string identity, byte[] evidence)
         {
-            this.Account = account;
-            this.Asset = asset;
             this.Identity = identity;
             this.Evidence = evidence;
         }
-
-        [BsonElement]
-        public string Account { get; private set; }
-
-        [BsonElement]
-        public string Asset { get; private set; }
-
+        
         [BsonElement]
         public string Identity { get; private set; }
 

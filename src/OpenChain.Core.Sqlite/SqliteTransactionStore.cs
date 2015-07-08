@@ -19,6 +19,56 @@ namespace OpenChain.Core.Sqlite
             this.OpenDatabase().Wait();
         }
 
+        #region OpenDatabase
+
+        public async Task OpenDatabase()
+        {
+            await connection.OpenAsync();
+
+            SQLiteCommand command = connection.CreateCommand();
+            command.CommandText = @"
+                CREATE TABLE IF NOT EXISTS Transactions
+                (
+                    Id INTEGER PRIMARY KEY,
+                    TransactionHash BLOB UNIQUE,
+                    RecordHash BLOB UNIQUE,
+                    PreviousRecordHash BLOB,
+                    RawData BLOB
+                );
+
+                CREATE TABLE IF NOT EXISTS Accounts
+                (
+                    Account TEXT,
+                    Asset TEXT,
+                    Balance INTEGER,
+                    Version BLOB,
+                    PRIMARY KEY (Account ASC, Asset ASC)
+                );
+
+                CREATE TABLE IF NOT EXISTS Ledgers
+                (
+                    Id INT,
+                    LedgerHeight INT,
+                    LedgerHash BLOB,
+                    PRIMARY KEY (Id ASC)
+                );
+            ";
+
+            await command.ExecuteNonQueryAsync();
+
+            // Insert the ledger master record
+            command = connection.CreateCommand();
+            command.CommandText = @"
+                INSERT OR IGNORE INTO Ledgers
+                (Id, LedgerHeight, LedgerHash)
+                VALUES (0, 0, X'');
+            ";
+
+            await command.ExecuteNonQueryAsync();
+        }
+
+        #endregion
+
         public async Task<BinaryData> AddTransaction(BinaryData rawTransaction, DateTime timestamp, BinaryData externalMetadata)
         {
             using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
@@ -31,7 +81,7 @@ namespace OpenChain.Core.Sqlite
                     externalMetadata,
                     ledgerStatus.Item1);
 
-                byte[] newLedgerHash = await InsertTransaction(context, ledgerRecord, TransactionSerializer.SerializeLedgerRecord(ledgerRecord), ledgerStatus.Item2 + 1);
+                byte[] newLedgerHash = await InsertTransaction(context, ledgerRecord, MessageSerializer.SerializeLedgerRecord(ledgerRecord), ledgerStatus.Item2 + 1);
 
                 context.Commit();
 
@@ -45,7 +95,7 @@ namespace OpenChain.Core.Sqlite
             {
                 Tuple<BinaryData, long> ledgerStatus = await GetLedgerStatus(context);
 
-                LedgerRecord record = TransactionSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToArray());
+                LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToArray());
 
                 if (!record.PreviousRecordHash.Equals(ledgerStatus.Item1))
                     throw new InvalidOperationException();
@@ -74,7 +124,7 @@ namespace OpenChain.Core.Sqlite
 
         private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord, long id)
         {
-            byte[] rawTransaction = ledgerRecord.Payload.ToArray();
+            byte[] rawTransaction = ledgerRecord.Transaction.ToArray();
             byte[] recordHash;
             byte[] transactionHash;
             using (SHA256 hash = SHA256.Create())
@@ -83,7 +133,7 @@ namespace OpenChain.Core.Sqlite
                 transactionHash = hash.ComputeHash(rawTransaction);
             }
 
-            await UpdateAccounts(TransactionSerializer.DeserializeTransaction(rawTransaction), transactionHash);
+            await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
 
             await ExecuteAsync(@"
                     INSERT INTO Transactions
@@ -113,16 +163,11 @@ namespace OpenChain.Core.Sqlite
 
         private async Task UpdateAccounts(Transaction transaction, byte[] transactionHash)
         {
-            var accountEntries = transaction.AccountEntries
-                .GroupBy(entry => entry.AccountKey, entry => entry);
-
-            if (accountEntries.Any(group => group.Count() > 1))
-                throw new InvalidOperationException();
-
             foreach (AccountEntry entry in transaction.AccountEntries)
             {
                 if (!entry.Version.Equals(BinaryData.Empty))
                 {
+                    // Update existing account
                     int count = await ExecuteAsync(@"
                             UPDATE  Accounts
                             SET     Balance = Balance + @balance, Version = @version
@@ -141,19 +186,20 @@ namespace OpenChain.Core.Sqlite
                 }
                 else
                 {
+                    // Create new account
                     try
                     {
                         await ExecuteAsync(@"
-                            INSERT INTO Accounts
-                            (Account, Asset, Balance, Version)
-                            VALUES (@account, @asset, @balance, @version)",
-                        new Dictionary<string, object>()
-                        {
-                            { "@account", entry.AccountKey.Account },
-                            { "@asset", entry.AccountKey.Asset },
-                            { "@balance", entry.Amount },
-                            { "@version", transactionHash }
-                        });
+                                INSERT INTO Accounts
+                                (Account, Asset, Balance, Version)
+                                VALUES (@account, @asset, @balance, @version)",
+                            new Dictionary<string, object>()
+                            {
+                                { "@account", entry.AccountKey.Account },
+                                { "@asset", entry.AccountKey.Asset },
+                                { "@balance", entry.Amount },
+                                { "@version", transactionHash }
+                            });
                     }
                     catch (SQLiteException exception) when (exception.Message == "constraint failed")
                     {
@@ -217,55 +263,34 @@ namespace OpenChain.Core.Sqlite
             }
         }
 
-        public async Task OpenDatabase()
+        public async Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount)
         {
-            await connection.OpenAsync();
+             IEnumerable<AccountEntry> accounts = await ExecuteAsync(@"
+                    SELECT  Account, Asset, Balance, Version
+                    FROM    Accounts
+                    WHERE   Account GLOB @prefix",
+                reader => new AccountEntry(new AccountKey(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
+                new Dictionary<string, object>()
+                {
+                    { "@prefix", rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*" }
+                });
 
-            SQLiteCommand command = connection.CreateCommand();
-            command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Transactions
-                (
-                    Id INTEGER PRIMARY KEY,
-                    TransactionHash BLOB UNIQUE,
-                    RecordHash BLOB UNIQUE,
-                    PreviousRecordHash BLOB,
-                    RawData BLOB
-                );
-
-                CREATE TABLE IF NOT EXISTS Accounts
-                (
-                    Account TEXT,
-                    Asset TEXT,
-                    Balance INTEGER,
-                    Version BLOB,
-                    PRIMARY KEY (Account ASC, Asset ASC)
-                );
-
-                CREATE TABLE IF NOT EXISTS Ledgers
-                (
-                    Id INT,
-                    LedgerHeight INT,
-                    LedgerHash BLOB,
-                    PRIMARY KEY (Id ASC)
-                );
-            ";
-
-            await command.ExecuteNonQueryAsync();
-
-            // Insert the ledger master record
-            command = connection.CreateCommand();
-            command.CommandText = @"
-                INSERT OR IGNORE INTO Ledgers
-                (Id, LedgerHeight, LedgerHash)
-                VALUES (0, 0, X'');
-            ";
-
-            await command.ExecuteNonQueryAsync();
+            return new ReadOnlyDictionary<AccountKey, AccountEntry>(accounts.ToDictionary(item => item.AccountKey, item => item));
         }
 
-        public Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount)
+        public async Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetAccount(string account)
         {
-            throw new NotImplementedException();
+            IEnumerable<AccountEntry> accounts = await ExecuteAsync(@"
+                    SELECT  Account, Asset, Balance, Version
+                    FROM    Accounts
+                    WHERE   Account = @account",
+               reader => new AccountEntry(new AccountKey(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
+               new Dictionary<string, object>()
+               {
+                    { "@account", account }
+               });
+
+            return new ReadOnlyDictionary<AccountKey, AccountEntry>(accounts.ToDictionary(item => item.AccountKey, item => item));
         }
 
         private async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)

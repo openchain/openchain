@@ -39,9 +39,9 @@ namespace OpenChain.Console
                 version
             );
 
-            byte[] b = TransactionSerializer.SerializeTransaction(transaction);
+            byte[] b = MessageSerializer.SerializeTransaction(transaction);
 
-            Transaction res = TransactionSerializer.DeserializeTransaction(b);
+            Transaction res = MessageSerializer.DeserializeTransaction(b);
 
             //LedgerRecord rec = new LedgerRecord(new BinaryData(b), DateTime.UtcNow, BinaryData.Parse("123456"), 1);
 
