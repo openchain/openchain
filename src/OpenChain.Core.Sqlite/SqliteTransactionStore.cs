@@ -125,13 +125,8 @@ namespace OpenChain.Core.Sqlite
         private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord, long id)
         {
             byte[] rawTransaction = ledgerRecord.Transaction.ToArray();
-            byte[] recordHash;
-            byte[] transactionHash;
-            using (SHA256 hash = SHA256.Create())
-            {
-                recordHash = hash.ComputeHash(rawLedgerRecord);
-                transactionHash = hash.ComputeHash(rawTransaction);
-            }
+            byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord);
+            byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
 
             await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
 
@@ -238,7 +233,12 @@ namespace OpenChain.Core.Sqlite
             return new ReadOnlyDictionary<AccountKey, AccountEntry>(result);
         }
 
-        public async Task<IReadOnlyList<BinaryData>> GetTransactionStream(BinaryData from)
+        public IObservable<BinaryData> GetTransactionStream(BinaryData from)
+        {
+            return new PollingObservable(from, this.GetLedgerRecords);
+        }
+
+        private async Task<IReadOnlyList<BinaryData>> GetLedgerRecords(BinaryData from)
         {
             Func<DbDataReader, BinaryData> selector = reader => new BinaryData((byte[])reader.GetValue(0));
             if (from != null)

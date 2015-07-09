@@ -9,7 +9,7 @@ namespace OpenChain.Server
 {
     public class AuthenticationEvidence
     {
-        public AuthenticationEvidence(string identity, byte[] evidence)
+        public AuthenticationEvidence(string identity, IList<byte[]> evidence)
         {
             this.Identity = identity;
             this.Evidence = evidence;
@@ -19,6 +19,6 @@ namespace OpenChain.Server
         public string Identity { get; private set; }
 
         [BsonElement]
-        public byte[] Evidence { get; private set; }
+        public IList<byte[]> Evidence { get; private set; }
     }
 }

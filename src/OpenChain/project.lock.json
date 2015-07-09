@@ -9,6 +9,7 @@
       "Microsoft.AspNet.Http >= 1.0.0-beta4",
       "Microsoft.AspNet.Cors >= 1.0.0-beta4",
       "Microsoft.AspNet.WebSockets.Server >= 1.0.0-beta4",
+      "Microsoft.AspNet.WebSockets.Client >= 1.0.0-beta4",
       "OpenChain.Core >= 1.0.0-*",
       "Newtonsoft.Json >= 7.0.1",
       "OpenChain.Server >= 1.0.0-*",
@@ -1476,6 +1477,53 @@
         "lib/dnx451/Microsoft.AspNet.Server.WebListener.xml",
         "lib/dnxcore50/Microsoft.AspNet.Server.WebListener.dll",
         "lib/dnxcore50/Microsoft.AspNet.Server.WebListener.xml"
+      ]
+    },
+    "Microsoft.AspNet.WebSockets.Client/1.0.0-beta4": {
+      "serviceable": true,
+      "sha": "RP+QbnYjRapoI3dlw6CS27qxefsHT7eAJwnRQ0YyWDyjJrl6/Rr/EkBmQNtie9Nz94s66Tt9mOuT5Zriv7ULGQ==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {
+            "Microsoft.AspNet.WebSockets.Protocol": "1.0.0-beta4"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net45/Microsoft.AspNet.WebSockets.Client.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/Microsoft.AspNet.WebSockets.Client.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {
+            "Microsoft.AspNet.WebSockets.Protocol": "1.0.0-beta4"
+          },
+          "frameworkAssemblies": [
+            "mscorlib",
+            "System",
+            "System.Core",
+            "Microsoft.CSharp"
+          ],
+          "runtimeAssemblies": [
+            "lib/net45/Microsoft.AspNet.WebSockets.Client.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/Microsoft.AspNet.WebSockets.Client.dll"
+          ]
+        }
+      },
+      "files": [
+        "Microsoft.AspNet.WebSockets.Client.1.0.0-beta4.nupkg",
+        "Microsoft.AspNet.WebSockets.Client.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.AspNet.WebSockets.Client.nuspec",
+        "lib/net45/Microsoft.AspNet.WebSockets.Client.dll",
+        "lib/net45/Microsoft.AspNet.WebSockets.Client.xml"
       ]
     },
     "Microsoft.AspNet.WebSockets.Protocol/1.0.0-beta4": {
@@ -2965,50 +3013,43 @@
         "lib/portable-net45+win8/System.Reflection.Metadata.xml"
       ]
     },
-    "System.Runtime/4.0.20-beta-22816": {
+    "System.Runtime/4.0.20-beta-23107": {
       "serviceable": false,
-      "sha": "sDSJEmM6Q5O7Nn9XxHTrsEJ4bv4hsBdeTWjuvyzd9/u9ujl9AWa3q1XFLrdPZetILPOC1P0+1LOCq4kZcsKF5Q==",
+      "sha": "jqloN4JOM71c+y6eClfW8v61DR3fKkpamgh/1k5LA+2H8YnVN8yye4Wo0R790Y308+gP//4C0nylckXB+HiV0w==",
       "frameworks": {
         "DNX,Version=v4.5.1": {
           "dependencies": {},
-          "frameworkAssemblies": [
-            "mscorlib",
-            "System",
-            "System.ComponentModel.Composition",
-            "System.Core"
-          ],
-          "runtimeAssemblies": [
-            "lib/net45/System.Runtime.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/System.Runtime.dll"
-          ]
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [],
+          "compileAssemblies": []
         },
         ".NETFramework,Version=v4.6": {
           "dependencies": {},
-          "frameworkAssemblies": [
-            "mscorlib",
-            "System",
-            "System.ComponentModel.Composition",
-            "System.Core"
-          ],
-          "runtimeAssemblies": [
-            "lib/net45/System.Runtime.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/System.Runtime.dll"
-          ]
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [],
+          "compileAssemblies": []
         }
       },
       "files": [
-        "License.rtf",
-        "System.Runtime.4.0.20-beta-22816.nupkg",
-        "System.Runtime.4.0.20-beta-22816.nupkg.sha512",
+        "System.Runtime.4.0.20-beta-23107.nupkg",
+        "System.Runtime.4.0.20-beta-23107.nupkg.sha512",
         "System.Runtime.nuspec",
-        "lib/aspnetcore50/System.Runtime.dll",
-        "lib/contract/System.Runtime.dll",
-        "lib/net45/System.Runtime.dll",
-        "lib/portable-wpa81+wp80+win80+net45+aspnetcore50/System.Runtime.dll"
+        "lib/DNXCore50/System.Runtime.dll",
+        "lib/net46/_._",
+        "lib/netcore50/System.Runtime.dll",
+        "ref/dotnet/System.Runtime.dll",
+        "ref/dotnet/System.Runtime.xml",
+        "ref/dotnet/de/System.Runtime.xml",
+        "ref/dotnet/es/System.Runtime.xml",
+        "ref/dotnet/fr/System.Runtime.xml",
+        "ref/dotnet/it/System.Runtime.xml",
+        "ref/dotnet/ja/System.Runtime.xml",
+        "ref/dotnet/ko/System.Runtime.xml",
+        "ref/dotnet/ru/System.Runtime.xml",
+        "ref/dotnet/zh-hans/System.Runtime.xml",
+        "ref/dotnet/zh-hant/System.Runtime.xml",
+        "ref/net46/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll"
       ]
     },
     "System.Text.Encoding/4.0.10-beta-22816": {

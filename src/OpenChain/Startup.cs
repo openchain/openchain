@@ -38,13 +38,22 @@ namespace OpenChain
 
             // Setup ASP.NET MVC
             services.AddMvc();
-            
+
+            services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
+
             // CORS Headers
             services.AddCors();
             CorsPolicy policy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().Build();
             services.ConfigureCors(options => options.AddPolicy("Any", policy));
 
+            // Ledger Store
             services.AddTransient<ILedgerStore>(ConfigurationParser.CreateLedgerStore);
+
+            // Logger
+            services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
+
+            // Transaction Stream Subscriber
+            services.AddSingleton<IStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
         }
 
         // Configure is called after ConfigureServices is called.
@@ -52,12 +61,12 @@ namespace OpenChain
         {
             loggerfactory.AddConsole();
 
-            app.Map("/ws", managedWebSocketsApp =>
+            app.Map("/stream", managedWebSocketsApp =>
             {
                 // Comment this out to test native server implementations
                 //managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
                 //var s = managedWebSocketsApp.ApplicationServices.GetService<IHttpUpgradeFeature>();
-                managedWebSocketsApp.Use(next => new TransactionStreamWebSocketMiddleware(next, null).Invoke);
+                managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);
             });
 
             // Configure the HTTP request pipeline.
@@ -69,14 +78,9 @@ namespace OpenChain
 
             // Add the following route for porting Web API 2 controllers.
             // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-            
 
-            string masterUrl = configuration.GetSubKey("Main").Get("master_url");
-            if (!string.IsNullOrEmpty(masterUrl))
-            {
-                StreamSubscriber streamSubscriber = new StreamSubscriber(new Uri(masterUrl), store);
-                streamSubscriber.Subscribe(CancellationToken.None);
-            }
+            // Activate the stream subscriber
+            app.ApplicationServices.GetService<IStreamSubscriber>();
         }
     }
 }

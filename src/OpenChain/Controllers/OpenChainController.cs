@@ -25,28 +25,55 @@ namespace OpenChain.Controllers
             this.validator = new TransactionValidator(store, validator);
         }
 
-        [HttpGet("stream")]
-        public async Task<ActionResult> GetStream(string from)
-        {
-            IConfigurationSourceRoot configuration = (IConfigurationSourceRoot)this.Context.ApplicationServices.GetService(typeof(IConfigurationSourceRoot));
+        //[HttpGet("stream")]
+        //public async Task<ActionResult> GetStream(string from)
+        //{
+        //    IConfigurationSourceRoot configuration = (IConfigurationSourceRoot)this.Context.ApplicationServices.GetService(typeof(IConfigurationSourceRoot));
 
-            BinaryData ledgerRecordHash;
-            if (string.IsNullOrEmpty(from))
-                ledgerRecordHash = null;
-            else
-                ledgerRecordHash = BinaryData.Parse(from);
+        //    BinaryData ledgerRecordHash;
+        //    if (string.IsNullOrEmpty(from))
+        //        ledgerRecordHash = null;
+        //    else
+        //        ledgerRecordHash = BinaryData.Parse(from);
 
-            IReadOnlyList<BinaryData> records = await this.store.GetTransactionStream(ledgerRecordHash);
+        //    IReadOnlyList<BinaryData> records = await this.store.GetTransactionStream(ledgerRecordHash);
 
-            return Json(records.Select(record => new { raw = record.ToString() }).ToArray());
-        }
+        //    return Json(records.Select(record => new { raw = record.ToString() }).ToArray());
+        //}
 
+        /// <summary>
+        /// Format:
+        /// {
+        ///   "transaction": "hex",
+        ///   "authentication": [
+        ///     {
+        ///       "identity": "string",
+        ///       "evidence": [
+        ///         "hex",
+        ///         "hex"
+        ///       ]
+        ///     },
+        ///     ...
+        ///   ]
+        /// }
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
         {
-            BinaryData parsedTransaction = BinaryData.Parse((string)body["raw"]);
+            BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
 
-            BinaryData ledgerRecordHash = await validator.PostTransaction(parsedTransaction, new AuthenticationEvidence[0]);
+            List<AuthenticationEvidence> authentication = new List<AuthenticationEvidence>();
+
+            foreach (JObject evidence in body["authentication"])
+            {
+                authentication.Add(new AuthenticationEvidence(
+                    (string)evidence["identity"],
+                    evidence["evidence"].Select(token => BinaryData.Parse((string)token).ToArray()).ToArray()));
+            }
+
+            BinaryData ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
 
             return Json(new
             {

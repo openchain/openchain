@@ -8,7 +8,8 @@
   "compilationOptions": { "languageVersion": "csharp6", "allowUnsafe": false },
 
   "dependencies": {
-    "Google.ProtocolBuffers": "2.4.1.555"
+    "Google.ProtocolBuffers": "2.4.1.555",
+    "System.Runtime": "4.0.20-beta-23107"
   },
 
   "frameworks": {

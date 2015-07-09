@@ -11,6 +11,7 @@
     "Microsoft.AspNet.Http": "1.0.0-beta4",
     "Microsoft.AspNet.Cors": "1.0.0-beta4",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta4",
+    "Microsoft.AspNet.WebSockets.Client": "1.0.0-beta4",
     "OpenChain.Core": "1.0.0-*",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Server": "1.0.0-*",

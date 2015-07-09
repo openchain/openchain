@@ -31,7 +31,7 @@ namespace OpenChain.Core
         /// Gets the leger records following the one whose hash has been provided.
         /// </summary>
         /// <param name="from">The hash of the record to start streaming from.</param>
-        /// <returns>A task that represents the completion of the operation and contains the ledger records.</returns>
-        Task<IReadOnlyList<BinaryData>> GetTransactionStream(BinaryData from);
+        /// <returns>An observable representing the transaction stream.</returns>
+        IObservable<BinaryData> GetTransactionStream(BinaryData from);
     }
 }

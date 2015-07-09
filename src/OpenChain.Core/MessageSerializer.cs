@@ -1,6 +1,7 @@
 ﻿using Google.ProtocolBuffers;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace OpenChain.Core
 {
@@ -63,6 +64,14 @@ namespace OpenChain.Core
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
                 new BinaryData(record.ExternalMetadata.ToByteArray()),
                 new BinaryData(record.PreviousRecord.ToByteArray()));
+        }
+        
+        public static byte[] ComputeHash(byte[] message)
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                return hash.ComputeHash(message.ToArray());
+            }
         }
     }
 }
