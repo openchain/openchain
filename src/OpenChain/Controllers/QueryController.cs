@@ -19,7 +19,7 @@ namespace OpenChain.Controllers
 
         public QueryController()
         {
-            this.store = new SqliteTransactionStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\src\OpenChain.Console\ledger.db");
+            this.store = new SqliteLedgerStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\src\OpenChain.Console\ledger.db");
         }
 
         [HttpGet("accountentry")]

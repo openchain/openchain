@@ -18,7 +18,7 @@ namespace OpenChain.Models
         {
             IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
 
-            return new SqliteTransactionStore(configuration.GetSubKey("SQLite").Get("path"));
+            return new SqliteLedgerStore(configuration.GetSubKey("SQLite").Get("path"));
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)

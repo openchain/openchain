@@ -22,7 +22,7 @@ namespace OpenChain.Console
         {
             //LedgerController.VerifyEvidence();
             
-            SqliteTransactionStore store = new SqliteTransactionStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\Server\src\OpenChain.Console\ledger.db");
+            SqliteLedgerStore store = new SqliteLedgerStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\Server\src\OpenChain.Console\ledger.db");
             await store.OpenDatabase();
 
             // DB
