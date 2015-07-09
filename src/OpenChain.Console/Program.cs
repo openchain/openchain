@@ -46,7 +46,7 @@ namespace OpenChain.Console
             //LedgerRecord rec = new LedgerRecord(new BinaryData(b), DateTime.UtcNow, BinaryData.Parse("123456"), 1);
 
             //await store.AddLedgerRecord(rec);
-            await store.AddTransaction(new BinaryData(b), DateTime.UtcNow, BinaryData.Parse("123456"));
+            await store.AddLedgerRecord(new BinaryData(MessageSerializer.SerializeLedgerRecord(new LedgerRecord(new BinaryData(b), DateTime.UtcNow, BinaryData.Parse("123456")))));
         }
     }
 }

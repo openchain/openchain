@@ -53,7 +53,8 @@ namespace OpenChain.Server
 
             byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
 
-            return await this.store.AddTransaction(rawTransaction, date, new BinaryData(metadata));
+            LedgerRecord record = new LedgerRecord(rawTransaction, date, new BinaryData(metadata));
+            return await this.store.AddLedgerRecord(new BinaryData(MessageSerializer.SerializeLedgerRecord(record)));
         }
     }
 }

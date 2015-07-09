@@ -29,10 +29,9 @@ namespace OpenChain.Core.Sqlite
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
                 (
-                    Id INTEGER PRIMARY KEY,
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     TransactionHash BLOB UNIQUE,
                     RecordHash BLOB UNIQUE,
-                    PreviousRecordHash BLOB,
                     RawData BLOB
                 );
 
@@ -44,24 +43,6 @@ namespace OpenChain.Core.Sqlite
                     Version BLOB,
                     PRIMARY KEY (Account ASC, Asset ASC)
                 );
-
-                CREATE TABLE IF NOT EXISTS Ledgers
-                (
-                    Id INT,
-                    LedgerHeight INT,
-                    LedgerHash BLOB,
-                    PRIMARY KEY (Id ASC)
-                );
-            ";
-
-            await command.ExecuteNonQueryAsync();
-
-            // Insert the ledger master record
-            command = connection.CreateCommand();
-            command.CommandText = @"
-                INSERT OR IGNORE INTO Ledgers
-                (Id, LedgerHeight, LedgerHash)
-                VALUES (0, 0, X'');
             ";
 
             await command.ExecuteNonQueryAsync();
@@ -69,60 +50,22 @@ namespace OpenChain.Core.Sqlite
 
         #endregion
 
-        public async Task<BinaryData> AddTransaction(BinaryData rawTransaction, DateTime timestamp, BinaryData externalMetadata)
-        {
-            using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
-            {
-                Tuple<BinaryData, long> ledgerStatus = await GetLedgerStatus(context);
-
-                LedgerRecord ledgerRecord = new LedgerRecord(
-                    rawTransaction,
-                    timestamp,
-                    externalMetadata,
-                    ledgerStatus.Item1);
-
-                byte[] newLedgerHash = await InsertTransaction(context, ledgerRecord, MessageSerializer.SerializeLedgerRecord(ledgerRecord), ledgerStatus.Item2 + 1);
-
-                context.Commit();
-
-                return new BinaryData(newLedgerHash);
-            }
-        }
+        #region AddLedgerRecord
 
         public async Task<BinaryData> AddLedgerRecord(BinaryData rawLedgerRecord)
         {
             using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                Tuple<BinaryData, long> ledgerStatus = await GetLedgerStatus(context);
-
                 LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToArray());
 
-                if (!record.PreviousRecordHash.Equals(ledgerStatus.Item1))
-                    throw new InvalidOperationException();
-
-                byte[] newLedgerHash = await InsertTransaction(context, record, rawLedgerRecord.ToArray(), ledgerStatus.Item2 + 1);
+                byte[] newLedgerHash = await InsertTransaction(context, record, rawLedgerRecord.ToArray());
                 context.Commit();
 
                 return new BinaryData(newLedgerHash);
             }
         }
 
-        private async Task<Tuple<BinaryData, long>> GetLedgerStatus(SQLiteTransaction context)
-        {
-            var result = await ExecuteAsync(@"
-                    SELECT  LedgerHeight, LedgerHash
-                    FROM    Ledgers
-                    WHERE   Id = 0",
-                reader => Tuple.Create(new BinaryData((byte[])reader.GetValue(1) ?? new byte[0]), reader.GetInt64(0)),
-                new Dictionary<string, object>());
-
-            if (result.Count == 0)
-                throw new InvalidOperationException();
-
-            return result[0];
-        }
-
-        private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord, long id)
+        private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord)
         {
             byte[] rawTransaction = ledgerRecord.Transaction.ToArray();
             byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord);
@@ -132,25 +75,13 @@ namespace OpenChain.Core.Sqlite
 
             await ExecuteAsync(@"
                     INSERT INTO Transactions
-                    (Id, TransactionHash, RecordHash, PreviousRecordHash, RawData)
-                    VALUES (@id, @transactionHash, @recordHash, @previousRecordHash, @rawData)",
+                    (TransactionHash, RecordHash, RawData)
+                    VALUES (@transactionHash, @recordHash, @rawData)",
                 new Dictionary<string, object>()
                 {
-                    { "@id", id },
                     { "@transactionHash", transactionHash },
                     { "@recordHash", recordHash },
-                    { "@previousRecordHash", ledgerRecord.PreviousRecordHash.ToArray() },
                     { "@rawData", rawLedgerRecord }
-                });
-
-            await ExecuteAsync(@"
-                    UPDATE  Ledgers
-                    SET     LedgerHash = @ledgerHash,
-                            LedgerHeight = LedgerHeight + 1
-                    WHERE   Id = 0",
-                new Dictionary<string, object>()
-                {
-                    { "@ledgerHash", recordHash }
                 });
 
             return recordHash;
@@ -204,6 +135,25 @@ namespace OpenChain.Core.Sqlite
             }
         }
 
+        #endregion
+
+        #region GetLastRecord
+
+        public async Task<BinaryData> GetLastRecord()
+        {
+            IEnumerable<BinaryData> accounts = await ExecuteAsync(@"
+                    SELECT  RecordHash
+                    FROM    Transactions
+                    ORDER BY Id DESC
+                    LIMIT 1",
+                reader => new BinaryData((byte[])reader.GetValue(0)),
+                new Dictionary<string, object>());
+
+            return accounts.FirstOrDefault() ?? BinaryData.Empty;
+        }
+
+        #endregion
+
         public async Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetAccounts(IEnumerable<AccountKey> accountKeys)
         {
             Dictionary<AccountKey, AccountEntry> result = new Dictionary<AccountKey, AccountEntry>();
@@ -233,7 +183,9 @@ namespace OpenChain.Core.Sqlite
             return new ReadOnlyDictionary<AccountKey, AccountEntry>(result);
         }
 
-        public IObservable<BinaryData> GetTransactionStream(BinaryData from)
+        #region GetRecordStream
+
+        public IObservable<BinaryData> GetRecordStream(BinaryData from)
         {
             return new PollingObservable(from, this.GetLedgerRecords);
         }
@@ -262,6 +214,8 @@ namespace OpenChain.Core.Sqlite
                     new Dictionary<string, object>());
             }
         }
+
+        #endregion
 
         public async Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount)
         {
@@ -293,6 +247,8 @@ namespace OpenChain.Core.Sqlite
             return new ReadOnlyDictionary<AccountKey, AccountEntry>(accounts.ToDictionary(item => item.AccountKey, item => item));
         }
 
+        #region Private Methods
+
         private async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
         {
             SQLiteCommand query = connection.CreateCommand();
@@ -321,5 +277,7 @@ namespace OpenChain.Core.Sqlite
 
             return await query.ExecuteNonQueryAsync();
         }
+
+        #endregion
     }
 }

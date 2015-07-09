@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNet.WebSockets.Client;
-using Microsoft.Framework.Logging;
-using Newtonsoft.Json.Linq;
+﻿using Microsoft.Framework.Logging;
 using OpenChain.Core;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,13 +10,15 @@ namespace OpenChain.Models
 {
     public class TransactionStreamSubscriber : IStreamSubscriber
     {
-        private readonly Uri endpoint;
+        private readonly UriBuilder endpoint;
         private readonly ILedgerStore store;
         private readonly ILogger logger;
 
         public TransactionStreamSubscriber(Uri endpoint, ILedgerStore store, ILogger logger)
         {
-            this.endpoint = new Uri(endpoint, "stream");
+            this.endpoint = new UriBuilder(endpoint);
+            this.endpoint.Scheme = "ws";
+            this.endpoint.Path = this.endpoint.Path.TrimEnd('/') + "/stream";
             this.store = store;
             this.logger = logger;
         }
@@ -30,15 +28,19 @@ namespace OpenChain.Models
             byte[] buffer = new byte[1024 * 1024];
             ArraySegment<byte> segment = new ArraySegment<byte>(buffer);
 
+            BinaryData currentRecord = await this.store.GetLastRecord();
+
             while (!cancel.IsCancellationRequested)
             {
                 try
                 {
                     ClientWebSocket socket = new ClientWebSocket();
 
-                    logger.LogInformation("Connecting to {0}", endpoint);
-                    //WebSocket socket = await wsClient.ConnectAsync(this.endpoint, cancel);
-                    await socket.ConnectAsync(this.endpoint, cancel);
+                    this.endpoint.Query = string.Format("from={0}", currentRecord.ToString());
+
+                    logger.LogInformation("Connecting to {0}", this.endpoint.Uri);
+
+                    await socket.ConnectAsync(this.endpoint.Uri, cancel);
 
                     while (true)
                     {
@@ -46,18 +48,8 @@ namespace OpenChain.Models
                         if (result.MessageType == WebSocketMessageType.Close)
                             break;
 
-                        await store.AddLedgerRecord(new BinaryData(buffer.Take(result.Count)));
+                        currentRecord = await store.AddLedgerRecord(new BinaryData(buffer.Take(result.Count)));
                     }
-                    //HttpClient client = new HttpClient();
-                    //string response = await client.GetStringAsync(this.endpoint);
-
-                    //JArray records = JArray.Parse(response);
-
-                    //foreach (JObject record in records)
-                    //{
-                    //    BinaryData rawRecord = BinaryData.Parse((string)record["raw"]);
-                    //    await this.store.AddLedgerRecord(rawRecord);
-                    //}
                 }
                 catch (Exception exception)
                 {

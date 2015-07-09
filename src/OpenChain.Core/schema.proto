@@ -14,8 +14,7 @@ message Transaction {
 }
 
 message LedgerRecord {
-   required bytes transaction = 1;
+   required bytes payload = 1;
    required int64 timestamp = 2;
-   required bytes external_metadata = 3;
-   required bytes previous_record = 4;
+   required bytes record_metadata = 3;
 }

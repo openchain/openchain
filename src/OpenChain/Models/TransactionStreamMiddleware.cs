@@ -30,7 +30,7 @@ namespace OpenChain.Models
 
                 ILedgerStore store = (ILedgerStore)context.ApplicationServices.GetService(typeof(ILedgerStore));
 
-                IObservable<BinaryData> stream = store.GetTransactionStream(lastLedgerRecordHash);
+                IObservable<BinaryData> stream = store.GetRecordStream(lastLedgerRecordHash);
 
                 using (WebSocket webSocket = await context.AcceptWebSocketAsync())
                 {

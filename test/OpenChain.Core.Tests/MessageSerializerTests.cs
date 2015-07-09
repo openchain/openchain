@@ -37,8 +37,7 @@ namespace OpenChain.Core.Tests
             LedgerRecord record = new LedgerRecord(
                 BinaryData.Parse("abcd"),
                 new DateTime(1, 2, 3, 4, 5, 6),
-                BinaryData.Parse("01234567"),
-                BinaryData.Parse("89ABCDEF"));
+                BinaryData.Parse("01234567"));
 
             byte[] result = MessageSerializer.SerializeLedgerRecord(record);
 
@@ -48,7 +47,6 @@ namespace OpenChain.Core.Tests
             Assert.Equal(record.Transaction, finalRecord.Transaction);
             Assert.Equal(record.Timestamp, finalRecord.Timestamp);
             Assert.Equal(record.ExternalMetadata, finalRecord.ExternalMetadata);
-            Assert.Equal(record.PreviousRecordHash, finalRecord.PreviousRecordHash);
         }
     }
 }

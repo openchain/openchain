@@ -32,20 +32,26 @@ namespace OpenChain.Models
         public static IRulesValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
-            ILedgerQueries queries = (ILedgerQueries)serviceProvider.GetService(typeof(ILedgerQueries));
+            
+            if (!configuration.GetSubKey("Main").Get<bool>("is_master"))
+                return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, false);
 
-            if (queries != null)
-                return new BasicValidator(queries);
-            else
-                return null;
+            switch (configuration.GetSubKey("Main").Get("validator"))
+            {
+                case "Basic":
+                    return ActivatorUtilities.CreateInstance<BasicValidator>(serviceProvider);
+                case "Disabled":
+                    return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
+                default:
+                    return null;
+            }
         }
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
             ILoggerFactory loggerFactory = (ILoggerFactory)serviceProvider.GetService(typeof(ILoggerFactory));
-
-            loggerFactory.AddConsole();
+            
             return loggerFactory.CreateLogger("General");
         }
 
@@ -54,7 +60,7 @@ namespace OpenChain.Models
             IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
 
             string masterUrl = configuration.GetSubKey("Main").Get("master_url");
-            if (!string.IsNullOrEmpty(masterUrl))
+            if (!string.IsNullOrEmpty(masterUrl) && !configuration.GetSubKey("Main").Get<bool>("is_master"))
             {
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));
                 streamSubscriber.Subscribe(CancellationToken.None);

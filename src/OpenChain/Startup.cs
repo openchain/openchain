@@ -17,6 +17,7 @@ using OpenChain.Core;
 using OpenChain.Models;
 using Microsoft.AspNet.WebSockets.Server;
 using Microsoft.AspNet.Cors.Core;
+using OpenChain.Server;
 
 namespace OpenChain
 {
@@ -48,6 +49,10 @@ namespace OpenChain
 
             // Ledger Store
             services.AddTransient<ILedgerStore>(ConfigurationParser.CreateLedgerStore);
+
+            services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
+
+            services.AddTransient<IRulesValidator>(ConfigurationParser.CreateRulesValidator);
 
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);

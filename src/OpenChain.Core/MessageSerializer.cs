@@ -46,10 +46,9 @@ namespace OpenChain.Core
         {
             Messages.LedgerRecord.Builder recordBuilder = new Messages.LedgerRecord.Builder()
             {
-                Transaction = ByteString.CopyFrom(record.Transaction.ToArray()),
+                Payload = ByteString.CopyFrom(record.Transaction.ToArray()),
                 Timestamp = (long)(record.Timestamp - epoch).TotalSeconds,
-                ExternalMetadata = ByteString.CopyFrom(record.ExternalMetadata.Value.ToArray()),
-                PreviousRecord = ByteString.CopyFrom(record.PreviousRecordHash.Value.ToArray())
+                RecordMetadata = ByteString.CopyFrom(record.ExternalMetadata.Value.ToArray())
             };
 
             return recordBuilder.Build().ToByteArray();
@@ -60,10 +59,9 @@ namespace OpenChain.Core
             Messages.LedgerRecord record = new Messages.LedgerRecord.Builder().MergeFrom(data).BuildParsed();
 
             return new LedgerRecord(
-                new BinaryData(record.Transaction.ToByteArray()),
+                new BinaryData(record.Payload.ToByteArray()),
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
-                new BinaryData(record.ExternalMetadata.ToByteArray()),
-                new BinaryData(record.PreviousRecord.ToByteArray()));
+                new BinaryData(record.RecordMetadata.ToByteArray()));
         }
         
         public static byte[] ComputeHash(byte[] message)

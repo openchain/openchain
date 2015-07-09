@@ -6,9 +6,8 @@ using OpenChain.Core;
 using OpenChain.Server;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OpenChain.Controllers
 {
@@ -16,30 +15,16 @@ namespace OpenChain.Controllers
     [Route("")]
     public class OpenChainController : Controller
     {
+        private readonly IConfiguration configuration;
         private readonly ILedgerStore store;
         private readonly TransactionValidator validator;
 
         public OpenChainController(IConfiguration configuration, ILedgerStore store, IRulesValidator validator)
         {
+            this.configuration = configuration;
             this.store = store;
             this.validator = new TransactionValidator(store, validator);
         }
-
-        //[HttpGet("stream")]
-        //public async Task<ActionResult> GetStream(string from)
-        //{
-        //    IConfigurationSourceRoot configuration = (IConfigurationSourceRoot)this.Context.ApplicationServices.GetService(typeof(IConfigurationSourceRoot));
-
-        //    BinaryData ledgerRecordHash;
-        //    if (string.IsNullOrEmpty(from))
-        //        ledgerRecordHash = null;
-        //    else
-        //        ledgerRecordHash = BinaryData.Parse(from);
-
-        //    IReadOnlyList<BinaryData> records = await this.store.GetTransactionStream(ledgerRecordHash);
-
-        //    return Json(records.Select(record => new { raw = record.ToString() }).ToArray());
-        //}
 
         /// <summary>
         /// Format:
@@ -62,6 +47,9 @@ namespace OpenChain.Controllers
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
         {
+            if (!configuration.GetSubKey("Main").Get<bool>("is_master"))
+                return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
+
             BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
 
             List<AuthenticationEvidence> authentication = new List<AuthenticationEvidence>();
@@ -73,7 +61,15 @@ namespace OpenChain.Controllers
                     evidence["evidence"].Select(token => BinaryData.Parse((string)token).ToArray()).ToArray()));
             }
 
-            BinaryData ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
+            BinaryData ledgerRecordHash;
+            try
+            {
+                ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
+            }
+            catch (AccountModifiedException)
+            {
+                return new HttpStatusCodeResult((int)HttpStatusCode.PreconditionFailed);
+            }
 
             return Json(new
             {

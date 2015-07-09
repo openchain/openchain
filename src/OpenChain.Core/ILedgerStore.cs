@@ -12,26 +12,22 @@ namespace OpenChain.Core
         /// <summary>
         /// Adds a record to the ledger.
         /// </summary>
-        /// <exception cref="AccountModifiedException">An account has been modified and the transaction is no longer valid.</exception>
-        /// <param name="rawTransaction"></param>
-        /// <param name="timestamp"></param>
-        /// <param name="externalMetadata"></param>
-        /// <returns>A task that represents the completion of the operation and contains the new ledger hash.</returns>
-        Task<BinaryData> AddTransaction(BinaryData rawTransaction, DateTime timestamp, BinaryData externalMetadata);
-
-        /// <summary>
-        /// Adds a record to the ledger.
-        /// </summary>
         /// <param name="rawLedgerRecord">The serialized ledger record to add to the ledger.</param>
         /// <exception cref="AccountModifiedException">An account has been modified and the transaction is no longer valid.</exception>
-        /// <returns>A task that represents the completion of the operation and contains the new ledger hash.</returns>
+        /// <returns>A task that represents the completion of the operation and contains the hash of the record.</returns>
         Task<BinaryData> AddLedgerRecord(BinaryData rawLedgerRecord);
+
+        /// <summary>
+        /// Gets the hash of the last record in the ledger.
+        /// </summary>
+        /// <returns>A task that represents the completion of the operation and contains the hash of the last record.</returns>
+        Task<BinaryData> GetLastRecord();
 
         /// <summary>
         /// Gets the leger records following the one whose hash has been provided.
         /// </summary>
         /// <param name="from">The hash of the record to start streaming from.</param>
         /// <returns>An observable representing the transaction stream.</returns>
-        IObservable<BinaryData> GetTransactionStream(BinaryData from);
+        IObservable<BinaryData> GetRecordStream(BinaryData from);
     }
 }

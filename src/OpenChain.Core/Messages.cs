@@ -36,9 +36,9 @@ namespace OpenChain.Messages {
             "YWNjb3VudF9lbnRyaWVzGAEgAygLMiMuT3BlbkNoYWluLlRyYW5zYWN0aW9u", 
             "LkFjY291bnRFbnRyeRIQCghtZXRhZGF0YRgCIAIoDBpPCgxBY2NvdW50RW50", 
             "cnkSDwoHYWNjb3VudBgBIAIoCRINCgVhc3NldBgCIAIoCRIOCgZhbW91bnQY", 
-            "AyACKBISDwoHdmVyc2lvbhgEIAIoDCJqCgxMZWRnZXJSZWNvcmQSEwoLdHJh", 
-            "bnNhY3Rpb24YASACKAwSEQoJdGltZXN0YW1wGAIgAigDEhkKEWV4dGVybmFs", 
-          "X21ldGFkYXRhGAMgAigMEhcKD3ByZXZpb3VzX3JlY29yZBgEIAIoDA=="));
+            "AyACKBISDwoHdmVyc2lvbhgEIAIoDCJLCgxMZWRnZXJSZWNvcmQSDwoHcGF5", 
+            "bG9hZBgBIAIoDBIRCgl0aW1lc3RhbXAYAiACKAMSFwoPcmVjb3JkX21ldGFk", 
+          "YXRhGAMgAigM"));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[0];
@@ -52,7 +52,7 @@ namespace OpenChain.Messages {
         internal__static_OpenChain_LedgerRecord__Descriptor = Descriptor.MessageTypes[1];
         internal__static_OpenChain_LedgerRecord__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.LedgerRecord, global::OpenChain.Messages.LedgerRecord.Builder>(internal__static_OpenChain_LedgerRecord__Descriptor,
-                new string[] { "Transaction", "Timestamp", "ExternalMetadata", "PreviousRecord", });
+                new string[] { "Payload", "Timestamp", "RecordMetadata", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -834,8 +834,8 @@ namespace OpenChain.Messages {
   internal sealed partial class LedgerRecord : pb::GeneratedMessage<LedgerRecord, LedgerRecord.Builder> {
     private LedgerRecord() { }
     private static readonly LedgerRecord defaultInstance = new LedgerRecord().MakeReadOnly();
-    private static readonly string[] _ledgerRecordFieldNames = new string[] { "external_metadata", "previous_record", "timestamp", "transaction" };
-    private static readonly uint[] _ledgerRecordFieldTags = new uint[] { 26, 34, 16, 10 };
+    private static readonly string[] _ledgerRecordFieldNames = new string[] { "payload", "record_metadata", "timestamp" };
+    private static readonly uint[] _ledgerRecordFieldTags = new uint[] { 10, 26, 16 };
     public static LedgerRecord DefaultInstance {
       get { return defaultInstance; }
     }
@@ -856,14 +856,14 @@ namespace OpenChain.Messages {
       get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_LedgerRecord__FieldAccessorTable; }
     }
     
-    public const int TransactionFieldNumber = 1;
-    private bool hasTransaction;
-    private pb::ByteString transaction_ = pb::ByteString.Empty;
-    public bool HasTransaction {
-      get { return hasTransaction; }
+    public const int PayloadFieldNumber = 1;
+    private bool hasPayload;
+    private pb::ByteString payload_ = pb::ByteString.Empty;
+    public bool HasPayload {
+      get { return hasPayload; }
     }
-    public pb::ByteString Transaction {
-      get { return transaction_; }
+    public pb::ByteString Payload {
+      get { return payload_; }
     }
     
     public const int TimestampFieldNumber = 2;
@@ -876,32 +876,21 @@ namespace OpenChain.Messages {
       get { return timestamp_; }
     }
     
-    public const int ExternalMetadataFieldNumber = 3;
-    private bool hasExternalMetadata;
-    private pb::ByteString externalMetadata_ = pb::ByteString.Empty;
-    public bool HasExternalMetadata {
-      get { return hasExternalMetadata; }
+    public const int RecordMetadataFieldNumber = 3;
+    private bool hasRecordMetadata;
+    private pb::ByteString recordMetadata_ = pb::ByteString.Empty;
+    public bool HasRecordMetadata {
+      get { return hasRecordMetadata; }
     }
-    public pb::ByteString ExternalMetadata {
-      get { return externalMetadata_; }
-    }
-    
-    public const int PreviousRecordFieldNumber = 4;
-    private bool hasPreviousRecord;
-    private pb::ByteString previousRecord_ = pb::ByteString.Empty;
-    public bool HasPreviousRecord {
-      get { return hasPreviousRecord; }
-    }
-    public pb::ByteString PreviousRecord {
-      get { return previousRecord_; }
+    public pb::ByteString RecordMetadata {
+      get { return recordMetadata_; }
     }
     
     public override bool IsInitialized {
       get {
-        if (!hasTransaction) return false;
+        if (!hasPayload) return false;
         if (!hasTimestamp) return false;
-        if (!hasExternalMetadata) return false;
-        if (!hasPreviousRecord) return false;
+        if (!hasRecordMetadata) return false;
         return true;
       }
     }
@@ -909,17 +898,14 @@ namespace OpenChain.Messages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
       string[] field_names = _ledgerRecordFieldNames;
-      if (hasTransaction) {
-        output.WriteBytes(1, field_names[3], Transaction);
+      if (hasPayload) {
+        output.WriteBytes(1, field_names[0], Payload);
       }
       if (hasTimestamp) {
         output.WriteInt64(2, field_names[2], Timestamp);
       }
-      if (hasExternalMetadata) {
-        output.WriteBytes(3, field_names[0], ExternalMetadata);
-      }
-      if (hasPreviousRecord) {
-        output.WriteBytes(4, field_names[1], PreviousRecord);
+      if (hasRecordMetadata) {
+        output.WriteBytes(3, field_names[1], RecordMetadata);
       }
       UnknownFields.WriteTo(output);
     }
@@ -938,17 +924,14 @@ namespace OpenChain.Messages {
       if (size != -1) return size;
       
       size = 0;
-      if (hasTransaction) {
-        size += pb::CodedOutputStream.ComputeBytesSize(1, Transaction);
+      if (hasPayload) {
+        size += pb::CodedOutputStream.ComputeBytesSize(1, Payload);
       }
       if (hasTimestamp) {
         size += pb::CodedOutputStream.ComputeInt64Size(2, Timestamp);
       }
-      if (hasExternalMetadata) {
-        size += pb::CodedOutputStream.ComputeBytesSize(3, ExternalMetadata);
-      }
-      if (hasPreviousRecord) {
-        size += pb::CodedOutputStream.ComputeBytesSize(4, PreviousRecord);
+      if (hasRecordMetadata) {
+        size += pb::CodedOutputStream.ComputeBytesSize(3, RecordMetadata);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -1072,17 +1055,14 @@ namespace OpenChain.Messages {
       public override Builder MergeFrom(LedgerRecord other) {
         if (other == global::OpenChain.Messages.LedgerRecord.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasTransaction) {
-          Transaction = other.Transaction;
+        if (other.HasPayload) {
+          Payload = other.Payload;
         }
         if (other.HasTimestamp) {
           Timestamp = other.Timestamp;
         }
-        if (other.HasExternalMetadata) {
-          ExternalMetadata = other.ExternalMetadata;
-        }
-        if (other.HasPreviousRecord) {
-          PreviousRecord = other.PreviousRecord;
+        if (other.HasRecordMetadata) {
+          RecordMetadata = other.RecordMetadata;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1128,7 +1108,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 10: {
-              result.hasTransaction = input.ReadBytes(ref result.transaction_);
+              result.hasPayload = input.ReadBytes(ref result.payload_);
               break;
             }
             case 16: {
@@ -1136,11 +1116,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 26: {
-              result.hasExternalMetadata = input.ReadBytes(ref result.externalMetadata_);
-              break;
-            }
-            case 34: {
-              result.hasPreviousRecord = input.ReadBytes(ref result.previousRecord_);
+              result.hasRecordMetadata = input.ReadBytes(ref result.recordMetadata_);
               break;
             }
           }
@@ -1153,24 +1129,24 @@ namespace OpenChain.Messages {
       }
       
       
-      public bool HasTransaction {
-        get { return result.hasTransaction; }
+      public bool HasPayload {
+        get { return result.hasPayload; }
       }
-      public pb::ByteString Transaction {
-        get { return result.Transaction; }
-        set { SetTransaction(value); }
+      public pb::ByteString Payload {
+        get { return result.Payload; }
+        set { SetPayload(value); }
       }
-      public Builder SetTransaction(pb::ByteString value) {
+      public Builder SetPayload(pb::ByteString value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasTransaction = true;
-        result.transaction_ = value;
+        result.hasPayload = true;
+        result.payload_ = value;
         return this;
       }
-      public Builder ClearTransaction() {
+      public Builder ClearPayload() {
         PrepareBuilder();
-        result.hasTransaction = false;
-        result.transaction_ = pb::ByteString.Empty;
+        result.hasPayload = false;
+        result.payload_ = pb::ByteString.Empty;
         return this;
       }
       
@@ -1194,45 +1170,24 @@ namespace OpenChain.Messages {
         return this;
       }
       
-      public bool HasExternalMetadata {
-        get { return result.hasExternalMetadata; }
+      public bool HasRecordMetadata {
+        get { return result.hasRecordMetadata; }
       }
-      public pb::ByteString ExternalMetadata {
-        get { return result.ExternalMetadata; }
-        set { SetExternalMetadata(value); }
+      public pb::ByteString RecordMetadata {
+        get { return result.RecordMetadata; }
+        set { SetRecordMetadata(value); }
       }
-      public Builder SetExternalMetadata(pb::ByteString value) {
+      public Builder SetRecordMetadata(pb::ByteString value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasExternalMetadata = true;
-        result.externalMetadata_ = value;
+        result.hasRecordMetadata = true;
+        result.recordMetadata_ = value;
         return this;
       }
-      public Builder ClearExternalMetadata() {
+      public Builder ClearRecordMetadata() {
         PrepareBuilder();
-        result.hasExternalMetadata = false;
-        result.externalMetadata_ = pb::ByteString.Empty;
-        return this;
-      }
-      
-      public bool HasPreviousRecord {
-        get { return result.hasPreviousRecord; }
-      }
-      public pb::ByteString PreviousRecord {
-        get { return result.PreviousRecord; }
-        set { SetPreviousRecord(value); }
-      }
-      public Builder SetPreviousRecord(pb::ByteString value) {
-        pb::ThrowHelper.ThrowIfNull(value, "value");
-        PrepareBuilder();
-        result.hasPreviousRecord = true;
-        result.previousRecord_ = value;
-        return this;
-      }
-      public Builder ClearPreviousRecord() {
-        PrepareBuilder();
-        result.hasPreviousRecord = false;
-        result.previousRecord_ = pb::ByteString.Empty;
+        result.hasRecordMetadata = false;
+        result.recordMetadata_ = pb::ByteString.Empty;
         return this;
       }
     }
