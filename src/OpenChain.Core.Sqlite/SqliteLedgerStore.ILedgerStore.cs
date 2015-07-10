@@ -48,41 +48,37 @@ namespace OpenChain.Core.Sqlite
 
         #endregion
 
-        #region AddLedgerRecord
+        #region AddLedgerRecords
 
-        public async Task<BinaryData> AddLedgerRecord(BinaryData rawLedgerRecord)
+        public async Task AddLedgerRecords(IEnumerable<BinaryData> rawLedgerRecords)
         {
             using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToArray());
-
-                byte[] newLedgerHash = await InsertTransaction(context, record, rawLedgerRecord.ToArray());
-                context.Commit();
-
-                return new BinaryData(newLedgerHash);
-            }
-        }
-
-        private async Task<byte[]> InsertTransaction(SQLiteTransaction context, LedgerRecord ledgerRecord, byte[] rawLedgerRecord)
-        {
-            byte[] rawTransaction = ledgerRecord.Transaction.ToArray();
-            byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord);
-            byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
-
-            await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
-
-            await ExecuteAsync(@"
-                    INSERT INTO Transactions
-                    (TransactionHash, RecordHash, RawData)
-                    VALUES (@transactionHash, @recordHash, @rawData)",
-                new Dictionary<string, object>()
+                foreach (BinaryData rawLedgerRecord in rawLedgerRecords)
                 {
-                    { "@transactionHash", transactionHash },
-                    { "@recordHash", recordHash },
-                    { "@rawData", rawLedgerRecord }
-                });
+                    LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToByteArray());
 
-            return recordHash;
+                    byte[] rawTransaction = record.Transaction.ToByteArray();
+                    byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
+
+                    await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
+
+                    byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord.ToByteArray());
+
+                    await ExecuteAsync(@"
+                        INSERT INTO Transactions
+                        (TransactionHash, RecordHash, RawData)
+                        VALUES (@transactionHash, @recordHash, @rawData)",
+                        new Dictionary<string, object>()
+                        {
+                        { "@transactionHash", transactionHash },
+                        { "@recordHash", recordHash },
+                        { "@rawData", rawLedgerRecord }
+                        });
+                }
+
+                context.Commit();
+            }
         }
 
         private async Task UpdateAccounts(Transaction transaction, byte[] transactionHash)
@@ -167,18 +163,20 @@ namespace OpenChain.Core.Sqlite
                 return await ExecuteAsync(@"
                         SELECT  RawData
                         FROM    Transactions
-                        WHERE   Id > (SELECT Id FROM Transactions WHERE RecordHash = @recordHash)",
+                        WHERE   Id > (SELECT Id FROM Transactions WHERE RecordHash = @recordHash)
+                        ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>()
                     {
-                        { "@recordHash", from.ToArray() }
+                        { "@recordHash", from.ToByteArray() }
                     });
             }
             else
             {
                 return await ExecuteAsync(@"
                         SELECT  RawData
-                        FROM    Transactions",
+                        FROM    Transactions
+                        ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>());
             }

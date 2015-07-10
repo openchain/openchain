@@ -23,7 +23,7 @@ namespace OpenChain.Server
         public async Task<BinaryData> PostTransaction(BinaryData rawTransaction, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             // Verify that the transaction can be deserialized
-            Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction.ToArray());
+            Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction.ToByteArray());
 
             // All assets must have an overall zero balance
             var groups = transaction.AccountEntries
@@ -54,7 +54,10 @@ namespace OpenChain.Server
             byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
 
             LedgerRecord record = new LedgerRecord(rawTransaction, date, new BinaryData(metadata));
-            return await this.store.AddLedgerRecord(new BinaryData(MessageSerializer.SerializeLedgerRecord(record)));
+            byte[] serializedLedgerRecord = MessageSerializer.SerializeLedgerRecord(record);
+            await this.store.AddLedgerRecords(new[] { new BinaryData(serializedLedgerRecord) });
+
+            return new BinaryData(MessageSerializer.ComputeHash(serializedLedgerRecord));
         }
     }
 }

@@ -52,7 +52,7 @@ namespace OpenChain
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
-            services.AddTransient<IRulesValidator>(ConfigurationParser.CreateRulesValidator);
+            services.AddSingleton<IRulesValidator>(ConfigurationParser.CreateRulesValidator);
 
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
@@ -84,8 +84,9 @@ namespace OpenChain
             // Add the following route for porting Web API 2 controllers.
             // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
 
-            // Activate the stream subscriber
+            // Activate singletons
             app.ApplicationServices.GetService<IStreamSubscriber>();
+            app.ApplicationServices.GetService<IRulesValidator>();
         }
     }
 }

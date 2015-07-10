@@ -5,10 +5,7 @@ using OpenChain.Core;
 using OpenChain.Core.Sqlite;
 using OpenChain.Server;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace OpenChain.Models
 {
@@ -16,25 +13,33 @@ namespace OpenChain.Models
     {
         public static ILedgerStore CreateLedgerStore(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
 
             return new SqliteLedgerStore(configuration.GetSubKey("SQLite").Get("path"));
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
-            ILedgerStore store = (ILedgerStore)serviceProvider.GetService(typeof(ILedgerStore));
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            ILedgerStore store = serviceProvider.GetService<ILedgerStore>();
 
             return store as ILedgerQueries;
         }
 
         public static IRulesValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
-            
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            ILogger logger = serviceProvider.GetService<ILogger>();
+
             if (!configuration.GetSubKey("Main").Get<bool>("is_master"))
+            {
+                logger.LogInformation("Transaction validation mode disabled (Slave mode)");
                 return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, false);
+            }
+            else
+            {
+                logger.LogInformation("Transaction validation mode enabled (Master mode)");
+            }
 
             switch (configuration.GetSubKey("Main").Get("validator"))
             {
@@ -49,19 +54,21 @@ namespace OpenChain.Models
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
-            ILoggerFactory loggerFactory = (ILoggerFactory)serviceProvider.GetService(typeof(ILoggerFactory));
-            
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            ILoggerFactory loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+
             return loggerFactory.CreateLogger("General");
         }
 
         public static IStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = (IConfiguration)serviceProvider.GetService(typeof(IConfiguration));
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            ILogger logger = serviceProvider.GetService<ILogger>();
 
             string masterUrl = configuration.GetSubKey("Main").Get("master_url");
             if (!string.IsNullOrEmpty(masterUrl) && !configuration.GetSubKey("Main").Get<bool>("is_master"))
             {
+                logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));
                 streamSubscriber.Subscribe(CancellationToken.None);
 
@@ -69,6 +76,7 @@ namespace OpenChain.Models
             }
             else
             {
+                logger.LogInformation("Stream subscriber disabled");
                 return null;
             }
         }

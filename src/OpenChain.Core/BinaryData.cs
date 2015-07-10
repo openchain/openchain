@@ -58,7 +58,7 @@ namespace OpenChain.Core
                 return value;
         }
 
-        public byte[] ToArray()
+        public byte[] ToByteArray()
         {
             byte[] result = new byte[data.Length];
             Buffer.BlockCopy(data, 0, result, 0, data.Length);

@@ -55,7 +55,7 @@ namespace OpenChain.Core.Tests
             byte[] sourceArray = new byte[] { 18, 178, 255, 70, 0 };
             BinaryData result = new BinaryData(sourceArray);
 
-            Assert.Equal<byte>(new byte[] { 18, 178, 255, 70, 0 }, result.ToArray());
+            Assert.Equal<byte>(new byte[] { 18, 178, 255, 70, 0 }, result.ToByteArray());
         }
 
         [Fact]

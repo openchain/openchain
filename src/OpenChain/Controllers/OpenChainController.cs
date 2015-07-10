@@ -58,7 +58,7 @@ namespace OpenChain.Controllers
             {
                 authentication.Add(new AuthenticationEvidence(
                     (string)evidence["identity"],
-                    evidence["evidence"].Select(token => BinaryData.Parse((string)token).ToArray()).ToArray()));
+                    evidence["evidence"].Select(token => BinaryData.Parse((string)token).ToByteArray()).ToArray()));
             }
 
             BinaryData ledgerRecordHash;

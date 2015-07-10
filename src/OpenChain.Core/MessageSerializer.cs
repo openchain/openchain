@@ -13,7 +13,7 @@ namespace OpenChain.Core
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                Metadata = Google.ProtocolBuffers.ByteString.CopyFrom(transaction.Metadata.ToArray())
+                Metadata = Google.ProtocolBuffers.ByteString.CopyFrom(transaction.Metadata.ToByteArray())
             };
 
             transactionBuilder.AddRangeAccountEntries(
@@ -23,7 +23,7 @@ namespace OpenChain.Core
                         Account = operation.AccountKey.Account,
                         Asset = operation.AccountKey.Asset,
                         Amount = operation.Amount,
-                        Version = ByteString.CopyFrom(operation.Version.ToArray())
+                        Version = ByteString.CopyFrom(operation.Version.ToByteArray())
                     }.Build()));
 
             return transactionBuilder.Build().ToByteArray();
@@ -46,7 +46,7 @@ namespace OpenChain.Core
         {
             Messages.LedgerRecord.Builder recordBuilder = new Messages.LedgerRecord.Builder()
             {
-                Payload = ByteString.CopyFrom(record.Transaction.ToArray()),
+                Payload = ByteString.CopyFrom(record.Transaction.ToByteArray()),
                 Timestamp = (long)(record.Timestamp - epoch).TotalSeconds,
                 RecordMetadata = ByteString.CopyFrom(record.ExternalMetadata.Value.ToArray())
             };
@@ -68,7 +68,7 @@ namespace OpenChain.Core
         {
             using (SHA256 hash = SHA256.Create())
             {
-                return hash.ComputeHash(message.ToArray());
+                return hash.ComputeHash(hash.ComputeHash(message.ToArray()));
             }
         }
     }

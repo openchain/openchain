@@ -12,10 +12,10 @@ namespace OpenChain.Core
         /// <summary>
         /// Adds a record to the ledger.
         /// </summary>
-        /// <param name="rawLedgerRecord">The serialized ledger record to add to the ledger.</param>
+        /// <param name="ledgerRecords">A collection of serialized ledger records to add to the ledger.</param>
         /// <exception cref="AccountModifiedException">An account has been modified and the transaction is no longer valid.</exception>
-        /// <returns>A task that represents the completion of the operation and contains the hash of the record.</returns>
-        Task<BinaryData> AddLedgerRecord(BinaryData rawLedgerRecord);
+        /// <returns>A task that represents the completion of the operation.</returns>
+        Task AddLedgerRecords(IEnumerable<BinaryData> ledgerRecords);
 
         /// <summary>
         /// Gets the hash of the last record in the ledger.

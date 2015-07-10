@@ -100,7 +100,7 @@ namespace OpenChain.Models
             public void OnNext(BinaryData value)
             {
                 QueueTask(() => webSocket.SendAsync(
-                    new ArraySegment<byte>(value.ToArray()),
+                    new ArraySegment<byte>(value.ToByteArray()),
                     WebSocketMessageType.Binary,
                     true,
                     cancel));

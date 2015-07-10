@@ -48,7 +48,10 @@ namespace OpenChain.Models
                         if (result.MessageType == WebSocketMessageType.Close)
                             break;
 
-                        currentRecord = await store.AddLedgerRecord(new BinaryData(buffer.Take(result.Count)));
+                        BinaryData record = new BinaryData(buffer.Take(result.Count));
+                        await store.AddLedgerRecords(new[] { record });
+
+                        currentRecord = new BinaryData(MessageSerializer.ComputeHash(record.ToByteArray()));
                     }
                 }
                 catch (Exception exception)
