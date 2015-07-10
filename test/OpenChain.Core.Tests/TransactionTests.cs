@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace OpenChain.Core.Tests
@@ -11,7 +8,7 @@ namespace OpenChain.Core.Tests
         [Fact]
         public void Transaction_Success()
         {
-            Transaction finalTransaction = new Transaction(
+            Transaction transaction = new Transaction(
                 "ledgerId",
                 new[]
                 {
@@ -20,13 +17,13 @@ namespace OpenChain.Core.Tests
                 },
                 BinaryData.Parse("abcdef"));
 
-            Assert.Equal(2, finalTransaction.AccountEntries.Count);
-            Assert.Equal("account1", finalTransaction.AccountEntries[0].AccountKey.Account);
-            Assert.Equal("asset1", finalTransaction.AccountEntries[0].AccountKey.Asset);
-            Assert.Equal(100, finalTransaction.AccountEntries[0].Amount);
-            Assert.Equal(BinaryData.Parse("1234"), finalTransaction.AccountEntries[0].Version);
-            Assert.Equal("ledgerId", finalTransaction.LedgerId);
-            Assert.Equal(BinaryData.Parse("abcdef"), finalTransaction.Metadata);
+            Assert.Equal(2, transaction.AccountEntries.Count);
+            Assert.Equal("account1", transaction.AccountEntries[0].AccountKey.Account);
+            Assert.Equal("asset1", transaction.AccountEntries[0].AccountKey.Asset);
+            Assert.Equal(100, transaction.AccountEntries[0].Amount);
+            Assert.Equal(BinaryData.Parse("1234"), transaction.AccountEntries[0].Version);
+            Assert.Equal("ledgerId", transaction.LedgerId);
+            Assert.Equal(BinaryData.Parse("abcdef"), transaction.Metadata);
         }
 
         [Fact]
