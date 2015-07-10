@@ -31,19 +31,19 @@ namespace OpenChain.Server
                 .Select(group => group.Sum(entry => entry.Amount));
 
             if (groups.Any(group => group != 0))
-                return null;
+                throw new TransactionInvalidException("UnbalancedTransaction");
 
             // There must not be the same account represented twice
             var accountEntries = transaction.AccountEntries
                 .GroupBy(entry => entry.AccountKey, entry => entry);
 
             if (accountEntries.Any(group => group.Count() > 1))
-                return null;
+                throw new TransactionInvalidException("DuplicateAccount");
 
             // Paths must be correctly formatted
             if (!transaction.AccountEntries.All(
                 account => LedgerPath.IsValidPath(account.AccountKey.Account) && LedgerPath.IsValidPath(account.AccountKey.Asset)))
-                return null;
+                throw new TransactionInvalidException("InvalidPath");
 
             DateTime date = DateTime.UtcNow;
             
@@ -55,7 +55,15 @@ namespace OpenChain.Server
 
             LedgerRecord record = new LedgerRecord(rawTransaction, date, new BinaryData(metadata));
             byte[] serializedLedgerRecord = MessageSerializer.SerializeLedgerRecord(record);
-            await this.store.AddLedgerRecords(new[] { new BinaryData(serializedLedgerRecord) });
+
+            try
+            {
+                await this.store.AddLedgerRecords(new[] { new BinaryData(serializedLedgerRecord) });
+            }
+            catch (AccountModifiedException)
+            {
+                throw new TransactionInvalidException("OptimisticConcurrency");
+            }
 
             return new BinaryData(MessageSerializer.ComputeHash(serializedLedgerRecord));
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using OpenChain.Core;
 using OpenChain.Server;
@@ -18,12 +19,14 @@ namespace OpenChain.Controllers
         private readonly IConfiguration configuration;
         private readonly ILedgerStore store;
         private readonly TransactionValidator validator;
+        private readonly ILogger logger;
 
-        public OpenChainController(IConfiguration configuration, ILedgerStore store, IRulesValidator validator)
+        public OpenChainController(IConfiguration configuration, ILedgerStore store, IRulesValidator validator, ILogger logger)
         {
             this.configuration = configuration;
             this.store = store;
             this.validator = new TransactionValidator(store, validator);
+            this.logger = logger;
         }
 
         /// <summary>
@@ -66,10 +69,13 @@ namespace OpenChain.Controllers
             {
                 ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
             }
-            catch (AccountModifiedException)
+            catch (TransactionInvalidException exception)
             {
-                return new HttpStatusCodeResult((int)HttpStatusCode.PreconditionFailed);
+                logger.LogInformation("Rejected transaction ({1})", exception.Message);
+                return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
+
+            logger.LogInformation("Validated transaction {0}", ledgerRecordHash.ToString());
 
             return Json(new
             {

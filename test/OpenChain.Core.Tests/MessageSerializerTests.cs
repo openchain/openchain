@@ -9,6 +9,7 @@ namespace OpenChain.Core.Tests
         public void Transaction()
         {
             Transaction transaction = new Transaction(
+                BinaryData.Parse("aabbccdd"),
                 new[]
                 {
                     new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")),
@@ -28,6 +29,7 @@ namespace OpenChain.Core.Tests
             Assert.Equal(transaction.AccountEntries[1].AccountKey, finalTransaction.AccountEntries[1].AccountKey);
             Assert.Equal(transaction.AccountEntries[1].Amount, finalTransaction.AccountEntries[1].Amount);
             Assert.Equal(transaction.AccountEntries[1].Version, finalTransaction.AccountEntries[1].Version);
+            Assert.Equal(transaction.LedgerId, finalTransaction.LedgerId);
             Assert.Equal(transaction.Metadata, finalTransaction.Metadata);
         }
 

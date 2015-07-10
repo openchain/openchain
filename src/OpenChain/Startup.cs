@@ -68,10 +68,11 @@ namespace OpenChain
 
             app.Map("/stream", managedWebSocketsApp =>
             {
-                // Comment this out to test native server implementations
-                //managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
-                //var s = managedWebSocketsApp.ApplicationServices.GetService<IHttpUpgradeFeature>();
-                managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);
+                if (configuration.GetSubKey("Main").Get<bool>("enable_transaction_stream"))
+                {
+                    managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
+                    managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);
+                }
             });
 
             // Configure the HTTP request pipeline.

@@ -9,8 +9,9 @@ message Transaction {
         required bytes version = 4;
     }
 
-    repeated AccountEntry account_entries = 1;
-    required bytes metadata = 2;
+    required bytes ledger_id = 1;
+    repeated AccountEntry account_entries = 2;
+    required bytes metadata = 3;
 }
 
 message LedgerRecord {

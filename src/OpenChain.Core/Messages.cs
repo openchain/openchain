@@ -32,19 +32,19 @@ namespace OpenChain.Messages {
     static Schema() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKuAQoLVHJhbnNhY3Rpb24SPAoP", 
-            "YWNjb3VudF9lbnRyaWVzGAEgAygLMiMuT3BlbkNoYWluLlRyYW5zYWN0aW9u", 
-            "LkFjY291bnRFbnRyeRIQCghtZXRhZGF0YRgCIAIoDBpPCgxBY2NvdW50RW50", 
-            "cnkSDwoHYWNjb3VudBgBIAIoCRINCgVhc3NldBgCIAIoCRIOCgZhbW91bnQY", 
-            "AyACKBISDwoHdmVyc2lvbhgEIAIoDCJLCgxMZWRnZXJSZWNvcmQSDwoHcGF5", 
-            "bG9hZBgBIAIoDBIRCgl0aW1lc3RhbXAYAiACKAMSFwoPcmVjb3JkX21ldGFk", 
-          "YXRhGAMgAigM"));
+            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiLBAQoLVHJhbnNhY3Rpb24SEQoJ", 
+            "bGVkZ2VyX2lkGAEgAigMEjwKD2FjY291bnRfZW50cmllcxgCIAMoCzIjLk9w", 
+            "ZW5DaGFpbi5UcmFuc2FjdGlvbi5BY2NvdW50RW50cnkSEAoIbWV0YWRhdGEY", 
+            "AyACKAwaTwoMQWNjb3VudEVudHJ5Eg8KB2FjY291bnQYASACKAkSDQoFYXNz", 
+            "ZXQYAiACKAkSDgoGYW1vdW50GAMgAigSEg8KB3ZlcnNpb24YBCACKAwiSwoM", 
+            "TGVkZ2VyUmVjb3JkEg8KB3BheWxvYWQYASACKAwSEQoJdGltZXN0YW1wGAIg", 
+          "AigDEhcKD3JlY29yZF9tZXRhZGF0YRgDIAIoDA=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[0];
         internal__static_OpenChain_Transaction__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder>(internal__static_OpenChain_Transaction__Descriptor,
-                new string[] { "AccountEntries", "Metadata", });
+                new string[] { "LedgerId", "AccountEntries", "Metadata", });
         internal__static_OpenChain_Transaction_AccountEntry__Descriptor = internal__static_OpenChain_Transaction__Descriptor.NestedTypes[0];
         internal__static_OpenChain_Transaction_AccountEntry__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction.Types.AccountEntry, global::OpenChain.Messages.Transaction.Types.AccountEntry.Builder>(internal__static_OpenChain_Transaction_AccountEntry__Descriptor,
@@ -67,8 +67,8 @@ namespace OpenChain.Messages {
   internal sealed partial class Transaction : pb::GeneratedMessage<Transaction, Transaction.Builder> {
     private Transaction() { }
     private static readonly Transaction defaultInstance = new Transaction().MakeReadOnly();
-    private static readonly string[] _transactionFieldNames = new string[] { "account_entries", "metadata" };
-    private static readonly uint[] _transactionFieldTags = new uint[] { 10, 18 };
+    private static readonly string[] _transactionFieldNames = new string[] { "account_entries", "ledger_id", "metadata" };
+    private static readonly uint[] _transactionFieldTags = new uint[] { 18, 10, 26 };
     public static Transaction DefaultInstance {
       get { return defaultInstance; }
     }
@@ -506,7 +506,17 @@ namespace OpenChain.Messages {
     }
     #endregion
     
-    public const int AccountEntriesFieldNumber = 1;
+    public const int LedgerIdFieldNumber = 1;
+    private bool hasLedgerId;
+    private pb::ByteString ledgerId_ = pb::ByteString.Empty;
+    public bool HasLedgerId {
+      get { return hasLedgerId; }
+    }
+    public pb::ByteString LedgerId {
+      get { return ledgerId_; }
+    }
+    
+    public const int AccountEntriesFieldNumber = 2;
     private pbc::PopsicleList<global::OpenChain.Messages.Transaction.Types.AccountEntry> accountEntries_ = new pbc::PopsicleList<global::OpenChain.Messages.Transaction.Types.AccountEntry>();
     public scg::IList<global::OpenChain.Messages.Transaction.Types.AccountEntry> AccountEntriesList {
       get { return accountEntries_; }
@@ -518,7 +528,7 @@ namespace OpenChain.Messages {
       return accountEntries_[index];
     }
     
-    public const int MetadataFieldNumber = 2;
+    public const int MetadataFieldNumber = 3;
     private bool hasMetadata;
     private pb::ByteString metadata_ = pb::ByteString.Empty;
     public bool HasMetadata {
@@ -530,6 +540,7 @@ namespace OpenChain.Messages {
     
     public override bool IsInitialized {
       get {
+        if (!hasLedgerId) return false;
         if (!hasMetadata) return false;
         foreach (global::OpenChain.Messages.Transaction.Types.AccountEntry element in AccountEntriesList) {
           if (!element.IsInitialized) return false;
@@ -541,11 +552,14 @@ namespace OpenChain.Messages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
       string[] field_names = _transactionFieldNames;
+      if (hasLedgerId) {
+        output.WriteBytes(1, field_names[1], LedgerId);
+      }
       if (accountEntries_.Count > 0) {
-        output.WriteMessageArray(1, field_names[0], accountEntries_);
+        output.WriteMessageArray(2, field_names[0], accountEntries_);
       }
       if (hasMetadata) {
-        output.WriteBytes(2, field_names[1], Metadata);
+        output.WriteBytes(3, field_names[2], Metadata);
       }
       UnknownFields.WriteTo(output);
     }
@@ -564,11 +578,14 @@ namespace OpenChain.Messages {
       if (size != -1) return size;
       
       size = 0;
+      if (hasLedgerId) {
+        size += pb::CodedOutputStream.ComputeBytesSize(1, LedgerId);
+      }
       foreach (global::OpenChain.Messages.Transaction.Types.AccountEntry element in AccountEntriesList) {
-        size += pb::CodedOutputStream.ComputeMessageSize(1, element);
+        size += pb::CodedOutputStream.ComputeMessageSize(2, element);
       }
       if (hasMetadata) {
-        size += pb::CodedOutputStream.ComputeBytesSize(2, Metadata);
+        size += pb::CodedOutputStream.ComputeBytesSize(3, Metadata);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -693,6 +710,9 @@ namespace OpenChain.Messages {
       public override Builder MergeFrom(Transaction other) {
         if (other == global::OpenChain.Messages.Transaction.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasLedgerId) {
+          LedgerId = other.LedgerId;
+        }
         if (other.accountEntries_.Count != 0) {
           result.accountEntries_.Add(other.accountEntries_);
         }
@@ -743,10 +763,14 @@ namespace OpenChain.Messages {
               break;
             }
             case 10: {
-              input.ReadMessageArray(tag, field_name, result.accountEntries_, global::OpenChain.Messages.Transaction.Types.AccountEntry.DefaultInstance, extensionRegistry);
+              result.hasLedgerId = input.ReadBytes(ref result.ledgerId_);
               break;
             }
             case 18: {
+              input.ReadMessageArray(tag, field_name, result.accountEntries_, global::OpenChain.Messages.Transaction.Types.AccountEntry.DefaultInstance, extensionRegistry);
+              break;
+            }
+            case 26: {
               result.hasMetadata = input.ReadBytes(ref result.metadata_);
               break;
             }
@@ -759,6 +783,27 @@ namespace OpenChain.Messages {
         return this;
       }
       
+      
+      public bool HasLedgerId {
+        get { return result.hasLedgerId; }
+      }
+      public pb::ByteString LedgerId {
+        get { return result.LedgerId; }
+        set { SetLedgerId(value); }
+      }
+      public Builder SetLedgerId(pb::ByteString value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasLedgerId = true;
+        result.ledgerId_ = value;
+        return this;
+      }
+      public Builder ClearLedgerId() {
+        PrepareBuilder();
+        result.hasLedgerId = false;
+        result.ledgerId_ = pb::ByteString.Empty;
+        return this;
+      }
       
       public pbc::IPopsicleList<global::OpenChain.Messages.Transaction.Types.AccountEntry> AccountEntriesList {
         get { return PrepareBuilder().accountEntries_; }

@@ -25,7 +25,7 @@ namespace OpenChain.Core.Sqlite
 
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Transactions
+                CREATE TABLE IF NOT EXISTS Records
                 (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     TransactionHash BLOB UNIQUE,
@@ -66,14 +66,14 @@ namespace OpenChain.Core.Sqlite
                     byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord.ToByteArray());
 
                     await ExecuteAsync(@"
-                        INSERT INTO Transactions
-                        (TransactionHash, RecordHash, RawData)
-                        VALUES (@transactionHash, @recordHash, @rawData)",
+                            INSERT INTO Records
+                            (TransactionHash, RecordHash, RawData)
+                            VALUES (@transactionHash, @recordHash, @rawData)",
                         new Dictionary<string, object>()
                         {
-                        { "@transactionHash", transactionHash },
-                        { "@recordHash", recordHash },
-                        { "@rawData", rawLedgerRecord }
+                            { "@transactionHash", transactionHash },
+                            { "@recordHash", recordHash },
+                            { "@rawData", rawLedgerRecord }
                         });
                 }
 
@@ -137,7 +137,7 @@ namespace OpenChain.Core.Sqlite
         {
             IEnumerable<BinaryData> accounts = await ExecuteAsync(@"
                     SELECT  RecordHash
-                    FROM    Transactions
+                    FROM    Records
                     ORDER BY Id DESC
                     LIMIT 1",
                 reader => new BinaryData((byte[])reader.GetValue(0)),
@@ -162,8 +162,8 @@ namespace OpenChain.Core.Sqlite
             {
                 return await ExecuteAsync(@"
                         SELECT  RawData
-                        FROM    Transactions
-                        WHERE   Id > (SELECT Id FROM Transactions WHERE RecordHash = @recordHash)
+                        FROM    Records
+                        WHERE   Id > (SELECT Id FROM Records WHERE RecordHash = @recordHash)
                         ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>()
@@ -175,7 +175,7 @@ namespace OpenChain.Core.Sqlite
             {
                 return await ExecuteAsync(@"
                         SELECT  RawData
-                        FROM    Transactions
+                        FROM    Records
                         ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>());

@@ -13,7 +13,8 @@ namespace OpenChain.Core
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                Metadata = Google.ProtocolBuffers.ByteString.CopyFrom(transaction.Metadata.ToByteArray())
+                LedgerId = ByteString.CopyFrom(transaction.LedgerId.ToByteArray()),
+                Metadata = ByteString.CopyFrom(transaction.Metadata.ToByteArray())
             };
 
             transactionBuilder.AddRangeAccountEntries(
@@ -34,6 +35,7 @@ namespace OpenChain.Core
             Messages.Transaction transaction = new Messages.Transaction.Builder().MergeFrom(data).BuildParsed();
 
             return new Transaction(
+                new BinaryData(transaction.LedgerId),
                 transaction.AccountEntriesList.Select(
                     entry => new AccountEntry(
                         new AccountKey(entry.Account, entry.Asset),

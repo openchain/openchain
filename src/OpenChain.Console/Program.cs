@@ -31,6 +31,7 @@ namespace OpenChain.Console
 
             BinaryData version = BinaryData.Parse("");
             Transaction transaction = new Transaction(
+                BinaryData.Parse("aabbccdd"),
                 new[]
                 {
                     new AccountEntry(key, 250, accounts[key].Version),
