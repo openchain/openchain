@@ -7,7 +7,7 @@ namespace OpenChain.Core
 {
     public class Transaction
     {
-        public Transaction(BinaryData ledgerId, IEnumerable<AccountEntry> accountEntries, BinaryData metadata)
+        public Transaction(string ledgerId, IEnumerable<AccountEntry> accountEntries, BinaryData metadata)
         {
             if (ledgerId == null)
                 throw new ArgumentNullException(nameof(ledgerId));
@@ -26,7 +26,7 @@ namespace OpenChain.Core
                 throw new ArgumentNullException(nameof(accountEntries));
         }
 
-        public BinaryData LedgerId { get; }
+        public string LedgerId { get; }
 
         public IReadOnlyList<AccountEntry> AccountEntries { get; }
 

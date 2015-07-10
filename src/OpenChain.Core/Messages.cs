@@ -33,7 +33,7 @@ namespace OpenChain.Messages {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiLBAQoLVHJhbnNhY3Rpb24SEQoJ", 
-            "bGVkZ2VyX2lkGAEgAigMEjwKD2FjY291bnRfZW50cmllcxgCIAMoCzIjLk9w", 
+            "bGVkZ2VyX2lkGAEgAigJEjwKD2FjY291bnRfZW50cmllcxgCIAMoCzIjLk9w", 
             "ZW5DaGFpbi5UcmFuc2FjdGlvbi5BY2NvdW50RW50cnkSEAoIbWV0YWRhdGEY", 
             "AyACKAwaTwoMQWNjb3VudEVudHJ5Eg8KB2FjY291bnQYASACKAkSDQoFYXNz", 
             "ZXQYAiACKAkSDgoGYW1vdW50GAMgAigSEg8KB3ZlcnNpb24YBCACKAwiSwoM", 
@@ -508,11 +508,11 @@ namespace OpenChain.Messages {
     
     public const int LedgerIdFieldNumber = 1;
     private bool hasLedgerId;
-    private pb::ByteString ledgerId_ = pb::ByteString.Empty;
+    private string ledgerId_ = "";
     public bool HasLedgerId {
       get { return hasLedgerId; }
     }
-    public pb::ByteString LedgerId {
+    public string LedgerId {
       get { return ledgerId_; }
     }
     
@@ -553,7 +553,7 @@ namespace OpenChain.Messages {
       CalcSerializedSize();
       string[] field_names = _transactionFieldNames;
       if (hasLedgerId) {
-        output.WriteBytes(1, field_names[1], LedgerId);
+        output.WriteString(1, field_names[1], LedgerId);
       }
       if (accountEntries_.Count > 0) {
         output.WriteMessageArray(2, field_names[0], accountEntries_);
@@ -579,7 +579,7 @@ namespace OpenChain.Messages {
       
       size = 0;
       if (hasLedgerId) {
-        size += pb::CodedOutputStream.ComputeBytesSize(1, LedgerId);
+        size += pb::CodedOutputStream.ComputeStringSize(1, LedgerId);
       }
       foreach (global::OpenChain.Messages.Transaction.Types.AccountEntry element in AccountEntriesList) {
         size += pb::CodedOutputStream.ComputeMessageSize(2, element);
@@ -763,7 +763,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 10: {
-              result.hasLedgerId = input.ReadBytes(ref result.ledgerId_);
+              result.hasLedgerId = input.ReadString(ref result.ledgerId_);
               break;
             }
             case 18: {
@@ -787,11 +787,11 @@ namespace OpenChain.Messages {
       public bool HasLedgerId {
         get { return result.hasLedgerId; }
       }
-      public pb::ByteString LedgerId {
+      public string LedgerId {
         get { return result.LedgerId; }
         set { SetLedgerId(value); }
       }
-      public Builder SetLedgerId(pb::ByteString value) {
+      public Builder SetLedgerId(string value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
         result.hasLedgerId = true;
@@ -801,7 +801,7 @@ namespace OpenChain.Messages {
       public Builder ClearLedgerId() {
         PrepareBuilder();
         result.hasLedgerId = false;
-        result.ledgerId_ = pb::ByteString.Empty;
+        result.ledgerId_ = "";
         return this;
       }
       

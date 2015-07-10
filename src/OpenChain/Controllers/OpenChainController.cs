@@ -82,5 +82,15 @@ namespace OpenChain.Controllers
                 ledger_record = ledgerRecordHash.ToString()
             });
         }
+
+        [HttpGet("info")]
+        public ActionResult GetLedgerInformation()
+        {
+            return Json(new
+            {
+                root_url = configuration.GetSubKey("Main").Get("root_url"),
+                name = configuration.GetSubKey("Info").Get("name")
+            });
+        }
     }
 }

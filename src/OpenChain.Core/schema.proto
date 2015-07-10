@@ -9,7 +9,7 @@ message Transaction {
         required bytes version = 4;
     }
 
-    required bytes ledger_id = 1;
+    required string ledger_id = 1;
     repeated AccountEntry account_entries = 2;
     required bytes metadata = 3;
 }

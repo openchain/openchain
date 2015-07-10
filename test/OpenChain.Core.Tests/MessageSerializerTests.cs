@@ -9,7 +9,7 @@ namespace OpenChain.Core.Tests
         public void Transaction()
         {
             Transaction transaction = new Transaction(
-                BinaryData.Parse("aabbccdd"),
+                "ledgerId",
                 new[]
                 {
                     new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")),
@@ -21,7 +21,7 @@ namespace OpenChain.Core.Tests
 
             Transaction finalTransaction = MessageSerializer.DeserializeTransaction(result);
 
-            Assert.Equal(59, result.Length);
+            Assert.Equal(69, result.Length);
             Assert.Equal(transaction.AccountEntries.Count, finalTransaction.AccountEntries.Count);
             Assert.Equal(transaction.AccountEntries[0].AccountKey, finalTransaction.AccountEntries[0].AccountKey);
             Assert.Equal(transaction.AccountEntries[0].Amount, finalTransaction.AccountEntries[0].Amount);
@@ -45,7 +45,7 @@ namespace OpenChain.Core.Tests
 
             LedgerRecord finalRecord = MessageSerializer.DeserializeLedgerRecord(result);
 
-            Assert.Equal(27, result.Length);
+            Assert.Equal(21, result.Length);
             Assert.Equal(record.Transaction, finalRecord.Transaction);
             Assert.Equal(record.Timestamp, finalRecord.Timestamp);
             Assert.Equal(record.ExternalMetadata, finalRecord.ExternalMetadata);

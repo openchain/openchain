@@ -12,7 +12,7 @@ namespace OpenChain.Core.Tests
         public void Transaction_Success()
         {
             Transaction finalTransaction = new Transaction(
-                BinaryData.Parse("aabbccdd"),
+                "ledgerId",
                 new[]
                 {
                     new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")),
@@ -25,7 +25,7 @@ namespace OpenChain.Core.Tests
             Assert.Equal("asset1", finalTransaction.AccountEntries[0].AccountKey.Asset);
             Assert.Equal(100, finalTransaction.AccountEntries[0].Amount);
             Assert.Equal(BinaryData.Parse("1234"), finalTransaction.AccountEntries[0].Version);
-            Assert.Equal(BinaryData.Parse("aabbccdd"), finalTransaction.LedgerId);
+            Assert.Equal("ledgerId", finalTransaction.LedgerId);
             Assert.Equal(BinaryData.Parse("abcdef"), finalTransaction.Metadata);
         }
 
@@ -38,17 +38,17 @@ namespace OpenChain.Core.Tests
                 BinaryData.Parse("abcdef")));
 
             Assert.Throws<ArgumentNullException>(() => new Transaction(
-                BinaryData.Parse("aabbccdd"),
+                "ledgerId",
                 null,
                 BinaryData.Parse("abcdef")));
 
             Assert.Throws<ArgumentNullException>(() => new Transaction(
-                BinaryData.Parse("aabbccdd"),
+                "ledgerId",
                 new[] { new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")) },
                 null));
 
             Assert.Throws<ArgumentNullException>(() => new Transaction(
-                BinaryData.Parse("aabbccdd"),
+                "ledgerId",
                 new[] { new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")), null },
                 BinaryData.Parse("abcdef")));
 

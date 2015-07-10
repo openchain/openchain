@@ -13,7 +13,7 @@ namespace OpenChain.Core
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                LedgerId = ByteString.CopyFrom(transaction.LedgerId.ToByteArray()),
+                LedgerId = transaction.LedgerId,
                 Metadata = ByteString.CopyFrom(transaction.Metadata.ToByteArray())
             };
 
@@ -35,7 +35,7 @@ namespace OpenChain.Core
             Messages.Transaction transaction = new Messages.Transaction.Builder().MergeFrom(data).BuildParsed();
 
             return new Transaction(
-                new BinaryData(transaction.LedgerId),
+                transaction.LedgerId,
                 transaction.AccountEntriesList.Select(
                     entry => new AccountEntry(
                         new AccountKey(entry.Account, entry.Asset),
