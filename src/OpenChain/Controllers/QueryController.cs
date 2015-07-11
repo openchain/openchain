@@ -17,17 +17,29 @@ namespace OpenChain.Controllers
     {
         private readonly ILedgerQueries store;
 
-        public QueryController()
+        public QueryController(ILedgerQueries store)
         {
-            this.store = new SqliteLedgerStore(@"D:\Flavien\Documents\Visual Studio 2015\Projects\OpenChain\src\OpenChain.Console\ledger.db");
+            this.store = store;
         }
 
-        [HttpGet("accountentry")]
+        [HttpGet("accountentries")]
         public async Task<ActionResult> GetAccount(string account, string asset)
         {
-            IReadOnlyDictionary<AccountKey, AccountEntry> accounts = await this.store.GetAccounts(new[] { new AccountKey(account, asset) });
+            IReadOnlyDictionary<AccountKey, AccountEntry> accounts;
+            if (asset != null && account != null)
+            {
+                accounts = await this.store.GetAccounts(new[] { new AccountKey(account, asset) });
+            }
+            else if (asset == null && account != null)
+            {
+                accounts = await this.store.GetAccount(account);
+            }
+            else
+            {
+                return HttpBadRequest();
+            }
 
-            return Json(GetAccountJson(accounts.First().Value));
+            return Json(accounts.Values.Select(GetAccountJson).ToArray());
         }
 
         [HttpGet("subaccounts")]

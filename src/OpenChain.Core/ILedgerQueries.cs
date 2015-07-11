@@ -9,6 +9,8 @@ namespace OpenChain.Core
     {
         Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetAccounts(IEnumerable<AccountKey> accountKeys);
 
+        Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetAccount(string account);
+
         Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetSubaccounts(string rootAccount);
     }
 }

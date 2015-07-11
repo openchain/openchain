@@ -13,17 +13,22 @@ namespace OpenChain.Server
     {
         private readonly ILedgerStore store;
         private readonly IRulesValidator validator;
+        private readonly string ledgerId;
 
-        public TransactionValidator(ILedgerStore store, IRulesValidator validator)
+        public TransactionValidator(ILedgerStore store, IRulesValidator validator, string ledgerId)
         {
             this.store = store;
             this.validator = validator;
+            this.ledgerId = ledgerId;
         }
 
         public async Task<BinaryData> PostTransaction(BinaryData rawTransaction, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             // Verify that the transaction can be deserialized
             Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction.ToByteArray());
+
+            if (transaction.LedgerId != this.ledgerId)
+                throw new TransactionInvalidException("InvalidLedgerId");
 
             // All assets must have an overall zero balance
             var groups = transaction.AccountEntries

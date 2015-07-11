@@ -25,7 +25,7 @@ namespace OpenChain.Controllers
         {
             this.configuration = configuration;
             this.store = store;
-            this.validator = new TransactionValidator(store, validator);
+            this.validator = new TransactionValidator(store, validator, configuration.GetSubKey("Main").Get("root_url"));
             this.logger = logger;
         }
 
@@ -71,7 +71,7 @@ namespace OpenChain.Controllers
             }
             catch (TransactionInvalidException exception)
             {
-                logger.LogInformation("Rejected transaction ({1})", exception.Message);
+                logger.LogInformation("Rejected transaction: {0}", exception.Message);
                 return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
             }
 

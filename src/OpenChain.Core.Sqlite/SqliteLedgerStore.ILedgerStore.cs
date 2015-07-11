@@ -56,14 +56,15 @@ namespace OpenChain.Core.Sqlite
             {
                 foreach (BinaryData rawLedgerRecord in rawLedgerRecords)
                 {
-                    LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(rawLedgerRecord.ToByteArray());
+                    byte[] ledgerRecordData = rawLedgerRecord.ToByteArray();
+                    LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(ledgerRecordData);
 
                     byte[] rawTransaction = record.Transaction.ToByteArray();
                     byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
 
                     await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
 
-                    byte[] recordHash = MessageSerializer.ComputeHash(rawLedgerRecord.ToByteArray());
+                    byte[] recordHash = MessageSerializer.ComputeHash(ledgerRecordData);
 
                     await ExecuteAsync(@"
                             INSERT INTO Records
@@ -73,7 +74,7 @@ namespace OpenChain.Core.Sqlite
                         {
                             { "@transactionHash", transactionHash },
                             { "@recordHash", recordHash },
-                            { "@rawData", rawLedgerRecord }
+                            { "@rawData", ledgerRecordData }
                         });
                 }
 
