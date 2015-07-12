@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SQLite;
+using OpenChain.Ledger;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Core.Sqlite
 {
-    public partial class SqliteLedgerStore : ILedgerQueries
+    public partial class SqliteTransactionStore : ILedgerQueries
     {
         public async Task<IReadOnlyDictionary<AccountKey, AccountEntry>> GetAccounts(IEnumerable<AccountKey> accountKeys)
         {

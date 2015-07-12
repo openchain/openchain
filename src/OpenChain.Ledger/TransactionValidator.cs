@@ -7,31 +7,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server
+namespace OpenChain.Ledger
 {
     public class TransactionValidator
     {
-        private readonly ILedgerStore store;
+        private readonly ITransactionStore store;
         private readonly IRulesValidator validator;
-        private readonly string ledgerId;
+        private readonly BinaryData ledgerId;
 
-        public TransactionValidator(ILedgerStore store, IRulesValidator validator, string ledgerId)
+        public TransactionValidator(ITransactionStore store, IRulesValidator validator, BinaryData ledgerId)
         {
             this.store = store;
             this.validator = validator;
             this.ledgerId = ledgerId;
         }
 
-        public async Task<BinaryData> PostTransaction(BinaryData rawTransaction, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task<BinaryData> PostTransaction(BinaryData rawMutationSet, IReadOnlyList<AuthenticationEvidence> authentication)
         {
-            // Verify that the transaction can be deserialized
-            Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction.ToByteArray());
+            // Verify that the mutation set can be deserialized
+            MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(rawMutationSet);
 
-            if (transaction.LedgerId != this.ledgerId)
-                throw new TransactionInvalidException("InvalidLedgerId");
+            if (!mutationSet.Namespace.Equals(this.ledgerId))
+                throw new TransactionInvalidException("InvalidNamespace");
+
+            IReadOnlyList<AccountEntry> accountEntries = mutationSet.Mutations.Select(AccountEntry.FromMutation).ToList();
+
+            if (accountEntries.Any(item => item == null))
+                throw new TransactionInvalidException("NotAccountMutation");
 
             // All assets must have an overall zero balance
-            var groups = transaction.AccountEntries
+            var groups = accountEntries
                 .GroupBy(entry => entry.AccountKey.Asset)
                 .Select(group => group.Sum(entry => entry.Amount));
 
@@ -39,38 +44,38 @@ namespace OpenChain.Server
                 throw new TransactionInvalidException("UnbalancedTransaction");
 
             // There must not be the same account represented twice
-            var accountEntries = transaction.AccountEntries
+            var groupedAccountEntries = accountEntries
                 .GroupBy(entry => entry.AccountKey, entry => entry);
 
-            if (accountEntries.Any(group => group.Count() > 1))
+            if (groupedAccountEntries.Any(group => group.Count() > 1))
                 throw new TransactionInvalidException("DuplicateAccount");
 
             // Paths must be correctly formatted
-            if (!transaction.AccountEntries.All(
+            if (!accountEntries.All(
                 account => LedgerPath.IsValidPath(account.AccountKey.Account) && LedgerPath.IsValidPath(account.AccountKey.Asset)))
                 throw new TransactionInvalidException("InvalidPath");
 
             DateTime date = DateTime.UtcNow;
             
-            await this.validator.Validate(transaction, authentication);
+            await this.validator.Validate(accountEntries, authentication);
 
             LedgerRecordMetadata recordMetadata = new LedgerRecordMetadata(1, authentication);
 
             byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
 
-            LedgerRecord record = new LedgerRecord(rawTransaction, date, new BinaryData(metadata));
-            byte[] serializedLedgerRecord = MessageSerializer.SerializeLedgerRecord(record);
+            Transaction transaction = new Transaction(rawMutationSet, date, new BinaryData(metadata));
+            BinaryData serializedTransaction = new BinaryData(MessageSerializer.SerializeTransaction(transaction));
 
             try
             {
-                await this.store.AddLedgerRecords(new[] { new BinaryData(serializedLedgerRecord) });
+                await this.store.AddTransactions(new[] { serializedTransaction });
             }
-            catch (AccountModifiedException)
+            catch (ConcurrentMutationException)
             {
                 throw new TransactionInvalidException("OptimisticConcurrency");
             }
 
-            return new BinaryData(MessageSerializer.ComputeHash(serializedLedgerRecord));
+            return new BinaryData(MessageSerializer.ComputeHash(serializedTransaction));
         }
     }
 }

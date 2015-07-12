@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server
+namespace OpenChain.Ledger
 {
     public class NullValidator : IRulesValidator
     {
@@ -13,7 +13,7 @@ namespace OpenChain.Server
             this.alwaysValid = alwaysValid;
         }
 
-        public Task Validate(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication)
+        public Task Validate(IReadOnlyList<AccountEntry> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             if (this.alwaysValid)
                 return Task.FromResult(0);

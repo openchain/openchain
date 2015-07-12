@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Core
+namespace OpenChain.Ledger
 {
     public interface ILedgerQueries
     {

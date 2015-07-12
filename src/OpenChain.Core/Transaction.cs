@@ -1,35 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace OpenChain.Core
 {
     public class Transaction
     {
-        public Transaction(string ledgerId, IEnumerable<AccountEntry> accountEntries, BinaryData metadata)
+        public Transaction(BinaryData mutationSet, DateTime timestamp, BinaryData externalMetadata)
         {
-            if (ledgerId == null)
-                throw new ArgumentNullException(nameof(ledgerId));
+            if (mutationSet == null)
+                throw new ArgumentNullException(nameof(mutationSet));
 
-            if (accountEntries == null)
-                throw new ArgumentNullException(nameof(accountEntries));
+            if (externalMetadata == null)
+                throw new ArgumentNullException(nameof(externalMetadata));
 
-            if (metadata == null)
-                throw new ArgumentNullException(nameof(metadata));
-
-            this.LedgerId = ledgerId;
-            this.AccountEntries = new ReadOnlyCollection<AccountEntry>(accountEntries.ToList());
-            this.Metadata = metadata;
-
-            if (this.AccountEntries.Any(entry => entry == null))
-                throw new ArgumentNullException(nameof(accountEntries));
+            this.MutationSet = mutationSet;
+            this.Timestamp = timestamp;
+            this.ExternalMetadata = externalMetadata;
         }
 
-        public string LedgerId { get; }
+        public BinaryData MutationSet { get; }
 
-        public IReadOnlyList<AccountEntry> AccountEntries { get; }
+        public DateTime Timestamp { get; }
 
-        public BinaryData Metadata { get; }
+        public BinaryData ExternalMetadata { get; }
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Core.Sqlite
 {
-    public partial class SqliteLedgerStore : ILedgerStore
+    public partial class SqliteTransactionStore : ITransactionStore
     {
         private readonly SQLiteConnection connection;
 
-        public SqliteLedgerStore(string filename)
+        public SqliteTransactionStore(string filename)
         {
             this.connection = new SQLiteConnection(new SQLiteConnectionStringBuilder() { Filename = filename }.ToString());
             this.OpenDatabase().Wait();
@@ -25,21 +25,19 @@ namespace OpenChain.Core.Sqlite
 
             SQLiteCommand command = connection.CreateCommand();
             command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Records
+                CREATE TABLE IF NOT EXISTS Transactions
                 (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    TransactionHash BLOB UNIQUE,
-                    RecordHash BLOB UNIQUE,
+                    Hash BLOB UNIQUE,
+                    MutationSetHash BLOB UNIQUE,
                     RawData BLOB
                 );
 
-                CREATE TABLE IF NOT EXISTS Accounts
+                CREATE TABLE IF NOT EXISTS KeyValuePairs
                 (
-                    Account TEXT,
-                    Asset TEXT,
-                    Balance INTEGER,
-                    Version BLOB,
-                    PRIMARY KEY (Account ASC, Asset ASC)
+                    Key BLOB PRIMARY KEY,
+                    Value BLOB,
+                    Version BLOB
                 );
             ";
 
@@ -50,31 +48,28 @@ namespace OpenChain.Core.Sqlite
 
         #region AddLedgerRecords
 
-        public async Task AddLedgerRecords(IEnumerable<BinaryData> rawLedgerRecords)
+        public async Task AddTransactions(IEnumerable<BinaryData> rawTransactions)
         {
             using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                foreach (BinaryData rawLedgerRecord in rawLedgerRecords)
+                foreach (BinaryData rawTransaction in rawTransactions)
                 {
-                    byte[] ledgerRecordData = rawLedgerRecord.ToByteArray();
-                    LedgerRecord record = MessageSerializer.DeserializeLedgerRecord(ledgerRecordData);
-
-                    byte[] rawTransaction = record.Transaction.ToByteArray();
+                    Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
                     byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
 
-                    await UpdateAccounts(MessageSerializer.DeserializeTransaction(rawTransaction), transactionHash);
+                    byte[] mutationSetHash = MessageSerializer.ComputeHash(transaction.MutationSet);
 
-                    byte[] recordHash = MessageSerializer.ComputeHash(ledgerRecordData);
-
+                    await UpdateAccounts(MessageSerializer.DeserializeMutationSet(rawTransaction), mutationSetHash);
+                    
                     await ExecuteAsync(@"
-                            INSERT INTO Records
-                            (TransactionHash, RecordHash, RawData)
-                            VALUES (@transactionHash, @recordHash, @rawData)",
+                            INSERT INTO Transactions
+                            (Hash, MutationSetHash, RawData)
+                            VALUES (@hash, @mutationSetHash, @rawData)",
                         new Dictionary<string, object>()
                         {
-                            { "@transactionHash", transactionHash },
-                            { "@recordHash", recordHash },
-                            { "@rawData", ledgerRecordData }
+                            { "@hash", transactionHash },
+                            { "@mutationSetHash", mutationSetHash },
+                            { "@rawData", rawTransaction.ToByteArray() }
                         });
                 }
 
@@ -82,28 +77,26 @@ namespace OpenChain.Core.Sqlite
             }
         }
 
-        private async Task UpdateAccounts(Transaction transaction, byte[] transactionHash)
+        private async Task UpdateAccounts(MutationSet mutationSet, byte[] transactionHash)
         {
-            foreach (AccountEntry entry in transaction.AccountEntries)
+            foreach (Mutation mutation in mutationSet.Mutations)
             {
-                if (!entry.Version.Equals(BinaryData.Empty))
+                if (!mutation.Version.Equals(BinaryData.Empty))
                 {
                     // Update existing account
                     int count = await ExecuteAsync(@"
-                            UPDATE  Accounts
-                            SET     Balance = Balance + @balance, Version = @version
-                            WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion",
+                            UPDATE  KeyValuePairs
+                            SET     Value = @value, Version = @version
+                            WHERE   Key = @key",
                         new Dictionary<string, object>()
                         {
-                            { "@account", entry.AccountKey.Account },
-                            { "@asset", entry.AccountKey.Asset },
-                            { "@previousVersion", entry.Version.Value.ToArray() },
-                            { "@balance", entry.Amount },
-                            { "@version", transactionHash }
+                            { "@key", mutation.Key.ToByteArray() },
+                            { "@value", mutation.Value.ToByteArray() },
+                            { "@version", mutation.Version.ToByteArray() }
                         });
 
                     if (count == 0)
-                        throw new AccountModifiedException(entry);
+                        throw new ConcurrentMutationException(mutation);
                 }
                 else
                 {
@@ -111,20 +104,19 @@ namespace OpenChain.Core.Sqlite
                     try
                     {
                         await ExecuteAsync(@"
-                                INSERT INTO Accounts
-                                (Account, Asset, Balance, Version)
-                                VALUES (@account, @asset, @balance, @version)",
+                                INSERT INTO KeyValuePairs
+                                (Key, Value, Version)
+                                VALUES (@key, @value, @version)",
                             new Dictionary<string, object>()
                             {
-                                { "@account", entry.AccountKey.Account },
-                                { "@asset", entry.AccountKey.Asset },
-                                { "@balance", entry.Amount },
+                                { "@key", mutation.Key.ToByteArray() },
+                                { "@value", mutation.Value.ToByteArray() },
                                 { "@version", transactionHash }
                             });
                     }
                     catch (SQLiteException exception) when (exception.Message == "constraint failed")
                     {
-                        throw new AccountModifiedException(entry);
+                        throw new ConcurrentMutationException(mutation);
                     }
                 }
             }
@@ -134,7 +126,7 @@ namespace OpenChain.Core.Sqlite
 
         #region GetLastRecord
 
-        public async Task<BinaryData> GetLastRecord()
+        public async Task<BinaryData> GetLastTransaction()
         {
             IEnumerable<BinaryData> accounts = await ExecuteAsync(@"
                     SELECT  RecordHash
@@ -151,7 +143,7 @@ namespace OpenChain.Core.Sqlite
         
         #region GetRecordStream
 
-        public IObservable<BinaryData> GetRecordStream(BinaryData from)
+        public IObservable<BinaryData> GetTransactionStream(BinaryData from)
         {
             return new PollingObservable(from, this.GetLedgerRecords);
         }

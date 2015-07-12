@@ -14,7 +14,7 @@
     "Microsoft.AspNet.WebSockets.Client": "1.0.0-beta4",
     "OpenChain.Core": "1.0.0-*",
     "Newtonsoft.Json": "7.0.1",
-    "OpenChain.Server": "1.0.0-*",
+    "OpenChain.Ledger": "1.0.0-*",
     "OpenChain.Core.Sqlite": "1.0.0-*",
     "System.Text.Encoding": "4.0.10-beta-22816",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta4",

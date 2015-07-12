@@ -51,7 +51,7 @@ namespace OpenChain.Core.Sqlite
                         }
 
                         if (lastRecord != null)
-                            cursor = new BinaryData(MessageSerializer.ComputeHash(lastRecord.ToByteArray()));
+                            cursor = new BinaryData(MessageSerializer.ComputeHash(lastRecord));
 
                         await Task.Delay(TimeSpan.FromSeconds(1));
                     }

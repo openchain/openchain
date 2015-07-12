@@ -17,7 +17,7 @@ using OpenChain.Core;
 using OpenChain.Models;
 using Microsoft.AspNet.WebSockets.Server;
 using Microsoft.AspNet.Cors.Core;
-using OpenChain.Server;
+using OpenChain.Ledger;
 
 namespace OpenChain
 {
@@ -48,7 +48,7 @@ namespace OpenChain
             services.ConfigureCors(options => options.AddPolicy("Any", policy));
 
             // Ledger Store
-            services.AddTransient<ILedgerStore>(ConfigurationParser.CreateLedgerStore);
+            services.AddTransient<ITransactionStore>(ConfigurationParser.CreateLedgerStore);
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
@@ -62,7 +62,7 @@ namespace OpenChain
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ILedgerStore store)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
         {
             loggerfactory.AddConsole();
 

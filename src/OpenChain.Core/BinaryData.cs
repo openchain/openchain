@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Google.ProtocolBuffers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -63,6 +65,16 @@ namespace OpenChain.Core
             byte[] result = new byte[data.Length];
             Buffer.BlockCopy(data, 0, result, 0, data.Length);
             return result;
+        }
+
+        public Stream ToStream()
+        {
+            return new MemoryStream(this.data, 0, this.data.Length, false, false);
+        }
+
+        internal ByteString ToByteString()
+        {
+            return ByteString.Unsafe.FromBytes(this.data);
         }
 
         public bool Equals(BinaryData other)

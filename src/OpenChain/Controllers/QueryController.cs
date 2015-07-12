@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Framework.Internal;
-using OpenChain.Server;
+using OpenChain.Ledger;
 
 namespace OpenChain.Controllers
 {

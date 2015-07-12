@@ -1,29 +1,25 @@
 ﻿using System;
+using System.Linq;
 using Xunit;
 
 namespace OpenChain.Core.Tests
 {
     public class TransactionTests
     {
+        private readonly BinaryData[] binaryData =
+            Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
+
         [Fact]
         public void Transaction_Success()
         {
-            Transaction transaction = new Transaction(
-                "ledgerId",
-                new[]
-                {
-                    new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")),
-                    new AccountEntry(new AccountKey("account2", "asset2"), 200, BinaryData.Parse("5678")),
-                },
-                BinaryData.Parse("abcdef"));
+            Transaction record = new Transaction(
+                binaryData[0],
+                new DateTime(1, 2, 3, 4, 5, 6),
+                binaryData[1]);
 
-            Assert.Equal(2, transaction.AccountEntries.Count);
-            Assert.Equal("account1", transaction.AccountEntries[0].AccountKey.Account);
-            Assert.Equal("asset1", transaction.AccountEntries[0].AccountKey.Asset);
-            Assert.Equal(100, transaction.AccountEntries[0].Amount);
-            Assert.Equal(BinaryData.Parse("1234"), transaction.AccountEntries[0].Version);
-            Assert.Equal("ledgerId", transaction.LedgerId);
-            Assert.Equal(BinaryData.Parse("abcdef"), transaction.Metadata);
+            Assert.Equal(binaryData[0], record.MutationSet);
+            Assert.Equal(new DateTime(1, 2, 3, 4, 5, 6), record.Timestamp);
+            Assert.Equal(binaryData[1], record.ExternalMetadata);
         }
 
         [Fact]
@@ -31,33 +27,13 @@ namespace OpenChain.Core.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new Transaction(
                 null,
-                new[] { new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")) },
-                BinaryData.Parse("abcdef")));
+                new DateTime(1, 2, 3, 4, 5, 6),
+                binaryData[1]));
 
             Assert.Throws<ArgumentNullException>(() => new Transaction(
-                "ledgerId",
-                null,
-                BinaryData.Parse("abcdef")));
-
-            Assert.Throws<ArgumentNullException>(() => new Transaction(
-                "ledgerId",
-                new[] { new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")) },
+                binaryData[0],
+                new DateTime(1, 2, 3, 4, 5, 6),
                 null));
-
-            Assert.Throws<ArgumentNullException>(() => new Transaction(
-                "ledgerId",
-                new[] { new AccountEntry(new AccountKey("account1", "asset1"), 100, BinaryData.Parse("1234")), null },
-                BinaryData.Parse("abcdef")));
-
-            Assert.Throws<ArgumentNullException>(() =>
-                new AccountEntry(null, 100, BinaryData.Parse("1234")));
-
-            Assert.Throws<ArgumentNullException>(() =>
-                new AccountEntry(new AccountKey("account1", "asset1"), 100, null));
-
-            Assert.Throws<ArgumentNullException>(() => new AccountKey(null, "asset1"));
-
-            Assert.Throws<ArgumentNullException>(() => new AccountKey("account1", null));
         }
     }
 }

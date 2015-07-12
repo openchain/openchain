@@ -4,7 +4,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.Data.SQLite >= 1.0.0-beta1",
-      "OpenChain.Core >= 1.0.0-*"
+      "OpenChain.Core >= 1.0.0-*",
+      "OpenChain.Ledger >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": [
       "framework/System.Data >= 4.0.0.0",
@@ -16,6 +17,42 @@
     ]
   },
   "libraries": {
+    "BouncyCastle/1.7.0": {
+      "serviceable": false,
+      "sha": "yvrW1NCFBC+l53Kchlk1iRYlnafpZ+o6oy0tFpFM2G28gz3H0PubyJFLc8KoYys3N0UPYo6TN2NRegpouDxRTw==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/Net40-Client/BouncyCastle.Crypto.dll"
+          ],
+          "compileAssemblies": [
+            "lib/Net40-Client/BouncyCastle.Crypto.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/Net40-Client/BouncyCastle.Crypto.dll"
+          ],
+          "compileAssemblies": [
+            "lib/Net40-Client/BouncyCastle.Crypto.dll"
+          ]
+        }
+      },
+      "files": [
+        "BouncyCastle.1.7.0.nupkg",
+        "BouncyCastle.1.7.0.nupkg.sha512",
+        "BouncyCastle.nuspec",
+        "Readme.txt",
+        "lib/Net20/BouncyCastle.Crypto.dll",
+        "lib/Net40-Client/BouncyCastle.Crypto.dll",
+        "lib/Net40-Client/BouncyCastle.Crypto.pdb",
+        "lib/Net40-Client/crypto.xml"
+      ]
+    },
     "Google.ProtocolBuffers/2.4.1.555": {
       "serviceable": false,
       "sha": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
@@ -155,6 +192,40 @@
         "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.dll",
         "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.xml",
         "redist/x86/sqlite3.dll"
+      ]
+    },
+    "MongoDB.Bson/2.0.1": {
+      "serviceable": false,
+      "sha": "dr8KYpTt5VIqGWQ5Bzud2BA/lH2csIfL5WLrfc90UzSWGF378ugvEo5tx4J0eZohvHzsRRiMS2YTmJOTRN+iYg==",
+      "frameworks": {
+        "DNX,Version=v4.5.1": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ]
+        },
+        ".NETFramework,Version=v4.6": {
+          "dependencies": {},
+          "frameworkAssemblies": [],
+          "runtimeAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ],
+          "compileAssemblies": [
+            "lib/net45/MongoDB.Bson.dll"
+          ]
+        }
+      },
+      "files": [
+        "License.rtf",
+        "MongoDB.Bson.2.0.1.nupkg",
+        "MongoDB.Bson.2.0.1.nupkg.sha512",
+        "MongoDB.Bson.nuspec",
+        "lib/net45/MongoDB.Bson.dll",
+        "lib/net45/MongoDB.Bson.XML"
       ]
     },
     "System.Data.Common/1.0.0-beta1": {

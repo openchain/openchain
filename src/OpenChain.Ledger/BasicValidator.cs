@@ -1,11 +1,9 @@
-﻿using System;
+﻿using OpenChain.Core;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OpenChain.Core;
-using MongoDB.Bson.Serialization;
 
-namespace OpenChain.Server
+namespace OpenChain.Ledger
 {
     public class BasicValidator : IRulesValidator
     {
@@ -16,13 +14,13 @@ namespace OpenChain.Server
             this.store = store;
         }
 
-        public async Task Validate(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task Validate(IReadOnlyList<AccountEntry> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             //BsonSerializer.Deserialize<LedgerRecordMetadata>(record.ExternalMetadata.Value.ToArray());
             IReadOnlyDictionary<AccountKey, AccountEntry> accounts =
-                await this.store.GetAccounts(transaction.AccountEntries.Select(entry => entry.AccountKey));
+                await this.store.GetAccounts(accountEntries.Select(entry => entry.AccountKey));
 
-            foreach (AccountEntry entry in transaction.AccountEntries)
+            foreach (AccountEntry entry in accountEntries)
             {
                 LedgerPath accountPath;
                 LedgerPath assetPath;
@@ -30,23 +28,23 @@ namespace OpenChain.Server
                     throw new TransactionInvalidException("InvalidPathFormat");
 
                 if (entry.Version.Equals(BinaryData.Empty))
-                    if (!await CheckCanCreate(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
+                    if (!await CheckCanCreate(authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
                         throw new TransactionInvalidException("AccountCannotBeCreated");
 
                 if (entry.Amount > 0)
                 {
-                    if (!CheckCanReceive(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
+                    if (!CheckCanReceive(authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
                         throw new TransactionInvalidException("AccountCannotReceive");
                 }
                 else if (entry.Amount < 0)
                 {
-                    if (!CheckCanSend(transaction, authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
+                    if (!CheckCanSend(authentication, accountPath, assetPath, accounts[entry.AccountKey], entry))
                         throw new TransactionInvalidException("AccountCannotSend");
                 }
             }
         }
 
-        private bool CheckCanSend(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
+        private bool CheckCanSend(IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
         {
             if (currentState.Amount + proposedChange.Amount < 0)
                 return false;
@@ -54,12 +52,12 @@ namespace OpenChain.Server
                 return true;
         }
 
-        private bool CheckCanReceive(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
+        private bool CheckCanReceive(IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
         {
             return !accountPath.IsDirectory;
         }
 
-        private async Task<bool> CheckCanCreate(Transaction transaction, IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
+        private async Task<bool> CheckCanCreate(IReadOnlyList<AuthenticationEvidence> authentication, LedgerPath accountPath, LedgerPath assetPath, AccountEntry currentState, AccountEntry proposedChange)
         {
             if (accountPath.Segments.Count < 3)
                 return false;

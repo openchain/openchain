@@ -1,5 +1,6 @@
 ﻿using Google.ProtocolBuffers;
 using System;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 
@@ -9,68 +10,70 @@ namespace OpenChain.Core
     {
         private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
+        public static byte[] SerializeMutationSet(MutationSet mutationSet)
+        {
+            Messages.MutationSet.Builder mutationSetBuilder = new Messages.MutationSet.Builder()
+            {
+                Namespace = mutationSet.Namespace.ToByteString(),
+                Metadata = mutationSet.Metadata.ToByteString()
+            };
+
+            mutationSetBuilder.AddRangeMutations(
+                mutationSet.Mutations.Select(
+                    mutation => new Messages.MutationSet.Types.Mutation.Builder()
+                    {
+                        Key = mutation.Key.ToByteString(),
+                        Value = mutation.Key.ToByteString(),
+                        Version = mutation.Version.ToByteString()
+                    }.Build()));
+
+            return mutationSetBuilder.Build().ToByteArray();
+        }
+
+        public static MutationSet DeserializeMutationSet(BinaryData data)
+        {
+            Messages.MutationSet mutationSet = new Messages.MutationSet.Builder().MergeFrom(data.ToByteString()).BuildParsed();
+
+            return new MutationSet(
+                new BinaryData(ByteString.Unsafe.GetBuffer(mutationSet.Namespace)),
+                mutationSet.MutationsList.Select(
+                    entry => new Mutation(
+                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Key)),
+                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Value)),
+                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Version)))),
+                new BinaryData(ByteString.Unsafe.GetBuffer(mutationSet.Metadata)));
+        }
+
         public static byte[] SerializeTransaction(Transaction transaction)
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                LedgerId = transaction.LedgerId,
-                Metadata = ByteString.CopyFrom(transaction.Metadata.ToByteArray())
+                MutationSet = transaction.MutationSet.ToByteString(),
+                Timestamp = (long)(transaction.Timestamp - epoch).TotalSeconds,
+                RecordMetadata = transaction.ExternalMetadata.ToByteString()
             };
-
-            transactionBuilder.AddRangeAccountEntries(
-                transaction.AccountEntries.Select(
-                    operation => new Messages.Transaction.Types.AccountEntry.Builder()
-                    {
-                        Account = operation.AccountKey.Account,
-                        Asset = operation.AccountKey.Asset,
-                        Amount = operation.Amount,
-                        Version = ByteString.CopyFrom(operation.Version.ToByteArray())
-                    }.Build()));
 
             return transactionBuilder.Build().ToByteArray();
         }
 
-        public static Transaction DeserializeTransaction(byte[] data)
+        public static Transaction DeserializeTransaction(BinaryData data)
         {
-            Messages.Transaction transaction = new Messages.Transaction.Builder().MergeFrom(data).BuildParsed();
+            Messages.Transaction record = new Messages.Transaction.Builder().MergeFrom(data.ToByteString()).BuildParsed();
 
             return new Transaction(
-                transaction.LedgerId,
-                transaction.AccountEntriesList.Select(
-                    entry => new AccountEntry(
-                        new AccountKey(entry.Account, entry.Asset),
-                        entry.Amount,
-                        new BinaryData(entry.Version))),
-                new BinaryData(transaction.Metadata));
-        }
-
-        public static byte[] SerializeLedgerRecord(LedgerRecord record)
-        {
-            Messages.LedgerRecord.Builder recordBuilder = new Messages.LedgerRecord.Builder()
-            {
-                Payload = ByteString.CopyFrom(record.Transaction.ToByteArray()),
-                Timestamp = (long)(record.Timestamp - epoch).TotalSeconds,
-                RecordMetadata = ByteString.CopyFrom(record.ExternalMetadata.Value.ToArray())
-            };
-
-            return recordBuilder.Build().ToByteArray();
-        }
-
-        public static LedgerRecord DeserializeLedgerRecord(byte[] data)
-        {
-            Messages.LedgerRecord record = new Messages.LedgerRecord.Builder().MergeFrom(data).BuildParsed();
-
-            return new LedgerRecord(
-                new BinaryData(record.Payload.ToByteArray()),
+                new BinaryData(ByteString.Unsafe.GetBuffer(record.MutationSet)),
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
-                new BinaryData(record.RecordMetadata.ToByteArray()));
+                new BinaryData(ByteString.Unsafe.GetBuffer(record.RecordMetadata)));
         }
         
-        public static byte[] ComputeHash(byte[] message)
+        public static byte[] ComputeHash(BinaryData message)
         {
             using (SHA256 hash = SHA256.Create())
             {
-                return hash.ComputeHash(hash.ComputeHash(message.ToArray()));
+                using (Stream stream = message.ToStream())
+                {
+                    return hash.ComputeHash(hash.ComputeHash(stream));
+                }
             }
         }
     }

@@ -4,10 +4,11 @@ using Microsoft.Framework.ConfigurationModel;
 using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using OpenChain.Core;
-using OpenChain.Server;
+using OpenChain.Ledger;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenChain.Controllers
@@ -17,15 +18,15 @@ namespace OpenChain.Controllers
     public class OpenChainController : Controller
     {
         private readonly IConfiguration configuration;
-        private readonly ILedgerStore store;
+        private readonly ITransactionStore store;
         private readonly TransactionValidator validator;
         private readonly ILogger logger;
 
-        public OpenChainController(IConfiguration configuration, ILedgerStore store, IRulesValidator validator, ILogger logger)
+        public OpenChainController(IConfiguration configuration, ITransactionStore store, IRulesValidator validator, ILogger logger)
         {
             this.configuration = configuration;
             this.store = store;
-            this.validator = new TransactionValidator(store, validator, configuration.GetSubKey("Main").Get("root_url"));
+            this.validator = new TransactionValidator(store, validator, new BinaryData(Encoding.UTF8.GetBytes(configuration.GetSubKey("Main").Get("root_url"))));
             this.logger = logger;
         }
 

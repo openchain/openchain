@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server
+namespace OpenChain.Ledger
 {
     public class TransactionInvalidException : Exception
     {

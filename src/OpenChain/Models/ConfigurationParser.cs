@@ -3,7 +3,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Core;
 using OpenChain.Core.Sqlite;
-using OpenChain.Server;
+using OpenChain.Ledger;
 using System;
 using System.Threading;
 
@@ -11,17 +11,17 @@ namespace OpenChain.Models
 {
     public static class ConfigurationParser
     {
-        public static ILedgerStore CreateLedgerStore(IServiceProvider serviceProvider)
+        public static ITransactionStore CreateLedgerStore(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
 
-            return new SqliteLedgerStore(configuration.GetSubKey("SQLite").Get("path"));
+            return new SqliteTransactionStore(configuration.GetSubKey("SQLite").Get("path"));
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            ILedgerStore store = serviceProvider.GetService<ILedgerStore>();
+            ITransactionStore store = serviceProvider.GetService<ITransactionStore>();
 
             return store as ILedgerQueries;
         }

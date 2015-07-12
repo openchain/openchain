@@ -28,9 +28,9 @@ namespace OpenChain.Models
                 else
                     lastLedgerRecordHash = BinaryData.Parse(from);
 
-                ILedgerStore store = (ILedgerStore)context.ApplicationServices.GetService(typeof(ILedgerStore));
+                ITransactionStore store = (ITransactionStore)context.ApplicationServices.GetService(typeof(ITransactionStore));
 
-                IObservable<BinaryData> stream = store.GetRecordStream(lastLedgerRecordHash);
+                IObservable<BinaryData> stream = store.GetTransactionStream(lastLedgerRecordHash);
 
                 using (WebSocket webSocket = await context.AcceptWebSocketAsync())
                 {

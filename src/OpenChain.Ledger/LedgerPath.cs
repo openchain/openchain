@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server
+namespace OpenChain.Ledger
 {
     public class LedgerPath
     {
