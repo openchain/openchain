@@ -7,23 +7,23 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Core.Sqlite
 {
-    public partial class SqliteTransactionStore : ITransactionStore
+    public class SqliteTransactionStore : ITransactionStore
     {
-        private readonly SQLiteConnection connection;
-
         public SqliteTransactionStore(string filename)
         {
-            this.connection = new SQLiteConnection(new SQLiteConnectionStringBuilder() { Filename = filename }.ToString());
+            this.Connection = new SQLiteConnection(new SQLiteConnectionStringBuilder() { Filename = filename }.ToString());
             this.OpenDatabase().Wait();
         }
 
+        protected SQLiteConnection Connection { get; }
+
         #region OpenDatabase
 
-        public async Task OpenDatabase()
+        public virtual async Task OpenDatabase()
         {
-            await connection.OpenAsync();
+            await Connection.OpenAsync();
 
-            SQLiteCommand command = connection.CreateCommand();
+            SQLiteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
                 (
@@ -48,16 +48,18 @@ namespace OpenChain.Core.Sqlite
 
         #region AddLedgerRecords
 
-        public async Task AddTransactions(IEnumerable<BinaryData> rawTransactions)
+        public async Task AddTransactions(IEnumerable<BinaryData> transactions)
         {
-            using (SQLiteTransaction context = connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+            using (SQLiteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                foreach (BinaryData rawTransaction in rawTransactions)
+                foreach (BinaryData rawTransaction in transactions)
                 {
+                    byte[] rawTransactionBuffer = rawTransaction.ToByteArray();
                     Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
-                    byte[] transactionHash = MessageSerializer.ComputeHash(rawTransaction);
+                    byte[] transactionHash = MessageSerializer.ComputeHash(rawTransactionBuffer);
 
-                    byte[] mutationSetHash = MessageSerializer.ComputeHash(transaction.MutationSet);
+                    byte[] mutationSetHash = MessageSerializer.ComputeHash(transaction.MutationSet.ToByteArray());
+                    MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(rawTransaction);
 
                     await UpdateAccounts(MessageSerializer.DeserializeMutationSet(rawTransaction), mutationSetHash);
                     
@@ -69,12 +71,19 @@ namespace OpenChain.Core.Sqlite
                         {
                             { "@hash", transactionHash },
                             { "@mutationSetHash", mutationSetHash },
-                            { "@rawData", rawTransaction.ToByteArray() }
+                            { "@rawData", rawTransactionBuffer }
                         });
+
+                    await AddTransaction(mutationSet, mutationSetHash);
                 }
 
                 context.Commit();
             }
+        }
+
+        protected virtual Task AddTransaction(MutationSet mutationSet, byte[] mutationSetHash)
+        {
+            return Task.FromResult(0);
         }
 
         private async Task UpdateAccounts(MutationSet mutationSet, byte[] transactionHash)
@@ -179,9 +188,9 @@ namespace OpenChain.Core.Sqlite
         
         #region Private Methods
 
-        private async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
+        protected async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
         {
-            SQLiteCommand query = connection.CreateCommand();
+            SQLiteCommand query = Connection.CreateCommand();
             query.CommandText = commandText;
 
             foreach (KeyValuePair<string, object> parameter in parameters)
@@ -197,9 +206,9 @@ namespace OpenChain.Core.Sqlite
             return result.AsReadOnly();
         }
 
-        private async Task<int> ExecuteAsync(string commandText, IDictionary<string, object> parameters)
+        protected async Task<int> ExecuteAsync(string commandText, IDictionary<string, object> parameters)
         {
-            SQLiteCommand query = connection.CreateCommand();
+            SQLiteCommand query = Connection.CreateCommand();
             query.CommandText = commandText;
 
             foreach (KeyValuePair<string, object> parameter in parameters)

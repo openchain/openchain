@@ -6,6 +6,6 @@ namespace OpenChain.Ledger
 {
     public interface IRulesValidator
     {
-        Task Validate(IReadOnlyList<AccountEntry> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication);
+        Task Validate(IReadOnlyList<AccountStatus> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication);
     }
 }

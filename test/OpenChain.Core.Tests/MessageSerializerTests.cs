@@ -52,7 +52,7 @@ namespace OpenChain.Core.Tests
             Assert.Equal(79, result.Length);
             Assert.Equal(transaction.MutationSet, finalTransaction.MutationSet);
             Assert.Equal(transaction.Timestamp, finalTransaction.Timestamp);
-            Assert.Equal(transaction.ExternalMetadata, finalTransaction.ExternalMetadata);
+            Assert.Equal(transaction.TransactionMetadata, finalTransaction.TransactionMetadata);
         }
     }
 }

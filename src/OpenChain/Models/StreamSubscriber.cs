@@ -51,7 +51,7 @@ namespace OpenChain.Models
                         BinaryData record = new BinaryData(buffer.Take(result.Count));
                         await store.AddTransactions(new[] { record });
 
-                        currentRecord = new BinaryData(MessageSerializer.ComputeHash(record));
+                        currentRecord = new BinaryData(MessageSerializer.ComputeHash(record.ToByteArray()));
                     }
                 }
                 catch (Exception exception)

@@ -13,7 +13,7 @@ namespace OpenChain.Ledger
             this.alwaysValid = alwaysValid;
         }
 
-        public Task Validate(IReadOnlyList<AccountEntry> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication)
+        public Task Validate(IReadOnlyList<AccountStatus> accountEntries, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             if (this.alwaysValid)
                 return Task.FromResult(0);

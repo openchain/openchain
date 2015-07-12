@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
-using OpenChain.Core;
-using OpenChain.Core.Sqlite;
+using OpenChain.Ledger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Framework.Internal;
-using OpenChain.Ledger;
 
 namespace OpenChain.Controllers
 {
@@ -25,7 +22,7 @@ namespace OpenChain.Controllers
         [HttpGet("accountentries")]
         public async Task<ActionResult> GetAccount(string account, string asset)
         {
-            IReadOnlyDictionary<AccountKey, AccountEntry> accounts;
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts;
             if (asset != null && account != null)
             {
                 accounts = await this.store.GetAccounts(new[] { new AccountKey(account, asset) });
@@ -54,19 +51,19 @@ namespace OpenChain.Controllers
 
             LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray(), true);
 
-            IReadOnlyDictionary<AccountKey, AccountEntry> accounts = await this.store.GetSubaccounts(directory.FullPath);
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await this.store.GetSubaccounts(directory.FullPath);
 
             return Json(accounts.Values.Select(GetAccountJson).ToArray());
         }
 
-        private object GetAccountJson(AccountEntry accountEntry)
+        private object GetAccountJson(AccountStatus account)
         {
             return new
             {
-                account = accountEntry.AccountKey.Account,
-                asset = accountEntry.AccountKey.Asset,
-                amount = accountEntry.Amount,
-                version = accountEntry.Version.ToString()
+                account = account.AccountKey.Account,
+                asset = account.AccountKey.Asset,
+                balance = account.Balance,
+                version = account.Version.ToString()
             };
         }
 

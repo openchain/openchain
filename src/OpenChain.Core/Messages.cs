@@ -36,8 +36,9 @@ namespace OpenChain.Messages {
             "bmFtZXNwYWNlGAEgAigMEjIKCW11dGF0aW9ucxgCIAMoCzIfLk9wZW5DaGFp", 
             "bi5NdXRhdGlvblNldC5NdXRhdGlvbhIQCghtZXRhZGF0YRgDIAIoDBo3CghN", 
             "dXRhdGlvbhILCgNrZXkYASACKAwSDQoFdmFsdWUYAiACKAwSDwoHdmVyc2lv", 
-            "bhgDIAIoDCJPCgtUcmFuc2FjdGlvbhIUCgxtdXRhdGlvbl9zZXQYASACKAwS", 
-          "EQoJdGltZXN0YW1wGAIgAigDEhcKD3JlY29yZF9tZXRhZGF0YRgDIAIoDA=="));
+            "bhgDIAIoDCJUCgtUcmFuc2FjdGlvbhIUCgxtdXRhdGlvbl9zZXQYASACKAwS", 
+            "EQoJdGltZXN0YW1wGAIgAigDEhwKFHRyYW5zYWN0aW9uX21ldGFkYXRhGAMg", 
+          "AigM"));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_OpenChain_MutationSet__Descriptor = Descriptor.MessageTypes[0];
@@ -51,7 +52,7 @@ namespace OpenChain.Messages {
         internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[1];
         internal__static_OpenChain_Transaction__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder>(internal__static_OpenChain_Transaction__Descriptor,
-                new string[] { "MutationSet", "Timestamp", "RecordMetadata", });
+                new string[] { "MutationSet", "Timestamp", "TransactionMetadata", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -834,8 +835,8 @@ namespace OpenChain.Messages {
   internal sealed partial class Transaction : pb::GeneratedMessage<Transaction, Transaction.Builder> {
     private Transaction() { }
     private static readonly Transaction defaultInstance = new Transaction().MakeReadOnly();
-    private static readonly string[] _transactionFieldNames = new string[] { "mutation_set", "record_metadata", "timestamp" };
-    private static readonly uint[] _transactionFieldTags = new uint[] { 10, 26, 16 };
+    private static readonly string[] _transactionFieldNames = new string[] { "mutation_set", "timestamp", "transaction_metadata" };
+    private static readonly uint[] _transactionFieldTags = new uint[] { 10, 16, 26 };
     public static Transaction DefaultInstance {
       get { return defaultInstance; }
     }
@@ -876,21 +877,21 @@ namespace OpenChain.Messages {
       get { return timestamp_; }
     }
     
-    public const int RecordMetadataFieldNumber = 3;
-    private bool hasRecordMetadata;
-    private pb::ByteString recordMetadata_ = pb::ByteString.Empty;
-    public bool HasRecordMetadata {
-      get { return hasRecordMetadata; }
+    public const int TransactionMetadataFieldNumber = 3;
+    private bool hasTransactionMetadata;
+    private pb::ByteString transactionMetadata_ = pb::ByteString.Empty;
+    public bool HasTransactionMetadata {
+      get { return hasTransactionMetadata; }
     }
-    public pb::ByteString RecordMetadata {
-      get { return recordMetadata_; }
+    public pb::ByteString TransactionMetadata {
+      get { return transactionMetadata_; }
     }
     
     public override bool IsInitialized {
       get {
         if (!hasMutationSet) return false;
         if (!hasTimestamp) return false;
-        if (!hasRecordMetadata) return false;
+        if (!hasTransactionMetadata) return false;
         return true;
       }
     }
@@ -902,10 +903,10 @@ namespace OpenChain.Messages {
         output.WriteBytes(1, field_names[0], MutationSet);
       }
       if (hasTimestamp) {
-        output.WriteInt64(2, field_names[2], Timestamp);
+        output.WriteInt64(2, field_names[1], Timestamp);
       }
-      if (hasRecordMetadata) {
-        output.WriteBytes(3, field_names[1], RecordMetadata);
+      if (hasTransactionMetadata) {
+        output.WriteBytes(3, field_names[2], TransactionMetadata);
       }
       UnknownFields.WriteTo(output);
     }
@@ -930,8 +931,8 @@ namespace OpenChain.Messages {
       if (hasTimestamp) {
         size += pb::CodedOutputStream.ComputeInt64Size(2, Timestamp);
       }
-      if (hasRecordMetadata) {
-        size += pb::CodedOutputStream.ComputeBytesSize(3, RecordMetadata);
+      if (hasTransactionMetadata) {
+        size += pb::CodedOutputStream.ComputeBytesSize(3, TransactionMetadata);
       }
       size += UnknownFields.SerializedSize;
       memoizedSerializedSize = size;
@@ -1061,8 +1062,8 @@ namespace OpenChain.Messages {
         if (other.HasTimestamp) {
           Timestamp = other.Timestamp;
         }
-        if (other.HasRecordMetadata) {
-          RecordMetadata = other.RecordMetadata;
+        if (other.HasTransactionMetadata) {
+          TransactionMetadata = other.TransactionMetadata;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1116,7 +1117,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 26: {
-              result.hasRecordMetadata = input.ReadBytes(ref result.recordMetadata_);
+              result.hasTransactionMetadata = input.ReadBytes(ref result.transactionMetadata_);
               break;
             }
           }
@@ -1170,24 +1171,24 @@ namespace OpenChain.Messages {
         return this;
       }
       
-      public bool HasRecordMetadata {
-        get { return result.hasRecordMetadata; }
+      public bool HasTransactionMetadata {
+        get { return result.hasTransactionMetadata; }
       }
-      public pb::ByteString RecordMetadata {
-        get { return result.RecordMetadata; }
-        set { SetRecordMetadata(value); }
+      public pb::ByteString TransactionMetadata {
+        get { return result.TransactionMetadata; }
+        set { SetTransactionMetadata(value); }
       }
-      public Builder SetRecordMetadata(pb::ByteString value) {
+      public Builder SetTransactionMetadata(pb::ByteString value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasRecordMetadata = true;
-        result.recordMetadata_ = value;
+        result.hasTransactionMetadata = true;
+        result.transactionMetadata_ = value;
         return this;
       }
-      public Builder ClearRecordMetadata() {
+      public Builder ClearTransactionMetadata() {
         PrepareBuilder();
-        result.hasRecordMetadata = false;
-        result.recordMetadata_ = pb::ByteString.Empty;
+        result.hasTransactionMetadata = false;
+        result.transactionMetadata_ = pb::ByteString.Empty;
         return this;
       }
     }

@@ -30,7 +30,7 @@ namespace OpenChain.Ledger
             if (!mutationSet.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
 
-            IReadOnlyList<AccountEntry> accountEntries = mutationSet.Mutations.Select(AccountEntry.FromMutation).ToList();
+            IReadOnlyList<AccountStatus> accountEntries = mutationSet.Mutations.Select(AccountStatus.FromMutation).ToList();
 
             if (accountEntries.Any(item => item == null))
                 throw new TransactionInvalidException("NotAccountMutation");
@@ -38,7 +38,7 @@ namespace OpenChain.Ledger
             // All assets must have an overall zero balance
             var groups = accountEntries
                 .GroupBy(entry => entry.AccountKey.Asset)
-                .Select(group => group.Sum(entry => entry.Amount));
+                .Select(group => group.Sum(entry => entry.Balance));
 
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
@@ -64,11 +64,11 @@ namespace OpenChain.Ledger
             byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
 
             Transaction transaction = new Transaction(rawMutationSet, date, new BinaryData(metadata));
-            BinaryData serializedTransaction = new BinaryData(MessageSerializer.SerializeTransaction(transaction));
+            byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
 
             try
             {
-                await this.store.AddTransactions(new[] { serializedTransaction });
+                await this.store.AddTransactions(new[] { new BinaryData(serializedTransaction) });
             }
             catch (ConcurrentMutationException)
             {

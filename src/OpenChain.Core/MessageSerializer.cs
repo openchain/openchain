@@ -50,7 +50,7 @@ namespace OpenChain.Core
             {
                 MutationSet = transaction.MutationSet.ToByteString(),
                 Timestamp = (long)(transaction.Timestamp - epoch).TotalSeconds,
-                RecordMetadata = transaction.ExternalMetadata.ToByteString()
+                TransactionMetadata = transaction.TransactionMetadata.ToByteString()
             };
 
             return transactionBuilder.Build().ToByteArray();
@@ -63,17 +63,14 @@ namespace OpenChain.Core
             return new Transaction(
                 new BinaryData(ByteString.Unsafe.GetBuffer(record.MutationSet)),
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
-                new BinaryData(ByteString.Unsafe.GetBuffer(record.RecordMetadata)));
+                new BinaryData(ByteString.Unsafe.GetBuffer(record.TransactionMetadata)));
         }
         
-        public static byte[] ComputeHash(BinaryData message)
+        public static byte[] ComputeHash(byte[] data)
         {
             using (SHA256 hash = SHA256.Create())
             {
-                using (Stream stream = message.ToStream())
-                {
-                    return hash.ComputeHash(hash.ComputeHash(stream));
-                }
+                return hash.ComputeHash(hash.ComputeHash(data));
             }
         }
     }
