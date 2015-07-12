@@ -1,11 +1,12 @@
 ﻿using Microsoft.Data.SQLite;
+using OpenChain.Core;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Core.Sqlite
+namespace OpenChain.Sqlite
 {
     public class SqliteTransactionStore : ITransactionStore
     {

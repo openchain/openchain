@@ -2,8 +2,8 @@
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Core;
-using OpenChain.Core.Sqlite;
 using OpenChain.Ledger;
+using OpenChain.Sqlite;
 using System;
 using System.Threading;
 

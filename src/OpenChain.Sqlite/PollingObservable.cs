@@ -1,9 +1,10 @@
-﻿using System;
+﻿using OpenChain.Core;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenChain.Core.Sqlite
+namespace OpenChain.Sqlite
 {
     public class PollingObservable : IObservable<BinaryData>
     {

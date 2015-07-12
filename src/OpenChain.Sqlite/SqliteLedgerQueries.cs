@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SQLite;
+using OpenChain.Core;
 using OpenChain.Ledger;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +7,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Core.Sqlite
+namespace OpenChain.Sqlite
 {
     public class SqliteLedgerQueries : SqliteTransactionStore, ILedgerQueries
     {
