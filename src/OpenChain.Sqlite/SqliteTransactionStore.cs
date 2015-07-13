@@ -60,9 +60,9 @@ namespace OpenChain.Sqlite
                     byte[] transactionHash = MessageSerializer.ComputeHash(rawTransactionBuffer);
 
                     byte[] mutationSetHash = MessageSerializer.ComputeHash(transaction.MutationSet.ToByteArray());
-                    MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(rawTransaction);
+                    MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(transaction.MutationSet);
 
-                    await UpdateAccounts(MessageSerializer.DeserializeMutationSet(rawTransaction), mutationSetHash);
+                    await UpdateAccounts(mutationSet, mutationSetHash);
                     
                     await ExecuteAsync(@"
                             INSERT INTO Transactions

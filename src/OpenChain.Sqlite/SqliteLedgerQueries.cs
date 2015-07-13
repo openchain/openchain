@@ -24,8 +24,8 @@ namespace OpenChain.Sqlite
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Accounts
                 (
-                    Account TEXT UNIQUE,
-                    Asset TEXT UNIQUE,
+                    Account TEXT,
+                    Asset TEXT,
                     Balance INTEGER,
                     Version BLOB,
                     PRIMARY KEY (Account ASC, Asset ASC)

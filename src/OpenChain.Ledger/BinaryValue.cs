@@ -31,35 +31,44 @@ namespace OpenChain.Ledger
 
         public static BinaryValue Read(BinaryData key)
         {
-            using (Stream input = key.ToStream())
-            using (BinaryReader reader = new BinaryReader(input, Encoding.UTF8))
+            try
             {
-                BinaryValueUsage type = (BinaryValueUsage)reader.ReadInt32();
-                BinaryValue result;
-
-                switch (type)
+                using (Stream input = key.ToStream())
+                using (BinaryReader reader = new BinaryReader(input, Encoding.UTF8))
                 {
-                    case BinaryValueUsage.AccountKey:
-                        string account = reader.ReadString();
-                        string asset = reader.ReadString();
-                        result = new AccountKey(account, asset);
-                        break;
-                    case BinaryValueUsage.Text:
-                        string stringValue = reader.ReadString();
-                        result = new TextValue(stringValue);
-                        break;
-                    case BinaryValueUsage.Int64:
-                        long intValue = reader.ReadInt64();
-                        result = new Int64Value(intValue);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
+                    BinaryValueUsage type = (BinaryValueUsage)reader.ReadInt32();
+                    BinaryValue result;
 
-                if (input.Position != input.Length)
-                    throw new ArgumentOutOfRangeException();
-                else
-                    return result;
+                    switch (type)
+                    {
+                        case BinaryValueUsage.AccountKey:
+                            uint accountLength = reader.ReadUInt32();
+                            string account = Encoding.UTF8.GetString(reader.ReadBytes((int)accountLength));
+                            uint assetLength = reader.ReadUInt32();
+                            string asset = Encoding.UTF8.GetString(reader.ReadBytes((int)assetLength));
+                            result = new AccountKey(account, asset);
+                            break;
+                        case BinaryValueUsage.Text:
+                            string stringValue = reader.ReadString();
+                            result = new TextValue(stringValue);
+                            break;
+                        case BinaryValueUsage.Int64:
+                            long intValue = reader.ReadInt64();
+                            result = new Int64Value(intValue);
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    if (input.Position != input.Length)
+                        throw new ArgumentOutOfRangeException();
+                    else
+                        return result;
+                }
+            }
+            catch (EndOfStreamException)
+            {
+                throw new ArgumentOutOfRangeException();
             }
         }
 
