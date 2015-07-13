@@ -5,8 +5,8 @@ namespace OpenChain.Ledger
 {
     public class TextValue : BinaryValue
     {
-        public TextValue(string value)
-            : base(BinaryValueUsage.Text)
+        public TextValue(BinaryValueUsage usage, string value)
+            : base(usage)
         {
             if (value == null)
                 throw new ArgumentNullException(nameof(value));

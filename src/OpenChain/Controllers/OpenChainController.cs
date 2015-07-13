@@ -84,6 +84,21 @@ namespace OpenChain.Controllers
             });
         }
 
+        [HttpGet("value")]
+        public async Task<ActionResult> GetValue(string key)
+        {
+            BinaryData parsedKey = BinaryData.Parse(key);
+
+            KeyValuePair result = (await this.store.GetValues(new[] { parsedKey })).First();
+
+            return Json(new
+            {
+                key = parsedKey.ToString(),
+                value = result.Value?.ToString(),
+                version = result.Version.ToString()
+            });
+        }
+
         [HttpGet("info")]
         public ActionResult GetLedgerInformation()
         {

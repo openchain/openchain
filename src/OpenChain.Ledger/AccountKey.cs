@@ -15,20 +15,20 @@ namespace OpenChain.Ledger
             if (asset == null)
                 throw new ArgumentNullException(nameof(asset));
 
-            this.Account = account;
-            this.Asset = asset;
+            this.Account = LedgerPath.Parse(account);
+            this.Asset = LedgerPath.Parse(asset);
             this.SetBinaryData();
         }
 
-        public string Account { get; }
+        public LedgerPath Account { get; }
 
-        public string Asset { get; }
+        public LedgerPath Asset { get; }
 
         protected override void Write(BinaryWriter writer)
         {
             writer.Write((int)Usage);
-            writer.Write(Account);
-            writer.Write(Asset);
+            writer.Write(Account.FullPath);
+            writer.Write(Asset.FullPath);
         }
     }
 }

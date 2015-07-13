@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 namespace OpenChain.Core
 {
     /// <summary>
-    /// Represents a data store for ledger records.
+    /// Represents a data store for key-value pairs.
     /// </summary>
     public interface ITransactionStore
     {
         /// <summary>
         /// Adds a transaction to the store.
         /// </summary>
-        /// <param name="transactions">A collection of serialized transactions to add to the store.</param>
+        /// <param name="transactions">A collection of serialized <see cref="Transaction"/> to add to the store.</param>
         /// <exception cref="ConcurrentMutationException">A key-value pair has been mutated and the transaction is no longer valid.</exception>
         /// <returns>A task that represents the completion of the operation.</returns>
         Task AddTransactions(IEnumerable<BinaryData> transactions);
@@ -21,9 +21,8 @@ namespace OpenChain.Core
         /// Gets the current values and versions for a set of keys.
         /// </summary>
         /// <param name="keys">The keys to query.</param>
-        /// <returns>A task that represents the completion of the operation and contains a dictionary mapping from the key to the corresponding
-        /// <see cref="KeyValuePair"/> (or null if the key doesn't exist).</returns>
-        Task<IDictionary<BinaryData, KeyValuePair>> GetValues(IEnumerable<BinaryData> keys);
+        /// <returns>A task that represents the completion of the operation and contains a list of the corresponding <see cref="KeyValuePair"/>.</returns>
+        Task<IList<KeyValuePair>> GetValues(IEnumerable<BinaryData> keys);
 
         /// <summary>
         /// Gets the hash of the last transaction in the ledger.

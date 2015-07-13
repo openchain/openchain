@@ -137,7 +137,7 @@ namespace OpenChain.Sqlite
 
         #region GetValues
 
-        public async Task<IDictionary<BinaryData, KeyValuePair>> GetValues(IEnumerable<BinaryData> keys)
+        public async Task<IList<KeyValuePair>> GetValues(IEnumerable<BinaryData> keys)
         {
             Dictionary<BinaryData, KeyValuePair> result = new Dictionary<BinaryData, KeyValuePair>();
 
@@ -158,11 +158,11 @@ namespace OpenChain.Sqlite
                     if (exists)
                         result[key] = new KeyValuePair(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
                     else
-                        result[key] = null;
+                        result[key] = new KeyValuePair(key, null, BinaryData.Empty);
                 }
             }
 
-            return new ReadOnlyDictionary<BinaryData, KeyValuePair>(result);
+            return result.Values.ToList().AsReadOnly();
         }
 
         #endregion

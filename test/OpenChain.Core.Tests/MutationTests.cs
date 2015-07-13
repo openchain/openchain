@@ -52,11 +52,13 @@ namespace OpenChain.Core.Tests
                 new[] { new KeyValuePair(binaryData[1], binaryData[2], binaryData[3]), null },
                 binaryData[4]));
 
-            Assert.Throws<ArgumentNullException>(() =>
-                new KeyValuePair(null, binaryData[2], binaryData[3]));
+            Assert.Throws<ArgumentNullException>(() => new Mutation(
+                binaryData[0],
+                new[] { new KeyValuePair(binaryData[1], null, binaryData[3]) },
+                binaryData[4]));
 
             Assert.Throws<ArgumentNullException>(() =>
-                new KeyValuePair(binaryData[1], null, binaryData[3]));
+                new KeyValuePair(null, binaryData[2], binaryData[3]));
 
             Assert.Throws<ArgumentNullException>(() =>
                 new KeyValuePair(binaryData[1], binaryData[2], null));

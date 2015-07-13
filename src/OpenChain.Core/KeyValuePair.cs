@@ -9,9 +9,6 @@ namespace OpenChain.Core
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
 
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
-
             if (version == null)
                 throw new ArgumentNullException(nameof(version));
 

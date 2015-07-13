@@ -21,7 +21,7 @@ namespace OpenChain.Core
             this.KeyValuePairs = keyValuePairs.ToList().AsReadOnly();
             this.Metadata = metadata;
 
-            if (this.KeyValuePairs.Any(entry => entry == null))
+            if (this.KeyValuePairs.Any(entry => entry == null || entry.Value == null))
                 throw new ArgumentNullException(nameof(keyValuePairs));
         }
 

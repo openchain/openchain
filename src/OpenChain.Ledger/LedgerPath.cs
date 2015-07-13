@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace OpenChain.Ledger
 {
@@ -39,6 +38,15 @@ namespace OpenChain.Ledger
                 result = new LedgerPath(path, segments.Skip(1), false);
 
             return true;
+        }
+
+        public static LedgerPath Parse(string path)
+        {
+            LedgerPath result;
+            if (TryParse(path, out result))
+                return result;
+            else
+                throw new ArgumentOutOfRangeException(nameof(path));
         }
 
         public static LedgerPath FromSegments(string[] segments, bool isDirectory)

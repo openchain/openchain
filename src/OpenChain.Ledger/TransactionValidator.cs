@@ -30,34 +30,32 @@ namespace OpenChain.Ledger
             if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
 
-            IReadOnlyList<AccountStatus> accountEntries = mutation.KeyValuePairs.Select(AccountStatus.FromKeyValuePair).ToList();
+            // There must not be the same key represented twice
+            var groupedPairs = mutation.KeyValuePairs
+                .GroupBy(pair => pair.Key, pair => pair);
 
-            if (accountEntries.Any(item => item == null))
-                throw new TransactionInvalidException("NotAccountMutation");
+            if (groupedPairs.Any(group => group.Count() > 1))
+                throw new TransactionInvalidException("DuplicateKey");
+
+            //IReadOnlyList<AccountStatus> accountEntries = mutation.KeyValuePairs.Select(AccountStatus.FromKeyValuePair).ToList();
+            ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
+
+            //if (accountEntries.Any(item => item == null))
+            //    throw new TransactionInvalidException("NotAccountMutation");
 
             // All assets must have an overall zero balance
-            var groups = accountEntries
-                .GroupBy(entry => entry.AccountKey.Asset)
+            var groups = parsedMutation.AccountMutations
+                .GroupBy(account => account.AccountKey.Asset)
                 .Select(group => group.Sum(entry => entry.Balance));
 
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
 
-            // There must not be the same account represented twice
-            var groupedAccountEntries = accountEntries
-                .GroupBy(entry => entry.AccountKey, entry => entry);
-
-            if (groupedAccountEntries.Any(group => group.Count() > 1))
-                throw new TransactionInvalidException("DuplicateAccount");
-
-            // Paths must be correctly formatted
-            if (!accountEntries.All(
-                account => LedgerPath.IsValidPath(account.AccountKey.Account) && LedgerPath.IsValidPath(account.AccountKey.Asset)))
-                throw new TransactionInvalidException("InvalidPath");
 
             DateTime date = DateTime.UtcNow;
             
-            await this.validator.Validate(accountEntries, authentication);
+            await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication);
+            await this.validator.ValidateAssetDefinitionMutations(parsedMutation.AssetDefinitions, authentication);
 
             LedgerRecordMetadata recordMetadata = new LedgerRecordMetadata(1, authentication);
 

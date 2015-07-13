@@ -23,7 +23,7 @@ namespace OpenChain.Core
                     pair => new Messages.Mutation.Types.KeyValuePair.Builder()
                     {
                         Key = pair.Key.ToByteString(),
-                        Value = pair.Key.ToByteString(),
+                        Value = pair.Value.ToByteString(),
                         Version = pair.Version.ToByteString()
                     }.Build()));
 

@@ -49,8 +49,10 @@ namespace OpenChain.Ledger
                             result = new AccountKey(account, asset);
                             break;
                         case BinaryValueUsage.Text:
-                            string stringValue = reader.ReadString();
-                            result = new TextValue(stringValue);
+                        case BinaryValueUsage.AssetDefinition:
+                            uint stringLength = reader.ReadUInt32();
+                            string value = Encoding.UTF8.GetString(reader.ReadBytes((int)stringLength));
+                            result = new TextValue(type, value);
                             break;
                         case BinaryValueUsage.Int64:
                             long intValue = reader.ReadInt64();

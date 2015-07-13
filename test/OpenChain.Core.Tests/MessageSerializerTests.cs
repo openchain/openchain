@@ -10,7 +10,7 @@ namespace OpenChain.Core.Tests
             Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
-        public void Mutation()
+        public void Mutation_Success()
         {
             Mutation mutation = new Mutation(
                 binaryData[0],
@@ -38,7 +38,7 @@ namespace OpenChain.Core.Tests
         }
 
         [Fact]
-        public void Transaction()
+        public void Transaction_Success()
         {
             Transaction transaction = new Transaction(
                 binaryData[0],
