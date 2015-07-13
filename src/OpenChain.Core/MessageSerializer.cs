@@ -10,45 +10,45 @@ namespace OpenChain.Core
     {
         private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
 
-        public static byte[] SerializeMutationSet(MutationSet mutationSet)
+        public static byte[] SerializeMutation(Mutation mutation)
         {
-            Messages.MutationSet.Builder mutationSetBuilder = new Messages.MutationSet.Builder()
+            Messages.Mutation.Builder mutationBuilder = new Messages.Mutation.Builder()
             {
-                Namespace = mutationSet.Namespace.ToByteString(),
-                Metadata = mutationSet.Metadata.ToByteString()
+                Namespace = mutation.Namespace.ToByteString(),
+                Metadata = mutation.Metadata.ToByteString()
             };
 
-            mutationSetBuilder.AddRangeMutations(
-                mutationSet.Mutations.Select(
-                    mutation => new Messages.MutationSet.Types.Mutation.Builder()
+            mutationBuilder.AddRangeKeyValuePairs(
+                mutation.KeyValuePairs.Select(
+                    pair => new Messages.Mutation.Types.KeyValuePair.Builder()
                     {
-                        Key = mutation.Key.ToByteString(),
-                        Value = mutation.Key.ToByteString(),
-                        Version = mutation.Version.ToByteString()
+                        Key = pair.Key.ToByteString(),
+                        Value = pair.Key.ToByteString(),
+                        Version = pair.Version.ToByteString()
                     }.Build()));
 
-            return mutationSetBuilder.Build().ToByteArray();
+            return mutationBuilder.Build().ToByteArray();
         }
 
-        public static MutationSet DeserializeMutationSet(BinaryData data)
+        public static Mutation DeserializeMutation(BinaryData data)
         {
-            Messages.MutationSet mutationSet = new Messages.MutationSet.Builder().MergeFrom(data.ToByteString()).BuildParsed();
+            Messages.Mutation mutation = new Messages.Mutation.Builder().MergeFrom(data.ToByteString()).BuildParsed();
 
-            return new MutationSet(
-                new BinaryData(ByteString.Unsafe.GetBuffer(mutationSet.Namespace)),
-                mutationSet.MutationsList.Select(
-                    entry => new Mutation(
-                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Key)),
-                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Value)),
-                        new BinaryData(ByteString.Unsafe.GetBuffer(entry.Version)))),
-                new BinaryData(ByteString.Unsafe.GetBuffer(mutationSet.Metadata)));
+            return new Mutation(
+                new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Namespace)),
+                mutation.KeyValuePairsList.Select(
+                    pair => new KeyValuePair(
+                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Key)),
+                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Value)),
+                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Version)))),
+                new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }
 
         public static byte[] SerializeTransaction(Transaction transaction)
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                MutationSet = transaction.MutationSet.ToByteString(),
+                Mutation = transaction.Mutation.ToByteString(),
                 Timestamp = (long)(transaction.Timestamp - epoch).TotalSeconds,
                 TransactionMetadata = transaction.TransactionMetadata.ToByteString()
             };
@@ -61,7 +61,7 @@ namespace OpenChain.Core
             Messages.Transaction record = new Messages.Transaction.Builder().MergeFrom(data.ToByteString()).BuildParsed();
 
             return new Transaction(
-                new BinaryData(ByteString.Unsafe.GetBuffer(record.MutationSet)),
+                new BinaryData(ByteString.Unsafe.GetBuffer(record.Mutation)),
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
                 new BinaryData(ByteString.Unsafe.GetBuffer(record.TransactionMetadata)));
         }

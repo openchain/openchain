@@ -1,20 +1,20 @@
 package OpenChain;
 
-message MutationSet {
+message Mutation {
 
-    message Mutation {
+    message KeyValuePair {
         required bytes key = 1;
         required bytes value = 2;
         required bytes version = 3;
     }
 
     required bytes namespace = 1;
-    repeated Mutation mutations = 2;
+    repeated KeyValuePair key_value_pairs = 2;
     required bytes metadata = 3;
 }
 
 message Transaction {
-    required bytes mutation_set = 1;
+    required bytes mutation = 1;
     required int64 timestamp = 2;
     required bytes transaction_metadata = 3;
 }

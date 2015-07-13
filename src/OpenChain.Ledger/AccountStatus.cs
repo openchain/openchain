@@ -18,7 +18,7 @@ namespace OpenChain.Ledger
             this.Version = version;
         }
 
-        public static AccountStatus FromMutation(Mutation mutation)
+        public static AccountStatus FromKeyValuePair(KeyValuePair mutation)
         {
             AccountKey key;
             Int64Value value;

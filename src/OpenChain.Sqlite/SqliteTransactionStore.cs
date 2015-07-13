@@ -2,6 +2,7 @@
 using OpenChain.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace OpenChain.Sqlite
                 (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Hash BLOB UNIQUE,
-                    MutationSetHash BLOB UNIQUE,
+                    MutationHash BLOB UNIQUE,
                     RawData BLOB
                 );
 
@@ -59,39 +60,39 @@ namespace OpenChain.Sqlite
                     Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
                     byte[] transactionHash = MessageSerializer.ComputeHash(rawTransactionBuffer);
 
-                    byte[] mutationSetHash = MessageSerializer.ComputeHash(transaction.MutationSet.ToByteArray());
-                    MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(transaction.MutationSet);
+                    byte[] mutationHash = MessageSerializer.ComputeHash(transaction.Mutation.ToByteArray());
+                    Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
 
-                    await UpdateAccounts(mutationSet, mutationSetHash);
+                    await UpdateAccounts(mutation, mutationHash);
                     
                     await ExecuteAsync(@"
                             INSERT INTO Transactions
-                            (Hash, MutationSetHash, RawData)
-                            VALUES (@hash, @mutationSetHash, @rawData)",
+                            (Hash, MutationHash, RawData)
+                            VALUES (@hash, @mutationHash, @rawData)",
                         new Dictionary<string, object>()
                         {
                             { "@hash", transactionHash },
-                            { "@mutationSetHash", mutationSetHash },
+                            { "@mutationHash", mutationHash },
                             { "@rawData", rawTransactionBuffer }
                         });
 
-                    await AddTransaction(mutationSet, mutationSetHash);
+                    await AddTransaction(mutation, mutationHash);
                 }
 
                 context.Commit();
             }
         }
 
-        protected virtual Task AddTransaction(MutationSet mutationSet, byte[] mutationSetHash)
+        protected virtual Task AddTransaction(Mutation mutation, byte[] mutationHash)
         {
             return Task.FromResult(0);
         }
 
-        private async Task UpdateAccounts(MutationSet mutationSet, byte[] transactionHash)
+        private async Task UpdateAccounts(Mutation mutation, byte[] transactionHash)
         {
-            foreach (Mutation mutation in mutationSet.Mutations)
+            foreach (KeyValuePair pair in mutation.KeyValuePairs)
             {
-                if (!mutation.Version.Equals(BinaryData.Empty))
+                if (!pair.Version.Equals(BinaryData.Empty))
                 {
                     // Update existing account
                     int count = await ExecuteAsync(@"
@@ -100,13 +101,13 @@ namespace OpenChain.Sqlite
                             WHERE   Key = @key",
                         new Dictionary<string, object>()
                         {
-                            { "@key", mutation.Key.ToByteArray() },
-                            { "@value", mutation.Value.ToByteArray() },
-                            { "@version", mutation.Version.ToByteArray() }
+                            { "@key", pair.Key.ToByteArray() },
+                            { "@value", pair.Value.ToByteArray() },
+                            { "@version", pair.Version.ToByteArray() }
                         });
 
                     if (count == 0)
-                        throw new ConcurrentMutationException(mutation);
+                        throw new ConcurrentMutationException(pair);
                 }
                 else
                 {
@@ -119,17 +120,49 @@ namespace OpenChain.Sqlite
                                 VALUES (@key, @value, @version)",
                             new Dictionary<string, object>()
                             {
-                                { "@key", mutation.Key.ToByteArray() },
-                                { "@value", mutation.Value.ToByteArray() },
+                                { "@key", pair.Key.ToByteArray() },
+                                { "@value", pair.Value.ToByteArray() },
                                 { "@version", transactionHash }
                             });
                     }
                     catch (SQLiteException exception) when (exception.Message == "constraint failed")
                     {
-                        throw new ConcurrentMutationException(mutation);
+                        throw new ConcurrentMutationException(pair);
                     }
                 }
             }
+        }
+
+        #endregion
+
+        #region GetValues
+
+        public async Task<IDictionary<BinaryData, KeyValuePair>> GetValues(IEnumerable<BinaryData> keys)
+        {
+            Dictionary<BinaryData, KeyValuePair> result = new Dictionary<BinaryData, KeyValuePair>();
+
+            foreach (BinaryData key in keys)
+            {
+                SQLiteCommand query = Connection.CreateCommand();
+                query.CommandText = @"
+                    SELECT  Value, Version
+                    FROM    KeyValuePairs
+                    WHERE   Key = @key";
+
+                query.Parameters.AddWithValue("@key", key.ToByteArray());
+
+                using (DbDataReader reader = await query.ExecuteReaderAsync())
+                {
+                    bool exists = await reader.ReadAsync();
+
+                    if (exists)
+                        result[key] = new KeyValuePair(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
+                    else
+                        result[key] = null;
+                }
+            }
+
+            return new ReadOnlyDictionary<BinaryData, KeyValuePair>(result);
         }
 
         #endregion

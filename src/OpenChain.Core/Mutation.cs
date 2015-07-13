@@ -1,29 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace OpenChain.Core
 {
     public class Mutation
     {
-        public Mutation(BinaryData key, BinaryData value, BinaryData version)
+        public Mutation(BinaryData @namespace, IEnumerable<KeyValuePair> keyValuePairs, BinaryData metadata)
         {
-            if (key == null)
-                throw new ArgumentNullException(nameof(key));
+            if (@namespace == null)
+                throw new ArgumentNullException(nameof(@namespace));
 
-            if (value == null)
-                throw new ArgumentNullException(nameof(value));
+            if (keyValuePairs == null)
+                throw new ArgumentNullException(nameof(keyValuePairs));
 
-            if (version == null)
-                throw new ArgumentNullException(nameof(version));
+            if (metadata == null)
+                throw new ArgumentNullException(nameof(metadata));
 
-            this.Key = key;
-            this.Value = value;
-            this.Version = version;
+            this.Namespace = @namespace;
+            this.KeyValuePairs = keyValuePairs.ToList().AsReadOnly();
+            this.Metadata = metadata;
+
+            if (this.KeyValuePairs.Any(entry => entry == null))
+                throw new ArgumentNullException(nameof(keyValuePairs));
         }
 
-        public BinaryData Key { get; }
+        public BinaryData Namespace { get; }
 
-        public BinaryData Value { get; }
+        public IReadOnlyList<KeyValuePair> KeyValuePairs { get; }
 
-        public BinaryData Version { get; }
+        public BinaryData Metadata { get; }
     }
 }

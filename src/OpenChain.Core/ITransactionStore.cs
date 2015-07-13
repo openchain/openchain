@@ -18,6 +18,14 @@ namespace OpenChain.Core
         Task AddTransactions(IEnumerable<BinaryData> transactions);
 
         /// <summary>
+        /// Gets the current values and versions for a set of keys.
+        /// </summary>
+        /// <param name="keys">The keys to query.</param>
+        /// <returns>A task that represents the completion of the operation and contains a dictionary mapping from the key to the corresponding
+        /// <see cref="KeyValuePair"/> (or null if the key doesn't exist).</returns>
+        Task<IDictionary<BinaryData, KeyValuePair>> GetValues(IEnumerable<BinaryData> keys);
+
+        /// <summary>
         /// Gets the hash of the last transaction in the ledger.
         /// </summary>
         /// <returns>A task that represents the completion of the operation and contains the hash of the last transaction.</returns>

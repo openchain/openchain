@@ -17,7 +17,7 @@ namespace OpenChain.Core.Tests
                 new DateTime(1, 2, 3, 4, 5, 6),
                 binaryData[1]);
 
-            Assert.Equal(binaryData[0], record.MutationSet);
+            Assert.Equal(binaryData[0], record.Mutation);
             Assert.Equal(new DateTime(1, 2, 3, 4, 5, 6), record.Timestamp);
             Assert.Equal(binaryData[1], record.TransactionMetadata);
         }

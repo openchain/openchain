@@ -16,10 +16,10 @@ namespace OpenChain.Messages {
     }
     #endregion
     #region Static variables
-    internal static pbd::MessageDescriptor internal__static_OpenChain_MutationSet__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.MutationSet, global::OpenChain.Messages.MutationSet.Builder> internal__static_OpenChain_MutationSet__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_OpenChain_MutationSet_Mutation__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.MutationSet.Types.Mutation, global::OpenChain.Messages.MutationSet.Types.Mutation.Builder> internal__static_OpenChain_MutationSet_Mutation__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_OpenChain_Mutation__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation, global::OpenChain.Messages.Mutation.Builder> internal__static_OpenChain_Mutation__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_OpenChain_Mutation_KeyValuePair__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation.Types.KeyValuePair, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder> internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_OpenChain_Transaction__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder> internal__static_OpenChain_Transaction__FieldAccessorTable;
     #endregion
@@ -32,27 +32,27 @@ namespace OpenChain.Messages {
     static Schema() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKfAQoLTXV0YXRpb25TZXQSEQoJ", 
-            "bmFtZXNwYWNlGAEgAigMEjIKCW11dGF0aW9ucxgCIAMoCzIfLk9wZW5DaGFp", 
-            "bi5NdXRhdGlvblNldC5NdXRhdGlvbhIQCghtZXRhZGF0YRgDIAIoDBo3CghN", 
-            "dXRhdGlvbhILCgNrZXkYASACKAwSDQoFdmFsdWUYAiACKAwSDwoHdmVyc2lv", 
-            "bhgDIAIoDCJUCgtUcmFuc2FjdGlvbhIUCgxtdXRhdGlvbl9zZXQYASACKAwS", 
-            "EQoJdGltZXN0YW1wGAIgAigDEhwKFHRyYW5zYWN0aW9uX21ldGFkYXRhGAMg", 
-          "AigM"));
+            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKnAQoITXV0YXRpb24SEQoJbmFt", 
+            "ZXNwYWNlGAEgAigMEjkKD2tleV92YWx1ZV9wYWlycxgCIAMoCzIgLk9wZW5D", 
+            "aGFpbi5NdXRhdGlvbi5LZXlWYWx1ZVBhaXISEAoIbWV0YWRhdGEYAyACKAwa", 
+            "OwoMS2V5VmFsdWVQYWlyEgsKA2tleRgBIAIoDBINCgV2YWx1ZRgCIAIoDBIP", 
+            "Cgd2ZXJzaW9uGAMgAigMIlAKC1RyYW5zYWN0aW9uEhAKCG11dGF0aW9uGAEg", 
+            "AigMEhEKCXRpbWVzdGFtcBgCIAIoAxIcChR0cmFuc2FjdGlvbl9tZXRhZGF0", 
+          "YRgDIAIoDA=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_OpenChain_MutationSet__Descriptor = Descriptor.MessageTypes[0];
-        internal__static_OpenChain_MutationSet__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.MutationSet, global::OpenChain.Messages.MutationSet.Builder>(internal__static_OpenChain_MutationSet__Descriptor,
-                new string[] { "Namespace", "Mutations", "Metadata", });
-        internal__static_OpenChain_MutationSet_Mutation__Descriptor = internal__static_OpenChain_MutationSet__Descriptor.NestedTypes[0];
-        internal__static_OpenChain_MutationSet_Mutation__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.MutationSet.Types.Mutation, global::OpenChain.Messages.MutationSet.Types.Mutation.Builder>(internal__static_OpenChain_MutationSet_Mutation__Descriptor,
+        internal__static_OpenChain_Mutation__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_OpenChain_Mutation__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation, global::OpenChain.Messages.Mutation.Builder>(internal__static_OpenChain_Mutation__Descriptor,
+                new string[] { "Namespace", "KeyValuePairs", "Metadata", });
+        internal__static_OpenChain_Mutation_KeyValuePair__Descriptor = internal__static_OpenChain_Mutation__Descriptor.NestedTypes[0];
+        internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation.Types.KeyValuePair, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder>(internal__static_OpenChain_Mutation_KeyValuePair__Descriptor,
                 new string[] { "Key", "Value", "Version", });
         internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[1];
         internal__static_OpenChain_Transaction__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder>(internal__static_OpenChain_Transaction__Descriptor,
-                new string[] { "MutationSet", "Timestamp", "TransactionMetadata", });
+                new string[] { "Mutation", "Timestamp", "TransactionMetadata", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -64,58 +64,58 @@ namespace OpenChain.Messages {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  internal sealed partial class MutationSet : pb::GeneratedMessage<MutationSet, MutationSet.Builder> {
-    private MutationSet() { }
-    private static readonly MutationSet defaultInstance = new MutationSet().MakeReadOnly();
-    private static readonly string[] _mutationSetFieldNames = new string[] { "metadata", "mutations", "namespace" };
-    private static readonly uint[] _mutationSetFieldTags = new uint[] { 26, 18, 10 };
-    public static MutationSet DefaultInstance {
+  internal sealed partial class Mutation : pb::GeneratedMessage<Mutation, Mutation.Builder> {
+    private Mutation() { }
+    private static readonly Mutation defaultInstance = new Mutation().MakeReadOnly();
+    private static readonly string[] _mutationFieldNames = new string[] { "key_value_pairs", "metadata", "namespace" };
+    private static readonly uint[] _mutationFieldTags = new uint[] { 18, 26, 10 };
+    public static Mutation DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override MutationSet DefaultInstanceForType {
+    public override Mutation DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override MutationSet ThisMessage {
+    protected override Mutation ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_MutationSet__Descriptor; }
+      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<MutationSet, MutationSet.Builder> InternalFieldAccessors {
-      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_MutationSet__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<Mutation, Mutation.Builder> InternalFieldAccessors {
+      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation__FieldAccessorTable; }
     }
     
     #region Nested types
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     public static partial class Types {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      internal sealed partial class Mutation : pb::GeneratedMessage<Mutation, Mutation.Builder> {
-        private Mutation() { }
-        private static readonly Mutation defaultInstance = new Mutation().MakeReadOnly();
-        private static readonly string[] _mutationFieldNames = new string[] { "key", "value", "version" };
-        private static readonly uint[] _mutationFieldTags = new uint[] { 10, 18, 26 };
-        public static Mutation DefaultInstance {
+      internal sealed partial class KeyValuePair : pb::GeneratedMessage<KeyValuePair, KeyValuePair.Builder> {
+        private KeyValuePair() { }
+        private static readonly KeyValuePair defaultInstance = new KeyValuePair().MakeReadOnly();
+        private static readonly string[] _keyValuePairFieldNames = new string[] { "key", "value", "version" };
+        private static readonly uint[] _keyValuePairFieldTags = new uint[] { 10, 18, 26 };
+        public static KeyValuePair DefaultInstance {
           get { return defaultInstance; }
         }
         
-        public override Mutation DefaultInstanceForType {
+        public override KeyValuePair DefaultInstanceForType {
           get { return DefaultInstance; }
         }
         
-        protected override Mutation ThisMessage {
+        protected override KeyValuePair ThisMessage {
           get { return this; }
         }
         
         public static pbd::MessageDescriptor Descriptor {
-          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_MutationSet_Mutation__Descriptor; }
+          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation_KeyValuePair__Descriptor; }
         }
         
-        protected override pb::FieldAccess.FieldAccessorTable<Mutation, Mutation.Builder> InternalFieldAccessors {
-          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_MutationSet_Mutation__FieldAccessorTable; }
+        protected override pb::FieldAccess.FieldAccessorTable<KeyValuePair, KeyValuePair.Builder> InternalFieldAccessors {
+          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable; }
         }
         
         public const int KeyFieldNumber = 1;
@@ -159,7 +159,7 @@ namespace OpenChain.Messages {
         
         public override void WriteTo(pb::ICodedOutputStream output) {
           CalcSerializedSize();
-          string[] field_names = _mutationFieldNames;
+          string[] field_names = _keyValuePairFieldNames;
           if (hasKey) {
             output.WriteBytes(1, field_names[0], Key);
           }
@@ -199,49 +199,49 @@ namespace OpenChain.Messages {
           memoizedSerializedSize = size;
           return size;
         }
-        public static Mutation ParseFrom(pb::ByteString data) {
+        public static KeyValuePair ParseFrom(pb::ByteString data) {
           return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
         }
-        public static Mutation ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+        public static KeyValuePair ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
           return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
         }
-        public static Mutation ParseFrom(byte[] data) {
+        public static KeyValuePair ParseFrom(byte[] data) {
           return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
         }
-        public static Mutation ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+        public static KeyValuePair ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
           return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
         }
-        public static Mutation ParseFrom(global::System.IO.Stream input) {
+        public static KeyValuePair ParseFrom(global::System.IO.Stream input) {
           return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
         }
-        public static Mutation ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+        public static KeyValuePair ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
           return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
         }
-        public static Mutation ParseDelimitedFrom(global::System.IO.Stream input) {
+        public static KeyValuePair ParseDelimitedFrom(global::System.IO.Stream input) {
           return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
         }
-        public static Mutation ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+        public static KeyValuePair ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
           return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
         }
-        public static Mutation ParseFrom(pb::ICodedInputStream input) {
+        public static KeyValuePair ParseFrom(pb::ICodedInputStream input) {
           return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
         }
-        public static Mutation ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        public static KeyValuePair ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
           return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
         }
-        private Mutation MakeReadOnly() {
+        private KeyValuePair MakeReadOnly() {
           return this;
         }
         
         public static Builder CreateBuilder() { return new Builder(); }
         public override Builder ToBuilder() { return CreateBuilder(this); }
         public override Builder CreateBuilderForType() { return new Builder(); }
-        public static Builder CreateBuilder(Mutation prototype) {
+        public static Builder CreateBuilder(KeyValuePair prototype) {
           return new Builder(prototype);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal sealed partial class Builder : pb::GeneratedBuilder<Mutation, Builder> {
+        internal sealed partial class Builder : pb::GeneratedBuilder<KeyValuePair, Builder> {
           protected override Builder ThisBuilder {
             get { return this; }
           }
@@ -249,18 +249,18 @@ namespace OpenChain.Messages {
             result = DefaultInstance;
             resultIsReadOnly = true;
           }
-          internal Builder(Mutation cloneFrom) {
+          internal Builder(KeyValuePair cloneFrom) {
             result = cloneFrom;
             resultIsReadOnly = true;
           }
           
           private bool resultIsReadOnly;
-          private Mutation result;
+          private KeyValuePair result;
           
-          private Mutation PrepareBuilder() {
+          private KeyValuePair PrepareBuilder() {
             if (resultIsReadOnly) {
-              Mutation original = result;
-              result = new Mutation();
+              KeyValuePair original = result;
+              result = new KeyValuePair();
               resultIsReadOnly = false;
               MergeFrom(original);
             }
@@ -271,7 +271,7 @@ namespace OpenChain.Messages {
             get { return result.IsInitialized; }
           }
           
-          protected override Mutation MessageBeingBuilt {
+          protected override KeyValuePair MessageBeingBuilt {
             get { return PrepareBuilder(); }
           }
           
@@ -290,14 +290,14 @@ namespace OpenChain.Messages {
           }
           
           public override pbd::MessageDescriptor DescriptorForType {
-            get { return global::OpenChain.Messages.MutationSet.Types.Mutation.Descriptor; }
+            get { return global::OpenChain.Messages.Mutation.Types.KeyValuePair.Descriptor; }
           }
           
-          public override Mutation DefaultInstanceForType {
-            get { return global::OpenChain.Messages.MutationSet.Types.Mutation.DefaultInstance; }
+          public override KeyValuePair DefaultInstanceForType {
+            get { return global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance; }
           }
           
-          public override Mutation BuildPartial() {
+          public override KeyValuePair BuildPartial() {
             if (resultIsReadOnly) {
               return result;
             }
@@ -306,16 +306,16 @@ namespace OpenChain.Messages {
           }
           
           public override Builder MergeFrom(pb::IMessage other) {
-            if (other is Mutation) {
-              return MergeFrom((Mutation) other);
+            if (other is KeyValuePair) {
+              return MergeFrom((KeyValuePair) other);
             } else {
               base.MergeFrom(other);
               return this;
             }
           }
           
-          public override Builder MergeFrom(Mutation other) {
-            if (other == global::OpenChain.Messages.MutationSet.Types.Mutation.DefaultInstance) return this;
+          public override Builder MergeFrom(KeyValuePair other) {
+            if (other == global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance) return this;
             PrepareBuilder();
             if (other.HasKey) {
               Key = other.Key;
@@ -341,9 +341,9 @@ namespace OpenChain.Messages {
             string field_name;
             while (input.ReadTag(out tag, out field_name)) {
               if(tag == 0 && field_name != null) {
-                int field_ordinal = global::System.Array.BinarySearch(_mutationFieldNames, field_name, global::System.StringComparer.Ordinal);
+                int field_ordinal = global::System.Array.BinarySearch(_keyValuePairFieldNames, field_name, global::System.StringComparer.Ordinal);
                 if(field_ordinal >= 0)
-                  tag = _mutationFieldTags[field_ordinal];
+                  tag = _keyValuePairFieldTags[field_ordinal];
                 else {
                   if (unknownFields == null) {
                     unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -454,7 +454,7 @@ namespace OpenChain.Messages {
             return this;
           }
         }
-        static Mutation() {
+        static KeyValuePair() {
           object.ReferenceEquals(global::OpenChain.Messages.Schema.Descriptor, null);
         }
       }
@@ -472,16 +472,16 @@ namespace OpenChain.Messages {
       get { return namespace_; }
     }
     
-    public const int MutationsFieldNumber = 2;
-    private pbc::PopsicleList<global::OpenChain.Messages.MutationSet.Types.Mutation> mutations_ = new pbc::PopsicleList<global::OpenChain.Messages.MutationSet.Types.Mutation>();
-    public scg::IList<global::OpenChain.Messages.MutationSet.Types.Mutation> MutationsList {
-      get { return mutations_; }
+    public const int KeyValuePairsFieldNumber = 2;
+    private pbc::PopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> keyValuePairs_ = new pbc::PopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair>();
+    public scg::IList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> KeyValuePairsList {
+      get { return keyValuePairs_; }
     }
-    public int MutationsCount {
-      get { return mutations_.Count; }
+    public int KeyValuePairsCount {
+      get { return keyValuePairs_.Count; }
     }
-    public global::OpenChain.Messages.MutationSet.Types.Mutation GetMutations(int index) {
-      return mutations_[index];
+    public global::OpenChain.Messages.Mutation.Types.KeyValuePair GetKeyValuePairs(int index) {
+      return keyValuePairs_[index];
     }
     
     public const int MetadataFieldNumber = 3;
@@ -498,7 +498,7 @@ namespace OpenChain.Messages {
       get {
         if (!hasNamespace) return false;
         if (!hasMetadata) return false;
-        foreach (global::OpenChain.Messages.MutationSet.Types.Mutation element in MutationsList) {
+        foreach (global::OpenChain.Messages.Mutation.Types.KeyValuePair element in KeyValuePairsList) {
           if (!element.IsInitialized) return false;
         }
         return true;
@@ -507,15 +507,15 @@ namespace OpenChain.Messages {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
-      string[] field_names = _mutationSetFieldNames;
+      string[] field_names = _mutationFieldNames;
       if (hasNamespace) {
         output.WriteBytes(1, field_names[2], Namespace);
       }
-      if (mutations_.Count > 0) {
-        output.WriteMessageArray(2, field_names[1], mutations_);
+      if (keyValuePairs_.Count > 0) {
+        output.WriteMessageArray(2, field_names[0], keyValuePairs_);
       }
       if (hasMetadata) {
-        output.WriteBytes(3, field_names[0], Metadata);
+        output.WriteBytes(3, field_names[1], Metadata);
       }
       UnknownFields.WriteTo(output);
     }
@@ -537,7 +537,7 @@ namespace OpenChain.Messages {
       if (hasNamespace) {
         size += pb::CodedOutputStream.ComputeBytesSize(1, Namespace);
       }
-      foreach (global::OpenChain.Messages.MutationSet.Types.Mutation element in MutationsList) {
+      foreach (global::OpenChain.Messages.Mutation.Types.KeyValuePair element in KeyValuePairsList) {
         size += pb::CodedOutputStream.ComputeMessageSize(2, element);
       }
       if (hasMetadata) {
@@ -547,50 +547,50 @@ namespace OpenChain.Messages {
       memoizedSerializedSize = size;
       return size;
     }
-    public static MutationSet ParseFrom(pb::ByteString data) {
+    public static Mutation ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MutationSet ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static Mutation ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MutationSet ParseFrom(byte[] data) {
+    public static Mutation ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static MutationSet ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static Mutation ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static MutationSet ParseFrom(global::System.IO.Stream input) {
+    public static Mutation ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MutationSet ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static Mutation ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static MutationSet ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static Mutation ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static MutationSet ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static Mutation ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static MutationSet ParseFrom(pb::ICodedInputStream input) {
+    public static Mutation ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static MutationSet ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static Mutation ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private MutationSet MakeReadOnly() {
-      mutations_.MakeReadOnly();
+    private Mutation MakeReadOnly() {
+      keyValuePairs_.MakeReadOnly();
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(MutationSet prototype) {
+    public static Builder CreateBuilder(Mutation prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    internal sealed partial class Builder : pb::GeneratedBuilder<MutationSet, Builder> {
+    internal sealed partial class Builder : pb::GeneratedBuilder<Mutation, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -598,18 +598,18 @@ namespace OpenChain.Messages {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(MutationSet cloneFrom) {
+      internal Builder(Mutation cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private MutationSet result;
+      private Mutation result;
       
-      private MutationSet PrepareBuilder() {
+      private Mutation PrepareBuilder() {
         if (resultIsReadOnly) {
-          MutationSet original = result;
-          result = new MutationSet();
+          Mutation original = result;
+          result = new Mutation();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -620,7 +620,7 @@ namespace OpenChain.Messages {
         get { return result.IsInitialized; }
       }
       
-      protected override MutationSet MessageBeingBuilt {
+      protected override Mutation MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -639,14 +639,14 @@ namespace OpenChain.Messages {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::OpenChain.Messages.MutationSet.Descriptor; }
+        get { return global::OpenChain.Messages.Mutation.Descriptor; }
       }
       
-      public override MutationSet DefaultInstanceForType {
-        get { return global::OpenChain.Messages.MutationSet.DefaultInstance; }
+      public override Mutation DefaultInstanceForType {
+        get { return global::OpenChain.Messages.Mutation.DefaultInstance; }
       }
       
-      public override MutationSet BuildPartial() {
+      public override Mutation BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -655,22 +655,22 @@ namespace OpenChain.Messages {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is MutationSet) {
-          return MergeFrom((MutationSet) other);
+        if (other is Mutation) {
+          return MergeFrom((Mutation) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(MutationSet other) {
-        if (other == global::OpenChain.Messages.MutationSet.DefaultInstance) return this;
+      public override Builder MergeFrom(Mutation other) {
+        if (other == global::OpenChain.Messages.Mutation.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasNamespace) {
           Namespace = other.Namespace;
         }
-        if (other.mutations_.Count != 0) {
-          result.mutations_.Add(other.mutations_);
+        if (other.keyValuePairs_.Count != 0) {
+          result.keyValuePairs_.Add(other.keyValuePairs_);
         }
         if (other.HasMetadata) {
           Metadata = other.Metadata;
@@ -690,9 +690,9 @@ namespace OpenChain.Messages {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_mutationSetFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_mutationFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _mutationSetFieldTags[field_ordinal];
+              tag = _mutationFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -723,7 +723,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.mutations_, global::OpenChain.Messages.MutationSet.Types.Mutation.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.keyValuePairs_, global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance, extensionRegistry);
               break;
             }
             case 26: {
@@ -761,47 +761,47 @@ namespace OpenChain.Messages {
         return this;
       }
       
-      public pbc::IPopsicleList<global::OpenChain.Messages.MutationSet.Types.Mutation> MutationsList {
-        get { return PrepareBuilder().mutations_; }
+      public pbc::IPopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> KeyValuePairsList {
+        get { return PrepareBuilder().keyValuePairs_; }
       }
-      public int MutationsCount {
-        get { return result.MutationsCount; }
+      public int KeyValuePairsCount {
+        get { return result.KeyValuePairsCount; }
       }
-      public global::OpenChain.Messages.MutationSet.Types.Mutation GetMutations(int index) {
-        return result.GetMutations(index);
+      public global::OpenChain.Messages.Mutation.Types.KeyValuePair GetKeyValuePairs(int index) {
+        return result.GetKeyValuePairs(index);
       }
-      public Builder SetMutations(int index, global::OpenChain.Messages.MutationSet.Types.Mutation value) {
+      public Builder SetKeyValuePairs(int index, global::OpenChain.Messages.Mutation.Types.KeyValuePair value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.mutations_[index] = value;
+        result.keyValuePairs_[index] = value;
         return this;
       }
-      public Builder SetMutations(int index, global::OpenChain.Messages.MutationSet.Types.Mutation.Builder builderForValue) {
+      public Builder SetKeyValuePairs(int index, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.mutations_[index] = builderForValue.Build();
+        result.keyValuePairs_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddMutations(global::OpenChain.Messages.MutationSet.Types.Mutation value) {
+      public Builder AddKeyValuePairs(global::OpenChain.Messages.Mutation.Types.KeyValuePair value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.mutations_.Add(value);
+        result.keyValuePairs_.Add(value);
         return this;
       }
-      public Builder AddMutations(global::OpenChain.Messages.MutationSet.Types.Mutation.Builder builderForValue) {
+      public Builder AddKeyValuePairs(global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.mutations_.Add(builderForValue.Build());
+        result.keyValuePairs_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeMutations(scg::IEnumerable<global::OpenChain.Messages.MutationSet.Types.Mutation> values) {
+      public Builder AddRangeKeyValuePairs(scg::IEnumerable<global::OpenChain.Messages.Mutation.Types.KeyValuePair> values) {
         PrepareBuilder();
-        result.mutations_.Add(values);
+        result.keyValuePairs_.Add(values);
         return this;
       }
-      public Builder ClearMutations() {
+      public Builder ClearKeyValuePairs() {
         PrepareBuilder();
-        result.mutations_.Clear();
+        result.keyValuePairs_.Clear();
         return this;
       }
       
@@ -826,7 +826,7 @@ namespace OpenChain.Messages {
         return this;
       }
     }
-    static MutationSet() {
+    static Mutation() {
       object.ReferenceEquals(global::OpenChain.Messages.Schema.Descriptor, null);
     }
   }
@@ -835,7 +835,7 @@ namespace OpenChain.Messages {
   internal sealed partial class Transaction : pb::GeneratedMessage<Transaction, Transaction.Builder> {
     private Transaction() { }
     private static readonly Transaction defaultInstance = new Transaction().MakeReadOnly();
-    private static readonly string[] _transactionFieldNames = new string[] { "mutation_set", "timestamp", "transaction_metadata" };
+    private static readonly string[] _transactionFieldNames = new string[] { "mutation", "timestamp", "transaction_metadata" };
     private static readonly uint[] _transactionFieldTags = new uint[] { 10, 16, 26 };
     public static Transaction DefaultInstance {
       get { return defaultInstance; }
@@ -857,14 +857,14 @@ namespace OpenChain.Messages {
       get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Transaction__FieldAccessorTable; }
     }
     
-    public const int MutationSetFieldNumber = 1;
-    private bool hasMutationSet;
-    private pb::ByteString mutationSet_ = pb::ByteString.Empty;
-    public bool HasMutationSet {
-      get { return hasMutationSet; }
+    public const int MutationFieldNumber = 1;
+    private bool hasMutation;
+    private pb::ByteString mutation_ = pb::ByteString.Empty;
+    public bool HasMutation {
+      get { return hasMutation; }
     }
-    public pb::ByteString MutationSet {
-      get { return mutationSet_; }
+    public pb::ByteString Mutation {
+      get { return mutation_; }
     }
     
     public const int TimestampFieldNumber = 2;
@@ -889,7 +889,7 @@ namespace OpenChain.Messages {
     
     public override bool IsInitialized {
       get {
-        if (!hasMutationSet) return false;
+        if (!hasMutation) return false;
         if (!hasTimestamp) return false;
         if (!hasTransactionMetadata) return false;
         return true;
@@ -899,8 +899,8 @@ namespace OpenChain.Messages {
     public override void WriteTo(pb::ICodedOutputStream output) {
       CalcSerializedSize();
       string[] field_names = _transactionFieldNames;
-      if (hasMutationSet) {
-        output.WriteBytes(1, field_names[0], MutationSet);
+      if (hasMutation) {
+        output.WriteBytes(1, field_names[0], Mutation);
       }
       if (hasTimestamp) {
         output.WriteInt64(2, field_names[1], Timestamp);
@@ -925,8 +925,8 @@ namespace OpenChain.Messages {
       if (size != -1) return size;
       
       size = 0;
-      if (hasMutationSet) {
-        size += pb::CodedOutputStream.ComputeBytesSize(1, MutationSet);
+      if (hasMutation) {
+        size += pb::CodedOutputStream.ComputeBytesSize(1, Mutation);
       }
       if (hasTimestamp) {
         size += pb::CodedOutputStream.ComputeInt64Size(2, Timestamp);
@@ -1056,8 +1056,8 @@ namespace OpenChain.Messages {
       public override Builder MergeFrom(Transaction other) {
         if (other == global::OpenChain.Messages.Transaction.DefaultInstance) return this;
         PrepareBuilder();
-        if (other.HasMutationSet) {
-          MutationSet = other.MutationSet;
+        if (other.HasMutation) {
+          Mutation = other.Mutation;
         }
         if (other.HasTimestamp) {
           Timestamp = other.Timestamp;
@@ -1109,7 +1109,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 10: {
-              result.hasMutationSet = input.ReadBytes(ref result.mutationSet_);
+              result.hasMutation = input.ReadBytes(ref result.mutation_);
               break;
             }
             case 16: {
@@ -1130,24 +1130,24 @@ namespace OpenChain.Messages {
       }
       
       
-      public bool HasMutationSet {
-        get { return result.hasMutationSet; }
+      public bool HasMutation {
+        get { return result.hasMutation; }
       }
-      public pb::ByteString MutationSet {
-        get { return result.MutationSet; }
-        set { SetMutationSet(value); }
+      public pb::ByteString Mutation {
+        get { return result.Mutation; }
+        set { SetMutation(value); }
       }
-      public Builder SetMutationSet(pb::ByteString value) {
+      public Builder SetMutation(pb::ByteString value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasMutationSet = true;
-        result.mutationSet_ = value;
+        result.hasMutation = true;
+        result.mutation_ = value;
         return this;
       }
-      public Builder ClearMutationSet() {
+      public Builder ClearMutation() {
         PrepareBuilder();
-        result.hasMutationSet = false;
-        result.mutationSet_ = pb::ByteString.Empty;
+        result.hasMutation = false;
+        result.mutation_ = pb::ByteString.Empty;
         return this;
       }
       

@@ -4,20 +4,20 @@ namespace OpenChain.Core
 {
     public class Transaction
     {
-        public Transaction(BinaryData mutationSet, DateTime timestamp, BinaryData transactionMetadata)
+        public Transaction(BinaryData mutation, DateTime timestamp, BinaryData transactionMetadata)
         {
-            if (mutationSet == null)
-                throw new ArgumentNullException(nameof(mutationSet));
+            if (mutation == null)
+                throw new ArgumentNullException(nameof(mutation));
 
             if (transactionMetadata == null)
                 throw new ArgumentNullException(nameof(transactionMetadata));
 
-            this.MutationSet = mutationSet;
+            this.Mutation = mutation;
             this.Timestamp = timestamp;
             this.TransactionMetadata = transactionMetadata;
         }
 
-        public BinaryData MutationSet { get; }
+        public BinaryData Mutation { get; }
 
         public DateTime Timestamp { get; }
 

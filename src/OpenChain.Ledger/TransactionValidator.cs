@@ -22,15 +22,15 @@ namespace OpenChain.Ledger
             this.ledgerId = ledgerId;
         }
 
-        public async Task<BinaryData> PostTransaction(BinaryData rawMutationSet, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task<BinaryData> PostTransaction(BinaryData rawMutation, IReadOnlyList<AuthenticationEvidence> authentication)
         {
             // Verify that the mutation set can be deserialized
-            MutationSet mutationSet = MessageSerializer.DeserializeMutationSet(rawMutationSet);
+            Mutation mutation = MessageSerializer.DeserializeMutation(rawMutation);
 
-            if (!mutationSet.Namespace.Equals(this.ledgerId))
+            if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
 
-            IReadOnlyList<AccountStatus> accountEntries = mutationSet.Mutations.Select(AccountStatus.FromMutation).ToList();
+            IReadOnlyList<AccountStatus> accountEntries = mutation.KeyValuePairs.Select(AccountStatus.FromKeyValuePair).ToList();
 
             if (accountEntries.Any(item => item == null))
                 throw new TransactionInvalidException("NotAccountMutation");
@@ -63,7 +63,7 @@ namespace OpenChain.Ledger
 
             byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
 
-            Transaction transaction = new Transaction(rawMutationSet, date, new BinaryData(metadata));
+            Transaction transaction = new Transaction(rawMutation, date, new BinaryData(metadata));
             byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
 
             try

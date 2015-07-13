@@ -10,31 +10,31 @@ namespace OpenChain.Core.Tests
             Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
-        public void MutationSet()
+        public void Mutation()
         {
-            MutationSet mutationSet = new MutationSet(
+            Mutation mutation = new Mutation(
                 binaryData[0],
                 new[]
                 {
-                    new Mutation(binaryData[1], binaryData[2], binaryData[3]),
-                    new Mutation(binaryData[4], binaryData[5], binaryData[6]),
+                    new KeyValuePair(binaryData[1], binaryData[2], binaryData[3]),
+                    new KeyValuePair(binaryData[4], binaryData[5], binaryData[6]),
                 },
                 binaryData[7]);
 
-            byte[] result = MessageSerializer.SerializeMutationSet(mutationSet);
+            byte[] result = MessageSerializer.SerializeMutation(mutation);
 
-            MutationSet finalMutationSet = MessageSerializer.DeserializeMutationSet(new BinaryData(result));
+            Mutation finalMutation = MessageSerializer.DeserializeMutation(new BinaryData(result));
 
             Assert.Equal(276, result.Length);
-            Assert.Equal(mutationSet.Mutations.Count, finalMutationSet.Mutations.Count);
-            Assert.Equal(mutationSet.Mutations[0].Key, finalMutationSet.Mutations[0].Key);
-            Assert.Equal(mutationSet.Mutations[0].Value, finalMutationSet.Mutations[0].Value);
-            Assert.Equal(mutationSet.Mutations[0].Version, finalMutationSet.Mutations[0].Version);
-            Assert.Equal(mutationSet.Mutations[1].Key, finalMutationSet.Mutations[1].Key);
-            Assert.Equal(mutationSet.Mutations[1].Value, finalMutationSet.Mutations[1].Value);
-            Assert.Equal(mutationSet.Mutations[1].Version, finalMutationSet.Mutations[1].Version);
-            Assert.Equal(mutationSet.Namespace, finalMutationSet.Namespace);
-            Assert.Equal(mutationSet.Metadata, finalMutationSet.Metadata);
+            Assert.Equal(mutation.KeyValuePairs.Count, finalMutation.KeyValuePairs.Count);
+            Assert.Equal(mutation.KeyValuePairs[0].Key, finalMutation.KeyValuePairs[0].Key);
+            Assert.Equal(mutation.KeyValuePairs[0].Value, finalMutation.KeyValuePairs[0].Value);
+            Assert.Equal(mutation.KeyValuePairs[0].Version, finalMutation.KeyValuePairs[0].Version);
+            Assert.Equal(mutation.KeyValuePairs[1].Key, finalMutation.KeyValuePairs[1].Key);
+            Assert.Equal(mutation.KeyValuePairs[1].Value, finalMutation.KeyValuePairs[1].Value);
+            Assert.Equal(mutation.KeyValuePairs[1].Version, finalMutation.KeyValuePairs[1].Version);
+            Assert.Equal(mutation.Namespace, finalMutation.Namespace);
+            Assert.Equal(mutation.Metadata, finalMutation.Metadata);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ namespace OpenChain.Core.Tests
             Transaction finalTransaction = MessageSerializer.DeserializeTransaction(new BinaryData(result));
 
             Assert.Equal(79, result.Length);
-            Assert.Equal(transaction.MutationSet, finalTransaction.MutationSet);
+            Assert.Equal(transaction.Mutation, finalTransaction.Mutation);
             Assert.Equal(transaction.Timestamp, finalTransaction.Timestamp);
             Assert.Equal(transaction.TransactionMetadata, finalTransaction.TransactionMetadata);
         }

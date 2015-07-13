@@ -35,11 +35,11 @@ namespace OpenChain.Sqlite
             await command.ExecuteNonQueryAsync();
         }
 
-        protected override async Task AddTransaction(MutationSet mutationSet, byte[] mutationSetHash)
+        protected override async Task AddTransaction(Mutation mutation, byte[] mutationHash)
         {
-            foreach (Mutation mutation in mutationSet.Mutations)
+            foreach (KeyValuePair pair in mutation.KeyValuePairs)
             {
-                AccountStatus account = AccountStatus.FromMutation(mutation);
+                AccountStatus account = AccountStatus.FromKeyValuePair(pair);
                 if (account != null)
                 {
                     if (!account.Version.Equals(BinaryData.Empty))
@@ -54,7 +54,7 @@ namespace OpenChain.Sqlite
                                 { "@asset", account.AccountKey.Asset },
                                 { "@previousVersion", account.Version.Value.ToArray() },
                                 { "@balance", account.Balance },
-                                { "@version", mutationSetHash }
+                                { "@version", mutationHash }
                             });
                     }
                     else
@@ -68,7 +68,7 @@ namespace OpenChain.Sqlite
                                 { "@account", account.AccountKey.Account },
                                 { "@asset", account.AccountKey.Asset },
                                 { "@balance", account.Balance },
-                                { "@version", mutationSetHash }
+                                { "@version", mutationHash }
                             });
                     }
                 }
