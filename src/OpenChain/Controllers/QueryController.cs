@@ -19,22 +19,10 @@ namespace OpenChain.Controllers
             this.store = store;
         }
 
-        [HttpGet("accountentries")]
-        public async Task<ActionResult> GetAccount(string account, string asset)
+        [HttpGet("account")]
+        public async Task<ActionResult> GetAccount(string account)
         {
-            IReadOnlyDictionary<AccountKey, AccountStatus> accounts;
-            if (asset != null && account != null)
-            {
-                accounts = await this.store.GetAccounts(new[] { new AccountKey(account, asset) });
-            }
-            else if (asset == null && account != null)
-            {
-                accounts = await this.store.GetAccount(account);
-            }
-            else
-            {
-                return HttpBadRequest();
-            }
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await this.store.GetAccount(account);
 
             return Json(accounts.Values.Select(GetAccountJson).ToArray());
         }
@@ -60,8 +48,8 @@ namespace OpenChain.Controllers
         {
             return new
             {
-                account = account.AccountKey.Account,
-                asset = account.AccountKey.Asset,
+                account = account.AccountKey.Account.FullPath,
+                asset = account.AccountKey.Asset.FullPath,
                 balance = account.Balance,
                 version = account.Version.ToString()
             };

@@ -8,11 +8,13 @@ namespace OpenChain.Ledger
 {
     public class BasicValidator : IRulesValidator
     {
-        private readonly ILedgerQueries store;
+        private readonly ILedgerQueries queries;
+        private readonly ITransactionStore store;
 
-        public BasicValidator(ILedgerQueries store)
+        public BasicValidator(ITransactionStore store, ILedgerQueries queries)
         {
             this.store = store;
+            this.queries = queries;
         }
 
         public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<AuthenticationEvidence> authentication)

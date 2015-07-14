@@ -75,35 +75,6 @@ namespace OpenChain.Sqlite
             }
         }
 
-        public async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccounts(IEnumerable<AccountKey> accountKeys)
-        {
-            Dictionary<AccountKey, AccountStatus> result = new Dictionary<AccountKey, AccountStatus>();
-
-            foreach (AccountKey accountKey in accountKeys)
-            {
-                SQLiteCommand selectAccount = Connection.CreateCommand();
-                selectAccount.CommandText = @"
-                    SELECT  Balance, Version
-                    FROM    Accounts
-                    WHERE   Account = @account AND Asset = @asset";
-
-                selectAccount.Parameters.AddWithValue("@account", accountKey.Account);
-                selectAccount.Parameters.AddWithValue("@asset", accountKey.Asset);
-
-                using (DbDataReader reader = await selectAccount.ExecuteReaderAsync())
-                {
-                    bool exists = await reader.ReadAsync();
-
-                    if (exists)
-                        result[accountKey] = new AccountStatus(accountKey, reader.GetInt64(0), new BinaryData((byte[])reader.GetValue(1)));
-                    else
-                        result[accountKey] = new AccountStatus(accountKey, 0, BinaryData.Empty);
-                }
-            }
-
-            return new ReadOnlyDictionary<AccountKey, AccountStatus>(result);
-        }
-
         public async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetSubaccounts(string rootAccount)
         {
              IEnumerable<AccountStatus> accounts = await ExecuteAsync(@"
