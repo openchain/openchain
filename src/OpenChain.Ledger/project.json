@@ -8,7 +8,6 @@
 
   "dependencies": {
     "OpenChain.Core": "1.0.0-*",
-    "MongoDB.Bson": "2.0.1",
     "BouncyCastle": "1.7.0"
   },
 

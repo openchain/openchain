@@ -17,9 +17,9 @@ namespace OpenChain.Core.Tests
                 new[]
                 {
                     new KeyValuePair(binaryData[1], binaryData[2], binaryData[3]),
-                    new KeyValuePair(binaryData[4], binaryData[5], binaryData[6]),
+                    new KeyValuePair(binaryData[4], null, binaryData[5]),
                 },
-                binaryData[7]);
+                binaryData[6]);
 
             byte[] result = MessageSerializer.SerializeMutation(mutation);
 

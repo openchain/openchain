@@ -2812,40 +2812,6 @@
         "lib/net45/Microsoft.Net.WebSockets.xml"
       ]
     },
-    "MongoDB.Bson/2.0.1": {
-      "serviceable": false,
-      "sha": "dr8KYpTt5VIqGWQ5Bzud2BA/lH2csIfL5WLrfc90UzSWGF378ugvEo5tx4J0eZohvHzsRRiMS2YTmJOTRN+iYg==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ]
-        }
-      },
-      "files": [
-        "License.rtf",
-        "MongoDB.Bson.2.0.1.nupkg",
-        "MongoDB.Bson.2.0.1.nupkg.sha512",
-        "MongoDB.Bson.nuspec",
-        "lib/net45/MongoDB.Bson.dll",
-        "lib/net45/MongoDB.Bson.XML"
-      ]
-    },
     "Newtonsoft.Json/7.0.1": {
       "serviceable": false,
       "sha": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",

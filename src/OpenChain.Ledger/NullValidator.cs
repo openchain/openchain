@@ -14,7 +14,7 @@ namespace OpenChain.Ledger
             this.alwaysValid = alwaysValid;
         }
 
-        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<AuthenticationEvidence> authentication)
+        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             if (this.alwaysValid)
                 return Task.FromResult(0);
@@ -22,7 +22,7 @@ namespace OpenChain.Ledger
                 throw new TransactionInvalidException("Disabled");
         }
 
-        public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<AuthenticationEvidence> authentication)
+        public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             if (this.alwaysValid)
                 return Task.FromResult(0);

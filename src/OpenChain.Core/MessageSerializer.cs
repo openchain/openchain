@@ -27,7 +27,7 @@ namespace OpenChain.Core
                         Version = pair.Version.ToByteString()
                     }.Build()));
 
-            return mutationBuilder.Build().ToByteArray();
+            return mutationBuilder.BuildParsed().ToByteArray();
         }
 
         public static Mutation DeserializeMutation(BinaryData data)
@@ -53,7 +53,7 @@ namespace OpenChain.Core
                 TransactionMetadata = transaction.TransactionMetadata.ToByteString()
             };
 
-            return transactionBuilder.Build().ToByteArray();
+            return transactionBuilder.BuildParsed().ToByteArray();
         }
 
         public static Transaction DeserializeTransaction(BinaryData data)

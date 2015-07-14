@@ -56,13 +56,13 @@ namespace OpenChain.Controllers
 
             BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
 
-            List<AuthenticationEvidence> authentication = new List<AuthenticationEvidence>();
+            List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
-            foreach (JObject evidence in body["authentication"])
+            foreach (JObject evidence in body["signatures"])
             {
-                authentication.Add(new AuthenticationEvidence(
-                    (string)evidence["identity"],
-                    evidence["evidence"].Select(token => BinaryData.Parse((string)token).ToByteArray()).ToArray()));
+                authentication.Add(new SignatureEvidence(
+                    BinaryData.Parse((string)evidence["pub_key"]),
+                    BinaryData.Parse((string)evidence["signature"])));
             }
 
             BinaryData ledgerRecordHash;

@@ -2,7 +2,6 @@
 using OpenChain.Core;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -92,42 +91,69 @@ namespace OpenChain.Sqlite
         {
             foreach (KeyValuePair pair in mutation.KeyValuePairs)
             {
-                if (!pair.Version.Equals(BinaryData.Empty))
+                if (pair.Value == null)
                 {
-                    // Update existing account
-                    int count = await ExecuteAsync(@"
-                            UPDATE  KeyValuePairs
-                            SET     Value = @value, Version = @version
+                    // Read the key-value pair and make sure it corresponds to the one supplied
+                    IReadOnlyList<byte[]> versions = await ExecuteAsync<byte[]>(@"
+                            SELECT  Version
+                            FROM    KeyValuePairs
                             WHERE   Key = @key",
+                        reader => (byte[])reader.GetValue(0),
                         new Dictionary<string, object>()
                         {
-                            { "@key", pair.Key.ToByteArray() },
-                            { "@value", pair.Value.ToByteArray() },
-                            { "@version", pair.Version.ToByteArray() }
+                            { "@key", pair.Key.ToByteArray() }
                         });
 
-                    if (count == 0)
-                        throw new ConcurrentMutationException(pair);
+                    if (versions.Count == 0)
+                    {
+                        if (!pair.Version.Equals(BinaryData.Empty))
+                            throw new ConcurrentMutationException(pair);
+                    }
+                    else
+                    {
+                        if (!new BinaryData(versions[0]).Equals(pair.Version))
+                            throw new ConcurrentMutationException(pair);
+                    }
                 }
                 else
                 {
-                    // Create new account
-                    try
+                    if (!pair.Version.Equals(BinaryData.Empty))
                     {
-                        await ExecuteAsync(@"
-                                INSERT INTO KeyValuePairs
-                                (Key, Value, Version)
-                                VALUES (@key, @value, @version)",
+                        // Update existing account
+                        int count = await ExecuteAsync(@"
+                                UPDATE  KeyValuePairs
+                                SET     Version = @version
+                                WHERE   Key = @key AND Version = @currentVersion",
                             new Dictionary<string, object>()
                             {
                                 { "@key", pair.Key.ToByteArray() },
-                                { "@value", pair.Value.ToByteArray() },
-                                { "@version", transactionHash }
+                                { "@version", transactionHash },
+                                { "@currentVersion", pair.Version.ToByteArray() }
                             });
+
+                        if (count == 0)
+                            throw new ConcurrentMutationException(pair);
                     }
-                    catch (SQLiteException exception) when (exception.Message == "constraint failed")
+                    else
                     {
-                        throw new ConcurrentMutationException(pair);
+                        // Create a new key-value pair
+                        try
+                        {
+                            await ExecuteAsync(@"
+                                    INSERT INTO KeyValuePairs
+                                    (Key, Value, Version)
+                                    VALUES (@key, @value, @version)",
+                                new Dictionary<string, object>()
+                                {
+                                    { "@key", pair.Key.ToByteArray() },
+                                    { "@value", pair.Value.ToByteArray() },
+                                    { "@version", transactionHash }
+                                });
+                        }
+                        catch (SQLiteException exception) when (exception.Message == "constraint failed")
+                        {
+                            throw new ConcurrentMutationException(pair);
+                        }
                     }
                 }
             }

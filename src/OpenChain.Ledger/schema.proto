@@ -1,0 +1,11 @@
+package OpenChain;
+
+message TransactionMetadata {
+
+    message SignatureEvidence {
+        required bytes public_key = 1;
+        required bytes signature = 2;
+    }
+
+    repeated SignatureEvidence signatures = 1;
+}

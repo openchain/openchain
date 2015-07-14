@@ -17,16 +17,19 @@ namespace OpenChain.Core.Tests
                 new[]
                 {
                     new KeyValuePair(binaryData[1], binaryData[2], binaryData[3]),
-                    new KeyValuePair(binaryData[4], binaryData[5], binaryData[6]),
+                    new KeyValuePair(binaryData[4], null, binaryData[5]),
                 },
-                binaryData[7]);
+                binaryData[6]);
 
             Assert.Equal(2, mutation.KeyValuePairs.Count);
             Assert.Equal(binaryData[1], mutation.KeyValuePairs[0].Key);
             Assert.Equal(binaryData[2], mutation.KeyValuePairs[0].Value);
             Assert.Equal(binaryData[3], mutation.KeyValuePairs[0].Version);
+            Assert.Equal(binaryData[4], mutation.KeyValuePairs[1].Key);
+            Assert.Equal(null, mutation.KeyValuePairs[1].Value);
+            Assert.Equal(binaryData[5], mutation.KeyValuePairs[1].Version);
             Assert.Equal(binaryData[0], mutation.Namespace);
-            Assert.Equal(binaryData[7], mutation.Metadata);
+            Assert.Equal(binaryData[6], mutation.Metadata);
         }
 
         [Fact]

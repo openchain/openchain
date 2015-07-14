@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using MongoDB.Bson.Serialization;
+﻿using Google.ProtocolBuffers;
 using OpenChain.Core;
 using System;
 using System.Collections.Generic;
@@ -22,7 +20,7 @@ namespace OpenChain.Ledger
             this.ledgerId = ledgerId;
         }
 
-        public async Task<BinaryData> PostTransaction(BinaryData rawMutation, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task<BinaryData> PostTransaction(BinaryData rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {
             // Verify that the mutation set can be deserialized
             Mutation mutation = MessageSerializer.DeserializeMutation(rawMutation);
@@ -37,11 +35,7 @@ namespace OpenChain.Ledger
             if (groupedPairs.Any(group => group.Count() > 1))
                 throw new TransactionInvalidException("DuplicateKey");
 
-            //IReadOnlyList<AccountStatus> accountEntries = mutation.KeyValuePairs.Select(AccountStatus.FromKeyValuePair).ToList();
             ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
-
-            //if (accountEntries.Any(item => item == null))
-            //    throw new TransactionInvalidException("NotAccountMutation");
 
             // All assets must have an overall zero balance
             var groups = parsedMutation.AccountMutations
@@ -57,11 +51,11 @@ namespace OpenChain.Ledger
             await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication);
             await this.validator.ValidateAssetDefinitionMutations(parsedMutation.AssetDefinitions, authentication);
 
-            LedgerRecordMetadata recordMetadata = new LedgerRecordMetadata(1, authentication);
+            TransactionMetadata metadata = new TransactionMetadata(authentication);
+            
+            byte[] rawMetadata = SerializeMetadata(metadata);
 
-            byte[] metadata = BsonExtensionMethods.ToBson<LedgerRecordMetadata>(recordMetadata);
-
-            Transaction transaction = new Transaction(rawMutation, date, new BinaryData(metadata));
+            Transaction transaction = new Transaction(rawMutation, date, new BinaryData(rawMetadata));
             byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
 
             try
@@ -74,6 +68,20 @@ namespace OpenChain.Ledger
             }
 
             return new BinaryData(MessageSerializer.ComputeHash(serializedTransaction));
+        }
+
+        private byte[] SerializeMetadata(TransactionMetadata metadata)
+        {
+            Messages.TransactionMetadata.Builder transactionMetadataBuilder = new Messages.TransactionMetadata.Builder();
+            transactionMetadataBuilder.AddRangeSignatures(metadata.Signatures.Select(
+                signature => new Messages.TransactionMetadata.Types.SignatureEvidence.Builder()
+                {
+                    PublicKey = ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
+                    Signature = ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
+                }
+                .Build()));
+
+            return transactionMetadataBuilder.BuildParsed().ToByteArray();
         }
     }
 }

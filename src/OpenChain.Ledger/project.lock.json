@@ -4,7 +4,6 @@
   "projectFileDependencyGroups": {
     "": [
       "OpenChain.Core >= 1.0.0-*",
-      "MongoDB.Bson >= 2.0.1",
       "BouncyCastle >= 1.7.0"
     ],
     "DNX,Version=v4.5.1": [],
@@ -131,40 +130,6 @@
         "tools/google/protobuf/descriptor.proto",
         "tools/google/protobuf/compiler/plugin.proto",
         "tools/tutorial/addressbook.proto"
-      ]
-    },
-    "MongoDB.Bson/2.0.1": {
-      "serviceable": false,
-      "sha": "dr8KYpTt5VIqGWQ5Bzud2BA/lH2csIfL5WLrfc90UzSWGF378ugvEo5tx4J0eZohvHzsRRiMS2YTmJOTRN+iYg==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net45/MongoDB.Bson.dll"
-          ]
-        }
-      },
-      "files": [
-        "License.rtf",
-        "MongoDB.Bson.2.0.1.nupkg",
-        "MongoDB.Bson.2.0.1.nupkg.sha512",
-        "MongoDB.Bson.nuspec",
-        "lib/net45/MongoDB.Bson.dll",
-        "lib/net45/MongoDB.Bson.XML"
       ]
     },
     "System.Runtime/4.0.20-beta-23107": {

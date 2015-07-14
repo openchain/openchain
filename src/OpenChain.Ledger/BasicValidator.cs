@@ -17,7 +17,7 @@ namespace OpenChain.Ledger
             this.queries = queries;
         }
 
-        public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<AuthenticationEvidence> authentication)
+        public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             //BsonSerializer.Deserialize<LedgerRecordMetadata>(record.ExternalMetadata.Value.ToArray());
             IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
@@ -42,7 +42,7 @@ namespace OpenChain.Ledger
             }
         }
 
-        private bool CheckCanSend(IReadOnlyList<AuthenticationEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
+        private bool CheckCanSend(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
         {
             if (currentState.Balance + proposedChange.Balance < 0)
                 return false;
@@ -50,12 +50,12 @@ namespace OpenChain.Ledger
                 return true;
         }
 
-        private bool CheckCanReceive(IReadOnlyList<AuthenticationEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
+        private bool CheckCanReceive(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
         {
             return !accountKey.Account.IsDirectory;
         }
 
-        private async Task<bool> CheckCanCreate(IReadOnlyList<AuthenticationEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
+        private async Task<bool> CheckCanCreate(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
         {
             if (accountKey.Account.Segments.Count < 3)
                 return false;
@@ -72,7 +72,7 @@ namespace OpenChain.Ledger
             return true;
         }
 
-        public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<AuthenticationEvidence> authentication)
+        public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             return Task.FromResult(0);
         }
