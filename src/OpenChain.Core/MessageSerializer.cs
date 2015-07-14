@@ -1,8 +1,7 @@
-﻿using Google.ProtocolBuffers;
-using System;
-using System.IO;
+﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
+using Google.ProtocolBuffers;
 
 namespace OpenChain.Core
 {
@@ -20,12 +19,19 @@ namespace OpenChain.Core
 
             mutationBuilder.AddRangeKeyValuePairs(
                 mutation.KeyValuePairs.Select(
-                    pair => new Messages.Mutation.Types.KeyValuePair.Builder()
+                    pair =>
                     {
-                        Key = pair.Key.ToByteString(),
-                        Value = pair.Value.ToByteString(),
-                        Version = pair.Version.ToByteString()
-                    }.Build()));
+                        var builder = new Messages.Mutation.Types.KeyValuePair.Builder()
+                        {
+                            Key = pair.Key.ToByteString(),
+                            Version = pair.Version.ToByteString()
+                        };
+
+                        if (pair.Value != null)
+                            builder.Value = pair.Value.ToByteString();
+
+                        return builder.Build();
+                    }));
 
             return mutationBuilder.BuildParsed().ToByteArray();
         }
@@ -39,7 +45,7 @@ namespace OpenChain.Core
                 mutation.KeyValuePairsList.Select(
                     pair => new KeyValuePair(
                         new BinaryData(ByteString.Unsafe.GetBuffer(pair.Key)),
-                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Value)),
+                        pair.HasValue ? new BinaryData(ByteString.Unsafe.GetBuffer(pair.Value)) : null,
                         new BinaryData(ByteString.Unsafe.GetBuffer(pair.Version)))),
                 new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }

@@ -122,11 +122,12 @@ namespace OpenChain.Sqlite
                         // Update existing account
                         int count = await ExecuteAsync(@"
                                 UPDATE  KeyValuePairs
-                                SET     Version = @version
+                                SET     Value = @value, Version = @version
                                 WHERE   Key = @key AND Version = @currentVersion",
                             new Dictionary<string, object>()
                             {
                                 { "@key", pair.Key.ToByteArray() },
+                                { "@value", pair.Value.ToByteArray() },
                                 { "@version", transactionHash },
                                 { "@currentVersion", pair.Version.ToByteArray() }
                             });

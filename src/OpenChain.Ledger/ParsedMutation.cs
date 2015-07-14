@@ -27,6 +27,9 @@ namespace OpenChain.Ledger
                 BinaryValue key;
                 BinaryValue value;
 
+                if (pair.Value == null)
+                    continue;
+
                 try
                 {
                     key = BinaryValue.Read(pair.Key);

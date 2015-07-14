@@ -45,14 +45,13 @@ namespace OpenChain.Ledger
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
 
-
             DateTime date = DateTime.UtcNow;
-            
+
             await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication);
             await this.validator.ValidateAssetDefinitionMutations(parsedMutation.AssetDefinitions, authentication);
 
             TransactionMetadata metadata = new TransactionMetadata(authentication);
-            
+
             byte[] rawMetadata = SerializeMetadata(metadata);
 
             Transaction transaction = new Transaction(rawMutation, date, new BinaryData(rawMetadata));

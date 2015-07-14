@@ -19,7 +19,6 @@ namespace OpenChain.Ledger
 
         public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
-            //BsonSerializer.Deserialize<LedgerRecordMetadata>(record.ExternalMetadata.Value.ToArray());
             IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
                 await this.store.GetAccounts(accountMutations.Select(entry => entry.AccountKey));
 

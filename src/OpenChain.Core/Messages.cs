@@ -35,7 +35,7 @@ namespace OpenChain.Messages {
             "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKnAQoITXV0YXRpb24SEQoJbmFt", 
             "ZXNwYWNlGAEgAigMEjkKD2tleV92YWx1ZV9wYWlycxgCIAMoCzIgLk9wZW5D", 
             "aGFpbi5NdXRhdGlvbi5LZXlWYWx1ZVBhaXISEAoIbWV0YWRhdGEYAyACKAwa", 
-            "OwoMS2V5VmFsdWVQYWlyEgsKA2tleRgBIAIoDBINCgV2YWx1ZRgCIAIoDBIP", 
+            "OwoMS2V5VmFsdWVQYWlyEgsKA2tleRgBIAIoDBINCgV2YWx1ZRgCIAEoDBIP", 
             "Cgd2ZXJzaW9uGAMgAigMIlAKC1RyYW5zYWN0aW9uEhAKCG11dGF0aW9uGAEg", 
             "AigMEhEKCXRpbWVzdGFtcBgCIAIoAxIcChR0cmFuc2FjdGlvbl9tZXRhZGF0", 
           "YRgDIAIoDA=="));
@@ -151,7 +151,6 @@ namespace OpenChain.Messages {
         public override bool IsInitialized {
           get {
             if (!hasKey) return false;
-            if (!hasValue) return false;
             if (!hasVersion) return false;
             return true;
           }

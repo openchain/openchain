@@ -2,8 +2,6 @@
 
 namespace OpenChain.Ledger.Tests
 {
-    // This project can output the Class library as a NuGet Package.
-    // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
     public class LedgerPathTests
     {
         [Fact]
@@ -33,14 +31,6 @@ namespace OpenChain.Ledger.Tests
             Assert.Equal("/", path.FullPath);
             Assert.Equal(true, path.IsDirectory);
             Assert.Equal<string>(new string[] { }, path.Segments);
-
-            // Unicode characters
-            result = LedgerPath.TryParse("/abc%20c d/ef❤ ☀ ☆ ☂ ☻", out path);
-
-            Assert.Equal(true, result);
-            Assert.Equal("/abc%20c d/ef❤ ☀ ☆ ☂ ☻", path.FullPath);
-            Assert.Equal(false, path.IsDirectory);
-            Assert.Equal<string>(new[] { "abc%20c d", "ef❤ ☀ ☆ ☂ ☻" }, path.Segments);
         }
 
         [Theory]
@@ -55,12 +45,27 @@ namespace OpenChain.Ledger.Tests
         [InlineData("/abc/def//")]
         public void TryParse_Invalid(string value)
         {
-            // Missing leading slash
             LedgerPath path;
             bool result = LedgerPath.TryParse(value, out path);
 
             Assert.Equal(false, result);
             Assert.Equal(null, path);
+        }
+
+        [Fact]
+        public void TryParse_InvalidCharacter()
+        {
+            const string invalidCharacters = " \"#%&/:;<=>?@[\\]^`{|}~\t\r\n\0é";
+
+            foreach (char c in invalidCharacters)
+            {
+                LedgerPath path;
+                bool result = LedgerPath.TryParse("/" + c, out path);
+
+                Assert.Equal(null, path);
+                Assert.Equal(false, result);
+                Assert.Equal(false, LedgerPath.IsValidPathSegment(c.ToString()));
+            }
         }
     }
 }
