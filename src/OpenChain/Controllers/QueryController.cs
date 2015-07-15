@@ -50,7 +50,7 @@ namespace OpenChain.Controllers
             {
                 account = account.AccountKey.Account.FullPath,
                 asset = account.AccountKey.Asset.FullPath,
-                balance = account.Balance,
+                balance = account.Balance.ToString(),
                 version = account.Version.ToString()
             };
         }

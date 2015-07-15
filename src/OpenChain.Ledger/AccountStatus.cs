@@ -25,20 +25,23 @@ namespace OpenChain.Ledger
             try
             {
                 key = BinaryValue.Read(mutation.Key) as AccountKey;
-                if (mutation.Value.Equals(BinaryData.Empty))
-                    value = 0;
-                else
-                    value = ((Int64Value)BinaryValue.Read(mutation.Value)).Value;
             }
             catch (ArgumentOutOfRangeException)
             {
                 return null;
             }
 
-            if (key != null)
-                return new AccountStatus(key, value, mutation.Version);
-            else
+            // This pair does not represent an account key
+            if (key == null)
                 return null;
+
+            // If the value is unset, the balance is 0
+            if (mutation.Value.Value.Count == 0)
+                value = 0;
+            else
+                value = ((Int64Value)BinaryValue.Read(mutation.Value)).Value;
+
+            return new AccountStatus(key, value, mutation.Version);
         }
 
         public AccountKey AccountKey { get; }

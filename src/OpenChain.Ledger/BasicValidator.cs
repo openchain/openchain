@@ -45,9 +45,9 @@ namespace OpenChain.Ledger
                 }
 
                 // The asset must be of the form /root/{name}
-                if (mutation.AccountKey.Account.IsDirectory
-                    || mutation.AccountKey.Account.Segments.Count != 2
-                    || mutation.AccountKey.Account.Segments[0] != "root")
+                if (mutation.AccountKey.Asset.IsDirectory
+                    || mutation.AccountKey.Asset.Segments.Count != 2
+                    || mutation.AccountKey.Asset.Segments[0] != "root")
                     throw new TransactionInvalidException("InvalidAsset");
 
                 if (signedAddresses.Contains(mutation.AccountKey.Account.Segments[1]))
@@ -79,6 +79,9 @@ namespace OpenChain.Ledger
 
         public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
+            if (assetDefinitionMutations.Count == 0)
+                return Task.FromResult(0);
+
             if (!authentication.Any(evidence => this.adminAddresses.Contains(GetPubKeyHash(evidence.PublicKey))))
                 throw new TransactionInvalidException("AdminOnlyOperation");
 
