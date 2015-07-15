@@ -39,11 +39,13 @@ namespace OpenChain.Ledger
 
             // All assets must have an overall zero balance
             var groups = parsedMutation.AccountMutations
-                .GroupBy(account => account.AccountKey.Asset)
+                .GroupBy(account => account.AccountKey.Asset.FullPath)
                 .Select(group => group.Sum(entry => entry.Balance));
 
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
+
+            ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
 
             DateTime date = DateTime.UtcNow;
 
@@ -67,6 +69,17 @@ namespace OpenChain.Ledger
             }
 
             return new BinaryData(MessageSerializer.ComputeHash(serializedTransaction));
+        }
+
+        private void ValidateAuthentication(IReadOnlyList<SignatureEvidence> authentication, byte[] mutationHash)
+        {
+            foreach (SignatureEvidence evidence in authentication)
+            {
+                ECKey key = new ECKey(evidence.PublicKey.ToByteArray());
+
+                if (!key.VerifySignature(mutationHash, evidence.Signature.ToByteArray()))
+                    throw new TransactionInvalidException("InvalidSignature");
+            }
         }
 
         private byte[] SerializeMetadata(TransactionMetadata metadata)

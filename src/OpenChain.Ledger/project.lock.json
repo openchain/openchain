@@ -6,8 +6,12 @@
       "OpenChain.Core >= 1.0.0-*",
       "BouncyCastle >= 1.7.0"
     ],
-    "DNX,Version=v4.5.1": [],
-    ".NETFramework,Version=v4.6": []
+    "DNX,Version=v4.5.1": [
+      "framework/System.Numerics >= 4.0.0.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "framework/System.Numerics >= 4.0.0.0"
+    ]
   },
   "libraries": {
     "BouncyCastle/1.7.0": {

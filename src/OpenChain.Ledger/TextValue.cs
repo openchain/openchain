@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 namespace OpenChain.Ledger
 {
@@ -19,8 +20,10 @@ namespace OpenChain.Ledger
 
         protected override void Write(BinaryWriter writer)
         {
+            byte[] value = Encoding.UTF8.GetBytes(Value);
             writer.Write((int)Usage);
-            writer.Write(Value);
+            writer.Write((uint)value.Length);
+            writer.Write(value);
         }
     }
 }

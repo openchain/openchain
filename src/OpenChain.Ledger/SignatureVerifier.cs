@@ -1,42 +1,64 @@
-﻿using Org.BouncyCastle.Math;
-using Org.BouncyCastle.Math.EC;
-using Org.BouncyCastle.Security;
-using Org.BouncyCastle.Utilities.Encoders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using Org.BouncyCastle.Asn1;
+using Org.BouncyCastle.Asn1.Sec;
+using Org.BouncyCastle.Asn1.X9;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Crypto.Signers;
+using Org.BouncyCastle.Math;
 
 namespace OpenChain.Ledger
 {
-    public class SignatureVerifier
+    public class ECKey
     {
-        //public static bool VerifySignature(byte[] publicKey, byte[] msgBytes, byte[] sigBytes)
-        //{
-        //    int first = (sigBytes[0] - 27);
-        //    bool comp = (first & 4) != 0;
-        //    int rec = first & 3;
+        public static X9ECParameters Secp256k1 { get; } = SecNamedCurves.GetByName("secp256k1");
 
-        //    BigInteger[] sig = ParseSig(sigBytes, 1);
-        //    byte[] msgHash = DigestUtilities.CalculateDigest("SHA-256", DigestUtilities.CalculateDigest("SHA-256", msgBytes));
+        public static ECDomainParameters DomainParameter { get; } = new ECDomainParameters(Secp256k1.Curve, Secp256k1.G, Secp256k1.N, Secp256k1.H);
 
-        //    ECPoint Q = Recover(msgHash, sig, rec, true);
+        private ECPublicKeyParameters key;
 
-        //    byte[] qEnc = Q.GetEncoded(comp);
-        //    Console.WriteLine("Q: " + Hex.ToHexString(qEnc));
+        public ECKey(byte[] vch)
+        {
+            var q = Secp256k1.Curve.DecodePoint(vch);
+            key = new ECPublicKeyParameters("EC", q, DomainParameter);
+        }
 
-        //    byte[] qHash = DigestUtilities.CalculateDigest("RIPEMD-160", DigestUtilities.CalculateDigest("SHA-256", qEnc));
-        //    Console.WriteLine("RIPEMD-160(SHA-256(Q)): " + Hex.ToHexString(qHash));
+        public bool VerifySignature(byte[] hash, byte[] signature)
+        {
+            ECDsaSigner signer = new ECDsaSigner();
+            ECDSASignature parsedSignature = ECDSASignature.FromDER(signature);
+            signer.Init(false, key);
+            return signer.VerifySignature(hash, parsedSignature.R, parsedSignature.S);
+        }
 
-        //    Console.WriteLine("Signature verified correctly: " + VerifySignature(Q, msgHash, sig));
-        //}
+        private class ECDSASignature
+        {
+            public BigInteger R { get; }
 
-        //public static void CheckSignedMessage(string message, string sig64)
-        //{
-        //    byte[] sigBytes = Convert.FromBase64String(sig64);
-        //    byte[] msgBytes = FormatMessageForSigning(message);
+            public BigInteger S { get; }
 
+            public ECDSASignature(BigInteger r, BigInteger s)
+            {
+                R = r;
+                S = s;
+            }
 
-        //}
+            public static ECDSASignature FromDER(byte[] sig)
+            {
+                try
+                {
+                    Asn1InputStream decoder = new Asn1InputStream(sig);
+                    var seq = decoder.ReadObject() as DerSequence;
+                    if (seq == null || seq.Count != 2)
+                        throw new FormatException("Invalid DER signature");
+
+                    return new ECDSASignature(((DerInteger)seq[0]).Value, ((DerInteger)seq[1]).Value);
+                }
+                catch (IOException ex)
+                {
+                    throw new FormatException("Invalid DER signature", ex);
+                }
+            }
+        }
     }
 }

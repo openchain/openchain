@@ -1,8 +1,9 @@
-﻿using OpenChain.Core;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System;
+using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
@@ -19,61 +20,63 @@ namespace OpenChain.Ledger
 
         public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
-            IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
-                await this.store.GetAccounts(accountMutations.Select(entry => entry.AccountKey));
+            HashSet<string> signedAddresses = new HashSet<string>(authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
 
-            foreach (AccountStatus account in accountMutations)
+            List<AccountStatus> signedMutations = new List<AccountStatus>();
+            List<AccountStatus> unsignedMutations = new List<AccountStatus>();
+            foreach (AccountStatus mutation in accountMutations)
             {
-                if (account.Version.Equals(BinaryData.Empty))
-                    if (!await CheckCanCreate(authentication, account.AccountKey, accounts[account.AccountKey], account))
-                        throw new TransactionInvalidException("AccountCannotBeCreated");
+                if (mutation.AccountKey.Account.IsDirectory)
+                    throw new TransactionInvalidException("InvalidAccount");
 
-                if (account.Balance > 0)
+                if (mutation.AccountKey.Account.Segments.Count != 2 || mutation.AccountKey.Account.Segments[0] != "p2pkh")
+                    throw new TransactionInvalidException("InvalidAccount");
+
+                try
                 {
-                    if (!CheckCanReceive(authentication, account.AccountKey, accounts[account.AccountKey], account))
-                        throw new TransactionInvalidException("AccountCannotReceive");
+                    byte[] pubKeyHash = Base58CheckEncoding.Decode(mutation.AccountKey.Account.Segments[1]);
+                    if (pubKeyHash.Length != 21 || pubKeyHash[0] != 0)
+                        throw new TransactionInvalidException("InvalidAccount");
                 }
-                else if (account.Balance < 0)
+                catch (FormatException)
                 {
-                    if (!CheckCanSend(authentication, account.AccountKey, accounts[account.AccountKey], account))
-                        throw new TransactionInvalidException("AccountCannotSend");
+                    throw new TransactionInvalidException("InvalidAccount");
                 }
+
+                if (mutation.Balance < 0)
+                    throw new TransactionInvalidException("NegativeBalance");
+
+                if (signedAddresses.Contains(mutation.AccountKey.Account.Segments[1]))
+                    signedMutations.Add(mutation);
+                else
+                    unsignedMutations.Add(mutation);
+            }
+            
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
+                await this.store.GetAccounts(unsignedMutations.Select(entry => entry.AccountKey));
+
+            foreach (AccountStatus account in unsignedMutations)
+            {
+                AccountStatus previousStatus = accounts[account.AccountKey];
+
+                if (account.Balance < previousStatus.Balance)
+                    throw new TransactionInvalidException("SignatureMissing");
             }
         }
-
-        private bool CheckCanSend(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
-        {
-            if (currentState.Balance + proposedChange.Balance < 0)
-                return false;
-            else
-                return true;
-        }
-
-        private bool CheckCanReceive(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
-        {
-            return !accountKey.Account.IsDirectory;
-        }
-
-        private async Task<bool> CheckCanCreate(IReadOnlyList<SignatureEvidence> authentication, AccountKey accountKey, AccountStatus currentState, AccountStatus proposedChange)
-        {
-            if (accountKey.Account.Segments.Count < 3)
-                return false;
-
-            if (accountKey.Account.Segments[0] != "account" || accountKey.Account.Segments[1] != "p2pkh")
-                return false;
-
-            LedgerPath rootPath = LedgerPath.FromSegments(new[] { accountKey.Account.Segments[0], accountKey.Account.Segments[1], accountKey.Account.Segments[2] }, true);
-
-            AccountStatus parentAccount = (await this.store.GetAccounts(new[] { new AccountKey(rootPath.FullPath, currentState.AccountKey.Asset.FullPath) })).First().Value;
-            if (parentAccount.Version.Equals(BinaryData.Empty))
-                return false;
-
-            return true;
-        }
-
+        
         public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             return Task.FromResult(0);
+        }
+
+        private static string GetPubKeyHash(BinaryData pubKey)
+        {
+            using (RIPEMD160 ripe = RIPEMD160.Create())
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] result = ripe.ComputeHash(sha256.ComputeHash(pubKey.ToByteArray()));
+                return Base58CheckEncoding.Encode(new byte[] { 0 }.Concat(result).ToArray());
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using OpenChain.Core;
-using System;
+﻿using System;
+using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
@@ -21,19 +21,22 @@ namespace OpenChain.Ledger
         public static AccountStatus FromKeyValuePair(KeyValuePair mutation)
         {
             AccountKey key;
-            Int64Value value;
+            long value;
             try
             {
                 key = BinaryValue.Read(mutation.Key) as AccountKey;
-                value = BinaryValue.Read(mutation.Value) as Int64Value;
+                if (mutation.Value == null)
+                    value = 0;
+                else
+                    value = ((Int64Value)BinaryValue.Read(mutation.Value)).Value;
             }
             catch (ArgumentOutOfRangeException)
             {
                 return null;
             }
 
-            if (key != null || value != null)
-                return new AccountStatus(key, value.Value, mutation.Version);
+            if (key != null)
+                return new AccountStatus(key, value, mutation.Version);
             else
                 return null;
         }
