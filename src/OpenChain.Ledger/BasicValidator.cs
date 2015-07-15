@@ -26,12 +26,13 @@ namespace OpenChain.Ledger
             List<AccountStatus> unsignedMutations = new List<AccountStatus>();
             foreach (AccountStatus mutation in accountMutations)
             {
-                if (mutation.AccountKey.Account.IsDirectory)
+                // The account must be of the form /p2pkh/{address}
+                if (mutation.AccountKey.Account.IsDirectory
+                    || mutation.AccountKey.Account.Segments.Count != 2
+                    || mutation.AccountKey.Account.Segments[0] != "p2pkh")
                     throw new TransactionInvalidException("InvalidAccount");
-
-                if (mutation.AccountKey.Account.Segments.Count != 2 || mutation.AccountKey.Account.Segments[0] != "p2pkh")
-                    throw new TransactionInvalidException("InvalidAccount");
-
+                
+                // The address must be a valid base 58 address with version byte set to 0
                 try
                 {
                     byte[] pubKeyHash = Base58CheckEncoding.Decode(mutation.AccountKey.Account.Segments[1]);
@@ -42,6 +43,12 @@ namespace OpenChain.Ledger
                 {
                     throw new TransactionInvalidException("InvalidAccount");
                 }
+
+                // The asset must be of the form /root/{name}
+                if (mutation.AccountKey.Account.IsDirectory
+                    || mutation.AccountKey.Account.Segments.Count != 2
+                    || mutation.AccountKey.Account.Segments[0] != "root")
+                    throw new TransactionInvalidException("InvalidAsset");
 
                 if (signedAddresses.Contains(mutation.AccountKey.Account.Segments[1]))
                     signedMutations.Add(mutation);
@@ -72,6 +79,18 @@ namespace OpenChain.Ledger
 
         public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
+            if (!authentication.Any(evidence => this.adminAddresses.Contains(GetPubKeyHash(evidence.PublicKey))))
+                throw new TransactionInvalidException("AdminOnlyOperation");
+
+            foreach (KeyValuePair<LedgerPath, string> mutation in assetDefinitionMutations)
+            {
+                // The asset must be of the form /root/{name}
+                if (mutation.Key.IsDirectory
+                    || mutation.Key.Segments.Count != 2
+                    || mutation.Key.Segments[0] != "root")
+                    throw new TransactionInvalidException("InvalidAsset");
+            }
+
             return Task.FromResult(0);
         }
 
