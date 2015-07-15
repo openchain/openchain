@@ -8,6 +8,15 @@ namespace OpenChain.Ledger.Tests
     public class BinaryValueTests
     {
         [Fact]
+        public void Read_DefaultValue()
+        {
+            BinaryValue result = BinaryValue.Read(BinaryData.Empty);
+
+            Assert.Equal(BinaryValueUsage.Default, result.Usage);
+            Assert.Equal(BinaryData.Empty, result.BinaryData);
+        }
+
+        [Fact]
         public void Read_AccountKey()
         {
             AccountKey accountKey = new AccountKey("/account/1", "/asset/1");

@@ -1,7 +1,7 @@
-﻿using OpenChain.Core;
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
+using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
@@ -11,6 +11,8 @@ namespace OpenChain.Ledger
         {
             this.Usage = usage;
         }
+
+        public static BinaryValue Default { get; private set; } = new DefaultValue();
 
         public BinaryData BinaryData { get; private set; }
 
@@ -31,6 +33,9 @@ namespace OpenChain.Ledger
 
         public static BinaryValue Read(BinaryData key)
         {
+            if (key.Value.Count == 0)
+                return Default;
+
             try
             {
                 using (Stream input = key.ToStream())
@@ -92,6 +97,18 @@ namespace OpenChain.Ledger
         public override bool Equals(object obj)
         {
             return this.Equals(obj as BinaryValue);
+        }
+
+        private class DefaultValue : BinaryValue
+        {
+            public DefaultValue()
+                : base(BinaryValueUsage.Default)
+            {
+                SetBinaryData();
+            }
+
+            protected override void Write(BinaryWriter writer)
+            { }
         }
     }
 }

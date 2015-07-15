@@ -25,7 +25,7 @@ namespace OpenChain.Ledger
             try
             {
                 key = BinaryValue.Read(mutation.Key) as AccountKey;
-                if (mutation.Value == null)
+                if (mutation.Value.Equals(BinaryData.Empty))
                     value = 0;
                 else
                     value = ((Int64Value)BinaryValue.Read(mutation.Value)).Value;

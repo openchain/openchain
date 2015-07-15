@@ -1,10 +1,10 @@
-﻿using Microsoft.Data.SQLite;
-using OpenChain.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SQLite;
+using OpenChain.Core;
 
 namespace OpenChain.Sqlite
 {
@@ -94,7 +94,7 @@ namespace OpenChain.Sqlite
                 if (pair.Value == null)
                 {
                     // Read the key-value pair and make sure it corresponds to the one supplied
-                    IReadOnlyList<byte[]> versions = await ExecuteAsync<byte[]>(@"
+                    IReadOnlyList<byte[]> versions = await ExecuteAsync(@"
                             SELECT  Version
                             FROM    KeyValuePairs
                             WHERE   Key = @key",
@@ -185,7 +185,7 @@ namespace OpenChain.Sqlite
                     if (exists)
                         result[key] = new KeyValuePair(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
                     else
-                        result[key] = new KeyValuePair(key, null, BinaryData.Empty);
+                        result[key] = new KeyValuePair(key, BinaryData.Empty, BinaryData.Empty);
                 }
             }
 

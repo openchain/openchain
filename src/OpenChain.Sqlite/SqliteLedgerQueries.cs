@@ -1,11 +1,10 @@
-﻿using Microsoft.Data.SQLite;
-using OpenChain.Core;
-using OpenChain.Ledger;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SQLite;
+using OpenChain.Core;
+using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite
 {

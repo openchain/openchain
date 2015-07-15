@@ -32,9 +32,9 @@ namespace OpenChain.Core.Tests
             Assert.Equal(1, pairs1.Count);
             AssertKeyValuePair(pairs1[0], binaryData[0], binaryData[1], mutationHash);
             Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[2], null, BinaryData.Empty);
+            AssertKeyValuePair(pairs2[0], binaryData[2], BinaryData.Empty, BinaryData.Empty);
             Assert.Equal(1, pairs3.Count);
-            AssertKeyValuePair(pairs3[0], binaryData[3], null, BinaryData.Empty);
+            AssertKeyValuePair(pairs3[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
         }
 
         [Fact]
@@ -72,9 +72,9 @@ namespace OpenChain.Core.Tests
             IList<KeyValuePair> pairs2 = await this.store.GetValues(new[] { binaryData[3] });
 
             Assert.Equal(1, pairs1.Count);
-            AssertKeyValuePair(pairs1[0], binaryData[0], null, BinaryData.Empty);
+            AssertKeyValuePair(pairs1[0], binaryData[0], BinaryData.Empty, BinaryData.Empty);
             Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[3], null, BinaryData.Empty);
+            AssertKeyValuePair(pairs2[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
         }
 
         [Fact]

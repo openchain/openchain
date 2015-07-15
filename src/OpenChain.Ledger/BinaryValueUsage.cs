@@ -2,8 +2,9 @@
 {
     public enum BinaryValueUsage : int
     {
-        Text            = 0,
-        Int64           = 1,
+        Default         = 0,
+        Text            = 1,
+        Int64           = 2,
 
         AccountKey      = 0 + 256,
         AssetDefinition = 1 + 256,

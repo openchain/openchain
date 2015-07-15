@@ -1,7 +1,7 @@
-﻿using OpenChain.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
@@ -26,7 +26,8 @@ namespace OpenChain.Ledger
             {
                 BinaryValue key;
                 BinaryValue value;
-
+                
+                // This key-value pair does not result in a mutation, it doesn't take part in the validation
                 if (pair.Value == null)
                     continue;
 
