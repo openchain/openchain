@@ -44,7 +44,8 @@ namespace OpenChain.Models
             switch (configuration.GetSubKey("Main").Get("validator"))
             {
                 case "Basic":
-                    return ActivatorUtilities.CreateInstance<BasicValidator>(serviceProvider);
+                    string[] adminAddresses = configuration.GetSubKey("BasicValidator").Get("admin_addresses").Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    return new BasicValidator(serviceProvider.GetRequiredService<ITransactionStore>(), adminAddresses);
                 case "Disabled":
                     return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                 default:

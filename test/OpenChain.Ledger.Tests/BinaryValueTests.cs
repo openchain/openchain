@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq;
+using OpenChain.Core;
+using Xunit;
 
 namespace OpenChain.Ledger.Tests
 {
@@ -42,6 +45,42 @@ namespace OpenChain.Ledger.Tests
             Assert.Equal(BinaryValueUsage.Int64, result.Usage);
             Assert.Equal(long.MaxValue - int.MaxValue, result.Value);
             Assert.Equal(intValue.BinaryData, result.BinaryData);
+        }
+
+        [Fact]
+        public void Read_InvalidUsage()
+        {
+            TextValue value = new TextValue((BinaryValueUsage)10000, "Text Value");
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryValue.Read(value.BinaryData));
+        }
+
+        [Fact]
+        public void Read_RountripFailing()
+        {
+            TextValue value = new TextValue(BinaryValueUsage.AssetDefinition, "Text Value");
+            byte[] invalidValue = value.BinaryData.ToByteArray();
+            invalidValue[invalidValue.Length - 1] = 128;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryValue.Read(new BinaryData(invalidValue)));
+        }
+
+        [Fact]
+        public void Read_BufferTooLong()
+        {
+            TextValue value = new TextValue(BinaryValueUsage.AssetDefinition, "Text Value");
+            byte[] invalidValue = value.BinaryData.ToByteArray().Concat(new byte[] { 0 }).ToArray();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryValue.Read(new BinaryData(invalidValue)));
+        }
+
+        [Fact]
+        public void Read_BufferTooShort()
+        {
+            Int64Value value = new Int64Value(1);
+            byte[] invalidValue = value.BinaryData.ToByteArray().Take(value.BinaryData.Value.Count - 1).ToArray();
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => BinaryValue.Read(new BinaryData(invalidValue)));
         }
     }
 }

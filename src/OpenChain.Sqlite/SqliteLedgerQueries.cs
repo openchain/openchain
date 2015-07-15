@@ -50,8 +50,8 @@ namespace OpenChain.Sqlite
                                 WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion",
                             new Dictionary<string, object>()
                             {
-                                { "@account", account.AccountKey.Account },
-                                { "@asset", account.AccountKey.Asset },
+                                { "@account", account.AccountKey.Account.FullPath },
+                                { "@asset", account.AccountKey.Asset.FullPath },
                                 { "@previousVersion", account.Version.Value.ToArray() },
                                 { "@balance", account.Balance },
                                 { "@version", mutationHash }
@@ -65,8 +65,8 @@ namespace OpenChain.Sqlite
                                 VALUES (@account, @asset, @balance, @version)",
                             new Dictionary<string, object>()
                             {
-                                { "@account", account.AccountKey.Account },
-                                { "@asset", account.AccountKey.Asset },
+                                { "@account", account.AccountKey.Account.FullPath },
+                                { "@asset", account.AccountKey.Asset.FullPath },
                                 { "@balance", account.Balance },
                                 { "@version", mutationHash }
                             });

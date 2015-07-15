@@ -64,6 +64,8 @@ namespace OpenChain.Ledger
 
                     if (input.Position != input.Length)
                         throw new ArgumentOutOfRangeException();
+                    else if (!result.BinaryData.Equals(key))
+                        throw new ArgumentOutOfRangeException();
                     else
                         return result;
                 }

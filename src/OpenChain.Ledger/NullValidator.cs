@@ -14,7 +14,7 @@ namespace OpenChain.Ledger
             this.alwaysValid = alwaysValid;
         }
 
-        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
+        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
         {
             if (this.alwaysValid)
                 return Task.FromResult(0);

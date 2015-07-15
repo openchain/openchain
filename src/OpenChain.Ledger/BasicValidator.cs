@@ -9,16 +9,16 @@ namespace OpenChain.Ledger
 {
     public class BasicValidator : IRulesValidator
     {
-        private readonly ILedgerQueries queries;
+        private readonly HashSet<string> adminAddresses;
         private readonly ITransactionStore store;
 
-        public BasicValidator(ITransactionStore store, ILedgerQueries queries)
+        public BasicValidator(ITransactionStore store, string[] adminAddresses)
         {
             this.store = store;
-            this.queries = queries;
+            this.adminAddresses = new HashSet<string>(adminAddresses, StringComparer.Ordinal);
         }
 
-        public async Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication)
+        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
         {
             HashSet<string> signedAddresses = new HashSet<string>(authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
 
@@ -43,27 +43,33 @@ namespace OpenChain.Ledger
                     throw new TransactionInvalidException("InvalidAccount");
                 }
 
-                if (mutation.Balance < 0)
-                    throw new TransactionInvalidException("NegativeBalance");
-
                 if (signedAddresses.Contains(mutation.AccountKey.Account.Segments[1]))
                     signedMutations.Add(mutation);
                 else
                     unsignedMutations.Add(mutation);
             }
-            
-            IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
-                await this.store.GetAccounts(unsignedMutations.Select(entry => entry.AccountKey));
 
-            foreach (AccountStatus account in unsignedMutations)
+            // Balance verifications if the admin is not a signer
+            if (!signedAddresses.Any(address => this.adminAddresses.Contains(address)))
             {
-                AccountStatus previousStatus = accounts[account.AccountKey];
+                foreach (AccountStatus mutation in accountMutations)
+                {
+                    if (mutation.Balance < 0)
+                        throw new TransactionInvalidException("NegativeBalance");
+                }
 
-                if (account.Balance < previousStatus.Balance)
-                    throw new TransactionInvalidException("SignatureMissing");
+                foreach (AccountStatus account in unsignedMutations)
+                {
+                    AccountStatus previousStatus = accounts[account.AccountKey];
+
+                    if (account.Balance < previousStatus.Balance)
+                        throw new TransactionInvalidException("SignatureMissing");
+                }
             }
+
+            return Task.FromResult(0);
         }
-        
+
         public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
         {
             return Task.FromResult(0);

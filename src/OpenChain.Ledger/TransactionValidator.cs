@@ -35,21 +35,25 @@ namespace OpenChain.Ledger
             if (groupedPairs.Any(group => group.Count() > 1))
                 throw new TransactionInvalidException("DuplicateKey");
 
+            ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
+
             ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
 
             // All assets must have an overall zero balance
+
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts =
+                await this.store.GetAccounts(parsedMutation.AccountMutations.Select(entry => entry.AccountKey));
+
             var groups = parsedMutation.AccountMutations
                 .GroupBy(account => account.AccountKey.Asset.FullPath)
-                .Select(group => group.Sum(entry => entry.Balance));
+                .Select(group => group.Sum(entry => entry.Balance - accounts[entry.AccountKey].Balance));
 
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
 
-            ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
-
             DateTime date = DateTime.UtcNow;
 
-            await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication);
+            await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication, accounts);
             await this.validator.ValidateAssetDefinitionMutations(parsedMutation.AssetDefinitions, authentication);
 
             TransactionMetadata metadata = new TransactionMetadata(authentication);
@@ -71,7 +75,7 @@ namespace OpenChain.Ledger
             return new BinaryData(MessageSerializer.ComputeHash(serializedTransaction));
         }
 
-        private void ValidateAuthentication(IReadOnlyList<SignatureEvidence> authentication, byte[] mutationHash)
+        private static void ValidateAuthentication(IReadOnlyList<SignatureEvidence> authentication, byte[] mutationHash)
         {
             foreach (SignatureEvidence evidence in authentication)
             {
