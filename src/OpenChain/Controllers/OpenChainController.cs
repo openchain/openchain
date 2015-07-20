@@ -105,7 +105,8 @@ namespace OpenChain.Controllers
             return Json(new
             {
                 root_url = configuration.GetSubKey("Main").Get("root_url"),
-                name = configuration.GetSubKey("Info").Get("name")
+                name = configuration.GetSubKey("Info").Get("name"),
+                tos = ""
             });
         }
     }

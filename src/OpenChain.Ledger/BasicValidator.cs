@@ -59,7 +59,7 @@ namespace OpenChain.Ledger
             // Balance verifications if the admin is not a signer
             if (!signedAddresses.Any(address => this.adminAddresses.Contains(address)))
             {
-                foreach (AccountStatus mutation in accountMutations)
+                foreach (AccountStatus mutation in signedMutations)
                 {
                     if (mutation.Balance < 0)
                         throw new TransactionInvalidException("NegativeBalance");

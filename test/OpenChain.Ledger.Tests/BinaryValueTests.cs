@@ -91,5 +91,26 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>(() => BinaryValue.Read(new BinaryData(invalidValue)));
         }
+
+        [Fact]
+        public void Equals_Sucess()
+        {
+            AccountKey key1 = new AccountKey("/the/path", "/the/asset");
+            AccountKey key2 = new AccountKey("/the/path", "/the/asset/");
+            AccountKey key3 = new AccountKey("/the/path", "/the/asset");
+
+            Assert.Equal(true, key1.Equals(key3));
+            Assert.Equal(true, key1.Equals((object)key3));
+            Assert.Equal(key3.GetHashCode(), key1.GetHashCode());
+            Assert.Equal(key1, key3);
+
+            Assert.Equal(false, key1.Equals(key2));
+            Assert.Equal(false, key1.Equals((object)key2));
+            Assert.Equal(key3.GetHashCode(), key1.GetHashCode());
+            Assert.NotEqual(key1, key2);
+
+            Assert.Equal(false, key1.Equals((AccountKey)null));
+            Assert.Equal(false, key1.Equals((object)null));
+        }
     }
 }

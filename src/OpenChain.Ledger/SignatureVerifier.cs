@@ -6,6 +6,7 @@ using Org.BouncyCastle.Asn1.X9;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Math;
+using Org.BouncyCastle.Math.EC;
 
 namespace OpenChain.Ledger
 {
@@ -17,10 +18,10 @@ namespace OpenChain.Ledger
 
         private ECPublicKeyParameters key;
 
-        public ECKey(byte[] vch)
+        public ECKey(byte[] publicKey)
         {
-            var q = Secp256k1.Curve.DecodePoint(vch);
-            key = new ECPublicKeyParameters("EC", q, DomainParameter);
+            ECPoint q = Secp256k1.Curve.DecodePoint(publicKey);
+            this.key = new ECPublicKeyParameters("EC", q, DomainParameter);
         }
 
         public bool VerifySignature(byte[] hash, byte[] signature)
@@ -43,11 +44,11 @@ namespace OpenChain.Ledger
                 S = s;
             }
 
-            public static ECDSASignature FromDER(byte[] sig)
+            public static ECDSASignature FromDER(byte[] signature)
             {
                 try
                 {
-                    Asn1InputStream decoder = new Asn1InputStream(sig);
+                    Asn1InputStream decoder = new Asn1InputStream(signature);
                     var seq = decoder.ReadObject() as DerSequence;
                     if (seq == null || seq.Count != 2)
                         throw new FormatException("Invalid DER signature");
