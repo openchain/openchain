@@ -1,24 +1,28 @@
-﻿using Google.ProtocolBuffers;
-using OpenChain.Core;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Google.ProtocolBuffers;
+using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
     public class TransactionValidator
     {
         private readonly ITransactionStore store;
-        private readonly IRulesValidator validator;
         private readonly BinaryData ledgerId;
+        private readonly IRulesValidator validator;
 
-        public TransactionValidator(ITransactionStore store, IRulesValidator validator, BinaryData ledgerId)
+        public TransactionValidator(ITransactionStore store, IRulesValidator validator, string rootUrl)
         {
             this.store = store;
             this.validator = validator;
-            this.ledgerId = ledgerId;
+            this.RootUrl = rootUrl;
+            this.ledgerId = new BinaryData(Encoding.UTF8.GetBytes(rootUrl));
         }
+
+        public string RootUrl { get; }
 
         public async Task<BinaryData> PostTransaction(BinaryData rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {

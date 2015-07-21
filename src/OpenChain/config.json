@@ -1,0 +1,23 @@
+﻿{
+  "enable_transaction_stream": true,
+  "storage": {
+    "type": "SQLite",
+    "path": "ledger.db"
+  },
+  "master_mode": {
+    "root_url": "http://localhost:5000/",
+    "validator": {
+      "type": "OpenLoop",
+      "admin_addresses": [
+        "1Az3u11trKmvHLSFhzSdRqT8hjUi7R7woA"
+      ]
+    },
+    "properties": {
+      "name": "Test Ledger",
+      "tos": "The terms of service have not been defined"
+    }
+  },
+  "observer_mode": {
+    "master_url": "http://localhost:5000/"
+  }
+}

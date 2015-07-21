@@ -17,7 +17,8 @@
     "OpenChain.Sqlite": "1.0.0-*",
     "System.Text.Encoding": "4.0.10-beta-22816",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
-    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079"
+    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5"
   },
 
   "commands": {

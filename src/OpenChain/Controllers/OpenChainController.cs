@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.Configuration;
+using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using OpenChain.Core;
 using OpenChain.Ledger;
+using OpenChain.Models;
 
 namespace OpenChain.Controllers
 {
@@ -17,16 +19,12 @@ namespace OpenChain.Controllers
     [Route("")]
     public class OpenChainController : Controller
     {
-        private readonly IConfiguration configuration;
         private readonly ITransactionStore store;
-        private readonly TransactionValidator validator;
         private readonly ILogger logger;
 
-        public OpenChainController(IConfiguration configuration, ITransactionStore store, IRulesValidator validator, ILogger logger)
+        public OpenChainController(ITransactionStore store, ILogger logger)
         {
-            this.configuration = configuration;
             this.store = store;
-            this.validator = new TransactionValidator(store, validator, new BinaryData(Encoding.UTF8.GetBytes(configuration.GetConfigurationSection("Main").Get("root_url"))));
             this.logger = logger;
         }
 
@@ -51,7 +49,8 @@ namespace OpenChain.Controllers
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
         {
-            if (!bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
+            TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
+            if (validator == null)
                 return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
 
             BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
@@ -102,12 +101,28 @@ namespace OpenChain.Controllers
         [HttpGet("info")]
         public ActionResult GetLedgerInformation()
         {
-            return Json(new
+            TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
+            MasterProperties properties = Context.ApplicationServices.GetService<MasterProperties>();
+
+            if (validator != null)
             {
-                root_url = configuration.GetConfigurationSection("Main").Get("root_url"),
-                name = configuration.GetConfigurationSection("Info").Get("name"),
-                tos = ""
-            });
+                if (properties != null)
+                    return Json(new
+                    {
+                        root_url = validator.RootUrl,
+                        name = properties.Name,
+                        tos = properties.Tos
+                    });
+                else
+                    return Json(new
+                    {
+                        root_url = validator.RootUrl
+                    });
+            }
+            else
+            {
+                return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
+            }
         }
     }
 }

@@ -23,20 +23,21 @@ namespace OpenChain
 {
     public class Startup
     {
-        private readonly IConfigurationBuilder configuration;
+        private readonly IConfiguration configuration;
 
         public Startup(IHostingEnvironment env)
         {
             // Setup Configuration
-            configuration = new ConfigurationBuilder(env.WebRootPath)
-                .AddIniFile("config.ini");
+            configuration = new ConfigurationBuilder()
+                .AddJsonFile($"{env.WebRootPath}/config.json")
+                .Build();
         }
 
         // This method gets called by a runtime.
         // Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IConfiguration>(_ => this.configuration.Build());
+            services.AddSingleton<IConfiguration>(_ => this.configuration);
 
             // Setup ASP.NET MVC
             services.AddMvc();
@@ -55,6 +56,10 @@ namespace OpenChain
 
             services.AddSingleton<IRulesValidator>(ConfigurationParser.CreateRulesValidator);
 
+            services.AddSingleton<MasterProperties>(ConfigurationParser.CreateMasterProperties);
+
+            services.AddTransient<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
+
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
@@ -69,7 +74,7 @@ namespace OpenChain
 
             app.Map("/stream", managedWebSocketsApp =>
             {
-                if (bool.Parse(configuration.GetConfigurationSection("Main").Get("enable_transaction_stream")))
+                if (bool.Parse(configuration["enable_transaction_stream"]))
                 {
                     managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
                     managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);

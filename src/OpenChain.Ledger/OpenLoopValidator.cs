@@ -7,12 +7,12 @@ using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
-    public class BasicValidator : IRulesValidator
+    public class OpenLoopValidator : IRulesValidator
     {
         private readonly HashSet<string> adminAddresses;
         private readonly ITransactionStore store;
 
-        public BasicValidator(ITransactionStore store, string[] adminAddresses)
+        public OpenLoopValidator(ITransactionStore store, string[] adminAddresses)
         {
             this.store = store;
             this.adminAddresses = new HashSet<string>(adminAddresses, StringComparer.Ordinal);

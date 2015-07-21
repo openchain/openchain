@@ -1,11 +1,12 @@
-﻿using Microsoft.Framework.Configuration;
+﻿using System;
+using System.Linq;
+using System.Threading;
+using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Core;
 using OpenChain.Ledger;
 using OpenChain.Sqlite;
-using System;
-using System.Threading;
 
 namespace OpenChain.Models
 {
@@ -14,8 +15,11 @@ namespace OpenChain.Models
         public static ITransactionStore CreateLedgerStore(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-
-            return new SqliteLedgerQueries(configuration.GetConfigurationSection("SQLite").Get("path"));
+            IConfiguration storage = configuration.GetConfigurationSection("storage");
+            if (storage["type"] == "SQLite")
+                return new SqliteLedgerQueries(storage["path"]);
+            else
+                throw new NotSupportedException();
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
@@ -28,28 +32,54 @@ namespace OpenChain.Models
 
         public static IRulesValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("master_mode");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            if (!bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
+            if (configuration["root_url"] != null)
             {
-                logger.LogInformation("Transaction validation mode disabled (Slave mode)");
-                return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, false);
+                logger.LogInformation("Transaction validation mode enabled (Master mode)");
+                IConfiguration validator = configuration.GetConfigurationSection("validator");
+
+                switch (validator["type"])
+                {
+                    case "OpenLoop":
+                        string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
+                        return new OpenLoopValidator(serviceProvider.GetRequiredService<ITransactionStore>(), adminAddresses);
+                    case "Disabled":
+                        return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
+                    default:
+                        return null;
+                }
             }
             else
             {
-                logger.LogInformation("Transaction validation mode enabled (Master mode)");
+                logger.LogInformation("Transaction validation mode disabled (Slave mode)");
+                return null;
             }
+        }
 
-            switch (configuration.GetConfigurationSection("Main").Get("validator"))
+        public static TransactionValidator CreateTransactionValidator(IServiceProvider serviceProvider)
+        {
+            IRulesValidator rulesValidator = serviceProvider.GetService<IRulesValidator>();
+
+            if (rulesValidator == null)
+                return null;
+            else
+                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>().Get("master_mode:root_url"));
+        }
+
+        public static MasterProperties CreateMasterProperties(IServiceProvider serviceProvider)
+        {
+            IRulesValidator master = serviceProvider.GetService<IRulesValidator>();
+
+            if (master != null)
             {
-                case "Basic":
-                    string[] adminAddresses = configuration.GetConfigurationSection("BasicValidator").Get("admin_addresses").Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    return new BasicValidator(serviceProvider.GetRequiredService<ITransactionStore>(), adminAddresses);
-                case "Disabled":
-                    return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
-                default:
-                    return null;
+                IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("master_mode").GetConfigurationSection("properties");
+                return new MasterProperties(configuration);
+            }
+            else
+            {
+                return null;
             }
         }
 
@@ -63,22 +93,23 @@ namespace OpenChain.Models
 
         public static IStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            string masterUrl = configuration.GetConfigurationSection("Main").Get("master_url");
-            if (!string.IsNullOrEmpty(masterUrl) && !bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
+            if (serviceProvider.GetService<IRulesValidator>() != null)
             {
+                logger.LogInformation("Stream subscriber disabled");
+                return null;
+            }
+            else
+            {
+                IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("observer_mode");
+                
+                string masterUrl = observerMode["master_url"];
                 logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));
                 streamSubscriber.Subscribe(CancellationToken.None);
 
                 return streamSubscriber;
-            }
-            else
-            {
-                logger.LogInformation("Stream subscriber disabled");
-                return null;
             }
         }
     }

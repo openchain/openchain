@@ -866,6 +866,24 @@
           "lib/dnx451/Microsoft.Framework.Configuration.Ini.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration.Json/1.0.0-beta5": {
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.6",
+          "Microsoft.Framework.Configuration": "1.0.0-beta5"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
         "dependencies": {
           "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta5"
@@ -1922,6 +1940,21 @@
         "lib/net45/Microsoft.Framework.Configuration.Ini.xml"
       ]
     },
+    "Microsoft.Framework.Configuration.Json/1.0.0-beta5": {
+      "serviceable": true,
+      "sha512": "oEfKwn889qloLLaz89X3Gvh4tcPeHHrqyQlAtmYHrzfE3EakkV3g8pBMIL8s26G8pIOfSaLyK3MMMqD7nxYMPA==",
+      "files": [
+        "Microsoft.Framework.Configuration.Json.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Configuration.Json.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.Configuration.Json.nuspec",
+        "lib/dnx451/Microsoft.Framework.Configuration.Json.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.Json.xml",
+        "lib/dotnet/Microsoft.Framework.Configuration.Json.dll",
+        "lib/dotnet/Microsoft.Framework.Configuration.Json.xml",
+        "lib/net45/Microsoft.Framework.Configuration.Json.dll",
+        "lib/net45/Microsoft.Framework.Configuration.Json.xml"
+      ]
+    },
     "Microsoft.Framework.DependencyInjection/1.0.0-beta5": {
       "serviceable": true,
       "sha512": "Jau27ULONglLGNu4FAwk7XjC3JXB4LsSWb8QsSlCotiJmOXHG7x+MEVz0nAgmFFkN2VGjFjK0Klnz0z9aDaBaw==",
@@ -2241,7 +2274,8 @@
       "OpenChain.Sqlite >= 1.0.0-*",
       "System.Text.Encoding >= 4.0.10-beta-22816",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta5",
-      "Microsoft.Net.Http.Client >= 1.0.0-beta6-10079"
+      "Microsoft.Net.Http.Client >= 1.0.0-beta6-10079",
+      "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5"
     ],
     "DNX,Version=v4.5.1": []
   }
