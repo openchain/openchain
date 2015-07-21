@@ -10,7 +10,7 @@ using Microsoft.Framework.DependencyInjection;
 using System.Text;
 using System.Threading;
 using Microsoft.AspNet.Cors;
-using Microsoft.Framework.ConfigurationModel;
+using Microsoft.Framework.Configuration;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
 using OpenChain.Core;
@@ -23,19 +23,20 @@ namespace OpenChain
 {
     public class Startup
     {
+        private readonly IConfigurationBuilder configuration;
+
         public Startup(IHostingEnvironment env)
         {
-
+            // Setup Configuration
+            configuration = new ConfigurationBuilder(env.WebRootPath)
+                .AddIniFile("config.ini");
         }
 
         // This method gets called by a runtime.
         // Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
-            // Setup Configuration
-            IConfigurationSourceRoot configuration = new Configuration()
-                .AddIniFile("config.ini");
-            services.AddInstance<IConfiguration>(configuration);
+            services.AddScoped<IConfiguration>(_ => this.configuration.Build());
 
             // Setup ASP.NET MVC
             services.AddMvc();
@@ -68,7 +69,7 @@ namespace OpenChain
 
             app.Map("/stream", managedWebSocketsApp =>
             {
-                if (configuration.GetSubKey("Main").Get<bool>("enable_transaction_stream"))
+                if (bool.Parse(configuration.GetConfigurationSection("Main").Get("enable_transaction_stream")))
                 {
                     managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
                     managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);

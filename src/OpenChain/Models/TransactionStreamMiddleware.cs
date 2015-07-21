@@ -19,7 +19,7 @@ namespace OpenChain.Models
 
         public async Task Invoke(HttpContext context)
         {
-            if (context.IsWebSocketRequest)
+            if (context.WebSockets.IsWebSocketRequest)
             {
                 string from = context.Request.Query.Get("from");
                 BinaryData lastLedgerRecordHash;
@@ -32,7 +32,7 @@ namespace OpenChain.Models
 
                 IObservable<BinaryData> stream = store.GetTransactionStream(lastLedgerRecordHash);
 
-                using (WebSocket webSocket = await context.AcceptWebSocketAsync())
+                using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
                 {
                     ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(new byte[512]);
 

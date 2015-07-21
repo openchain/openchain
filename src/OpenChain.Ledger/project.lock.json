@@ -1,44 +1,51 @@
 {
   "locked": false,
-  "version": -9998,
-  "projectFileDependencyGroups": {
-    "": [
-      "OpenChain.Core >= 1.0.0-*",
-      "BouncyCastle >= 1.7.0"
-    ],
-    "DNX,Version=v4.5.1": [
-      "framework/System.Numerics >= 4.0.0.0"
-    ],
-    ".NETFramework,Version=v4.6": [
-      "framework/System.Numerics >= 4.0.0.0"
-    ]
+  "version": -9996,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "BouncyCastle/1.7.0": {
+        "compile": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6": {
+      "BouncyCastle/1.7.0": {
+        "compile": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      }
+    }
   },
   "libraries": {
     "BouncyCastle/1.7.0": {
-      "serviceable": false,
-      "sha": "yvrW1NCFBC+l53Kchlk1iRYlnafpZ+o6oy0tFpFM2G28gz3H0PubyJFLc8KoYys3N0UPYo6TN2NRegpouDxRTw==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ],
-          "compileAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ],
-          "compileAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ]
-        }
-      },
+      "sha512": "yvrW1NCFBC+l53Kchlk1iRYlnafpZ+o6oy0tFpFM2G28gz3H0PubyJFLc8KoYys3N0UPYo6TN2NRegpouDxRTw==",
       "files": [
         "BouncyCastle.1.7.0.nupkg",
         "BouncyCastle.1.7.0.nupkg.sha512",
@@ -51,34 +58,7 @@
       ]
     },
     "Google.ProtocolBuffers/2.4.1.555": {
-      "serviceable": false,
-      "sha": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ]
-        }
-      },
+      "sha512": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
       "files": [
         "Google.ProtocolBuffers.2.4.1.555.nupkg",
         "Google.ProtocolBuffers.2.4.1.555.nupkg.sha512",
@@ -135,45 +115,18 @@
         "tools/google/protobuf/compiler/plugin.proto",
         "tools/tutorial/addressbook.proto"
       ]
-    },
-    "System.Runtime/4.0.20-beta-23107": {
-      "serviceable": false,
-      "sha": "jqloN4JOM71c+y6eClfW8v61DR3fKkpamgh/1k5LA+2H8YnVN8yye4Wo0R790Y308+gP//4C0nylckXB+HiV0w==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "System.Runtime.4.0.20-beta-23107.nupkg",
-        "System.Runtime.4.0.20-beta-23107.nupkg.sha512",
-        "System.Runtime.nuspec",
-        "lib/DNXCore50/System.Runtime.dll",
-        "lib/net46/_._",
-        "lib/netcore50/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.xml",
-        "ref/dotnet/de/System.Runtime.xml",
-        "ref/dotnet/es/System.Runtime.xml",
-        "ref/dotnet/fr/System.Runtime.xml",
-        "ref/dotnet/it/System.Runtime.xml",
-        "ref/dotnet/ja/System.Runtime.xml",
-        "ref/dotnet/ko/System.Runtime.xml",
-        "ref/dotnet/ru/System.Runtime.xml",
-        "ref/dotnet/zh-hans/System.Runtime.xml",
-        "ref/dotnet/zh-hant/System.Runtime.xml",
-        "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll"
-      ]
     }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "OpenChain.Core >= 1.0.0-*",
+      "BouncyCastle >= 1.7.0"
+    ],
+    "DNX,Version=v4.5.1": [
+      "fx/System.Numerics >= 4.0.0.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "fx/System.Numerics >= 4.0.0.0"
+    ]
   }
 }

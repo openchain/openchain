@@ -5,11 +5,13 @@
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
-  "compilationOptions": { "languageVersion": "csharp6", "allowUnsafe": false },
+  "compilationOptions": {
+    "languageVersion": "csharp6",
+    "allowUnsafe": false
+  },
 
   "dependencies": {
     "Google.ProtocolBuffers": "2.4.1.555",
-    "System.Runtime": "4.0.20-beta-23107"
   },
 
   "frameworks": {
@@ -31,13 +33,5 @@
 
       }
     }
-    //"dnxcore50": {
-    //  "dependencies": {
-    //    "System.Collections": "4.0.10-beta-22816",
-    //    "System.Linq": "4.0.0-beta-22816",
-    //    "System.Threading": "4.0.10-beta-22816",
-    //    "Microsoft.CSharp": "4.0.0-beta-22816"
-    //  }
-    //}
   }
 }

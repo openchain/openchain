@@ -1,4 +1,4 @@
-﻿using Microsoft.Framework.ConfigurationModel;
+﻿using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Core;
@@ -15,7 +15,7 @@ namespace OpenChain.Models
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
 
-            return new SqliteLedgerQueries(configuration.GetSubKey("SQLite").Get("path"));
+            return new SqliteLedgerQueries(configuration.GetConfigurationSection("SQLite").Get("path"));
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
@@ -31,7 +31,7 @@ namespace OpenChain.Models
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            if (!configuration.GetSubKey("Main").Get<bool>("is_master"))
+            if (!bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
             {
                 logger.LogInformation("Transaction validation mode disabled (Slave mode)");
                 return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, false);
@@ -41,10 +41,10 @@ namespace OpenChain.Models
                 logger.LogInformation("Transaction validation mode enabled (Master mode)");
             }
 
-            switch (configuration.GetSubKey("Main").Get("validator"))
+            switch (configuration.GetConfigurationSection("Main").Get("validator"))
             {
                 case "Basic":
-                    string[] adminAddresses = configuration.GetSubKey("BasicValidator").Get("admin_addresses").Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] adminAddresses = configuration.GetConfigurationSection("BasicValidator").Get("admin_addresses").Split(new[] { ' ', ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
                     return new BasicValidator(serviceProvider.GetRequiredService<ITransactionStore>(), adminAddresses);
                 case "Disabled":
                     return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
@@ -66,8 +66,8 @@ namespace OpenChain.Models
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            string masterUrl = configuration.GetSubKey("Main").Get("master_url");
-            if (!string.IsNullOrEmpty(masterUrl) && !configuration.GetSubKey("Main").Get<bool>("is_master"))
+            string masterUrl = configuration.GetConfigurationSection("Main").Get("master_url");
+            if (!string.IsNullOrEmpty(masterUrl) && !bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
             {
                 logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));

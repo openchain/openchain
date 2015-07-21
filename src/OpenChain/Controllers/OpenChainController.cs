@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNet.Cors.Core;
-using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.ConfigurationModel;
-using Microsoft.Framework.Logging;
-using Newtonsoft.Json.Linq;
-using OpenChain.Core;
-using OpenChain.Ledger;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Cors.Core;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Framework.Configuration;
+using Microsoft.Framework.Logging;
+using Newtonsoft.Json.Linq;
+using OpenChain.Core;
+using OpenChain.Ledger;
 
 namespace OpenChain.Controllers
 {
@@ -26,7 +26,7 @@ namespace OpenChain.Controllers
         {
             this.configuration = configuration;
             this.store = store;
-            this.validator = new TransactionValidator(store, validator, new BinaryData(Encoding.UTF8.GetBytes(configuration.GetSubKey("Main").Get("root_url"))));
+            this.validator = new TransactionValidator(store, validator, new BinaryData(Encoding.UTF8.GetBytes(configuration.GetConfigurationSection("Main").Get("root_url"))));
             this.logger = logger;
         }
 
@@ -51,7 +51,7 @@ namespace OpenChain.Controllers
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
         {
-            if (!configuration.GetSubKey("Main").Get<bool>("is_master"))
+            if (!bool.Parse(configuration.GetConfigurationSection("Main").Get("is_master")))
                 return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
 
             BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
@@ -104,8 +104,8 @@ namespace OpenChain.Controllers
         {
             return Json(new
             {
-                root_url = configuration.GetSubKey("Main").Get("root_url"),
-                name = configuration.GetSubKey("Info").Get("name"),
+                root_url = configuration.GetConfigurationSection("Main").Get("root_url"),
+                name = configuration.GetConfigurationSection("Info").Get("name"),
                 tos = ""
             });
         }

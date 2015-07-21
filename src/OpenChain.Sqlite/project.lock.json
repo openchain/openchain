@@ -1,47 +1,115 @@
 {
   "locked": false,
-  "version": -9998,
-  "projectFileDependencyGroups": {
-    "": [
-      "Microsoft.Data.SQLite >= 1.0.0-beta1",
-      "OpenChain.Core >= 1.0.0-*",
-      "OpenChain.Ledger >= 1.0.0-*"
-    ],
-    "DNX,Version=v4.5.1": [
-      "framework/System.Data >= 4.0.0.0",
-      "framework/System.Xml >= 4.0.0.0"
-    ],
-    ".NETFramework,Version=v4.6": [
-      "framework/System.Data >= 4.0.0.0",
-      "framework/System.Xml >= 4.0.0.0"
-    ]
+  "version": -9996,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "BouncyCastle/1.7.0": {
+        "compile": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      },
+      "Microsoft.Data.SQLite/1.0.0-beta1": {
+        "dependencies": {
+          "System.Data.Common": "1.0.0-beta1"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/aspnet50/Microsoft.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/aspnet50/Microsoft.Data.SQLite.dll": {}
+        }
+      },
+      "System.Data.Common/1.0.0-beta1": {
+        "frameworkAssemblies": [
+          "System.Data",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/aspnet50/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/aspnet50/System.Data.Common.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6": {
+      "BouncyCastle/1.7.0": {
+        "compile": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/Net40-Client/BouncyCastle.Crypto.dll": {}
+        }
+      },
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      },
+      "Microsoft.Data.SQLite/1.0.0-beta1": {
+        "dependencies": {
+          "System.Data.Common": "1.0.0-beta1"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/net451/Microsoft.Data.SQLite.dll": {}
+        },
+        "runtime": {
+          "lib/net451/Microsoft.Data.SQLite.dll": {}
+        }
+      },
+      "System.Data.Common/1.0.0-beta1": {
+        "frameworkAssemblies": [
+          "System.Data",
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/net451/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/net451/System.Data.Common.dll": {}
+        }
+      }
+    }
   },
   "libraries": {
     "BouncyCastle/1.7.0": {
-      "serviceable": false,
-      "sha": "yvrW1NCFBC+l53Kchlk1iRYlnafpZ+o6oy0tFpFM2G28gz3H0PubyJFLc8KoYys3N0UPYo6TN2NRegpouDxRTw==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ],
-          "compileAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ],
-          "compileAssemblies": [
-            "lib/Net40-Client/BouncyCastle.Crypto.dll"
-          ]
-        }
-      },
+      "sha512": "yvrW1NCFBC+l53Kchlk1iRYlnafpZ+o6oy0tFpFM2G28gz3H0PubyJFLc8KoYys3N0UPYo6TN2NRegpouDxRTw==",
       "files": [
         "BouncyCastle.1.7.0.nupkg",
         "BouncyCastle.1.7.0.nupkg.sha512",
@@ -54,34 +122,7 @@
       ]
     },
     "Google.ProtocolBuffers/2.4.1.555": {
-      "serviceable": false,
-      "sha": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net40/Google.ProtocolBuffers.dll",
-            "lib/net40/Google.ProtocolBuffers.Serialization.dll"
-          ]
-        }
-      },
+      "sha512": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
       "files": [
         "Google.ProtocolBuffers.2.4.1.555.nupkg",
         "Google.ProtocolBuffers.2.4.1.555.nupkg.sha512",
@@ -140,44 +181,7 @@
       ]
     },
     "Microsoft.Data.SQLite/1.0.0-beta1": {
-      "serviceable": false,
-      "sha": "Lgx+43A8cUn24jaehz0IuDNYVGc2EaSjp37xvbvh6ljSkyqrRDHIvuhX2HrHZnHg0k4LDydleKiCI9jwSUbStQ==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {
-            "System.Data.Common": "1.0.0-beta1"
-          },
-          "frameworkAssemblies": [
-            "mscorlib",
-            "System",
-            "System.Core",
-            "Microsoft.CSharp"
-          ],
-          "runtimeAssemblies": [
-            "lib/aspnet50/Microsoft.Data.SQLite.dll"
-          ],
-          "compileAssemblies": [
-            "lib/aspnet50/Microsoft.Data.SQLite.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {
-            "System.Data.Common": "1.0.0-beta1"
-          },
-          "frameworkAssemblies": [
-            "mscorlib",
-            "System",
-            "System.Core",
-            "Microsoft.CSharp"
-          ],
-          "runtimeAssemblies": [
-            "lib/net451/Microsoft.Data.SQLite.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net451/Microsoft.Data.SQLite.dll"
-          ]
-        }
-      },
+      "sha512": "Lgx+43A8cUn24jaehz0IuDNYVGc2EaSjp37xvbvh6ljSkyqrRDHIvuhX2HrHZnHg0k4LDydleKiCI9jwSUbStQ==",
       "files": [
         "Microsoft.Data.SQLite.1.0.0-beta1.nupkg",
         "Microsoft.Data.SQLite.1.0.0-beta1.nupkg.sha512",
@@ -195,42 +199,7 @@
       ]
     },
     "System.Data.Common/1.0.0-beta1": {
-      "serviceable": false,
-      "sha": "cuIEw5cNVZZBYz2STud08Q5VBP+GKvDJPPP3AoApL72tlYhl9uHoW54Q3QTi5tElsXFCnFw868atiHqrGS7GIw==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [
-            "System.Data",
-            "mscorlib",
-            "System",
-            "System.Core",
-            "Microsoft.CSharp"
-          ],
-          "runtimeAssemblies": [
-            "lib/aspnet50/System.Data.Common.dll"
-          ],
-          "compileAssemblies": [
-            "lib/aspnet50/System.Data.Common.dll"
-          ]
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [
-            "System.Data",
-            "mscorlib",
-            "System",
-            "System.Core",
-            "Microsoft.CSharp"
-          ],
-          "runtimeAssemblies": [
-            "lib/net451/System.Data.Common.dll"
-          ],
-          "compileAssemblies": [
-            "lib/net451/System.Data.Common.dll"
-          ]
-        }
-      },
+      "sha512": "cuIEw5cNVZZBYz2STud08Q5VBP+GKvDJPPP3AoApL72tlYhl9uHoW54Q3QTi5tElsXFCnFw868atiHqrGS7GIw==",
       "files": [
         "System.Data.Common.1.0.0-beta1.nupkg",
         "System.Data.Common.1.0.0-beta1.nupkg.sha512",
@@ -244,45 +213,21 @@
         "lib/portable-net451+win81+wpa81/System.Data.Common.dll",
         "lib/portable-net451+win81+wpa81/System.Data.Common.xml"
       ]
-    },
-    "System.Runtime/4.0.20-beta-23107": {
-      "serviceable": false,
-      "sha": "jqloN4JOM71c+y6eClfW8v61DR3fKkpamgh/1k5LA+2H8YnVN8yye4Wo0R790Y308+gP//4C0nylckXB+HiV0w==",
-      "frameworks": {
-        "DNX,Version=v4.5.1": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        },
-        ".NETFramework,Version=v4.6": {
-          "dependencies": {},
-          "frameworkAssemblies": [],
-          "runtimeAssemblies": [],
-          "compileAssemblies": []
-        }
-      },
-      "files": [
-        "System.Runtime.4.0.20-beta-23107.nupkg",
-        "System.Runtime.4.0.20-beta-23107.nupkg.sha512",
-        "System.Runtime.nuspec",
-        "lib/DNXCore50/System.Runtime.dll",
-        "lib/net46/_._",
-        "lib/netcore50/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.xml",
-        "ref/dotnet/de/System.Runtime.xml",
-        "ref/dotnet/es/System.Runtime.xml",
-        "ref/dotnet/fr/System.Runtime.xml",
-        "ref/dotnet/it/System.Runtime.xml",
-        "ref/dotnet/ja/System.Runtime.xml",
-        "ref/dotnet/ko/System.Runtime.xml",
-        "ref/dotnet/ru/System.Runtime.xml",
-        "ref/dotnet/zh-hans/System.Runtime.xml",
-        "ref/dotnet/zh-hant/System.Runtime.xml",
-        "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll"
-      ]
     }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "Microsoft.Data.SQLite >= 1.0.0-beta1",
+      "OpenChain.Core >= 1.0.0-*",
+      "OpenChain.Ledger >= 1.0.0-*"
+    ],
+    "DNX,Version=v4.5.1": [
+      "fx/System.Data >= 4.0.0.0",
+      "fx/System.Xml >= 4.0.0.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "fx/System.Data >= 4.0.0.0",
+      "fx/System.Xml >= 4.0.0.0"
+    ]
   }
 }
