@@ -21,39 +21,6 @@
           "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
         }
       },
-      "Microsoft.CodeAnalysis.Analyzers/1.0.0-rc2": {
-        "frameworkAssemblies": [
-          "System"
-        ]
-      },
-      "Microsoft.CodeAnalysis.Common/1.0.0-rc2": {
-        "dependencies": {
-          "System.Collections.Immutable": "[1.1.33-beta]",
-          "System.Reflection.Metadata": "[1.0.18-beta]",
-          "Microsoft.CodeAnalysis.Analyzers": "[1.0.0-rc2]"
-        },
-        "compile": {
-          "lib/net45/Microsoft.CodeAnalysis.Desktop.dll": {},
-          "lib/net45/Microsoft.CodeAnalysis.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.CodeAnalysis.Desktop.dll": {},
-          "lib/net45/Microsoft.CodeAnalysis.dll": {}
-        }
-      },
-      "Microsoft.CodeAnalysis.CSharp/1.0.0-rc2": {
-        "dependencies": {
-          "Microsoft.CodeAnalysis.Common": "[1.0.0-rc2]"
-        },
-        "compile": {
-          "lib/net45/Microsoft.CodeAnalysis.CSharp.Desktop.dll": {},
-          "lib/net45/Microsoft.CodeAnalysis.CSharp.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Microsoft.CodeAnalysis.CSharp.Desktop.dll": {},
-          "lib/net45/Microsoft.CodeAnalysis.CSharp.dll": {}
-        }
-      },
       "Microsoft.Data.SQLite/1.0.0-beta1": {
         "dependencies": {
           "System.Data.Common": "1.0.0-beta1"
@@ -71,10 +38,10 @@
           "lib/aspnet50/Microsoft.Data.SQLite.dll": {}
         }
       },
-      "Microsoft.Framework.ApplicationHost/1.0.0-beta4": {
+      "Microsoft.Framework.ApplicationHost/1.0.0-beta5": {
         "dependencies": {
-          "Microsoft.Framework.Runtime": "1.0.0-beta4",
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4"
+          "Microsoft.Framework.Runtime": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5"
         },
         "frameworkAssemblies": [
           "mscorlib",
@@ -89,7 +56,7 @@
           "lib/dnx451/Microsoft.Framework.ApplicationHost.dll": {}
         }
       },
-      "Microsoft.Framework.CommandLineUtils/1.0.0-beta4": {
+      "Microsoft.Framework.CommandLineUtils.Sources/1.0.0-beta5": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -97,13 +64,13 @@
           "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/dnx451/Microsoft.Framework.CommandLineUtils.dll": {}
+          "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         },
         "runtime": {
-          "lib/dnx451/Microsoft.Framework.CommandLineUtils.dll": {}
+          "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Interfaces/1.0.0-beta4": {
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -111,16 +78,16 @@
           "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dnx451/Microsoft.Framework.DependencyInjection.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll": {}
         }
       },
-      "Microsoft.Framework.Logging/1.0.0-beta4": {
+      "Microsoft.Framework.Logging/1.0.0-beta5": {
         "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Interfaces": "1.0.0-beta4",
-          "Microsoft.Framework.Logging.Interfaces": "1.0.0-beta4"
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta5",
+          "Microsoft.Framework.Logging.Abstractions": "1.0.0-beta5"
         },
         "frameworkAssemblies": [
           "System.Collections.Concurrent",
@@ -136,7 +103,7 @@
           "lib/dnx451/Microsoft.Framework.Logging.dll": {}
         }
       },
-      "Microsoft.Framework.Logging.Interfaces/1.0.0-beta4": {
+      "Microsoft.Framework.Logging.Abstractions/1.0.0-beta5": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -144,20 +111,17 @@
           "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/dnx451/Microsoft.Framework.Logging.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.Logging.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dnx451/Microsoft.Framework.Logging.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.Logging.Abstractions.dll": {}
         }
       },
-      "Microsoft.Framework.Runtime/1.0.0-beta4": {
+      "Microsoft.Framework.Runtime/1.0.0-beta5": {
         "dependencies": {
-          "System.Reflection.Metadata": "1.0.18-beta",
-          "Microsoft.CodeAnalysis.CSharp": "1.0.0-rc2",
-          "Microsoft.Framework.Runtime.Roslyn.Interfaces": "1.0.0-beta4",
-          "Microsoft.Framework.Runtime.Loader": "1.0.0-beta4",
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
-          "Newtonsoft.Json": "6.0.6"
+          "Microsoft.Framework.Runtime.Loader": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime.Caching": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5"
         },
         "frameworkAssemblies": [
           "System.Collections",
@@ -181,7 +145,7 @@
           "lib/dnx451/Microsoft.Framework.Runtime.dll": {}
         }
       },
-      "Microsoft.Framework.Runtime.Interfaces/1.0.0-beta4": {
+      "Microsoft.Framework.Runtime.Abstractions/1.0.0-beta5": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -189,15 +153,32 @@
           "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/dnx451/Microsoft.Framework.Runtime.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.Runtime.Abstractions.dll": {}
         },
         "runtime": {
-          "lib/dnx451/Microsoft.Framework.Runtime.Interfaces.dll": {}
+          "lib/dnx451/Microsoft.Framework.Runtime.Abstractions.dll": {}
         }
       },
-      "Microsoft.Framework.Runtime.Loader/1.0.0-beta4": {
+      "Microsoft.Framework.Runtime.Caching/1.0.0-beta5": {
         "dependencies": {
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4"
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5"
+        },
+        "frameworkAssemblies": [
+          "mscorlib",
+          "System",
+          "System.Core",
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Runtime.Caching.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Runtime.Caching.dll": {}
+        }
+      },
+      "Microsoft.Framework.Runtime.Loader/1.0.0-beta5": {
+        "dependencies": {
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5"
         },
         "frameworkAssemblies": [
           "mscorlib",
@@ -212,25 +193,7 @@
           "lib/dnx451/Microsoft.Framework.Runtime.Loader.dll": {}
         }
       },
-      "Microsoft.Framework.Runtime.Roslyn.Interfaces/1.0.0-beta4": {
-        "dependencies": {
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
-          "Microsoft.CodeAnalysis.CSharp": "1.0.0-rc2"
-        },
-        "frameworkAssemblies": [
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Interfaces.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Interfaces.dll": {}
-        }
-      },
-      "Microsoft.Framework.TestAdapter/1.0.0-beta4": {
+      "Microsoft.Framework.TestAdapter/1.0.0-beta5": {
         "frameworkAssemblies": [
           "mscorlib",
           "System",
@@ -244,14 +207,14 @@
           "lib/dnx451/Microsoft.Framework.TestAdapter.dll": {}
         }
       },
-      "Microsoft.Framework.TestHost/1.0.0-beta4": {
+      "Microsoft.Framework.TestHost/1.0.0-beta5": {
         "dependencies": {
-          "Microsoft.Framework.TestAdapter": "1.0.0-beta4",
-          "Microsoft.Framework.ApplicationHost": "1.0.0-beta4",
-          "Microsoft.Framework.CommandLineUtils": "1.0.0-beta4",
-          "Microsoft.Framework.Logging": "1.0.0-beta4",
-          "Microsoft.Framework.Runtime": "1.0.0-beta4",
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
+          "Microsoft.Framework.TestAdapter": "1.0.0-beta5",
+          "Microsoft.Framework.ApplicationHost": "1.0.0-beta5",
+          "Microsoft.Framework.CommandLineUtils.Sources": "1.0.0-beta5",
+          "Microsoft.Framework.Logging": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
           "Newtonsoft.Json": "6.0.6"
         },
         "frameworkAssemblies": [
@@ -275,14 +238,6 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "System.Collections.Immutable/1.1.33-beta": {
-        "compile": {
-          "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll": {}
-        }
-      },
       "System.Data.Common/1.0.0-beta1": {
         "frameworkAssemblies": [
           "System.Data",
@@ -298,21 +253,10 @@
           "lib/aspnet50/System.Data.Common.dll": {}
         }
       },
-      "System.Reflection.Metadata/1.0.18-beta": {
+      "xunit/2.1.0-beta3-build3029": {
         "dependencies": {
-          "System.Collections.Immutable": "1.1.33-beta"
-        },
-        "compile": {
-          "lib/portable-net45+win8/System.Reflection.Metadata.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win8/System.Reflection.Metadata.dll": {}
-        }
-      },
-      "xunit/2.1.0-beta2-build2981": {
-        "dependencies": {
-          "xunit.core": "[2.1.0-beta2-build2981]",
-          "xunit.assert": "[2.1.0-beta2-build2981]"
+          "xunit.core": "[2.1.0-beta3-build3029]",
+          "xunit.assert": "[2.1.0-beta3-build3029]"
         }
       },
       "xunit.abstractions/2.0.0": {
@@ -323,7 +267,7 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.1.0-beta2-build2981": {
+      "xunit.assert/2.1.0-beta3-build3029": {
         "compile": {
           "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll": {}
         },
@@ -331,13 +275,13 @@
           "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.1.0-beta2-build2981": {
+      "xunit.core/2.1.0-beta3-build3029": {
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-beta2-build2981]",
-          "xunit.extensibility.execution": "[2.1.0-beta2-build2981]"
+          "xunit.extensibility.core": "[2.1.0-beta3-build3029]",
+          "xunit.extensibility.execution": "[2.1.0-beta3-build3029]"
         }
       },
-      "xunit.extensibility.core/2.1.0-beta2-build2981": {
+      "xunit.extensibility.core/2.1.0-beta3-build3029": {
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
         },
@@ -348,20 +292,10 @@
           "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.1.0-beta2-build2981": {
+      "xunit.extensibility.execution/2.1.0-beta3-build3029": {
         "dependencies": {
-          "xunit.extensibility.core": "[2.1.0-beta2-build2981]"
+          "xunit.extensibility.core": "[2.1.0-beta3-build3029]"
         },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "System.Collections",
-          "System.Reflection",
-          "System.Runtime",
-          "System.Threading.Tasks"
-        ],
         "compile": {
           "lib/dnx451/xunit.execution.dnx.dll": {}
         },
@@ -369,12 +303,14 @@
           "lib/dnx451/xunit.execution.dnx.dll": {}
         }
       },
-      "xunit.runner.dnx/2.1.0-beta2-build79": {
+      "xunit.runner.dnx/2.1.0-beta3-build99": {
         "dependencies": {
-          "Microsoft.Framework.Runtime.Interfaces": "1.0.0-beta4",
-          "Microsoft.Framework.TestAdapter": "1.0.0-beta4",
-          "Microsoft.Framework.TestHost": "1.0.0-beta4",
-          "xunit.runner.utility": "2.1.0-beta2-build2981"
+          "Microsoft.Framework.Runtime": "1.0.0-beta5",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta5",
+          "Microsoft.Framework.TestAdapter": "1.0.0-beta5",
+          "Microsoft.Framework.TestHost": "1.0.0-beta5",
+          "xunit.runner.utility": "2.1.0-beta3-build3029",
+          "xunit.runner.reporters": "2.1.0-beta3-build3029"
         },
         "frameworkAssemblies": [
           "System.Collections",
@@ -396,21 +332,22 @@
           "lib/dnx451/xunit.runner.dnx.dll": {}
         }
       },
-      "xunit.runner.utility/2.1.0-beta2-build2981": {
+      "xunit.runner.reporters/2.1.0-beta3-build3029": {
+        "dependencies": {
+          "Newtonsoft.Json": "6.0.6",
+          "xunit.runner.utility": "2.1.0-beta3-build3029"
+        },
+        "compile": {
+          "lib/dnx451/xunit.runner.reporters.dnx.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/xunit.runner.reporters.dnx.dll": {}
+        }
+      },
+      "xunit.runner.utility/2.1.0-beta3-build3029": {
         "dependencies": {
           "xunit.abstractions": "[2.0.0]"
         },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Collections",
-          "System.Core",
-          "System.Reflection",
-          "System.Runtime",
-          "System.Web",
-          "System.Xml"
-        ],
         "compile": {
           "lib/dnx451/xunit.runner.utility.dnx.dll": {}
         },
@@ -493,51 +430,6 @@
         "tools/tutorial/addressbook.proto"
       ]
     },
-    "Microsoft.CodeAnalysis.Analyzers/1.0.0-rc2": {
-      "sha512": "/4Z5es8TXCEn5sfzWz2uhUITmikgCfMAhehMJPQcSD2FRp2ooLTczDq3p4KOl+bcnsvaAu0aKrmdRgOvkrcwhw==",
-      "files": [
-        "Microsoft.CodeAnalysis.Analyzers.1.0.0-rc2.nupkg",
-        "Microsoft.CodeAnalysis.Analyzers.1.0.0-rc2.nupkg.sha512",
-        "Microsoft.CodeAnalysis.Analyzers.nuspec",
-        "ThirdPartyNotices.rtf",
-        "tools/install.ps1",
-        "tools/uninstall.ps1",
-        "tools/analyzers/C#/Microsoft.CodeAnalysis.Analyzers.dll",
-        "tools/analyzers/C#/Microsoft.CodeAnalysis.CSharp.Analyzers.dll",
-        "tools/analyzers/VB.NET/Microsoft.CodeAnalysis.Analyzers.dll",
-        "tools/analyzers/VB.NET/Microsoft.CodeAnalysis.VisualBasic.Analyzers.dll"
-      ]
-    },
-    "Microsoft.CodeAnalysis.Common/1.0.0-rc2": {
-      "sha512": "7ALXqeJxiEMgnSST2qlWMThc5CIhJNFsUKYITIXXXj7gf8mF+ktEuKgUE7NWePzUgi0gq/2WmBX/4yWJuF1j6w==",
-      "files": [
-        "Microsoft.CodeAnalysis.Common.1.0.0-rc2.nupkg",
-        "Microsoft.CodeAnalysis.Common.1.0.0-rc2.nupkg.sha512",
-        "Microsoft.CodeAnalysis.Common.nuspec",
-        "ThirdPartyNotices.rtf",
-        "lib/net45/Microsoft.CodeAnalysis.Desktop.dll",
-        "lib/net45/Microsoft.CodeAnalysis.Desktop.xml",
-        "lib/net45/Microsoft.CodeAnalysis.dll",
-        "lib/net45/Microsoft.CodeAnalysis.xml",
-        "lib/portable-net45+win8/Microsoft.CodeAnalysis.dll",
-        "lib/portable-net45+win8/Microsoft.CodeAnalysis.xml"
-      ]
-    },
-    "Microsoft.CodeAnalysis.CSharp/1.0.0-rc2": {
-      "sha512": "wsj0BdWRY+fsUINMEQ+uanN0pWMAMj2z0UiJKjwoUo/Xbrk7PqGklzpOB7lvlESHjO8+Eaw71PQnml6j7m7rdQ==",
-      "files": [
-        "Microsoft.CodeAnalysis.CSharp.1.0.0-rc2.nupkg",
-        "Microsoft.CodeAnalysis.CSharp.1.0.0-rc2.nupkg.sha512",
-        "Microsoft.CodeAnalysis.CSharp.nuspec",
-        "ThirdPartyNotices.rtf",
-        "lib/net45/Microsoft.CodeAnalysis.CSharp.Desktop.dll",
-        "lib/net45/Microsoft.CodeAnalysis.CSharp.Desktop.xml",
-        "lib/net45/Microsoft.CodeAnalysis.CSharp.dll",
-        "lib/net45/Microsoft.CodeAnalysis.CSharp.xml",
-        "lib/portable-net45+win8/Microsoft.CodeAnalysis.CSharp.dll",
-        "lib/portable-net45+win8/Microsoft.CodeAnalysis.CSharp.xml"
-      ]
-    },
     "Microsoft.Data.SQLite/1.0.0-beta1": {
       "sha512": "Lgx+43A8cUn24jaehz0IuDNYVGc2EaSjp37xvbvh6ljSkyqrRDHIvuhX2HrHZnHg0k4LDydleKiCI9jwSUbStQ==",
       "files": [
@@ -556,11 +448,11 @@
         "redist/x86/sqlite3.dll"
       ]
     },
-    "Microsoft.Framework.ApplicationHost/1.0.0-beta4": {
-      "sha512": "U7frhgsqolI+AMUrX44WNgV7Xyoxj8UtttE21pkD5Wfeubo1mZyhtJUvcMN4zxAPCjFqdOfKizWfcEI+mZ0Rtg==",
+    "Microsoft.Framework.ApplicationHost/1.0.0-beta5": {
+      "sha512": "MR2arJidpFSuQRk+mIuWVRWWyK8yB/4+1Oho6XTbV4gukpo4XhEW/Dm4d3HadbGX4+GK1sn+5ctfJFo6kF55ag==",
       "files": [
-        "Microsoft.Framework.ApplicationHost.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.ApplicationHost.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.ApplicationHost.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.ApplicationHost.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.ApplicationHost.nuspec",
         "lib/dnx451/Microsoft.Framework.ApplicationHost.dll",
         "lib/dnx451/Microsoft.Framework.ApplicationHost.xml",
@@ -568,16 +460,16 @@
         "lib/dnxcore50/Microsoft.Framework.ApplicationHost.xml"
       ]
     },
-    "Microsoft.Framework.CommandLineUtils/1.0.0-beta4": {
-      "sha512": "sWFw8wo77BRWAzoS50mgDUzBVXkRAZySYSaIFfpk3W5oJYmjcFt0SHpGJoVbIO3ZcKMORYvrxgnwNXx1p0ZCxQ==",
+    "Microsoft.Framework.CommandLineUtils.Sources/1.0.0-beta5": {
+      "sha512": "sZIlSWm9r2CFDI5JB21lKwa8Hq7DZPBYx3LcBnuxZnhSh2AwrhrS88YUZSMP6QCV+PHMwj0udTdnS1eZ2DbM7w==",
       "files": [
-        "Microsoft.Framework.CommandLineUtils.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.CommandLineUtils.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.Framework.CommandLineUtils.nuspec",
-        "lib/dnx451/Microsoft.Framework.CommandLineUtils.dll",
-        "lib/dnx451/Microsoft.Framework.CommandLineUtils.xml",
-        "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.dll",
-        "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.xml",
+        "Microsoft.Framework.CommandLineUtils.Sources.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.CommandLineUtils.Sources.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.CommandLineUtils.Sources.nuspec",
+        "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.dll",
+        "lib/dnx451/Microsoft.Framework.CommandLineUtils.Sources.xml",
+        "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.Sources.dll",
+        "lib/dnxcore50/Microsoft.Framework.CommandLineUtils.Sources.xml",
         "shared/AnsiConsole.cs",
         "shared/CommandArgument.cs",
         "shared/CommandLineApplication.cs",
@@ -585,63 +477,57 @@
         "shared/CommandOptionType.cs"
       ]
     },
-    "Microsoft.Framework.DependencyInjection.Interfaces/1.0.0-beta4": {
+    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "qbBGymgVdlrJZhJFg+35JaA0Tp8DYeFrDwv1Q3Di9hRWLZ3rAE7bvsnP+fmuo0XGlZDVXfGjINvtryFPyoQ58g==",
+      "sha512": "/WgY/P0YftvScIfLyLee36H7fb6EUG2L6p5qZMp7quJ3aUEHUolZpXBbYQ9XP21KuX4ab0/zH8DD0mpMKjGDsw==",
       "files": [
-        "Microsoft.Framework.DependencyInjection.Interfaces.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.DependencyInjection.Interfaces.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.Framework.DependencyInjection.Interfaces.nuspec",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Interfaces.dll",
-        "lib/dnx451/Microsoft.Framework.DependencyInjection.Interfaces.xml",
-        "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Interfaces.dll",
-        "lib/dnxcore50/Microsoft.Framework.DependencyInjection.Interfaces.xml",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Interfaces.dll",
-        "lib/net45/Microsoft.Framework.DependencyInjection.Interfaces.xml",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.DependencyInjection.Interfaces.dll",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.DependencyInjection.Interfaces.xml"
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.DependencyInjection.Abstractions.nuspec",
+        "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll",
+        "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.xml",
+        "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.dll",
+        "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.xml",
+        "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll",
+        "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.xml"
       ]
     },
-    "Microsoft.Framework.Logging/1.0.0-beta4": {
+    "Microsoft.Framework.Logging/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "aFlG7h0WMJn+TgKIqoDkXh6LOquu7e6HKCOSrLvAaOp93qOWycz0kNQ0oGXVHYP6QebAjHgz9UffcqeCqeWN1Q==",
+      "sha512": "YbfHijwmKd3PsNSJ6iYRARwSeCPwkZKY9s3qb+jNFqom2QnD9PDq9q0yIZZBWZMJ3EAsRIZa92FYuKnNKPfX9g==",
       "files": [
-        "Microsoft.Framework.Logging.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Logging.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.Logging.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Logging.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.Logging.nuspec",
         "lib/dnx451/Microsoft.Framework.Logging.dll",
         "lib/dnx451/Microsoft.Framework.Logging.xml",
-        "lib/dnxcore50/Microsoft.Framework.Logging.dll",
-        "lib/dnxcore50/Microsoft.Framework.Logging.xml",
+        "lib/dotnet/Microsoft.Framework.Logging.dll",
+        "lib/dotnet/Microsoft.Framework.Logging.xml",
         "lib/net45/Microsoft.Framework.Logging.dll",
-        "lib/net45/Microsoft.Framework.Logging.xml",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.Logging.dll",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.Logging.xml"
+        "lib/net45/Microsoft.Framework.Logging.xml"
       ]
     },
-    "Microsoft.Framework.Logging.Interfaces/1.0.0-beta4": {
+    "Microsoft.Framework.Logging.Abstractions/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "OK8v8gpDYfH01Gy1tvT4mS1r6ZWMAz1HXo872v7pswishE6oyTQwC44BpYM+Obq8GW7E6Ai/Vj3wE/CuLUDJGA==",
+      "sha512": "roTRT5h5eSEIS1on9K4M+IhI/YD1vXDpslXXebmxWqRN+9TbAd2xc/j5KgAOZd0hBem1R5rPiiBkBnNa+FSeBA==",
       "files": [
-        "Microsoft.Framework.Logging.Interfaces.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Logging.Interfaces.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.Framework.Logging.Interfaces.nuspec",
-        "lib/dnx451/Microsoft.Framework.Logging.Interfaces.dll",
-        "lib/dnx451/Microsoft.Framework.Logging.Interfaces.xml",
-        "lib/dnxcore50/Microsoft.Framework.Logging.Interfaces.dll",
-        "lib/dnxcore50/Microsoft.Framework.Logging.Interfaces.xml",
-        "lib/net45/Microsoft.Framework.Logging.Interfaces.dll",
-        "lib/net45/Microsoft.Framework.Logging.Interfaces.xml",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.Logging.Interfaces.dll",
-        "lib/portable-net451+win81+wpa81/Microsoft.Framework.Logging.Interfaces.xml"
+        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Logging.Abstractions.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.Logging.Abstractions.nuspec",
+        "lib/dnx451/Microsoft.Framework.Logging.Abstractions.dll",
+        "lib/dnx451/Microsoft.Framework.Logging.Abstractions.xml",
+        "lib/dotnet/Microsoft.Framework.Logging.Abstractions.dll",
+        "lib/dotnet/Microsoft.Framework.Logging.Abstractions.xml",
+        "lib/net45/Microsoft.Framework.Logging.Abstractions.dll",
+        "lib/net45/Microsoft.Framework.Logging.Abstractions.xml"
       ]
     },
-    "Microsoft.Framework.Runtime/1.0.0-beta4": {
+    "Microsoft.Framework.Runtime/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "R4Ob2q5tUb6ocw1itBO84HL8gXZMu52mi8jfxwtXoJU42gHt3ouBTEHX1WCzqcgLNGrIh89mjFV8iFTNShKXdA==",
+      "sha512": "feBypBwOlylGFJsPbi8YH0MzCuvhvV0GHqSX/FvvFhWWU/lQnozVNKGZPq+4T6zfhoteo/acMB0c5rfQx8agMw==",
       "files": [
-        "Microsoft.Framework.Runtime.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Runtime.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.Runtime.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Runtime.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.Runtime.nuspec",
         "lib/dnx451/Microsoft.Framework.Runtime.dll",
         "lib/dnx451/Microsoft.Framework.Runtime.xml",
@@ -649,25 +535,37 @@
         "lib/dnxcore50/Microsoft.Framework.Runtime.xml"
       ]
     },
-    "Microsoft.Framework.Runtime.Interfaces/1.0.0-beta4": {
+    "Microsoft.Framework.Runtime.Abstractions/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "RrZdqvUm8QbgxnZQuafYGo6NezoKx7VqAfAtHVzoKBm3GSV8xlPh90u1fsGhNCv37xJNk5PuRCa4Mq27ko7pLw==",
+      "sha512": "w8FtN1i6dcKxCEF3fX2CYNA9LfkQ+vpGqmGAzRJn1Xg3N+73rywlIl7ijZLgCHS8MH0XO8KqpUCVR05UtVvJPg==",
       "files": [
-        "Microsoft.Framework.Runtime.Interfaces.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Runtime.Interfaces.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.Framework.Runtime.Interfaces.nuspec",
-        "lib/dnx451/Microsoft.Framework.Runtime.Interfaces.dll",
-        "lib/dnx451/Microsoft.Framework.Runtime.Interfaces.xml",
-        "lib/dnxcore50/Microsoft.Framework.Runtime.Interfaces.dll",
-        "lib/dnxcore50/Microsoft.Framework.Runtime.Interfaces.xml"
+        "Microsoft.Framework.Runtime.Abstractions.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Runtime.Abstractions.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.Runtime.Abstractions.nuspec",
+        "lib/dnx451/Microsoft.Framework.Runtime.Abstractions.dll",
+        "lib/dnx451/Microsoft.Framework.Runtime.Abstractions.xml",
+        "lib/dnxcore50/Microsoft.Framework.Runtime.Abstractions.dll",
+        "lib/dnxcore50/Microsoft.Framework.Runtime.Abstractions.xml"
       ]
     },
-    "Microsoft.Framework.Runtime.Loader/1.0.0-beta4": {
-      "serviceable": true,
-      "sha512": "XpLguvjD4bfhE2fu1SWaOXjUkVcKTRW8x1mZjPpxns250pcTg1v/sG70fmZKtoiaXHYZFzTai2SRtqfBB20hOA==",
+    "Microsoft.Framework.Runtime.Caching/1.0.0-beta5": {
+      "sha512": "70c4qatSDcPulQ6MMtu208Aj0VjUZW3I+B8cYfvVCfU998PbA8rbRrzSkHXGJjs8wZj5CDRAFmX6S7SgfhsJIg==",
       "files": [
-        "Microsoft.Framework.Runtime.Loader.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Runtime.Loader.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.Runtime.Caching.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Runtime.Caching.1.0.0-beta5.nupkg.sha512",
+        "Microsoft.Framework.Runtime.Caching.nuspec",
+        "lib/dnx451/Microsoft.Framework.Runtime.Caching.dll",
+        "lib/dnx451/Microsoft.Framework.Runtime.Caching.xml",
+        "lib/dnxcore50/Microsoft.Framework.Runtime.Caching.dll",
+        "lib/dnxcore50/Microsoft.Framework.Runtime.Caching.xml"
+      ]
+    },
+    "Microsoft.Framework.Runtime.Loader/1.0.0-beta5": {
+      "serviceable": true,
+      "sha512": "rYI6kMs3OPVYnpeIh1y1pg0eQ7+DyEph3+3UEToEDB8RnlXpVAoRgyIkreLv3sVsyCdI5J1AP2NitmEc3368FQ==",
+      "files": [
+        "Microsoft.Framework.Runtime.Loader.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.Runtime.Loader.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.Runtime.Loader.nuspec",
         "lib/dnx451/Microsoft.Framework.Runtime.Loader.dll",
         "lib/dnx451/Microsoft.Framework.Runtime.Loader.xml",
@@ -675,24 +573,12 @@
         "lib/dnxcore50/Microsoft.Framework.Runtime.Loader.xml"
       ]
     },
-    "Microsoft.Framework.Runtime.Roslyn.Interfaces/1.0.0-beta4": {
+    "Microsoft.Framework.TestAdapter/1.0.0-beta5": {
       "serviceable": true,
-      "sha512": "iZNGlqBAWIT2zWI1Z4AWpx9loBvplEgyHp3lRfBJX30npClf9d3fMRRlO1K9wx9ho0tMLBU8CSXpUc/21Knm6Q==",
+      "sha512": "9Rv5Kl/R/MRaStqDl8fLZHeKdA2WDNbwMzNeK97BUsmaQnG2kBapvWOhDbSzGKbocO+VKLZYfhu7la9MmivvRg==",
       "files": [
-        "Microsoft.Framework.Runtime.Roslyn.Interfaces.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.Runtime.Roslyn.Interfaces.1.0.0-beta4.nupkg.sha512",
-        "Microsoft.Framework.Runtime.Roslyn.Interfaces.nuspec",
-        "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Interfaces.dll",
-        "lib/dnx451/Microsoft.Framework.Runtime.Roslyn.Interfaces.xml",
-        "lib/dnxcore50/Microsoft.Framework.Runtime.Roslyn.Interfaces.dll",
-        "lib/dnxcore50/Microsoft.Framework.Runtime.Roslyn.Interfaces.xml"
-      ]
-    },
-    "Microsoft.Framework.TestAdapter/1.0.0-beta4": {
-      "sha512": "s4vPz/frohp6tyjTY9cTOHqZLotEdiV5GScHqdpTxFc9cWG3coyf03WYUQx6Kia5o7CWRiAYURqF5pr+9gTD7A==",
-      "files": [
-        "Microsoft.Framework.TestAdapter.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.TestAdapter.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.TestAdapter.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.TestAdapter.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.TestAdapter.nuspec",
         "lib/dnx451/Microsoft.Framework.TestAdapter.dll",
         "lib/dnx451/Microsoft.Framework.TestAdapter.xml",
@@ -700,11 +586,12 @@
         "lib/dnxcore50/Microsoft.Framework.TestAdapter.xml"
       ]
     },
-    "Microsoft.Framework.TestHost/1.0.0-beta4": {
-      "sha512": "At1dKPJGTP3P6b9wNoyT4HkwpiJjUgBE9khzltAMY5U2va3csdPrCZPnU/jb4LA7RWGMkt34s7leB0w/DYovAQ==",
+    "Microsoft.Framework.TestHost/1.0.0-beta5": {
+      "serviceable": true,
+      "sha512": "2cWQFV+YWvN4FcvIefkO2W4Jj3ow6zNOmCNW2nVvbsleX8K+Cf+cGiukndVNbl12rPCliD7yu/gFHB7A8QrV7g==",
       "files": [
-        "Microsoft.Framework.TestHost.1.0.0-beta4.nupkg",
-        "Microsoft.Framework.TestHost.1.0.0-beta4.nupkg.sha512",
+        "Microsoft.Framework.TestHost.1.0.0-beta5.nupkg",
+        "Microsoft.Framework.TestHost.1.0.0-beta5.nupkg.sha512",
         "Microsoft.Framework.TestHost.nuspec",
         "app/project.json",
         "lib/dnx451/Microsoft.Framework.TestHost.dll",
@@ -736,18 +623,6 @@
         "tools/install.ps1"
       ]
     },
-    "System.Collections.Immutable/1.1.33-beta": {
-      "serviceable": true,
-      "sha512": "Qnv6M/BRf0w1xNoD5tH7V+jK0kdO+OZymwQS5Lj6FALt3AZMGVeJs+lHXi1PsKFll67UtGY+I7r8WDhRzspXCA==",
-      "files": [
-        "License-Stable.rtf",
-        "System.Collections.Immutable.1.1.33-beta.nupkg",
-        "System.Collections.Immutable.1.1.33-beta.nupkg.sha512",
-        "System.Collections.Immutable.nuspec",
-        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.dll",
-        "lib/portable-net45+win8+wp8+wpa81/System.Collections.Immutable.xml"
-      ]
-    },
     "System.Data.Common/1.0.0-beta1": {
       "sha512": "cuIEw5cNVZZBYz2STud08Q5VBP+GKvDJPPP3AoApL72tlYhl9uHoW54Q3QTi5tElsXFCnFw868atiHqrGS7GIw==",
       "files": [
@@ -764,23 +639,11 @@
         "lib/portable-net451+win81+wpa81/System.Data.Common.xml"
       ]
     },
-    "System.Reflection.Metadata/1.0.18-beta": {
-      "serviceable": true,
-      "sha512": "4PtC2U6seQthZMvXvGTxXZUqlF0oV9jzYNTkG0Yo/D6cLO5AH3lrxh2djGyKsDYnAZjBCoyA/z3vHRCeaBEp4w==",
+    "xunit/2.1.0-beta3-build3029": {
+      "sha512": "NMFXV0ePe/GrfhMSPGAlWmiUZCzjaatpdAGcavf2B6vYTRyMTpyJT01LI6jemMV/VSDXLrtHp0Ov9xZyR1cLLg==",
       "files": [
-        "License-Stable.rtf",
-        "System.Reflection.Metadata.1.0.18-beta.nupkg",
-        "System.Reflection.Metadata.1.0.18-beta.nupkg.sha512",
-        "System.Reflection.Metadata.nuspec",
-        "lib/portable-net45+win8/System.Reflection.Metadata.dll",
-        "lib/portable-net45+win8/System.Reflection.Metadata.xml"
-      ]
-    },
-    "xunit/2.1.0-beta2-build2981": {
-      "sha512": "qTzY4x9uJ+CXDpS7/mm+rmz4YvpwY4IwTgRs6bk9R71G2yXneuuSJ+XaZ5V8ytGHgXeIWfwp3h4sg8uRi2GNxw==",
-      "files": [
-        "xunit.2.1.0-beta2-build2981.nupkg",
-        "xunit.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.2.1.0-beta3-build3029.nupkg",
+        "xunit.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.nuspec"
       ]
     },
@@ -796,22 +659,22 @@
         "lib/portable-net45+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.abstractions.xml"
       ]
     },
-    "xunit.assert/2.1.0-beta2-build2981": {
-      "sha512": "jxJ7novf8W3LJweqThxddbS1burh8ptXu7mhSHbu4irVKuRWJ6hZpmXX9aIKhvfbBlm7b6HLtTR0WK0VOwaHXg==",
+    "xunit.assert/2.1.0-beta3-build3029": {
+      "sha512": "AMS7Fv77DayXVRCBMmVEDwOXPcbxk8dCBA/iACsve+6+UQqopMtNyAynyIcXPFRK/peeitUKID4ChOXWisJmUw==",
       "files": [
-        "xunit.assert.2.1.0-beta2-build2981.nupkg",
-        "xunit.assert.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.assert.2.1.0-beta3-build3029.nupkg",
+        "xunit.assert.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.assert.nuspec",
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.dll",
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.pdb",
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.assert.xml"
       ]
     },
-    "xunit.core/2.1.0-beta2-build2981": {
-      "sha512": "yxaLG6iKjRxx6UlY1XM0uUshzBb9vVHf9rBnHext1bjS3nG7C2C2To+jQYyR8iwvLOq1HyKi3e/KBlgEgSkxyA==",
+    "xunit.core/2.1.0-beta3-build3029": {
+      "sha512": "uDUBbwZSRx226BMwj6VylzXQPVpEIelNIulT+LxbSEH52y2a4btR9d5ptQmkSVjmJXP5/hGCc4cu1DSCu0pgUA==",
       "files": [
-        "xunit.core.2.1.0-beta2-build2981.nupkg",
-        "xunit.core.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.core.2.1.0-beta3-build3029.nupkg",
+        "xunit.core.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.core.nuspec",
         "build/monoandroid/xunit.core.props",
         "build/monoandroid/xunit.execution.MonoAndroid.dll",
@@ -822,9 +685,6 @@
         "build/portable-win81+wpa81/xunit.core.targets",
         "build/portable-win81+wpa81/xunit.execution.universal.dll",
         "build/portable-win81+wpa81/xunit.execution.universal.pri",
-        "build/win8/xunit.core.props",
-        "build/win8/xunit.core.targets",
-        "build/win8/xunit.execution.win8.dll",
         "build/wp8/xunit.core.props",
         "build/wp8/xunit.core.targets",
         "build/wp8/xunit.execution.wp8.dll",
@@ -833,11 +693,11 @@
         "build/_Desktop/xunit.execution.desktop.dll"
       ]
     },
-    "xunit.extensibility.core/2.1.0-beta2-build2981": {
-      "sha512": "Q6ilaa1rwI1S8R+/5bxiWPIFCsqRfz63XFMJz1AAUDWdw4nL2MIDjQzbUvFJ77KWocQVDyqasVo679s2+Ex8dQ==",
+    "xunit.extensibility.core/2.1.0-beta3-build3029": {
+      "sha512": "lsPro5U3NLasHI/RwqjKzXiRlh9N0IOlR3cluwXYVtihXbGtySeSnU/Fh5MTcWYxh+MVpoNop5zDD0/A2nrHsA==",
       "files": [
-        "xunit.extensibility.core.2.1.0-beta2-build2981.nupkg",
-        "xunit.extensibility.core.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.extensibility.core.2.1.0-beta3-build3029.nupkg",
+        "xunit.extensibility.core.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.extensibility.core.nuspec",
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll",
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.core.dll.tdnet",
@@ -847,11 +707,11 @@
         "lib/portable-net45+dnxcore50+win+wpa81+wp80+monotouch+monoandroid+Xamarin.iOS/xunit.runner.utility.desktop.dll"
       ]
     },
-    "xunit.extensibility.execution/2.1.0-beta2-build2981": {
-      "sha512": "FCD7WyGybb/svGjuGfjs+Gqb5EYeP5LKyO+YZRxmSrWvHw55+T3P/kdmqO/84Rx0DAMmnh83CBifk51p9NrD4A==",
+    "xunit.extensibility.execution/2.1.0-beta3-build3029": {
+      "sha512": "WuUYamK4RHrHxihvNuX7NkryMhQrpH1+ziJ/mPIQbm18zevSgre8BwUuVZvmLZa8uVob3xS4dvAah2+HCgLiXg==",
       "files": [
-        "xunit.extensibility.execution.2.1.0-beta2-build2981.nupkg",
-        "xunit.extensibility.execution.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.extensibility.execution.2.1.0-beta3-build3029.nupkg",
+        "xunit.extensibility.execution.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.extensibility.execution.nuspec",
         "lib/dnx451/xunit.execution.dnx.dll",
         "lib/dnx451/xunit.execution.dnx.pdb",
@@ -872,9 +732,6 @@
         "lib/portable-wpa81+win81/xunit.execution.universal.pdb",
         "lib/portable-wpa81+win81/xunit.execution.universal.pri",
         "lib/portable-wpa81+win81/xunit.execution.universal.xml",
-        "lib/win8/xunit.execution.win8.dll",
-        "lib/win8/xunit.execution.win8.pdb",
-        "lib/win8/xunit.execution.win8.xml",
         "lib/wp8/xunit.execution.wp8.dll",
         "lib/wp8/xunit.execution.wp8.pdb",
         "lib/wp8/xunit.execution.wp8.xml",
@@ -883,11 +740,11 @@
         "lib/Xamarin.iOS/xunit.execution.iOS-Universal.xml"
       ]
     },
-    "xunit.runner.dnx/2.1.0-beta2-build79": {
-      "sha512": "RXeHTGiII/oOYLhFdNygRbspjV+PprxIosHOO/1fv3VBrLqqpPyOHnJWKG4hLYK2v4p0BT+KhrRduLorS8YLSQ==",
+    "xunit.runner.dnx/2.1.0-beta3-build99": {
+      "sha512": "R6cvKy3mb8QjMxiTHqljsgwf424jYLbU07Ao0NcNHcRMT2OR+a2ldE6WdECiDMseYz/vuIaFQ6ebYRKEfMI/1A==",
       "files": [
-        "xunit.runner.dnx.2.1.0-beta2-build79.nupkg",
-        "xunit.runner.dnx.2.1.0-beta2-build79.nupkg.sha512",
+        "xunit.runner.dnx.2.1.0-beta3-build99.nupkg",
+        "xunit.runner.dnx.2.1.0-beta3-build99.nupkg.sha512",
         "xunit.runner.dnx.nuspec",
         "app/project.json",
         "app/xunit",
@@ -898,11 +755,22 @@
         "lib/dnxcore50/xunit.runner.dnx.xml"
       ]
     },
-    "xunit.runner.utility/2.1.0-beta2-build2981": {
-      "sha512": "g7jIEcA3ghXVwPAqy55sqbLXnpqEjmCoup5DnqpRVdz7JL2vEQlO4ERJyGx7zRO46iJnwdVWHbHVT4N1bHbeiQ==",
+    "xunit.runner.reporters/2.1.0-beta3-build3029": {
+      "sha512": "o+hiJTewV+4cA2GoHgbNC/FATjKxo2Z6PPeIdIfc7qysvYtu33POYUdo5XAqlRD9BQ7ojc8t/NOyZg/Qd9kjAg==",
       "files": [
-        "xunit.runner.utility.2.1.0-beta2-build2981.nupkg",
-        "xunit.runner.utility.2.1.0-beta2-build2981.nupkg.sha512",
+        "xunit.runner.reporters.2.1.0-beta3-build3029.nupkg",
+        "xunit.runner.reporters.2.1.0-beta3-build3029.nupkg.sha512",
+        "xunit.runner.reporters.nuspec",
+        "lib/dnx451/xunit.runner.reporters.dnx.dll",
+        "lib/dnxcore50/xunit.runner.reporters.dnx.dll",
+        "lib/net45/xunit.runner.reporters.desktop.dll"
+      ]
+    },
+    "xunit.runner.utility/2.1.0-beta3-build3029": {
+      "sha512": "cm5lVNYtypOLgu6Vnd30UWPVNrcILzWmSul7tFrW/xT+ZjPYSES7kvYc80rKAUWXQl/awglhc5IMtAbHJi4abg==",
+      "files": [
+        "xunit.runner.utility.2.1.0-beta3-build3029.nupkg",
+        "xunit.runner.utility.2.1.0-beta3-build3029.nupkg.sha512",
         "xunit.runner.utility.nuspec",
         "lib/dnx451/xunit.runner.utility.dnx.dll",
         "lib/dnx451/xunit.runner.utility.dnx.pdb",
@@ -923,9 +791,6 @@
         "lib/portable-wpa81+win81/xunit.runner.utility.universal.pdb",
         "lib/portable-wpa81+win81/xunit.runner.utility.universal.pri",
         "lib/portable-wpa81+win81/xunit.runner.utility.universal.xml",
-        "lib/win8/xunit.runner.utility.win8.dll",
-        "lib/win8/xunit.runner.utility.win8.pdb",
-        "lib/win8/xunit.runner.utility.win8.xml",
         "lib/wp8/xunit.runner.utility.wp8.dll",
         "lib/wp8/xunit.runner.utility.wp8.pdb",
         "lib/wp8/xunit.runner.utility.wp8.xml",
@@ -937,8 +802,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "xunit >= 2.1.0-beta2-*",
-      "xunit.runner.dnx >= 2.1.0-beta2-*",
+      "xunit >= 2.1.0-*",
+      "xunit.runner.dnx >= 2.1.0-*",
       "OpenChain.Sqlite >= 1.0.0-*"
     ],
     "DNX,Version=v4.5.1": []

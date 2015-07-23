@@ -16,6 +16,14 @@ namespace OpenChain.Ledger.Tests
             Assert.Equal(false, path.IsDirectory);
             Assert.Equal<string>(new[] { "abc", "def" }, path.Segments);
 
+            // All characters
+            result = LedgerPath.TryParse("/azAZ0189$-_.+!*'(),", out path);
+
+            Assert.Equal(true, result);
+            Assert.Equal("/azAZ0189$-_.+!*'(),", path.FullPath);
+            Assert.Equal(false, path.IsDirectory);
+            Assert.Equal<string>(new[] { "azAZ0189$-_.+!*'()," }, path.Segments);
+
             // Directory
             result = LedgerPath.TryParse("/abc/def/", out path);
 
@@ -66,6 +74,20 @@ namespace OpenChain.Ledger.Tests
                 Assert.Equal(false, result);
                 Assert.Equal(false, LedgerPath.IsValidPathSegment(c.ToString()));
             }
+        }
+
+        [Fact]
+        public void IsStrictParentOf_Success()
+        {
+            LedgerPath parent = LedgerPath.Parse("/the/parent");
+
+            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child")));
+            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child/child")));
+            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child/")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/not/related")));
         }
     }
 }

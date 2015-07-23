@@ -9,7 +9,7 @@ namespace OpenChain.Ledger
     public class LedgerPath
     {
         // Only allow alphanumeric characters and characters in the following set: "$-_.+!*'(),".
-        private static readonly Regex invalidCharacter = new Regex(@"[^\w\$_\.\+!*'\(\),-]", RegexOptions.Compiled);
+        private static readonly Regex invalidCharacter = new Regex(@"[^A-Za-z0-9\$_\.\+!*'\(\),-]", RegexOptions.Compiled);
 
         private LedgerPath(string path, IEnumerable<string> segments, bool isDirectory)
         {
@@ -17,6 +17,12 @@ namespace OpenChain.Ledger
             this.Segments = new ReadOnlyCollection<string>(segments.ToList());
             this.IsDirectory = isDirectory;
         }
+
+        public string FullPath { get; }
+
+        public IReadOnlyList<string> Segments { get; }
+
+        public bool IsDirectory { get; }
 
         public static bool TryParse(string path, out LedgerPath result)
         {
@@ -62,7 +68,6 @@ namespace OpenChain.Ledger
 
         public static bool IsValidPathSegment(string path)
         {
-            //return !path.Contains("\0") && !path.Contains("/");
             return !invalidCharacter.IsMatch(path);
         }
 
@@ -71,10 +76,18 @@ namespace OpenChain.Ledger
             return path.StartsWith("/", StringComparison.Ordinal) && path.Split('/').All(IsValidPathSegment);
         }
 
-        public string FullPath { get; }
+        public bool IsStrictParentOf(LedgerPath child)
+        {
+            if (child.Segments.Count <= this.Segments.Count)
+                return false;
 
-        public IReadOnlyList<string> Segments { get; }
-        
-        public bool IsDirectory { get; }
+            for (int i = 0; i < this.Segments.Count; i++)
+            {
+                if (!StringComparer.Ordinal.Equals(this.Segments[i], child.Segments[i]))
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

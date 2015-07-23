@@ -8,6 +8,7 @@
     "root_url": "http://localhost:5000/",
     "validator": {
       "type": "OpenLoop",
+      "allow_third_party_assets": true,
       "admin_addresses": [
         "1Az3u11trKmvHLSFhzSdRqT8hjUi7R7woA"
       ]

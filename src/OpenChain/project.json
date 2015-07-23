@@ -4,6 +4,7 @@
   "compilationOptions": { "languageVersion": "csharp6" },
 
   "dependencies": {
+    "System.Text.Encoding": "4.0.10-beta-22816",
     "Microsoft.AspNet.Cors": "1.0.0-beta5",
     "Microsoft.AspNet.Mvc": "6.0.0-beta5",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta5",
@@ -11,14 +12,13 @@
     "Microsoft.AspNet.Http": "1.0.0-beta5",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta5",
     "Microsoft.AspNet.WebSockets.Client": "1.0.0-beta5",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5",
+    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
     "OpenChain.Core": "1.0.0-*",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Ledger": "1.0.0-*",
     "OpenChain.Sqlite": "1.0.0-*",
-    "System.Text.Encoding": "4.0.10-beta-22816",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta5",
-    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta5"
   },
 
   "commands": {
