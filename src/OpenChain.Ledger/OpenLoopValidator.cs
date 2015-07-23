@@ -99,16 +99,23 @@ namespace OpenChain.Ledger
             if (assetDefinitionMutations.Count == 0)
                 return Task.FromResult(0);
 
-            if (!authentication.Any(evidence => this.adminAddresses.Contains(GetPubKeyHash(evidence.PublicKey))))
-                throw new TransactionInvalidException("AdminOnlyOperation");
+            HashSet<string> signedAddresses = new HashSet<string>(authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
+            bool adminSigned = signedAddresses.Any(address => this.adminAddresses.Contains(address));
 
             foreach (KeyValuePair<LedgerPath, string> mutation in assetDefinitionMutations)
             {
-                // The asset must be of the form /root/{name}
-                if (mutation.Key.IsDirectory
-                    || mutation.Key.Segments.Count != 2
-                    || mutation.Key.Segments[0] != "root")
-                    throw new TransactionInvalidException("InvalidAsset");
+                if (this.allowThirdPartyAssets && p2pkhAssetRoot.IsStrictParentOf(mutation.Key))
+                {
+                    if (signedAddresses.Contains(mutation.Key.Segments[1]))
+                        continue;
+                }
+                else if (adminAssetRoot.IsStrictParentOf(mutation.Key))
+                {
+                    if (adminSigned)
+                        continue;
+                }
+
+                throw new TransactionInvalidException("InvalidSignature");
             }
 
             return Task.FromResult(0);
