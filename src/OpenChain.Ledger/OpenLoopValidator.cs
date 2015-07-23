@@ -7,7 +7,7 @@ using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {
-    public class OpenLoopValidator : IRulesValidator
+    public class OpenLoopValidator : IMutationValidator
     {
         private readonly HashSet<string> adminAddresses;
         private readonly ITransactionStore store;
@@ -23,13 +23,26 @@ namespace OpenChain.Ledger
             this.allowThirdPartyAssets = allowThirdPartyAssets;
         }
 
-        public Task ValidateAccountMutations(IReadOnlyList<AccountStatus> accountMutations, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
+        public Task Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
         {
             HashSet<string> signedAddresses = new HashSet<string>(authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
+            bool adminSigned = signedAddresses.Any(address => this.adminAddresses.Contains(address));
 
+            ValidateAccountMutations(mutation.AccountMutations, accounts, signedAddresses, adminSigned);
+            ValidateAssetDefinitionMutations(mutation.AssetDefinitions, signedAddresses, adminSigned);
+            ValidateAliasMutations(mutation.Aliases, adminSigned);
+
+            return Task.FromResult(0);
+        }
+
+        private void ValidateAccountMutations(
+            IReadOnlyList<AccountStatus> accountMutations,
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts,
+            HashSet<string> signedAddresses,
+            bool adminSigned)
+        {
             List<AccountStatus> signedMutations = new List<AccountStatus>();
             List<AccountStatus> unsignedMutations = new List<AccountStatus>();
-            bool adminSigned = signedAddresses.Any(address => this.adminAddresses.Contains(address));
 
             foreach (AccountStatus mutation in accountMutations)
             {
@@ -90,18 +103,13 @@ namespace OpenChain.Ledger
                 if (account.Balance < previousStatus.Balance)
                     throw new TransactionInvalidException("SignatureMissing");
             }
-
-            return Task.FromResult(0);
         }
 
-        public Task ValidateAssetDefinitionMutations(IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations, IReadOnlyList<SignatureEvidence> authentication)
+        private void ValidateAssetDefinitionMutations(
+            IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations,
+            HashSet<string> signedAddresses,
+            bool adminSigned)
         {
-            if (assetDefinitionMutations.Count == 0)
-                return Task.FromResult(0);
-
-            HashSet<string> signedAddresses = new HashSet<string>(authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
-            bool adminSigned = signedAddresses.Any(address => this.adminAddresses.Contains(address));
-
             foreach (KeyValuePair<LedgerPath, string> mutation in assetDefinitionMutations)
             {
                 if (this.allowThirdPartyAssets && p2pkhAssetRoot.IsStrictParentOf(mutation.Key))
@@ -117,8 +125,12 @@ namespace OpenChain.Ledger
 
                 throw new TransactionInvalidException("InvalidSignature");
             }
+        }
 
-            return Task.FromResult(0);
+        private void ValidateAliasMutations(IReadOnlyList<KeyValuePair<string, LedgerPath>> aliases, bool adminSigned)
+        {
+            if (aliases.Count > 0 && !adminSigned)
+                throw new TransactionInvalidException("InvalidSignature");
         }
 
         private static string GetPubKeyHash(BinaryData pubKey)

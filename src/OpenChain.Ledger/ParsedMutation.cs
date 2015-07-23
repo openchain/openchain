@@ -7,20 +7,24 @@ namespace OpenChain.Ledger
 {
     public class ParsedMutation
     {
-        private ParsedMutation(IList<AccountStatus> accountMutations, IList<KeyValuePair<LedgerPath, string>> assetDefinitions)
+        private ParsedMutation(IList<AccountStatus> accountMutations, IList<KeyValuePair<LedgerPath, string>> assetDefinitions, IList<KeyValuePair<string, LedgerPath>> aliases)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
             this.AssetDefinitions = new ReadOnlyCollection<KeyValuePair<LedgerPath, string>>(assetDefinitions);
+            this.Aliases = new ReadOnlyCollection<KeyValuePair<string, LedgerPath>>(aliases);
         }
 
         public IReadOnlyList<AccountStatus> AccountMutations { get; }
 
         public IReadOnlyList<KeyValuePair<LedgerPath, string>> AssetDefinitions { get; }
 
+        public IReadOnlyList<KeyValuePair<string, LedgerPath>> Aliases { get; }
+
         public static ParsedMutation Parse(Mutation mutation)
         {
             List<AccountStatus> accountMutations = new List<AccountStatus>();
             List<KeyValuePair<LedgerPath, string>> assetDefinitions = new List<KeyValuePair<LedgerPath, string>>();
+            List<KeyValuePair<string, LedgerPath>> aliases = new List<KeyValuePair<string, LedgerPath>>();
 
             foreach (KeyValuePair pair in mutation.KeyValuePairs)
             {
@@ -47,6 +51,8 @@ namespace OpenChain.Ledger
                         accountMutations.Add(new AccountStatus((AccountKey)key, ((Int64Value)value).Value, pair.Version));
                     else if (key.Usage == BinaryValueUsage.AssetDefinition && value.Usage == BinaryValueUsage.Text)
                         assetDefinitions.Add(new KeyValuePair<LedgerPath, string>(LedgerPath.Parse(((TextValue)key).Value), ((TextValue)value).Value));
+                    else if (key.Usage == BinaryValueUsage.Alias && value.Usage == BinaryValueUsage.Text)
+                        aliases.Add(new KeyValuePair<string, LedgerPath>(((TextValue)key).Value, LedgerPath.Parse(((TextValue)value).Value)));
                     else
                         throw new TransactionInvalidException("InvalidKeyValuePair");
                 }
@@ -56,7 +62,7 @@ namespace OpenChain.Ledger
                 }
             }
 
-            return new ParsedMutation(accountMutations, assetDefinitions);
+            return new ParsedMutation(accountMutations, assetDefinitions, aliases);
         }
     }
 }

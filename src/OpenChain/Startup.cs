@@ -54,7 +54,7 @@ namespace OpenChain
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
-            services.AddSingleton<IRulesValidator>(ConfigurationParser.CreateRulesValidator);
+            services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
 
             services.AddSingleton<MasterProperties>(ConfigurationParser.CreateMasterProperties);
 
@@ -93,7 +93,7 @@ namespace OpenChain
 
             // Activate singletons
             app.ApplicationServices.GetService<IStreamSubscriber>();
-            app.ApplicationServices.GetService<IRulesValidator>();
+            app.ApplicationServices.GetService<IMutationValidator>();
         }
     }
 }

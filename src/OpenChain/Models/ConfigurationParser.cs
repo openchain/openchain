@@ -30,7 +30,7 @@ namespace OpenChain.Models
             return store as ILedgerQueries;
         }
 
-        public static IRulesValidator CreateRulesValidator(IServiceProvider serviceProvider)
+        public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("master_mode");
             ILogger logger = serviceProvider.GetService<ILogger>();
@@ -61,7 +61,7 @@ namespace OpenChain.Models
 
         public static TransactionValidator CreateTransactionValidator(IServiceProvider serviceProvider)
         {
-            IRulesValidator rulesValidator = serviceProvider.GetService<IRulesValidator>();
+            IMutationValidator rulesValidator = serviceProvider.GetService<IMutationValidator>();
 
             if (rulesValidator == null)
                 return null;
@@ -71,7 +71,7 @@ namespace OpenChain.Models
 
         public static MasterProperties CreateMasterProperties(IServiceProvider serviceProvider)
         {
-            IRulesValidator master = serviceProvider.GetService<IRulesValidator>();
+            IMutationValidator master = serviceProvider.GetService<IMutationValidator>();
 
             if (master != null)
             {
@@ -96,7 +96,7 @@ namespace OpenChain.Models
         {
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            if (serviceProvider.GetService<IRulesValidator>() != null)
+            if (serviceProvider.GetService<IMutationValidator>() != null)
             {
                 logger.LogInformation("Stream subscriber disabled");
                 return null;

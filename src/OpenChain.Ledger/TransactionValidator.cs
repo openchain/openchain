@@ -12,9 +12,9 @@ namespace OpenChain.Ledger
     {
         private readonly ITransactionStore store;
         private readonly BinaryData ledgerId;
-        private readonly IRulesValidator validator;
+        private readonly IMutationValidator validator;
 
-        public TransactionValidator(ITransactionStore store, IRulesValidator validator, string rootUrl)
+        public TransactionValidator(ITransactionStore store, IMutationValidator validator, string rootUrl)
         {
             this.store = store;
             this.validator = validator;
@@ -57,8 +57,7 @@ namespace OpenChain.Ledger
 
             DateTime date = DateTime.UtcNow;
 
-            await this.validator.ValidateAccountMutations(parsedMutation.AccountMutations, authentication, accounts);
-            await this.validator.ValidateAssetDefinitionMutations(parsedMutation.AssetDefinitions, authentication);
+            await this.validator.Validate(parsedMutation, authentication, accounts);
 
             TransactionMetadata metadata = new TransactionMetadata(authentication);
 

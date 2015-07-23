@@ -55,6 +55,7 @@ namespace OpenChain.Ledger
                             break;
                         case BinaryValueUsage.Text:
                         case BinaryValueUsage.AssetDefinition:
+                        case BinaryValueUsage.Alias:
                             uint stringLength = reader.ReadUInt32();
                             string value = Encoding.UTF8.GetString(reader.ReadBytes((int)stringLength));
                             result = new TextValue(type, value);

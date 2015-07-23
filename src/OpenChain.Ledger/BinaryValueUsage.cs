@@ -8,5 +8,6 @@
 
         AccountKey      = 0 + 256,
         AssetDefinition = 1 + 256,
+        Alias           = 2 + 256
     }
 }
