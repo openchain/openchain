@@ -18,7 +18,7 @@ namespace OpenChain.Ledger
             this.Version = version;
         }
 
-        public static AccountStatus FromKeyValuePair(KeyValuePair mutation)
+        public static AccountStatus FromRecord(Record mutation)
         {
             AccountKey key;
             long value;
@@ -31,7 +31,7 @@ namespace OpenChain.Ledger
                 return null;
             }
 
-            // This pair does not represent an account key
+            // This record does not represent an account key
             if (key == null)
                 return null;
 

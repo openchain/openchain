@@ -2,9 +2,9 @@
 
 namespace OpenChain.Core
 {
-    public class KeyValuePair
+    public class Record
     {
-        public KeyValuePair(BinaryData key, BinaryData value, BinaryData version)
+        public Record(BinaryData key, BinaryData value, BinaryData version)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));

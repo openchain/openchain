@@ -33,7 +33,7 @@ namespace OpenChain.Ledger
                 throw new TransactionInvalidException("InvalidNamespace");
 
             // There must not be the same key represented twice
-            var groupedPairs = mutation.KeyValuePairs
+            var groupedPairs = mutation.Records
                 .GroupBy(pair => pair.Key, pair => pair);
 
             if (groupedPairs.Any(group => group.Count() > 1))

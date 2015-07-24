@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using OpenChain.Core;
-using Xunit;
+using Assert = Xunit.Assert;
+using Fact = Xunit.FactAttribute;
 
 namespace OpenChain.Ledger.Tests
 {
@@ -10,14 +11,14 @@ namespace OpenChain.Ledger.Tests
             Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
-        public void FromKeyValuePair_Set()
+        public void FromRecord_Set()
         {
-            KeyValuePair pair = new KeyValuePair(
+            Record pair = new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
-            AccountStatus status = AccountStatus.FromKeyValuePair(pair);
+            AccountStatus status = AccountStatus.FromRecord(pair);
 
             Assert.Equal("/the/account", status.AccountKey.Account.FullPath);
             Assert.Equal("/the/asset", status.AccountKey.Asset.FullPath);
@@ -26,14 +27,14 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
-        public void FromKeyValuePair_Unset()
+        public void FromRecord_Unset()
         {
-            KeyValuePair pair = new KeyValuePair(
+            Record pair = new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 BinaryData.Empty,
                 BinaryData.Empty);
 
-            AccountStatus status = AccountStatus.FromKeyValuePair(pair);
+            AccountStatus status = AccountStatus.FromRecord(pair);
 
             Assert.Equal("/the/account", status.AccountKey.Account.FullPath);
             Assert.Equal("/the/asset", status.AccountKey.Asset.FullPath);
@@ -42,27 +43,27 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
-        public void FromKeyValuePair_InvalidKey()
+        public void FromRecord_InvalidKey()
         {
-            KeyValuePair pair = new KeyValuePair(
+            Record pair = new Record(
                 new TextValue(BinaryValueUsage.Alias, "Text Value").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
-            AccountStatus status = AccountStatus.FromKeyValuePair(pair);
+            AccountStatus status = AccountStatus.FromRecord(pair);
 
             Assert.Null(status);
         }
 
         [Fact]
-        public void FromKeyValuePair_InvalidBinaryData()
+        public void FromRecord_InvalidBinaryData()
         {
-            KeyValuePair pair = new KeyValuePair(
+            Record pair = new Record(
                 new TextValue(BinaryValueUsage.Account, "Text Value").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
-            AccountStatus status = AccountStatus.FromKeyValuePair(pair);
+            AccountStatus status = AccountStatus.FromRecord(pair);
 
             Assert.Null(status);
         }

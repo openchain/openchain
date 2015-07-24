@@ -16,10 +16,10 @@ namespace OpenChain.Messages {
     }
     #endregion
     #region Static variables
+    internal static pbd::MessageDescriptor internal__static_OpenChain_Record__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Record, global::OpenChain.Messages.Record.Builder> internal__static_OpenChain_Record__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_OpenChain_Mutation__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation, global::OpenChain.Messages.Mutation.Builder> internal__static_OpenChain_Mutation__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_OpenChain_Mutation_KeyValuePair__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation.Types.KeyValuePair, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder> internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_OpenChain_Transaction__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder> internal__static_OpenChain_Transaction__FieldAccessorTable;
     #endregion
@@ -32,24 +32,23 @@ namespace OpenChain.Messages {
     static Schema() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKnAQoITXV0YXRpb24SEQoJbmFt", 
-            "ZXNwYWNlGAEgAigMEjkKD2tleV92YWx1ZV9wYWlycxgCIAMoCzIgLk9wZW5D", 
-            "aGFpbi5NdXRhdGlvbi5LZXlWYWx1ZVBhaXISEAoIbWV0YWRhdGEYAyACKAwa", 
-            "OwoMS2V5VmFsdWVQYWlyEgsKA2tleRgBIAIoDBINCgV2YWx1ZRgCIAEoDBIP", 
-            "Cgd2ZXJzaW9uGAMgAigMIlAKC1RyYW5zYWN0aW9uEhAKCG11dGF0aW9uGAEg", 
-            "AigMEhEKCXRpbWVzdGFtcBgCIAIoAxIcChR0cmFuc2FjdGlvbl9tZXRhZGF0", 
-          "YRgDIAIoDA=="));
+            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiI1CgZSZWNvcmQSCwoDa2V5GAEg", 
+            "AigMEg0KBXZhbHVlGAIgASgMEg8KB3ZlcnNpb24YAyACKAwiUwoITXV0YXRp", 
+            "b24SEQoJbmFtZXNwYWNlGAEgAigMEiIKB3JlY29yZHMYAiADKAsyES5PcGVu", 
+            "Q2hhaW4uUmVjb3JkEhAKCG1ldGFkYXRhGAMgAigMIlAKC1RyYW5zYWN0aW9u", 
+            "EhAKCG11dGF0aW9uGAEgAigMEhEKCXRpbWVzdGFtcBgCIAIoAxIcChR0cmFu", 
+          "c2FjdGlvbl9tZXRhZGF0YRgDIAIoDA=="));
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
-        internal__static_OpenChain_Mutation__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_OpenChain_Record__Descriptor = Descriptor.MessageTypes[0];
+        internal__static_OpenChain_Record__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Record, global::OpenChain.Messages.Record.Builder>(internal__static_OpenChain_Record__Descriptor,
+                new string[] { "Key", "Value", "Version", });
+        internal__static_OpenChain_Mutation__Descriptor = Descriptor.MessageTypes[1];
         internal__static_OpenChain_Mutation__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation, global::OpenChain.Messages.Mutation.Builder>(internal__static_OpenChain_Mutation__Descriptor,
-                new string[] { "Namespace", "KeyValuePairs", "Metadata", });
-        internal__static_OpenChain_Mutation_KeyValuePair__Descriptor = internal__static_OpenChain_Mutation__Descriptor.NestedTypes[0];
-        internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Mutation.Types.KeyValuePair, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder>(internal__static_OpenChain_Mutation_KeyValuePair__Descriptor,
-                new string[] { "Key", "Value", "Version", });
-        internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[1];
+                new string[] { "Namespace", "Records", "Metadata", });
+        internal__static_OpenChain_Transaction__Descriptor = Descriptor.MessageTypes[2];
         internal__static_OpenChain_Transaction__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::OpenChain.Messages.Transaction, global::OpenChain.Messages.Transaction.Builder>(internal__static_OpenChain_Transaction__Descriptor,
                 new string[] { "Mutation", "Timestamp", "TransactionMetadata", });
@@ -64,11 +63,377 @@ namespace OpenChain.Messages {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  internal sealed partial class Record : pb::GeneratedMessage<Record, Record.Builder> {
+    private Record() { }
+    private static readonly Record defaultInstance = new Record().MakeReadOnly();
+    private static readonly string[] _recordFieldNames = new string[] { "key", "value", "version" };
+    private static readonly uint[] _recordFieldTags = new uint[] { 10, 18, 26 };
+    public static Record DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override Record DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override Record ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Record__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<Record, Record.Builder> InternalFieldAccessors {
+      get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Record__FieldAccessorTable; }
+    }
+    
+    public const int KeyFieldNumber = 1;
+    private bool hasKey;
+    private pb::ByteString key_ = pb::ByteString.Empty;
+    public bool HasKey {
+      get { return hasKey; }
+    }
+    public pb::ByteString Key {
+      get { return key_; }
+    }
+    
+    public const int ValueFieldNumber = 2;
+    private bool hasValue;
+    private pb::ByteString value_ = pb::ByteString.Empty;
+    public bool HasValue {
+      get { return hasValue; }
+    }
+    public pb::ByteString Value {
+      get { return value_; }
+    }
+    
+    public const int VersionFieldNumber = 3;
+    private bool hasVersion;
+    private pb::ByteString version_ = pb::ByteString.Empty;
+    public bool HasVersion {
+      get { return hasVersion; }
+    }
+    public pb::ByteString Version {
+      get { return version_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasKey) return false;
+        if (!hasVersion) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      CalcSerializedSize();
+      string[] field_names = _recordFieldNames;
+      if (hasKey) {
+        output.WriteBytes(1, field_names[0], Key);
+      }
+      if (hasValue) {
+        output.WriteBytes(2, field_names[1], Value);
+      }
+      if (hasVersion) {
+        output.WriteBytes(3, field_names[2], Version);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        return CalcSerializedSize();
+      }
+    }
+    
+    private int CalcSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+      
+      size = 0;
+      if (hasKey) {
+        size += pb::CodedOutputStream.ComputeBytesSize(1, Key);
+      }
+      if (hasValue) {
+        size += pb::CodedOutputStream.ComputeBytesSize(2, Value);
+      }
+      if (hasVersion) {
+        size += pb::CodedOutputStream.ComputeBytesSize(3, Version);
+      }
+      size += UnknownFields.SerializedSize;
+      memoizedSerializedSize = size;
+      return size;
+    }
+    public static Record ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Record ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Record ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static Record ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static Record ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Record ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static Record ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static Record ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static Record ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static Record ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private Record MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(Record prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal sealed partial class Builder : pb::GeneratedBuilder<Record, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(Record cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private Record result;
+      
+      private Record PrepareBuilder() {
+        if (resultIsReadOnly) {
+          Record original = result;
+          result = new Record();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override Record MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::OpenChain.Messages.Record.Descriptor; }
+      }
+      
+      public override Record DefaultInstanceForType {
+        get { return global::OpenChain.Messages.Record.DefaultInstance; }
+      }
+      
+      public override Record BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is Record) {
+          return MergeFrom((Record) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(Record other) {
+        if (other == global::OpenChain.Messages.Record.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasKey) {
+          Key = other.Key;
+        }
+        if (other.HasValue) {
+          Value = other.Value;
+        }
+        if (other.HasVersion) {
+          Version = other.Version;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_recordFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _recordFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 10: {
+              result.hasKey = input.ReadBytes(ref result.key_);
+              break;
+            }
+            case 18: {
+              result.hasValue = input.ReadBytes(ref result.value_);
+              break;
+            }
+            case 26: {
+              result.hasVersion = input.ReadBytes(ref result.version_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasKey {
+        get { return result.hasKey; }
+      }
+      public pb::ByteString Key {
+        get { return result.Key; }
+        set { SetKey(value); }
+      }
+      public Builder SetKey(pb::ByteString value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasKey = true;
+        result.key_ = value;
+        return this;
+      }
+      public Builder ClearKey() {
+        PrepareBuilder();
+        result.hasKey = false;
+        result.key_ = pb::ByteString.Empty;
+        return this;
+      }
+      
+      public bool HasValue {
+        get { return result.hasValue; }
+      }
+      public pb::ByteString Value {
+        get { return result.Value; }
+        set { SetValue(value); }
+      }
+      public Builder SetValue(pb::ByteString value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasValue = true;
+        result.value_ = value;
+        return this;
+      }
+      public Builder ClearValue() {
+        PrepareBuilder();
+        result.hasValue = false;
+        result.value_ = pb::ByteString.Empty;
+        return this;
+      }
+      
+      public bool HasVersion {
+        get { return result.hasVersion; }
+      }
+      public pb::ByteString Version {
+        get { return result.Version; }
+        set { SetVersion(value); }
+      }
+      public Builder SetVersion(pb::ByteString value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasVersion = true;
+        result.version_ = value;
+        return this;
+      }
+      public Builder ClearVersion() {
+        PrepareBuilder();
+        result.hasVersion = false;
+        result.version_ = pb::ByteString.Empty;
+        return this;
+      }
+    }
+    static Record() {
+      object.ReferenceEquals(global::OpenChain.Messages.Schema.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class Mutation : pb::GeneratedMessage<Mutation, Mutation.Builder> {
     private Mutation() { }
     private static readonly Mutation defaultInstance = new Mutation().MakeReadOnly();
-    private static readonly string[] _mutationFieldNames = new string[] { "key_value_pairs", "metadata", "namespace" };
-    private static readonly uint[] _mutationFieldTags = new uint[] { 18, 26, 10 };
+    private static readonly string[] _mutationFieldNames = new string[] { "metadata", "namespace", "records" };
+    private static readonly uint[] _mutationFieldTags = new uint[] { 26, 10, 18 };
     public static Mutation DefaultInstance {
       get { return defaultInstance; }
     }
@@ -89,378 +454,6 @@ namespace OpenChain.Messages {
       get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation__FieldAccessorTable; }
     }
     
-    #region Nested types
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public static partial class Types {
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      internal sealed partial class KeyValuePair : pb::GeneratedMessage<KeyValuePair, KeyValuePair.Builder> {
-        private KeyValuePair() { }
-        private static readonly KeyValuePair defaultInstance = new KeyValuePair().MakeReadOnly();
-        private static readonly string[] _keyValuePairFieldNames = new string[] { "key", "value", "version" };
-        private static readonly uint[] _keyValuePairFieldTags = new uint[] { 10, 18, 26 };
-        public static KeyValuePair DefaultInstance {
-          get { return defaultInstance; }
-        }
-        
-        public override KeyValuePair DefaultInstanceForType {
-          get { return DefaultInstance; }
-        }
-        
-        protected override KeyValuePair ThisMessage {
-          get { return this; }
-        }
-        
-        public static pbd::MessageDescriptor Descriptor {
-          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation_KeyValuePair__Descriptor; }
-        }
-        
-        protected override pb::FieldAccess.FieldAccessorTable<KeyValuePair, KeyValuePair.Builder> InternalFieldAccessors {
-          get { return global::OpenChain.Messages.Schema.internal__static_OpenChain_Mutation_KeyValuePair__FieldAccessorTable; }
-        }
-        
-        public const int KeyFieldNumber = 1;
-        private bool hasKey;
-        private pb::ByteString key_ = pb::ByteString.Empty;
-        public bool HasKey {
-          get { return hasKey; }
-        }
-        public pb::ByteString Key {
-          get { return key_; }
-        }
-        
-        public const int ValueFieldNumber = 2;
-        private bool hasValue;
-        private pb::ByteString value_ = pb::ByteString.Empty;
-        public bool HasValue {
-          get { return hasValue; }
-        }
-        public pb::ByteString Value {
-          get { return value_; }
-        }
-        
-        public const int VersionFieldNumber = 3;
-        private bool hasVersion;
-        private pb::ByteString version_ = pb::ByteString.Empty;
-        public bool HasVersion {
-          get { return hasVersion; }
-        }
-        public pb::ByteString Version {
-          get { return version_; }
-        }
-        
-        public override bool IsInitialized {
-          get {
-            if (!hasKey) return false;
-            if (!hasVersion) return false;
-            return true;
-          }
-        }
-        
-        public override void WriteTo(pb::ICodedOutputStream output) {
-          CalcSerializedSize();
-          string[] field_names = _keyValuePairFieldNames;
-          if (hasKey) {
-            output.WriteBytes(1, field_names[0], Key);
-          }
-          if (hasValue) {
-            output.WriteBytes(2, field_names[1], Value);
-          }
-          if (hasVersion) {
-            output.WriteBytes(3, field_names[2], Version);
-          }
-          UnknownFields.WriteTo(output);
-        }
-        
-        private int memoizedSerializedSize = -1;
-        public override int SerializedSize {
-          get {
-            int size = memoizedSerializedSize;
-            if (size != -1) return size;
-            return CalcSerializedSize();
-          }
-        }
-        
-        private int CalcSerializedSize() {
-          int size = memoizedSerializedSize;
-          if (size != -1) return size;
-          
-          size = 0;
-          if (hasKey) {
-            size += pb::CodedOutputStream.ComputeBytesSize(1, Key);
-          }
-          if (hasValue) {
-            size += pb::CodedOutputStream.ComputeBytesSize(2, Value);
-          }
-          if (hasVersion) {
-            size += pb::CodedOutputStream.ComputeBytesSize(3, Version);
-          }
-          size += UnknownFields.SerializedSize;
-          memoizedSerializedSize = size;
-          return size;
-        }
-        public static KeyValuePair ParseFrom(pb::ByteString data) {
-          return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
-          return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(byte[] data) {
-          return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
-          return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(global::System.IO.Stream input) {
-          return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-          return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-        }
-        public static KeyValuePair ParseDelimitedFrom(global::System.IO.Stream input) {
-          return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
-        }
-        public static KeyValuePair ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
-          return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(pb::ICodedInputStream input) {
-          return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
-        }
-        public static KeyValuePair ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-          return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
-        }
-        private KeyValuePair MakeReadOnly() {
-          return this;
-        }
-        
-        public static Builder CreateBuilder() { return new Builder(); }
-        public override Builder ToBuilder() { return CreateBuilder(this); }
-        public override Builder CreateBuilderForType() { return new Builder(); }
-        public static Builder CreateBuilder(KeyValuePair prototype) {
-          return new Builder(prototype);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        internal sealed partial class Builder : pb::GeneratedBuilder<KeyValuePair, Builder> {
-          protected override Builder ThisBuilder {
-            get { return this; }
-          }
-          public Builder() {
-            result = DefaultInstance;
-            resultIsReadOnly = true;
-          }
-          internal Builder(KeyValuePair cloneFrom) {
-            result = cloneFrom;
-            resultIsReadOnly = true;
-          }
-          
-          private bool resultIsReadOnly;
-          private KeyValuePair result;
-          
-          private KeyValuePair PrepareBuilder() {
-            if (resultIsReadOnly) {
-              KeyValuePair original = result;
-              result = new KeyValuePair();
-              resultIsReadOnly = false;
-              MergeFrom(original);
-            }
-            return result;
-          }
-          
-          public override bool IsInitialized {
-            get { return result.IsInitialized; }
-          }
-          
-          protected override KeyValuePair MessageBeingBuilt {
-            get { return PrepareBuilder(); }
-          }
-          
-          public override Builder Clear() {
-            result = DefaultInstance;
-            resultIsReadOnly = true;
-            return this;
-          }
-          
-          public override Builder Clone() {
-            if (resultIsReadOnly) {
-              return new Builder(result);
-            } else {
-              return new Builder().MergeFrom(result);
-            }
-          }
-          
-          public override pbd::MessageDescriptor DescriptorForType {
-            get { return global::OpenChain.Messages.Mutation.Types.KeyValuePair.Descriptor; }
-          }
-          
-          public override KeyValuePair DefaultInstanceForType {
-            get { return global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance; }
-          }
-          
-          public override KeyValuePair BuildPartial() {
-            if (resultIsReadOnly) {
-              return result;
-            }
-            resultIsReadOnly = true;
-            return result.MakeReadOnly();
-          }
-          
-          public override Builder MergeFrom(pb::IMessage other) {
-            if (other is KeyValuePair) {
-              return MergeFrom((KeyValuePair) other);
-            } else {
-              base.MergeFrom(other);
-              return this;
-            }
-          }
-          
-          public override Builder MergeFrom(KeyValuePair other) {
-            if (other == global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance) return this;
-            PrepareBuilder();
-            if (other.HasKey) {
-              Key = other.Key;
-            }
-            if (other.HasValue) {
-              Value = other.Value;
-            }
-            if (other.HasVersion) {
-              Version = other.Version;
-            }
-            this.MergeUnknownFields(other.UnknownFields);
-            return this;
-          }
-          
-          public override Builder MergeFrom(pb::ICodedInputStream input) {
-            return MergeFrom(input, pb::ExtensionRegistry.Empty);
-          }
-          
-          public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
-            PrepareBuilder();
-            pb::UnknownFieldSet.Builder unknownFields = null;
-            uint tag;
-            string field_name;
-            while (input.ReadTag(out tag, out field_name)) {
-              if(tag == 0 && field_name != null) {
-                int field_ordinal = global::System.Array.BinarySearch(_keyValuePairFieldNames, field_name, global::System.StringComparer.Ordinal);
-                if(field_ordinal >= 0)
-                  tag = _keyValuePairFieldTags[field_ordinal];
-                else {
-                  if (unknownFields == null) {
-                    unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-                  }
-                  ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-                  continue;
-                }
-              }
-              switch (tag) {
-                case 0: {
-                  throw pb::InvalidProtocolBufferException.InvalidTag();
-                }
-                default: {
-                  if (pb::WireFormat.IsEndGroupTag(tag)) {
-                    if (unknownFields != null) {
-                      this.UnknownFields = unknownFields.Build();
-                    }
-                    return this;
-                  }
-                  if (unknownFields == null) {
-                    unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
-                  }
-                  ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
-                  break;
-                }
-                case 10: {
-                  result.hasKey = input.ReadBytes(ref result.key_);
-                  break;
-                }
-                case 18: {
-                  result.hasValue = input.ReadBytes(ref result.value_);
-                  break;
-                }
-                case 26: {
-                  result.hasVersion = input.ReadBytes(ref result.version_);
-                  break;
-                }
-              }
-            }
-            
-            if (unknownFields != null) {
-              this.UnknownFields = unknownFields.Build();
-            }
-            return this;
-          }
-          
-          
-          public bool HasKey {
-            get { return result.hasKey; }
-          }
-          public pb::ByteString Key {
-            get { return result.Key; }
-            set { SetKey(value); }
-          }
-          public Builder SetKey(pb::ByteString value) {
-            pb::ThrowHelper.ThrowIfNull(value, "value");
-            PrepareBuilder();
-            result.hasKey = true;
-            result.key_ = value;
-            return this;
-          }
-          public Builder ClearKey() {
-            PrepareBuilder();
-            result.hasKey = false;
-            result.key_ = pb::ByteString.Empty;
-            return this;
-          }
-          
-          public bool HasValue {
-            get { return result.hasValue; }
-          }
-          public pb::ByteString Value {
-            get { return result.Value; }
-            set { SetValue(value); }
-          }
-          public Builder SetValue(pb::ByteString value) {
-            pb::ThrowHelper.ThrowIfNull(value, "value");
-            PrepareBuilder();
-            result.hasValue = true;
-            result.value_ = value;
-            return this;
-          }
-          public Builder ClearValue() {
-            PrepareBuilder();
-            result.hasValue = false;
-            result.value_ = pb::ByteString.Empty;
-            return this;
-          }
-          
-          public bool HasVersion {
-            get { return result.hasVersion; }
-          }
-          public pb::ByteString Version {
-            get { return result.Version; }
-            set { SetVersion(value); }
-          }
-          public Builder SetVersion(pb::ByteString value) {
-            pb::ThrowHelper.ThrowIfNull(value, "value");
-            PrepareBuilder();
-            result.hasVersion = true;
-            result.version_ = value;
-            return this;
-          }
-          public Builder ClearVersion() {
-            PrepareBuilder();
-            result.hasVersion = false;
-            result.version_ = pb::ByteString.Empty;
-            return this;
-          }
-        }
-        static KeyValuePair() {
-          object.ReferenceEquals(global::OpenChain.Messages.Schema.Descriptor, null);
-        }
-      }
-      
-    }
-    #endregion
-    
     public const int NamespaceFieldNumber = 1;
     private bool hasNamespace;
     private pb::ByteString namespace_ = pb::ByteString.Empty;
@@ -471,16 +464,16 @@ namespace OpenChain.Messages {
       get { return namespace_; }
     }
     
-    public const int KeyValuePairsFieldNumber = 2;
-    private pbc::PopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> keyValuePairs_ = new pbc::PopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair>();
-    public scg::IList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> KeyValuePairsList {
-      get { return keyValuePairs_; }
+    public const int RecordsFieldNumber = 2;
+    private pbc::PopsicleList<global::OpenChain.Messages.Record> records_ = new pbc::PopsicleList<global::OpenChain.Messages.Record>();
+    public scg::IList<global::OpenChain.Messages.Record> RecordsList {
+      get { return records_; }
     }
-    public int KeyValuePairsCount {
-      get { return keyValuePairs_.Count; }
+    public int RecordsCount {
+      get { return records_.Count; }
     }
-    public global::OpenChain.Messages.Mutation.Types.KeyValuePair GetKeyValuePairs(int index) {
-      return keyValuePairs_[index];
+    public global::OpenChain.Messages.Record GetRecords(int index) {
+      return records_[index];
     }
     
     public const int MetadataFieldNumber = 3;
@@ -497,7 +490,7 @@ namespace OpenChain.Messages {
       get {
         if (!hasNamespace) return false;
         if (!hasMetadata) return false;
-        foreach (global::OpenChain.Messages.Mutation.Types.KeyValuePair element in KeyValuePairsList) {
+        foreach (global::OpenChain.Messages.Record element in RecordsList) {
           if (!element.IsInitialized) return false;
         }
         return true;
@@ -508,13 +501,13 @@ namespace OpenChain.Messages {
       CalcSerializedSize();
       string[] field_names = _mutationFieldNames;
       if (hasNamespace) {
-        output.WriteBytes(1, field_names[2], Namespace);
+        output.WriteBytes(1, field_names[1], Namespace);
       }
-      if (keyValuePairs_.Count > 0) {
-        output.WriteMessageArray(2, field_names[0], keyValuePairs_);
+      if (records_.Count > 0) {
+        output.WriteMessageArray(2, field_names[2], records_);
       }
       if (hasMetadata) {
-        output.WriteBytes(3, field_names[1], Metadata);
+        output.WriteBytes(3, field_names[0], Metadata);
       }
       UnknownFields.WriteTo(output);
     }
@@ -536,7 +529,7 @@ namespace OpenChain.Messages {
       if (hasNamespace) {
         size += pb::CodedOutputStream.ComputeBytesSize(1, Namespace);
       }
-      foreach (global::OpenChain.Messages.Mutation.Types.KeyValuePair element in KeyValuePairsList) {
+      foreach (global::OpenChain.Messages.Record element in RecordsList) {
         size += pb::CodedOutputStream.ComputeMessageSize(2, element);
       }
       if (hasMetadata) {
@@ -577,7 +570,7 @@ namespace OpenChain.Messages {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
     private Mutation MakeReadOnly() {
-      keyValuePairs_.MakeReadOnly();
+      records_.MakeReadOnly();
       return this;
     }
     
@@ -668,8 +661,8 @@ namespace OpenChain.Messages {
         if (other.HasNamespace) {
           Namespace = other.Namespace;
         }
-        if (other.keyValuePairs_.Count != 0) {
-          result.keyValuePairs_.Add(other.keyValuePairs_);
+        if (other.records_.Count != 0) {
+          result.records_.Add(other.records_);
         }
         if (other.HasMetadata) {
           Metadata = other.Metadata;
@@ -722,7 +715,7 @@ namespace OpenChain.Messages {
               break;
             }
             case 18: {
-              input.ReadMessageArray(tag, field_name, result.keyValuePairs_, global::OpenChain.Messages.Mutation.Types.KeyValuePair.DefaultInstance, extensionRegistry);
+              input.ReadMessageArray(tag, field_name, result.records_, global::OpenChain.Messages.Record.DefaultInstance, extensionRegistry);
               break;
             }
             case 26: {
@@ -760,47 +753,47 @@ namespace OpenChain.Messages {
         return this;
       }
       
-      public pbc::IPopsicleList<global::OpenChain.Messages.Mutation.Types.KeyValuePair> KeyValuePairsList {
-        get { return PrepareBuilder().keyValuePairs_; }
+      public pbc::IPopsicleList<global::OpenChain.Messages.Record> RecordsList {
+        get { return PrepareBuilder().records_; }
       }
-      public int KeyValuePairsCount {
-        get { return result.KeyValuePairsCount; }
+      public int RecordsCount {
+        get { return result.RecordsCount; }
       }
-      public global::OpenChain.Messages.Mutation.Types.KeyValuePair GetKeyValuePairs(int index) {
-        return result.GetKeyValuePairs(index);
+      public global::OpenChain.Messages.Record GetRecords(int index) {
+        return result.GetRecords(index);
       }
-      public Builder SetKeyValuePairs(int index, global::OpenChain.Messages.Mutation.Types.KeyValuePair value) {
+      public Builder SetRecords(int index, global::OpenChain.Messages.Record value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.keyValuePairs_[index] = value;
+        result.records_[index] = value;
         return this;
       }
-      public Builder SetKeyValuePairs(int index, global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder builderForValue) {
+      public Builder SetRecords(int index, global::OpenChain.Messages.Record.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.keyValuePairs_[index] = builderForValue.Build();
+        result.records_[index] = builderForValue.Build();
         return this;
       }
-      public Builder AddKeyValuePairs(global::OpenChain.Messages.Mutation.Types.KeyValuePair value) {
+      public Builder AddRecords(global::OpenChain.Messages.Record value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.keyValuePairs_.Add(value);
+        result.records_.Add(value);
         return this;
       }
-      public Builder AddKeyValuePairs(global::OpenChain.Messages.Mutation.Types.KeyValuePair.Builder builderForValue) {
+      public Builder AddRecords(global::OpenChain.Messages.Record.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.keyValuePairs_.Add(builderForValue.Build());
+        result.records_.Add(builderForValue.Build());
         return this;
       }
-      public Builder AddRangeKeyValuePairs(scg::IEnumerable<global::OpenChain.Messages.Mutation.Types.KeyValuePair> values) {
+      public Builder AddRangeRecords(scg::IEnumerable<global::OpenChain.Messages.Record> values) {
         PrepareBuilder();
-        result.keyValuePairs_.Add(values);
+        result.records_.Add(values);
         return this;
       }
-      public Builder ClearKeyValuePairs() {
+      public Builder ClearRecords() {
         PrepareBuilder();
-        result.keyValuePairs_.Clear();
+        result.records_.Clear();
         return this;
       }
       

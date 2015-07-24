@@ -13,16 +13,16 @@ namespace OpenChain.Core
         /// Adds a transaction to the store.
         /// </summary>
         /// <param name="transactions">A collection of serialized <see cref="Transaction"/> to add to the store.</param>
-        /// <exception cref="ConcurrentMutationException">A key-value pair has been mutated and the transaction is no longer valid.</exception>
+        /// <exception cref="ConcurrentMutationException">A record has been mutated and the transaction is no longer valid.</exception>
         /// <returns>A task that represents the completion of the operation.</returns>
         Task AddTransactions(IEnumerable<BinaryData> transactions);
 
         /// <summary>
-        /// Gets the current values and versions for a set of keys.
+        /// Gets the current records for a set of keys.
         /// </summary>
         /// <param name="keys">The keys to query.</param>
-        /// <returns>A task that represents the completion of the operation and contains a list of the corresponding <see cref="KeyValuePair"/>.</returns>
-        Task<IList<KeyValuePair>> GetValues(IEnumerable<BinaryData> keys);
+        /// <returns>A task that represents the completion of the operation and contains a list of the corresponding <see cref="Record"/>.</returns>
+        Task<IList<Record>> GetRecords(IEnumerable<BinaryData> keys);
 
         /// <summary>
         /// Gets the hash of the last transaction in the ledger.

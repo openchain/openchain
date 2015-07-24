@@ -34,7 +34,7 @@ namespace OpenChain.Sqlite
                     RawData BLOB
                 );
 
-                CREATE TABLE IF NOT EXISTS KeyValuePairs
+                CREATE TABLE IF NOT EXISTS Records
                 (
                     Key BLOB PRIMARY KEY,
                     Value BLOB,
@@ -51,7 +51,7 @@ namespace OpenChain.Sqlite
             await command.ExecuteNonQueryAsync();
 
             await ExecuteAsync(@"
-                    INSERT INTO Global
+                    INSERT OR IGNORE INTO Global
                     (Id, LastTransactionId)
                     VALUES (0, 0)",
                 new Dictionary<string, object>());
@@ -120,71 +120,71 @@ namespace OpenChain.Sqlite
 
         private async Task UpdateAccounts(Mutation mutation, byte[] transactionHash)
         {
-            foreach (KeyValuePair pair in mutation.KeyValuePairs)
+            foreach (Record record in mutation.Records)
             {
-                if (pair.Value == null)
+                if (record.Value == null)
                 {
-                    // Read the key-value pair and make sure it corresponds to the one supplied
+                    // Read the record and make sure it corresponds to the one supplied
                     IReadOnlyList<byte[]> versions = await ExecuteAsync(@"
                             SELECT  Version
-                            FROM    KeyValuePairs
+                            FROM    Records
                             WHERE   Key = @key",
                         reader => (byte[])reader.GetValue(0),
                         new Dictionary<string, object>()
                         {
-                            ["@key"] = pair.Key.ToByteArray()
+                            ["@key"] = record.Key.ToByteArray()
                         });
 
                     if (versions.Count == 0)
                     {
-                        if (!pair.Version.Equals(BinaryData.Empty))
-                            throw new ConcurrentMutationException(pair);
+                        if (!record.Version.Equals(BinaryData.Empty))
+                            throw new ConcurrentMutationException(record);
                     }
                     else
                     {
-                        if (!new BinaryData(versions[0]).Equals(pair.Version))
-                            throw new ConcurrentMutationException(pair);
+                        if (!new BinaryData(versions[0]).Equals(record.Version))
+                            throw new ConcurrentMutationException(record);
                     }
                 }
                 else
                 {
-                    if (!pair.Version.Equals(BinaryData.Empty))
+                    if (!record.Version.Equals(BinaryData.Empty))
                     {
                         // Update existing account
                         int count = await ExecuteAsync(@"
-                                UPDATE  KeyValuePairs
+                                UPDATE  Records
                                 SET     Value = @value, Version = @version
                                 WHERE   Key = @key AND Version = @currentVersion",
                             new Dictionary<string, object>()
                             {
-                                ["@key"] = pair.Key.ToByteArray(),
-                                ["@value"] = pair.Value.ToByteArray(),
+                                ["@key"] = record.Key.ToByteArray(),
+                                ["@value"] = record.Value.ToByteArray(),
                                 ["@version"] = transactionHash,
-                                ["@currentVersion"] = pair.Version.ToByteArray()
+                                ["@currentVersion"] = record.Version.ToByteArray()
                             });
 
                         if (count == 0)
-                            throw new ConcurrentMutationException(pair);
+                            throw new ConcurrentMutationException(record);
                     }
                     else
                     {
-                        // Create a new key-value pair
+                        // Create a new record
                         try
                         {
                             await ExecuteAsync(@"
-                                    INSERT INTO KeyValuePairs
+                                    INSERT INTO Records
                                     (Key, Value, Version)
                                     VALUES (@key, @value, @version)",
                                 new Dictionary<string, object>()
                                 {
-                                    ["@key"] = pair.Key.ToByteArray(),
-                                    ["@value"] = pair.Value.ToByteArray(),
+                                    ["@key"] = record.Key.ToByteArray(),
+                                    ["@value"] = record.Value.ToByteArray(),
                                     ["@version"] = transactionHash
                                 });
                         }
                         catch (SQLiteException exception) when (exception.Message == "constraint failed")
                         {
-                            throw new ConcurrentMutationException(pair);
+                            throw new ConcurrentMutationException(record);
                         }
                     }
                 }
@@ -195,16 +195,16 @@ namespace OpenChain.Sqlite
 
         #region GetValues
 
-        public async Task<IList<KeyValuePair>> GetValues(IEnumerable<BinaryData> keys)
+        public async Task<IList<Record>> GetRecords(IEnumerable<BinaryData> keys)
         {
-            Dictionary<BinaryData, KeyValuePair> result = new Dictionary<BinaryData, KeyValuePair>();
+            Dictionary<BinaryData, Record> result = new Dictionary<BinaryData, Record>();
 
             foreach (BinaryData key in keys)
             {
                 SQLiteCommand query = Connection.CreateCommand();
                 query.CommandText = @"
                     SELECT  Value, Version
-                    FROM    KeyValuePairs
+                    FROM    Records
                     WHERE   Key = @key";
 
                 query.Parameters.AddWithValue("@key", key.ToByteArray());
@@ -214,9 +214,9 @@ namespace OpenChain.Sqlite
                     bool exists = await reader.ReadAsync();
 
                     if (exists)
-                        result[key] = new KeyValuePair(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
+                        result[key] = new Record(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
                     else
-                        result[key] = new KeyValuePair(key, BinaryData.Empty, BinaryData.Empty);
+                        result[key] = new Record(key, BinaryData.Empty, BinaryData.Empty);
                 }
             }
 
@@ -230,8 +230,8 @@ namespace OpenChain.Sqlite
         public async Task<BinaryData> GetLastTransaction()
         {
             IEnumerable<BinaryData> accounts = await ExecuteAsync(@"
-                    SELECT  RecordHash
-                    FROM    Records
+                    SELECT  Hash
+                    FROM    Transactions
                     ORDER BY Id DESC
                     LIMIT 1",
                 reader => new BinaryData((byte[])reader.GetValue(0)),

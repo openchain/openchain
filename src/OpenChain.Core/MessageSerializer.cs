@@ -17,18 +17,18 @@ namespace OpenChain.Core
                 Metadata = mutation.Metadata.ToByteString()
             };
 
-            mutationBuilder.AddRangeKeyValuePairs(
-                mutation.KeyValuePairs.Select(
-                    pair =>
+            mutationBuilder.AddRangeRecords(
+                mutation.Records.Select(
+                    record =>
                     {
-                        var builder = new Messages.Mutation.Types.KeyValuePair.Builder()
+                        var builder = new Messages.Record.Builder()
                         {
-                            Key = pair.Key.ToByteString(),
-                            Version = pair.Version.ToByteString()
+                            Key = record.Key.ToByteString(),
+                            Version = record.Version.ToByteString()
                         };
 
-                        if (pair.Value != null)
-                            builder.Value = pair.Value.ToByteString();
+                        if (record.Value != null)
+                            builder.Value = record.Value.ToByteString();
 
                         return builder.Build();
                     }));
@@ -42,11 +42,11 @@ namespace OpenChain.Core
 
             return new Mutation(
                 new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Namespace)),
-                mutation.KeyValuePairsList.Select(
-                    pair => new KeyValuePair(
-                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Key)),
-                        pair.HasValue ? new BinaryData(ByteString.Unsafe.GetBuffer(pair.Value)) : null,
-                        new BinaryData(ByteString.Unsafe.GetBuffer(pair.Version)))),
+                mutation.RecordsList.Select(
+                    record => new Record(
+                        new BinaryData(ByteString.Unsafe.GetBuffer(record.Key)),
+                        record.HasValue ? new BinaryData(ByteString.Unsafe.GetBuffer(record.Value)) : null,
+                        new BinaryData(ByteString.Unsafe.GetBuffer(record.Version)))),
                 new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }
 

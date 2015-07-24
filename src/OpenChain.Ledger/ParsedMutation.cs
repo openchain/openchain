@@ -26,19 +26,19 @@ namespace OpenChain.Ledger
             List<KeyValuePair<LedgerPath, string>> assetDefinitions = new List<KeyValuePair<LedgerPath, string>>();
             List<KeyValuePair<string, LedgerPath>> aliases = new List<KeyValuePair<string, LedgerPath>>();
 
-            foreach (KeyValuePair pair in mutation.KeyValuePairs)
+            foreach (Record record in mutation.Records)
             {
                 BinaryValue key;
                 BinaryValue value;
                 
-                // This key-value pair does not result in a mutation, it doesn't take part in the validation
-                if (pair.Value == null)
+                // This record does not result in a mutation, it doesn't take part in the validation
+                if (record.Value == null)
                     continue;
 
                 try
                 {
-                    key = BinaryValue.Read(pair.Key, isKey: true);
-                    value = BinaryValue.Read(pair.Value, isKey: false);
+                    key = BinaryValue.Read(record.Key, isKey: true);
+                    value = BinaryValue.Read(record.Value, isKey: false);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -48,7 +48,7 @@ namespace OpenChain.Ledger
                 try
                 {
                     if (key.Usage == BinaryValueUsage.Account && key.Type == BinaryValueType.StringPair && value.Type == BinaryValueType.Int64)
-                        accountMutations.Add(new AccountStatus((AccountKey)key, ((Int64Value)value).Value, pair.Version));
+                        accountMutations.Add(new AccountStatus((AccountKey)key, ((Int64Value)value).Value, record.Version));
                     else if (key.Usage == BinaryValueUsage.AssetDefinition && key.Type == BinaryValueType.String && value.Type == BinaryValueType.String)
                         assetDefinitions.Add(new KeyValuePair<LedgerPath, string>(LedgerPath.Parse(((TextValue)key).Value), ((TextValue)value).Value));
                     else if (key.Usage == BinaryValueUsage.Alias && key.Type == BinaryValueType.String && value.Type == BinaryValueType.String)

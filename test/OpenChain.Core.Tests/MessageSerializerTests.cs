@@ -17,8 +17,8 @@ namespace OpenChain.Core.Tests
                 binaryData[0],
                 new[]
                 {
-                    new KeyValuePair(binaryData[1], binaryData[2], binaryData[3]),
-                    new KeyValuePair(binaryData[4], null, binaryData[5]),
+                    new Record(binaryData[1], binaryData[2], binaryData[3]),
+                    new Record(binaryData[4], null, binaryData[5]),
                 },
                 binaryData[6]);
 
@@ -27,13 +27,13 @@ namespace OpenChain.Core.Tests
             Mutation finalMutation = MessageSerializer.DeserializeMutation(new BinaryData(result));
 
             Assert.Equal(242, result.Length);
-            Assert.Equal(mutation.KeyValuePairs.Count, finalMutation.KeyValuePairs.Count);
-            Assert.Equal(mutation.KeyValuePairs[0].Key, finalMutation.KeyValuePairs[0].Key);
-            Assert.Equal(mutation.KeyValuePairs[0].Value, finalMutation.KeyValuePairs[0].Value);
-            Assert.Equal(mutation.KeyValuePairs[0].Version, finalMutation.KeyValuePairs[0].Version);
-            Assert.Equal(mutation.KeyValuePairs[1].Key, finalMutation.KeyValuePairs[1].Key);
-            Assert.Equal(mutation.KeyValuePairs[1].Value, finalMutation.KeyValuePairs[1].Value);
-            Assert.Equal(mutation.KeyValuePairs[1].Version, finalMutation.KeyValuePairs[1].Version);
+            Assert.Equal(mutation.Records.Count, finalMutation.Records.Count);
+            Assert.Equal(mutation.Records[0].Key, finalMutation.Records[0].Key);
+            Assert.Equal(mutation.Records[0].Value, finalMutation.Records[0].Value);
+            Assert.Equal(mutation.Records[0].Version, finalMutation.Records[0].Version);
+            Assert.Equal(mutation.Records[1].Key, finalMutation.Records[1].Key);
+            Assert.Equal(mutation.Records[1].Value, finalMutation.Records[1].Value);
+            Assert.Equal(mutation.Records[1].Version, finalMutation.Records[1].Version);
             Assert.Equal(mutation.Namespace, finalMutation.Namespace);
             Assert.Equal(mutation.Metadata, finalMutation.Metadata);
         }

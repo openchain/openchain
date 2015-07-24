@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using System.Text;
 using OpenChain.Core;
-using Xunit;
+using Assert = Xunit.Assert;
+using Fact = Xunit.FactAttribute;
 
 namespace OpenChain.Ledger.Tests
 {
@@ -13,7 +13,7 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void Parse_AccountMutations()
         {
-            ParsedMutation result = Parse(new KeyValuePair(
+            ParsedMutation result = Parse(new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3]));
@@ -30,7 +30,7 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void Parse_AssetDefinitions()
         {
-            ParsedMutation result = Parse(new KeyValuePair(
+            ParsedMutation result = Parse(new Record(
                 new TextValue(BinaryValueUsage.AssetDefinition, "/the/asset").BinaryData,
                 new TextValue(BinaryValueUsage.None, "Definition").BinaryData,
                 binaryData[3]));
@@ -45,7 +45,7 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void Parse_Alias()
         {
-            ParsedMutation result = Parse(new KeyValuePair(
+            ParsedMutation result = Parse(new Record(
                 new TextValue(BinaryValueUsage.Alias, "alias").BinaryData,
                 new TextValue(BinaryValueUsage.None, "/the/path").BinaryData,
                 binaryData[3]));
@@ -61,55 +61,55 @@ namespace OpenChain.Ledger.Tests
         public void Parse_InvalidKeyPair()
         {
             // Invalid key types
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.Account, "/the/asset").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new AccountKey(BinaryValueUsage.AssetDefinition, "/the/account", "/the/asset").BinaryData,
                 new TextValue(BinaryValueUsage.None, "Definition").BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new AccountKey(BinaryValueUsage.Alias, "/the/account", "/the/asset").BinaryData,
                 new TextValue(BinaryValueUsage.None, "alias").BinaryData,
                 binaryData[3])));
 
             // Invalid value types
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 new TextValue(BinaryValueUsage.None, "Definition").BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.AssetDefinition, "/the/asset").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.Alias, "alias").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3])));
 
             // Invalid value usages
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 new Int64Value(BinaryValueUsage.Account, 100).BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.AssetDefinition, "/the/asset").BinaryData,
                 new TextValue(BinaryValueUsage.Account, "Definition").BinaryData,
                 binaryData[3])));
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.Alias, "alias").BinaryData,
                 new TextValue(BinaryValueUsage.Account, "alias").BinaryData,
                 binaryData[3])));
 
             // Empty value
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 BinaryData.Empty,
                 binaryData[3])));
@@ -117,29 +117,29 @@ namespace OpenChain.Ledger.Tests
             // Invalid path
             byte[] key = new AccountKey(BinaryValueUsage.Account, "/account", "/the/asset").BinaryData.ToByteArray();
             key[2 + 1 + 4] = (byte)'a';
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new BinaryData(key),
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3])));
 
             // Invalid alias
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.Alias, "alias").BinaryData,
                 new TextValue(BinaryValueUsage.None, "the/path").BinaryData,
                 binaryData[3])));
 
             // Invalid Binary Value
-            Assert.Throws<TransactionInvalidException>(() => Parse(new KeyValuePair(
+            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 new TextValue(BinaryValueUsage.Account, "Text").BinaryData,
                 new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[3])));
         }
 
-        private ParsedMutation Parse(params KeyValuePair[] pairs)
+        private ParsedMutation Parse(params Record[] records)
         {
             Mutation mutation = new Mutation(
                 binaryData[1],
-                pairs,
+                records,
                 binaryData[2]);
 
             return ParsedMutation.Parse(mutation);

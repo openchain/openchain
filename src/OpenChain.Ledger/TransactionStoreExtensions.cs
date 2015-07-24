@@ -9,9 +9,9 @@ namespace OpenChain.Ledger
     {
         public static async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccounts(this ITransactionStore store, IEnumerable<AccountKey> accounts)
         {
-            IList<KeyValuePair> pairs = await store.GetValues(accounts.Select(account => account.BinaryData));
+            IList<Record> records = await store.GetRecords(accounts.Select(account => account.BinaryData));
 
-            return pairs.Select(AccountStatus.FromKeyValuePair).ToDictionary(account => account.AccountKey, account => account);
+            return records.Select(AccountStatus.FromRecord).ToDictionary(account => account.AccountKey, account => account);
         }
 
         public static async Task<AccountStatus> GetAccount(this ITransactionStore store, AccountKey account)

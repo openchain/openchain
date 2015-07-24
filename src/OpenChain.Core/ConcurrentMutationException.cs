@@ -4,7 +4,7 @@ namespace OpenChain.Core
 {
     public class ConcurrentMutationException : Exception
     {
-        public ConcurrentMutationException(KeyValuePair failedMutation)
+        public ConcurrentMutationException(Record failedMutation)
             : base(string.Format(
                 "Version '{0}' of key '{1}' no longer exists.",
                 failedMutation.Version.ToString(),
@@ -13,6 +13,6 @@ namespace OpenChain.Core
             this.FailedMutation = failedMutation;
         }
 
-        public KeyValuePair FailedMutation { get; }
+        public Record FailedMutation { get; }
     }
 }

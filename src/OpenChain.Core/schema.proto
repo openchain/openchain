@@ -1,15 +1,14 @@
 package OpenChain;
 
+message Record {
+    required bytes key = 1;
+    optional bytes value = 2;
+    required bytes version = 3;
+}
+
 message Mutation {
-
-    message KeyValuePair {
-        required bytes key = 1;
-        optional bytes value = 2;
-        required bytes version = 3;
-    }
-
     required bytes namespace = 1;
-    repeated KeyValuePair key_value_pairs = 2;
+    repeated Record records = 2;
     required bytes metadata = 3;
 }
 

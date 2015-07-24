@@ -22,86 +22,86 @@ namespace OpenChain.Core.Tests
         public async Task AddTransaction_InsertSuccess()
         {
             BinaryData mutationHash = await AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[1], BinaryData.Empty),
-                new KeyValuePair(binaryData[2], null, BinaryData.Empty));
+                new Record(binaryData[0], binaryData[1], BinaryData.Empty),
+                new Record(binaryData[2], null, BinaryData.Empty));
 
-            IList<KeyValuePair> pairs1 = await this.store.GetValues(new[] { binaryData[0] });
-            IList<KeyValuePair> pairs2 = await this.store.GetValues(new[] { binaryData[2] });
-            IList<KeyValuePair> pairs3 = await this.store.GetValues(new[] { binaryData[3] });
+            IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[2] });
+            IList<Record> records3 = await this.store.GetRecords(new[] { binaryData[3] });
 
-            Assert.Equal(1, pairs1.Count);
-            AssertKeyValuePair(pairs1[0], binaryData[0], binaryData[1], mutationHash);
-            Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[2], BinaryData.Empty, BinaryData.Empty);
-            Assert.Equal(1, pairs3.Count);
-            AssertKeyValuePair(pairs3[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
+            Assert.Equal(1, records1.Count);
+            AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
+            Assert.Equal(1, records2.Count);
+            AssertRecord(records2[0], binaryData[2], BinaryData.Empty, BinaryData.Empty);
+            Assert.Equal(1, records3.Count);
+            AssertRecord(records3[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
         }
 
         [Fact]
         public async Task AddTransaction_UpdateSuccess()
         {
             BinaryData mutationHash1 = await AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[1], BinaryData.Empty));
+                new Record(binaryData[0], binaryData[1], BinaryData.Empty));
 
             BinaryData mutationHash2 = await AddTransaction(
-                new KeyValuePair(binaryData[3], binaryData[4], BinaryData.Empty));
+                new Record(binaryData[3], binaryData[4], BinaryData.Empty));
 
             BinaryData mutationHash3 = await AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[2], mutationHash1),
-                new KeyValuePair(binaryData[3], null, mutationHash2));
+                new Record(binaryData[0], binaryData[2], mutationHash1),
+                new Record(binaryData[3], null, mutationHash2));
 
-            IList<KeyValuePair> pairs1 = await this.store.GetValues(new[] { binaryData[0] });
-            IList<KeyValuePair> pairs2 = await this.store.GetValues(new[] { binaryData[3] });
+            IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[3] });
 
-            Assert.Equal(1, pairs1.Count);
-            AssertKeyValuePair(pairs1[0], binaryData[0], binaryData[2], mutationHash3);
-            Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[3], binaryData[4], mutationHash2);
+            Assert.Equal(1, records1.Count);
+            AssertRecord(records1[0], binaryData[0], binaryData[2], mutationHash3);
+            Assert.Equal(1, records2.Count);
+            AssertRecord(records2[0], binaryData[3], binaryData[4], mutationHash2);
         }
 
         [Fact]
         public async Task AddTransaction_InsertError()
         {
             await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[1], binaryData[2])));
+                new Record(binaryData[0], binaryData[1], binaryData[2])));
 
             await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new KeyValuePair(binaryData[3], null, binaryData[4])));
+                new Record(binaryData[3], null, binaryData[4])));
 
-            IList<KeyValuePair> pairs1 = await this.store.GetValues(new[] { binaryData[0] });
-            IList<KeyValuePair> pairs2 = await this.store.GetValues(new[] { binaryData[3] });
+            IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[3] });
 
-            Assert.Equal(1, pairs1.Count);
-            AssertKeyValuePair(pairs1[0], binaryData[0], BinaryData.Empty, BinaryData.Empty);
-            Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
+            Assert.Equal(1, records1.Count);
+            AssertRecord(records1[0], binaryData[0], BinaryData.Empty, BinaryData.Empty);
+            Assert.Equal(1, records2.Count);
+            AssertRecord(records2[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
         }
 
         [Fact]
         public async Task AddTransaction_UpdateError()
         {
             BinaryData mutationHash = await AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[1], BinaryData.Empty),
-                new KeyValuePair(binaryData[4], binaryData[5], BinaryData.Empty));
+                new Record(binaryData[0], binaryData[1], BinaryData.Empty),
+                new Record(binaryData[4], binaryData[5], BinaryData.Empty));
 
             await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new KeyValuePair(binaryData[0], binaryData[2], binaryData[3])));
+                new Record(binaryData[0], binaryData[2], binaryData[3])));
 
             await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new KeyValuePair(binaryData[4], null, binaryData[6])));
+                new Record(binaryData[4], null, binaryData[6])));
 
-            IList<KeyValuePair> pairs1 = await this.store.GetValues(new[] { binaryData[0] });
-            IList<KeyValuePair> pairs2 = await this.store.GetValues(new[] { binaryData[4] });
+            IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[4] });
 
-            Assert.Equal(1, pairs1.Count);
-            AssertKeyValuePair(pairs1[0], binaryData[0], binaryData[1], mutationHash);
-            Assert.Equal(1, pairs2.Count);
-            AssertKeyValuePair(pairs2[0], binaryData[4], binaryData[5], mutationHash);
+            Assert.Equal(1, records1.Count);
+            AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
+            Assert.Equal(1, records2.Count);
+            AssertRecord(records2[0], binaryData[4], binaryData[5], mutationHash);
         }
 
-        private async Task<BinaryData> AddTransaction(params KeyValuePair[] pairs)
+        private async Task<BinaryData> AddTransaction(params Record[] records)
         {
-            Mutation mutation = new Mutation(BinaryData.Parse("0123"), pairs, BinaryData.Parse("4567"));
+            Mutation mutation = new Mutation(BinaryData.Parse("0123"), records, BinaryData.Parse("4567"));
             BinaryData serializedMutation = new BinaryData(MessageSerializer.SerializeMutation(mutation));
             Transaction transaction = new Transaction(
                 serializedMutation,
@@ -113,11 +113,11 @@ namespace OpenChain.Core.Tests
             return new BinaryData(MessageSerializer.ComputeHash(serializedMutation.ToByteArray()));
         }
 
-        private static void AssertKeyValuePair(KeyValuePair pair, BinaryData key, BinaryData value, BinaryData version)
+        private static void AssertRecord(Record record, BinaryData key, BinaryData value, BinaryData version)
         {
-            Assert.Equal(key, pair.Key);
-            Assert.Equal(value, pair.Value);
-            Assert.Equal(version, pair.Version);
+            Assert.Equal(key, record.Key);
+            Assert.Equal(value, record.Value);
+            Assert.Equal(version, record.Version);
         }
     }
 }

@@ -88,7 +88,7 @@ namespace OpenChain.Controllers
         {
             BinaryData parsedKey = BinaryData.Parse(key);
 
-            KeyValuePair result = (await this.store.GetValues(new[] { parsedKey })).First();
+            Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
 
             return Json(new
             {

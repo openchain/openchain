@@ -36,9 +36,9 @@ namespace OpenChain.Sqlite
 
         protected override async Task AddTransaction(Mutation mutation, byte[] mutationHash)
         {
-            foreach (KeyValuePair pair in mutation.KeyValuePairs)
+            foreach (Record record in mutation.Records)
             {
-                AccountStatus account = AccountStatus.FromKeyValuePair(pair);
+                AccountStatus account = AccountStatus.FromRecord(record);
                 if (account != null)
                 {
                     if (!account.Version.Equals(BinaryData.Empty))

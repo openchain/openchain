@@ -6,28 +6,28 @@ namespace OpenChain.Core
 {
     public class Mutation
     {
-        public Mutation(BinaryData @namespace, IEnumerable<KeyValuePair> keyValuePairs, BinaryData metadata)
+        public Mutation(BinaryData @namespace, IEnumerable<Record> records, BinaryData metadata)
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
 
-            if (keyValuePairs == null)
-                throw new ArgumentNullException(nameof(keyValuePairs));
+            if (records == null)
+                throw new ArgumentNullException(nameof(records));
 
             if (metadata == null)
                 throw new ArgumentNullException(nameof(metadata));
 
             this.Namespace = @namespace;
-            this.KeyValuePairs = keyValuePairs.ToList().AsReadOnly();
+            this.Records = records.ToList().AsReadOnly();
             this.Metadata = metadata;
 
-            if (this.KeyValuePairs.Any(entry => entry == null))
-                throw new ArgumentNullException(nameof(keyValuePairs));
+            if (this.Records.Any(entry => entry == null))
+                throw new ArgumentNullException(nameof(records));
         }
 
         public BinaryData Namespace { get; }
 
-        public IReadOnlyList<KeyValuePair> KeyValuePairs { get; }
+        public IReadOnlyList<Record> Records { get; }
 
         public BinaryData Metadata { get; }
     }
