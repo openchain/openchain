@@ -28,7 +28,7 @@ namespace OpenChain.Sqlite
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
                 (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Id INTEGER PRIMARY KEY,
                     Hash BLOB UNIQUE,
                     MutationHash BLOB UNIQUE,
                     RawData BLOB
@@ -40,9 +40,21 @@ namespace OpenChain.Sqlite
                     Value BLOB,
                     Version BLOB
                 );
+
+                CREATE TABLE IF NOT EXISTS Global
+                (
+                    Id INTEGER PRIMARY KEY,
+                    LastTransactionId INT
+                );
             ";
 
             await command.ExecuteNonQueryAsync();
+
+            await ExecuteAsync(@"
+                    INSERT INTO Global
+                    (Id, LastTransactionId)
+                    VALUES (0, 0)",
+                new Dictionary<string, object>());
         }
 
         #endregion
@@ -53,6 +65,14 @@ namespace OpenChain.Sqlite
         {
             using (SQLiteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
+                long transactionId = (await ExecuteAsync(@"
+                        SELECT  LastTransactionId
+                        FROM    Global
+                        WHERE   Id = 0",
+                    reader => reader.GetInt64(0),
+                    new Dictionary<string, object>()))
+                    .First();
+
                 foreach (BinaryData rawTransaction in transactions)
                 {
                     byte[] rawTransactionBuffer = rawTransaction.ToByteArray();
@@ -63,20 +83,31 @@ namespace OpenChain.Sqlite
                     Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
 
                     await UpdateAccounts(mutation, mutationHash);
-                    
+
+                    transactionId += 1;
                     await ExecuteAsync(@"
                             INSERT INTO Transactions
-                            (Hash, MutationHash, RawData)
-                            VALUES (@hash, @mutationHash, @rawData)",
+                            (Id, Hash, MutationHash, RawData)
+                            VALUES (@id, @hash, @mutationHash, @rawData)",
                         new Dictionary<string, object>()
                         {
-                            { "@hash", transactionHash },
-                            { "@mutationHash", mutationHash },
-                            { "@rawData", rawTransactionBuffer }
+                            ["@id"] = transactionId,
+                            ["@hash"] = transactionHash,
+                            ["@mutationHash"] = mutationHash,
+                            ["@rawData"] = rawTransactionBuffer
                         });
 
                     await AddTransaction(mutation, mutationHash);
                 }
+
+                await ExecuteAsync(@"
+                        UPDATE  Global
+                        SET     LastTransactionId = @lastTransactionId
+                        WHERE   Id = 0",
+                    new Dictionary<string, object>()
+                    {
+                        ["@lastTransactionId"] = transactionId
+                    });
 
                 context.Commit();
             }
@@ -101,7 +132,7 @@ namespace OpenChain.Sqlite
                         reader => (byte[])reader.GetValue(0),
                         new Dictionary<string, object>()
                         {
-                            { "@key", pair.Key.ToByteArray() }
+                            ["@key"] = pair.Key.ToByteArray()
                         });
 
                     if (versions.Count == 0)
@@ -126,10 +157,10 @@ namespace OpenChain.Sqlite
                                 WHERE   Key = @key AND Version = @currentVersion",
                             new Dictionary<string, object>()
                             {
-                                { "@key", pair.Key.ToByteArray() },
-                                { "@value", pair.Value.ToByteArray() },
-                                { "@version", transactionHash },
-                                { "@currentVersion", pair.Version.ToByteArray() }
+                                ["@key"] = pair.Key.ToByteArray(),
+                                ["@value"] = pair.Value.ToByteArray(),
+                                ["@version"] = transactionHash,
+                                ["@currentVersion"] = pair.Version.ToByteArray()
                             });
 
                         if (count == 0)
@@ -146,9 +177,9 @@ namespace OpenChain.Sqlite
                                     VALUES (@key, @value, @version)",
                                 new Dictionary<string, object>()
                                 {
-                                    { "@key", pair.Key.ToByteArray() },
-                                    { "@value", pair.Value.ToByteArray() },
-                                    { "@version", transactionHash }
+                                    ["@key"] = pair.Key.ToByteArray(),
+                                    ["@value"] = pair.Value.ToByteArray(),
+                                    ["@version"] = transactionHash
                                 });
                         }
                         catch (SQLiteException exception) when (exception.Message == "constraint failed")
@@ -231,7 +262,7 @@ namespace OpenChain.Sqlite
                     selector,
                     new Dictionary<string, object>()
                     {
-                        { "@recordHash", from.ToByteArray() }
+                        ["@recordHash"] = from.ToByteArray()
                     });
             }
             else
