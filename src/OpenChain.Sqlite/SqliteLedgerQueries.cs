@@ -15,9 +15,9 @@ namespace OpenChain.Sqlite
         {
         }
 
-        public override async Task OpenDatabase()
+        public override async Task EnsureTables()
         {
-            await base.OpenDatabase();
+            await base.EnsureTables();
 
             SQLiteCommand command = Connection.CreateCommand();
             command.CommandText = @"

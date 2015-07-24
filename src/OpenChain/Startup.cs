@@ -68,7 +68,7 @@ namespace OpenChain
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
         {
             loggerfactory.AddConsole();
 
@@ -94,6 +94,8 @@ namespace OpenChain
             // Activate singletons
             app.ApplicationServices.GetService<IStreamSubscriber>();
             app.ApplicationServices.GetService<IMutationValidator>();
+
+            await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
         }
     }
 }

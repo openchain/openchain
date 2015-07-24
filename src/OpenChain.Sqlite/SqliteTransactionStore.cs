@@ -13,17 +13,15 @@ namespace OpenChain.Sqlite
         public SqliteTransactionStore(string filename)
         {
             this.Connection = new SQLiteConnection(new SQLiteConnectionStringBuilder() { Filename = filename }.ToString());
-            this.OpenDatabase().Wait();
+            this.Connection.OpenAsync().Wait();
         }
 
         protected SQLiteConnection Connection { get; }
 
         #region OpenDatabase
 
-        public virtual async Task OpenDatabase()
+        public virtual async Task EnsureTables()
         {
-            await Connection.OpenAsync();
-
             SQLiteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
@@ -28,6 +29,17 @@ namespace OpenChain.Models
             ITransactionStore store = serviceProvider.GetService<ITransactionStore>();
 
             return store as ILedgerQueries;
+        }
+
+        public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)
+        {
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IConfiguration storage = configuration.GetConfigurationSection("storage");
+
+            SqliteLedgerQueries store = new SqliteLedgerQueries(storage["path"]);
+
+            if (storage["type"] == "SQLite")
+                await store.EnsureTables();
         }
 
         public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
@@ -104,7 +116,7 @@ namespace OpenChain.Models
             else
             {
                 IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("observer_mode");
-                
+
                 string masterUrl = observerMode["master_url"];
                 logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));
