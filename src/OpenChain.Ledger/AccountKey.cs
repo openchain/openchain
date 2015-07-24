@@ -6,8 +6,8 @@ namespace OpenChain.Ledger
 {
     public class AccountKey : BinaryValue
     {
-        public AccountKey(string account, string asset)
-            : base(BinaryValueUsage.AccountKey)
+        public AccountKey(BinaryValueUsage usage, string account, string asset)
+            : base(usage)
         {
             if (account == null)
                 throw new ArgumentNullException(nameof(account));
@@ -24,11 +24,12 @@ namespace OpenChain.Ledger
 
         public LedgerPath Asset { get; }
 
+        public override BinaryValueType Type => BinaryValueType.StringPair;
+
         protected override void Write(BinaryWriter writer)
         {
             byte[] account = Encoding.UTF8.GetBytes(Account.FullPath);
             byte[] asset = Encoding.UTF8.GetBytes(Asset.FullPath);
-            writer.Write((int)Usage);
             writer.Write((uint)account.Length);
             writer.Write(account);
             writer.Write((uint)asset.Length);

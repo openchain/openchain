@@ -37,8 +37,8 @@ namespace OpenChain.Ledger
 
                 try
                 {
-                    key = BinaryValue.Read(pair.Key);
-                    value = BinaryValue.Read(pair.Value);
+                    key = BinaryValue.Read(pair.Key, isKey: true);
+                    value = BinaryValue.Read(pair.Value, isKey: false);
                 }
                 catch (ArgumentOutOfRangeException)
                 {
@@ -47,11 +47,11 @@ namespace OpenChain.Ledger
 
                 try
                 {
-                    if (key.Usage == BinaryValueUsage.AccountKey && value.Usage == BinaryValueUsage.Int64)
+                    if (key.Usage == BinaryValueUsage.Account && key.Type == BinaryValueType.StringPair && value.Type == BinaryValueType.Int64)
                         accountMutations.Add(new AccountStatus((AccountKey)key, ((Int64Value)value).Value, pair.Version));
-                    else if (key.Usage == BinaryValueUsage.AssetDefinition && value.Usage == BinaryValueUsage.Text)
+                    else if (key.Usage == BinaryValueUsage.AssetDefinition && key.Type == BinaryValueType.String && value.Type == BinaryValueType.String)
                         assetDefinitions.Add(new KeyValuePair<LedgerPath, string>(LedgerPath.Parse(((TextValue)key).Value), ((TextValue)value).Value));
-                    else if (key.Usage == BinaryValueUsage.Alias && value.Usage == BinaryValueUsage.Text)
+                    else if (key.Usage == BinaryValueUsage.Alias && key.Type == BinaryValueType.String && value.Type == BinaryValueType.String)
                         aliases.Add(new KeyValuePair<string, LedgerPath>(((TextValue)key).Value, LedgerPath.Parse(((TextValue)value).Value)));
                     else
                         throw new TransactionInvalidException("InvalidKeyValuePair");

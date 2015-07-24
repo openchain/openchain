@@ -7,16 +7,18 @@ namespace OpenChain.Ledger
 {
     public abstract class BinaryValue : IEquatable<BinaryValue>
     {
-        public BinaryValue(BinaryValueUsage usage)
-        {
-            this.Usage = usage;
-        }
-
         public static BinaryValue Default { get; private set; } = new DefaultValue();
 
         public BinaryData BinaryData { get; private set; }
 
         public BinaryValueUsage Usage { get; }
+
+        public abstract BinaryValueType Type { get; }
+
+        public BinaryValue(BinaryValueUsage usage)
+        {
+            this.Usage = usage;
+        }
 
         protected abstract void Write(BinaryWriter writer);
 
@@ -25,14 +27,20 @@ namespace OpenChain.Ledger
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
+                if (Usage != BinaryValueUsage.None)
+                    writer.Write((ushort)Usage);
+
+                writer.Write((byte)Type);
+
                 Write(writer);
 
                 BinaryData = new BinaryData(stream.ToArray());
             }
         }
 
-        public static BinaryValue Read(BinaryData key)
+        public static BinaryValue Read(BinaryData key, bool isKey)
         {
+            BinaryValue result;
             if (key.Value.Count == 0)
                 return Default;
 
@@ -41,28 +49,32 @@ namespace OpenChain.Ledger
                 using (Stream input = key.ToStream())
                 using (BinaryReader reader = new BinaryReader(input, Encoding.UTF8))
                 {
-                    BinaryValueUsage type = (BinaryValueUsage)reader.ReadInt32();
-                    BinaryValue result;
+                    BinaryValueUsage usage;
+                    if (isKey)
+                        usage = (BinaryValueUsage)reader.ReadUInt16();
+                    else
+                        usage = BinaryValueUsage.None;
+
+                    BinaryValueType type = (BinaryValueType)reader.ReadByte();
+
 
                     switch (type)
                     {
-                        case BinaryValueUsage.AccountKey:
+                        case BinaryValueType.StringPair:
                             uint accountLength = reader.ReadUInt32();
                             string account = Encoding.UTF8.GetString(reader.ReadBytes((int)accountLength));
                             uint assetLength = reader.ReadUInt32();
                             string asset = Encoding.UTF8.GetString(reader.ReadBytes((int)assetLength));
-                            result = new AccountKey(account, asset);
+                            result = new AccountKey(usage, account, asset);
                             break;
-                        case BinaryValueUsage.Text:
-                        case BinaryValueUsage.AssetDefinition:
-                        case BinaryValueUsage.Alias:
+                        case BinaryValueType.String:
                             uint stringLength = reader.ReadUInt32();
                             string value = Encoding.UTF8.GetString(reader.ReadBytes((int)stringLength));
-                            result = new TextValue(type, value);
+                            result = new TextValue(usage, value);
                             break;
-                        case BinaryValueUsage.Int64:
+                        case BinaryValueType.Int64:
                             long intValue = reader.ReadInt64();
-                            result = new Int64Value(intValue);
+                            result = new Int64Value(usage, intValue);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -103,10 +115,12 @@ namespace OpenChain.Ledger
         private class DefaultValue : BinaryValue
         {
             public DefaultValue()
-                : base(BinaryValueUsage.Default)
+                : base(BinaryValueUsage.None)
             {
-                SetBinaryData();
+                BinaryData = BinaryData.Empty;
             }
+
+            public override BinaryValueType Type => BinaryValueType.Default;
 
             protected override void Write(BinaryWriter writer)
             { }

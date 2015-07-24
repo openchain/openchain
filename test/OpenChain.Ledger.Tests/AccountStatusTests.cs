@@ -13,8 +13,8 @@ namespace OpenChain.Ledger.Tests
         public void FromKeyValuePair_Set()
         {
             KeyValuePair pair = new KeyValuePair(
-                new AccountKey("/the/account", "/the/asset").BinaryData,
-                new Int64Value(100).BinaryData,
+                new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
+                new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
             AccountStatus status = AccountStatus.FromKeyValuePair(pair);
@@ -29,7 +29,7 @@ namespace OpenChain.Ledger.Tests
         public void FromKeyValuePair_Unset()
         {
             KeyValuePair pair = new KeyValuePair(
-                new AccountKey("/the/account", "/the/asset").BinaryData,
+                new AccountKey(BinaryValueUsage.Account, "/the/account", "/the/asset").BinaryData,
                 BinaryData.Empty,
                 BinaryData.Empty);
 
@@ -45,8 +45,8 @@ namespace OpenChain.Ledger.Tests
         public void FromKeyValuePair_InvalidKey()
         {
             KeyValuePair pair = new KeyValuePair(
-                new TextValue(BinaryValueUsage.Text, "Text Value").BinaryData,
-                new Int64Value(100).BinaryData,
+                new TextValue(BinaryValueUsage.Alias, "Text Value").BinaryData,
+                new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
             AccountStatus status = AccountStatus.FromKeyValuePair(pair);
@@ -58,8 +58,8 @@ namespace OpenChain.Ledger.Tests
         public void FromKeyValuePair_InvalidBinaryData()
         {
             KeyValuePair pair = new KeyValuePair(
-                new TextValue(BinaryValueUsage.AccountKey, "Text Value").BinaryData,
-                new Int64Value(100).BinaryData,
+                new TextValue(BinaryValueUsage.Account, "Text Value").BinaryData,
+                new Int64Value(BinaryValueUsage.None, 100).BinaryData,
                 binaryData[1]);
 
             AccountStatus status = AccountStatus.FromKeyValuePair(pair);

@@ -80,7 +80,7 @@ namespace OpenChain.Sqlite
                     SELECT  Account, Asset, Balance, Version
                     FROM    Accounts
                     WHERE   Account GLOB @prefix",
-                reader => new AccountStatus(new AccountKey(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
+                reader => new AccountStatus(new AccountKey(BinaryValueUsage.Account, reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
                 new Dictionary<string, object>()
                 {
                     { "@prefix", rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*" }
@@ -95,7 +95,7 @@ namespace OpenChain.Sqlite
                     SELECT  Account, Asset, Balance, Version
                     FROM    Accounts
                     WHERE   Account = @account",
-               reader => new AccountStatus(new AccountKey(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
+               reader => new AccountStatus(new AccountKey(BinaryValueUsage.Account, reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
                new Dictionary<string, object>()
                {
                     { "@account", account }

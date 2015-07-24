@@ -18,10 +18,11 @@ namespace OpenChain.Ledger
 
         public string Value { get; }
 
+        public override BinaryValueType Type => BinaryValueType.String;
+
         protected override void Write(BinaryWriter writer)
         {
             byte[] value = Encoding.UTF8.GetBytes(Value);
-            writer.Write((int)Usage);
             writer.Write((uint)value.Length);
             writer.Write(value);
         }

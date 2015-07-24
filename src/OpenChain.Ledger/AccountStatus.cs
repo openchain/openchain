@@ -24,7 +24,7 @@ namespace OpenChain.Ledger
             long value;
             try
             {
-                key = BinaryValue.Read(mutation.Key) as AccountKey;
+                key = BinaryValue.Read(mutation.Key, isKey: true) as AccountKey;
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -39,7 +39,7 @@ namespace OpenChain.Ledger
             if (mutation.Value.Value.Count == 0)
                 value = 0;
             else
-                value = ((Int64Value)BinaryValue.Read(mutation.Value)).Value;
+                value = ((Int64Value)BinaryValue.Read(mutation.Value, isKey: false)).Value;
 
             return new AccountStatus(key, value, mutation.Version);
         }
