@@ -2,7 +2,7 @@
 using System.Linq;
 using Xunit;
 
-namespace OpenChain.Core.Tests
+namespace OpenChain.Tests
 {
     public class MutationTests
     {

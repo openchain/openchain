@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.SQLite;
-using OpenChain.Core;
 using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite

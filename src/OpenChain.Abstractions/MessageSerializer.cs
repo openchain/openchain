@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Google.ProtocolBuffers;
 
-namespace OpenChain.Core
+namespace OpenChain
 {
     public static class MessageSerializer
     {

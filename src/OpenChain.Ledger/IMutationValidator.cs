@@ -1,5 +1,4 @@
-﻿using OpenChain.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OpenChain.Ledger

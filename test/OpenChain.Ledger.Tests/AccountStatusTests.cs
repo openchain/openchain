@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using OpenChain.Core;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 

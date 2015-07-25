@@ -13,7 +13,6 @@ using Microsoft.AspNet.Cors;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Logging.Console;
-using OpenChain.Core;
 using OpenChain.Models;
 using Microsoft.AspNet.WebSockets.Server;
 using Microsoft.AspNet.Cors.Core;

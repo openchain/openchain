@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
 using Xunit;
 
-namespace OpenChain.Core.Tests
+namespace OpenChain.Tests
 {
     public class BinaryDataTests
     {

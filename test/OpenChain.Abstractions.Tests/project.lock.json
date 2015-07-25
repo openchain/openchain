@@ -715,7 +715,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "OpenChain.Core >= 1.0.0-*",
+      "OpenChain.Abstractions >= 1.0.0-*",
       "xunit >= 2.1.0-*",
       "xunit.runner.dnx >= 2.1.0-*"
     ],

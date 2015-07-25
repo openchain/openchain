@@ -9,7 +9,6 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
-using OpenChain.Core;
 using OpenChain.Ledger;
 using OpenChain.Models;
 

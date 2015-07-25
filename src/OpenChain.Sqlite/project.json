@@ -8,7 +8,7 @@
 
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-beta1",
-    "OpenChain.Core": "1.0.0-*",
+    "OpenChain.Abstractions": "1.0.0-*",
     "OpenChain.Ledger": "1.0.0-*"
   },
 

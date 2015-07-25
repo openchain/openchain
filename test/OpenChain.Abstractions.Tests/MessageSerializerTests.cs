@@ -3,7 +3,7 @@ using System.Linq;
 using Google.ProtocolBuffers;
 using Xunit;
 
-namespace OpenChain.Core.Tests
+namespace OpenChain.Tests
 {
     public class MessageSerializerTests
     {

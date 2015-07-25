@@ -1,5 +1,4 @@
 ﻿using System;
-using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {

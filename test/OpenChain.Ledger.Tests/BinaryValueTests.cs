@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using OpenChain.Core;
 using Xunit;
 
 namespace OpenChain.Ledger.Tests

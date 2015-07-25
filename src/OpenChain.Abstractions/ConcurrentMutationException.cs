@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OpenChain.Core
+namespace OpenChain
 {
     public class ConcurrentMutationException : Exception
     {

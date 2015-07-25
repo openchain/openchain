@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using OpenChain.Core;
 
 namespace OpenChain.Ledger
 {

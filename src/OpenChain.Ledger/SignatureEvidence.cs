@@ -1,6 +1,4 @@
-﻿using OpenChain.Core;
-
-namespace OpenChain.Ledger
+﻿namespace OpenChain.Ledger
 {
     public class SignatureEvidence
     {

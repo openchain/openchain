@@ -2272,7 +2272,7 @@
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta5",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta5",
       "Microsoft.Net.Http.Client >= 1.0.0-beta6-10079",
-      "OpenChain.Core >= 1.0.0-*",
+      "OpenChain.Abstractions >= 1.0.0-*",
       "Newtonsoft.Json >= 7.0.1",
       "OpenChain.Ledger >= 1.0.0-*",
       "OpenChain.Sqlite >= 1.0.0-*"

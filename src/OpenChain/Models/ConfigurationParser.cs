@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using OpenChain.Core;
 using OpenChain.Ledger;
 using OpenChain.Sqlite;
 

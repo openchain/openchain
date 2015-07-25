@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Google.ProtocolBuffers;
 
-namespace OpenChain.Core
+namespace OpenChain
 {
     public class BinaryData : IEquatable<BinaryData>
     {

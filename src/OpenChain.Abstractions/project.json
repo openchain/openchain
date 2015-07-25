@@ -11,7 +11,7 @@
   },
 
   "dependencies": {
-    "Google.ProtocolBuffers": "2.4.1.555",
+    "Google.ProtocolBuffers": "2.4.1.555"
   },
 
   "frameworks": {

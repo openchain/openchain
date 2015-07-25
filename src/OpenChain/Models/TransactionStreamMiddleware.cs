@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
-using OpenChain.Core;
 using System;
 using System.Net.WebSockets;
 using System.Threading;
