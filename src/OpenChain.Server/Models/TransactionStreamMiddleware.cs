@@ -5,7 +5,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenChain.Models
+namespace OpenChain.Server.Models
 {
     public class TransactionStreamMiddleware
     {

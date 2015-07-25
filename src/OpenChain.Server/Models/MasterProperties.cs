@@ -1,6 +1,6 @@
 ﻿using Microsoft.Framework.Configuration;
 
-namespace OpenChain.Models
+namespace OpenChain.Server.Models
 {
     public class MasterProperties
     {

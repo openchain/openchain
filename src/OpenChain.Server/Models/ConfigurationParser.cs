@@ -8,7 +8,7 @@ using Microsoft.Framework.Logging;
 using OpenChain.Ledger;
 using OpenChain.Sqlite;
 
-namespace OpenChain.Models
+namespace OpenChain.Server.Models
 {
     public static class ConfigurationParser
     {

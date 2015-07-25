@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain", "src\OpenChain\OpenChain.xproj", "{C24C1145-878A-476A-AC93-6A272BE3D139}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{62976C02-9AC7-450D-8634-FB01F357F47B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Ledger", "src\OpenChain.Ledger\OpenChain.Ledger.xproj", "{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}"
@@ -26,16 +24,14 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Abstractions", "s
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Abstractions.Tests", "test\OpenChain.Abstractions.Tests\OpenChain.Abstractions.Tests.xproj", "{38A38DEF-1B86-495E-8674-2AA135CE016A}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Server", "src\OpenChain.Server\OpenChain.Server.xproj", "{C24C1145-878A-476A-AC93-6A272BE3D139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C24C1145-878A-476A-AC93-6A272BE3D139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C24C1145-878A-476A-AC93-6A272BE3D139}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C24C1145-878A-476A-AC93-6A272BE3D139}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C24C1145-878A-476A-AC93-6A272BE3D139}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,17 +56,21 @@ Global
 		{38A38DEF-1B86-495E-8674-2AA135CE016A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38A38DEF-1B86-495E-8674-2AA135CE016A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38A38DEF-1B86-495E-8674-2AA135CE016A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24C1145-878A-476A-AC93-6A272BE3D139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24C1145-878A-476A-AC93-6A272BE3D139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24C1145-878A-476A-AC93-6A272BE3D139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24C1145-878A-476A-AC93-6A272BE3D139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C24C1145-878A-476A-AC93-6A272BE3D139} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{91B5C8B9-602C-4843-A2BE-DA82B3F7449B} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{B76EC900-3DC6-42B0-B480-B758E00507B6} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{AC31F4E0-A1AF-4418-823B-8BBD6BADE39F} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{CA9A2FB3-5BB1-4730-A65E-16BD9831F303} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{38A38DEF-1B86-495E-8674-2AA135CE016A} = {62976C02-9AC7-450D-8634-FB01F357F47B}
+		{C24C1145-878A-476A-AC93-6A272BE3D139} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 	EndGlobalSection
 EndGlobal

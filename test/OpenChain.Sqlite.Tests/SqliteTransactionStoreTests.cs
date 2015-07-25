@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using OpenChain.Sqlite;
 using Xunit;
 
-namespace OpenChain.Abstractions.Tests
+namespace OpenChain.Sqlite.Tests
 {
     public class SqliteTransactionStoreTests
     {

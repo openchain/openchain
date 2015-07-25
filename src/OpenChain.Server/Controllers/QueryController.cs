@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Controllers
+namespace OpenChain.Server.Controllers
 {
     [EnableCors("Any")]
     [Route("query")]

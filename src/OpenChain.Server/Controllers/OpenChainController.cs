@@ -10,9 +10,9 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using OpenChain.Ledger;
-using OpenChain.Models;
+using OpenChain.Server.Models;
 
-namespace OpenChain.Controllers
+namespace OpenChain.Server.Controllers
 {
     [EnableCors("Any")]
     [Route("")]
