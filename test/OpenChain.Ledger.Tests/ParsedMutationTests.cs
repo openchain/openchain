@@ -59,6 +59,19 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
+        public void Parse_OptimisticConcurrency()
+        {
+            ParsedMutation result = Parse(new Record(
+                SerializeString("/the/account:ACC:/the/asset"),
+                null,
+                binaryData[3]));
+
+            Assert.Equal(0, result.AccountMutations.Count);
+            Assert.Equal(0, result.AssetDefinitions.Count);
+            Assert.Equal(0, result.Aliases.Count);
+        }
+
+        [Fact]
         public void Parse_InvalidRecord()
         {
             // Invalid number of components

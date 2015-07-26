@@ -28,6 +28,10 @@ namespace OpenChain.Ledger
 
             foreach (Record record in mutation.Records)
             {
+                // This is used for optimistic concurrency and does not participate in the validation
+                if (record.Value == null)
+                    continue;
+
                 try
                 {
                     RecordKey key = RecordKey.Parse(record.Key);

@@ -23,13 +23,15 @@ namespace OpenChain.Ledger
             if (key.RecordType != RecordType.Account)
                 throw new ArgumentOutOfRangeException(nameof(key));
 
-            if (record.Value.Value.Count != 4)
+            long amount;
+            if (record.Value.Value.Count == 0)
+                amount = 0;
+            else if (record.Value.Value.Count == 8)
+                amount = BitConverter.ToInt64(record.Value.Value.Reverse().ToArray(), 0);
+            else
                 throw new ArgumentOutOfRangeException(nameof(record));
 
-            return new AccountStatus(
-                new AccountKey(key.Path, key.AdditionalKeyComponents[0]),
-                BitConverter.ToInt64(record.Value.Value.Reverse().ToArray(), 0),
-                record.Version);
+            return new AccountStatus(new AccountKey(key.Path, key.AdditionalKeyComponents[0]), amount, record.Version);
         }
 
         public AccountKey AccountKey { get; }

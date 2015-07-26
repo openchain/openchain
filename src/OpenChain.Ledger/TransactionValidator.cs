@@ -32,10 +32,10 @@ namespace OpenChain.Ledger
                 throw new TransactionInvalidException("InvalidNamespace");
 
             // There must not be the same key represented twice
-            var groupedPairs = mutation.Records
-                .GroupBy(pair => pair.Key, pair => pair);
+            var groupedRecords = mutation.Records
+                .GroupBy(record => record.Key, record => record);
 
-            if (groupedPairs.Any(group => group.Count() > 1))
+            if (groupedRecords.Any(group => group.Count() > 1))
                 throw new TransactionInvalidException("DuplicateKey");
 
             ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));

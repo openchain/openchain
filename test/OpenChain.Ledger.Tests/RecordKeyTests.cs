@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace OpenChain.Ledger.Tests
@@ -11,7 +9,7 @@ namespace OpenChain.Ledger.Tests
     {
         private readonly BinaryData[] binaryData =
             Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
-        
+
         [Fact]
         public void Parse_Account()
         {

@@ -2,7 +2,7 @@
 
 namespace OpenChain.Ledger
 {
-    public class AccountKey
+    public class AccountKey : IEquatable<AccountKey>
     {
         public AccountKey(LedgerPath account, LedgerPath asset)
         {
@@ -29,5 +29,26 @@ namespace OpenChain.Ledger
         public LedgerPath Asset { get; }
 
         public RecordKey Key { get; }
+
+        public bool Equals(AccountKey other)
+        {
+            if (other == null)
+                return false;
+            else
+                return StringComparer.Ordinal.Equals(Key.ToString(), other.Key.ToString());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is AccountKey)
+                return this.Equals((AccountKey)obj);
+            else
+                return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return StringComparer.Ordinal.GetHashCode(ToString());
+        }
     }
 }
