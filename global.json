@@ -1,5 +1,5 @@
 ﻿{
-  "projects": [ "src", "test" ],
+  "projects": [ "src" ],
   "sdk": {
     "version": "1.0.0-beta5",
     "runtime": "clr",
