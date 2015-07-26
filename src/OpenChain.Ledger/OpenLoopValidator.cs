@@ -126,7 +126,7 @@ namespace OpenChain.Ledger
             }
         }
 
-        private void ValidateAliasMutations(IReadOnlyList<KeyValuePair<string, LedgerPath>> aliases, bool adminSigned)
+        private void ValidateAliasMutations(IReadOnlyList<KeyValuePair<LedgerPath, LedgerPath>> aliases, bool adminSigned)
         {
             if (aliases.Count > 0 && !adminSigned)
                 throw new TransactionInvalidException("InvalidSignature");

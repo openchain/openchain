@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace OpenChain.Ledger
 {
@@ -17,30 +18,18 @@ namespace OpenChain.Ledger
             this.Version = version;
         }
 
-        public static AccountStatus FromRecord(Record mutation)
+        public static AccountStatus FromRecord(RecordKey key, Record record)
         {
-            AccountKey key;
-            long value;
-            try
-            {
-                key = BinaryValue.Read(mutation.Key, isKey: true) as AccountKey;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return null;
-            }
+            if (key.RecordType != RecordType.Account)
+                throw new ArgumentOutOfRangeException(nameof(key));
 
-            // This record does not represent an account key
-            if (key == null)
-                return null;
+            if (record.Value.Value.Count != 4)
+                throw new ArgumentOutOfRangeException(nameof(record));
 
-            // If the value is unset, the balance is 0
-            if (mutation.Value.Value.Count == 0)
-                value = 0;
-            else
-                value = ((Int64Value)BinaryValue.Read(mutation.Value, isKey: false)).Value;
-
-            return new AccountStatus(key, value, mutation.Version);
+            return new AccountStatus(
+                new AccountKey(key.Path, key.AdditionalKeyComponents[0]),
+                BitConverter.ToInt64(record.Value.Value.Reverse().ToArray(), 0),
+                record.Version);
         }
 
         public AccountKey AccountKey { get; }
