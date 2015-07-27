@@ -7,7 +7,7 @@ namespace OpenChain.Ledger
 {
     public class ParsedMutation
     {
-        private ParsedMutation(IList<AccountStatus> accountMutations, IList<KeyValuePair<LedgerPath, string>> assetDefinitions, IList<KeyValuePair<LedgerPath, LedgerPath>> aliases)
+        public ParsedMutation(IList<AccountStatus> accountMutations, IList<KeyValuePair<LedgerPath, string>> assetDefinitions, IList<KeyValuePair<LedgerPath, LedgerPath>> aliases)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
             this.AssetDefinitions = new ReadOnlyCollection<KeyValuePair<LedgerPath, string>>(assetDefinitions);

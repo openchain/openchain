@@ -56,7 +56,8 @@ namespace OpenChain.Server.Models
                     case "OpenLoop":
                         string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
-                        return new OpenLoopValidator(serviceProvider.GetRequiredService<ITransactionStore>(), adminAddresses, allowThirdPartyAssets);
+                        IPermissionsProvider permissions = new DefaultPermissionLayout(adminAddresses, allowThirdPartyAssets);
+                        return new OpenLoopValidator(permissions);
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                     default:
