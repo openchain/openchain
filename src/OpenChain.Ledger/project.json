@@ -8,24 +8,30 @@
 
   "dependencies": {
     "OpenChain.Abstractions": "1.0.0-*",
-    "BouncyCastle": "1.7.0",
+    "Portable.BouncyCastle": "1.8.0-RC1",
 
   },
 
   "frameworks": {
     "dnx451": {
       "dependencies": {
-        
+
       },
       "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0",
+        "System.IO": "4.0.0.0",
         "System.Numerics": "4.0.0.0"
       }
     },
+
     "net46": {
       "frameworkAssemblies": {
+        "System.Runtime": "4.0.20.0",
+        "System.IO": "4.0.0.0",
         "System.Numerics": "4.0.0.0"
       },
       "dependencies": {
+
       }
     }
 
