@@ -5,11 +5,11 @@
 
   "dependencies": {
     "System.Text.Encoding": "4.0.10-beta-22816",
-    "Microsoft.AspNet.Cors": "1.0.0-beta6",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta6",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta6",
+    "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta6",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6",
+    "Microsoft.AspNet.Hosting": "1.0.0-beta6",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
-    "Microsoft.AspNet.Http": "1.0.0-beta6",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta6",
     "Microsoft.AspNet.WebSockets.Client": "1.0.0-beta6",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",

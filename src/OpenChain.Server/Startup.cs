@@ -30,7 +30,10 @@ namespace OpenChain.Server
             services.AddSingleton<IConfiguration>(_ => this.configuration);
 
             // Setup ASP.NET MVC
-            services.AddMvc();
+            services
+                .AddMvcCore()
+                .AddCors()
+                .AddJsonFormatters();
 
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
