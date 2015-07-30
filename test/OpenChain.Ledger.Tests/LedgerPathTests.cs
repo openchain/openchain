@@ -89,5 +89,19 @@ namespace OpenChain.Ledger.Tests
             Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the")));
             Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/not/related")));
         }
+
+        [Fact]
+        public void IsParentOf_Success()
+        {
+            LedgerPath parent = LedgerPath.Parse("/the/parent");
+
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child")));
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child/child")));
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child/")));
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/")));
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent")));
+            Assert.False(parent.IsParentOf(LedgerPath.Parse("/the")));
+            Assert.False(parent.IsParentOf(LedgerPath.Parse("/not/related")));
+        }
     }
 }

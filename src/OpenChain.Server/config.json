@@ -10,8 +10,17 @@
       "type": "OpenLoop",
       "allow_third_party_assets": true,
       "admin_addresses": [
-        "1Az3u11trKmvHLSFhzSdRqT8hjUi7R7woA"
-      ]
+        "mqW1C46sfMDB4SusRZR1FkfTZj5R1fUnuh"
+      ],
+      "issuers": [
+        {
+          "path": "/asset/btc",
+          "addresses": [
+            "mtYWSapHLBioZJfXXnQqw45yCuEi37Tkwn"
+          ]
+        }
+      ],
+      "version_byte": 111
     },
     "properties": {
       "name": "Test Ledger",

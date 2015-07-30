@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,8 +56,22 @@ namespace OpenChain.Server.Models
                 {
                     case "OpenLoop":
                         string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
+                        List<PathPermissions> pathPermissions = new List<PathPermissions>();
+                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true), adminAddresses));
+                        
+                        foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
+                        {
+                            string[] addresses = pair.Value.GetConfigurationSections("addresses").Select(key => pair.Value.GetConfigurationSection("addresses").Get(key.Key)).ToArray();
+
+                            pathPermissions.Add(new PathPermissions(
+                                LedgerPath.Parse(pair.Value.Get("path")),
+                                new PermissionSet(true, true, true, false),
+                                addresses));
+                        }
+
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
-                        IPermissionsProvider permissions = new DefaultPermissionLayout(adminAddresses, allowThirdPartyAssets);
+                        byte versionByte = byte.Parse(validator["version_byte"]);
+                        IPermissionsProvider permissions = new DefaultPermissionLayout(pathPermissions, allowThirdPartyAssets, versionByte);
                         return new OpenLoopValidator(permissions);
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);

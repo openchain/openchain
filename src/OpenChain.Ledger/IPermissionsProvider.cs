@@ -5,6 +5,6 @@ namespace OpenChain.Ledger
 {
     public interface IPermissionsProvider
     {
-        Task<PermissionSet> GetPermissions(IReadOnlyList<string> identities, LedgerPath path);
+        Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path);
     }
 }

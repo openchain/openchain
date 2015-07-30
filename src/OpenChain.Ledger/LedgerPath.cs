@@ -89,5 +89,19 @@ namespace OpenChain.Ledger
 
             return true;
         }
+
+        public bool IsParentOf(LedgerPath child)
+        {
+            if (child.Segments.Count < this.Segments.Count)
+                return false;
+
+            for (int i = 0; i < this.Segments.Count; i++)
+            {
+                if (!StringComparer.Ordinal.Equals(this.Segments[i], child.Segments[i]))
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

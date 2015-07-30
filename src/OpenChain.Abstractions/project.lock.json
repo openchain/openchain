@@ -14,7 +14,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6": {
+    ".NETFramework,Version=v4.5": {
       "Google.ProtocolBuffers/2.4.1.555": {
         "compile": {
           "lib/net40/Google.ProtocolBuffers.dll": {},
@@ -96,7 +96,7 @@
       "fx/System.Data >= 4.0.0.0",
       "fx/System.Xml >= 4.0.0.0"
     ],
-    ".NETFramework,Version=v4.6": [
+    ".NETFramework,Version=v4.5": [
       "fx/System.Data >= 4.0.0.0",
       "fx/System.Xml >= 4.0.0.0"
     ]

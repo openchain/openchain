@@ -12,7 +12,7 @@ namespace OpenChain.Ledger.Tests
         public async Task Validate_ComputeAddress()
         {
             OpenLoopValidator validator = CreateValidator(
-                new string[] { "1GSPLFveS1P2HMgzqUcAbxarUpGtNBauQQ" },
+                new string[] { "0123456789abcdef11223344" },
                 new Dictionary<string, PermissionSet>()
                 {
                     ["/a"] = new PermissionSet(true, true, true, true),
@@ -31,7 +31,7 @@ namespace OpenChain.Ledger.Tests
 
             await validator.Validate(
                 mutation,
-                new[] { new SignatureEvidence(BinaryData.Parse("0123456789abcdef"), BinaryData.Parse("0123456789abcdef")) },
+                new[] { new SignatureEvidence(BinaryData.Parse("0123456789abcdef"), BinaryData.Parse("11223344")) },
                 accounts);
         }
 
@@ -208,15 +208,20 @@ namespace OpenChain.Ledger.Tests
                 this.getPermissions = getPermissions;
             }
 
-            public Task<PermissionSet> GetPermissions(IReadOnlyList<string> identities, LedgerPath path)
+            public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path)
             {
-                Assert.Equal(identities, expectedIdentities, StringComparer.Ordinal);
+                Assert.Equal(identities.Select(ConvertEvidence), expectedIdentities, StringComparer.Ordinal);
 
                 PermissionSet result;
                 if (!getPermissions.TryGetValue(path.FullPath, out result))
                     throw new InvalidOperationException();
                 else
                     return Task.FromResult(result);
+            }
+
+            private static string ConvertEvidence(SignatureEvidence pubKey)
+            {
+                return pubKey.PublicKey.ToString() + pubKey.Signature.ToString();
             }
         }
     }
