@@ -20,27 +20,11 @@ namespace OpenChain.Ledger.Tests
                 binaryData[3]));
 
             Assert.Equal(1, result.AccountMutations.Count);
-            Assert.Equal(0, result.AssetDefinitions.Count);
             Assert.Equal(0, result.DataRecords.Count);
             Assert.Equal("/the/account", result.AccountMutations[0].AccountKey.Account.FullPath);
             Assert.Equal("/the/asset", result.AccountMutations[0].AccountKey.Asset.FullPath);
             Assert.Equal(100, result.AccountMutations[0].Balance);
             Assert.Equal(binaryData[3], result.AccountMutations[0].Version);
-        }
-
-        [Fact]
-        public void Parse_AssetDefinitions()
-        {
-            ParsedMutation result = Parse(new Record(
-                SerializeString("/the/asset:ASDEF"),
-                SerializeString("Definition"),
-                binaryData[3]));
-
-            Assert.Equal(0, result.AccountMutations.Count);
-            Assert.Equal(1, result.AssetDefinitions.Count);
-            Assert.Equal(0, result.DataRecords.Count);
-            Assert.Equal("/the/asset", result.AssetDefinitions[0].Key.FullPath);
-            Assert.Equal("Definition", result.AssetDefinitions[0].Value);
         }
 
         [Fact]
@@ -52,7 +36,6 @@ namespace OpenChain.Ledger.Tests
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
-            Assert.Equal(0, result.AssetDefinitions.Count);
             Assert.Equal(1, result.DataRecords.Count);
             Assert.Equal("/aka/alias", result.DataRecords[0].Key.FullPath);
             Assert.Equal(BinaryData.Parse("aabbccdd"), result.DataRecords[0].Value);
@@ -67,7 +50,6 @@ namespace OpenChain.Ledger.Tests
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
-            Assert.Equal(0, result.AssetDefinitions.Count);
             Assert.Equal(0, result.DataRecords.Count);
         }
 

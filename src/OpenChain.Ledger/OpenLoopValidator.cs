@@ -15,7 +15,6 @@ namespace OpenChain.Ledger
         public async Task Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
         {
             await ValidateAccountMutations(mutation.AccountMutations, accounts, authentication);
-            await ValidateAssetDefinitionMutations(mutation.AssetDefinitions, authentication);
             await ValidateDataMutations(mutation.DataRecords, authentication);
         }
 
@@ -52,19 +51,6 @@ namespace OpenChain.Ledger
             }
         }
 
-        private async Task ValidateAssetDefinitionMutations(
-            IReadOnlyList<KeyValuePair<LedgerPath, string>> assetDefinitionMutations,
-            IReadOnlyList<SignatureEvidence> signedAddresses)
-        {
-            foreach (KeyValuePair<LedgerPath, string> mutation in assetDefinitionMutations)
-            {
-                PermissionSet assetPermissions = await this.permissions.GetPermissions(signedAddresses, mutation.Key);
-
-                if (!assetPermissions.Issuance)
-                    throw new TransactionInvalidException("CannotSpendFromAccount");
-            }
-        }
-
         private async Task ValidateDataMutations(
             IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> aliases,
             IReadOnlyList<SignatureEvidence> signedAddresses)
@@ -74,7 +60,7 @@ namespace OpenChain.Ledger
                 PermissionSet aliasPermissions = await this.permissions.GetPermissions(signedAddresses, alias.Key);
 
                 if (!aliasPermissions.ModifyData)
-                    throw new TransactionInvalidException("CannotModifyAlias");
+                    throw new TransactionInvalidException("CannotModifyData");
             }
         }
     }

@@ -23,17 +23,6 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
-        public void Parse_AssetDefinition()
-        {
-            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/asset/name:ASDEF"));
-            RecordKey key = RecordKey.Parse(data);
-
-            Assert.Equal(RecordType.AssetDefinition, key.RecordType);
-            Assert.Equal("/asset/name", key.Path.FullPath);
-            Assert.Equal(0, key.AdditionalKeyComponents.Count);
-        }
-
-        [Fact]
         public void Parse_Data()
         {
             BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/aka/name:DATA"));
@@ -72,7 +61,6 @@ namespace OpenChain.Ledger.Tests
         public void GetRecordTypeName_Success()
         {
             Assert.Equal("ACC", RecordKey.GetRecordTypeName(RecordType.Account));
-            Assert.Equal("ASDEF", RecordKey.GetRecordTypeName(RecordType.AssetDefinition));
             Assert.Equal("DATA", RecordKey.GetRecordTypeName(RecordType.Data));
             Assert.Throws<ArgumentOutOfRangeException>(() => RecordKey.GetRecordTypeName((RecordType)100000));
         }

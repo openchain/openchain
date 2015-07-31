@@ -61,8 +61,6 @@ namespace OpenChain.Ledger
                     if (components.Count != 1)
                         throw new ArgumentOutOfRangeException(nameof(components));
                     return new RecordKey(RecordType.Account, ledgerPath, components[0]);
-                case "ASDEF":
-                    return new RecordKey(RecordType.AssetDefinition, ledgerPath);
                 case "DATA":
                     return new RecordKey(RecordType.Data, ledgerPath);
                 default:
@@ -76,8 +74,6 @@ namespace OpenChain.Ledger
             {
                 case RecordType.Account:
                     return "ACC";
-                case RecordType.AssetDefinition:
-                    return "ASDEF";
                 case RecordType.Data:
                     return "DATA";
                 default:

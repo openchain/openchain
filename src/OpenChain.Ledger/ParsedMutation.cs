@@ -9,24 +9,19 @@ namespace OpenChain.Ledger
     {
         public ParsedMutation(
             IList<AccountStatus> accountMutations,
-            IList<KeyValuePair<LedgerPath, string>> assetDefinitions,
             IList<KeyValuePair<LedgerPath, BinaryData>> dataRecords)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
-            this.AssetDefinitions = new ReadOnlyCollection<KeyValuePair<LedgerPath, string>>(assetDefinitions);
             this.DataRecords = new ReadOnlyCollection<KeyValuePair<LedgerPath, BinaryData>>(dataRecords);
         }
 
         public IReadOnlyList<AccountStatus> AccountMutations { get; }
-
-        public IReadOnlyList<KeyValuePair<LedgerPath, string>> AssetDefinitions { get; }
 
         public IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> DataRecords { get; }
 
         public static ParsedMutation Parse(Mutation mutation)
         {
             List<AccountStatus> accountMutations = new List<AccountStatus>();
-            List<KeyValuePair<LedgerPath, string>> assetDefinitions = new List<KeyValuePair<LedgerPath, string>>();
             List<KeyValuePair<LedgerPath, BinaryData>> dataRecords = new List<KeyValuePair<LedgerPath, BinaryData>>();
 
             foreach (Record record in mutation.Records)
@@ -42,11 +37,6 @@ namespace OpenChain.Ledger
                     {
                         case RecordType.Account:
                             accountMutations.Add(AccountStatus.FromRecord(key, record));
-                            break;
-                        case RecordType.AssetDefinition:
-                            assetDefinitions.Add(new KeyValuePair<LedgerPath, string>(
-                                key.Path,
-                                Encoding.UTF8.GetString(record.Value.ToByteArray())));
                             break;
                         case RecordType.Data:
                             dataRecords.Add(new KeyValuePair<LedgerPath, BinaryData>(
@@ -67,7 +57,7 @@ namespace OpenChain.Ledger
                 }
             }
 
-            return new ParsedMutation(accountMutations, assetDefinitions, dataRecords);
+            return new ParsedMutation(accountMutations, dataRecords);
         }
     }
 }

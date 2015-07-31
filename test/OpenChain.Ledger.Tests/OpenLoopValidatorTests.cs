@@ -26,7 +26,6 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new[] { new AccountStatus(AccountKey.Parse("/a", "/b"), 100, BinaryData.Empty) },
-                new KeyValuePair<LedgerPath, string>[] { },
                 new KeyValuePair<LedgerPath, BinaryData>[] { });
 
             await validator.Validate(
@@ -89,46 +88,6 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
-        public async Task Validate_AssetDefinitionMutationSuccess()
-        {
-            OpenLoopValidator validator = CreateValidator(
-                new string[0],
-                new Dictionary<string, PermissionSet>()
-                {
-                    ["/a"] = new PermissionSet(true, false, false, false)
-                });
-
-            Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
-
-            ParsedMutation mutation = new ParsedMutation(
-                new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, string>(LedgerPath.Parse("/a"), "") },
-                new KeyValuePair<LedgerPath, BinaryData>[0]);
-
-            await validator.Validate(mutation, new SignatureEvidence[0], accounts);
-        }
-
-        [Fact]
-        public async Task Validate_AssetDefinitionMutationError()
-        {
-            OpenLoopValidator validator = CreateValidator(
-                new string[0],
-                new Dictionary<string, PermissionSet>()
-                {
-                    ["/a"] = new PermissionSet(false, true, true, true)
-                });
-
-            Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
-
-            ParsedMutation mutation = new ParsedMutation(
-                new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, string>(LedgerPath.Parse("/a"), "") },
-                new KeyValuePair<LedgerPath, BinaryData>[0]);
-
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
-        }
-
-        [Fact]
         public async Task Validate_DataMutationSuccess()
         {
             OpenLoopValidator validator = CreateValidator(
@@ -142,7 +101,6 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new KeyValuePair<LedgerPath, string>[0],
                 new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a"), BinaryData.Parse("aabb")) });
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
@@ -162,7 +120,6 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new KeyValuePair<LedgerPath, string>[0],
                 new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a"), BinaryData.Parse("aabb")) });
 
             await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
@@ -185,7 +142,6 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new[] { new AccountStatus(AccountKey.Parse("/a", "/b"), newBalance, BinaryData.Empty) },
-                new KeyValuePair<LedgerPath, string>[0],
                 new KeyValuePair<LedgerPath, BinaryData>[0]);
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);

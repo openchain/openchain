@@ -8,7 +8,6 @@ namespace OpenChain.Ledger
     public enum RecordType
     {
         Account,
-        AssetDefinition,
         Data
     }
 }
