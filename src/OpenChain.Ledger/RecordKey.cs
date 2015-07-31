@@ -63,8 +63,8 @@ namespace OpenChain.Ledger
                     return new RecordKey(RecordType.Account, ledgerPath, components[0]);
                 case "ASDEF":
                     return new RecordKey(RecordType.AssetDefinition, ledgerPath);
-                case "ALIAS":
-                    return new RecordKey(RecordType.Alias, ledgerPath);
+                case "DATA":
+                    return new RecordKey(RecordType.Data, ledgerPath);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(recordType));
             }
@@ -78,8 +78,8 @@ namespace OpenChain.Ledger
                     return "ACC";
                 case RecordType.AssetDefinition:
                     return "ASDEF";
-                case RecordType.Alias:
-                    return "ALIAS";
+                case RecordType.Data:
+                    return "DATA";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(recordType));
             }

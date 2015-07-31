@@ -35,6 +35,7 @@ namespace OpenChain.Server
                 .AddCors()
                 .AddJsonFormatters();
 
+            // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
             // CORS Headers
@@ -52,9 +53,6 @@ namespace OpenChain.Server
             services.AddSingleton<MasterProperties>(ConfigurationParser.CreateMasterProperties);
 
             services.AddTransient<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
-
-            // Logger
-            services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
             // Transaction Stream Subscriber
             services.AddSingleton<IStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);

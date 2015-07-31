@@ -34,12 +34,12 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
-        public void Parse_Alias()
+        public void Parse_Data()
         {
-            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/aka/name:ALIAS"));
+            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/aka/name:DATA"));
             RecordKey key = RecordKey.Parse(data);
 
-            Assert.Equal(RecordType.Alias, key.RecordType);
+            Assert.Equal(RecordType.Data, key.RecordType);
             Assert.Equal("/aka/name", key.Path.FullPath);
             Assert.Equal(0, key.AdditionalKeyComponents.Count);
         }
@@ -73,7 +73,7 @@ namespace OpenChain.Ledger.Tests
         {
             Assert.Equal("ACC", RecordKey.GetRecordTypeName(RecordType.Account));
             Assert.Equal("ASDEF", RecordKey.GetRecordTypeName(RecordType.AssetDefinition));
-            Assert.Equal("ALIAS", RecordKey.GetRecordTypeName(RecordType.Alias));
+            Assert.Equal("DATA", RecordKey.GetRecordTypeName(RecordType.Data));
             Assert.Throws<ArgumentOutOfRangeException>(() => RecordKey.GetRecordTypeName((RecordType)100000));
         }
 

@@ -9,6 +9,6 @@ namespace OpenChain.Ledger
     {
         Account,
         AssetDefinition,
-        Alias
+        Data
     }
 }

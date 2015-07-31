@@ -27,6 +27,17 @@ namespace OpenChain.Server.Controllers
             return Json(accounts.Values.Select(GetAccountJson).ToArray());
         }
 
+        [HttpGet("transaction")]
+        public async Task<ActionResult> GetTransaction(string mutationHash)
+        {
+            BinaryData transaction = await this.store.GetTransaction(BinaryData.Parse(mutationHash));
+
+            if (transaction == null)
+                return new HttpStatusCodeResult(404);
+            else
+                return Json(new { raw = transaction.ToString() });
+        }
+
         [HttpGet("subaccounts")]
         public async Task<ActionResult> GetSubaccounts(string account)
         {

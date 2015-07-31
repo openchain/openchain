@@ -21,7 +21,7 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(1, result.AccountMutations.Count);
             Assert.Equal(0, result.AssetDefinitions.Count);
-            Assert.Equal(0, result.Aliases.Count);
+            Assert.Equal(0, result.DataRecords.Count);
             Assert.Equal("/the/account", result.AccountMutations[0].AccountKey.Account.FullPath);
             Assert.Equal("/the/asset", result.AccountMutations[0].AccountKey.Asset.FullPath);
             Assert.Equal(100, result.AccountMutations[0].Balance);
@@ -38,24 +38,24 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(1, result.AssetDefinitions.Count);
-            Assert.Equal(0, result.Aliases.Count);
+            Assert.Equal(0, result.DataRecords.Count);
             Assert.Equal("/the/asset", result.AssetDefinitions[0].Key.FullPath);
             Assert.Equal("Definition", result.AssetDefinitions[0].Value);
         }
 
         [Fact]
-        public void Parse_Alias()
+        public void Parse_Data()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/aka/alias:ALIAS"),
-                SerializeString("/the/path"),
+                SerializeString("/aka/alias:DATA"),
+                BinaryData.Parse("aabbccdd"),
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(0, result.AssetDefinitions.Count);
-            Assert.Equal(1, result.Aliases.Count);
-            Assert.Equal("/aka/alias", result.Aliases[0].Key.FullPath);
-            Assert.Equal("/the/path", result.Aliases[0].Value.FullPath);
+            Assert.Equal(1, result.DataRecords.Count);
+            Assert.Equal("/aka/alias", result.DataRecords[0].Key.FullPath);
+            Assert.Equal(BinaryData.Parse("aabbccdd"), result.DataRecords[0].Value);
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(0, result.AssetDefinitions.Count);
-            Assert.Equal(0, result.Aliases.Count);
+            Assert.Equal(0, result.DataRecords.Count);
         }
 
         [Fact]

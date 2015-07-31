@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,11 +51,11 @@ namespace OpenChain.Sqlite
                                 WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion",
                             new Dictionary<string, object>()
                             {
-                                { "@account", account.AccountKey.Account.FullPath },
-                                { "@asset", account.AccountKey.Asset.FullPath },
-                                { "@previousVersion", account.Version.Value.ToArray() },
-                                { "@balance", account.Balance },
-                                { "@version", mutationHash }
+                                ["@account"] = account.AccountKey.Account.FullPath,
+                                ["@asset"] = account.AccountKey.Asset.FullPath,
+                                ["@previousVersion"] = account.Version.Value.ToArray(),
+                                ["@balance"] = account.Balance,
+                                ["@version"] = mutationHash
                             });
                     }
                     else
@@ -65,10 +66,10 @@ namespace OpenChain.Sqlite
                                 VALUES (@account, @asset, @balance, @version)",
                             new Dictionary<string, object>()
                             {
-                                { "@account", account.AccountKey.Account.FullPath },
-                                { "@asset", account.AccountKey.Asset.FullPath },
-                                { "@balance", account.Balance },
-                                { "@version", mutationHash }
+                                ["@account"] = account.AccountKey.Account.FullPath,
+                                ["@asset"] = account.AccountKey.Asset.FullPath,
+                                ["@balance"] = account.Balance,
+                                ["@version"] = mutationHash
                             });
                     }
                 }
@@ -84,7 +85,7 @@ namespace OpenChain.Sqlite
                 reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
                 new Dictionary<string, object>()
                 {
-                    { "@prefix", rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*" }
+                    ["@prefix"] = rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*"
                 });
 
             return new ReadOnlyDictionary<AccountKey, AccountStatus>(accounts.ToDictionary(item => item.AccountKey, item => item));
@@ -99,10 +100,25 @@ namespace OpenChain.Sqlite
                reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
                new Dictionary<string, object>()
                {
-                    { "@account", account }
+                    ["@account"] = account
                });
 
             return new ReadOnlyDictionary<AccountKey, AccountStatus>(accounts.ToDictionary(item => item.AccountKey, item => item));
+        }
+
+        public async Task<BinaryData> GetTransaction(BinaryData mutationHash)
+        {
+            IEnumerable<BinaryData> transactions = await ExecuteAsync(@"
+                    SELECT  RawData
+                    FROM    Transactions
+                    WHERE   MutationHash = @mutationHash",
+               reader => new BinaryData((byte[])reader.GetValue(0)),
+               new Dictionary<string, object>()
+               {
+                    ["@mutationHash"] = mutationHash.ToByteArray()
+               });
+
+            return transactions.FirstOrDefault();
         }
     }
 }

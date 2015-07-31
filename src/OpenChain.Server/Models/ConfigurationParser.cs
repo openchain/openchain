@@ -65,7 +65,7 @@ namespace OpenChain.Server.Models
 
                             pathPermissions.Add(new PathPermissions(
                                 LedgerPath.Parse(pair.Value.Get("path")),
-                                new PermissionSet(true, true, true, false),
+                                new PermissionSet(true, true, true, true),
                                 addresses));
                         }
 

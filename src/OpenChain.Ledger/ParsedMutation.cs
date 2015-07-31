@@ -7,24 +7,27 @@ namespace OpenChain.Ledger
 {
     public class ParsedMutation
     {
-        public ParsedMutation(IList<AccountStatus> accountMutations, IList<KeyValuePair<LedgerPath, string>> assetDefinitions, IList<KeyValuePair<LedgerPath, LedgerPath>> aliases)
+        public ParsedMutation(
+            IList<AccountStatus> accountMutations,
+            IList<KeyValuePair<LedgerPath, string>> assetDefinitions,
+            IList<KeyValuePair<LedgerPath, BinaryData>> dataRecords)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
             this.AssetDefinitions = new ReadOnlyCollection<KeyValuePair<LedgerPath, string>>(assetDefinitions);
-            this.Aliases = new ReadOnlyCollection<KeyValuePair<LedgerPath, LedgerPath>>(aliases);
+            this.DataRecords = new ReadOnlyCollection<KeyValuePair<LedgerPath, BinaryData>>(dataRecords);
         }
 
         public IReadOnlyList<AccountStatus> AccountMutations { get; }
 
         public IReadOnlyList<KeyValuePair<LedgerPath, string>> AssetDefinitions { get; }
 
-        public IReadOnlyList<KeyValuePair<LedgerPath, LedgerPath>> Aliases { get; }
+        public IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> DataRecords { get; }
 
         public static ParsedMutation Parse(Mutation mutation)
         {
             List<AccountStatus> accountMutations = new List<AccountStatus>();
             List<KeyValuePair<LedgerPath, string>> assetDefinitions = new List<KeyValuePair<LedgerPath, string>>();
-            List<KeyValuePair<LedgerPath, LedgerPath>> aliases = new List<KeyValuePair<LedgerPath, LedgerPath>>();
+            List<KeyValuePair<LedgerPath, BinaryData>> dataRecords = new List<KeyValuePair<LedgerPath, BinaryData>>();
 
             foreach (Record record in mutation.Records)
             {
@@ -45,15 +48,14 @@ namespace OpenChain.Ledger
                                 key.Path,
                                 Encoding.UTF8.GetString(record.Value.ToByteArray())));
                             break;
-                        case RecordType.Alias:
-                            aliases.Add(new KeyValuePair<LedgerPath, LedgerPath>(
+                        case RecordType.Data:
+                            dataRecords.Add(new KeyValuePair<LedgerPath, BinaryData>(
                                 key.Path,
-                                LedgerPath.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()))));
+                                record.Value));
                             break;
                         default:
                             throw new TransactionInvalidException("InvalidRecord");
                     }
-
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "keyData")
                 {
@@ -65,7 +67,7 @@ namespace OpenChain.Ledger
                 }
             }
 
-            return new ParsedMutation(accountMutations, assetDefinitions, aliases);
+            return new ParsedMutation(accountMutations, assetDefinitions, dataRecords);
         }
     }
 }

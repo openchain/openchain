@@ -14,7 +14,6 @@ namespace OpenChain.Ledger
         private readonly LedgerPath assetPath = LedgerPath.Parse("/asset");
         private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh");
         private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh");
-        private readonly LedgerPath aliasPath = LedgerPath.Parse("/aka");
 
         public DefaultPermissionLayout(IList<PathPermissions> permissions, bool allowThirdPartyAssets, byte versionByte)
         {
@@ -27,7 +26,6 @@ namespace OpenChain.Ledger
         {
             IReadOnlyList<string> identities = authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)).ToList().AsReadOnly();
 
-            bool isAliasPath = aliasPath.IsStrictParentOf(path);
             bool isAccountPath = p2pkhAccountPath.IsStrictParentOf(path);
             bool isAssetPath = assetPath.IsStrictParentOf(path);
 
@@ -45,7 +43,7 @@ namespace OpenChain.Ledger
                 issuance: issuancePath,
                 spendFrom: isAccountPath && identities.Contains(path.Segments[1]),
                 affectBalance: (isAccountPath && IsP2pkh(path.Segments[1])) || issuancePath,
-                modifyAlias: false));
+                modifyData: false));
         }
 
         private bool IsP2pkh(string address)

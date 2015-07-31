@@ -10,5 +10,7 @@ namespace OpenChain.Ledger
         Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccount(string account);
 
         Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetSubaccounts(string rootAccount);
+
+        Task<BinaryData> GetTransaction(BinaryData mutationHash);
     }
 }

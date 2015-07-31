@@ -16,7 +16,7 @@ namespace OpenChain.Ledger
         {
             await ValidateAccountMutations(mutation.AccountMutations, accounts, authentication);
             await ValidateAssetDefinitionMutations(mutation.AssetDefinitions, authentication);
-            await ValidateAliasMutations(mutation.Aliases, authentication);
+            await ValidateDataMutations(mutation.DataRecords, authentication);
         }
 
         private async Task ValidateAccountMutations(
@@ -65,15 +65,15 @@ namespace OpenChain.Ledger
             }
         }
 
-        private async Task ValidateAliasMutations(
-            IReadOnlyList<KeyValuePair<LedgerPath, LedgerPath>> aliases,
+        private async Task ValidateDataMutations(
+            IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> aliases,
             IReadOnlyList<SignatureEvidence> signedAddresses)
         {
-            foreach (KeyValuePair<LedgerPath, LedgerPath> alias in aliases)
+            foreach (KeyValuePair<LedgerPath, BinaryData> alias in aliases)
             {
                 PermissionSet aliasPermissions = await this.permissions.GetPermissions(signedAddresses, alias.Key);
 
-                if (!aliasPermissions.ModifyAlias)
+                if (!aliasPermissions.ModifyData)
                     throw new TransactionInvalidException("CannotModifyAlias");
             }
         }

@@ -7,12 +7,12 @@ namespace OpenChain.Ledger
 {
     public class PermissionSet
     {
-        public PermissionSet(bool issuance, bool spendFrom, bool affectBalance, bool modifyAlias)
+        public PermissionSet(bool issuance, bool spendFrom, bool affectBalance, bool modifyData)
         {
             this.Issuance = issuance;
             this.SpendFrom = spendFrom;
             this.AffectBalance = affectBalance;
-            this.ModifyAlias = modifyAlias;
+            this.ModifyData = modifyData;
         }
 
         public bool Issuance { get; }
@@ -21,6 +21,6 @@ namespace OpenChain.Ledger
 
         public bool AffectBalance { get; }
 
-        public bool ModifyAlias { get; }
+        public bool ModifyData { get; }
     }
 }
