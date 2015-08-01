@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace OpenChain
 {
+    /// <summary>
+    /// Represent a mutation performed on a set of data records.
+    /// </summary>
     public class Mutation
     {
         public Mutation(BinaryData @namespace, IEnumerable<Record> records, BinaryData metadata)
@@ -25,10 +28,19 @@ namespace OpenChain
                 throw new ArgumentNullException(nameof(records));
         }
 
+        /// <summary>
+        /// Gets the namespace in which the mutation operates.
+        /// </summary>
         public BinaryData Namespace { get; }
 
+        /// <summary>
+        /// Gets a collection containing all the records being affected by the mutation.
+        /// </summary>
         public IReadOnlyList<Record> Records { get; }
 
+        /// <summary>
+        /// Gets the metadata associated with the mutation.
+        /// </summary>
         public BinaryData Metadata { get; }
     }
 }
