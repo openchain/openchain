@@ -10,7 +10,7 @@ namespace OpenChain.Ledger
     public class TransactionValidator
     {
         private readonly ITransactionStore store;
-        private readonly BinaryData ledgerId;
+        private readonly ByteString ledgerId;
         private readonly IMutationValidator validator;
 
         public TransactionValidator(ITransactionStore store, IMutationValidator validator, string rootUrl)
@@ -18,12 +18,12 @@ namespace OpenChain.Ledger
             this.store = store;
             this.validator = validator;
             this.RootUrl = rootUrl;
-            this.ledgerId = new BinaryData(Encoding.UTF8.GetBytes(rootUrl));
+            this.ledgerId = new ByteString(Encoding.UTF8.GetBytes(rootUrl));
         }
 
         public string RootUrl { get; }
 
-        public async Task<BinaryData> PostTransaction(BinaryData rawMutation, IReadOnlyList<SignatureEvidence> authentication)
+        public async Task<ByteString> PostTransaction(ByteString rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {
             // Verify that the mutation set can be deserialized
             Mutation mutation = MessageSerializer.DeserializeMutation(rawMutation);
@@ -62,19 +62,19 @@ namespace OpenChain.Ledger
 
             byte[] rawMetadata = SerializeMetadata(metadata);
 
-            Transaction transaction = new Transaction(rawMutation, date, new BinaryData(rawMetadata));
+            Transaction transaction = new Transaction(rawMutation, date, new ByteString(rawMetadata));
             byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
 
             try
             {
-                await this.store.AddTransactions(new[] { new BinaryData(serializedTransaction) });
+                await this.store.AddTransactions(new[] { new ByteString(serializedTransaction) });
             }
             catch (ConcurrentMutationException)
             {
                 throw new TransactionInvalidException("OptimisticConcurrency");
             }
 
-            return new BinaryData(MessageSerializer.ComputeHash(serializedTransaction));
+            return new ByteString(MessageSerializer.ComputeHash(serializedTransaction));
         }
 
         private static void ValidateAuthentication(IReadOnlyList<SignatureEvidence> authentication, byte[] mutationHash)
@@ -94,8 +94,8 @@ namespace OpenChain.Ledger
             transactionMetadataBuilder.AddRangeSignatures(metadata.Signatures.Select(
                 signature => new Messages.TransactionMetadata.Types.SignatureEvidence.Builder()
                 {
-                    PublicKey = ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
-                    Signature = ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
+                    PublicKey = Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
+                    Signature = Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
                 }
                 .Build()));
 

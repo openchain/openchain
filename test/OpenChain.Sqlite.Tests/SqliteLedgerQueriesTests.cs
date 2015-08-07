@@ -10,8 +10,8 @@ namespace OpenChain.Sqlite.Tests
     public class SqliteLedgerQueriesTests
     {
         private readonly SqliteLedgerQueries store;
-        private readonly BinaryData[] binaryData =
-            Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
+        private readonly ByteString[] binaryData =
+            Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         public SqliteLedgerQueriesTests()
         {
@@ -28,7 +28,7 @@ namespace OpenChain.Sqlite.Tests
                 "/:ACC:/key./",
                 "/:ACC:/key0/");
 
-            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new BinaryData(Encoding.UTF8.GetBytes("/:ACC:/key/")));
+            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:ACC:/key/")));
 
             Assert.Equal(2, result.Count);
             Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:ACC:/key/e/"));
@@ -38,19 +38,19 @@ namespace OpenChain.Sqlite.Tests
         private async Task AddRecords(params string[] keys)
         {
             Mutation mutation = new Mutation(
-                BinaryData.Empty,
+                ByteString.Empty,
                 keys.Select(key => new Record(
-                    new BinaryData(Encoding.UTF8.GetBytes(key)),
-                    BinaryData.Empty,
-                    BinaryData.Empty)),
-                BinaryData.Empty);
+                    new ByteString(Encoding.UTF8.GetBytes(key)),
+                    ByteString.Empty,
+                    ByteString.Empty)),
+                ByteString.Empty);
 
             Transaction transaction = new Transaction(
-                new BinaryData(MessageSerializer.SerializeMutation(mutation)),
+                new ByteString(MessageSerializer.SerializeMutation(mutation)),
                 new DateTime(),
-                BinaryData.Empty);
+                ByteString.Empty);
 
-            await store.AddTransactions(new[] { new BinaryData(MessageSerializer.SerializeTransaction(transaction)) });
+            await store.AddTransactions(new[] { new ByteString(MessageSerializer.SerializeTransaction(transaction)) });
         }
     }
 }

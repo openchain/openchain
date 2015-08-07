@@ -9,20 +9,20 @@ namespace OpenChain.Ledger
     {
         public ParsedMutation(
             IList<AccountStatus> accountMutations,
-            IList<KeyValuePair<LedgerPath, BinaryData>> dataRecords)
+            IList<KeyValuePair<LedgerPath, ByteString>> dataRecords)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
-            this.DataRecords = new ReadOnlyCollection<KeyValuePair<LedgerPath, BinaryData>>(dataRecords);
+            this.DataRecords = new ReadOnlyCollection<KeyValuePair<LedgerPath, ByteString>>(dataRecords);
         }
 
         public IReadOnlyList<AccountStatus> AccountMutations { get; }
 
-        public IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> DataRecords { get; }
+        public IReadOnlyList<KeyValuePair<LedgerPath, ByteString>> DataRecords { get; }
 
         public static ParsedMutation Parse(Mutation mutation)
         {
             List<AccountStatus> accountMutations = new List<AccountStatus>();
-            List<KeyValuePair<LedgerPath, BinaryData>> dataRecords = new List<KeyValuePair<LedgerPath, BinaryData>>();
+            List<KeyValuePair<LedgerPath, ByteString>> dataRecords = new List<KeyValuePair<LedgerPath, ByteString>>();
 
             foreach (Record record in mutation.Records)
             {
@@ -39,7 +39,7 @@ namespace OpenChain.Ledger
                             accountMutations.Add(AccountStatus.FromRecord(key, record));
                             break;
                         case RecordType.Data:
-                            dataRecords.Add(new KeyValuePair<LedgerPath, BinaryData>(
+                            dataRecords.Add(new KeyValuePair<LedgerPath, ByteString>(
                                 key.Path,
                                 record.Value));
                             break;

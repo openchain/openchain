@@ -41,13 +41,13 @@ namespace OpenChain.Sqlite
             }
         }
 
-        public async Task<BinaryData> GetTransaction(BinaryData mutationHash)
+        public async Task<ByteString> GetTransaction(ByteString mutationHash)
         {
-            IEnumerable<BinaryData> transactions = await ExecuteAsync(@"
+            IEnumerable<ByteString> transactions = await ExecuteAsync(@"
                     SELECT  RawData
                     FROM    Transactions
                     WHERE   MutationHash = @mutationHash",
-               reader => new BinaryData((byte[])reader.GetValue(0)),
+               reader => new ByteString((byte[])reader.GetValue(0)),
                new Dictionary<string, object>()
                {
                    ["@mutationHash"] = mutationHash.ToByteArray()
@@ -56,7 +56,7 @@ namespace OpenChain.Sqlite
             return transactions.FirstOrDefault();
         }
 
-        public async Task<IReadOnlyList<Record>> GetKeyStartingFrom(BinaryData prefix)
+        public async Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix)
         {
             byte[] from = prefix.ToByteArray();
             byte[] to = prefix.ToByteArray();
@@ -69,9 +69,9 @@ namespace OpenChain.Sqlite
                     FROM    Records
                     WHERE   Key >= @from AND Key < @to",
             reader => new Record(
-                    new BinaryData((byte[])reader.GetValue(0)),
-                    reader.GetValue(1) == null ? BinaryData.Empty : new BinaryData((byte[])reader.GetValue(1)),
-                    new BinaryData((byte[])reader.GetValue(2))),
+                    new ByteString((byte[])reader.GetValue(0)),
+                    reader.GetValue(1) == null ? ByteString.Empty : new ByteString((byte[])reader.GetValue(1)),
+                    new ByteString((byte[])reader.GetValue(2))),
                 new Dictionary<string, object>()
                 {
                     ["@from"] = from,

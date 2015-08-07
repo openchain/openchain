@@ -58,7 +58,7 @@ namespace OpenChain.Sqlite
 
         #region AddLedgerRecords
 
-        public async Task AddTransactions(IEnumerable<BinaryData> transactions)
+        public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
             using (SQLiteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
@@ -70,7 +70,7 @@ namespace OpenChain.Sqlite
                     new Dictionary<string, object>()))
                     .First();
 
-                foreach (BinaryData rawTransaction in transactions)
+                foreach (ByteString rawTransaction in transactions)
                 {
                     byte[] rawTransactionBuffer = rawTransaction.ToByteArray();
                     Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
@@ -134,18 +134,18 @@ namespace OpenChain.Sqlite
 
                     if (versions.Count == 0)
                     {
-                        if (!record.Version.Equals(BinaryData.Empty))
+                        if (!record.Version.Equals(ByteString.Empty))
                             throw new ConcurrentMutationException(record);
                     }
                     else
                     {
-                        if (!new BinaryData(versions[0]).Equals(record.Version))
+                        if (!new ByteString(versions[0]).Equals(record.Version))
                             throw new ConcurrentMutationException(record);
                     }
                 }
                 else
                 {
-                    if (!record.Version.Equals(BinaryData.Empty))
+                    if (!record.Version.Equals(ByteString.Empty))
                     {
                         // Update existing account
                         int count = await ExecuteAsync(@"
@@ -192,11 +192,11 @@ namespace OpenChain.Sqlite
 
         #region GetValues
 
-        public async Task<IList<Record>> GetRecords(IEnumerable<BinaryData> keys)
+        public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
-            Dictionary<BinaryData, Record> result = new Dictionary<BinaryData, Record>();
+            Dictionary<ByteString, Record> result = new Dictionary<ByteString, Record>();
 
-            foreach (BinaryData key in keys)
+            foreach (ByteString key in keys)
             {
                 SQLiteCommand query = Connection.CreateCommand();
                 query.CommandText = @"
@@ -214,12 +214,12 @@ namespace OpenChain.Sqlite
                     {
                         result[key] = new Record(
                             key,
-                            reader.GetValue(0) == null ? BinaryData.Empty : new BinaryData((byte[])reader.GetValue(0)),
-                            new BinaryData((byte[])reader.GetValue(1)));
+                            reader.GetValue(0) == null ? ByteString.Empty : new ByteString((byte[])reader.GetValue(0)),
+                            new ByteString((byte[])reader.GetValue(1)));
                     }
                     else
                     {
-                        result[key] = new Record(key, BinaryData.Empty, BinaryData.Empty);
+                        result[key] = new Record(key, ByteString.Empty, ByteString.Empty);
                     }
                 }
             }
@@ -231,31 +231,31 @@ namespace OpenChain.Sqlite
 
         #region GetLastRecord
 
-        public async Task<BinaryData> GetLastTransaction()
+        public async Task<ByteString> GetLastTransaction()
         {
-            IEnumerable<BinaryData> accounts = await ExecuteAsync(@"
+            IEnumerable<ByteString> accounts = await ExecuteAsync(@"
                     SELECT  Hash
                     FROM    Transactions
                     ORDER BY Id DESC
                     LIMIT 1",
-                reader => new BinaryData((byte[])reader.GetValue(0)),
+                reader => new ByteString((byte[])reader.GetValue(0)),
                 new Dictionary<string, object>());
 
-            return accounts.FirstOrDefault() ?? BinaryData.Empty;
+            return accounts.FirstOrDefault() ?? ByteString.Empty;
         }
 
         #endregion
         
         #region GetRecordStream
 
-        public IObservable<BinaryData> GetTransactionStream(BinaryData from)
+        public IObservable<ByteString> GetTransactionStream(ByteString from)
         {
             return new PollingObservable(from, this.GetLedgerRecords);
         }
 
-        private async Task<IReadOnlyList<BinaryData>> GetLedgerRecords(BinaryData from)
+        private async Task<IReadOnlyList<ByteString>> GetLedgerRecords(ByteString from)
         {
-            Func<DbDataReader, BinaryData> selector = reader => new BinaryData((byte[])reader.GetValue(0));
+            Func<DbDataReader, ByteString> selector = reader => new ByteString((byte[])reader.GetValue(0));
             if (from != null)
             {
                 return await ExecuteAsync(@"

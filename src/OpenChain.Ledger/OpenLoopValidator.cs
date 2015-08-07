@@ -52,10 +52,10 @@ namespace OpenChain.Ledger
         }
 
         private async Task ValidateDataMutations(
-            IReadOnlyList<KeyValuePair<LedgerPath, BinaryData>> aliases,
+            IReadOnlyList<KeyValuePair<LedgerPath, ByteString>> aliases,
             IReadOnlyList<SignatureEvidence> signedAddresses)
         {
-            foreach (KeyValuePair<LedgerPath, BinaryData> alias in aliases)
+            foreach (KeyValuePair<LedgerPath, ByteString> alias in aliases)
             {
                 PermissionSet aliasPermissions = await this.permissions.GetPermissions(signedAddresses, alias.Key);
 

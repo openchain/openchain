@@ -6,8 +6,8 @@ namespace OpenChain.Tests
 {
     public class MutationTests
     {
-        private readonly BinaryData[] binaryData =
-            Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
+        private readonly ByteString[] binaryData =
+            Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
         public void Mutation_Success()

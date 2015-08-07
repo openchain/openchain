@@ -27,7 +27,7 @@ namespace OpenChain.Server.Models
             byte[] buffer = new byte[1024 * 1024];
             ArraySegment<byte> segment = new ArraySegment<byte>(buffer);
 
-            BinaryData currentRecord = await this.store.GetLastTransaction();
+            ByteString currentRecord = await this.store.GetLastTransaction();
 
             while (!cancel.IsCancellationRequested)
             {
@@ -47,10 +47,10 @@ namespace OpenChain.Server.Models
                         if (result.MessageType == WebSocketMessageType.Close)
                             break;
 
-                        BinaryData record = new BinaryData(buffer.Take(result.Count));
+                        ByteString record = new ByteString(buffer.Take(result.Count));
                         await store.AddTransactions(new[] { record });
 
-                        currentRecord = new BinaryData(MessageSerializer.ComputeHash(record.ToByteArray()));
+                        currentRecord = new ByteString(MessageSerializer.ComputeHash(record.ToByteArray()));
                     }
                 }
                 catch (Exception exception)

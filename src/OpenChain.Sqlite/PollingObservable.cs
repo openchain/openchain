@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Sqlite
 {
-    public class PollingObservable : IObservable<BinaryData>
+    public class PollingObservable : IObservable<ByteString>
     {
-        private readonly Func<BinaryData, Task<IReadOnlyList<BinaryData>>> query;
-        private readonly BinaryData from;
+        private readonly Func<ByteString, Task<IReadOnlyList<ByteString>>> query;
+        private readonly ByteString from;
 
-        public PollingObservable(BinaryData from, Func<BinaryData, Task<IReadOnlyList<BinaryData>>> query)
+        public PollingObservable(ByteString from, Func<ByteString, Task<IReadOnlyList<ByteString>>> query)
         {
             this.from = from;
             this.query = query;
         }
 
-        public IDisposable Subscribe(IObserver<BinaryData> observer)
+        public IDisposable Subscribe(IObserver<ByteString> observer)
         {
             Subscription subscription = new Subscription(this, observer);
             subscription.Start(observer);
@@ -28,30 +28,30 @@ namespace OpenChain.Sqlite
             private readonly PollingObservable parent;
             private readonly CancellationTokenSource cancel = new CancellationTokenSource();
 
-            public Subscription(PollingObservable parent, IObserver<BinaryData> observer)
+            public Subscription(PollingObservable parent, IObserver<ByteString> observer)
             {
                 this.parent = parent;
             }
 
-            public async void Start(IObserver<BinaryData> observer)
+            public async void Start(IObserver<ByteString> observer)
             {
                 try
                 {
-                    BinaryData cursor = parent.from;
+                    ByteString cursor = parent.from;
 
                     while (!cancel.Token.IsCancellationRequested)
                     {
-                        IReadOnlyList<BinaryData> result = await parent.query(cursor);
+                        IReadOnlyList<ByteString> result = await parent.query(cursor);
 
-                        BinaryData lastRecord = null;
-                        foreach (BinaryData record in result)
+                        ByteString lastRecord = null;
+                        foreach (ByteString record in result)
                         {
                             observer.OnNext(record);
                             lastRecord = record;
                         }
 
                         if (lastRecord != null)
-                            cursor = new BinaryData(MessageSerializer.ComputeHash(lastRecord.ToByteArray()));
+                            cursor = new ByteString(MessageSerializer.ComputeHash(lastRecord.ToByteArray()));
 
                         await Task.Delay(TimeSpan.FromSeconds(1));
                     }

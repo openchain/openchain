@@ -21,15 +21,15 @@ namespace OpenChain.Server.Models
             if (context.WebSockets.IsWebSocketRequest)
             {
                 string from = context.Request.Query.Get("from");
-                BinaryData lastLedgerRecordHash;
+                ByteString lastLedgerRecordHash;
                 if (string.IsNullOrEmpty(from))
                     lastLedgerRecordHash = null;
                 else
-                    lastLedgerRecordHash = BinaryData.Parse(from);
+                    lastLedgerRecordHash = ByteString.Parse(from);
 
                 ITransactionStore store = (ITransactionStore)context.ApplicationServices.GetService(typeof(ITransactionStore));
 
-                IObservable<BinaryData> stream = store.GetTransactionStream(lastLedgerRecordHash);
+                IObservable<ByteString> stream = store.GetTransactionStream(lastLedgerRecordHash);
 
                 using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
                 {
@@ -52,7 +52,7 @@ namespace OpenChain.Server.Models
             }
         }
 
-        private class Observer : IObserver<BinaryData>, IDisposable
+        private class Observer : IObserver<ByteString>, IDisposable
         {
             private readonly WebSocket webSocket;
             private Task currentTask = Task.FromResult(0);
@@ -96,7 +96,7 @@ namespace OpenChain.Server.Models
                 });
             }
 
-            public void OnNext(BinaryData value)
+            public void OnNext(ByteString value)
             {
                 QueueTask(() => webSocket.SendAsync(
                     new ArraySegment<byte>(value.ToByteArray()),

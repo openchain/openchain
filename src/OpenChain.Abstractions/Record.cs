@@ -7,7 +7,7 @@ namespace OpenChain
     /// </summary>
     public class Record
     {
-        public Record(BinaryData key, BinaryData value, BinaryData version)
+        public Record(ByteString key, ByteString value, ByteString version)
         {
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
@@ -23,16 +23,16 @@ namespace OpenChain
         /// <summary>
         /// Gets the key of the record.
         /// </summary>
-        public BinaryData Key { get; }
+        public ByteString Key { get; }
 
         /// <summary>
         /// Gets the value of the record.
         /// </summary>
-        public BinaryData Value { get; }
+        public ByteString Value { get; }
 
         /// <summary>
         /// Gets the version of the record.
         /// </summary>
-        public BinaryData Version { get; }
+        public ByteString Version { get; }
     }
 }

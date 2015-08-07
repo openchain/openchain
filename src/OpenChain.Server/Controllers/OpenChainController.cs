@@ -52,18 +52,18 @@ namespace OpenChain.Server.Controllers
             if (validator == null)
                 return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
 
-            BinaryData parsedTransaction = BinaryData.Parse((string)body["transaction"]);
+            ByteString parsedTransaction = ByteString.Parse((string)body["transaction"]);
 
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
             foreach (JObject evidence in body["signatures"])
             {
                 authentication.Add(new SignatureEvidence(
-                    BinaryData.Parse((string)evidence["pub_key"]),
-                    BinaryData.Parse((string)evidence["signature"])));
+                    ByteString.Parse((string)evidence["pub_key"]),
+                    ByteString.Parse((string)evidence["signature"])));
             }
 
-            BinaryData ledgerRecordHash;
+            ByteString ledgerRecordHash;
             try
             {
                 ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
@@ -85,7 +85,7 @@ namespace OpenChain.Server.Controllers
         [HttpGet("value")]
         public async Task<ActionResult> GetValue(string key)
         {
-            BinaryData parsedKey = BinaryData.Parse(key);
+            ByteString parsedKey = ByteString.Parse(key);
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
 

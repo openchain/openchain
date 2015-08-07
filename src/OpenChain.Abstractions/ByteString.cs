@@ -4,29 +4,28 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Google.ProtocolBuffers;
 
 namespace OpenChain
 {
     /// <summary>
     /// Represents an immutable string of binary data.
     /// </summary>
-    public class BinaryData : IEquatable<BinaryData>
+    public class ByteString : IEquatable<ByteString>
     {
         private readonly byte[] data;
 
-        static BinaryData()
+        static ByteString()
         {
-            Empty = new BinaryData(new byte[0]);
+            Empty = new ByteString(new byte[0]);
         }
 
-        public BinaryData(IEnumerable<byte> data)
+        public ByteString(IEnumerable<byte> data)
         {
             this.data = data.ToArray();
             this.Value = new ReadOnlyCollection<byte>(this.data);
         }
 
-        public BinaryData(byte[] data)
+        public ByteString(byte[] data)
         {
             this.data = new byte[data.Length];
             Buffer.BlockCopy(data, 0, this.data, 0, data.Length);
@@ -34,21 +33,21 @@ namespace OpenChain
         }
 
         /// <summary>
-        /// Gets an empty <see cref="BinaryData"/>.
+        /// Gets an empty <see cref="ByteString"/>.
         /// </summary>
-        public static BinaryData Empty { get; }
+        public static ByteString Empty { get; }
 
         /// <summary>
-        /// Gets a read-only collection containing all the bytes in the <see cref="BinaryData"/>.
+        /// Gets a read-only collection containing all the bytes in the <see cref="ByteString"/>.
         /// </summary>
         public IReadOnlyList<byte> Value { get; }
 
         /// <summary>
-        /// Parses a <see cref="BinaryData"/> from a hexadecimal string.
+        /// Parses a <see cref="ByteString"/> from a hexadecimal string.
         /// </summary>
         /// <param name="hexValue">The hexadecimal string to parse.</param>
         /// <returns></returns>
-        public static BinaryData Parse(string hexValue)
+        public static ByteString Parse(string hexValue)
         {
             if (hexValue == null)
                 throw new FormatException("The hexValue parameter must not be null.");
@@ -61,7 +60,7 @@ namespace OpenChain
             for (int i = 0; i < hexValue.Length >> 1; ++i)
                 result[i] = (byte)((GetHexValue(hexValue[i << 1]) << 4) + (GetHexValue(hexValue[(i << 1) + 1])));
 
-            return new BinaryData(result);
+            return new ByteString(result);
         }
 
         private static int GetHexValue(char hex)
@@ -94,9 +93,9 @@ namespace OpenChain
             return new MemoryStream(this.data, 0, this.data.Length, false, false);
         }
 
-        internal ByteString ToByteString()
+        internal Google.ProtocolBuffers.ByteString ToProtocolBuffers()
         {
-            return ByteString.Unsafe.FromBytes(this.data);
+            return Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(this.data);
         }
 
         /// <summary>
@@ -104,7 +103,7 @@ namespace OpenChain
         /// </summary>
         /// <param name="other">The object to compare with the current object.</param>
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
-        public bool Equals(BinaryData other)
+        public bool Equals(ByteString other)
         {
             if (other == null)
             {
@@ -130,8 +129,8 @@ namespace OpenChain
         /// <returns>true if the specified object is equal to the current object; otherwise, false.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is BinaryData)
-                return this.Equals((BinaryData)obj);
+            if (obj is ByteString)
+                return this.Equals((ByteString)obj);
             else
                 return false;
         }

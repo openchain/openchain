@@ -2,14 +2,14 @@
 {
     public class SignatureEvidence
     {
-        public SignatureEvidence(BinaryData publicKey, BinaryData signature)
+        public SignatureEvidence(ByteString publicKey, ByteString signature)
         {
             this.PublicKey = publicKey;
             this.Signature = signature;
         }
 
-        public BinaryData PublicKey { get; private set; }
+        public ByteString PublicKey { get; private set; }
 
-        public BinaryData Signature { get; private set; }
+        public ByteString Signature { get; private set; }
     }
 }

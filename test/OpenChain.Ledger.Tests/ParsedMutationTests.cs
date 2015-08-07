@@ -8,8 +8,8 @@ namespace OpenChain.Ledger.Tests
 {
     public class ParsedMutationTests
     {
-        private readonly BinaryData[] binaryData =
-            Enumerable.Range(0, 10).Select(index => new BinaryData(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
+        private readonly ByteString[] binaryData =
+            Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
         public void Parse_AccountMutations()
@@ -32,13 +32,13 @@ namespace OpenChain.Ledger.Tests
         {
             ParsedMutation result = Parse(new Record(
                 SerializeString("/aka/alias/:DATA"),
-                BinaryData.Parse("aabbccdd"),
+                ByteString.Parse("aabbccdd"),
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(1, result.DataRecords.Count);
             Assert.Equal("/aka/alias/", result.DataRecords[0].Key.FullPath);
-            Assert.Equal(BinaryData.Parse("aabbccdd"), result.DataRecords[0].Value);
+            Assert.Equal(ByteString.Parse("aabbccdd"), result.DataRecords[0].Value);
         }
 
         [Fact]
@@ -101,14 +101,14 @@ namespace OpenChain.Ledger.Tests
             return ParsedMutation.Parse(mutation);
         }
 
-        private static BinaryData SerializeInt(long value)
+        private static ByteString SerializeInt(long value)
         {
-            return new BinaryData(BitConverter.GetBytes(value).Reverse());
+            return new ByteString(BitConverter.GetBytes(value).Reverse());
         }
 
-        private static BinaryData SerializeString(string value)
+        private static ByteString SerializeString(string value)
         {
-            return new BinaryData(Encoding.UTF8.GetBytes(value));
+            return new ByteString(Encoding.UTF8.GetBytes(value));
         }
     }
 }

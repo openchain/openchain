@@ -20,7 +20,7 @@ namespace OpenChain.Ledger
 
         public IReadOnlyList<LedgerPath> AdditionalKeyComponents { get; }
 
-        public static RecordKey Parse(BinaryData keyData)
+        public static RecordKey Parse(ByteString keyData)
         {
             string[] parts = Encoding.UTF8.GetString(keyData?.ToByteArray()).Split(':');
             if (parts.Length < 2)
@@ -51,7 +51,7 @@ namespace OpenChain.Ledger
             }
         }
 
-        public BinaryData ToBinary() => new BinaryData(Encoding.UTF8.GetBytes(ToString()));
+        public ByteString ToBinary() => new ByteString(Encoding.UTF8.GetBytes(ToString()));
 
         public static RecordKey ParseRecord(string recordType, LedgerPath ledgerPath, IList<LedgerPath> components)
         {

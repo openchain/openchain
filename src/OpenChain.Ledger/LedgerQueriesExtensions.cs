@@ -10,7 +10,7 @@ namespace OpenChain.Ledger
     {
         public static async Task<IReadOnlyList<AccountStatus>> GetAccount(this ILedgerQueries queries, string account)
         {
-            BinaryData prefix = new BinaryData(Encoding.UTF8.GetBytes(account + ":ACC:"));
+            ByteString prefix = new ByteString(Encoding.UTF8.GetBytes(account + ":ACC:"));
             IReadOnlyList<Record> records = await queries.GetKeyStartingFrom(prefix);
 
             return records
@@ -21,7 +21,7 @@ namespace OpenChain.Ledger
         
         public static async Task<IReadOnlyList<Record>> GetSubaccounts(this ILedgerQueries queries, string rootAccount)
         {
-            BinaryData prefix = new BinaryData(Encoding.UTF8.GetBytes(rootAccount));
+            ByteString prefix = new ByteString(Encoding.UTF8.GetBytes(rootAccount));
             return await queries.GetKeyStartingFrom(prefix);
         }
     }

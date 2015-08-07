@@ -7,7 +7,7 @@ namespace OpenChain
     /// </summary>
     public class Transaction
     {
-        public Transaction(BinaryData mutation, DateTime timestamp, BinaryData transactionMetadata)
+        public Transaction(ByteString mutation, DateTime timestamp, ByteString transactionMetadata)
         {
             if (mutation == null)
                 throw new ArgumentNullException(nameof(mutation));
@@ -23,7 +23,7 @@ namespace OpenChain
         /// <summary>
         /// Gets the binary representation of the mutation applied by this transaction.
         /// </summary>
-        public BinaryData Mutation { get; }
+        public ByteString Mutation { get; }
 
         /// <summary>
         /// Gets the timestamp of the transaction.
@@ -33,6 +33,6 @@ namespace OpenChain
         /// <summary>
         /// Gets the metadata associated with the transaction.
         /// </summary>
-        public BinaryData TransactionMetadata { get; }
+        public ByteString TransactionMetadata { get; }
     }
 }

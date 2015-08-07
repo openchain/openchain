@@ -9,7 +9,7 @@ namespace OpenChain
     /// </summary>
     public class Mutation
     {
-        public Mutation(BinaryData @namespace, IEnumerable<Record> records, BinaryData metadata)
+        public Mutation(ByteString @namespace, IEnumerable<Record> records, ByteString metadata)
         {
             if (@namespace == null)
                 throw new ArgumentNullException(nameof(@namespace));
@@ -31,7 +31,7 @@ namespace OpenChain
         /// <summary>
         /// Gets the namespace in which the mutation operates.
         /// </summary>
-        public BinaryData Namespace { get; }
+        public ByteString Namespace { get; }
 
         /// <summary>
         /// Gets a collection containing all the records being affected by the mutation.
@@ -41,6 +41,6 @@ namespace OpenChain
         /// <summary>
         /// Gets the metadata associated with the mutation.
         /// </summary>
-        public BinaryData Metadata { get; }
+        public ByteString Metadata { get; }
     }
 }

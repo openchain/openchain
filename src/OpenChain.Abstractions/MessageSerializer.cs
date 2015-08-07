@@ -18,8 +18,8 @@ namespace OpenChain
         {
             Messages.Mutation.Builder mutationBuilder = new Messages.Mutation.Builder()
             {
-                Namespace = mutation.Namespace.ToByteString(),
-                Metadata = mutation.Metadata.ToByteString()
+                Namespace = mutation.Namespace.ToProtocolBuffers(),
+                Metadata = mutation.Metadata.ToProtocolBuffers()
             };
 
             mutationBuilder.AddRangeRecords(
@@ -28,12 +28,12 @@ namespace OpenChain
                     {
                         var builder = new Messages.Record.Builder()
                         {
-                            Key = record.Key.ToByteString(),
-                            Version = record.Version.ToByteString()
+                            Key = record.Key.ToProtocolBuffers(),
+                            Version = record.Version.ToProtocolBuffers()
                         };
 
                         if (record.Value != null)
-                            builder.Value = record.Value.ToByteString();
+                            builder.Value = record.Value.ToProtocolBuffers();
 
                         return builder.Build();
                     }));
@@ -46,18 +46,18 @@ namespace OpenChain
         /// </summary>
         /// <param name="data">The binary data to deserialize.</param>
         /// <returns>The deserialized <see cref="Mutation"/>.</returns>
-        public static Mutation DeserializeMutation(BinaryData data)
+        public static Mutation DeserializeMutation(ByteString data)
         {
-            Messages.Mutation mutation = new Messages.Mutation.Builder().MergeFrom(data.ToByteString()).BuildParsed();
+            Messages.Mutation mutation = new Messages.Mutation.Builder().MergeFrom(data.ToProtocolBuffers()).BuildParsed();
 
             return new Mutation(
-                new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Namespace)),
+                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(mutation.Namespace)),
                 mutation.RecordsList.Select(
                     record => new Record(
-                        new BinaryData(ByteString.Unsafe.GetBuffer(record.Key)),
-                        record.HasValue ? new BinaryData(ByteString.Unsafe.GetBuffer(record.Value)) : null,
-                        new BinaryData(ByteString.Unsafe.GetBuffer(record.Version)))),
-                new BinaryData(ByteString.Unsafe.GetBuffer(mutation.Metadata)));
+                        new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Key)),
+                        record.HasValue ? new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Value)) : null,
+                        new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Version)))),
+                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }
 
         /// <summary>
@@ -69,9 +69,9 @@ namespace OpenChain
         {
             Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
             {
-                Mutation = transaction.Mutation.ToByteString(),
+                Mutation = transaction.Mutation.ToProtocolBuffers(),
                 Timestamp = (long)(transaction.Timestamp - epoch).TotalSeconds,
-                TransactionMetadata = transaction.TransactionMetadata.ToByteString()
+                TransactionMetadata = transaction.TransactionMetadata.ToProtocolBuffers()
             };
 
             return transactionBuilder.BuildParsed().ToByteArray();
@@ -82,14 +82,14 @@ namespace OpenChain
         /// </summary>
         /// <param name="data">The binary data to deserialize.</param>
         /// <returns>The deserialized <see cref="Transaction"/>.</returns>
-        public static Transaction DeserializeTransaction(BinaryData data)
+        public static Transaction DeserializeTransaction(ByteString data)
         {
-            Messages.Transaction record = new Messages.Transaction.Builder().MergeFrom(data.ToByteString()).BuildParsed();
+            Messages.Transaction record = new Messages.Transaction.Builder().MergeFrom(data.ToProtocolBuffers()).BuildParsed();
 
             return new Transaction(
-                new BinaryData(ByteString.Unsafe.GetBuffer(record.Mutation)),
+                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Mutation)),
                 epoch + TimeSpan.FromSeconds(record.Timestamp),
-                new BinaryData(ByteString.Unsafe.GetBuffer(record.TransactionMetadata)));
+                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.TransactionMetadata)));
         }
         
         /// <summary>

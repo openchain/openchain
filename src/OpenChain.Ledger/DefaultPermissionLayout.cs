@@ -62,7 +62,7 @@ namespace OpenChain.Ledger
             }
         }
 
-        private string GetPubKeyHash(BinaryData pubKey)
+        private string GetPubKeyHash(ByteString pubKey)
         {
             using (RIPEMD160 ripe = RIPEMD160.Create())
             using (SHA256 sha256 = SHA256.Create())

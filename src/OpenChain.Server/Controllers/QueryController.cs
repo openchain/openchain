@@ -30,7 +30,7 @@ namespace OpenChain.Server.Controllers
         [HttpGet("transaction")]
         public async Task<ActionResult> GetTransaction(string mutationHash)
         {
-            BinaryData transaction = await this.store.GetTransaction(BinaryData.Parse(mutationHash));
+            ByteString transaction = await this.store.GetTransaction(ByteString.Parse(mutationHash));
 
             if (transaction == null)
                 return new HttpStatusCodeResult(404);

@@ -21,16 +21,16 @@ namespace OpenChain.Ledger.Tests
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
             {
-                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), 150, BinaryData.Empty)
+                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), 150, ByteString.Empty)
             };
 
             ParsedMutation mutation = new ParsedMutation(
-                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), 100, BinaryData.Empty) },
-                new KeyValuePair<LedgerPath, BinaryData>[] { });
+                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), 100, ByteString.Empty) },
+                new KeyValuePair<LedgerPath, ByteString>[] { });
 
             await validator.Validate(
                 mutation,
-                new[] { new SignatureEvidence(BinaryData.Parse("0123456789abcdef"), BinaryData.Parse("11223344")) },
+                new[] { new SignatureEvidence(ByteString.Parse("0123456789abcdef"), ByteString.Parse("11223344")) },
                 accounts);
         }
 
@@ -101,7 +101,7 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a/"), BinaryData.Parse("aabb")) });
+                new[] { new KeyValuePair<LedgerPath, ByteString>(LedgerPath.Parse("/a/"), ByteString.Parse("aabb")) });
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
         }
@@ -120,7 +120,7 @@ namespace OpenChain.Ledger.Tests
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a/"), BinaryData.Parse("aabb")) });
+                new[] { new KeyValuePair<LedgerPath, ByteString>(LedgerPath.Parse("/a/"), ByteString.Parse("aabb")) });
 
             await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
         }
@@ -137,12 +137,12 @@ namespace OpenChain.Ledger.Tests
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
             {
-                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), previousBalance, BinaryData.Empty)
+                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), previousBalance, ByteString.Empty)
             };
 
             ParsedMutation mutation = new ParsedMutation(
-                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), newBalance, BinaryData.Empty) },
-                new KeyValuePair<LedgerPath, BinaryData>[0]);
+                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), newBalance, ByteString.Empty) },
+                new KeyValuePair<LedgerPath, ByteString>[0]);
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
         }

@@ -7,8 +7,8 @@ namespace OpenChain.Ledger
 {
     public interface ILedgerQueries
     {
-        Task<IReadOnlyList<Record>> GetKeyStartingFrom(BinaryData prefix);
+        Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix);
 
-        Task<BinaryData> GetTransaction(BinaryData mutationHash);
+        Task<ByteString> GetTransaction(ByteString mutationHash);
     }
 }

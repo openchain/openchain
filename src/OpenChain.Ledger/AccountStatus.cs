@@ -5,7 +5,7 @@ namespace OpenChain.Ledger
 {
     public class AccountStatus
     {
-        public AccountStatus(AccountKey accountKey, long amount, BinaryData version)
+        public AccountStatus(AccountKey accountKey, long amount, ByteString version)
         {
             if (accountKey == null)
                 throw new ArgumentNullException(nameof(accountKey));
@@ -38,6 +38,6 @@ namespace OpenChain.Ledger
 
         public long Balance { get; }
 
-        public BinaryData Version { get; }
+        public ByteString Version { get; }
     }
 }
