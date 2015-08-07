@@ -7,9 +7,7 @@ namespace OpenChain.Ledger
 {
     public interface ILedgerQueries
     {
-        Task<IReadOnlyList<AccountStatus>> GetAccount(string account);
-
-        Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetSubaccounts(string rootAccount);
+        Task<IReadOnlyList<Record>> GetKeyStartingFrom(BinaryData prefix);
 
         Task<BinaryData> GetTransaction(BinaryData mutationHash);
     }

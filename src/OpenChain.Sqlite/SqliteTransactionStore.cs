@@ -211,9 +211,16 @@ namespace OpenChain.Sqlite
                     bool exists = await reader.ReadAsync();
 
                     if (exists)
-                        result[key] = new Record(key, new BinaryData((byte[])reader.GetValue(0)), new BinaryData((byte[])reader.GetValue(1)));
+                    {
+                        result[key] = new Record(
+                            key,
+                            reader.GetValue(0) == null ? BinaryData.Empty : new BinaryData((byte[])reader.GetValue(0)),
+                            new BinaryData((byte[])reader.GetValue(1)));
+                    }
                     else
+                    {
                         result[key] = new Record(key, BinaryData.Empty, BinaryData.Empty);
+                    }
                 }
             }
 

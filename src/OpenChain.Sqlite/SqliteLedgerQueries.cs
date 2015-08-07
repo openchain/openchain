@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.SQLite;
 using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite
@@ -20,19 +16,9 @@ namespace OpenChain.Sqlite
         {
             await base.EnsureTables();
 
-            SQLiteCommand command = Connection.CreateCommand();
-            command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Accounts
-                (
-                    Account TEXT,
-                    Asset TEXT,
-                    Balance INTEGER,
-                    Version BLOB,
-                    PRIMARY KEY (Account ASC, Asset ASC)
-                );
-            ";
-
-            await command.ExecuteNonQueryAsync();
+            await ExecuteAsync(
+                "ALTER TABLE Records ADD COLUMN Asset TEXT;",
+                new Dictionary<string, object>());
         }
 
         protected override async Task AddTransaction(Mutation mutation, byte[] mutationHash)
@@ -42,65 +28,17 @@ namespace OpenChain.Sqlite
                 RecordKey key = RecordKey.Parse(record.Key);
                 if (key.RecordType == RecordType.Account)
                 {
-                    AccountStatus account = AccountStatus.FromRecord(key, record);
-
-                    if (!account.Version.Equals(BinaryData.Empty))
+                    await ExecuteAsync(@"
+                        UPDATE  Records
+                        SET     Asset = @asset
+                        WHERE   Key = @key",
+                    new Dictionary<string, object>()
                     {
-                        await ExecuteAsync(@"
-                                UPDATE  Accounts
-                                SET     Balance = @balance, Version = @version
-                                WHERE   Account = @account AND Asset = @asset AND Version = @previousVersion",
-                            new Dictionary<string, object>()
-                            {
-                                ["@account"] = account.AccountKey.Account.FullPath,
-                                ["@asset"] = account.AccountKey.Asset.FullPath,
-                                ["@previousVersion"] = account.Version.Value.ToArray(),
-                                ["@balance"] = account.Balance,
-                                ["@version"] = mutationHash
-                            });
-                    }
-                    else
-                    {
-                        await ExecuteAsync(@"
-                                INSERT INTO Accounts
-                                (Account, Asset, Balance, Version)
-                                VALUES (@account, @asset, @balance, @version)",
-                            new Dictionary<string, object>()
-                            {
-                                ["@account"] = account.AccountKey.Account.FullPath,
-                                ["@asset"] = account.AccountKey.Asset.FullPath,
-                                ["@balance"] = account.Balance,
-                                ["@version"] = mutationHash
-                            });
-                    }
+                        ["@key"] = record.Key.ToByteArray(),
+                        ["@asset"] = key.AdditionalKeyComponents[0].FullPath
+                    });
                 }
             }
-        }
-
-        public async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetSubaccounts(string rootAccount)
-        {
-            IEnumerable<AccountStatus> accounts = await ExecuteAsync(@"
-                    SELECT  Account, Asset, Balance, Version
-                    FROM    Accounts
-                    WHERE   Account GLOB @prefix",
-               reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
-               new Dictionary<string, object>()
-               {
-                   ["@prefix"] = rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*"
-               });
-
-            return new ReadOnlyDictionary<AccountKey, AccountStatus>(accounts.ToDictionary(item => item.AccountKey, item => item));
-        }
-
-        public async Task<IReadOnlyList<AccountStatus>> GetAccount(string account)
-        {
-            BinaryData prefix = new BinaryData(Encoding.UTF8.GetBytes(account + ":ACC:"));
-            IReadOnlyList<Record> records = await GetKeyStartingFrom(prefix);
-
-            return records
-                .Select(record => AccountStatus.FromRecord(RecordKey.Parse(record.Key), record))
-                .ToList()
-                .AsReadOnly();
         }
 
         public async Task<BinaryData> GetTransaction(BinaryData mutationHash)

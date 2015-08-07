@@ -47,9 +47,14 @@ namespace OpenChain.Server.Controllers
 
             LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray());
 
-            IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await this.store.GetSubaccounts(directory.FullPath);
+            IReadOnlyList<Record> accounts = await this.store.GetSubaccounts(directory.FullPath);
 
-            return Json(accounts.Values.Select(GetAccountJson).ToArray());
+            return Json(accounts.Select(result => new
+            {
+                key = result.Key.ToString(),
+                value = result.Value.ToString(),
+                version = result.Version.ToString()
+            }).ToArray());
         }
 
         private object GetAccountJson(AccountStatus account)

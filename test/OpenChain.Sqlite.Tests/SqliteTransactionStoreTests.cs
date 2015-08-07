@@ -23,18 +23,22 @@ namespace OpenChain.Sqlite.Tests
         {
             BinaryData mutationHash = await AddTransaction(
                 new Record(binaryData[0], binaryData[1], BinaryData.Empty),
-                new Record(binaryData[2], null, BinaryData.Empty));
+                new Record(binaryData[2], null, BinaryData.Empty),
+                new Record(binaryData[4], BinaryData.Empty, BinaryData.Empty));
 
             IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
             IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[2] });
-            IList<Record> records3 = await this.store.GetRecords(new[] { binaryData[3] });
+            IList<Record> records3 = await this.store.GetRecords(new[] { binaryData[4] });
+            IList<Record> records4 = await this.store.GetRecords(new[] { binaryData[6] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
             Assert.Equal(1, records2.Count);
             AssertRecord(records2[0], binaryData[2], BinaryData.Empty, BinaryData.Empty);
             Assert.Equal(1, records3.Count);
-            AssertRecord(records3[0], binaryData[3], BinaryData.Empty, BinaryData.Empty);
+            AssertRecord(records3[0], binaryData[4], BinaryData.Empty, mutationHash);
+            Assert.Equal(1, records4.Count);
+            AssertRecord(records4[0], binaryData[6], BinaryData.Empty, BinaryData.Empty);
         }
 
         [Fact]
