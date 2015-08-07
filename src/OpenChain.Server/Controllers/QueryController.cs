@@ -22,9 +22,9 @@ namespace OpenChain.Server.Controllers
         [HttpGet("account")]
         public async Task<ActionResult> GetAccount(string account)
         {
-            IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await this.store.GetAccount(account);
+            IReadOnlyList<AccountStatus> accounts = await this.store.GetAccount(account);
 
-            return Json(accounts.Values.Select(GetAccountJson).ToArray());
+            return Json(accounts.Select(GetAccountJson).ToArray());
         }
 
         [HttpGet("transaction")]
@@ -45,10 +45,7 @@ namespace OpenChain.Server.Controllers
             if (!LedgerPath.TryParse(account, out path))
                 return HttpBadRequest();
 
-            if (path.IsDirectory)
-                return HttpBadRequest();
-
-            LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray(), true);
+            LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray());
 
             IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await this.store.GetSubaccounts(directory.FullPath);
 

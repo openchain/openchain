@@ -15,17 +15,17 @@ namespace OpenChain.Ledger.Tests
                 new string[] { "0123456789abcdef11223344" },
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a"] = new PermissionSet(true, true, true, true),
-                    ["/b"] = new PermissionSet(true, true, true, true)
+                    ["/a/"] = new PermissionSet(true, true, true, true),
+                    ["/b/"] = new PermissionSet(true, true, true, true)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
             {
-                [AccountKey.Parse("/a", "/b")] = new AccountStatus(AccountKey.Parse("/a", "/b"), 150, BinaryData.Empty)
+                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), 150, BinaryData.Empty)
             };
 
             ParsedMutation mutation = new ParsedMutation(
-                new[] { new AccountStatus(AccountKey.Parse("/a", "/b"), 100, BinaryData.Empty) },
+                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), 100, BinaryData.Empty) },
                 new KeyValuePair<LedgerPath, BinaryData>[] { });
 
             await validator.Validate(
@@ -94,14 +94,14 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a"] = new PermissionSet(false, false, false, true)
+                    ["/a/"] = new PermissionSet(false, false, false, true)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a"), BinaryData.Parse("aabb")) });
+                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a/"), BinaryData.Parse("aabb")) });
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
         }
@@ -113,14 +113,14 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a"] = new PermissionSet(true, true, true, false)
+                    ["/a/"] = new PermissionSet(true, true, true, false)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
-                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a"), BinaryData.Parse("aabb")) });
+                new[] { new KeyValuePair<LedgerPath, BinaryData>(LedgerPath.Parse("/a/"), BinaryData.Parse("aabb")) });
 
             await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
         }
@@ -131,17 +131,17 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a"] = accountPermissions,
-                    ["/b"] = issuancePermissions
+                    ["/a/"] = accountPermissions,
+                    ["/b/"] = issuancePermissions
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
             {
-                [AccountKey.Parse("/a", "/b")] = new AccountStatus(AccountKey.Parse("/a", "/b"), previousBalance, BinaryData.Empty)
+                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), previousBalance, BinaryData.Empty)
             };
 
             ParsedMutation mutation = new ParsedMutation(
-                new[] { new AccountStatus(AccountKey.Parse("/a", "/b"), newBalance, BinaryData.Empty) },
+                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), newBalance, BinaryData.Empty) },
                 new KeyValuePair<LedgerPath, BinaryData>[0]);
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);

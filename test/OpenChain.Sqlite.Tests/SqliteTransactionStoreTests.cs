@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OpenChain.Sqlite;
 using Xunit;
 
 namespace OpenChain.Sqlite.Tests
@@ -16,6 +15,7 @@ namespace OpenChain.Sqlite.Tests
         public SqliteTransactionStoreTests()
         {
             this.store = new SqliteTransactionStore(":memory:");
+            this.store.EnsureTables().Wait();
         }
 
         [Fact]

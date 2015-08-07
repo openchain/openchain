@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SQLite;
 using OpenChain.Ledger;
@@ -78,32 +79,28 @@ namespace OpenChain.Sqlite
 
         public async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetSubaccounts(string rootAccount)
         {
-             IEnumerable<AccountStatus> accounts = await ExecuteAsync(@"
+            IEnumerable<AccountStatus> accounts = await ExecuteAsync(@"
                     SELECT  Account, Asset, Balance, Version
                     FROM    Accounts
                     WHERE   Account GLOB @prefix",
-                reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
-                new Dictionary<string, object>()
-                {
-                    ["@prefix"] = rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*"
-                });
+               reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
+               new Dictionary<string, object>()
+               {
+                   ["@prefix"] = rootAccount.Replace("[", "[[]").Replace("*", "[*]").Replace("?", "[?]") + "*"
+               });
 
             return new ReadOnlyDictionary<AccountKey, AccountStatus>(accounts.ToDictionary(item => item.AccountKey, item => item));
         }
 
-        public async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccount(string account)
+        public async Task<IReadOnlyList<AccountStatus>> GetAccount(string account)
         {
-            IEnumerable<AccountStatus> accounts = await ExecuteAsync(@"
-                    SELECT  Account, Asset, Balance, Version
-                    FROM    Accounts
-                    WHERE   Account = @account",
-               reader => new AccountStatus(AccountKey.Parse(reader.GetString(0), reader.GetString(1)), reader.GetInt64(2), new BinaryData((byte[])reader.GetValue(3))),
-               new Dictionary<string, object>()
-               {
-                    ["@account"] = account
-               });
+            BinaryData prefix = new BinaryData(Encoding.UTF8.GetBytes(account + ":ACC:"));
+            IReadOnlyList<Record> records = await GetKeyStartingFrom(prefix);
 
-            return new ReadOnlyDictionary<AccountKey, AccountStatus>(accounts.ToDictionary(item => item.AccountKey, item => item));
+            return records
+                .Select(record => AccountStatus.FromRecord(RecordKey.Parse(record.Key), record))
+                .ToList()
+                .AsReadOnly();
         }
 
         public async Task<BinaryData> GetTransaction(BinaryData mutationHash)
@@ -115,10 +112,33 @@ namespace OpenChain.Sqlite
                reader => new BinaryData((byte[])reader.GetValue(0)),
                new Dictionary<string, object>()
                {
-                    ["@mutationHash"] = mutationHash.ToByteArray()
+                   ["@mutationHash"] = mutationHash.ToByteArray()
                });
 
             return transactions.FirstOrDefault();
+        }
+
+        public async Task<IReadOnlyList<Record>> GetKeyStartingFrom(BinaryData prefix)
+        {
+            byte[] from = prefix.ToByteArray();
+            byte[] to = prefix.ToByteArray();
+
+            if (to[to.Length - 1] < 255)
+                to[to.Length - 1] += 1;
+
+            return await ExecuteAsync(@"
+                    SELECT  Key, Value, Version
+                    FROM    Records
+                    WHERE   Key >= @from AND Key < @to",
+            reader => new Record(
+                    new BinaryData((byte[])reader.GetValue(0)),
+                    reader.GetValue(1) == null ? BinaryData.Empty : new BinaryData((byte[])reader.GetValue(1)),
+                    new BinaryData((byte[])reader.GetValue(2))),
+                new Dictionary<string, object>()
+                {
+                    ["@from"] = from,
+                    ["@to"] = to
+                });
         }
     }
 }

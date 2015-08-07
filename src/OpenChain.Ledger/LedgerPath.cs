@@ -11,24 +11,21 @@ namespace OpenChain.Ledger
         // Only allow alphanumeric characters and characters in the following set: "$-_.+!*'(),".
         private static readonly Regex invalidCharacter = new Regex(@"[^A-Za-z0-9\$_\.\+!*'\(\),-]", RegexOptions.Compiled);
 
-        private LedgerPath(string path, IEnumerable<string> segments, bool isDirectory)
+        private LedgerPath(string path, IEnumerable<string> segments)
         {
             this.FullPath = path;
             this.Segments = new ReadOnlyCollection<string>(segments.ToList());
-            this.IsDirectory = isDirectory;
         }
 
         public string FullPath { get; }
 
         public IReadOnlyList<string> Segments { get; }
 
-        public bool IsDirectory { get; }
-
         public static bool TryParse(string path, out LedgerPath result)
         {
             result = null;
             string[] segments = path.Split('/');
-            if (segments.Length < 2 || segments[0] != string.Empty)
+            if (segments.Length < 2 || segments[0] != string.Empty || segments[segments.Length - 1] != string.Empty)
                 return false;
 
             if (segments.Any(segment => !IsValidPathSegment(segment)))
@@ -38,10 +35,7 @@ namespace OpenChain.Ledger
                 if (segments[i] == string.Empty)
                     return false;
 
-            if (segments[segments.Length - 1] == string.Empty)
-                result = new LedgerPath(path, segments.Skip(1).Take(segments.Length - 2), true);
-            else
-                result = new LedgerPath(path, segments.Skip(1), false);
+            result = new LedgerPath(path, segments.Skip(1).Take(segments.Length - 2));
 
             return true;
         }
@@ -55,15 +49,12 @@ namespace OpenChain.Ledger
                 throw new ArgumentOutOfRangeException(nameof(path));
         }
 
-        public static LedgerPath FromSegments(string[] segments, bool isDirectory)
+        public static LedgerPath FromSegments(string[] segments)
         {
             if (segments == null || segments.Any(segment => !IsValidPathSegment(segment) || segment == string.Empty))
                 throw new ArgumentOutOfRangeException(nameof(segments));
 
-            return new LedgerPath(
-                "/" + string.Join("/", segments) + (isDirectory ? "/" : ""),
-                segments,
-                isDirectory);
+            return new LedgerPath("/" + string.Join("/", segments) + "/", segments);
         }
 
         public static bool IsValidPathSegment(string path)

@@ -14,14 +14,14 @@ namespace OpenChain.Ledger.Tests
         public void FromRecord_Set()
         {
             Record record = new Record(
-                AccountKey.Parse("/the/account", "/the/asset").Key.ToBinary(),
+                AccountKey.Parse("/the/account/", "/the/asset/").Key.ToBinary(),
                 SerializeInt(100),
                 binaryData[1]);
 
             AccountStatus status = AccountStatus.FromRecord(RecordKey.Parse(record.Key), record);
 
-            Assert.Equal("/the/account", status.AccountKey.Account.FullPath);
-            Assert.Equal("/the/asset", status.AccountKey.Asset.FullPath);
+            Assert.Equal("/the/account/", status.AccountKey.Account.FullPath);
+            Assert.Equal("/the/asset/", status.AccountKey.Asset.FullPath);
             Assert.Equal(100, status.Balance);
             Assert.Equal(binaryData[1], status.Version);
         }
@@ -30,14 +30,14 @@ namespace OpenChain.Ledger.Tests
         public void FromRecord_Unset()
         {
             Record record = new Record(
-                AccountKey.Parse("/the/account", "/the/asset").Key.ToBinary(),
+                AccountKey.Parse("/the/account/", "/the/asset/").Key.ToBinary(),
                 BinaryData.Empty,
                 binaryData[1]);
 
             AccountStatus status = AccountStatus.FromRecord(RecordKey.Parse(record.Key), record);
 
-            Assert.Equal("/the/account", status.AccountKey.Account.FullPath);
-            Assert.Equal("/the/asset", status.AccountKey.Asset.FullPath);
+            Assert.Equal("/the/account/", status.AccountKey.Account.FullPath);
+            Assert.Equal("/the/asset/", status.AccountKey.Asset.FullPath);
             Assert.Equal(0, status.Balance);
             Assert.Equal(binaryData[1], status.Version);
         }

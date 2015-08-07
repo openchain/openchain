@@ -14,7 +14,7 @@
       ],
       "issuers": [
         {
-          "path": "/asset/btc",
+          "path": "/asset/btc/",
           "addresses": [
             "mtYWSapHLBioZJfXXnQqw45yCuEi37Tkwn"
           ]

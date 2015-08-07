@@ -13,23 +13,23 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void Parse_Account()
         {
-            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/account/name:ACC:/asset/name"));
+            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/account/name/:ACC:/asset/name/"));
             RecordKey key = RecordKey.Parse(data);
 
             Assert.Equal(RecordType.Account, key.RecordType);
-            Assert.Equal("/account/name", key.Path.FullPath);
+            Assert.Equal("/account/name/", key.Path.FullPath);
             Assert.Equal(1, key.AdditionalKeyComponents.Count);
-            Assert.Equal("/asset/name", key.AdditionalKeyComponents[0].FullPath);
+            Assert.Equal("/asset/name/", key.AdditionalKeyComponents[0].FullPath);
         }
 
         [Fact]
         public void Parse_Data()
         {
-            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/aka/name:DATA"));
+            BinaryData data = new BinaryData(Encoding.UTF8.GetBytes("/aka/name/:DATA"));
             RecordKey key = RecordKey.Parse(data);
 
             Assert.Equal(RecordType.Data, key.RecordType);
-            Assert.Equal("/aka/name", key.Path.FullPath);
+            Assert.Equal("/aka/name/", key.Path.FullPath);
             Assert.Equal(0, key.AdditionalKeyComponents.Count);
         }
 
@@ -38,23 +38,23 @@ namespace OpenChain.Ledger.Tests
         {
             // Invalid structure
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/account/name"))));
+                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/account/name/"))));
 
             // Unknown record type
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/account/name:DOESNOTEXIST"))));
+                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/account/name/:DOESNOTEXIST"))));
 
             // Incorrect number of additional components
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/asset/name:ASDEF:/other"))));
+                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/asset/name/:ASDEF:/other/"))));
 
             // Incorrect number of additional components
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/asset/name:ACC"))));
+                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("/asset/name/:ACC"))));
 
             // Invalid path
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("account/name:ACC"))));
+                RecordKey.Parse(new BinaryData(Encoding.UTF8.GetBytes("account/name/:ACC"))));
         }
 
         [Fact]

@@ -11,9 +11,9 @@ namespace OpenChain.Ledger
         private readonly IList<PathPermissions> permissions;
         private readonly bool allowThirdPartyAssets;
         private readonly byte versionByte;
-        private readonly LedgerPath assetPath = LedgerPath.Parse("/asset");
-        private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh");
-        private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh");
+        private readonly LedgerPath assetPath = LedgerPath.Parse("/asset/");
+        private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh/");
+        private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh/");
 
         public DefaultPermissionLayout(IList<PathPermissions> permissions, bool allowThirdPartyAssets, byte versionByte)
         {

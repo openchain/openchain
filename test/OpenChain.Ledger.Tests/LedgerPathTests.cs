@@ -9,19 +9,17 @@ namespace OpenChain.Ledger.Tests
         {
             // Normal case
             LedgerPath path;
-            bool result = LedgerPath.TryParse("/abc/def", out path);
+            bool result = LedgerPath.TryParse("/abc/def/", out path);
 
             Assert.Equal(true, result);
-            Assert.Equal("/abc/def", path.FullPath);
-            Assert.Equal(false, path.IsDirectory);
+            Assert.Equal("/abc/def/", path.FullPath);
             Assert.Equal<string>(new[] { "abc", "def" }, path.Segments);
 
             // All characters
-            result = LedgerPath.TryParse("/azAZ0189$-_.+!*'(),", out path);
+            result = LedgerPath.TryParse("/azAZ0189$-_.+!*'(),/", out path);
 
             Assert.Equal(true, result);
-            Assert.Equal("/azAZ0189$-_.+!*'(),", path.FullPath);
-            Assert.Equal(false, path.IsDirectory);
+            Assert.Equal("/azAZ0189$-_.+!*'(),/", path.FullPath);
             Assert.Equal<string>(new[] { "azAZ0189$-_.+!*'()," }, path.Segments);
 
             // Directory
@@ -29,7 +27,6 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(true, result);
             Assert.Equal("/abc/def/", path.FullPath);
-            Assert.Equal(true, path.IsDirectory);
             Assert.Equal<string>(new[] { "abc", "def" }, path.Segments);
 
             // Root
@@ -37,19 +34,21 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(true, result);
             Assert.Equal("/", path.FullPath);
-            Assert.Equal(true, path.IsDirectory);
             Assert.Equal<string>(new string[] { }, path.Segments);
         }
 
         [Theory]
         // Missing leading slash
-        [InlineData("abc/def")]
-        [InlineData("abc")]
-        // Null character
-        [InlineData("/abc" + "\x000")]
+        [InlineData("abc/def/")]
+        [InlineData("abc/")]
+        // Missing final slash
+        [InlineData("/abc/def")]
+        [InlineData("/abc")]
         [InlineData("")]
+        // Null character
+        [InlineData("/abc" + "\x000" + "/")]
         // Empty segment
-        [InlineData("/abc//def")]
+        [InlineData("/abc//def/")]
         [InlineData("/abc/def//")]
         public void TryParse_Invalid(string value)
         {
@@ -68,7 +67,7 @@ namespace OpenChain.Ledger.Tests
             foreach (char c in invalidCharacters)
             {
                 LedgerPath path;
-                bool result = LedgerPath.TryParse("/" + c, out path);
+                bool result = LedgerPath.TryParse("/" + c + "/", out path);
 
                 Assert.Equal(null, path);
                 Assert.Equal(false, result);
@@ -79,29 +78,25 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void IsStrictParentOf_Success()
         {
-            LedgerPath parent = LedgerPath.Parse("/the/parent");
+            LedgerPath parent = LedgerPath.Parse("/the/parent/");
 
-            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child")));
-            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child/child")));
             Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child/")));
+            Assert.True(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/child/child/")));
             Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent/")));
-            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the/parent")));
-            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the")));
-            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/not/related")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/the/")));
+            Assert.False(parent.IsStrictParentOf(LedgerPath.Parse("/not/related/")));
         }
 
         [Fact]
         public void IsParentOf_Success()
         {
-            LedgerPath parent = LedgerPath.Parse("/the/parent");
+            LedgerPath parent = LedgerPath.Parse("/the/parent/");
 
-            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child")));
-            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child/child")));
             Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child/")));
+            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/child/child/")));
             Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent/")));
-            Assert.True(parent.IsParentOf(LedgerPath.Parse("/the/parent")));
-            Assert.False(parent.IsParentOf(LedgerPath.Parse("/the")));
-            Assert.False(parent.IsParentOf(LedgerPath.Parse("/not/related")));
+            Assert.False(parent.IsParentOf(LedgerPath.Parse("/the/")));
+            Assert.False(parent.IsParentOf(LedgerPath.Parse("/not/related/")));
         }
     }
 }

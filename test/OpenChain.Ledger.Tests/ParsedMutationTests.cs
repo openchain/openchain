@@ -15,14 +15,14 @@ namespace OpenChain.Ledger.Tests
         public void Parse_AccountMutations()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/the/account:ACC:/the/asset"),
+                SerializeString("/the/account/:ACC:/the/asset/"),
                 SerializeInt(100),
                 binaryData[3]));
 
             Assert.Equal(1, result.AccountMutations.Count);
             Assert.Equal(0, result.DataRecords.Count);
-            Assert.Equal("/the/account", result.AccountMutations[0].AccountKey.Account.FullPath);
-            Assert.Equal("/the/asset", result.AccountMutations[0].AccountKey.Asset.FullPath);
+            Assert.Equal("/the/account/", result.AccountMutations[0].AccountKey.Account.FullPath);
+            Assert.Equal("/the/asset/", result.AccountMutations[0].AccountKey.Asset.FullPath);
             Assert.Equal(100, result.AccountMutations[0].Balance);
             Assert.Equal(binaryData[3], result.AccountMutations[0].Version);
         }
@@ -31,13 +31,13 @@ namespace OpenChain.Ledger.Tests
         public void Parse_Data()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/aka/alias:DATA"),
+                SerializeString("/aka/alias/:DATA"),
                 BinaryData.Parse("aabbccdd"),
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(1, result.DataRecords.Count);
-            Assert.Equal("/aka/alias", result.DataRecords[0].Key.FullPath);
+            Assert.Equal("/aka/alias/", result.DataRecords[0].Key.FullPath);
             Assert.Equal(BinaryData.Parse("aabbccdd"), result.DataRecords[0].Value);
         }
 
@@ -45,7 +45,7 @@ namespace OpenChain.Ledger.Tests
         public void Parse_OptimisticConcurrency()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/the/account:ACC:/the/asset"),
+                SerializeString("/the/account/:ACC:/the/asset/"),
                 null,
                 binaryData[3]));
 
@@ -58,35 +58,35 @@ namespace OpenChain.Ledger.Tests
         {
             // Invalid number of components
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/the/account:ACC"),
+                SerializeString("/the/account/:ACC"),
                 SerializeInt(100),
                 binaryData[3])));
 
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/the/asset:ASDEF:/other/path"),
+                SerializeString("/the/asset/:ASDEF:/other/path/"),
                 SerializeString("Definition"),
                 binaryData[3])));
 
             // Invalid path
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("the/account:ACC:/the/asset"),
+                SerializeString("the/account/:ACC:/the/asset/"),
                 SerializeInt(100),
                 binaryData[3])));
 
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/the/account:ACC:the/asset"),
+                SerializeString("/the/account/:ACC:the/asset/"),
                 SerializeInt(100),
                 binaryData[3])));
 
             // Invalid account balance
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/the/account:ACC:/the/asset"),
+                SerializeString("/the/account/:ACC:/the/asset/"),
                 SerializeString("01"),
                 binaryData[3])));
 
             // Invalid alias
             Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/aka/alias:ALIAS"),
+                SerializeString("/aka/alias/:ALIAS"),
                 SerializeString("the/path"),
                 binaryData[3])));
         }
