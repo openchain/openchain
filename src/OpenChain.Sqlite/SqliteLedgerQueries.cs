@@ -21,26 +21,6 @@ namespace OpenChain.Sqlite
                 new Dictionary<string, object>());
         }
 
-        protected override async Task AddTransaction(Mutation mutation, byte[] mutationHash)
-        {
-            foreach (Record record in mutation.Records)
-            {
-                RecordKey key = RecordKey.Parse(record.Key);
-                if (key.RecordType == RecordType.Account)
-                {
-                    await ExecuteAsync(@"
-                        UPDATE  Records
-                        SET     Asset = @asset
-                        WHERE   Key = @key",
-                    new Dictionary<string, object>()
-                    {
-                        ["@key"] = record.Key.ToByteArray(),
-                        ["@asset"] = key.AdditionalKeyComponents[0].FullPath
-                    });
-                }
-            }
-        }
-
         public async Task<ByteString> GetTransaction(ByteString mutationHash)
         {
             IEnumerable<ByteString> transactions = await ExecuteAsync(@"
@@ -77,6 +57,26 @@ namespace OpenChain.Sqlite
                     ["@from"] = from,
                     ["@to"] = to
                 });
+        }
+
+        protected override async Task AddTransaction(Mutation mutation)
+        {
+            foreach (Record record in mutation.Records)
+            {
+                RecordKey key = RecordKey.Parse(record.Key);
+                if (key.RecordType == RecordType.Account)
+                {
+                    await ExecuteAsync(@"
+                        UPDATE  Records
+                        SET     Asset = @asset
+                        WHERE   Key = @key",
+                    new Dictionary<string, object>()
+                    {
+                        ["@key"] = record.Key.ToByteArray(),
+                        ["@asset"] = key.AdditionalKeyComponents[0].FullPath
+                    });
+                }
+            }
         }
     }
 }

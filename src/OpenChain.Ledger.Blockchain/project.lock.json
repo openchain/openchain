@@ -1,0 +1,362 @@
+{
+  "locked": false,
+  "version": -9996,
+  "targets": {
+    "DNX,Version=v4.5.1": {
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.0.0-beta-23109": {
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ]
+      },
+      "Portable.BouncyCastle/1.8.0-RC1": {
+        "compile": {
+          "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
+        }
+      },
+      "System.Collections/4.0.10-beta-23109": {
+        "dependencies": {
+          "System.Runtime": "4.0.0-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Collections.dll": {}
+        }
+      },
+      "System.Linq/4.0.0-beta-23109": {},
+      "System.Runtime/4.0.10-beta-23109": {},
+      "System.Threading/4.0.10-beta-23109": {
+        "dependencies": {
+          "System.Runtime": "4.0.0-beta-23109",
+          "System.Threading.Tasks": "4.0.0-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Threading.dll": {}
+        }
+      },
+      "System.Threading.Tasks/4.0.0-beta-23109": {}
+    },
+    ".NETFramework,Version=v4.6": {
+      "Google.ProtocolBuffers/2.4.1.555": {
+        "compile": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Google.ProtocolBuffers.dll": {},
+          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+        }
+      },
+      "Microsoft.CSharp/4.0.0-beta-23109": {
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ]
+      },
+      "Portable.BouncyCastle/1.8.0-RC1": {
+        "compile": {
+          "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
+        }
+      },
+      "System.Collections/4.0.10-beta-23109": {},
+      "System.Linq/4.0.0-beta-23109": {},
+      "System.Runtime/4.0.10-beta-23109": {},
+      "System.Threading/4.0.10-beta-23109": {}
+    }
+  },
+  "libraries": {
+    "Google.ProtocolBuffers/2.4.1.555": {
+      "sha512": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
+      "files": [
+        "Google.ProtocolBuffers.2.4.1.555.nupkg",
+        "Google.ProtocolBuffers.2.4.1.555.nupkg.sha512",
+        "Google.ProtocolBuffers.nuspec",
+        "lib/cf20/Google.ProtocolBuffers.dll",
+        "lib/cf20/Google.ProtocolBuffers.Serialization.dll",
+        "lib/cf20/Google.ProtocolBuffers.Serialization.xml",
+        "lib/cf20/Google.ProtocolBuffers.xml",
+        "lib/cf35/Google.ProtocolBuffers.dll",
+        "lib/cf35/Google.ProtocolBuffers.Serialization.dll",
+        "lib/cf35/Google.ProtocolBuffers.Serialization.xml",
+        "lib/cf35/Google.ProtocolBuffers.xml",
+        "lib/net20/Google.ProtocolBuffers.dll",
+        "lib/net20/Google.ProtocolBuffers.Serialization.dll",
+        "lib/net20/Google.ProtocolBuffers.Serialization.xml",
+        "lib/net20/Google.ProtocolBuffers.xml",
+        "lib/net35/Google.ProtocolBuffers.dll",
+        "lib/net35/Google.ProtocolBuffers.Serialization.dll",
+        "lib/net35/Google.ProtocolBuffers.Serialization.xml",
+        "lib/net35/Google.ProtocolBuffers.xml",
+        "lib/net40/Google.ProtocolBuffers.dll",
+        "lib/net40/Google.ProtocolBuffers.Serialization.dll",
+        "lib/net40/Google.ProtocolBuffers.Serialization.xml",
+        "lib/net40/Google.ProtocolBuffers.xml",
+        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.dll",
+        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.Serialization.dll",
+        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.Serialization.xml",
+        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.xml",
+        "lib/sl20/Google.ProtocolBuffers.dll",
+        "lib/sl20/Google.ProtocolBuffers.Serialization.dll",
+        "lib/sl20/Google.ProtocolBuffers.Serialization.xml",
+        "lib/sl20/Google.ProtocolBuffers.xml",
+        "lib/sl30/Google.ProtocolBuffers.dll",
+        "lib/sl30/Google.ProtocolBuffers.Serialization.dll",
+        "lib/sl30/Google.ProtocolBuffers.Serialization.xml",
+        "lib/sl30/Google.ProtocolBuffers.xml",
+        "lib/sl40/Google.ProtocolBuffers.dll",
+        "lib/sl40/Google.ProtocolBuffers.Serialization.dll",
+        "lib/sl40/Google.ProtocolBuffers.Serialization.xml",
+        "lib/sl40/Google.ProtocolBuffers.xml",
+        "tools/CHANGES.txt",
+        "tools/Google.ProtocolBuffers.dll",
+        "tools/Google.ProtocolBuffers.Serialization.dll",
+        "tools/license.txt",
+        "tools/ProtoBench.exe",
+        "tools/protoc-license.txt",
+        "tools/protoc.exe",
+        "tools/ProtoDump.exe",
+        "tools/ProtoGen.exe",
+        "tools/ProtoGen.exe.config",
+        "tools/ProtoMunge.exe",
+        "tools/google/protobuf/csharp_options.proto",
+        "tools/google/protobuf/descriptor.proto",
+        "tools/google/protobuf/compiler/plugin.proto",
+        "tools/tutorial/addressbook.proto"
+      ]
+    },
+    "Microsoft.CSharp/4.0.0-beta-23109": {
+      "serviceable": true,
+      "sha512": "7fvpHYho71PHIu5eC4nhyzJtBxrijza8VviOoJZuweLv5wHaASaV03Mt9eOTJvQChiFXQ/ZNziVSu9xWU4ruTw==",
+      "files": [
+        "Microsoft.CSharp.4.0.0-beta-23109.nupkg",
+        "Microsoft.CSharp.4.0.0-beta-23109.nupkg.sha512",
+        "Microsoft.CSharp.nuspec",
+        "lib/dotnet/Microsoft.CSharp.dll",
+        "lib/net45/_._",
+        "lib/netcore50/Microsoft.CSharp.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/Microsoft.CSharp.dll",
+        "ref/dotnet/Microsoft.CSharp.xml",
+        "ref/dotnet/de/Microsoft.CSharp.xml",
+        "ref/dotnet/es/Microsoft.CSharp.xml",
+        "ref/dotnet/fr/Microsoft.CSharp.xml",
+        "ref/dotnet/it/Microsoft.CSharp.xml",
+        "ref/dotnet/ja/Microsoft.CSharp.xml",
+        "ref/dotnet/ko/Microsoft.CSharp.xml",
+        "ref/dotnet/ru/Microsoft.CSharp.xml",
+        "ref/dotnet/zh-hans/Microsoft.CSharp.xml",
+        "ref/dotnet/zh-hant/Microsoft.CSharp.xml",
+        "ref/net45/_._",
+        "ref/netcore50/Microsoft.CSharp.dll",
+        "ref/netcore50/Microsoft.CSharp.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._"
+      ]
+    },
+    "Portable.BouncyCastle/1.8.0-RC1": {
+      "sha512": "vY5PybIhYTvmdHRWT5DyvvEJXoKD733k3LFZu3NhSNXNhz1JHLHTcwZJF43j2Qql1D+qR86Acah67hz3AoGs+Q==",
+      "files": [
+        "Portable.BouncyCastle.1.8.0-RC1.nupkg",
+        "Portable.BouncyCastle.1.8.0-RC1.nupkg.sha512",
+        "Portable.BouncyCastle.nuspec",
+        "Readme.html",
+        "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
+        "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
+        "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
+        "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
+        "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
+        "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml"
+      ]
+    },
+    "System.Collections/4.0.10-beta-23109": {
+      "serviceable": true,
+      "sha512": "AWwdIi5Ye6BUYI0ANekbB3LxjJjLswbm90FB0MBJRtL/g0ViXFhggZN1bfR5m+4fN7nO2xYlbJ7TRqJaypUvIw==",
+      "files": [
+        "System.Collections.4.0.10-beta-23109.nupkg",
+        "System.Collections.4.0.10-beta-23109.nupkg.sha512",
+        "System.Collections.nuspec",
+        "lib/DNXCore50/System.Collections.dll",
+        "lib/net46/_._",
+        "lib/netcore50/System.Collections.dll",
+        "ref/dotnet/System.Collections.dll",
+        "ref/dotnet/System.Collections.xml",
+        "ref/dotnet/de/System.Collections.xml",
+        "ref/dotnet/es/System.Collections.xml",
+        "ref/dotnet/fr/System.Collections.xml",
+        "ref/dotnet/it/System.Collections.xml",
+        "ref/dotnet/ja/System.Collections.xml",
+        "ref/dotnet/ko/System.Collections.xml",
+        "ref/dotnet/ru/System.Collections.xml",
+        "ref/dotnet/zh-hans/System.Collections.xml",
+        "ref/dotnet/zh-hant/System.Collections.xml",
+        "ref/net46/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Collections.dll"
+      ]
+    },
+    "System.Linq/4.0.0-beta-23109": {
+      "serviceable": true,
+      "sha512": "N08PwMdjX3F9055FY/PcVpuMN8MbYZAcIQBoeaPonHOztZj0rM1qgdHe/3LVa1IWFF5VqrJdTyhoybSPIjeHag==",
+      "files": [
+        "System.Linq.4.0.0-beta-23109.nupkg",
+        "System.Linq.4.0.0-beta-23109.nupkg.sha512",
+        "System.Linq.nuspec",
+        "lib/dotnet/System.Linq.dll",
+        "lib/net45/_._",
+        "lib/netcore50/System.Linq.dll",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Linq.dll",
+        "ref/dotnet/System.Linq.xml",
+        "ref/dotnet/de/System.Linq.xml",
+        "ref/dotnet/es/System.Linq.xml",
+        "ref/dotnet/fr/System.Linq.xml",
+        "ref/dotnet/it/System.Linq.xml",
+        "ref/dotnet/ja/System.Linq.xml",
+        "ref/dotnet/ko/System.Linq.xml",
+        "ref/dotnet/ru/System.Linq.xml",
+        "ref/dotnet/zh-hans/System.Linq.xml",
+        "ref/dotnet/zh-hant/System.Linq.xml",
+        "ref/net45/_._",
+        "ref/netcore50/System.Linq.dll",
+        "ref/netcore50/System.Linq.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._"
+      ]
+    },
+    "System.Runtime/4.0.10-beta-23109": {
+      "sha512": "K7OCOpYILsRp4r2wcdhsIa+lFIwAyRvj0ysc5oD8mrnUt95gUrWLUPQCuKQSJhy0XtVpuP3EGD2WBEjIRdHX1A==",
+      "files": [
+        "License.rtf",
+        "System.Runtime.4.0.10-beta-23109.nupkg",
+        "System.Runtime.4.0.10-beta-23109.nupkg.sha512",
+        "System.Runtime.nuspec",
+        "lib/net451/_._",
+        "lib/win81/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Runtime.dll",
+        "ref/dotnet/System.Runtime.xml",
+        "ref/dotnet/de/System.Runtime.xml",
+        "ref/dotnet/es/System.Runtime.xml",
+        "ref/dotnet/fr/System.Runtime.xml",
+        "ref/dotnet/it/System.Runtime.xml",
+        "ref/dotnet/ja/System.Runtime.xml",
+        "ref/dotnet/ko/System.Runtime.xml",
+        "ref/dotnet/ru/System.Runtime.xml",
+        "ref/dotnet/zh-hans/System.Runtime.xml",
+        "ref/dotnet/zh-hant/System.Runtime.xml",
+        "ref/net451/_._",
+        "ref/netcore50/System.Runtime.dll",
+        "ref/netcore50/System.Runtime.xml",
+        "ref/netcore50/de/System.Runtime.xml",
+        "ref/netcore50/es/System.Runtime.xml",
+        "ref/netcore50/fr/System.Runtime.xml",
+        "ref/netcore50/it/System.Runtime.xml",
+        "ref/netcore50/ja/System.Runtime.xml",
+        "ref/netcore50/ko/System.Runtime.xml",
+        "ref/netcore50/ru/System.Runtime.xml",
+        "ref/netcore50/zh-hans/System.Runtime.xml",
+        "ref/netcore50/zh-hant/System.Runtime.xml",
+        "ref/win81/_._",
+        "ref/wpa81/_._"
+      ]
+    },
+    "System.Threading/4.0.10-beta-23109": {
+      "serviceable": true,
+      "sha512": "nG7j3zkJfcr+6Nm3FYtGXqOfRGeOl2RKyZH1odHXPxCZzAzWieDO6srTW5QrT6BP6D6JkLcXNTsCxZkaqVLROw==",
+      "files": [
+        "System.Threading.4.0.10-beta-23109.nupkg",
+        "System.Threading.4.0.10-beta-23109.nupkg.sha512",
+        "System.Threading.nuspec",
+        "lib/DNXCore50/System.Threading.dll",
+        "lib/net46/_._",
+        "lib/netcore50/System.Threading.dll",
+        "ref/dotnet/System.Threading.dll",
+        "ref/dotnet/System.Threading.xml",
+        "ref/dotnet/de/System.Threading.xml",
+        "ref/dotnet/es/System.Threading.xml",
+        "ref/dotnet/fr/System.Threading.xml",
+        "ref/dotnet/it/System.Threading.xml",
+        "ref/dotnet/ja/System.Threading.xml",
+        "ref/dotnet/ko/System.Threading.xml",
+        "ref/dotnet/ru/System.Threading.xml",
+        "ref/dotnet/zh-hans/System.Threading.xml",
+        "ref/dotnet/zh-hant/System.Threading.xml",
+        "ref/net46/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Threading.dll"
+      ]
+    },
+    "System.Threading.Tasks/4.0.0-beta-23109": {
+      "sha512": "n+6CuE1OacSQDH5PM2nqgg/odAaBanICHReiIf8kdqauo8lJovkgxJeD+/LIVTB1zCPuMKjcSEK6SxRpmyvZFw==",
+      "files": [
+        "License.rtf",
+        "System.Threading.Tasks.4.0.0-beta-23109.nupkg",
+        "System.Threading.Tasks.4.0.0-beta-23109.nupkg.sha512",
+        "System.Threading.Tasks.nuspec",
+        "lib/net45/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/dotnet/System.Threading.Tasks.dll",
+        "ref/dotnet/System.Threading.Tasks.xml",
+        "ref/dotnet/de/System.Threading.Tasks.xml",
+        "ref/dotnet/es/System.Threading.Tasks.xml",
+        "ref/dotnet/fr/System.Threading.Tasks.xml",
+        "ref/dotnet/it/System.Threading.Tasks.xml",
+        "ref/dotnet/ja/System.Threading.Tasks.xml",
+        "ref/dotnet/ko/System.Threading.Tasks.xml",
+        "ref/dotnet/ru/System.Threading.Tasks.xml",
+        "ref/dotnet/zh-hans/System.Threading.Tasks.xml",
+        "ref/dotnet/zh-hant/System.Threading.Tasks.xml",
+        "ref/net45/_._",
+        "ref/netcore50/System.Threading.Tasks.dll",
+        "ref/netcore50/System.Threading.Tasks.xml",
+        "ref/netcore50/de/System.Threading.Tasks.xml",
+        "ref/netcore50/es/System.Threading.Tasks.xml",
+        "ref/netcore50/fr/System.Threading.Tasks.xml",
+        "ref/netcore50/it/System.Threading.Tasks.xml",
+        "ref/netcore50/ja/System.Threading.Tasks.xml",
+        "ref/netcore50/ko/System.Threading.Tasks.xml",
+        "ref/netcore50/ru/System.Threading.Tasks.xml",
+        "ref/netcore50/zh-hans/System.Threading.Tasks.xml",
+        "ref/netcore50/zh-hant/System.Threading.Tasks.xml",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "System.Collections >= 4.0.10-beta-23109",
+      "System.Linq >= 4.0.0-beta-23109",
+      "System.Threading >= 4.0.10-beta-23109",
+      "System.Runtime >= 4.0.10-beta-23109",
+      "Microsoft.CSharp >= 4.0.0-beta-23109",
+      "OpenChain.Ledger >= 1.0.0-*"
+    ],
+    "DNX,Version=v4.5.1": [
+      "fx/System.Runtime >= 4.0.10.0"
+    ],
+    ".NETFramework,Version=v4.6": [
+      "fx/System.Runtime >= 4.0.20.0"
+    ]
+  }
+}

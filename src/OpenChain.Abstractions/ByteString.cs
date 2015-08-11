@@ -85,6 +85,16 @@ namespace OpenChain
         }
 
         /// <summary>
+        /// Copies the <see cref="ByteString"/> to a buffer.
+        /// </summary>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="index">The index in the buffer to which to copy this <see cref="ByteString"/>.</param>
+        public void CopyTo(byte[] buffer, int index)
+        {
+            Buffer.BlockCopy(data, 0, buffer, index, data.Length);
+        }
+
+        /// <summary>
         /// Returns a read-only stream containing the data represented by the current object.
         /// </summary>
         /// <returns></returns>

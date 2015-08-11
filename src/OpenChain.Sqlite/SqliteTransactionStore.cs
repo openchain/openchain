@@ -17,7 +17,7 @@ namespace OpenChain.Sqlite
 
         protected SQLiteConnection Connection { get; }
 
-        #region OpenDatabase
+        #region EnsureTables
 
         public virtual async Task EnsureTables()
         {
@@ -25,7 +25,7 @@ namespace OpenChain.Sqlite
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
                 (
-                    Id INTEGER PRIMARY KEY,
+                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Hash BLOB UNIQUE,
                     MutationHash BLOB UNIQUE,
                     RawData BLOB
@@ -37,39 +37,19 @@ namespace OpenChain.Sqlite
                     Value BLOB,
                     Version BLOB
                 );
-
-                CREATE TABLE IF NOT EXISTS Global
-                (
-                    Id INTEGER PRIMARY KEY,
-                    LastTransactionId INT
-                );
             ";
 
             await command.ExecuteNonQueryAsync();
-
-            await ExecuteAsync(@"
-                    INSERT OR IGNORE INTO Global
-                    (Id, LastTransactionId)
-                    VALUES (0, 0)",
-                new Dictionary<string, object>());
         }
 
         #endregion
 
-        #region AddLedgerRecords
+        #region AddTransactions
 
         public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
             using (SQLiteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
-                long transactionId = (await ExecuteAsync(@"
-                        SELECT  LastTransactionId
-                        FROM    Global
-                        WHERE   Id = 0",
-                    reader => reader.GetInt64(0),
-                    new Dictionary<string, object>()))
-                    .First();
-
                 foreach (ByteString rawTransaction in transactions)
                 {
                     byte[] rawTransactionBuffer = rawTransaction.ToByteArray();
@@ -81,36 +61,25 @@ namespace OpenChain.Sqlite
 
                     await UpdateAccounts(mutation, mutationHash);
 
-                    transactionId += 1;
                     await ExecuteAsync(@"
                             INSERT INTO Transactions
-                            (Id, Hash, MutationHash, RawData)
-                            VALUES (@id, @hash, @mutationHash, @rawData)",
+                            (Hash, MutationHash, RawData)
+                            VALUES (@hash, @mutationHash, @rawData)",
                         new Dictionary<string, object>()
                         {
-                            ["@id"] = transactionId,
                             ["@hash"] = transactionHash,
                             ["@mutationHash"] = mutationHash,
                             ["@rawData"] = rawTransactionBuffer
                         });
 
-                    await AddTransaction(mutation, mutationHash);
+                    await AddTransaction(mutation);
                 }
-
-                await ExecuteAsync(@"
-                        UPDATE  Global
-                        SET     LastTransactionId = @lastTransactionId
-                        WHERE   Id = 0",
-                    new Dictionary<string, object>()
-                    {
-                        ["@lastTransactionId"] = transactionId
-                    });
 
                 context.Commit();
             }
         }
 
-        protected virtual Task AddTransaction(Mutation mutation, byte[] mutationHash)
+        protected virtual Task AddTransaction(Mutation mutation)
         {
             return Task.FromResult(0);
         }
@@ -190,7 +159,7 @@ namespace OpenChain.Sqlite
 
         #endregion
 
-        #region GetValues
+        #region GetRecords
 
         public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
@@ -229,11 +198,11 @@ namespace OpenChain.Sqlite
 
         #endregion
 
-        #region GetLastRecord
+        #region GetLastTransaction
 
         public async Task<ByteString> GetLastTransaction()
         {
-            IEnumerable<ByteString> accounts = await ExecuteAsync(@"
+            IEnumerable<ByteString> transactions = await ExecuteAsync(@"
                     SELECT  Hash
                     FROM    Transactions
                     ORDER BY Id DESC
@@ -241,12 +210,12 @@ namespace OpenChain.Sqlite
                 reader => new ByteString((byte[])reader.GetValue(0)),
                 new Dictionary<string, object>());
 
-            return accounts.FirstOrDefault() ?? ByteString.Empty;
+            return transactions.FirstOrDefault() ?? ByteString.Empty;
         }
 
         #endregion
-        
-        #region GetRecordStream
+
+        #region GetTransactionStream
 
         public IObservable<ByteString> GetTransactionStream(ByteString from)
         {

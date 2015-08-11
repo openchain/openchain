@@ -1,0 +1,38 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "OpenChain.Ledger.Blockchain Class Library",
+  "authors": [ "Flavien" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "System.Collections": "4.0.10-beta-23109",
+    "System.Linq": "4.0.0-beta-23109",
+    "System.Threading": "4.0.10-beta-23109",
+    "System.Runtime": "4.0.10-beta-23109",
+    "Microsoft.CSharp": "4.0.0-beta-23109",
+    "OpenChain.Ledger": "1.0.0-*"
+  },
+
+  "frameworks": {
+    "dnx451": {
+      "dependencies": {
+
+      },
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.10.0"
+      }
+    },
+
+    "net46": {
+      "frameworkAssemblies": {
+        "System.Runtime": "4.0.20.0"
+      },
+      "dependencies": {
+
+      }
+    }
+
+  }
+}
