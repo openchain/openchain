@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 
 namespace OpenChain
 {
@@ -16,29 +16,29 @@ namespace OpenChain
         /// <returns>The serialized mutation.</returns>
         public static byte[] SerializeMutation(Mutation mutation)
         {
-            Messages.Mutation.Builder mutationBuilder = new Messages.Mutation.Builder()
+            Messages.Mutation mutationBuilder = new Messages.Mutation()
             {
                 Namespace = mutation.Namespace.ToProtocolBuffers(),
                 Metadata = mutation.Metadata.ToProtocolBuffers()
             };
 
-            mutationBuilder.AddRangeRecords(
+            mutationBuilder.Records.Add(
                 mutation.Records.Select(
                     record =>
                     {
-                        var builder = new Messages.Record.Builder()
+                        var builder = new Messages.Record()
                         {
                             Key = record.Key.ToProtocolBuffers(),
                             Version = record.Version.ToProtocolBuffers()
                         };
 
                         if (record.Value != null)
-                            builder.Value = record.Value.ToProtocolBuffers();
+                            builder.Value = new Messages.BytesValue() { Value = record.Value.ToProtocolBuffers() };
 
-                        return builder.Build();
+                        return builder;
                     }));
 
-            return mutationBuilder.BuildParsed().ToByteArray();
+            return mutationBuilder.ToByteArray();
         }
 
         /// <summary>
@@ -48,16 +48,17 @@ namespace OpenChain
         /// <returns>The deserialized <see cref="Mutation"/>.</returns>
         public static Mutation DeserializeMutation(ByteString data)
         {
-            Messages.Mutation mutation = new Messages.Mutation.Builder().MergeFrom(data.ToProtocolBuffers()).BuildParsed();
-
+            Messages.Mutation mutation = new Messages.Mutation();
+            mutation.MergeFrom(data.ToProtocolBuffers());
+            
             return new Mutation(
-                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(mutation.Namespace)),
-                mutation.RecordsList.Select(
+                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(mutation.Namespace)),
+                mutation.Records.Select(
                     record => new Record(
-                        new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Key)),
-                        record.HasValue ? new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Value)) : null,
-                        new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Version)))),
-                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(mutation.Metadata)));
+                        new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Key)),
+                        record.Value != null ? new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Value.Value)) : null,
+                        new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Version)))),
+                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }
 
         /// <summary>
@@ -67,14 +68,14 @@ namespace OpenChain
         /// <returns>The serialized transaction.</returns>
         public static byte[] SerializeTransaction(Transaction transaction)
         {
-            Messages.Transaction.Builder transactionBuilder = new Messages.Transaction.Builder()
+            Messages.Transaction transactionBuilder = new Messages.Transaction()
             {
                 Mutation = transaction.Mutation.ToProtocolBuffers(),
                 Timestamp = (long)(transaction.Timestamp - epoch).TotalSeconds,
                 TransactionMetadata = transaction.TransactionMetadata.ToProtocolBuffers()
             };
 
-            return transactionBuilder.BuildParsed().ToByteArray();
+            return transactionBuilder.ToByteArray();
         }
 
         /// <summary>
@@ -84,12 +85,13 @@ namespace OpenChain
         /// <returns>The deserialized <see cref="Transaction"/>.</returns>
         public static Transaction DeserializeTransaction(ByteString data)
         {
-            Messages.Transaction record = new Messages.Transaction.Builder().MergeFrom(data.ToProtocolBuffers()).BuildParsed();
+            Messages.Transaction transaction = new Messages.Transaction();
+            transaction.MergeFrom(data.ToProtocolBuffers());
 
             return new Transaction(
-                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.Mutation)),
-                epoch + TimeSpan.FromSeconds(record.Timestamp),
-                new ByteString(Google.ProtocolBuffers.ByteString.Unsafe.GetBuffer(record.TransactionMetadata)));
+                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(transaction.Mutation)),
+                epoch + TimeSpan.FromSeconds(transaction.Timestamp),
+                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(transaction.TransactionMetadata)));
         }
         
         /// <summary>

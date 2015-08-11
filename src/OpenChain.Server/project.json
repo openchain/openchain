@@ -28,6 +28,11 @@
   },
 
   "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Net.WebSockets.Client": "4.0.0-beta-22816"
+      }
+    },
     "dnx451": { }
   },
 

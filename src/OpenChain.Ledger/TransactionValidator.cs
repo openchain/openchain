@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 
 namespace OpenChain.Ledger
 {
@@ -90,16 +90,15 @@ namespace OpenChain.Ledger
 
         private byte[] SerializeMetadata(TransactionMetadata metadata)
         {
-            Messages.TransactionMetadata.Builder transactionMetadataBuilder = new Messages.TransactionMetadata.Builder();
-            transactionMetadataBuilder.AddRangeSignatures(metadata.Signatures.Select(
-                signature => new Messages.TransactionMetadata.Types.SignatureEvidence.Builder()
+            Messages.TransactionMetadata transactionMetadataBuilder = new Messages.TransactionMetadata();
+            transactionMetadataBuilder.Signatures.Add(metadata.Signatures.Select(
+                signature => new Messages.TransactionMetadata.Types.SignatureEvidence()
                 {
-                    PublicKey = Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
-                    Signature = Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
-                }
-                .Build()));
+                    PublicKey = Google.Protobuf.ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
+                    Signature = Google.Protobuf.ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
+                }));
 
-            return transactionMetadataBuilder.BuildParsed().ToByteArray();
+            return transactionMetadataBuilder.ToByteArray();
         }
     }
 }

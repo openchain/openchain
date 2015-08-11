@@ -64,11 +64,15 @@ namespace OpenChain.Ledger
 
         private string GetPubKeyHash(ByteString pubKey)
         {
-            using (RIPEMD160 ripe = RIPEMD160.Create())
+            Org.BouncyCastle.Crypto.Digests.RipeMD160Digest ripe = new Org.BouncyCastle.Crypto.Digests.RipeMD160Digest();
+
             using (SHA256 sha256 = SHA256.Create())
             {
-                byte[] result = ripe.ComputeHash(sha256.ComputeHash(pubKey.ToByteArray()));
-                return Base58CheckEncoding.Encode(new byte[] { versionByte }.Concat(result).ToArray());
+                byte[] shaResult = sha256.ComputeHash(pubKey.ToByteArray());
+                ripe.BlockUpdate(shaResult, 0, shaResult.Length);
+                byte[] hash = new byte[20];
+                ripe.DoFinal(hash, 0);
+                return Base58CheckEncoding.Encode(new byte[] { versionByte }.Concat(hash).ToArray());
             }
         }
     }

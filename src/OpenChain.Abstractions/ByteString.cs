@@ -103,9 +103,9 @@ namespace OpenChain
             return new MemoryStream(this.data, 0, this.data.Length, false, false);
         }
 
-        internal Google.ProtocolBuffers.ByteString ToProtocolBuffers()
+        internal Google.Protobuf.ByteString ToProtocolBuffers()
         {
-            return Google.ProtocolBuffers.ByteString.Unsafe.FromBytes(this.data);
+            return Google.Protobuf.ByteString.Unsafe.FromBytes(this.data);
         }
 
         /// <summary>

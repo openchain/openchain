@@ -13,6 +13,9 @@
   },
 
   "frameworks": {
+    "dnxcore50": {
+
+    },
     "dnx451": {
       "frameworkAssemblies": {
         "System.Data": "4.0.0.0",

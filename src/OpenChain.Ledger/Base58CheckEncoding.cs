@@ -23,7 +23,7 @@ namespace OpenChain.Ledger
         /// <returns></returns>
         public static string Encode(byte[] data)
         {
-            return EncodePlain(_AddCheckSum(data));
+            return EncodePlain(AddCheckSum(data));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace OpenChain.Ledger
         public static byte[] Decode(string data)
         {
             var dataWithCheckSum = DecodePlain(data);
-            var dataWithoutCheckSum = _VerifyAndRemoveCheckSum(dataWithCheckSum);
+            var dataWithoutCheckSum = VerifyAndRemoveCheckSum(dataWithCheckSum);
 
             if (dataWithoutCheckSum == null)
             {
@@ -106,34 +106,35 @@ namespace OpenChain.Ledger
             return result;
         }
 
-        private static byte[] _AddCheckSum(byte[] data)
+        private static byte[] AddCheckSum(byte[] data)
         {
-            var checkSum = _GetCheckSum(data);
+            var checkSum = GetCheckSum(data);
             var dataWithCheckSum = ArrayHelpers.ConcatArrays(data, checkSum);
 
             return dataWithCheckSum;
         }
-
-        //Returns null if the checksum is invalid
-        private static byte[] _VerifyAndRemoveCheckSum(byte[] data)
+        
+        private static byte[] VerifyAndRemoveCheckSum(byte[] data)
         {
             var result = ArrayHelpers.SubArray(data, 0, data.Length - CHECK_SUM_SIZE);
             var givenCheckSum = ArrayHelpers.SubArray(data, data.Length - CHECK_SUM_SIZE);
-            var correctCheckSum = _GetCheckSum(result);
+            var correctCheckSum = GetCheckSum(result);
 
             return givenCheckSum.SequenceEqual(correctCheckSum) ? result : null;
         }
 
-        private static byte[] _GetCheckSum(byte[] data)
+        private static byte[] GetCheckSum(byte[] data)
         {
-            SHA256 sha256 = new SHA256Managed();
-            var hash1 = sha256.ComputeHash(data);
-            var hash2 = sha256.ComputeHash(hash1);
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                var hash1 = sha256.ComputeHash(data);
+                var hash2 = sha256.ComputeHash(hash1);
 
-            var result = new byte[CHECK_SUM_SIZE];
-            Buffer.BlockCopy(hash2, 0, result, 0, result.Length);
+                var result = new byte[CHECK_SUM_SIZE];
+                Buffer.BlockCopy(hash2, 0, result, 0, result.Length);
 
-            return result;
+                return result;
+            }
         }
 
         private class ArrayHelpers

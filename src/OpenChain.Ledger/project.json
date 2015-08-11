@@ -13,6 +13,12 @@
   },
 
   "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Runtime.Numerics": "4.0.0-beta-22816"
+      }
+    },
+
     "dnx451": {
       "dependencies": {
 
@@ -24,9 +30,9 @@
       }
     },
 
-    "net46": {
+    "net45": {
       "frameworkAssemblies": {
-        "System.Runtime": "4.0.20.0",
+        "System.Runtime": "4.0.0.0",
         "System.IO": "4.0.0.0",
         "System.Numerics": "4.0.0.0"
       },
@@ -36,4 +42,4 @@
     }
 
   }
-}
+  }

@@ -3,14 +3,12 @@
   "version": -9996,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "Google.ProtocolBuffers/2.4.1.555": {
+      "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
         "compile": {
-          "lib/net40/Google.ProtocolBuffers.dll": {},
-          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         },
         "runtime": {
-          "lib/net40/Google.ProtocolBuffers.dll": {},
-          "lib/net40/Google.ProtocolBuffers.Serialization.dll": {}
+          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
       "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {
@@ -331,63 +329,26 @@
     }
   },
   "libraries": {
-    "Google.ProtocolBuffers/2.4.1.555": {
-      "sha512": "JsaOFX3nr6F0nGkGk7stbD2jTpvy7vgBuY+chB6+qsimMPu7YvQ6BgNOjjHd2xFqmByUCUD8pF9D07kPug8N1g==",
+    "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
+      "sha512": "Pda5VAca4mLrYkOZ2g1CwShT6zieEuucA9jqACQ8PIYNjMIgdkWyJFE3jliQTeAKD+Llo6ZJtjFjATv7fGtRcw==",
       "files": [
-        "Google.ProtocolBuffers.2.4.1.555.nupkg",
-        "Google.ProtocolBuffers.2.4.1.555.nupkg.sha512",
-        "Google.ProtocolBuffers.nuspec",
-        "lib/cf20/Google.ProtocolBuffers.dll",
-        "lib/cf20/Google.ProtocolBuffers.Serialization.dll",
-        "lib/cf20/Google.ProtocolBuffers.Serialization.xml",
-        "lib/cf20/Google.ProtocolBuffers.xml",
-        "lib/cf35/Google.ProtocolBuffers.dll",
-        "lib/cf35/Google.ProtocolBuffers.Serialization.dll",
-        "lib/cf35/Google.ProtocolBuffers.Serialization.xml",
-        "lib/cf35/Google.ProtocolBuffers.xml",
-        "lib/net20/Google.ProtocolBuffers.dll",
-        "lib/net20/Google.ProtocolBuffers.Serialization.dll",
-        "lib/net20/Google.ProtocolBuffers.Serialization.xml",
-        "lib/net20/Google.ProtocolBuffers.xml",
-        "lib/net35/Google.ProtocolBuffers.dll",
-        "lib/net35/Google.ProtocolBuffers.Serialization.dll",
-        "lib/net35/Google.ProtocolBuffers.Serialization.xml",
-        "lib/net35/Google.ProtocolBuffers.xml",
-        "lib/net40/Google.ProtocolBuffers.dll",
-        "lib/net40/Google.ProtocolBuffers.Serialization.dll",
-        "lib/net40/Google.ProtocolBuffers.Serialization.xml",
-        "lib/net40/Google.ProtocolBuffers.xml",
-        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.dll",
-        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.Serialization.dll",
-        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.Serialization.xml",
-        "lib/portable-net40+sl4+sl5+wp7+wp8+win8/Google.ProtocolBuffers.xml",
-        "lib/sl20/Google.ProtocolBuffers.dll",
-        "lib/sl20/Google.ProtocolBuffers.Serialization.dll",
-        "lib/sl20/Google.ProtocolBuffers.Serialization.xml",
-        "lib/sl20/Google.ProtocolBuffers.xml",
-        "lib/sl30/Google.ProtocolBuffers.dll",
-        "lib/sl30/Google.ProtocolBuffers.Serialization.dll",
-        "lib/sl30/Google.ProtocolBuffers.Serialization.xml",
-        "lib/sl30/Google.ProtocolBuffers.xml",
-        "lib/sl40/Google.ProtocolBuffers.dll",
-        "lib/sl40/Google.ProtocolBuffers.Serialization.dll",
-        "lib/sl40/Google.ProtocolBuffers.Serialization.xml",
-        "lib/sl40/Google.ProtocolBuffers.xml",
-        "tools/CHANGES.txt",
-        "tools/Google.ProtocolBuffers.dll",
-        "tools/Google.ProtocolBuffers.Serialization.dll",
-        "tools/license.txt",
-        "tools/ProtoBench.exe",
-        "tools/protoc-license.txt",
+        "Google.Protobuf.3.0.0-a20150808-e58cdbd214.nupkg",
+        "Google.Protobuf.3.0.0-a20150808-e58cdbd214.nupkg.sha512",
+        "Google.Protobuf.nuspec",
+        "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll",
+        "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.xml",
         "tools/protoc.exe",
-        "tools/ProtoDump.exe",
-        "tools/ProtoGen.exe",
-        "tools/ProtoGen.exe.config",
-        "tools/ProtoMunge.exe",
-        "tools/google/protobuf/csharp_options.proto",
-        "tools/google/protobuf/descriptor.proto",
-        "tools/google/protobuf/compiler/plugin.proto",
-        "tools/tutorial/addressbook.proto"
+        "tools/Schema.cs",
+        "tools/google/protobuf/any.proto",
+        "tools/google/protobuf/api.proto",
+        "tools/google/protobuf/duration.proto",
+        "tools/google/protobuf/empty.proto",
+        "tools/google/protobuf/field_mask.proto",
+        "tools/google/protobuf/source_context.proto",
+        "tools/google/protobuf/struct.proto",
+        "tools/google/protobuf/timestamp.proto",
+        "tools/google/protobuf/type.proto",
+        "tools/google/protobuf/wrappers.proto"
       ]
     },
     "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {

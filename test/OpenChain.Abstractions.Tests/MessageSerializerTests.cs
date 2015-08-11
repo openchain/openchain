@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Google.ProtocolBuffers;
+using Google.Protobuf;
 using Xunit;
 
 namespace OpenChain.Tests
@@ -26,7 +26,7 @@ namespace OpenChain.Tests
 
             Mutation finalMutation = MessageSerializer.DeserializeMutation(new ByteString(result));
 
-            Assert.Equal(242, result.Length);
+            Assert.Equal(244, result.Length);
             Assert.Equal(mutation.Records.Count, finalMutation.Records.Count);
             Assert.Equal(mutation.Records[0].Key, finalMutation.Records[0].Key);
             Assert.Equal(mutation.Records[0].Value, finalMutation.Records[0].Value);
@@ -41,7 +41,7 @@ namespace OpenChain.Tests
         [Fact]
         public void Mutation_Invalid()
         {
-            Assert.Throws<InvalidProtocolBufferException>(() => MessageSerializer.DeserializeMutation(ByteString.Empty));
+            Assert.Throws<InvalidProtocolBufferException>(() => MessageSerializer.DeserializeMutation(ByteString.Parse("01")));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace OpenChain.Tests
         [Fact]
         public void Transaction_Invalid()
         {
-            Assert.Throws<InvalidProtocolBufferException>(() => MessageSerializer.DeserializeTransaction(ByteString.Empty));
+            Assert.Throws<InvalidProtocolBufferException>(() => MessageSerializer.DeserializeTransaction(ByteString.Parse("01")));
         }
     }
 }
