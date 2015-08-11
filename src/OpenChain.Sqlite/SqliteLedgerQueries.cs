@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.SQLite;
 using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite
@@ -16,9 +17,14 @@ namespace OpenChain.Sqlite
         {
             await base.EnsureTables();
 
-            await ExecuteAsync(
-                "ALTER TABLE Records ADD COLUMN Asset TEXT;",
-                new Dictionary<string, object>());
+            try
+            {
+                await ExecuteAsync(
+                    "ALTER TABLE Records ADD COLUMN Asset TEXT;",
+                    new Dictionary<string, object>());
+            }
+            catch (SQLiteException exception) when (exception.Message == "SQL logic error or missing database")
+            { }
         }
 
         public async Task<ByteString> GetTransaction(ByteString mutationHash)
