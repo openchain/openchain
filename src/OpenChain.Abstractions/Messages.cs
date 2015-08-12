@@ -21,18 +21,18 @@ namespace OpenChain.Messages {
     static Schema() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SEk9wZW5DaGFpbi5NZXNzYWdlcyIbCgpCeXRlc1Zh", 
-            "bHVlEg0KBXZhbHVlGAEgASgMIlUKBlJlY29yZBILCgNrZXkYASABKAwSLQoF", 
-            "dmFsdWUYAiABKAsyHi5PcGVuQ2hhaW4uTWVzc2FnZXMuQnl0ZXNWYWx1ZRIP", 
-            "Cgd2ZXJzaW9uGAMgASgMIlwKCE11dGF0aW9uEhEKCW5hbWVzcGFjZRgBIAEo", 
-            "DBIrCgdyZWNvcmRzGAIgAygLMhouT3BlbkNoYWluLk1lc3NhZ2VzLlJlY29y", 
-            "ZBIQCghtZXRhZGF0YRgDIAEoDCJQCgtUcmFuc2FjdGlvbhIQCghtdXRhdGlv", 
-            "bhgBIAEoDBIRCgl0aW1lc3RhbXAYAiABKAMSHAoUdHJhbnNhY3Rpb25fbWV0", 
-            "YWRhdGEYAyABKAxiBnByb3RvMw=="));
+            "CgxzY2hlbWEucHJvdG8SEk9wZW5DaGFpbi5NZXNzYWdlcyIbCgtSZWNvcmRW", 
+            "YWx1ZRIMCgRkYXRhGAEgASgMIlYKBlJlY29yZBILCgNrZXkYASABKAwSLgoF", 
+            "dmFsdWUYAiABKAsyHy5PcGVuQ2hhaW4uTWVzc2FnZXMuUmVjb3JkVmFsdWUS", 
+            "DwoHdmVyc2lvbhgDIAEoDCJcCghNdXRhdGlvbhIRCgluYW1lc3BhY2UYASAB", 
+            "KAwSKwoHcmVjb3JkcxgCIAMoCzIaLk9wZW5DaGFpbi5NZXNzYWdlcy5SZWNv", 
+            "cmQSEAoIbWV0YWRhdGEYAyABKAwiUAoLVHJhbnNhY3Rpb24SEAoIbXV0YXRp", 
+            "b24YASABKAwSEQoJdGltZXN0YW1wGAIgASgDEhwKFHRyYW5zYWN0aW9uX21l", 
+            "dGFkYXRhGAMgASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.BytesValue), new[]{ "Value" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.RecordValue), new[]{ "Data" }, null, null, null),
             new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Record), new[]{ "Key", "Value", "Version" }, null, null, null),
             new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Mutation), new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
             new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Transaction), new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
@@ -43,9 +43,9 @@ namespace OpenChain.Messages {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class BytesValue : pb::IMessage<BytesValue> {
-    private static readonly pb::MessageParser<BytesValue> _parser = new pb::MessageParser<BytesValue>(() => new BytesValue());
-    public static pb::MessageParser<BytesValue> Parser { get { return _parser; } }
+  internal sealed partial class RecordValue : pb::IMessage<RecordValue> {
+    private static readonly pb::MessageParser<RecordValue> _parser = new pb::MessageParser<RecordValue>(() => new RecordValue());
+    public static pb::MessageParser<RecordValue> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
       get { return global::OpenChain.Messages.Schema.Descriptor.MessageTypes[0]; }
@@ -55,47 +55,47 @@ namespace OpenChain.Messages {
       get { return Descriptor; }
     }
 
-    public BytesValue() {
+    public RecordValue() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
-    public BytesValue(BytesValue other) : this() {
-      value_ = other.value_;
+    public RecordValue(RecordValue other) : this() {
+      data_ = other.data_;
     }
 
-    public BytesValue Clone() {
-      return new BytesValue(this);
+    public RecordValue Clone() {
+      return new RecordValue(this);
     }
 
-    public const int ValueFieldNumber = 1;
-    private pb::ByteString value_ = pb::ByteString.Empty;
-    public pb::ByteString Value {
-      get { return value_; }
+    public const int DataFieldNumber = 1;
+    private pb::ByteString data_ = pb::ByteString.Empty;
+    public pb::ByteString Data {
+      get { return data_; }
       set {
-        value_ = pb::Preconditions.CheckNotNull(value, "value");
+        data_ = pb::Preconditions.CheckNotNull(value, "value");
       }
     }
 
     public override bool Equals(object other) {
-      return Equals(other as BytesValue);
+      return Equals(other as RecordValue);
     }
 
-    public bool Equals(BytesValue other) {
+    public bool Equals(RecordValue other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Value != other.Value) return false;
+      if (Data != other.Data) return false;
       return true;
     }
 
     public override int GetHashCode() {
       int hash = 1;
-      if (Value.Length != 0) hash ^= Value.GetHashCode();
+      if (Data.Length != 0) hash ^= Data.GetHashCode();
       return hash;
     }
 
@@ -104,26 +104,26 @@ namespace OpenChain.Messages {
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
-      if (Value.Length != 0) {
+      if (Data.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteBytes(Value);
+        output.WriteBytes(Data);
       }
     }
 
     public int CalculateSize() {
       int size = 0;
-      if (Value.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Value);
+      if (Data.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeBytesSize(Data);
       }
       return size;
     }
 
-    public void MergeFrom(BytesValue other) {
+    public void MergeFrom(RecordValue other) {
       if (other == null) {
         return;
       }
-      if (other.Value.Length != 0) {
-        Value = other.Value;
+      if (other.Data.Length != 0) {
+        Data = other.Data;
       }
     }
 
@@ -135,7 +135,7 @@ namespace OpenChain.Messages {
             input.SkipLastField();
             break;
           case 10: {
-            Value = input.ReadBytes();
+            Data = input.ReadBytes();
             break;
           }
         }
@@ -145,7 +145,7 @@ namespace OpenChain.Messages {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class Record : pb::IMessage<Record> {
+  internal sealed partial class Record : pb::IMessage<Record> {
     private static readonly pb::MessageParser<Record> _parser = new pb::MessageParser<Record>(() => new Record());
     public static pb::MessageParser<Record> Parser { get { return _parser; } }
 
@@ -183,8 +183,8 @@ namespace OpenChain.Messages {
     }
 
     public const int ValueFieldNumber = 2;
-    private global::OpenChain.Messages.BytesValue value_;
-    public global::OpenChain.Messages.BytesValue Value {
+    private global::OpenChain.Messages.RecordValue value_;
+    public global::OpenChain.Messages.RecordValue Value {
       get { return value_; }
       set {
         value_ = value;
@@ -267,7 +267,7 @@ namespace OpenChain.Messages {
       }
       if (other.value_ != null) {
         if (value_ == null) {
-          value_ = new global::OpenChain.Messages.BytesValue();
+          value_ = new global::OpenChain.Messages.RecordValue();
         }
         Value.MergeFrom(other.Value);
       }
@@ -289,7 +289,7 @@ namespace OpenChain.Messages {
           }
           case 18: {
             if (value_ == null) {
-              value_ = new global::OpenChain.Messages.BytesValue();
+              value_ = new global::OpenChain.Messages.RecordValue();
             }
             input.ReadMessage(value_);
             break;
@@ -305,7 +305,7 @@ namespace OpenChain.Messages {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class Mutation : pb::IMessage<Mutation> {
+  internal sealed partial class Mutation : pb::IMessage<Mutation> {
     private static readonly pb::MessageParser<Mutation> _parser = new pb::MessageParser<Mutation>(() => new Mutation());
     public static pb::MessageParser<Mutation> Parser { get { return _parser; } }
 
@@ -451,7 +451,7 @@ namespace OpenChain.Messages {
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class Transaction : pb::IMessage<Transaction> {
+  internal sealed partial class Transaction : pb::IMessage<Transaction> {
     private static readonly pb::MessageParser<Transaction> _parser = new pb::MessageParser<Transaction>(() => new Transaction());
     public static pb::MessageParser<Transaction> Parser { get { return _parser; } }
 

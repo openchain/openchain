@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package OpenChain;
 
-message BytesValue {
-    bytes value = 1;
+message RecordValue {
+    bytes data = 1;
 }
 
 message Record {
     bytes key = 1;
-    BytesValue value = 2;
+    RecordValue value = 2;
     bytes version = 3;
 }
 

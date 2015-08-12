@@ -33,7 +33,7 @@ namespace OpenChain
                         };
 
                         if (record.Value != null)
-                            builder.Value = new Messages.BytesValue() { Value = record.Value.ToProtocolBuffers() };
+                            builder.Value = new Messages.RecordValue() { Data = record.Value.ToProtocolBuffers() };
 
                         return builder;
                     }));
@@ -56,7 +56,7 @@ namespace OpenChain
                 mutation.Records.Select(
                     record => new Record(
                         new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Key)),
-                        record.Value != null ? new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Value.Value)) : null,
+                        record.Value != null ? new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Value.Data)) : null,
                         new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Version)))),
                 new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(mutation.Metadata)));
         }

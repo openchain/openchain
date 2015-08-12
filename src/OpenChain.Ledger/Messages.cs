@@ -37,7 +37,7 @@ namespace OpenChain.Messages {
   }
   #region Messages
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class TransactionMetadata : pb::IMessage<TransactionMetadata> {
+  internal sealed partial class TransactionMetadata : pb::IMessage<TransactionMetadata> {
     private static readonly pb::MessageParser<TransactionMetadata> _parser = new pb::MessageParser<TransactionMetadata>(() => new TransactionMetadata());
     public static pb::MessageParser<TransactionMetadata> Parser { get { return _parser; } }
 
@@ -130,9 +130,9 @@ namespace OpenChain.Messages {
 
     #region Nested types
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public static partial class Types {
+    internal static partial class Types {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      public sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
+      internal sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
         private static readonly pb::MessageParser<SignatureEvidence> _parser = new pb::MessageParser<SignatureEvidence>(() => new SignatureEvidence());
         public static pb::MessageParser<SignatureEvidence> Parser { get { return _parser; } }
 
