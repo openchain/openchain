@@ -17,39 +17,24 @@
   "frameworks": {
     "dnxcore50": {
       "dependencies": {
-        "System.Collections": "4.0.10-beta-22816",
-        "System.Linq": "4.0.0-beta-22816",
-        "System.Threading": "4.0.10-beta-22816",
-        "System.Runtime.Extensions": "4.0.10-beta-22816",
-        "System.Text.RegularExpressions": "4.0.10-beta-22816",
-        "System.Globalization": "4.0.10-beta-22816",
-        "System.Reflection.TypeExtensions": "4.0.0-beta-22816",
-        "System.Reflection.Extensions": "4.0.0-beta-22816",
-        "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-22816",
-        "System.Diagnostics.Debug": "4.0.10-beta-22816",
-        "Microsoft.CSharp": "4.0.0-beta-22816"
+        "System.Collections": "4.0.10-beta-23109",
+        "System.Linq": "4.0.0-beta-23109",
+        "System.Runtime.Extensions": "4.0.10-beta-23109",
+        "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23109"
       }
     },
+
     "dnx451": {
       "frameworkAssemblies": {
-        "System.Data": "4.0.0.0",
-        "System.Xml": "4.0.0.0",
         "System.IO": "4.0.0.0",
         "System.Runtime": "4.0.10.0"
-      },
-      "dependencies": {
-
       }
     },
+
     "net45": {
       "frameworkAssemblies": {
-        "System.Data": "4.0.0.0",
-        "System.Xml": "4.0.0.0",
         "System.IO": "4.0.0.0",
         "System.Runtime": "4.0.0.0"
-      },
-      "dependencies": {
-
       }
     }
   }

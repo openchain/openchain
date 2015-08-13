@@ -22,7 +22,12 @@ namespace OpenChain.Ledger
 
         public static RecordKey Parse(ByteString keyData)
         {
-            string[] parts = Encoding.UTF8.GetString(keyData?.ToByteArray()).Split(':');
+            if (keyData == null)
+                throw new ArgumentNullException(nameof(keyData));
+
+            byte[] key = keyData.ToByteArray();
+
+            string[] parts = Encoding.UTF8.GetString(key, 0, key.Length).Split(':');
             if (parts.Length < 2)
                 throw new ArgumentOutOfRangeException(nameof(keyData));
             

@@ -100,7 +100,7 @@ namespace OpenChain
         /// <returns></returns>
         public Stream ToStream()
         {
-            return new MemoryStream(this.data, 0, this.data.Length, false, false);
+            return new MemoryStream(this.data, 0, this.data.Length, false);
         }
 
         internal Google.Protobuf.ByteString ToProtocolBuffers()

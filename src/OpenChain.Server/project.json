@@ -1,10 +1,13 @@
 {
-  "webroot": "",
   "version": "1.0.0-*",
+  "description": "",
+  "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
+
+  "webroot": "",
   "compilationOptions": { "languageVersion": "csharp6" },
 
   "dependencies": {
-    "System.Text.Encoding": "4.0.10-beta-22816",
+    "System.Text.Encoding": "4.0.10-beta-23109",
     "Microsoft.AspNet.Mvc.Core": "6.0.0-beta6",
     "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta6",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6",
@@ -16,10 +19,10 @@
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
     "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
     "Kestrel": "1.0.0-beta6",
-    "OpenChain.Abstractions": "1.0.0-*",
     "Newtonsoft.Json": "7.0.1",
+    "OpenChain.Abstractions": "1.0.0-*",
     "OpenChain.Ledger": "1.0.0-*",
-    "OpenChain.Sqlite": "1.0.0-*",
+    "OpenChain.Sqlite": "1.0.0-*"
   },
 
   "commands": {
@@ -28,16 +31,19 @@
   },
 
   "frameworks": {
+
     "dnxcore50": {
       "dependencies": {
-        "System.Net.WebSockets.Client": "4.0.0-beta-22816"
+        "System.Net.WebSockets.Client": "4.0.0-beta-23109"
       }
     },
+
     "dnx451": { }
   },
 
   "exclude": [
   ],
+
   "publishExclude": [
     "**.xproj",
     "**.user",

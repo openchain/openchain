@@ -11,21 +11,23 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-beta1": {
+      "Microsoft.Data.SQLite/1.0.0-beta6": {
         "dependencies": {
-          "System.Data.Common": "1.0.0-beta1"
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6",
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6"
         },
         "frameworkAssemblies": [
+          "System.Data",
           "mscorlib",
           "System",
           "System.Core",
           "Microsoft.CSharp"
         ],
         "compile": {
-          "lib/aspnet50/Microsoft.Data.SQLite.dll": {}
+          "lib/dnx451/Microsoft.Data.Sqlite.dll": {}
         },
         "runtime": {
-          "lib/aspnet50/Microsoft.Data.SQLite.dll": {}
+          "lib/dnx451/Microsoft.Data.Sqlite.dll": {}
         }
       },
       "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {
@@ -204,21 +206,6 @@
       },
       "System.Collections/4.0.0": {},
       "System.Collections.Concurrent/4.0.0": {},
-      "System.Data.Common/1.0.0-beta1": {
-        "frameworkAssemblies": [
-          "System.Data",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "Microsoft.CSharp"
-        ],
-        "compile": {
-          "lib/aspnet50/System.Data.Common.dll": {}
-        },
-        "runtime": {
-          "lib/aspnet50/System.Data.Common.dll": {}
-        }
-      },
       "System.Diagnostics.Debug/4.0.0": {},
       "System.Globalization/4.0.0": {},
       "System.IO/4.0.0": {},
@@ -391,22 +378,26 @@
         "tools/google/protobuf/wrappers.proto"
       ]
     },
-    "Microsoft.Data.SQLite/1.0.0-beta1": {
-      "sha512": "Lgx+43A8cUn24jaehz0IuDNYVGc2EaSjp37xvbvh6ljSkyqrRDHIvuhX2HrHZnHg0k4LDydleKiCI9jwSUbStQ==",
+    "Microsoft.Data.SQLite/1.0.0-beta6": {
+      "serviceable": true,
+      "sha512": "7yyqsIahqnM+5/9To3vhoYFttNlvDea9ASAayxqN0DxzpMv9Sguty22Qj5yM2DPlY1AGLCGxl0B/Jayp/7ePNQ==",
       "files": [
-        "Microsoft.Data.SQLite.1.0.0-beta1.nupkg",
-        "Microsoft.Data.SQLite.1.0.0-beta1.nupkg.sha512",
+        "Microsoft.Data.SQLite.1.0.0-beta6.nupkg",
+        "Microsoft.Data.SQLite.1.0.0-beta6.nupkg.sha512",
         "Microsoft.Data.SQLite.nuspec",
-        "build/net451/Microsoft.Data.SQLite.targets",
-        "lib/aspnet50/Microsoft.Data.SQLite.dll",
-        "lib/aspnet50/Microsoft.Data.SQLite.xml",
-        "lib/aspnetcore50/Microsoft.Data.SQLite.dll",
-        "lib/aspnetcore50/Microsoft.Data.SQLite.xml",
-        "lib/net451/Microsoft.Data.SQLite.dll",
-        "lib/net451/Microsoft.Data.SQLite.xml",
-        "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.dll",
-        "lib/portable-net451+win81+wpa81/Microsoft.Data.SQLite.xml",
-        "redist/x86/sqlite3.dll"
+        "lib/dnx451/Microsoft.Data.Sqlite.dll",
+        "lib/dnx451/Microsoft.Data.Sqlite.xml",
+        "lib/dnxcore50/Microsoft.Data.Sqlite.dll",
+        "lib/dnxcore50/Microsoft.Data.Sqlite.xml",
+        "lib/dotnet/Microsoft.Data.Sqlite.dll",
+        "lib/dotnet/Microsoft.Data.Sqlite.xml",
+        "lib/net45/Microsoft.Data.Sqlite.dll",
+        "lib/net45/Microsoft.Data.Sqlite.xml",
+        "runtimes/win/native/x86/sqlite3.dll",
+        "runtimes/win-x86/native/sqlite3.dll",
+        "runtimes/win10-arm/native/sqlite3.dll",
+        "runtimes/win10-x64/native/sqlite3.dll",
+        "runtimes/win10-x86/native/sqlite3.dll"
       ]
     },
     "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {
@@ -665,22 +656,6 @@
         "ref/wpa81/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
-      ]
-    },
-    "System.Data.Common/1.0.0-beta1": {
-      "sha512": "cuIEw5cNVZZBYz2STud08Q5VBP+GKvDJPPP3AoApL72tlYhl9uHoW54Q3QTi5tElsXFCnFw868atiHqrGS7GIw==",
-      "files": [
-        "System.Data.Common.1.0.0-beta1.nupkg",
-        "System.Data.Common.1.0.0-beta1.nupkg.sha512",
-        "System.Data.Common.nuspec",
-        "lib/aspnet50/System.Data.Common.dll",
-        "lib/aspnet50/System.Data.Common.xml",
-        "lib/aspnetcore50/System.Data.Common.dll",
-        "lib/aspnetcore50/System.Data.Common.xml",
-        "lib/net451/System.Data.Common.dll",
-        "lib/net451/System.Data.Common.xml",
-        "lib/portable-net451+win81+wpa81/System.Data.Common.dll",
-        "lib/portable-net451+win81+wpa81/System.Data.Common.xml"
       ]
     },
     "System.Diagnostics.Debug/4.0.0": {

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Microsoft.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite
@@ -17,8 +17,8 @@ namespace OpenChain.Sqlite
         public override async Task EnsureTables()
         {
             await base.EnsureTables();
-
-            SQLiteCommand command = Connection.CreateCommand();
+            
+            SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Anchors
                 (

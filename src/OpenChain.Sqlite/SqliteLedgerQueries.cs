@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using OpenChain.Ledger;
 
 namespace OpenChain.Sqlite
@@ -23,7 +23,7 @@ namespace OpenChain.Sqlite
                     "ALTER TABLE Records ADD COLUMN Asset TEXT;",
                     new Dictionary<string, object>());
             }
-            catch (SQLiteException exception) when (exception.Message == "SQL logic error or missing database")
+            catch (SqliteException exception) when (exception.Message == "SQL logic error or missing database")
             { }
         }
 

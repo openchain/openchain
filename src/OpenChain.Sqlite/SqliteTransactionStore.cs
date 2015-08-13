@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Data.SQLite;
+using Microsoft.Data.Sqlite;
 
 namespace OpenChain.Sqlite
 {
@@ -11,17 +11,17 @@ namespace OpenChain.Sqlite
     {
         public SqliteTransactionStore(string filename)
         {
-            this.Connection = new SQLiteConnection(new SQLiteConnectionStringBuilder() { Filename = filename }.ToString());
+            this.Connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString());
             this.Connection.OpenAsync().Wait();
         }
 
-        protected SQLiteConnection Connection { get; }
+        protected SqliteConnection Connection { get; }
 
         #region EnsureTables
 
         public virtual async Task EnsureTables()
         {
-            SQLiteCommand command = Connection.CreateCommand();
+            SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
                 (
@@ -48,7 +48,7 @@ namespace OpenChain.Sqlite
 
         public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
-            using (SQLiteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+            using (SqliteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
             {
                 foreach (ByteString rawTransaction in transactions)
                 {
@@ -148,7 +148,7 @@ namespace OpenChain.Sqlite
                                     ["@version"] = transactionHash
                                 });
                         }
-                        catch (SQLiteException exception) when (exception.Message == "constraint failed")
+                        catch (SqliteException exception) when (exception.Message == "constraint failed")
                         {
                             throw new ConcurrentMutationException(record);
                         }
@@ -167,7 +167,7 @@ namespace OpenChain.Sqlite
 
             foreach (ByteString key in keys)
             {
-                SQLiteCommand query = Connection.CreateCommand();
+                SqliteCommand query = Connection.CreateCommand();
                 query.CommandText = @"
                     SELECT  Value, Version
                     FROM    Records
@@ -255,7 +255,7 @@ namespace OpenChain.Sqlite
 
         protected async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
         {
-            SQLiteCommand query = Connection.CreateCommand();
+            SqliteCommand query = Connection.CreateCommand();
             query.CommandText = commandText;
 
             foreach (KeyValuePair<string, object> parameter in parameters)
@@ -273,7 +273,7 @@ namespace OpenChain.Sqlite
 
         protected async Task<int> ExecuteAsync(string commandText, IDictionary<string, object> parameters)
         {
-            SQLiteCommand query = Connection.CreateCommand();
+            SqliteCommand query = Connection.CreateCommand();
             query.CommandText = commandText;
 
             foreach (KeyValuePair<string, object> parameter in parameters)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Xunit;
 
 namespace OpenChain.Tests
@@ -63,6 +64,26 @@ namespace OpenChain.Tests
             string result = new ByteString(new byte[] { 18, 178, 255, 70, 0 }).ToString();
 
             Assert.Equal("12b2ff4600", result);
+        }
+
+        [Fact]
+        public void ToStream_Success()
+        {
+            ByteString data = ByteString.Parse("abcdef");
+
+            byte[] result = new BinaryReader(data.ToStream()).ReadBytes(3);
+
+            Assert.Equal(3, data.ToStream().Length);
+            Assert.Equal(data, new ByteString(result));
+            Assert.Equal(false, data.ToStream().CanWrite);
+        }
+
+        [Fact]
+        public void ToStream_Immutable()
+        {
+            ByteString data = ByteString.Parse("abcdef");
+
+            Assert.Throws<NotSupportedException>(() => data.ToStream().WriteByte(1));
         }
     }
 }
