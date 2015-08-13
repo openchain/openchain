@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -55,11 +53,6 @@ namespace OpenChain.Ledger.Blockchain
             builder.Send(opReturn, 0);
             builder.SendFees(1000);
             builder.SetChange(this.publishingAddress.ScriptPubKey, ChangeType.All);
-            //NBitcoin.Transaction temporaryTransaction = builder.BuildTransaction(false);
-            
-            //temporaryTransaction.AddOutput(0, opReturn);
-
-            //new TransactionBuilder().ContinueToBuild(temporaryTransaction).BuildTransaction(true);
 
             ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
 

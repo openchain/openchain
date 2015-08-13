@@ -48,6 +48,8 @@ namespace OpenChain.Server
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
+            services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder);
+
             services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
 
             services.AddSingleton<MasterProperties>(ConfigurationParser.CreateMasterProperties);
@@ -56,6 +58,9 @@ namespace OpenChain.Server
 
             // Transaction Stream Subscriber
             services.AddSingleton<IStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
+
+            // Anchoring
+            services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
         }
 
         // Configure is called after ConfigureServices is called.
@@ -78,6 +83,7 @@ namespace OpenChain.Server
             // Activate singletons
             app.ApplicationServices.GetService<IStreamSubscriber>();
             app.ApplicationServices.GetService<IMutationValidator>();
+            app.ApplicationServices.GetService<LedgerAnchorWorker>();
 
             await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
         }

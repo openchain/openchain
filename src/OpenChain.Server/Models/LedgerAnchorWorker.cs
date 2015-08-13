@@ -27,7 +27,11 @@ namespace OpenChain.Server.Models
                 {
                     LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
 
-                    await this.anchorRecorder.RecordAnchor(anchor);
+                    if (anchor != null)
+                    {
+                        logger.LogInformation($"Recorded anchor for {anchor.TransactionCount} transaction(s)");
+                        await this.anchorRecorder.RecordAnchor(anchor);
+                    }
                 }
                 catch (Exception exception)
                 {

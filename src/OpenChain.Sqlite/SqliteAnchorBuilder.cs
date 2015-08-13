@@ -53,9 +53,10 @@ namespace OpenChain.Sqlite
             if (lastAnchor != null)
             {
                 newTransactions = await ExecuteAsync(@"
-                        SELECT  Id
+                        SELECT  Hash
                         FROM    Transactions
-                        WHERE   Id > (SELECT Id FROM Transactions WHERE Hash = @hash)",
+                        WHERE   Id > (SELECT Id FROM Transactions WHERE Hash = @hash)
+                        ORDER BY Id",
                     reader => new ByteString((byte[])reader.GetValue(0)),
                     new Dictionary<string, object>()
                     {
@@ -67,8 +68,9 @@ namespace OpenChain.Sqlite
             else
             {
                 newTransactions = await ExecuteAsync(@"
-                        SELECT  Id
-                        FROM    Transactions",
+                        SELECT  Hash
+                        FROM    Transactions
+                        ORDER BY Id",
                     reader => new ByteString((byte[])reader.GetValue(0)),
                     new Dictionary<string, object>());
 
@@ -93,7 +95,7 @@ namespace OpenChain.Sqlite
             LedgerAnchor result = new LedgerAnchor(
                 newTransactions[newTransactions.Count - 1],
                 new ByteString(currentHash),
-                lastAnchor != null ? lastAnchor.TransactionCount + newTransactions.Count : 0);
+                newTransactions.Count + (lastAnchor != null ? lastAnchor.TransactionCount : 0));
 
             await RecordAnchor(result);
 

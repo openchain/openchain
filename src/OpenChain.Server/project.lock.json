@@ -1001,6 +1001,18 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
+      "NBitcoin/2.1.4.6": {
+        "compile": {
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
+          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
+        }
+      },
       "Newtonsoft.Json/7.0.1": {
         "compile": {
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
@@ -3138,6 +3150,20 @@
           "lib/dnx451/Microsoft.Net.WebSockets.dll": {}
         }
       },
+      "NBitcoin/2.1.4.6": {
+        "dependencies": {
+          "protobuf-net": "2.0.0.668",
+          "Newtonsoft.Json": "6.0.1"
+        },
+        "compile": {
+          "lib/net45/NBitcoin.BouncyCastle.dll": {},
+          "lib/net45/NBitcoin.dll": {}
+        },
+        "runtime": {
+          "lib/net45/NBitcoin.BouncyCastle.dll": {},
+          "lib/net45/NBitcoin.dll": {}
+        }
+      },
       "Newtonsoft.Json/7.0.1": {
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -3152,6 +3178,14 @@
         },
         "runtime": {
           "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
+        }
+      },
+      "protobuf-net/2.0.0.668": {
+        "compile": {
+          "lib/net40/protobuf-net.dll": {}
+        },
+        "runtime": {
+          "lib/net40/protobuf-net.dll": {}
         }
       },
       "System.Runtime/4.0.0-beta-23109": {},
@@ -4102,6 +4136,43 @@
         "ref/net46/Microsoft.Win32.Registry.dll"
       ]
     },
+    "NBitcoin/2.1.4.6": {
+      "sha512": "UCoAL7S54mxH9Ma3+uCsmXBUx0+RUfpJqOv1Ud649Ga1WlTWZym9A0Zu3DXPtWtePwdePOnomp3pJ2VgiVHy2Q==",
+      "files": [
+        "NBitcoin.2.1.4.6.nupkg",
+        "NBitcoin.2.1.4.6.nupkg.sha512",
+        "NBitcoin.nuspec",
+        "lib/MonoAndroid/NBitcoin.BouncyCastle.dll",
+        "lib/MonoAndroid/NBitcoin.BouncyCastle.pdb",
+        "lib/MonoAndroid/NBitcoin.dll",
+        "lib/MonoAndroid/NBitcoin.pdb",
+        "lib/MonoAndroid/NBitcoin.XML",
+        "lib/MonoAndroid/Newtonsoft.Json.dll",
+        "lib/MonoAndroid/Newtonsoft.Json.pdb",
+        "lib/MonoAndroid/Newtonsoft.Json.xml",
+        "lib/net45/NBitcoin.BouncyCastle.dll",
+        "lib/net45/NBitcoin.BouncyCastle.pdb",
+        "lib/net45/NBitcoin.dll",
+        "lib/net45/NBitcoin.pdb",
+        "lib/net45/NBitcoin.XML",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.pdb",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.pdb",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.XML",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
+        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.pdb",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.pdb",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.XML",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml"
+      ]
+    },
     "Newtonsoft.Json/7.0.1": {
       "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
       "files": [
@@ -4136,6 +4207,54 @@
         "Portable.BouncyCastle.1.8.0-RC1.nupkg.sha512",
         "Portable.BouncyCastle.nuspec",
         "Readme.html"
+      ]
+    },
+    "protobuf-net/2.0.0.668": {
+      "sha512": "Lgj+Kf1+RV0utKxX9u1WEcymPGrbWrj/AwFmFADFLLa/LLdc1ji2MIGcecFRAGUu6UO8BRbdjZAIYWvLlN1B/A==",
+      "files": [
+        "protobuf-net.2.0.0.668.nupkg",
+        "protobuf-net.2.0.0.668.nupkg.sha512",
+        "protobuf-net.nuspec",
+        "lib/net20/protobuf-net.dll",
+        "lib/net20/protobuf-net.pdb",
+        "lib/net20/protobuf-net.xml",
+        "lib/net20-cf/protobuf-net.dll",
+        "lib/net20-cf/protobuf-net.pdb",
+        "lib/net20-cf/protobuf-net.xml",
+        "lib/net30/protobuf-net.dll",
+        "lib/net30/protobuf-net.pdb",
+        "lib/net30/protobuf-net.xml",
+        "lib/net35/protobuf-net.dll",
+        "lib/net35/protobuf-net.pdb",
+        "lib/net35/protobuf-net.xml",
+        "lib/net35-cf/protobuf-net.dll",
+        "lib/net35-cf/protobuf-net.pdb",
+        "lib/net35-cf/protobuf-net.xml",
+        "lib/net40/protobuf-net.dll",
+        "lib/net40/protobuf-net.pdb",
+        "lib/net40/protobuf-net.xml",
+        "lib/net40-cf/protobuf-net.dll",
+        "lib/net40-cf/protobuf-net.pdb",
+        "lib/net40-cf/protobuf-net.xml",
+        "lib/netcore45/protobuf-net.dll",
+        "lib/netcore45/protobuf-net.pdb",
+        "lib/netcore45/protobuf-net.pri",
+        "lib/netcore45/protobuf-net.XML",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.dll",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.pdb",
+        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.xml",
+        "lib/sl3-wp/protobuf-net.dll",
+        "lib/sl3-wp/protobuf-net.pdb",
+        "lib/sl3-wp/protobuf-net.xml",
+        "lib/sl4/protobuf-net.dll",
+        "lib/sl4/protobuf-net.pdb",
+        "lib/sl4/protobuf-net.xml",
+        "lib/sl4-windowsphone71/protobuf-net.dll",
+        "lib/sl4-windowsphone71/protobuf-net.pdb",
+        "lib/sl4-windowsphone71/protobuf-net.xml",
+        "lib/windowsphone8/protobuf-net.dll",
+        "lib/windowsphone8/protobuf-net.pdb",
+        "lib/windowsphone8/protobuf-net.xml"
       ]
     },
     "System.AppContext/4.0.0-beta-23109": {
@@ -6015,9 +6134,10 @@
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta6",
       "Microsoft.Net.Http.Client >= 1.0.0-beta6-10079",
       "Kestrel >= 1.0.0-beta6",
-      "OpenChain.Abstractions >= 1.0.0-*",
       "Newtonsoft.Json >= 7.0.1",
+      "OpenChain.Abstractions >= 1.0.0-*",
       "OpenChain.Ledger >= 1.0.0-*",
+      "OpenChain.Ledger.Blockchain >= 1.0.0-*",
       "OpenChain.Sqlite >= 1.0.0-*"
     ],
     "DNXCore,Version=v5.0": [

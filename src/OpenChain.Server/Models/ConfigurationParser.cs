@@ -7,6 +7,7 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Ledger;
+using OpenChain.Ledger.Blockchain;
 using OpenChain.Sqlite;
 
 namespace OpenChain.Server.Models
@@ -29,6 +30,49 @@ namespace OpenChain.Server.Models
             ITransactionStore store = serviceProvider.GetService<ITransactionStore>();
 
             return store as ILedgerQueries;
+        }
+
+        public static IAnchorBuilder CreateAnchorBuilder(IServiceProvider serviceProvider)
+        {
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IConfiguration storage = configuration.GetConfigurationSection("storage");
+
+            if (storage["type"] == "SQLite")
+            {
+                SqliteAnchorBuilder result = new SqliteAnchorBuilder(storage["path"]);
+                result.EnsureTables().Wait();
+                return result;
+            }
+            else
+            {
+                throw new NotSupportedException();
+            }
+        }
+
+        public static LedgerAnchorWorker CreateLedgerAnchorWorker(IServiceProvider serviceProvider)
+        {
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IConfiguration anchoring = configuration.GetConfigurationSection("anchoring");
+
+            IAnchorRecorder recorder = null;
+            switch (anchoring["type"])
+            {
+                case "blockchain":
+                    NBitcoin.Key key = NBitcoin.Key.Parse(anchoring["key"]);
+                    recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, NBitcoin.Network.TestNet);
+                    break;
+            }
+
+            if (recorder != null)
+            {
+                LedgerAnchorWorker anchorWorker = new LedgerAnchorWorker(serviceProvider.GetRequiredService<IAnchorBuilder>(), recorder, serviceProvider.GetRequiredService<ILogger>());
+                anchorWorker.Run(CancellationToken.None);
+                return anchorWorker;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)

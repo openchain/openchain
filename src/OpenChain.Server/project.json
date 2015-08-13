@@ -22,6 +22,7 @@
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "1.0.0-*",
     "OpenChain.Ledger": "1.0.0-*",
+    "OpenChain.Ledger.Blockchain": "1.0.0-*",
     "OpenChain.Sqlite": "1.0.0-*"
   },
 

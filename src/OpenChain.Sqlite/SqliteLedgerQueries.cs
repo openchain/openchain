@@ -8,6 +8,8 @@ namespace OpenChain.Sqlite
 {
     public class SqliteLedgerQueries : SqliteTransactionStore, ILedgerQueries
     {
+        private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Asset'";
+
         public SqliteLedgerQueries(string filename)
             : base(filename)
         {
@@ -23,7 +25,7 @@ namespace OpenChain.Sqlite
                     "ALTER TABLE Records ADD COLUMN Asset TEXT;",
                     new Dictionary<string, object>());
             }
-            catch (SqliteException exception) when (exception.Message == "SQL logic error or missing database")
+            catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
             { }
         }
 
