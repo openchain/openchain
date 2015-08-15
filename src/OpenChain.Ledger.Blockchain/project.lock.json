@@ -1,6 +1,6 @@
 {
   "locked": false,
-  "version": -9996,
+  "version": 1,
   "targets": {
     "DNXCore,Version=v5.0": {
       "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
@@ -23,10 +23,10 @@
           "System.IO": "4.0.10-beta-23029",
           "System.IO.FileSystem": "4.0.0-beta-23029",
           "System.Linq": "4.0.0-beta-23029",
-          "System.Net.Primitives": "4.0.10-beta-23029",
           "System.Net.Http": "4.0.0-beta-23029",
-          "System.Net.Sockets": "4.0.10-beta-23029",
+          "System.Net.Primitives": "4.0.10-beta-23029",
           "System.Net.Security": "4.0.0-beta-23029",
+          "System.Net.Sockets": "4.0.10-beta-23029",
           "System.Reflection": "4.0.10-beta-23029",
           "System.Resources.ResourceManager": "4.0.0-beta-23029",
           "System.Runtime": "4.0.20-beta-23029",
@@ -103,12 +103,12 @@
       },
       "System.Collections.NonGeneric/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
+          "System.Diagnostics.Debug": "4.0.10-beta-23029",
           "System.Globalization": "4.0.10-beta-23029",
           "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Diagnostics.Debug": "4.0.10-beta-23029",
-          "System.Threading": "4.0.10-beta-23029",
-          "System.Runtime.Extensions": "4.0.10-beta-23029"
+          "System.Runtime": "4.0.20-beta-23029",
+          "System.Runtime.Extensions": "4.0.10-beta-23029",
+          "System.Threading": "4.0.10-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Collections.NonGeneric.dll": {}
@@ -119,9 +119,9 @@
       },
       "System.ComponentModel.EventBasedAsync/4.0.10-beta-23029": {
         "dependencies": {
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
           "System.Runtime": "4.0.20-beta-23029",
           "System.Threading": "4.0.10-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
           "System.Threading.Tasks": "4.0.10-beta-23029"
         },
         "compile": {
@@ -185,8 +185,8 @@
       },
       "System.Globalization.Calendars/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23029",
-          "System.Globalization": "4.0.0-beta-23029"
+          "System.Globalization": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.0-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Globalization.Calendars.dll": {}
@@ -210,17 +210,17 @@
       },
       "System.IO.Compression/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.IO": "4.0.10-beta-23029",
-          "System.Text.Encoding": "4.0.10-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Threading": "4.0.0-beta-23029",
-          "System.Threading.Tasks": "4.0.10-beta-23029",
-          "System.Diagnostics.Debug": "4.0.10-beta-23029",
           "System.Collections": "4.0.10-beta-23029",
-          "System.Runtime.Extensions": "4.0.10-beta-23029"
+          "System.Diagnostics.Debug": "4.0.10-beta-23029",
+          "System.IO": "4.0.10-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
+          "System.Runtime.Extensions": "4.0.10-beta-23029",
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Text.Encoding": "4.0.10-beta-23029",
+          "System.Threading": "4.0.0-beta-23029",
+          "System.Threading.Tasks": "4.0.10-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.IO.Compression.dll": {}
@@ -231,19 +231,19 @@
       },
       "System.IO.FileSystem/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.IO.FileSystem.Primitives": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Threading.Overlapped": "4.0.0-beta-23029",
-          "System.Text.Encoding": "4.0.10-beta-23029",
-          "System.IO": "4.0.10-beta-23029",
           "System.Collections": "4.0.10-beta-23029",
-          "System.Threading.Tasks": "4.0.10-beta-23029",
+          "System.IO": "4.0.10-beta-23029",
+          "System.IO.FileSystem.Primitives": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
           "System.Runtime.Extensions": "4.0.10-beta-23029",
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Text.Encoding": "4.0.10-beta-23029",
           "System.Text.Encoding.Extensions": "4.0.10-beta-23029",
-          "System.Threading": "4.0.10-beta-23029"
+          "System.Threading": "4.0.10-beta-23029",
+          "System.Threading.Overlapped": "4.0.0-beta-23029",
+          "System.Threading.Tasks": "4.0.10-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.IO.FileSystem.dll": {}
@@ -265,10 +265,10 @@
       },
       "System.Linq/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
           "System.Collections": "4.0.10-beta-23109",
-          "System.Resources.ResourceManager": "4.0.0-beta-23109",
           "System.Diagnostics.Debug": "4.0.10-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
           "System.Runtime.Extensions": "4.0.10-beta-23109"
         },
         "compile": {
@@ -280,22 +280,22 @@
       },
       "System.Net.Http/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
           "Microsoft.Win32.Primitives": "4.0.0-beta-23029",
-          "System.Threading.Tasks": "4.0.0-beta-23029",
           "System.Collections": "4.0.0-beta-23029",
-          "System.Runtime.Extensions": "4.0.0-beta-23029",
+          "System.Diagnostics.Debug": "4.0.10-beta-23029",
           "System.Globalization": "4.0.0-beta-23029",
-          "System.Threading": "4.0.0-beta-23029",
+          "System.IO": "4.0.10-beta-23029",
           "System.IO.Compression": "4.0.0-beta-23029",
           "System.Net.Primitives": "4.0.10-beta-23029",
-          "System.IO": "4.0.10-beta-23029",
-          "System.Diagnostics.Debug": "4.0.10-beta-23029",
-          "System.Text.Encoding": "4.0.10-beta-23029"
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
+          "System.Runtime.Extensions": "4.0.0-beta-23029",
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23029",
+          "System.Text.Encoding": "4.0.10-beta-23029",
+          "System.Threading": "4.0.0-beta-23029",
+          "System.Threading.Tasks": "4.0.0-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Net.Http.dll": {}
@@ -339,45 +339,51 @@
       },
       "System.Private.Networking/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23029",
+          "Microsoft.Win32.Primitives": "4.0.0-beta-23029",
           "System.Collections": "4.0.0-beta-23029",
           "System.Collections.Concurrent": "4.0.0-beta-23029",
-          "System.Diagnostics.Tracing": "4.0.0-beta-23029",
-          "System.Threading": "4.0.0-beta-23029",
-          "System.Threading.Tasks": "4.0.0-beta-23029",
           "System.Collections.NonGeneric": "4.0.0-beta-23029",
-          "System.Security.SecureString": "4.0.0-beta-23029",
-          "System.Security.Principal.Windows": "4.0.0-beta-23029",
-          "Microsoft.Win32.Primitives": "4.0.0-beta-23029",
-          "System.IO.FileSystem": "4.0.0-beta-23029",
-          "System.Threading.Overlapped": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
-          "System.Globalization": "4.0.0-beta-23029",
-          "System.IO.FileSystem.Primitives": "4.0.0-beta-23029",
-          "System.IO": "4.0.10-beta-23029",
-          "System.Diagnostics.Debug": "4.0.10-beta-23029",
-          "System.Threading.ThreadPool": "4.0.10-beta-23029",
           "System.ComponentModel.EventBasedAsync": "4.0.10-beta-23029",
-          "System.Runtime.Extensions": "4.0.10-beta-23029"
+          "System.Diagnostics.Debug": "4.0.10-beta-23029",
+          "System.Diagnostics.Tracing": "4.0.0-beta-23029",
+          "System.Globalization": "4.0.0-beta-23029",
+          "System.IO": "4.0.10-beta-23029",
+          "System.IO.FileSystem": "4.0.0-beta-23029",
+          "System.IO.FileSystem.Primitives": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
+          "System.Runtime.Extensions": "4.0.10-beta-23029",
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
+          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23029",
+          "System.Security.Principal.Windows": "4.0.0-beta-23029",
+          "System.Security.SecureString": "4.0.0-beta-23029",
+          "System.Threading": "4.0.0-beta-23029",
+          "System.Threading.Overlapped": "4.0.0-beta-23029",
+          "System.Threading.Tasks": "4.0.0-beta-23029",
+          "System.Threading.ThreadPool": "4.0.10-beta-23029"
+        },
+        "compile": {
+          "ref/dnxcore50/_._": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Private.Networking.dll": {}
         }
       },
       "System.Private.Uri/4.0.0-beta-23109": {
+        "compile": {
+          "ref/dnxcore50/_._": {}
+        },
         "runtime": {
           "lib/DNXCore50/System.Private.Uri.dll": {}
         }
       },
       "System.Reflection/4.0.10-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
           "System.IO": "4.0.0-beta-23029",
-          "System.Reflection.Primitives": "4.0.0-beta-23029"
+          "System.Reflection.Primitives": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Reflection.dll": {}
@@ -399,9 +405,9 @@
       },
       "System.Resources.ResourceManager/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23109",
+          "System.Globalization": "4.0.0-beta-23109",
           "System.Reflection": "4.0.0-beta-23109",
-          "System.Globalization": "4.0.0-beta-23109"
+          "System.Runtime": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Resources.ResourceManager.dll": {}
@@ -445,9 +451,9 @@
       },
       "System.Runtime.InteropServices/4.0.20-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23029",
           "System.Reflection": "4.0.0-beta-23029",
           "System.Reflection.Primitives": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.0-beta-23029",
           "System.Runtime.Handles": "4.0.0-beta-23029"
         },
         "compile": {
@@ -459,9 +465,9 @@
       },
       "System.Runtime.Numerics/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
-          "System.Resources.ResourceManager": "4.0.0-beta-23109",
           "System.Globalization": "4.0.10-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
           "System.Runtime.Extensions": "4.0.10-beta-23109"
         },
         "compile": {
@@ -473,14 +479,14 @@
       },
       "System.Security.Claims/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23029",
-          "System.Security.Principal": "4.0.0-beta-23029",
-          "System.IO": "4.0.0-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
           "System.Collections": "4.0.0-beta-23029",
           "System.Diagnostics.Debug": "4.0.0-beta-23029",
           "System.Globalization": "4.0.0-beta-23029",
-          "System.Runtime.Extensions": "4.0.0-beta-23029"
+          "System.IO": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.0-beta-23029",
+          "System.Runtime.Extensions": "4.0.0-beta-23029",
+          "System.Security.Principal": "4.0.0-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Security.Claims.dll": {}
@@ -491,12 +497,12 @@
       },
       "System.Security.Cryptography.Encoding/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Diagnostics.Debug": "4.0.10-beta-23029",
           "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
           "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Diagnostics.Debug": "4.0.10-beta-23029"
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Security.Cryptography.Encoding.dll": {}
@@ -507,11 +513,11 @@
       },
       "System.Security.Cryptography.Encryption/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
-          "System.Resources.ResourceManager": "4.0.0-beta-23109",
-          "System.Threading.Tasks": "4.0.0-beta-23109",
           "System.Globalization": "4.0.0-beta-23109",
-          "System.IO": "4.0.10-beta-23109"
+          "System.IO": "4.0.10-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
+          "System.Threading.Tasks": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Security.Cryptography.Encryption.dll": {}
@@ -522,9 +528,9 @@
       },
       "System.Security.Cryptography.Hashing/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
+          "System.IO": "4.0.0-beta-23109",
           "System.Resources.ResourceManager": "4.0.0-beta-23109",
-          "System.IO": "4.0.0-beta-23109"
+          "System.Runtime": "4.0.20-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Security.Cryptography.Hashing.dll": {}
@@ -535,12 +541,12 @@
       },
       "System.Security.Cryptography.Hashing.Algorithms/4.0.0-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
           "System.Resources.ResourceManager": "4.0.0-beta-23109",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
           "System.Runtime.Handles": "4.0.0-beta-23109",
-          "System.Security.Cryptography.RandomNumberGenerator": "4.0.0-beta-23109",
-          "System.Security.Cryptography.Hashing": "4.0.0-beta-23109"
+          "System.Security.Cryptography.Encryption": "4.0.0-beta-23109",
+          "System.Security.Cryptography.Hashing": "4.0.0-beta-23109",
+          "System.Security.Cryptography.RandomNumberGenerator": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Security.Cryptography.Hashing.Algorithms.dll": {}
@@ -563,18 +569,18 @@
       },
       "System.Security.Cryptography.RSA/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encoding": "4.0.0-beta-23029",
-          "System.Reflection": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Hashing": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23029",
-          "System.IO": "4.0.10-beta-23029",
           "System.Diagnostics.Debug": "4.0.10-beta-23029",
+          "System.IO": "4.0.10-beta-23029",
+          "System.Reflection": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
           "System.Runtime.Extensions": "4.0.10-beta-23029",
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Security.Cryptography.Encoding": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Hashing": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23029",
           "System.Threading": "4.0.10-beta-23029"
         },
         "compile": {
@@ -586,24 +592,24 @@
       },
       "System.Security.Cryptography.X509Certificates/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
-          "System.Runtime.Handles": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
-          "System.Security.Cryptography.RSA": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Encoding": "4.0.0-beta-23029",
-          "System.Runtime.Numerics": "4.0.0-beta-23029",
-          "System.Globalization.Calendars": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23029",
-          "System.Security.Cryptography.Hashing": "4.0.0-beta-23029",
-          "System.IO.FileSystem": "4.0.0-beta-23029",
-          "System.Globalization": "4.0.10-beta-23029",
           "System.Diagnostics.Debug": "4.0.10-beta-23029",
+          "System.Globalization": "4.0.10-beta-23029",
+          "System.Globalization.Calendars": "4.0.0-beta-23029",
           "System.IO": "4.0.10-beta-23029",
-          "System.Threading": "4.0.10-beta-23029",
+          "System.IO.FileSystem": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
           "System.Runtime.Extensions": "4.0.10-beta-23029",
-          "System.Text.Encoding": "4.0.10-beta-23029"
+          "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
+          "System.Runtime.Numerics": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Encoding": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Hashing": "4.0.0-beta-23029",
+          "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23029",
+          "System.Security.Cryptography.RSA": "4.0.0-beta-23029",
+          "System.Text.Encoding": "4.0.10-beta-23029",
+          "System.Threading": "4.0.10-beta-23029"
         },
         "compile": {
           "ref/dotnet/System.Security.Cryptography.X509Certificates.dll": {}
@@ -625,15 +631,15 @@
       },
       "System.Security.Principal.Windows/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23029",
-          "System.Resources.ResourceManager": "4.0.0-beta-23029",
           "System.Collections": "4.0.0-beta-23029",
+          "System.Diagnostics.Debug": "4.0.0-beta-23029",
+          "System.Reflection": "4.0.0-beta-23029",
+          "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.0-beta-23029",
+          "System.Runtime.Extensions": "4.0.0-beta-23029",
           "System.Runtime.InteropServices": "4.0.0-beta-23029",
           "System.Security.Claims": "4.0.0-beta-23029",
           "System.Security.Principal": "4.0.0-beta-23029",
-          "System.Diagnostics.Debug": "4.0.0-beta-23029",
-          "System.Reflection": "4.0.0-beta-23029",
-          "System.Runtime.Extensions": "4.0.0-beta-23029",
           "System.Threading": "4.0.10-beta-23029"
         },
         "compile": {
@@ -645,10 +651,10 @@
       },
       "System.Security.SecureString/4.0.0-beta-23029": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23029",
-          "System.Runtime.InteropServices": "4.0.20-beta-23029",
           "System.Resources.ResourceManager": "4.0.0-beta-23029",
+          "System.Runtime": "4.0.20-beta-23029",
           "System.Runtime.Handles": "4.0.0-beta-23029",
+          "System.Runtime.InteropServices": "4.0.20-beta-23029",
           "System.Security.Cryptography.Encryption": "4.0.0-beta-23029",
           "System.Threading": "4.0.10-beta-23029"
         },
@@ -684,10 +690,10 @@
       },
       "System.Text.RegularExpressions/4.0.10-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.20-beta-23109",
-          "System.Resources.ResourceManager": "4.0.0-beta-23109",
           "System.Collections": "4.0.10-beta-23109",
           "System.Globalization": "4.0.10-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
           "System.Runtime.Extensions": "4.0.10-beta-23109",
           "System.Threading": "4.0.10-beta-23109"
         },
@@ -757,11 +763,11 @@
       },
       "Microsoft.Net.Http.Client/1.0.0-beta6-10079": {
         "frameworkAssemblies": [
-          "System.Net.Http",
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
           "System.Core",
-          "Microsoft.CSharp"
+          "System.Net.Http"
         ],
         "compile": {
           "lib/dnx451/Microsoft.Net.Http.Client.dll": {}
@@ -772,8 +778,8 @@
       },
       "NBitcoin/2.1.4.6": {
         "dependencies": {
-          "protobuf-net": "2.0.0.668",
-          "Newtonsoft.Json": "6.0.1"
+          "Newtonsoft.Json": "6.0.1",
+          "protobuf-net": "2.0.0.668"
         },
         "compile": {
           "lib/net45/NBitcoin.BouncyCastle.dll": {},
@@ -820,11 +826,11 @@
       },
       "Microsoft.Net.Http.Client/1.0.0-beta6-10079": {
         "frameworkAssemblies": [
-          "System.Net.Http",
+          "Microsoft.CSharp",
           "mscorlib",
           "System",
           "System.Core",
-          "Microsoft.CSharp"
+          "System.Net.Http"
         ],
         "compile": {
           "lib/net45/Microsoft.Net.Http.Client.dll": {}
@@ -835,8 +841,8 @@
       },
       "NBitcoin/2.1.4.6": {
         "dependencies": {
-          "protobuf-net": "2.0.0.668",
-          "Newtonsoft.Json": "6.0.1"
+          "Newtonsoft.Json": "6.0.1",
+          "protobuf-net": "2.0.0.668"
         },
         "compile": {
           "lib/net45/NBitcoin.BouncyCastle.dll": {},
@@ -882,8 +888,6 @@
         "Google.Protobuf.nuspec",
         "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll",
         "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.xml",
-        "tools/protoc.exe",
-        "tools/Schema.cs",
         "tools/google/protobuf/any.proto",
         "tools/google/protobuf/api.proto",
         "tools/google/protobuf/duration.proto",
@@ -893,40 +897,42 @@
         "tools/google/protobuf/struct.proto",
         "tools/google/protobuf/timestamp.proto",
         "tools/google/protobuf/type.proto",
-        "tools/google/protobuf/wrappers.proto"
+        "tools/google/protobuf/wrappers.proto",
+        "tools/protoc.exe",
+        "tools/Schema.cs"
       ]
     },
     "Microsoft.Net.Http.Client/1.0.0-beta6-10079": {
       "sha512": "cCEgqyC3RIvgl2BbFYg3aMVB+JioIse0TsEqOocVhYuUAxBxDXo6/CSmJFScu+seTHo1AUjwIq4fNAioeAJbHA==",
       "files": [
-        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg",
-        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg.sha512",
-        "Microsoft.Net.Http.Client.nuspec",
         "lib/dnx451/Microsoft.Net.Http.Client.dll",
         "lib/dnx451/Microsoft.Net.Http.Client.xml",
         "lib/dnxcore50/Microsoft.Net.Http.Client.dll",
         "lib/dnxcore50/Microsoft.Net.Http.Client.xml",
         "lib/net45/Microsoft.Net.Http.Client.dll",
-        "lib/net45/Microsoft.Net.Http.Client.xml"
+        "lib/net45/Microsoft.Net.Http.Client.xml",
+        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg",
+        "Microsoft.Net.Http.Client.1.0.0-beta6-10079.nupkg.sha512",
+        "Microsoft.Net.Http.Client.nuspec"
       ]
     },
     "Microsoft.Win32.Primitives/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "k26p/QPVYr9k9y83mzm9CimL5pKSwwJFNlnCCW2veebPiQ4wUsKx1ZMpCJukHUjXyH+Ekmtqscsq8lnNT63F7A==",
       "files": [
+        "lib/dotnet/Microsoft.Win32.Primitives.dll",
+        "lib/net46/Microsoft.Win32.Primitives.dll",
         "Microsoft.Win32.Primitives.4.0.0-beta-23029.nupkg",
         "Microsoft.Win32.Primitives.4.0.0-beta-23029.nupkg.sha512",
         "Microsoft.Win32.Primitives.nuspec",
-        "lib/dotnet/Microsoft.Win32.Primitives.dll",
-        "lib/net46/Microsoft.Win32.Primitives.dll",
-        "ref/dotnet/Microsoft.Win32.Primitives.dll",
-        "ref/dotnet/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/de/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/es/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/fr/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/it/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/ja/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/ko/Microsoft.Win32.Primitives.xml",
+        "ref/dotnet/Microsoft.Win32.Primitives.dll",
+        "ref/dotnet/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/ru/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/zh-hans/Microsoft.Win32.Primitives.xml",
         "ref/dotnet/zh-hant/Microsoft.Win32.Primitives.xml",
@@ -936,9 +942,6 @@
     "NBitcoin/2.1.4.6": {
       "sha512": "UCoAL7S54mxH9Ma3+uCsmXBUx0+RUfpJqOv1Ud649Ga1WlTWZym9A0Zu3DXPtWtePwdePOnomp3pJ2VgiVHy2Q==",
       "files": [
-        "NBitcoin.2.1.4.6.nupkg",
-        "NBitcoin.2.1.4.6.nupkg.sha512",
-        "NBitcoin.nuspec",
         "lib/MonoAndroid/NBitcoin.BouncyCastle.dll",
         "lib/MonoAndroid/NBitcoin.BouncyCastle.pdb",
         "lib/MonoAndroid/NBitcoin.dll",
@@ -967,15 +970,15 @@
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.XML",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml"
+        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
+        "NBitcoin.2.1.4.6.nupkg",
+        "NBitcoin.2.1.4.6.nupkg.sha512",
+        "NBitcoin.nuspec"
       ]
     },
     "Newtonsoft.Json/6.0.1": {
       "sha512": "tZ4TnfiXc3CUDZSZxXWcFOq5nDHxYY05qSDfZEJ654YOYzrPPOBgvSwJzr4jkTxeK5uoXmFG93Fq1lWDeLSmmA==",
       "files": [
-        "Newtonsoft.Json.6.0.1.nupkg",
-        "Newtonsoft.Json.6.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -990,30 +993,30 @@
         "lib/portable-net40+sl5+wp80+win8+monotouch+monoandroid/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.6.0.1.nupkg",
+        "Newtonsoft.Json.6.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
     },
     "Portable.BouncyCastle/1.8.0-RC1": {
       "sha512": "vY5PybIhYTvmdHRWT5DyvvEJXoKD733k3LFZu3NhSNXNhz1JHLHTcwZJF43j2Qql1D+qR86Acah67hz3AoGs+Q==",
       "files": [
-        "Portable.BouncyCastle.1.8.0-RC1.nupkg",
-        "Portable.BouncyCastle.1.8.0-RC1.nupkg.sha512",
-        "Portable.BouncyCastle.nuspec",
-        "Readme.html",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
         "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
         "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
-        "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml"
+        "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
+        "Portable.BouncyCastle.1.8.0-RC1.nupkg",
+        "Portable.BouncyCastle.1.8.0-RC1.nupkg.sha512",
+        "Portable.BouncyCastle.nuspec",
+        "Readme.html"
       ]
     },
     "protobuf-net/2.0.0.668": {
       "sha512": "Lgj+Kf1+RV0utKxX9u1WEcymPGrbWrj/AwFmFADFLLa/LLdc1ji2MIGcecFRAGUu6UO8BRbdjZAIYWvLlN1B/A==",
       "files": [
-        "protobuf-net.2.0.0.668.nupkg",
-        "protobuf-net.2.0.0.668.nupkg.sha512",
-        "protobuf-net.nuspec",
         "lib/net20/protobuf-net.dll",
         "lib/net20/protobuf-net.pdb",
         "lib/net20/protobuf-net.xml",
@@ -1053,21 +1056,19 @@
         "lib/sl4-windowsphone71/protobuf-net.xml",
         "lib/windowsphone8/protobuf-net.dll",
         "lib/windowsphone8/protobuf-net.pdb",
-        "lib/windowsphone8/protobuf-net.xml"
+        "lib/windowsphone8/protobuf-net.xml",
+        "protobuf-net.2.0.0.668.nupkg",
+        "protobuf-net.2.0.0.668.nupkg.sha512",
+        "protobuf-net.nuspec"
       ]
     },
     "System.Collections/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "AWwdIi5Ye6BUYI0ANekbB3LxjJjLswbm90FB0MBJRtL/g0ViXFhggZN1bfR5m+4fN7nO2xYlbJ7TRqJaypUvIw==",
       "files": [
-        "System.Collections.4.0.10-beta-23109.nupkg",
-        "System.Collections.4.0.10-beta-23109.nupkg.sha512",
-        "System.Collections.nuspec",
         "lib/DNXCore50/System.Collections.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Collections.dll",
-        "ref/dotnet/System.Collections.dll",
-        "ref/dotnet/System.Collections.xml",
         "ref/dotnet/de/System.Collections.xml",
         "ref/dotnet/es/System.Collections.xml",
         "ref/dotnet/fr/System.Collections.xml",
@@ -1075,24 +1076,24 @@
         "ref/dotnet/ja/System.Collections.xml",
         "ref/dotnet/ko/System.Collections.xml",
         "ref/dotnet/ru/System.Collections.xml",
+        "ref/dotnet/System.Collections.dll",
+        "ref/dotnet/System.Collections.xml",
         "ref/dotnet/zh-hans/System.Collections.xml",
         "ref/dotnet/zh-hant/System.Collections.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Collections.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Collections.dll",
+        "System.Collections.4.0.10-beta-23109.nupkg",
+        "System.Collections.4.0.10-beta-23109.nupkg.sha512",
+        "System.Collections.nuspec"
       ]
     },
     "System.Collections.Concurrent/4.0.0-beta-23109": {
       "sha512": "ho+bO0DCKzknt/Wclih/H0tEeVj+BVPp1SE9dWqejp2iUtqlJrL8XVpdM8OgDIyT2DESwMPwDNpDsx7QI+bZhA==",
       "files": [
-        "License.rtf",
-        "System.Collections.Concurrent.4.0.0-beta-23109.nupkg",
-        "System.Collections.Concurrent.4.0.0-beta-23109.nupkg.sha512",
-        "System.Collections.Concurrent.nuspec",
         "lib/net45/_._",
         "lib/win8/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Collections.Concurrent.dll",
-        "ref/dotnet/System.Collections.Concurrent.xml",
+        "License.rtf",
         "ref/dotnet/de/System.Collections.Concurrent.xml",
         "ref/dotnet/es/System.Collections.Concurrent.xml",
         "ref/dotnet/fr/System.Collections.Concurrent.xml",
@@ -1100,11 +1101,11 @@
         "ref/dotnet/ja/System.Collections.Concurrent.xml",
         "ref/dotnet/ko/System.Collections.Concurrent.xml",
         "ref/dotnet/ru/System.Collections.Concurrent.xml",
+        "ref/dotnet/System.Collections.Concurrent.dll",
+        "ref/dotnet/System.Collections.Concurrent.xml",
         "ref/dotnet/zh-hans/System.Collections.Concurrent.xml",
         "ref/dotnet/zh-hant/System.Collections.Concurrent.xml",
         "ref/net45/_._",
-        "ref/netcore50/System.Collections.Concurrent.dll",
-        "ref/netcore50/System.Collections.Concurrent.xml",
         "ref/netcore50/de/System.Collections.Concurrent.xml",
         "ref/netcore50/es/System.Collections.Concurrent.xml",
         "ref/netcore50/fr/System.Collections.Concurrent.xml",
@@ -1112,23 +1113,23 @@
         "ref/netcore50/ja/System.Collections.Concurrent.xml",
         "ref/netcore50/ko/System.Collections.Concurrent.xml",
         "ref/netcore50/ru/System.Collections.Concurrent.xml",
+        "ref/netcore50/System.Collections.Concurrent.dll",
+        "ref/netcore50/System.Collections.Concurrent.xml",
         "ref/netcore50/zh-hans/System.Collections.Concurrent.xml",
         "ref/netcore50/zh-hant/System.Collections.Concurrent.xml",
         "ref/win8/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Collections.Concurrent.4.0.0-beta-23109.nupkg",
+        "System.Collections.Concurrent.4.0.0-beta-23109.nupkg.sha512",
+        "System.Collections.Concurrent.nuspec"
       ]
     },
     "System.Collections.NonGeneric/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "GFcChXb4svYlw1UA0qqE9Ps9Ooh7wYs60Dy1ywNfQSewz5WiZHl+TRc3VhbbP4iwobX676g0PmgltT69FGvQxw==",
       "files": [
-        "System.Collections.NonGeneric.4.0.0-beta-23029.nupkg",
-        "System.Collections.NonGeneric.4.0.0-beta-23029.nupkg.sha512",
-        "System.Collections.NonGeneric.nuspec",
         "lib/dotnet/System.Collections.NonGeneric.dll",
         "lib/net46/System.Collections.NonGeneric.dll",
-        "ref/dotnet/System.Collections.NonGeneric.dll",
-        "ref/dotnet/System.Collections.NonGeneric.xml",
         "ref/dotnet/de/System.Collections.NonGeneric.xml",
         "ref/dotnet/es/System.Collections.NonGeneric.xml",
         "ref/dotnet/fr/System.Collections.NonGeneric.xml",
@@ -1136,22 +1137,22 @@
         "ref/dotnet/ja/System.Collections.NonGeneric.xml",
         "ref/dotnet/ko/System.Collections.NonGeneric.xml",
         "ref/dotnet/ru/System.Collections.NonGeneric.xml",
+        "ref/dotnet/System.Collections.NonGeneric.dll",
+        "ref/dotnet/System.Collections.NonGeneric.xml",
         "ref/dotnet/zh-hans/System.Collections.NonGeneric.xml",
         "ref/dotnet/zh-hant/System.Collections.NonGeneric.xml",
-        "ref/net46/System.Collections.NonGeneric.dll"
+        "ref/net46/System.Collections.NonGeneric.dll",
+        "System.Collections.NonGeneric.4.0.0-beta-23029.nupkg",
+        "System.Collections.NonGeneric.4.0.0-beta-23029.nupkg.sha512",
+        "System.Collections.NonGeneric.nuspec"
       ]
     },
     "System.ComponentModel.EventBasedAsync/4.0.10-beta-23029": {
       "serviceable": true,
       "sha512": "1+r7m3Fu+SAeGz+h3gvxXC21d8HL6/9GbYREPNlakll1Qmp+B7hrRKPI7msYC7w6uXBMvI7Udq99FNJ0E0tBdA==",
       "files": [
-        "System.ComponentModel.EventBasedAsync.4.0.10-beta-23029.nupkg",
-        "System.ComponentModel.EventBasedAsync.4.0.10-beta-23029.nupkg.sha512",
-        "System.ComponentModel.EventBasedAsync.nuspec",
         "lib/dotnet/System.ComponentModel.EventBasedAsync.dll",
         "lib/net46/_._",
-        "ref/dotnet/System.ComponentModel.EventBasedAsync.dll",
-        "ref/dotnet/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/de/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/es/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/fr/System.ComponentModel.EventBasedAsync.xml",
@@ -1159,25 +1160,25 @@
         "ref/dotnet/ja/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/ko/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/ru/System.ComponentModel.EventBasedAsync.xml",
+        "ref/dotnet/System.ComponentModel.EventBasedAsync.dll",
+        "ref/dotnet/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/zh-hans/System.ComponentModel.EventBasedAsync.xml",
         "ref/dotnet/zh-hant/System.ComponentModel.EventBasedAsync.xml",
-        "ref/net46/_._"
+        "ref/net46/_._",
+        "System.ComponentModel.EventBasedAsync.4.0.10-beta-23029.nupkg",
+        "System.ComponentModel.EventBasedAsync.4.0.10-beta-23029.nupkg.sha512",
+        "System.ComponentModel.EventBasedAsync.nuspec"
       ]
     },
     "System.Diagnostics.Contracts/4.0.0-beta-23029": {
       "sha512": "iSbm8JPwQm7WWx7g0pkC5VyDzy//E5aTRdbik76oCFs1LRn0jcA2zVOhs4Wni3FKyWbOcDfyXVMjmiQKhtcp9g==",
       "files": [
-        "System.Diagnostics.Contracts.4.0.0-beta-23029.nupkg",
-        "System.Diagnostics.Contracts.4.0.0-beta-23029.nupkg.sha512",
-        "System.Diagnostics.Contracts.nuspec",
         "lib/DNXCore50/System.Diagnostics.Contracts.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Diagnostics.Contracts.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Diagnostics.Contracts.dll",
-        "ref/dotnet/System.Diagnostics.Contracts.xml",
         "ref/dotnet/de/System.Diagnostics.Contracts.xml",
         "ref/dotnet/es/System.Diagnostics.Contracts.xml",
         "ref/dotnet/fr/System.Diagnostics.Contracts.xml",
@@ -1185,6 +1186,8 @@
         "ref/dotnet/ja/System.Diagnostics.Contracts.xml",
         "ref/dotnet/ko/System.Diagnostics.Contracts.xml",
         "ref/dotnet/ru/System.Diagnostics.Contracts.xml",
+        "ref/dotnet/System.Diagnostics.Contracts.dll",
+        "ref/dotnet/System.Diagnostics.Contracts.xml",
         "ref/dotnet/zh-hans/System.Diagnostics.Contracts.xml",
         "ref/dotnet/zh-hant/System.Diagnostics.Contracts.xml",
         "ref/net45/_._",
@@ -1193,21 +1196,19 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Contracts.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Contracts.dll",
+        "System.Diagnostics.Contracts.4.0.0-beta-23029.nupkg",
+        "System.Diagnostics.Contracts.4.0.0-beta-23029.nupkg.sha512",
+        "System.Diagnostics.Contracts.nuspec"
       ]
     },
     "System.Diagnostics.Debug/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "vulHJ/VPQTK+pJGqyLjs9yMgmgxukhtK/DRtOlHs4clW0FJbyNNrN09YWMh3XQWRSuZ3WkcvR3VDY9g1NsFzeA==",
       "files": [
-        "System.Diagnostics.Debug.4.0.10-beta-23109.nupkg",
-        "System.Diagnostics.Debug.4.0.10-beta-23109.nupkg.sha512",
-        "System.Diagnostics.Debug.nuspec",
         "lib/DNXCore50/System.Diagnostics.Debug.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Diagnostics.Debug.dll",
-        "ref/dotnet/System.Diagnostics.Debug.dll",
-        "ref/dotnet/System.Diagnostics.Debug.xml",
         "ref/dotnet/de/System.Diagnostics.Debug.xml",
         "ref/dotnet/es/System.Diagnostics.Debug.xml",
         "ref/dotnet/fr/System.Diagnostics.Debug.xml",
@@ -1215,27 +1216,27 @@
         "ref/dotnet/ja/System.Diagnostics.Debug.xml",
         "ref/dotnet/ko/System.Diagnostics.Debug.xml",
         "ref/dotnet/ru/System.Diagnostics.Debug.xml",
+        "ref/dotnet/System.Diagnostics.Debug.dll",
+        "ref/dotnet/System.Diagnostics.Debug.xml",
         "ref/dotnet/zh-hans/System.Diagnostics.Debug.xml",
         "ref/dotnet/zh-hant/System.Diagnostics.Debug.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Debug.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Debug.dll",
+        "System.Diagnostics.Debug.4.0.10-beta-23109.nupkg",
+        "System.Diagnostics.Debug.4.0.10-beta-23109.nupkg.sha512",
+        "System.Diagnostics.Debug.nuspec"
       ]
     },
     "System.Diagnostics.Tools/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "aEaqvEuwDan1T8lbA1uIRSyckLrf0b8XMiDh+V/mziSRaz52gS4fgXW4k4Wo4RAMsQnSYUfIXeXWX7w9eDVuAg==",
       "files": [
-        "System.Diagnostics.Tools.4.0.0-beta-23029.nupkg",
-        "System.Diagnostics.Tools.4.0.0-beta-23029.nupkg.sha512",
-        "System.Diagnostics.Tools.nuspec",
         "lib/DNXCore50/System.Diagnostics.Tools.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Diagnostics.Tools.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Diagnostics.Tools.dll",
-        "ref/dotnet/System.Diagnostics.Tools.xml",
         "ref/dotnet/de/System.Diagnostics.Tools.xml",
         "ref/dotnet/es/System.Diagnostics.Tools.xml",
         "ref/dotnet/fr/System.Diagnostics.Tools.xml",
@@ -1243,6 +1244,8 @@
         "ref/dotnet/ja/System.Diagnostics.Tools.xml",
         "ref/dotnet/ko/System.Diagnostics.Tools.xml",
         "ref/dotnet/ru/System.Diagnostics.Tools.xml",
+        "ref/dotnet/System.Diagnostics.Tools.dll",
+        "ref/dotnet/System.Diagnostics.Tools.xml",
         "ref/dotnet/zh-hans/System.Diagnostics.Tools.xml",
         "ref/dotnet/zh-hant/System.Diagnostics.Tools.xml",
         "ref/net45/_._",
@@ -1251,21 +1254,19 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Tools.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Diagnostics.Tools.dll",
+        "System.Diagnostics.Tools.4.0.0-beta-23029.nupkg",
+        "System.Diagnostics.Tools.4.0.0-beta-23029.nupkg.sha512",
+        "System.Diagnostics.Tools.nuspec"
       ]
     },
     "System.Diagnostics.Tracing/4.0.0-beta-23029": {
       "sha512": "BtkRkwaaAt6ndx1Y9vQAZjFEZIbEzjLFB7t7LJrXz8L1H2MoL1xObY4jXu0VHjBRZKm4llbhHlS+jnq/McGqVg==",
       "files": [
-        "License.rtf",
-        "System.Diagnostics.Tracing.4.0.0-beta-23029.nupkg",
-        "System.Diagnostics.Tracing.4.0.0-beta-23029.nupkg.sha512",
-        "System.Diagnostics.Tracing.nuspec",
         "lib/net45/_._",
         "lib/win8/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Diagnostics.Tracing.dll",
-        "ref/dotnet/System.Diagnostics.Tracing.xml",
+        "License.rtf",
         "ref/dotnet/de/System.Diagnostics.Tracing.xml",
         "ref/dotnet/es/System.Diagnostics.Tracing.xml",
         "ref/dotnet/fr/System.Diagnostics.Tracing.xml",
@@ -1273,11 +1274,11 @@
         "ref/dotnet/ja/System.Diagnostics.Tracing.xml",
         "ref/dotnet/ko/System.Diagnostics.Tracing.xml",
         "ref/dotnet/ru/System.Diagnostics.Tracing.xml",
+        "ref/dotnet/System.Diagnostics.Tracing.dll",
+        "ref/dotnet/System.Diagnostics.Tracing.xml",
         "ref/dotnet/zh-hans/System.Diagnostics.Tracing.xml",
         "ref/dotnet/zh-hant/System.Diagnostics.Tracing.xml",
         "ref/net45/_._",
-        "ref/netcore50/System.Diagnostics.Tracing.dll",
-        "ref/netcore50/System.Diagnostics.Tracing.xml",
         "ref/netcore50/de/System.Diagnostics.Tracing.xml",
         "ref/netcore50/es/System.Diagnostics.Tracing.xml",
         "ref/netcore50/fr/System.Diagnostics.Tracing.xml",
@@ -1285,23 +1286,23 @@
         "ref/netcore50/ja/System.Diagnostics.Tracing.xml",
         "ref/netcore50/ko/System.Diagnostics.Tracing.xml",
         "ref/netcore50/ru/System.Diagnostics.Tracing.xml",
+        "ref/netcore50/System.Diagnostics.Tracing.dll",
+        "ref/netcore50/System.Diagnostics.Tracing.xml",
         "ref/netcore50/zh-hans/System.Diagnostics.Tracing.xml",
         "ref/netcore50/zh-hant/System.Diagnostics.Tracing.xml",
         "ref/win8/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Diagnostics.Tracing.4.0.0-beta-23029.nupkg",
+        "System.Diagnostics.Tracing.4.0.0-beta-23029.nupkg.sha512",
+        "System.Diagnostics.Tracing.nuspec"
       ]
     },
     "System.Globalization/4.0.10-beta-23109": {
       "sha512": "KxDNlJB+k7T9rRq7V3Rx7fh0UsoWLjPltk61m6MD7fJGz5fi98n3B/N51PioMxwC1XL6kwBh38zKy7ylAcfrSA==",
       "files": [
-        "System.Globalization.4.0.10-beta-23109.nupkg",
-        "System.Globalization.4.0.10-beta-23109.nupkg.sha512",
-        "System.Globalization.nuspec",
         "lib/DNXCore50/System.Globalization.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Globalization.dll",
-        "ref/dotnet/System.Globalization.dll",
-        "ref/dotnet/System.Globalization.xml",
         "ref/dotnet/de/System.Globalization.xml",
         "ref/dotnet/es/System.Globalization.xml",
         "ref/dotnet/fr/System.Globalization.xml",
@@ -1309,23 +1310,23 @@
         "ref/dotnet/ja/System.Globalization.xml",
         "ref/dotnet/ko/System.Globalization.xml",
         "ref/dotnet/ru/System.Globalization.xml",
+        "ref/dotnet/System.Globalization.dll",
+        "ref/dotnet/System.Globalization.xml",
         "ref/dotnet/zh-hans/System.Globalization.xml",
         "ref/dotnet/zh-hant/System.Globalization.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Globalization.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Globalization.dll",
+        "System.Globalization.4.0.10-beta-23109.nupkg",
+        "System.Globalization.4.0.10-beta-23109.nupkg.sha512",
+        "System.Globalization.nuspec"
       ]
     },
     "System.Globalization.Calendars/4.0.0-beta-23029": {
       "sha512": "qsw0RnYEcYfR6cTGWsO4LR9MD/HhwLO1+Y7xTUceCEhsXf5ly7WLaFkoAGP7GoxWfkvadrTBkoPRnvdS1Acpig==",
       "files": [
-        "System.Globalization.Calendars.4.0.0-beta-23029.nupkg",
-        "System.Globalization.Calendars.4.0.0-beta-23029.nupkg.sha512",
-        "System.Globalization.Calendars.nuspec",
         "lib/DNXCore50/System.Globalization.Calendars.dll",
         "lib/net46/System.Globalization.Calendars.dll",
         "lib/netcore50/System.Globalization.Calendars.dll",
-        "ref/dotnet/System.Globalization.Calendars.dll",
-        "ref/dotnet/System.Globalization.Calendars.xml",
         "ref/dotnet/de/System.Globalization.Calendars.xml",
         "ref/dotnet/es/System.Globalization.Calendars.xml",
         "ref/dotnet/fr/System.Globalization.Calendars.xml",
@@ -1333,24 +1334,24 @@
         "ref/dotnet/ja/System.Globalization.Calendars.xml",
         "ref/dotnet/ko/System.Globalization.Calendars.xml",
         "ref/dotnet/ru/System.Globalization.Calendars.xml",
+        "ref/dotnet/System.Globalization.Calendars.dll",
+        "ref/dotnet/System.Globalization.Calendars.xml",
         "ref/dotnet/zh-hans/System.Globalization.Calendars.xml",
         "ref/dotnet/zh-hant/System.Globalization.Calendars.xml",
         "ref/net46/System.Globalization.Calendars.dll",
-        "runtimes/win8-aot/lib/netcore50/System.Globalization.Calendars.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Globalization.Calendars.dll",
+        "System.Globalization.Calendars.4.0.0-beta-23029.nupkg",
+        "System.Globalization.Calendars.4.0.0-beta-23029.nupkg.sha512",
+        "System.Globalization.Calendars.nuspec"
       ]
     },
     "System.IO/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "C8ckViTew34qWEZghLEOA4HdjFtCzwXpU4tzhbY+wli3H0rojUL6O/KAeoMktXAkj5nXFjMCO28c1VTeredFwg==",
       "files": [
-        "System.IO.4.0.10-beta-23109.nupkg",
-        "System.IO.4.0.10-beta-23109.nupkg.sha512",
-        "System.IO.nuspec",
         "lib/DNXCore50/System.IO.dll",
         "lib/net46/_._",
         "lib/netcore50/System.IO.dll",
-        "ref/dotnet/System.IO.dll",
-        "ref/dotnet/System.IO.xml",
         "ref/dotnet/de/System.IO.xml",
         "ref/dotnet/es/System.IO.xml",
         "ref/dotnet/fr/System.IO.xml",
@@ -1358,27 +1359,26 @@
         "ref/dotnet/ja/System.IO.xml",
         "ref/dotnet/ko/System.IO.xml",
         "ref/dotnet/ru/System.IO.xml",
+        "ref/dotnet/System.IO.dll",
+        "ref/dotnet/System.IO.xml",
         "ref/dotnet/zh-hans/System.IO.xml",
         "ref/dotnet/zh-hant/System.IO.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.IO.dll"
+        "runtimes/win8-aot/lib/netcore50/System.IO.dll",
+        "System.IO.4.0.10-beta-23109.nupkg",
+        "System.IO.4.0.10-beta-23109.nupkg.sha512",
+        "System.IO.nuspec"
       ]
     },
     "System.IO.Compression/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "ZQJum48IrCzwFgR3bJ9JFYpD1XK7EgyTJE3MKBDzslVgyymDpb2zhx95lqeagTlmpcn+A+Hwe8kWE+czxYgvwA==",
       "files": [
-        "runtime.json",
-        "System.IO.Compression.4.0.0-beta-23029.nupkg",
-        "System.IO.Compression.4.0.0-beta-23029.nupkg.sha512",
-        "System.IO.Compression.nuspec",
         "lib/dotnet/System.IO.Compression.dll",
         "lib/net45/_._",
         "lib/netcore50/System.IO.Compression.dll",
         "lib/win8/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.IO.Compression.dll",
-        "ref/dotnet/System.IO.Compression.xml",
         "ref/dotnet/de/System.IO.Compression.xml",
         "ref/dotnet/es/System.IO.Compression.xml",
         "ref/dotnet/fr/System.IO.Compression.xml",
@@ -1386,27 +1386,28 @@
         "ref/dotnet/ja/System.IO.Compression.xml",
         "ref/dotnet/ko/System.IO.Compression.xml",
         "ref/dotnet/ru/System.IO.Compression.xml",
+        "ref/dotnet/System.IO.Compression.dll",
+        "ref/dotnet/System.IO.Compression.xml",
         "ref/dotnet/zh-hans/System.IO.Compression.xml",
         "ref/dotnet/zh-hant/System.IO.Compression.xml",
         "ref/net45/_._",
         "ref/netcore50/System.IO.Compression.dll",
         "ref/netcore50/System.IO.Compression.xml",
         "ref/win8/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "runtime.json",
+        "System.IO.Compression.4.0.0-beta-23029.nupkg",
+        "System.IO.Compression.4.0.0-beta-23029.nupkg.sha512",
+        "System.IO.Compression.nuspec"
       ]
     },
     "System.IO.FileSystem/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "N/Lv/zMuUusYnN+448s7H1kHoYHyKg0fIjaCOT2uC4Vf0RIwCLvdKG5PcQf6B6KBvJ2/FPo6TKpMz2YiNP0oeA==",
       "files": [
-        "System.IO.FileSystem.4.0.0-beta-23029.nupkg",
-        "System.IO.FileSystem.4.0.0-beta-23029.nupkg.sha512",
-        "System.IO.FileSystem.nuspec",
         "lib/DNXCore50/System.IO.FileSystem.dll",
         "lib/net46/System.IO.FileSystem.dll",
         "lib/netcore50/System.IO.FileSystem.dll",
-        "ref/dotnet/System.IO.FileSystem.dll",
-        "ref/dotnet/System.IO.FileSystem.xml",
         "ref/dotnet/de/System.IO.FileSystem.xml",
         "ref/dotnet/es/System.IO.FileSystem.xml",
         "ref/dotnet/fr/System.IO.FileSystem.xml",
@@ -1414,22 +1415,22 @@
         "ref/dotnet/ja/System.IO.FileSystem.xml",
         "ref/dotnet/ko/System.IO.FileSystem.xml",
         "ref/dotnet/ru/System.IO.FileSystem.xml",
+        "ref/dotnet/System.IO.FileSystem.dll",
+        "ref/dotnet/System.IO.FileSystem.xml",
         "ref/dotnet/zh-hans/System.IO.FileSystem.xml",
         "ref/dotnet/zh-hant/System.IO.FileSystem.xml",
-        "ref/net46/System.IO.FileSystem.dll"
+        "ref/net46/System.IO.FileSystem.dll",
+        "System.IO.FileSystem.4.0.0-beta-23029.nupkg",
+        "System.IO.FileSystem.4.0.0-beta-23029.nupkg.sha512",
+        "System.IO.FileSystem.nuspec"
       ]
     },
     "System.IO.FileSystem.Primitives/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "WwVLMyOW/+UGaZR5XOTvRuOzPHH82EMEc5Z7LOS7LhZJGiUaqF8ytTspsJ9ScrAclLFaX0AYqJkKLivxZ6aGwg==",
       "files": [
-        "System.IO.FileSystem.Primitives.4.0.0-beta-23029.nupkg",
-        "System.IO.FileSystem.Primitives.4.0.0-beta-23029.nupkg.sha512",
-        "System.IO.FileSystem.Primitives.nuspec",
         "lib/dotnet/System.IO.FileSystem.Primitives.dll",
         "lib/net46/System.IO.FileSystem.Primitives.dll",
-        "ref/dotnet/System.IO.FileSystem.Primitives.dll",
-        "ref/dotnet/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/de/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/es/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/fr/System.IO.FileSystem.Primitives.xml",
@@ -1437,26 +1438,26 @@
         "ref/dotnet/ja/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/ko/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/ru/System.IO.FileSystem.Primitives.xml",
+        "ref/dotnet/System.IO.FileSystem.Primitives.dll",
+        "ref/dotnet/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/zh-hans/System.IO.FileSystem.Primitives.xml",
         "ref/dotnet/zh-hant/System.IO.FileSystem.Primitives.xml",
-        "ref/net46/System.IO.FileSystem.Primitives.dll"
+        "ref/net46/System.IO.FileSystem.Primitives.dll",
+        "System.IO.FileSystem.Primitives.4.0.0-beta-23029.nupkg",
+        "System.IO.FileSystem.Primitives.4.0.0-beta-23029.nupkg.sha512",
+        "System.IO.FileSystem.Primitives.nuspec"
       ]
     },
     "System.Linq/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "N08PwMdjX3F9055FY/PcVpuMN8MbYZAcIQBoeaPonHOztZj0rM1qgdHe/3LVa1IWFF5VqrJdTyhoybSPIjeHag==",
       "files": [
-        "System.Linq.4.0.0-beta-23109.nupkg",
-        "System.Linq.4.0.0-beta-23109.nupkg.sha512",
-        "System.Linq.nuspec",
         "lib/dotnet/System.Linq.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Linq.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Linq.dll",
-        "ref/dotnet/System.Linq.xml",
         "ref/dotnet/de/System.Linq.xml",
         "ref/dotnet/es/System.Linq.xml",
         "ref/dotnet/fr/System.Linq.xml",
@@ -1464,6 +1465,8 @@
         "ref/dotnet/ja/System.Linq.xml",
         "ref/dotnet/ko/System.Linq.xml",
         "ref/dotnet/ru/System.Linq.xml",
+        "ref/dotnet/System.Linq.dll",
+        "ref/dotnet/System.Linq.xml",
         "ref/dotnet/zh-hans/System.Linq.xml",
         "ref/dotnet/zh-hant/System.Linq.xml",
         "ref/net45/_._",
@@ -1471,23 +1474,21 @@
         "ref/netcore50/System.Linq.xml",
         "ref/win8/_._",
         "ref/wp80/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Linq.4.0.0-beta-23109.nupkg",
+        "System.Linq.4.0.0-beta-23109.nupkg.sha512",
+        "System.Linq.nuspec"
       ]
     },
     "System.Net.Http/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "QOclBnin0G5kE5I0/ckJH/CXANNB+JAIMdGUnpJN56zzuP/zqZ/I1cCpbRQi906+Zo6H3OIMbx/nl3e/PSOZGg==",
       "files": [
-        "System.Net.Http.4.0.0-beta-23029.nupkg",
-        "System.Net.Http.4.0.0-beta-23029.nupkg.sha512",
-        "System.Net.Http.nuspec",
         "lib/DNXCore50/System.Net.Http.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Net.Http.dll",
         "lib/win8/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Net.Http.dll",
-        "ref/dotnet/System.Net.Http.xml",
         "ref/dotnet/de/System.Net.Http.xml",
         "ref/dotnet/es/System.Net.Http.xml",
         "ref/dotnet/fr/System.Net.Http.xml",
@@ -1495,27 +1496,27 @@
         "ref/dotnet/ja/System.Net.Http.xml",
         "ref/dotnet/ko/System.Net.Http.xml",
         "ref/dotnet/ru/System.Net.Http.xml",
+        "ref/dotnet/System.Net.Http.dll",
+        "ref/dotnet/System.Net.Http.xml",
         "ref/dotnet/zh-hans/System.Net.Http.xml",
         "ref/dotnet/zh-hant/System.Net.Http.xml",
         "ref/net45/_._",
         "ref/netcore50/System.Net.Http.dll",
         "ref/netcore50/System.Net.Http.xml",
         "ref/win8/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Net.Http.4.0.0-beta-23029.nupkg",
+        "System.Net.Http.4.0.0-beta-23029.nupkg.sha512",
+        "System.Net.Http.nuspec"
       ]
     },
     "System.Net.Primitives/4.0.10-beta-23029": {
       "serviceable": true,
       "sha512": "azMLkiZI+aLYH11u9bQ05cL3tML6DIXrX6wZ4sFRiCf6Mfc/vTqQ5VcdCgFV9BzTTXLV7o6XzfH2YxOIjWgTJg==",
       "files": [
-        "System.Net.Primitives.4.0.10-beta-23029.nupkg",
-        "System.Net.Primitives.4.0.10-beta-23029.nupkg.sha512",
-        "System.Net.Primitives.nuspec",
         "lib/DNXCore50/System.Net.Primitives.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Net.Primitives.dll",
-        "ref/dotnet/System.Net.Primitives.dll",
-        "ref/dotnet/System.Net.Primitives.xml",
         "ref/dotnet/de/System.Net.Primitives.xml",
         "ref/dotnet/es/System.Net.Primitives.xml",
         "ref/dotnet/fr/System.Net.Primitives.xml",
@@ -1523,21 +1524,21 @@
         "ref/dotnet/ja/System.Net.Primitives.xml",
         "ref/dotnet/ko/System.Net.Primitives.xml",
         "ref/dotnet/ru/System.Net.Primitives.xml",
+        "ref/dotnet/System.Net.Primitives.dll",
+        "ref/dotnet/System.Net.Primitives.xml",
         "ref/dotnet/zh-hans/System.Net.Primitives.xml",
         "ref/dotnet/zh-hant/System.Net.Primitives.xml",
-        "ref/net46/_._"
+        "ref/net46/_._",
+        "System.Net.Primitives.4.0.10-beta-23029.nupkg",
+        "System.Net.Primitives.4.0.10-beta-23029.nupkg.sha512",
+        "System.Net.Primitives.nuspec"
       ]
     },
     "System.Net.Security/4.0.0-beta-23029": {
       "sha512": "NQUOSSp/vFxaA7asFUgonzfDK0AMP/GDmKjaHocsP9FqBJ+ehLgHGLayyvjdhChLMVXko61w8cN0LD34KK/5Gw==",
       "files": [
-        "System.Net.Security.4.0.0-beta-23029.nupkg",
-        "System.Net.Security.4.0.0-beta-23029.nupkg.sha512",
-        "System.Net.Security.nuspec",
         "lib/DNXCore50/System.Net.Security.dll",
         "lib/net46/System.Net.Security.dll",
-        "ref/dotnet/System.Net.Security.dll",
-        "ref/dotnet/System.Net.Security.xml",
         "ref/dotnet/de/System.Net.Security.xml",
         "ref/dotnet/es/System.Net.Security.xml",
         "ref/dotnet/fr/System.Net.Security.xml",
@@ -1545,20 +1546,20 @@
         "ref/dotnet/ja/System.Net.Security.xml",
         "ref/dotnet/ko/System.Net.Security.xml",
         "ref/dotnet/ru/System.Net.Security.xml",
+        "ref/dotnet/System.Net.Security.dll",
+        "ref/dotnet/System.Net.Security.xml",
         "ref/dotnet/zh-hans/System.Net.Security.xml",
         "ref/dotnet/zh-hant/System.Net.Security.xml",
-        "ref/net46/System.Net.Security.dll"
+        "ref/net46/System.Net.Security.dll",
+        "System.Net.Security.4.0.0-beta-23029.nupkg",
+        "System.Net.Security.4.0.0-beta-23029.nupkg.sha512",
+        "System.Net.Security.nuspec"
       ]
     },
     "System.Net.Sockets/4.0.10-beta-23029": {
       "sha512": "7D73VHdDNhXF8wwCTEv1FFHtZnl3p3470QWYYXz8pMiutO8/MX/Y3JVBmBHriGgNMUwXBLiiSirEkB0nQYgZkQ==",
       "files": [
-        "System.Net.Sockets.4.0.10-beta-23029.nupkg",
-        "System.Net.Sockets.4.0.10-beta-23029.nupkg.sha512",
-        "System.Net.Sockets.nuspec",
         "lib/DNXCore50/System.Net.Sockets.dll",
-        "ref/dotnet/System.Net.Sockets.dll",
-        "ref/dotnet/System.Net.Sockets.xml",
         "ref/dotnet/de/System.Net.Sockets.xml",
         "ref/dotnet/es/System.Net.Sockets.xml",
         "ref/dotnet/fr/System.Net.Sockets.xml",
@@ -1566,48 +1567,48 @@
         "ref/dotnet/ja/System.Net.Sockets.xml",
         "ref/dotnet/ko/System.Net.Sockets.xml",
         "ref/dotnet/ru/System.Net.Sockets.xml",
+        "ref/dotnet/System.Net.Sockets.dll",
+        "ref/dotnet/System.Net.Sockets.xml",
         "ref/dotnet/zh-hans/System.Net.Sockets.xml",
-        "ref/dotnet/zh-hant/System.Net.Sockets.xml"
+        "ref/dotnet/zh-hant/System.Net.Sockets.xml",
+        "System.Net.Sockets.4.0.10-beta-23029.nupkg",
+        "System.Net.Sockets.4.0.10-beta-23029.nupkg.sha512",
+        "System.Net.Sockets.nuspec"
       ]
     },
     "System.Private.Networking/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "NWH/oxyK/GdFdyLsrjSKCdEmDZLs9KCUb8J0PU1p7kWIb4iB13qIMZ6LTcOFyplgI2UGwAk+royTiA5ezUQu5g==",
       "files": [
-        "System.Private.Networking.4.0.0-beta-23029.nupkg",
-        "System.Private.Networking.4.0.0-beta-23029.nupkg.sha512",
-        "System.Private.Networking.nuspec",
         "lib/DNXCore50/System.Private.Networking.dll",
         "lib/netcore50/System.Private.Networking.dll",
         "ref/dnxcore50/_._",
-        "ref/netcore50/_._"
+        "ref/netcore50/_._",
+        "System.Private.Networking.4.0.0-beta-23029.nupkg",
+        "System.Private.Networking.4.0.0-beta-23029.nupkg.sha512",
+        "System.Private.Networking.nuspec"
       ]
     },
     "System.Private.Uri/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "b7xqqNskbBRep2ur+D7bhEj8XUAIMUz7ikofgOkarb/k5StLqDxVYD8pP7nvYKDeMeWLvEQgq/5cAFSp+tWY8Q==",
       "files": [
-        "System.Private.Uri.4.0.0-beta-23109.nupkg",
-        "System.Private.Uri.4.0.0-beta-23109.nupkg.sha512",
-        "System.Private.Uri.nuspec",
         "lib/DNXCore50/System.Private.Uri.dll",
         "lib/netcore50/System.Private.Uri.dll",
         "ref/dnxcore50/_._",
         "ref/netcore50/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Private.Uri.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Private.Uri.dll",
+        "System.Private.Uri.4.0.0-beta-23109.nupkg",
+        "System.Private.Uri.4.0.0-beta-23109.nupkg.sha512",
+        "System.Private.Uri.nuspec"
       ]
     },
     "System.Reflection/4.0.10-beta-23029": {
       "sha512": "euY4LRBGqC5xXil65zSyqMTxyRQD2HRMFYLi/UkixfsuAFAuLwNDVBJoqVdYn34N/SVYBGER3NNOry0u+Fl2dw==",
       "files": [
-        "System.Reflection.4.0.10-beta-23029.nupkg",
-        "System.Reflection.4.0.10-beta-23029.nupkg.sha512",
-        "System.Reflection.nuspec",
         "lib/DNXCore50/System.Reflection.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Reflection.dll",
-        "ref/dotnet/System.Reflection.dll",
-        "ref/dotnet/System.Reflection.xml",
         "ref/dotnet/de/System.Reflection.xml",
         "ref/dotnet/es/System.Reflection.xml",
         "ref/dotnet/fr/System.Reflection.xml",
@@ -1615,27 +1616,27 @@
         "ref/dotnet/ja/System.Reflection.xml",
         "ref/dotnet/ko/System.Reflection.xml",
         "ref/dotnet/ru/System.Reflection.xml",
+        "ref/dotnet/System.Reflection.dll",
+        "ref/dotnet/System.Reflection.xml",
         "ref/dotnet/zh-hans/System.Reflection.xml",
         "ref/dotnet/zh-hant/System.Reflection.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Reflection.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Reflection.dll",
+        "System.Reflection.4.0.10-beta-23029.nupkg",
+        "System.Reflection.4.0.10-beta-23029.nupkg.sha512",
+        "System.Reflection.nuspec"
       ]
     },
     "System.Reflection.Primitives/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "7Iarpz4F8KYCTw3/BmOQjEtb3njPuYHa0pov9zQ812IN5a8lvAA5tXFwFV/KfWsaGzTAkVUsrbQDX6Z1VQ8qgg==",
       "files": [
-        "System.Reflection.Primitives.4.0.0-beta-23029.nupkg",
-        "System.Reflection.Primitives.4.0.0-beta-23029.nupkg.sha512",
-        "System.Reflection.Primitives.nuspec",
         "lib/DNXCore50/System.Reflection.Primitives.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Reflection.Primitives.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Reflection.Primitives.dll",
-        "ref/dotnet/System.Reflection.Primitives.xml",
         "ref/dotnet/de/System.Reflection.Primitives.xml",
         "ref/dotnet/es/System.Reflection.Primitives.xml",
         "ref/dotnet/fr/System.Reflection.Primitives.xml",
@@ -1643,6 +1644,8 @@
         "ref/dotnet/ja/System.Reflection.Primitives.xml",
         "ref/dotnet/ko/System.Reflection.Primitives.xml",
         "ref/dotnet/ru/System.Reflection.Primitives.xml",
+        "ref/dotnet/System.Reflection.Primitives.dll",
+        "ref/dotnet/System.Reflection.Primitives.xml",
         "ref/dotnet/zh-hans/System.Reflection.Primitives.xml",
         "ref/dotnet/zh-hant/System.Reflection.Primitives.xml",
         "ref/net45/_._",
@@ -1651,24 +1654,22 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Reflection.Primitives.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Reflection.Primitives.dll",
+        "System.Reflection.Primitives.4.0.0-beta-23029.nupkg",
+        "System.Reflection.Primitives.4.0.0-beta-23029.nupkg.sha512",
+        "System.Reflection.Primitives.nuspec"
       ]
     },
     "System.Resources.ResourceManager/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "EzHmFDNXwxSmxHEngXzt1q+X9rg54DJypZ2G1J9QSej9sS/ui6FgkiAN2LHSZ7JXiSWlPnt3HAk8Rb8xENKbag==",
       "files": [
-        "System.Resources.ResourceManager.4.0.0-beta-23109.nupkg",
-        "System.Resources.ResourceManager.4.0.0-beta-23109.nupkg.sha512",
-        "System.Resources.ResourceManager.nuspec",
         "lib/DNXCore50/System.Resources.ResourceManager.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Resources.ResourceManager.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Resources.ResourceManager.dll",
-        "ref/dotnet/System.Resources.ResourceManager.xml",
         "ref/dotnet/de/System.Resources.ResourceManager.xml",
         "ref/dotnet/es/System.Resources.ResourceManager.xml",
         "ref/dotnet/fr/System.Resources.ResourceManager.xml",
@@ -1676,6 +1677,8 @@
         "ref/dotnet/ja/System.Resources.ResourceManager.xml",
         "ref/dotnet/ko/System.Resources.ResourceManager.xml",
         "ref/dotnet/ru/System.Resources.ResourceManager.xml",
+        "ref/dotnet/System.Resources.ResourceManager.dll",
+        "ref/dotnet/System.Resources.ResourceManager.xml",
         "ref/dotnet/zh-hans/System.Resources.ResourceManager.xml",
         "ref/dotnet/zh-hant/System.Resources.ResourceManager.xml",
         "ref/net45/_._",
@@ -1684,21 +1687,19 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Resources.ResourceManager.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Resources.ResourceManager.dll",
+        "System.Resources.ResourceManager.4.0.0-beta-23109.nupkg",
+        "System.Resources.ResourceManager.4.0.0-beta-23109.nupkg.sha512",
+        "System.Resources.ResourceManager.nuspec"
       ]
     },
     "System.Runtime/4.0.20-beta-23109": {
       "serviceable": true,
       "sha512": "4fCy/GsXAORQtTG4r8I6EIM1j0V2PlhiujJzN0Tqc5l1bfLdqe5/bI1KzggdrF2jPYDd0K/FXINto78fcOCXQg==",
       "files": [
-        "System.Runtime.4.0.20-beta-23109.nupkg",
-        "System.Runtime.4.0.20-beta-23109.nupkg.sha512",
-        "System.Runtime.nuspec",
         "lib/DNXCore50/System.Runtime.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.dll",
-        "ref/dotnet/System.Runtime.xml",
         "ref/dotnet/de/System.Runtime.xml",
         "ref/dotnet/es/System.Runtime.xml",
         "ref/dotnet/fr/System.Runtime.xml",
@@ -1706,24 +1707,24 @@
         "ref/dotnet/ja/System.Runtime.xml",
         "ref/dotnet/ko/System.Runtime.xml",
         "ref/dotnet/ru/System.Runtime.xml",
+        "ref/dotnet/System.Runtime.dll",
+        "ref/dotnet/System.Runtime.xml",
         "ref/dotnet/zh-hans/System.Runtime.xml",
         "ref/dotnet/zh-hant/System.Runtime.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.dll",
+        "System.Runtime.4.0.20-beta-23109.nupkg",
+        "System.Runtime.4.0.20-beta-23109.nupkg.sha512",
+        "System.Runtime.nuspec"
       ]
     },
     "System.Runtime.Extensions/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "S1PpQStr/ZpjOolZYjHyRCIV54SEDar06iA+bru0Ve4DX6QY/mlC7Y9YrUyg9HIlwX1rp+gR4ZaGoJpdtjABlA==",
       "files": [
-        "System.Runtime.Extensions.4.0.10-beta-23109.nupkg",
-        "System.Runtime.Extensions.4.0.10-beta-23109.nupkg.sha512",
-        "System.Runtime.Extensions.nuspec",
         "lib/DNXCore50/System.Runtime.Extensions.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Runtime.Extensions.dll",
-        "ref/dotnet/System.Runtime.Extensions.dll",
-        "ref/dotnet/System.Runtime.Extensions.xml",
         "ref/dotnet/de/System.Runtime.Extensions.xml",
         "ref/dotnet/es/System.Runtime.Extensions.xml",
         "ref/dotnet/fr/System.Runtime.Extensions.xml",
@@ -1731,24 +1732,24 @@
         "ref/dotnet/ja/System.Runtime.Extensions.xml",
         "ref/dotnet/ko/System.Runtime.Extensions.xml",
         "ref/dotnet/ru/System.Runtime.Extensions.xml",
+        "ref/dotnet/System.Runtime.Extensions.dll",
+        "ref/dotnet/System.Runtime.Extensions.xml",
         "ref/dotnet/zh-hans/System.Runtime.Extensions.xml",
         "ref/dotnet/zh-hant/System.Runtime.Extensions.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.Extensions.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.Extensions.dll",
+        "System.Runtime.Extensions.4.0.10-beta-23109.nupkg",
+        "System.Runtime.Extensions.4.0.10-beta-23109.nupkg.sha512",
+        "System.Runtime.Extensions.nuspec"
       ]
     },
     "System.Runtime.Handles/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "Tb6J9ag+Zx4r5vO97PoxZkj0LvsaJTo9LFEYQSgNw6KXXaX2+B7fQF2wWQiZ50AEom4sXn5DfEkrMZZ+GCuddQ==",
       "files": [
-        "System.Runtime.Handles.4.0.0-beta-23109.nupkg",
-        "System.Runtime.Handles.4.0.0-beta-23109.nupkg.sha512",
-        "System.Runtime.Handles.nuspec",
         "lib/DNXCore50/System.Runtime.Handles.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Runtime.Handles.dll",
-        "ref/dotnet/System.Runtime.Handles.dll",
-        "ref/dotnet/System.Runtime.Handles.xml",
         "ref/dotnet/de/System.Runtime.Handles.xml",
         "ref/dotnet/es/System.Runtime.Handles.xml",
         "ref/dotnet/fr/System.Runtime.Handles.xml",
@@ -1756,24 +1757,24 @@
         "ref/dotnet/ja/System.Runtime.Handles.xml",
         "ref/dotnet/ko/System.Runtime.Handles.xml",
         "ref/dotnet/ru/System.Runtime.Handles.xml",
+        "ref/dotnet/System.Runtime.Handles.dll",
+        "ref/dotnet/System.Runtime.Handles.xml",
         "ref/dotnet/zh-hans/System.Runtime.Handles.xml",
         "ref/dotnet/zh-hant/System.Runtime.Handles.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.Handles.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.Handles.dll",
+        "System.Runtime.Handles.4.0.0-beta-23109.nupkg",
+        "System.Runtime.Handles.4.0.0-beta-23109.nupkg.sha512",
+        "System.Runtime.Handles.nuspec"
       ]
     },
     "System.Runtime.InteropServices/4.0.20-beta-23029": {
       "serviceable": true,
       "sha512": "j8O7CRH6BRtELmiVf2f6nr8L1Ye/LqwQtQ7EfTp66UWjh+0nhAXRpTktqRRnwonMkdWpftxgZ1/8YphA9rs2PQ==",
       "files": [
-        "System.Runtime.InteropServices.4.0.20-beta-23029.nupkg",
-        "System.Runtime.InteropServices.4.0.20-beta-23029.nupkg.sha512",
-        "System.Runtime.InteropServices.nuspec",
         "lib/DNXCore50/System.Runtime.InteropServices.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Runtime.InteropServices.dll",
-        "ref/dotnet/System.Runtime.InteropServices.dll",
-        "ref/dotnet/System.Runtime.InteropServices.xml",
         "ref/dotnet/de/System.Runtime.InteropServices.xml",
         "ref/dotnet/es/System.Runtime.InteropServices.xml",
         "ref/dotnet/fr/System.Runtime.InteropServices.xml",
@@ -1781,26 +1782,26 @@
         "ref/dotnet/ja/System.Runtime.InteropServices.xml",
         "ref/dotnet/ko/System.Runtime.InteropServices.xml",
         "ref/dotnet/ru/System.Runtime.InteropServices.xml",
+        "ref/dotnet/System.Runtime.InteropServices.dll",
+        "ref/dotnet/System.Runtime.InteropServices.xml",
         "ref/dotnet/zh-hans/System.Runtime.InteropServices.xml",
         "ref/dotnet/zh-hant/System.Runtime.InteropServices.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Runtime.InteropServices.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Runtime.InteropServices.dll",
+        "System.Runtime.InteropServices.4.0.20-beta-23029.nupkg",
+        "System.Runtime.InteropServices.4.0.20-beta-23029.nupkg.sha512",
+        "System.Runtime.InteropServices.nuspec"
       ]
     },
     "System.Runtime.Numerics/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "2dQE8+gVnkNFs/6xnBIDXyPvEe8L+X9GahZZaaseR9LTbisNnZYnKCE76Cl4xNf1s8xIP/Nro+whcvpeEX7DLQ==",
       "files": [
-        "System.Runtime.Numerics.4.0.0-beta-23109.nupkg",
-        "System.Runtime.Numerics.4.0.0-beta-23109.nupkg.sha512",
-        "System.Runtime.Numerics.nuspec",
         "lib/dotnet/System.Runtime.Numerics.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Runtime.Numerics.dll",
         "lib/win8/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Runtime.Numerics.dll",
-        "ref/dotnet/System.Runtime.Numerics.xml",
         "ref/dotnet/de/System.Runtime.Numerics.xml",
         "ref/dotnet/es/System.Runtime.Numerics.xml",
         "ref/dotnet/fr/System.Runtime.Numerics.xml",
@@ -1808,26 +1809,26 @@
         "ref/dotnet/ja/System.Runtime.Numerics.xml",
         "ref/dotnet/ko/System.Runtime.Numerics.xml",
         "ref/dotnet/ru/System.Runtime.Numerics.xml",
+        "ref/dotnet/System.Runtime.Numerics.dll",
+        "ref/dotnet/System.Runtime.Numerics.xml",
         "ref/dotnet/zh-hans/System.Runtime.Numerics.xml",
         "ref/dotnet/zh-hant/System.Runtime.Numerics.xml",
         "ref/net45/_._",
         "ref/netcore50/System.Runtime.Numerics.dll",
         "ref/netcore50/System.Runtime.Numerics.xml",
         "ref/win8/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Runtime.Numerics.4.0.0-beta-23109.nupkg",
+        "System.Runtime.Numerics.4.0.0-beta-23109.nupkg.sha512",
+        "System.Runtime.Numerics.nuspec"
       ]
     },
     "System.Security.Claims/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "xjnM7OQpVqoEnuZrO5/hHu6imkIPuHNn7UONDKRYMH9l8rENRJyB8qnnR+iiifOJvQnskjs+eAeApH0AKFkHWA==",
       "files": [
-        "System.Security.Claims.4.0.0-beta-23029.nupkg",
-        "System.Security.Claims.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Claims.nuspec",
         "lib/dotnet/System.Security.Claims.dll",
         "lib/net46/System.Security.Claims.dll",
-        "ref/dotnet/System.Security.Claims.dll",
-        "ref/dotnet/System.Security.Claims.xml",
         "ref/dotnet/de/System.Security.Claims.xml",
         "ref/dotnet/es/System.Security.Claims.xml",
         "ref/dotnet/fr/System.Security.Claims.xml",
@@ -1835,22 +1836,22 @@
         "ref/dotnet/ja/System.Security.Claims.xml",
         "ref/dotnet/ko/System.Security.Claims.xml",
         "ref/dotnet/ru/System.Security.Claims.xml",
+        "ref/dotnet/System.Security.Claims.dll",
+        "ref/dotnet/System.Security.Claims.xml",
         "ref/dotnet/zh-hans/System.Security.Claims.xml",
         "ref/dotnet/zh-hant/System.Security.Claims.xml",
-        "ref/net46/System.Security.Claims.dll"
+        "ref/net46/System.Security.Claims.dll",
+        "System.Security.Claims.4.0.0-beta-23029.nupkg",
+        "System.Security.Claims.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Claims.nuspec"
       ]
     },
     "System.Security.Cryptography.Encoding/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "CWIKYQg7G4Vr5V+JSe8/lTA7TfVQcxvXa/3VFaW5DLP7jvXe7+9uTzlHnxTZ6w0QiDXit+cyL3iZzbEW34xqdw==",
       "files": [
-        "System.Security.Cryptography.Encoding.4.0.0-beta-23029.nupkg",
-        "System.Security.Cryptography.Encoding.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Cryptography.Encoding.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.Encoding.dll",
         "lib/net46/System.Security.Cryptography.Encoding.dll",
-        "ref/dotnet/System.Security.Cryptography.Encoding.dll",
-        "ref/dotnet/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/de/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/es/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/fr/System.Security.Cryptography.Encoding.xml",
@@ -1858,22 +1859,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/ko/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/ru/System.Security.Cryptography.Encoding.xml",
+        "ref/dotnet/System.Security.Cryptography.Encoding.dll",
+        "ref/dotnet/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.Encoding.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.Encoding.xml",
-        "ref/net46/System.Security.Cryptography.Encoding.dll"
+        "ref/net46/System.Security.Cryptography.Encoding.dll",
+        "System.Security.Cryptography.Encoding.4.0.0-beta-23029.nupkg",
+        "System.Security.Cryptography.Encoding.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Cryptography.Encoding.nuspec"
       ]
     },
     "System.Security.Cryptography.Encryption/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "jnhHwMWLdvLPTvozxcyqOrlxTJeyq2NzZBFa4RN7sQ2V9/YWYo8zBcLy7L9LOFpvfgCkbT4VJd0961DY3dVI7Q==",
       "files": [
-        "System.Security.Cryptography.Encryption.4.0.0-beta-23109.nupkg",
-        "System.Security.Cryptography.Encryption.4.0.0-beta-23109.nupkg.sha512",
-        "System.Security.Cryptography.Encryption.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.Encryption.dll",
         "lib/net46/System.Security.Cryptography.Encryption.dll",
-        "ref/dotnet/System.Security.Cryptography.Encryption.dll",
-        "ref/dotnet/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/de/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/es/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/fr/System.Security.Cryptography.Encryption.xml",
@@ -1881,22 +1882,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/ko/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/ru/System.Security.Cryptography.Encryption.xml",
+        "ref/dotnet/System.Security.Cryptography.Encryption.dll",
+        "ref/dotnet/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.Encryption.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.Encryption.xml",
-        "ref/net46/System.Security.Cryptography.Encryption.dll"
+        "ref/net46/System.Security.Cryptography.Encryption.dll",
+        "System.Security.Cryptography.Encryption.4.0.0-beta-23109.nupkg",
+        "System.Security.Cryptography.Encryption.4.0.0-beta-23109.nupkg.sha512",
+        "System.Security.Cryptography.Encryption.nuspec"
       ]
     },
     "System.Security.Cryptography.Hashing/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "vC3CC39fbGrLX9edeBW5uID6yuvNf2wamHEfZrMJkK+S8v4+rkOniEc6dotnTfIh0jFwOZmLNk02Rji3XOPwAw==",
       "files": [
-        "System.Security.Cryptography.Hashing.4.0.0-beta-23109.nupkg",
-        "System.Security.Cryptography.Hashing.4.0.0-beta-23109.nupkg.sha512",
-        "System.Security.Cryptography.Hashing.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.Hashing.dll",
         "lib/net46/System.Security.Cryptography.Hashing.dll",
-        "ref/dotnet/System.Security.Cryptography.Hashing.dll",
-        "ref/dotnet/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/de/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/es/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/fr/System.Security.Cryptography.Hashing.xml",
@@ -1904,22 +1905,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/ko/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/ru/System.Security.Cryptography.Hashing.xml",
+        "ref/dotnet/System.Security.Cryptography.Hashing.dll",
+        "ref/dotnet/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.Hashing.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.Hashing.xml",
-        "ref/net46/System.Security.Cryptography.Hashing.dll"
+        "ref/net46/System.Security.Cryptography.Hashing.dll",
+        "System.Security.Cryptography.Hashing.4.0.0-beta-23109.nupkg",
+        "System.Security.Cryptography.Hashing.4.0.0-beta-23109.nupkg.sha512",
+        "System.Security.Cryptography.Hashing.nuspec"
       ]
     },
     "System.Security.Cryptography.Hashing.Algorithms/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "wZYU/3BQwi5Hufq1ibdqeCr/fETvEmc40jeofQf8rL1ZDdUU0Tl+KAWpbSAQJxWPHDGzDecNB9Np3LAzNEYNwA==",
       "files": [
-        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23109.nupkg",
-        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23109.nupkg.sha512",
-        "System.Security.Cryptography.Hashing.Algorithms.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.Hashing.Algorithms.dll",
         "lib/net46/System.Security.Cryptography.Hashing.Algorithms.dll",
-        "ref/dotnet/System.Security.Cryptography.Hashing.Algorithms.dll",
-        "ref/dotnet/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/de/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/es/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/fr/System.Security.Cryptography.Hashing.Algorithms.xml",
@@ -1927,22 +1928,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/ko/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/ru/System.Security.Cryptography.Hashing.Algorithms.xml",
+        "ref/dotnet/System.Security.Cryptography.Hashing.Algorithms.dll",
+        "ref/dotnet/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.Hashing.Algorithms.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.Hashing.Algorithms.xml",
-        "ref/net46/System.Security.Cryptography.Hashing.Algorithms.dll"
+        "ref/net46/System.Security.Cryptography.Hashing.Algorithms.dll",
+        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23109.nupkg",
+        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23109.nupkg.sha512",
+        "System.Security.Cryptography.Hashing.Algorithms.nuspec"
       ]
     },
     "System.Security.Cryptography.RandomNumberGenerator/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "jhzi8Eyh9vg7rw7QVSrodLcsS19xayjzWXItsjq4l2M6jvFRqOp1RL0fswzZQH02pRhb+faQCOUZtPLGtGUB1Q==",
       "files": [
-        "System.Security.Cryptography.RandomNumberGenerator.4.0.0-beta-23109.nupkg",
-        "System.Security.Cryptography.RandomNumberGenerator.4.0.0-beta-23109.nupkg.sha512",
-        "System.Security.Cryptography.RandomNumberGenerator.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.RandomNumberGenerator.dll",
         "lib/net46/System.Security.Cryptography.RandomNumberGenerator.dll",
-        "ref/dotnet/System.Security.Cryptography.RandomNumberGenerator.dll",
-        "ref/dotnet/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/de/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/es/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/fr/System.Security.Cryptography.RandomNumberGenerator.xml",
@@ -1950,22 +1951,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/ko/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/ru/System.Security.Cryptography.RandomNumberGenerator.xml",
+        "ref/dotnet/System.Security.Cryptography.RandomNumberGenerator.dll",
+        "ref/dotnet/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.RandomNumberGenerator.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.RandomNumberGenerator.xml",
-        "ref/net46/System.Security.Cryptography.RandomNumberGenerator.dll"
+        "ref/net46/System.Security.Cryptography.RandomNumberGenerator.dll",
+        "System.Security.Cryptography.RandomNumberGenerator.4.0.0-beta-23109.nupkg",
+        "System.Security.Cryptography.RandomNumberGenerator.4.0.0-beta-23109.nupkg.sha512",
+        "System.Security.Cryptography.RandomNumberGenerator.nuspec"
       ]
     },
     "System.Security.Cryptography.RSA/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "m3xP613PjhtVlllcbgDKfkODMWtXo4dQaZyQKAQ09tA/2EpaUuiY/BWLEW+NW2/NpFDiS5E5aqh6VeTWmSwl9A==",
       "files": [
-        "System.Security.Cryptography.RSA.4.0.0-beta-23029.nupkg",
-        "System.Security.Cryptography.RSA.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Cryptography.RSA.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.RSA.dll",
         "lib/net46/System.Security.Cryptography.RSA.dll",
-        "ref/dotnet/System.Security.Cryptography.RSA.dll",
-        "ref/dotnet/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/de/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/es/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/fr/System.Security.Cryptography.RSA.xml",
@@ -1973,22 +1974,22 @@
         "ref/dotnet/ja/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/ko/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/ru/System.Security.Cryptography.RSA.xml",
+        "ref/dotnet/System.Security.Cryptography.RSA.dll",
+        "ref/dotnet/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.RSA.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.RSA.xml",
-        "ref/net46/System.Security.Cryptography.RSA.dll"
+        "ref/net46/System.Security.Cryptography.RSA.dll",
+        "System.Security.Cryptography.RSA.4.0.0-beta-23029.nupkg",
+        "System.Security.Cryptography.RSA.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Cryptography.RSA.nuspec"
       ]
     },
     "System.Security.Cryptography.X509Certificates/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "WZALjI1kLSlGUC2Wa78Lk3BkS+Py9KY9oTC9MbOKAl/6KeirIURh3JwUEXpCo0AiOWhWfxlW1zBksRqFS+b+uA==",
       "files": [
-        "System.Security.Cryptography.X509Certificates.4.0.0-beta-23029.nupkg",
-        "System.Security.Cryptography.X509Certificates.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Cryptography.X509Certificates.nuspec",
         "lib/DNXCore50/System.Security.Cryptography.X509Certificates.dll",
         "lib/net46/System.Security.Cryptography.X509Certificates.dll",
-        "ref/dotnet/System.Security.Cryptography.X509Certificates.dll",
-        "ref/dotnet/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/de/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/es/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/fr/System.Security.Cryptography.X509Certificates.xml",
@@ -1996,26 +1997,26 @@
         "ref/dotnet/ja/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/ko/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/ru/System.Security.Cryptography.X509Certificates.xml",
+        "ref/dotnet/System.Security.Cryptography.X509Certificates.dll",
+        "ref/dotnet/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/zh-hans/System.Security.Cryptography.X509Certificates.xml",
         "ref/dotnet/zh-hant/System.Security.Cryptography.X509Certificates.xml",
-        "ref/net46/System.Security.Cryptography.X509Certificates.dll"
+        "ref/net46/System.Security.Cryptography.X509Certificates.dll",
+        "System.Security.Cryptography.X509Certificates.4.0.0-beta-23029.nupkg",
+        "System.Security.Cryptography.X509Certificates.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Cryptography.X509Certificates.nuspec"
       ]
     },
     "System.Security.Principal/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "3TGierFp4cO6tw3fxG2/jpetPnRzdpTF0b1e9ZTMg4vpnQJaTkurjAXhGdfO5unGTvnwQ/4V2Y7hlPVXMF9l9w==",
       "files": [
-        "System.Security.Principal.4.0.0-beta-23029.nupkg",
-        "System.Security.Principal.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Principal.nuspec",
         "lib/dotnet/System.Security.Principal.dll",
         "lib/net45/_._",
         "lib/netcore50/System.Security.Principal.dll",
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Security.Principal.dll",
-        "ref/dotnet/System.Security.Principal.xml",
         "ref/dotnet/de/System.Security.Principal.xml",
         "ref/dotnet/es/System.Security.Principal.xml",
         "ref/dotnet/fr/System.Security.Principal.xml",
@@ -2023,6 +2024,8 @@
         "ref/dotnet/ja/System.Security.Principal.xml",
         "ref/dotnet/ko/System.Security.Principal.xml",
         "ref/dotnet/ru/System.Security.Principal.xml",
+        "ref/dotnet/System.Security.Principal.dll",
+        "ref/dotnet/System.Security.Principal.xml",
         "ref/dotnet/zh-hans/System.Security.Principal.xml",
         "ref/dotnet/zh-hant/System.Security.Principal.xml",
         "ref/net45/_._",
@@ -2030,20 +2033,18 @@
         "ref/netcore50/System.Security.Principal.xml",
         "ref/win8/_._",
         "ref/wp80/_._",
-        "ref/wpa81/_._"
+        "ref/wpa81/_._",
+        "System.Security.Principal.4.0.0-beta-23029.nupkg",
+        "System.Security.Principal.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Principal.nuspec"
       ]
     },
     "System.Security.Principal.Windows/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "1sgp5do2HG54sqff0tZLFqJuA0SIkI04MbI2MHl6aRrv9eY5x708N940VPpJHiV7Jqdfid+8Nk0OeYej/Lrqkg==",
       "files": [
-        "System.Security.Principal.Windows.4.0.0-beta-23029.nupkg",
-        "System.Security.Principal.Windows.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.Principal.Windows.nuspec",
         "lib/DNXCore50/System.Security.Principal.Windows.dll",
         "lib/net46/System.Security.Principal.Windows.dll",
-        "ref/dotnet/System.Security.Principal.Windows.dll",
-        "ref/dotnet/System.Security.Principal.Windows.xml",
         "ref/dotnet/de/System.Security.Principal.Windows.xml",
         "ref/dotnet/es/System.Security.Principal.Windows.xml",
         "ref/dotnet/fr/System.Security.Principal.Windows.xml",
@@ -2051,22 +2052,22 @@
         "ref/dotnet/ja/System.Security.Principal.Windows.xml",
         "ref/dotnet/ko/System.Security.Principal.Windows.xml",
         "ref/dotnet/ru/System.Security.Principal.Windows.xml",
+        "ref/dotnet/System.Security.Principal.Windows.dll",
+        "ref/dotnet/System.Security.Principal.Windows.xml",
         "ref/dotnet/zh-hans/System.Security.Principal.Windows.xml",
         "ref/dotnet/zh-hant/System.Security.Principal.Windows.xml",
-        "ref/net46/System.Security.Principal.Windows.dll"
+        "ref/net46/System.Security.Principal.Windows.dll",
+        "System.Security.Principal.Windows.4.0.0-beta-23029.nupkg",
+        "System.Security.Principal.Windows.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.Principal.Windows.nuspec"
       ]
     },
     "System.Security.SecureString/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "AN+IeaKJjjFRQJiv84i4i0Qs+CSAaSX+yFzlN56OyGO0f6K6IeTCXfv5skjyBMel93eO4YDSbxdiTv637PLUgg==",
       "files": [
-        "System.Security.SecureString.4.0.0-beta-23029.nupkg",
-        "System.Security.SecureString.4.0.0-beta-23029.nupkg.sha512",
-        "System.Security.SecureString.nuspec",
         "lib/DNXCore50/System.Security.SecureString.dll",
         "lib/net46/System.Security.SecureString.dll",
-        "ref/dotnet/System.Security.SecureString.dll",
-        "ref/dotnet/System.Security.SecureString.xml",
         "ref/dotnet/de/System.Security.SecureString.xml",
         "ref/dotnet/es/System.Security.SecureString.xml",
         "ref/dotnet/fr/System.Security.SecureString.xml",
@@ -2074,22 +2075,22 @@
         "ref/dotnet/ja/System.Security.SecureString.xml",
         "ref/dotnet/ko/System.Security.SecureString.xml",
         "ref/dotnet/ru/System.Security.SecureString.xml",
+        "ref/dotnet/System.Security.SecureString.dll",
+        "ref/dotnet/System.Security.SecureString.xml",
         "ref/dotnet/zh-hans/System.Security.SecureString.xml",
         "ref/dotnet/zh-hant/System.Security.SecureString.xml",
-        "ref/net46/System.Security.SecureString.dll"
+        "ref/net46/System.Security.SecureString.dll",
+        "System.Security.SecureString.4.0.0-beta-23029.nupkg",
+        "System.Security.SecureString.4.0.0-beta-23029.nupkg.sha512",
+        "System.Security.SecureString.nuspec"
       ]
     },
     "System.Text.Encoding/4.0.10-beta-23029": {
       "sha512": "00CKBKtnTiMkYe8WckOLpNod52LiYXlAZa2lJ8Bj7nZugREbujY2yrpE88bIkJiEpOYAvYFotLtN85CpP8h50w==",
       "files": [
-        "System.Text.Encoding.4.0.10-beta-23029.nupkg",
-        "System.Text.Encoding.4.0.10-beta-23029.nupkg.sha512",
-        "System.Text.Encoding.nuspec",
         "lib/DNXCore50/System.Text.Encoding.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Text.Encoding.dll",
-        "ref/dotnet/System.Text.Encoding.dll",
-        "ref/dotnet/System.Text.Encoding.xml",
         "ref/dotnet/de/System.Text.Encoding.xml",
         "ref/dotnet/es/System.Text.Encoding.xml",
         "ref/dotnet/fr/System.Text.Encoding.xml",
@@ -2097,23 +2098,23 @@
         "ref/dotnet/ja/System.Text.Encoding.xml",
         "ref/dotnet/ko/System.Text.Encoding.xml",
         "ref/dotnet/ru/System.Text.Encoding.xml",
+        "ref/dotnet/System.Text.Encoding.dll",
+        "ref/dotnet/System.Text.Encoding.xml",
         "ref/dotnet/zh-hans/System.Text.Encoding.xml",
         "ref/dotnet/zh-hant/System.Text.Encoding.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.dll",
+        "System.Text.Encoding.4.0.10-beta-23029.nupkg",
+        "System.Text.Encoding.4.0.10-beta-23029.nupkg.sha512",
+        "System.Text.Encoding.nuspec"
       ]
     },
     "System.Text.Encoding.Extensions/4.0.10-beta-23029": {
       "sha512": "LdVtm3huelnDtp/dR1T5lGREX3gYBxHYl/n6LLeJRFpk49CR3iVac9rA/Ns2Bvh8P7BvOz56v9AzL2zmRpTI7A==",
       "files": [
-        "System.Text.Encoding.Extensions.4.0.10-beta-23029.nupkg",
-        "System.Text.Encoding.Extensions.4.0.10-beta-23029.nupkg.sha512",
-        "System.Text.Encoding.Extensions.nuspec",
         "lib/DNXCore50/System.Text.Encoding.Extensions.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Text.Encoding.Extensions.dll",
-        "ref/dotnet/System.Text.Encoding.Extensions.dll",
-        "ref/dotnet/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/de/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/es/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/fr/System.Text.Encoding.Extensions.xml",
@@ -2121,23 +2122,23 @@
         "ref/dotnet/ja/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/ko/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/ru/System.Text.Encoding.Extensions.xml",
+        "ref/dotnet/System.Text.Encoding.Extensions.dll",
+        "ref/dotnet/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/zh-hans/System.Text.Encoding.Extensions.xml",
         "ref/dotnet/zh-hant/System.Text.Encoding.Extensions.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.Extensions.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.Extensions.dll",
+        "System.Text.Encoding.Extensions.4.0.10-beta-23029.nupkg",
+        "System.Text.Encoding.Extensions.4.0.10-beta-23029.nupkg.sha512",
+        "System.Text.Encoding.Extensions.nuspec"
       ]
     },
     "System.Text.RegularExpressions/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "SiidJ6Eveg59OZA/3amuChUr6mUn8vXfUBx1lkwwd5netIAy7Ii8zTRHx3oT+brT/n/B1J1wb3Fgn1LI12HgSg==",
       "files": [
-        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg",
-        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg.sha512",
-        "System.Text.RegularExpressions.nuspec",
         "lib/dotnet/System.Text.RegularExpressions.dll",
         "lib/net46/_._",
-        "ref/dotnet/System.Text.RegularExpressions.dll",
-        "ref/dotnet/System.Text.RegularExpressions.xml",
         "ref/dotnet/de/System.Text.RegularExpressions.xml",
         "ref/dotnet/es/System.Text.RegularExpressions.xml",
         "ref/dotnet/fr/System.Text.RegularExpressions.xml",
@@ -2145,23 +2146,23 @@
         "ref/dotnet/ja/System.Text.RegularExpressions.xml",
         "ref/dotnet/ko/System.Text.RegularExpressions.xml",
         "ref/dotnet/ru/System.Text.RegularExpressions.xml",
+        "ref/dotnet/System.Text.RegularExpressions.dll",
+        "ref/dotnet/System.Text.RegularExpressions.xml",
         "ref/dotnet/zh-hans/System.Text.RegularExpressions.xml",
         "ref/dotnet/zh-hant/System.Text.RegularExpressions.xml",
-        "ref/net46/_._"
+        "ref/net46/_._",
+        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg",
+        "System.Text.RegularExpressions.4.0.10-beta-23109.nupkg.sha512",
+        "System.Text.RegularExpressions.nuspec"
       ]
     },
     "System.Threading/4.0.10-beta-23109": {
       "serviceable": true,
       "sha512": "nG7j3zkJfcr+6Nm3FYtGXqOfRGeOl2RKyZH1odHXPxCZzAzWieDO6srTW5QrT6BP6D6JkLcXNTsCxZkaqVLROw==",
       "files": [
-        "System.Threading.4.0.10-beta-23109.nupkg",
-        "System.Threading.4.0.10-beta-23109.nupkg.sha512",
-        "System.Threading.nuspec",
         "lib/DNXCore50/System.Threading.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Threading.dll",
-        "ref/dotnet/System.Threading.dll",
-        "ref/dotnet/System.Threading.xml",
         "ref/dotnet/de/System.Threading.xml",
         "ref/dotnet/es/System.Threading.xml",
         "ref/dotnet/fr/System.Threading.xml",
@@ -2169,24 +2170,24 @@
         "ref/dotnet/ja/System.Threading.xml",
         "ref/dotnet/ko/System.Threading.xml",
         "ref/dotnet/ru/System.Threading.xml",
+        "ref/dotnet/System.Threading.dll",
+        "ref/dotnet/System.Threading.xml",
         "ref/dotnet/zh-hans/System.Threading.xml",
         "ref/dotnet/zh-hant/System.Threading.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Threading.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Threading.dll",
+        "System.Threading.4.0.10-beta-23109.nupkg",
+        "System.Threading.4.0.10-beta-23109.nupkg.sha512",
+        "System.Threading.nuspec"
       ]
     },
     "System.Threading.Overlapped/4.0.0-beta-23029": {
       "serviceable": true,
       "sha512": "XX2doWUPDtZU5+mwbkxIkbDDTdxjAIs8JkRr3gwn2gaXb6tK/B6IHzjTM/DAGTgDJfVaWWoQoDAKIH822K7rBw==",
       "files": [
-        "System.Threading.Overlapped.4.0.0-beta-23029.nupkg",
-        "System.Threading.Overlapped.4.0.0-beta-23029.nupkg.sha512",
-        "System.Threading.Overlapped.nuspec",
         "lib/DNXCore50/System.Threading.Overlapped.dll",
         "lib/net46/System.Threading.Overlapped.dll",
         "lib/netcore50/System.Threading.Overlapped.dll",
-        "ref/dotnet/System.Threading.Overlapped.dll",
-        "ref/dotnet/System.Threading.Overlapped.xml",
         "ref/dotnet/de/System.Threading.Overlapped.xml",
         "ref/dotnet/es/System.Threading.Overlapped.xml",
         "ref/dotnet/fr/System.Threading.Overlapped.xml",
@@ -2194,23 +2195,23 @@
         "ref/dotnet/ja/System.Threading.Overlapped.xml",
         "ref/dotnet/ko/System.Threading.Overlapped.xml",
         "ref/dotnet/ru/System.Threading.Overlapped.xml",
+        "ref/dotnet/System.Threading.Overlapped.dll",
+        "ref/dotnet/System.Threading.Overlapped.xml",
         "ref/dotnet/zh-hans/System.Threading.Overlapped.xml",
         "ref/dotnet/zh-hant/System.Threading.Overlapped.xml",
-        "ref/net46/System.Threading.Overlapped.dll"
+        "ref/net46/System.Threading.Overlapped.dll",
+        "System.Threading.Overlapped.4.0.0-beta-23029.nupkg",
+        "System.Threading.Overlapped.4.0.0-beta-23029.nupkg.sha512",
+        "System.Threading.Overlapped.nuspec"
       ]
     },
     "System.Threading.Tasks/4.0.10-beta-23029": {
       "serviceable": true,
       "sha512": "hkQ+vycXx9DS9JWuS/UHsob0flA3b8tba2bBUZLo640dwc2gSKeeliJ21kFQWdJfU+5X5+4IatPFcGs9yumNeQ==",
       "files": [
-        "System.Threading.Tasks.4.0.10-beta-23029.nupkg",
-        "System.Threading.Tasks.4.0.10-beta-23029.nupkg.sha512",
-        "System.Threading.Tasks.nuspec",
         "lib/DNXCore50/System.Threading.Tasks.dll",
         "lib/net46/_._",
         "lib/netcore50/System.Threading.Tasks.dll",
-        "ref/dotnet/System.Threading.Tasks.dll",
-        "ref/dotnet/System.Threading.Tasks.xml",
         "ref/dotnet/de/System.Threading.Tasks.xml",
         "ref/dotnet/es/System.Threading.Tasks.xml",
         "ref/dotnet/fr/System.Threading.Tasks.xml",
@@ -2218,22 +2219,22 @@
         "ref/dotnet/ja/System.Threading.Tasks.xml",
         "ref/dotnet/ko/System.Threading.Tasks.xml",
         "ref/dotnet/ru/System.Threading.Tasks.xml",
+        "ref/dotnet/System.Threading.Tasks.dll",
+        "ref/dotnet/System.Threading.Tasks.xml",
         "ref/dotnet/zh-hans/System.Threading.Tasks.xml",
         "ref/dotnet/zh-hant/System.Threading.Tasks.xml",
         "ref/net46/_._",
-        "runtimes/win8-aot/lib/netcore50/System.Threading.Tasks.dll"
+        "runtimes/win8-aot/lib/netcore50/System.Threading.Tasks.dll",
+        "System.Threading.Tasks.4.0.10-beta-23029.nupkg",
+        "System.Threading.Tasks.4.0.10-beta-23029.nupkg.sha512",
+        "System.Threading.Tasks.nuspec"
       ]
     },
     "System.Threading.ThreadPool/4.0.10-beta-23029": {
       "sha512": "VxFF5Tizt1GapiO6wx6IHOnEDBizVwSZqnuRBnaEQN1skJa3xFJwT/Pk9v7P58gYRmXhrrYW5+PXBRYQKTe88Q==",
       "files": [
-        "System.Threading.ThreadPool.4.0.10-beta-23029.nupkg",
-        "System.Threading.ThreadPool.4.0.10-beta-23029.nupkg.sha512",
-        "System.Threading.ThreadPool.nuspec",
         "lib/DNXCore50/System.Threading.ThreadPool.dll",
         "lib/net46/System.Threading.ThreadPool.dll",
-        "ref/dotnet/System.Threading.ThreadPool.dll",
-        "ref/dotnet/System.Threading.ThreadPool.xml",
         "ref/dotnet/de/System.Threading.ThreadPool.xml",
         "ref/dotnet/es/System.Threading.ThreadPool.xml",
         "ref/dotnet/fr/System.Threading.ThreadPool.xml",
@@ -2241,9 +2242,14 @@
         "ref/dotnet/ja/System.Threading.ThreadPool.xml",
         "ref/dotnet/ko/System.Threading.ThreadPool.xml",
         "ref/dotnet/ru/System.Threading.ThreadPool.xml",
+        "ref/dotnet/System.Threading.ThreadPool.dll",
+        "ref/dotnet/System.Threading.ThreadPool.xml",
         "ref/dotnet/zh-hans/System.Threading.ThreadPool.xml",
         "ref/dotnet/zh-hant/System.Threading.ThreadPool.xml",
-        "ref/net46/System.Threading.ThreadPool.dll"
+        "ref/net46/System.Threading.ThreadPool.dll",
+        "System.Threading.ThreadPool.4.0.10-beta-23029.nupkg",
+        "System.Threading.ThreadPool.4.0.10-beta-23029.nupkg.sha512",
+        "System.Threading.ThreadPool.nuspec"
       ]
     }
   },

@@ -14,7 +14,6 @@
     "Microsoft.AspNet.Hosting": "1.0.0-beta6",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta6",
-    "Microsoft.AspNet.WebSockets.Client": "1.0.0-beta6",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
     "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",

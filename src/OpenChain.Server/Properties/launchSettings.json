@@ -9,7 +9,7 @@
     },
     "web": {
       "commandName": "web",
-      "sdkVersion": "dnx-coreclr-win-x86.1.0.0-beta5"
+      "sdkVersion": "dnx-coreclr-win-x86.1.0.0-beta6"
     }
   }
 }

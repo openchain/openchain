@@ -76,6 +76,22 @@ namespace OpenChain.Ledger.Tests
         }
 
         [Fact]
+        public void FromSegments_Success()
+        {
+            LedgerPath path = LedgerPath.FromSegments();
+            Assert.Equal("/", path.FullPath);
+            Assert.Equal<string>(new string[0], path.Segments);
+
+            path = LedgerPath.FromSegments("a");
+            Assert.Equal("/a/", path.FullPath);
+            Assert.Equal<string>(new[] { "a" }, path.Segments);
+
+            path = LedgerPath.FromSegments("a", "b");
+            Assert.Equal("/a/b/", path.FullPath);
+            Assert.Equal<string>(new[] { "a", "b" }, path.Segments);
+        }
+
+        [Fact]
         public void IsStrictParentOf_Success()
         {
             LedgerPath parent = LedgerPath.Parse("/the/parent/");

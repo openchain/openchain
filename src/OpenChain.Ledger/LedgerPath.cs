@@ -49,12 +49,12 @@ namespace OpenChain.Ledger
                 throw new ArgumentOutOfRangeException(nameof(path));
         }
 
-        public static LedgerPath FromSegments(string[] segments)
+        public static LedgerPath FromSegments(params string[] segments)
         {
             if (segments == null || segments.Any(segment => !IsValidPathSegment(segment) || segment == string.Empty))
                 throw new ArgumentOutOfRangeException(nameof(segments));
 
-            return new LedgerPath("/" + string.Join("/", segments) + "/", segments);
+            return new LedgerPath("/" + string.Join("/", segments.Select(segment => segment + "/")), segments);
         }
 
         public static bool IsValidPathSegment(string path)
