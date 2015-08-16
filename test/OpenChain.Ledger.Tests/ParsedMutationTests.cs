@@ -31,7 +31,7 @@ namespace OpenChain.Ledger.Tests
         public void Parse_Data()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/aka/alias/:DATA"),
+                SerializeString("/aka/alias/:DATA:"),
                 ByteString.Parse("aabbccdd"),
                 binaryData[3]));
 

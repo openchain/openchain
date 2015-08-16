@@ -22,7 +22,9 @@ namespace OpenChain.Sqlite
             try
             {
                 await ExecuteAsync(
-                    "ALTER TABLE Records ADD COLUMN Asset TEXT;",
+                    @"
+                    ALTER TABLE Records ADD COLUMN Name TEXT;
+                    ALTER TABLE Records ADD COLUMN Type INTEGER;",
                     new Dictionary<string, object>());
             }
             catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
@@ -72,18 +74,17 @@ namespace OpenChain.Sqlite
             foreach (Record record in mutation.Records)
             {
                 RecordKey key = RecordKey.Parse(record.Key);
-                if (key.RecordType == RecordType.Account)
-                {
                     await ExecuteAsync(@"
                         UPDATE  Records
-                        SET     Asset = @asset
+                        SET     Type = @type,
+                                Name = @name
                         WHERE   Key = @key",
                     new Dictionary<string, object>()
                     {
                         ["@key"] = record.Key.ToByteArray(),
-                        ["@asset"] = key.AdditionalKeyComponents[0].FullPath
+                        ["@type"] = (int)key.RecordType,
+                        ["@name"] = key.Name
                     });
-                }
             }
         }
     }

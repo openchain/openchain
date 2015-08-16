@@ -54,7 +54,7 @@ namespace OpenChain.Ledger
             if (segments == null || segments.Any(segment => !IsValidPathSegment(segment) || segment == string.Empty))
                 throw new ArgumentOutOfRangeException(nameof(segments));
 
-            return new LedgerPath("/" + string.Join("/", segments.Select(segment => segment + "/")), segments);
+            return new LedgerPath("/" + string.Concat(segments.Select(segment => segment + "/")), segments);
         }
 
         public static bool IsValidPathSegment(string path)

@@ -18,19 +18,18 @@ namespace OpenChain.Ledger.Tests
 
             Assert.Equal(RecordType.Account, key.RecordType);
             Assert.Equal("/account/name/", key.Path.FullPath);
-            Assert.Equal(1, key.AdditionalKeyComponents.Count);
-            Assert.Equal("/asset/name/", key.AdditionalKeyComponents[0].FullPath);
+            Assert.Equal("/asset/name/", key.Name);
         }
 
         [Fact]
         public void Parse_Data()
         {
-            ByteString data = new ByteString(Encoding.UTF8.GetBytes("/aka/name/:DATA"));
+            ByteString data = new ByteString(Encoding.UTF8.GetBytes("/aka/name/:DATA:"));
             RecordKey key = RecordKey.Parse(data);
 
             Assert.Equal(RecordType.Data, key.RecordType);
             Assert.Equal("/aka/name/", key.Path.FullPath);
-            Assert.Equal(0, key.AdditionalKeyComponents.Count);
+            Assert.Equal("", key.Name);
         }
 
         [Fact]
@@ -42,19 +41,21 @@ namespace OpenChain.Ledger.Tests
 
             // Unknown record type
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/account/name/:DOESNOTEXIST"))));
+                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/account/name/:DOESNOTEXIST:"))));
 
             // Incorrect number of additional components
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/asset/name/:ASDEF:/other/"))));
+                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/asset/name/:ACC:/other/:other"))));
 
-            // Incorrect number of additional components
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/asset/name/:ACC"))));
 
             // Invalid path
             Assert.Throws<ArgumentOutOfRangeException>(() =>
-                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("account/name/:ACC"))));
+                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("account/name/:ACC:/"))));
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/account/name/:ACC:account"))));
         }
 
         [Fact]

@@ -14,7 +14,7 @@ namespace OpenChain.Ledger
 
             this.Account = account;
             this.Asset = asset;
-            this.Key = new RecordKey(RecordType.Account, account, new[] { asset });
+            this.Key = new RecordKey(RecordType.Account, account, asset.FullPath);
         }
 
         public static AccountKey Parse(string account, string asset)

@@ -23,16 +23,16 @@ namespace OpenChain.Sqlite.Tests
         public async Task AddTransaction_InsertSuccess()
         {
             await AddRecords(
-                "/:ACC:/key/e/",
-                "/:ACC:/key/",
-                "/:ACC:/key./",
-                "/:ACC:/key0/");
+                "/:DATA:/e",
+                "/:DATA:/",
+                "/:DATA:.",
+                "/:DATA:0");
 
-            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:ACC:/key/")));
+            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:/")));
 
             Assert.Equal(2, result.Count);
-            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:ACC:/key/e/"));
-            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:ACC:/key/"));
+            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:DATA:/e"));
+            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:DATA:/"));
         }
 
         private async Task AddRecords(params string[] keys)

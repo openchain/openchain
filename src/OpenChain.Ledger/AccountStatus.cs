@@ -31,7 +31,7 @@ namespace OpenChain.Ledger
             else
                 throw new ArgumentOutOfRangeException(nameof(record));
 
-            return new AccountStatus(new AccountKey(key.Path, key.AdditionalKeyComponents[0]), amount, record.Version);
+            return new AccountStatus(new AccountKey(key.Path, LedgerPath.Parse(key.Name)), amount, record.Version);
         }
 
         public AccountKey AccountKey { get; }

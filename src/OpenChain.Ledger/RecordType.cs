@@ -7,7 +7,7 @@ namespace OpenChain.Ledger
 {
     public enum RecordType
     {
-        Account,
-        Data
+        Account = 1,
+        Data = 2
     }
 }
