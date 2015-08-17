@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using OpenChain.Ledger;
+using OpenChain.Ledger.Validation;
 using OpenChain.Server.Models;
 
 namespace OpenChain.Server.Controllers

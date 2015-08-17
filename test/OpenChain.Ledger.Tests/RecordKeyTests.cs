@@ -24,12 +24,12 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public void Parse_Data()
         {
-            ByteString data = new ByteString(Encoding.UTF8.GetBytes("/aka/name/:DATA:"));
+            ByteString data = new ByteString(Encoding.UTF8.GetBytes("/aka/name/:DATA:record:name"));
             RecordKey key = RecordKey.Parse(data);
 
             Assert.Equal(RecordType.Data, key.RecordType);
             Assert.Equal("/aka/name/", key.Path.FullPath);
-            Assert.Equal("", key.Name);
+            Assert.Equal("record:name", key.Name);
         }
 
         [Fact]

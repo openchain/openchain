@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     public class ParsedMutation
     {
         public ParsedMutation(
             IList<AccountStatus> accountMutations,
-            IList<KeyValuePair<LedgerPath, ByteString>> dataRecords)
+            IList<KeyValuePair<RecordKey, ByteString>> dataRecords)
         {
             this.AccountMutations = new ReadOnlyCollection<AccountStatus>(accountMutations);
-            this.DataRecords = new ReadOnlyCollection<KeyValuePair<LedgerPath, ByteString>>(dataRecords);
+            this.DataRecords = new ReadOnlyCollection<KeyValuePair<RecordKey, ByteString>>(dataRecords);
         }
 
         public IReadOnlyList<AccountStatus> AccountMutations { get; }
 
-        public IReadOnlyList<KeyValuePair<LedgerPath, ByteString>> DataRecords { get; }
+        public IReadOnlyList<KeyValuePair<RecordKey, ByteString>> DataRecords { get; }
 
         public static ParsedMutation Parse(Mutation mutation)
         {
             List<AccountStatus> accountMutations = new List<AccountStatus>();
-            List<KeyValuePair<LedgerPath, ByteString>> dataRecords = new List<KeyValuePair<LedgerPath, ByteString>>();
+            List<KeyValuePair<RecordKey, ByteString>> dataRecords = new List<KeyValuePair<RecordKey, ByteString>>();
 
             foreach (Record record in mutation.Records)
             {
@@ -39,9 +39,7 @@ namespace OpenChain.Ledger
                             accountMutations.Add(AccountStatus.FromRecord(key, record));
                             break;
                         case RecordType.Data:
-                            dataRecords.Add(new KeyValuePair<LedgerPath, ByteString>(
-                                key.Path,
-                                record.Value));
+                            dataRecords.Add(new KeyValuePair<RecordKey, ByteString>(key, record.Value));
                             break;
                         default:
                             throw new TransactionInvalidException("InvalidRecord");

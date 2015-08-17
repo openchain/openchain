@@ -6,6 +6,12 @@ namespace OpenChain.Ledger
 {
     public static class TransactionStoreExtensions
     {
+        public static async Task<Record> GetRecord(this ITransactionStore store, RecordKey key)
+        {
+            IList<Record> result = await store.GetRecords(new[] { key.ToBinary() });
+            return result[0];
+        }
+
         public static async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccounts(this ITransactionStore store, IEnumerable<AccountKey> accounts)
         {
             IList<Record> records = await store.GetRecords(accounts.Select(account => account.Key.ToBinary()));

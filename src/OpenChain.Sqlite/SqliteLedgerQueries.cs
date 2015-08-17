@@ -8,7 +8,7 @@ namespace OpenChain.Sqlite
 {
     public class SqliteLedgerQueries : SqliteTransactionStore, ILedgerQueries
     {
-        private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Asset'";
+        private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
 
         public SqliteLedgerQueries(string filename)
             : base(filename)

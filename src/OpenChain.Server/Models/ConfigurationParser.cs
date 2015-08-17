@@ -8,6 +8,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Ledger;
 using OpenChain.Ledger.Blockchain;
+using OpenChain.Ledger.Validation;
 using OpenChain.Sqlite;
 
 namespace OpenChain.Server.Models
@@ -101,7 +102,7 @@ namespace OpenChain.Server.Models
                     case "OpenLoop":
                         string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
                         List<PathPermissions> pathPermissions = new List<PathPermissions>();
-                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true), adminAddresses));
+                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true, true), adminAddresses));
                         
                         foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
                         {
@@ -109,14 +110,14 @@ namespace OpenChain.Server.Models
 
                             pathPermissions.Add(new PathPermissions(
                                 LedgerPath.Parse(pair.Value.Get("path")),
-                                new PermissionSet(true, true, true, true),
+                                new PermissionSet(true, true, true, true, false),
                                 addresses));
                         }
 
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
                         byte versionByte = byte.Parse(validator["version_byte"]);
                         IPermissionsProvider permissions = new DefaultPermissionLayout(pathPermissions, allowThirdPartyAssets, versionByte);
-                        return new OpenLoopValidator(permissions);
+                        return new OpenLoopValidator(new[] { permissions });
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                     default:

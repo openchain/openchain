@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using OpenChain.Ledger.Validation;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 
@@ -31,13 +32,15 @@ namespace OpenChain.Ledger.Tests
         public void Parse_Data()
         {
             ParsedMutation result = Parse(new Record(
-                SerializeString("/aka/alias/:DATA:"),
+                SerializeString("/aka/alias/:DATA:name"),
                 ByteString.Parse("aabbccdd"),
                 binaryData[3]));
 
             Assert.Equal(0, result.AccountMutations.Count);
             Assert.Equal(1, result.DataRecords.Count);
-            Assert.Equal("/aka/alias/", result.DataRecords[0].Key.FullPath);
+            Assert.Equal("/aka/alias/", result.DataRecords[0].Key.Path.FullPath);
+            Assert.Equal(RecordType.Data, result.DataRecords[0].Key.RecordType);
+            Assert.Equal("name", result.DataRecords[0].Key.Name);
             Assert.Equal(ByteString.Parse("aabbccdd"), result.DataRecords[0].Value);
         }
 

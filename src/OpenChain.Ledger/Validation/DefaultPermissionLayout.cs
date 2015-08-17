@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     public class DefaultPermissionLayout : IPermissionsProvider
     {
@@ -43,7 +43,8 @@ namespace OpenChain.Ledger
                 issuance: issuancePath,
                 spendFrom: isAccountPath && identities.Contains(path.Segments[1]),
                 affectBalance: (isAccountPath && IsP2pkh(path.Segments[1])) || issuancePath,
-                modifyData: issuancePath));
+                modifyData: issuancePath,
+                modifyPermissions: issuancePath));
         }
 
         private bool IsP2pkh(string address)

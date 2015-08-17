@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     public class OpenLoopValidator : IMutationValidator
     {
-        private readonly IPermissionsProvider permissions;
+        private readonly IList<IPermissionsProvider> permissions;
 
-        public OpenLoopValidator(IPermissionsProvider permissions)
+        public OpenLoopValidator(IList<IPermissionsProvider> permissions)
         {
             this.permissions = permissions;
         }
@@ -25,8 +26,8 @@ namespace OpenChain.Ledger
         {
             foreach (AccountStatus mutation in accountMutations)
             {
-                PermissionSet assetPermissions = await this.permissions.GetPermissions(signedAddresses, mutation.AccountKey.Asset);
-                PermissionSet accountPermissions = await this.permissions.GetPermissions(signedAddresses, mutation.AccountKey.Account);
+                PermissionSet assetPermissions = await GetPermissions(signedAddresses, mutation.AccountKey.Asset);
+                PermissionSet accountPermissions = await GetPermissions(signedAddresses, mutation.AccountKey.Account);
 
                 AccountStatus previousStatus = accounts[mutation.AccountKey];
 
@@ -51,17 +52,27 @@ namespace OpenChain.Ledger
             }
         }
 
+
         private async Task ValidateDataMutations(
-            IReadOnlyList<KeyValuePair<LedgerPath, ByteString>> aliases,
+            IReadOnlyList<KeyValuePair<RecordKey, ByteString>> aliases,
             IReadOnlyList<SignatureEvidence> signedAddresses)
         {
-            foreach (KeyValuePair<LedgerPath, ByteString> alias in aliases)
+            foreach (KeyValuePair<RecordKey, ByteString> alias in aliases)
             {
-                PermissionSet aliasPermissions = await this.permissions.GetPermissions(signedAddresses, alias.Key);
+                PermissionSet dataRecordPermissions = await GetPermissions(signedAddresses, alias.Key.Path);
 
-                if (!aliasPermissions.ModifyData)
+                if (!dataRecordPermissions.ModifyData)
                     throw new TransactionInvalidException("CannotModifyData");
+
+                if (alias.Key.Name == "acl" && !dataRecordPermissions.ModifyPermissions)
+                    throw new TransactionInvalidException("CannotModifyPermissions");
             }
+        }
+
+        private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath asset)
+        {
+            IList<PermissionSet> permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, asset)));
+            return permissions.Aggregate(PermissionSet.AllowAll, (accumulator, value) => accumulator.Intersect(value), result => result);
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using OpenChain.Ledger;
+using OpenChain.Ledger.Validation;
 using OpenChain.Server.Models;
 
 namespace OpenChain.Server

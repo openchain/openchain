@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     public class TransactionValidator
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     /// <summary>
     /// Base58Check Encoding / Decoding (Bitcoin-style)

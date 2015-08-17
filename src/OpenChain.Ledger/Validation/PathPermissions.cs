@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenChain.Ledger
+namespace OpenChain.Ledger.Validation
 {
     public class PathPermissions
     {
