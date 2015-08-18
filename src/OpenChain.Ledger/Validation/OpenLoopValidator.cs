@@ -68,7 +68,7 @@ namespace OpenChain.Ledger.Validation
         private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath asset, string recordName)
         {
             IList<PermissionSet> permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, asset, recordName)));
-            return permissions.Aggregate(PermissionSet.AllowAll, (accumulator, value) => accumulator.Intersect(value), result => result);
+            return permissions.Aggregate(PermissionSet.DenyAll, (accumulator, value) => accumulator.Add(value), result => result);
         }
     }
 }

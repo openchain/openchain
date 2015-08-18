@@ -28,7 +28,7 @@ namespace OpenChain.Ledger.Validation
 
                 Acl acl = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
 
-                if (acl.IsMatch(identities, recordName) && (acl.Recursive || i == path.Segments.Count - 1))
+                if (acl.IsMatch(identities, path, recordName))
                     currentPermissions = currentPermissions.Add(acl.Permissions);
             }
 

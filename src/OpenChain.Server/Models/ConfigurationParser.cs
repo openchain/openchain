@@ -100,24 +100,44 @@ namespace OpenChain.Server.Models
                 switch (validator["type"])
                 {
                     case "OpenLoop":
-                        string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
-                        List<PathPermissions> pathPermissions = new List<PathPermissions>();
-                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true), adminAddresses));
+                        byte versionByte = byte.Parse(validator["version_byte"]);
+                        KeyEncoder keyEncoder = new KeyEncoder(versionByte);
+
+                        P2pkhSubject[] adminAddresses = validator
+                            .GetConfigurationSections("admin_addresses")
+                            .Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key))
+                            .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
+                            .ToArray();
+
+                        List<Acl> pathPermissions = new List<Acl>();
+                        pathPermissions.Add(new Acl(
+                            adminAddresses,
+                            LedgerPath.Parse("/"),
+                            true,
+                            new [] { "" },
+                            new PermissionSet(true, true, true, true)));
                         
                         foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
                         {
-                            string[] addresses = pair.Value.GetConfigurationSections("addresses").Select(key => pair.Value.GetConfigurationSection("addresses").Get(key.Key)).ToArray();
+                            P2pkhSubject[] addresses = pair.Value
+                                .GetConfigurationSections("addresses")
+                                .Select(key => pair.Value.GetConfigurationSection("addresses").Get(key.Key))
+                                .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
+                                .ToArray();
 
-                            pathPermissions.Add(new PathPermissions(
+                            pathPermissions.Add(new Acl(
+                                addresses,
                                 LedgerPath.Parse(pair.Value.Get("path")),
-                                new PermissionSet(true, true, true, true),
-                                addresses));
+                                true,
+                                new[] { "" },
+                                new PermissionSet(true, true, true, true)));
                         }
 
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
-                        byte versionByte = byte.Parse(validator["version_byte"]);
-                        IPermissionsProvider permissions = new DefaultPermissionLayout(pathPermissions, allowThirdPartyAssets, new KeyEncoder(versionByte));
-                        return new OpenLoopValidator(new[] { permissions });
+
+                        IPermissionsProvider implicitLayout = new DefaultPermissionLayout(allowThirdPartyAssets, keyEncoder);
+                        IPermissionsProvider staticPermissions = new StaticPermissionLayout(pathPermissions, keyEncoder);
+                        return new OpenLoopValidator(new[] { implicitLayout, staticPermissions });
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                     default:

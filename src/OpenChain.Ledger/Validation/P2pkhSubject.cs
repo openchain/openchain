@@ -12,6 +12,7 @@ namespace OpenChain.Ledger.Validation
         {
             this.Addresses = addresses.ToList().AsReadOnly();
             this.SignaturesRequired = signaturesRequired;
+            this.keyEncoder = keyEncoder;
         }
 
         public IReadOnlyList<string> Addresses { get; }

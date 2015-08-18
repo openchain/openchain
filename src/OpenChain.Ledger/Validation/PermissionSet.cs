@@ -7,15 +7,9 @@ namespace OpenChain.Ledger.Validation
 {
     public class PermissionSet
     {
-        static PermissionSet()
-        {
-            AllowAll = new PermissionSet(true, true, true, true);
-            DenyAll = new PermissionSet(false, false, false, false);
-        }
+        public static PermissionSet AllowAll { get; } = new PermissionSet(true, true, true, true);
 
-        public static PermissionSet AllowAll { get; }
-
-        public static PermissionSet DenyAll { get; }
+        public static PermissionSet DenyAll { get; } = new PermissionSet(false, false, false, false);
 
         public PermissionSet(bool accountNegative, bool accountSpend, bool accountModify, bool dataModify)
         {

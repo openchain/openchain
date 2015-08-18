@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,16 +6,14 @@ namespace OpenChain.Ledger.Validation
 {
     public class DefaultPermissionLayout : IPermissionsProvider
     {
-        private readonly IList<PathPermissions> permissions;
         private readonly bool allowThirdPartyAssets;
         private readonly KeyEncoder keyEncoder;
         private readonly LedgerPath assetPath = LedgerPath.Parse("/asset/");
         private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh/");
         private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh/");
 
-        public DefaultPermissionLayout(IList<PathPermissions> permissions, bool allowThirdPartyAssets, KeyEncoder keyEncoder)
+        public DefaultPermissionLayout(bool allowThirdPartyAssets, KeyEncoder keyEncoder)
         {
-            this.permissions = permissions;
             this.allowThirdPartyAssets = allowThirdPartyAssets;
             this.keyEncoder = keyEncoder;
         }
@@ -24,12 +21,6 @@ namespace OpenChain.Ledger.Validation
         public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
         {
             IReadOnlyList<string> identities = authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)).ToList().AsReadOnly();
-
-            foreach (PathPermissions permission in permissions)
-            {
-                if (permission.Path.IsParentOf(path) && identities.Any(identity => permission.Identities.Contains(identity, StringComparer.Ordinal)))
-                    return Task.FromResult(permission.Permissions);
-            }
 
             // Is the record path under /p2pkh/
             bool isAccountPath = p2pkhAccountPath.IsStrictParentOf(path);

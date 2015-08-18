@@ -49,9 +49,12 @@ namespace OpenChain.Ledger.Validation
                     dataModify: (bool)root["permissions"]["data_modify"]));
         }
 
-        public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, string recordName)
+        public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
         {
-            return RecordNames.Any(item => item == recordName) && Subjects.Any(subject => subject.IsMatch(authentication));
+            return Path.IsParentOf(path)
+                && (Path.Segments.Count == path.Segments.Count || Recursive)
+                && RecordNames.Any(item => item == recordName)
+                && Subjects.Any(subject => subject.IsMatch(authentication));
         }
     }
 }
