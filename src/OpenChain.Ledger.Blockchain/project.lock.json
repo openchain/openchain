@@ -73,6 +73,14 @@
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
         }
       },
+      "Newtonsoft.Json/7.0.1": {
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.8.0-RC1": {
         "compile": {
           "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
@@ -665,9 +673,9 @@
           "lib/DNXCore50/System.Security.SecureString.dll": {}
         }
       },
-      "System.Text.Encoding/4.0.10-beta-23029": {
+      "System.Text.Encoding/4.0.10-beta-23109": {
         "dependencies": {
-          "System.Runtime": "4.0.0-beta-23029"
+          "System.Runtime": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Text.Encoding.dll": {}
@@ -790,7 +798,7 @@
           "lib/net45/NBitcoin.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.1": {
+      "Newtonsoft.Json/7.0.1": {
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
         },
@@ -853,7 +861,7 @@
           "lib/net45/NBitcoin.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.1": {
+      "Newtonsoft.Json/7.0.1": {
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
         },
@@ -976,8 +984,8 @@
         "NBitcoin.nuspec"
       ]
     },
-    "Newtonsoft.Json/6.0.1": {
-      "sha512": "tZ4TnfiXc3CUDZSZxXWcFOq5nDHxYY05qSDfZEJ654YOYzrPPOBgvSwJzr4jkTxeK5uoXmFG93Fq1lWDeLSmmA==",
+    "Newtonsoft.Json/7.0.1": {
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -987,14 +995,12 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+wp80+win8+monotouch+monoandroid/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+wp80+win8+monotouch+monoandroid/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.6.0.1.nupkg",
-        "Newtonsoft.Json.6.0.1.nupkg.sha512",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
@@ -2085,8 +2091,8 @@
         "System.Security.SecureString.nuspec"
       ]
     },
-    "System.Text.Encoding/4.0.10-beta-23029": {
-      "sha512": "00CKBKtnTiMkYe8WckOLpNod52LiYXlAZa2lJ8Bj7nZugREbujY2yrpE88bIkJiEpOYAvYFotLtN85CpP8h50w==",
+    "System.Text.Encoding/4.0.10-beta-23109": {
+      "sha512": "mC5gFE/lq3HsB0vUbNa9y9o+wT8rtXOU8pugH+4PKwiwYkRupMw48zfF/LZJxt8LJk6XqJphx5CuKGCSyHfVmw==",
       "files": [
         "lib/DNXCore50/System.Text.Encoding.dll",
         "lib/net46/_._",
@@ -2104,8 +2110,8 @@
         "ref/dotnet/zh-hant/System.Text.Encoding.xml",
         "ref/net46/_._",
         "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.dll",
-        "System.Text.Encoding.4.0.10-beta-23029.nupkg",
-        "System.Text.Encoding.4.0.10-beta-23029.nupkg.sha512",
+        "System.Text.Encoding.4.0.10-beta-23109.nupkg",
+        "System.Text.Encoding.4.0.10-beta-23109.nupkg.sha512",
         "System.Text.Encoding.nuspec"
       ]
     },

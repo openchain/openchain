@@ -26,21 +26,20 @@ namespace OpenChain.Ledger.Validation
         {
             foreach (AccountStatus mutation in accountMutations)
             {
-                PermissionSet assetPermissions = await GetPermissions(signedAddresses, mutation.AccountKey.Asset);
-                PermissionSet accountPermissions = await GetPermissions(signedAddresses, mutation.AccountKey.Account);
+                PermissionSet accountPermissions = await GetPermissions(signedAddresses, mutation.AccountKey.Account, mutation.AccountKey.Asset.FullPath);
 
                 AccountStatus previousStatus = accounts[mutation.AccountKey];
 
-                if (!accountPermissions.AffectBalance)
+                if (!accountPermissions.AccountModify)
                     throw new TransactionInvalidException("AccountModificationUnauthorized");
 
-                if (mutation.Balance < previousStatus.Balance && !assetPermissions.Issuance)
+                if (mutation.Balance < previousStatus.Balance && !accountPermissions.AccountNegative)
                 {
                     // Decreasing the balance
                     if (mutation.Balance >= 0)
                     {
                         // Spending existing funds
-                        if (!accountPermissions.SpendFrom)
+                        if (!accountPermissions.AccountSpend)
                             throw new TransactionInvalidException("CannotSpendFromAccount");
                     }
                     else
@@ -59,19 +58,16 @@ namespace OpenChain.Ledger.Validation
         {
             foreach (KeyValuePair<RecordKey, ByteString> alias in aliases)
             {
-                PermissionSet dataRecordPermissions = await GetPermissions(signedAddresses, alias.Key.Path);
+                PermissionSet dataRecordPermissions = await GetPermissions(signedAddresses, alias.Key.Path, alias.Key.Name);
 
-                if (!dataRecordPermissions.ModifyData)
+                if (!dataRecordPermissions.DataModify)
                     throw new TransactionInvalidException("CannotModifyData");
-
-                if (alias.Key.Name == "acl" && !dataRecordPermissions.ModifyPermissions)
-                    throw new TransactionInvalidException("CannotModifyPermissions");
             }
         }
 
-        private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath asset)
+        private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath asset, string recordName)
         {
-            IList<PermissionSet> permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, asset)));
+            IList<PermissionSet> permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, asset, recordName)));
             return permissions.Aggregate(PermissionSet.AllowAll, (accumulator, value) => accumulator.Intersect(value), result => result);
         }
     }

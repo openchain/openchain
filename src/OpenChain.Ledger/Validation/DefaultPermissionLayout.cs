@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace OpenChain.Ledger.Validation
@@ -10,24 +9,21 @@ namespace OpenChain.Ledger.Validation
     {
         private readonly IList<PathPermissions> permissions;
         private readonly bool allowThirdPartyAssets;
-        private readonly byte versionByte;
+        private readonly KeyEncoder keyEncoder;
         private readonly LedgerPath assetPath = LedgerPath.Parse("/asset/");
         private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh/");
         private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh/");
 
-        public DefaultPermissionLayout(IList<PathPermissions> permissions, bool allowThirdPartyAssets, byte versionByte)
+        public DefaultPermissionLayout(IList<PathPermissions> permissions, bool allowThirdPartyAssets, KeyEncoder keyEncoder)
         {
             this.permissions = permissions;
             this.allowThirdPartyAssets = allowThirdPartyAssets;
-            this.versionByte = versionByte;
+            this.keyEncoder = keyEncoder;
         }
 
-        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path)
+        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
         {
-            IReadOnlyList<string> identities = authentication.Select(evidence => GetPubKeyHash(evidence.PublicKey)).ToList().AsReadOnly();
-
-            bool isAccountPath = p2pkhAccountPath.IsStrictParentOf(path);
-            bool isAssetPath = assetPath.IsStrictParentOf(path);
+            IReadOnlyList<string> identities = authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)).ToList().AsReadOnly();
 
             foreach (PathPermissions permission in permissions)
             {
@@ -35,46 +31,36 @@ namespace OpenChain.Ledger.Validation
                     return Task.FromResult(permission.Permissions);
             }
 
-            bool issuancePath = this.allowThirdPartyAssets
-                    && thirdPartyAssetPath.IsStrictParentOf(path)
-                    && identities.Contains(path.Segments[2]);
+            // Is the record path under /p2pkh/
+            bool isAccountPath = p2pkhAccountPath.IsStrictParentOf(path);
+            // Is the record path under /asset/
+            bool isAssetPath = assetPath.IsStrictParentOf(path);
+
+            // If the account is /p2pkh/<signed-key>, you can spend from that account, and modify DATA records
+            bool canSpend = isAccountPath && identities.Contains(path.Segments[1]);
+            // If the account is under /p2pkh/<valid-key> or under /asset/, you can send to that account
+            bool validPath = (isAccountPath && keyEncoder.IsP2pkh(path.Segments[1])) || isAssetPath;
+
+            // If the record name is under /asset/p2pkh/<signed-key>, you can issue from that account
+            bool isIssuer = false;
+            LedgerPath pathRecordName;
+            if (LedgerPath.TryParse(recordName, out pathRecordName))
+            {
+                isIssuer = this.allowThirdPartyAssets
+                    && thirdPartyAssetPath.IsStrictParentOf(pathRecordName)
+                    && identities.Contains(pathRecordName.Segments[2]);
+            }
+
+            // If the path is under /asset/p2pkh/<signed-key>, you can modify DATA records
+            bool isOwnAssetPath = this.allowThirdPartyAssets
+                && thirdPartyAssetPath.IsStrictParentOf(path)
+                && identities.Contains(path.Segments[2]);
 
             return Task.FromResult(new PermissionSet(
-                issuance: issuancePath,
-                spendFrom: isAccountPath && identities.Contains(path.Segments[1]),
-                affectBalance: (isAccountPath && IsP2pkh(path.Segments[1])) || issuancePath,
-                modifyData: issuancePath,
-                modifyPermissions: issuancePath));
-        }
-
-        private bool IsP2pkh(string address)
-        {
-            try
-            {
-                byte[] pubKeyHash = Base58CheckEncoding.Decode(address);
-                if (pubKeyHash.Length != 21 || pubKeyHash[0] != versionByte)
-                    return false;
-                else
-                    return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
-        private string GetPubKeyHash(ByteString pubKey)
-        {
-            Org.BouncyCastle.Crypto.Digests.RipeMD160Digest ripe = new Org.BouncyCastle.Crypto.Digests.RipeMD160Digest();
-
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] shaResult = sha256.ComputeHash(pubKey.ToByteArray());
-                ripe.BlockUpdate(shaResult, 0, shaResult.Length);
-                byte[] hash = new byte[20];
-                ripe.DoFinal(hash, 0);
-                return Base58CheckEncoding.Encode(new byte[] { versionByte }.Concat(hash).ToArray());
-            }
+                accountNegative: isIssuer,
+                accountSpend: canSpend,
+                accountModify: validPath,
+                dataModify: isOwnAssetPath || canSpend));
         }
     }
 }

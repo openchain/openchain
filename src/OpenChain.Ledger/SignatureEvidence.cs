@@ -8,8 +8,8 @@
             this.Signature = signature;
         }
 
-        public ByteString PublicKey { get; private set; }
+        public ByteString PublicKey { get; }
 
-        public ByteString Signature { get; private set; }
+        public ByteString Signature { get; }
     }
 }

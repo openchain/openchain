@@ -102,7 +102,7 @@ namespace OpenChain.Server.Models
                     case "OpenLoop":
                         string[] adminAddresses = validator.GetConfigurationSections("admin_addresses").Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key)).ToArray();
                         List<PathPermissions> pathPermissions = new List<PathPermissions>();
-                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true, true), adminAddresses));
+                        pathPermissions.Add(new PathPermissions(LedgerPath.Parse("/"), new PermissionSet(true, true, true, true), adminAddresses));
                         
                         foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
                         {
@@ -110,13 +110,13 @@ namespace OpenChain.Server.Models
 
                             pathPermissions.Add(new PathPermissions(
                                 LedgerPath.Parse(pair.Value.Get("path")),
-                                new PermissionSet(true, true, true, true, false),
+                                new PermissionSet(true, true, true, true),
                                 addresses));
                         }
 
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
                         byte versionByte = byte.Parse(validator["version_byte"]);
-                        IPermissionsProvider permissions = new DefaultPermissionLayout(pathPermissions, allowThirdPartyAssets, versionByte);
+                        IPermissionsProvider permissions = new DefaultPermissionLayout(pathPermissions, allowThirdPartyAssets, new KeyEncoder(versionByte));
                         return new OpenLoopValidator(new[] { permissions });
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);

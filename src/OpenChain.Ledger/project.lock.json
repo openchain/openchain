@@ -11,6 +11,14 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
+      "Newtonsoft.Json/7.0.1": {
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.8.0-RC1": {
         "compile": {
           "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
@@ -225,12 +233,15 @@
           "lib/DNXCore50/System.Security.Cryptography.RandomNumberGenerator.dll": {}
         }
       },
-      "System.Text.Encoding/4.0.0-beta-23109": {
+      "System.Text.Encoding/4.0.10-beta-23109": {
         "dependencies": {
           "System.Runtime": "4.0.0-beta-23109"
         },
         "compile": {
           "ref/dotnet/System.Text.Encoding.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Text.Encoding.dll": {}
         }
       },
       "System.Text.RegularExpressions/4.0.10-beta-23109": {
@@ -279,6 +290,14 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
+      "Newtonsoft.Json/7.0.1": {
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        }
+      },
       "Portable.BouncyCastle/1.8.0-RC1": {
         "compile": {
           "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll": {}
@@ -295,6 +314,14 @@
         },
         "runtime": {
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
+        }
+      },
+      "Newtonsoft.Json/7.0.1": {
+        "compile": {
+          "lib/net45/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.0-RC1": {
@@ -328,6 +355,27 @@
         "tools/google/protobuf/wrappers.proto",
         "tools/protoc.exe",
         "tools/Schema.cs"
+      ]
+    },
+    "Newtonsoft.Json/7.0.1": {
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+      "files": [
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "Newtonsoft.Json.nuspec",
+        "tools/install.ps1"
       ]
     },
     "Portable.BouncyCastle/1.8.0-RC1": {
@@ -792,14 +840,12 @@
         "System.Security.Cryptography.RandomNumberGenerator.nuspec"
       ]
     },
-    "System.Text.Encoding/4.0.0-beta-23109": {
-      "sha512": "UnZfp4VOOha1V99nZYVIXPRoXlNLc5t2sJGGGqakwcsnQF0/SCkoaB1DfArI5+9gDwyHmnVEBLWW4+vUlHO/aA==",
+    "System.Text.Encoding/4.0.10-beta-23109": {
+      "sha512": "mC5gFE/lq3HsB0vUbNa9y9o+wT8rtXOU8pugH+4PKwiwYkRupMw48zfF/LZJxt8LJk6XqJphx5CuKGCSyHfVmw==",
       "files": [
-        "lib/net45/_._",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
-        "License.rtf",
+        "lib/DNXCore50/System.Text.Encoding.dll",
+        "lib/net46/_._",
+        "lib/netcore50/System.Text.Encoding.dll",
         "ref/dotnet/de/System.Text.Encoding.xml",
         "ref/dotnet/es/System.Text.Encoding.xml",
         "ref/dotnet/fr/System.Text.Encoding.xml",
@@ -811,23 +857,10 @@
         "ref/dotnet/System.Text.Encoding.xml",
         "ref/dotnet/zh-hans/System.Text.Encoding.xml",
         "ref/dotnet/zh-hant/System.Text.Encoding.xml",
-        "ref/net45/_._",
-        "ref/netcore50/de/System.Text.Encoding.xml",
-        "ref/netcore50/es/System.Text.Encoding.xml",
-        "ref/netcore50/fr/System.Text.Encoding.xml",
-        "ref/netcore50/it/System.Text.Encoding.xml",
-        "ref/netcore50/ja/System.Text.Encoding.xml",
-        "ref/netcore50/ko/System.Text.Encoding.xml",
-        "ref/netcore50/ru/System.Text.Encoding.xml",
-        "ref/netcore50/System.Text.Encoding.dll",
-        "ref/netcore50/System.Text.Encoding.xml",
-        "ref/netcore50/zh-hans/System.Text.Encoding.xml",
-        "ref/netcore50/zh-hant/System.Text.Encoding.xml",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
-        "System.Text.Encoding.4.0.0-beta-23109.nupkg",
-        "System.Text.Encoding.4.0.0-beta-23109.nupkg.sha512",
+        "ref/net46/_._",
+        "runtimes/win8-aot/lib/netcore50/System.Text.Encoding.dll",
+        "System.Text.Encoding.4.0.10-beta-23109.nupkg",
+        "System.Text.Encoding.4.0.10-beta-23109.nupkg.sha512",
         "System.Text.Encoding.nuspec"
       ]
     },
@@ -921,11 +954,13 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Newtonsoft.Json >= 7.0.1",
       "OpenChain.Abstractions >= 1.0.0-*",
       "Portable.BouncyCastle >= 1.8.0-RC1"
     ],
     "DNXCore,Version=v5.0": [
       "System.Runtime.Numerics >= 4.0.0-beta-23109",
+      "System.Text.Encoding >= 4.0.10-beta-23109",
       "System.Text.RegularExpressions >= 4.0.10-beta-23109"
     ],
     "DNX,Version=v4.5.1": [

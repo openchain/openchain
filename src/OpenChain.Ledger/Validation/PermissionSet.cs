@@ -9,41 +9,46 @@ namespace OpenChain.Ledger.Validation
     {
         static PermissionSet()
         {
-            AllowAll = new PermissionSet(true, true, true, true, true);
-            DenyAll = new PermissionSet(false, false, false, false, false);
+            AllowAll = new PermissionSet(true, true, true, true);
+            DenyAll = new PermissionSet(false, false, false, false);
         }
 
         public static PermissionSet AllowAll { get; }
 
         public static PermissionSet DenyAll { get; }
 
-        public PermissionSet(bool issuance, bool spendFrom, bool affectBalance, bool modifyData, bool modifyPermissions)
+        public PermissionSet(bool accountNegative, bool accountSpend, bool accountModify, bool dataModify)
         {
-            this.Issuance = issuance;
-            this.SpendFrom = spendFrom;
-            this.AffectBalance = affectBalance;
-            this.ModifyData = modifyData;
-            this.ModifyPermissions = modifyPermissions;
+            this.AccountNegative = accountNegative;
+            this.AccountSpend = accountSpend;
+            this.AccountModify = accountModify;
+            this.DataModify = dataModify;
         }
 
-        public bool Issuance { get; }
+        public bool AccountNegative { get; }
 
-        public bool SpendFrom { get; }
+        public bool AccountSpend { get; }
 
-        public bool AffectBalance { get; }
+        public bool AccountModify { get; }
 
-        public bool ModifyData { get; }
+        public bool DataModify { get; }
 
-        public bool ModifyPermissions { get; }
+        public PermissionSet Add(PermissionSet added)
+        {
+            return new PermissionSet(
+                accountNegative: AccountNegative || added.AccountNegative,
+                accountSpend: AccountSpend || added.AccountSpend,
+                accountModify: AccountModify || added.AccountModify,
+                dataModify: DataModify || added.DataModify);
+        }
 
         public PermissionSet Intersect(PermissionSet other)
         {
             return new PermissionSet(
-                issuance: Issuance && other.Issuance,
-                spendFrom: SpendFrom && other.SpendFrom,
-                affectBalance: AffectBalance && other.AffectBalance,
-                modifyData: ModifyData && other.ModifyData,
-                modifyPermissions: ModifyPermissions && other.ModifyPermissions);
+                accountNegative: AccountNegative && other.AccountNegative,
+                accountSpend: AccountSpend && other.AccountSpend,
+                accountModify: AccountModify && other.AccountModify,
+                dataModify: DataModify && other.DataModify);
         }
     }
 }

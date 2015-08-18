@@ -7,6 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
+    "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "1.0.0-*",
     "Portable.BouncyCastle": "1.8.0-RC1"
   },
@@ -16,6 +17,7 @@
     "dnxcore50": {
       "dependencies": {
         "System.Runtime.Numerics": "4.0.0-beta-23109",
+        "System.Text.Encoding": "4.0.10-beta-23109",
         "System.Text.RegularExpressions": "4.0.10-beta-23109"
       }
     },

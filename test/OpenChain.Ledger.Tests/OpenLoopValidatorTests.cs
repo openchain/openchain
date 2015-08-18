@@ -16,8 +16,7 @@ namespace OpenChain.Ledger.Tests
                 new string[] { "0123456789abcdef11223344" },
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(true, true, true, true, true),
-                    ["/b/"] = new PermissionSet(true, true, true, true, true)
+                    ["/a/"] = PermissionSet.AllowAll
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
@@ -40,50 +39,43 @@ namespace OpenChain.Ledger.Tests
         {
             // Able to spend existing funds as the issuer
             await TestAccountChange(
-                issuancePermissions: new PermissionSet(true, false, false, false, false),
-                accountPermissions: new PermissionSet(false, false, true, false, false),
+                accountPermissions: new PermissionSet(true, false, true, false),
                 previousBalance: 150,
                 newBalance: 100);
 
             // Able to spend non-existing funds as the issuer
             await TestAccountChange(
-                issuancePermissions: new PermissionSet(true, false, false, false, false),
-                accountPermissions: new PermissionSet(false, false, true, false, false),
+                accountPermissions: new PermissionSet(true, false, true, false),
                 previousBalance: 100,
                 newBalance: -50);
 
             // Able to spend funds as the owner
             await TestAccountChange(
-                issuancePermissions: new PermissionSet(false, false, false, false, false),
-                accountPermissions: new PermissionSet(false, true, true, false, false),
+                accountPermissions: new PermissionSet(false, true, true, false),
                 previousBalance: 100,
                 newBalance: 50);
 
             // Able to receive funds
             await TestAccountChange(
-                issuancePermissions: new PermissionSet(false, false, false, false, false),
-                accountPermissions: new PermissionSet(false, false, true, false, false),
+                accountPermissions: new PermissionSet(false, false, true, false),
                 previousBalance: 50,
                 newBalance: 100);
 
             // Missing the affect balance permission
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                issuancePermissions: new PermissionSet(true, true, true, true, true),
-                accountPermissions: new PermissionSet(true, true, false, true, true),
+                accountPermissions: new PermissionSet(true, true, false, true),
                 previousBalance: 100,
                 newBalance: 150));
 
             // Missing the permissions to spend from the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                issuancePermissions: new PermissionSet(false, false, false, false, false),
-                accountPermissions: new PermissionSet(true, false, true, true, true),
+                accountPermissions: new PermissionSet(false, false, true, true),
                 previousBalance: 150,
                 newBalance: 100));
 
             // Not able to spend more that the funds on the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                issuancePermissions: new PermissionSet(false, false, false, false, false),
-                accountPermissions: new PermissionSet(true, true, true, true, true),
+                accountPermissions: new PermissionSet(false, true, true, true),
                 previousBalance: 100,
                 newBalance: -50));
         }
@@ -95,7 +87,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(false, false, false, true, false)
+                    ["/a/"] = new PermissionSet(false, false, false, true)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
@@ -114,7 +106,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(true, true, true, false, true)
+                    ["/a/"] = new PermissionSet(true, true, true, false)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
@@ -126,14 +118,13 @@ namespace OpenChain.Ledger.Tests
             await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
         }
 
-        private static async Task TestAccountChange(PermissionSet issuancePermissions, PermissionSet accountPermissions, long previousBalance, long newBalance)
+        private static async Task TestAccountChange(PermissionSet accountPermissions, long previousBalance, long newBalance)
         {
             OpenLoopValidator validator = CreateValidator(
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = accountPermissions,
-                    ["/b/"] = issuancePermissions
+                    ["/a/"] = accountPermissions
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
@@ -165,7 +156,7 @@ namespace OpenChain.Ledger.Tests
                 this.getPermissions = getPermissions;
             }
 
-            public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path)
+            public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, string recordName)
             {
                 Assert.Equal(identities.Select(ConvertEvidence), expectedIdentities, StringComparer.Ordinal);
 
