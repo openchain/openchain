@@ -109,16 +109,16 @@ namespace OpenChain.Server.Models
                             .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
                             .ToArray();
 
-                        List<Acl> pathPermissions = new List<Acl>();
-                        pathPermissions.Add(new Acl(
-                            adminAddresses,
-                            LedgerPath.Parse("/"),
-                            true,
-                            new [] { "" },
-                            new PermissionSet(true, true, true, true)));
+                        List<Acl> pathPermissions = new List<Acl>()
+                        {
+                            // Admins have full rights
+                            new Acl(adminAddresses, LedgerPath.Parse("/"), true, StringPattern.MatchAll, PermissionSet.AllowAll)
+                        };
                         
                         foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
                         {
+                            LedgerPath assetPath = LedgerPath.Parse(pair.Value.Get("path"));
+
                             P2pkhSubject[] addresses = pair.Value
                                 .GetConfigurationSections("addresses")
                                 .Select(key => pair.Value.GetConfigurationSection("addresses").Get(key.Key))
@@ -127,10 +127,16 @@ namespace OpenChain.Server.Models
 
                             pathPermissions.Add(new Acl(
                                 addresses,
-                                LedgerPath.Parse(pair.Value.Get("path")),
+                                assetPath,
                                 true,
-                                new[] { "" },
-                                new PermissionSet(true, true, true, true)));
+                                StringPattern.MatchAll,
+                                new PermissionSet(false, true, false, true)));
+                            pathPermissions.Add(new Acl(
+                                addresses,
+                                LedgerPath.Parse("/"),
+                                true,
+                                new StringPattern(assetPath.FullPath, PatternMatchingStrategy.Prefix),
+                                new PermissionSet(true, false, false, false)));
                         }
 
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);

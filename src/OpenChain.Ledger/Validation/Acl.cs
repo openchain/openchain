@@ -12,13 +12,13 @@ namespace OpenChain.Ledger.Validation
             IEnumerable<P2pkhSubject> subjects,
             LedgerPath path,
             bool recursive,
-            IEnumerable<string> recordNames,
+            StringPattern recordName,
             PermissionSet permissions)
         {
             this.Subjects = subjects.ToList().AsReadOnly();
             this.Path = path;
             this.Recursive = recursive;
-            this.RecordNames = recordNames.ToList().AsReadOnly();
+            this.RecordName = recordName;
             this.Permissions = permissions;
         }
 
@@ -28,7 +28,7 @@ namespace OpenChain.Ledger.Validation
 
         public bool Recursive { get; }
 
-        public IReadOnlyList<string> RecordNames { get; }
+        public StringPattern RecordName { get; }
 
         public PermissionSet Permissions { get; }
 
@@ -41,7 +41,7 @@ namespace OpenChain.Ledger.Validation
                     new P2pkhSubject(new[] { (string)subject["key"] }, (int)subject["required"], keyEncoder)),
                 LedgerPath.Parse((string)root["path"]),
                 (bool)root["recursive"],
-                ((JArray)root["record_names"]).Children().Select(item => (string)item),
+                new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),
                 new PermissionSet(
                     accountNegative: (bool)root["permissions"]["account_negative"],
                     accountSpend: (bool)root["permissions"]["account_spend"],
@@ -53,7 +53,7 @@ namespace OpenChain.Ledger.Validation
         {
             return Path.IsParentOf(path)
                 && (Path.Segments.Count == path.Segments.Count || Recursive)
-                && RecordNames.Any(item => item == recordName)
+                && RecordName.IsMatch(recordName)
                 && Subjects.Any(subject => subject.IsMatch(authentication));
         }
     }
