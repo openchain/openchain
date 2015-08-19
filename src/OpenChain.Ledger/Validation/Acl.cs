@@ -32,27 +32,35 @@ namespace OpenChain.Ledger.Validation
 
         public PermissionSet Permissions { get; }
 
-        public static Acl Parse(string json, KeyEncoder keyEncoder)
+        public static IReadOnlyList<Acl> Parse(string json, KeyEncoder keyEncoder)
         {
-            JObject root = JObject.Parse(json);
+            JArray document = JArray.Parse(json);
 
-            return new Acl(
-                ((JArray)root["subjects"]).Children().Select(subject =>
-                    new P2pkhSubject(new[] { (string)subject["key"] }, (int)subject["required"], keyEncoder)),
-                LedgerPath.Parse((string)root["path"]),
-                (bool)root["recursive"],
-                new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),
-                new PermissionSet(
-                    accountNegative: (bool)root["permissions"]["account_negative"],
-                    accountSpend: (bool)root["permissions"]["account_spend"],
-                    accountModify: (bool)root["permissions"]["account_modify"],
-                    dataModify: (bool)root["permissions"]["data_modify"]));
+            return ((IEnumerable<JToken>)document).Select(root =>
+                new Acl(
+                    ((JArray)root["subjects"]).Children().Select(subject =>
+                        new P2pkhSubject(new[] { (string)subject["key"] }, (int)subject["required"], keyEncoder)),
+                    LedgerPath.Parse((string)root["path"]),
+                    (bool)root["recursive"],
+                    new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),
+                    new PermissionSet(
+                        accountNegative: Parse(root["permissions"]["account_negative"]),
+                        accountSpend: Parse(root["permissions"]["account_spend"]),
+                        accountModify: Parse(root["permissions"]["account_modify"]),
+                        dataModify: Parse(root["permissions"]["data_modify"]))))
+                .ToList();
         }
 
-        public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
+        private static Access Parse(JToken value)
+        {
+            return (Access)Enum.Parse(typeof(Access), (string)value);
+        }
+
+        public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
             return Path.IsParentOf(path)
                 && (Path.Segments.Count == path.Segments.Count || Recursive)
+                && (!recursiveOnly || Recursive)
                 && RecordName.IsMatch(recordName)
                 && Subjects.Any(subject => subject.IsMatch(authentication));
         }

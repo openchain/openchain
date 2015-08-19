@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,19 +15,17 @@ namespace OpenChain.Ledger.Validation
             this.keyEncoder = keyEncoder;
         }
 
-        public async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, string recordName)
+        public async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, bool recursiveOnly, string recordName)
         {
             PermissionSet currentPermissions = PermissionSet.DenyAll;
 
-            for (int i = 0; i < path.Segments.Count; i++)
+            Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, path, "acl"));
+
+            IReadOnlyList<Acl> permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
+
+            foreach (Acl acl in permissions)
             {
-                LedgerPath parent = LedgerPath.FromSegments(path.Segments.Take(i).ToArray());
-
-                Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, parent, "acl"));
-
-                Acl acl = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
-
-                if (acl.IsMatch(identities, path, recordName))
+                if (acl.IsMatch(identities, path, recursiveOnly, recordName))
                     currentPermissions = currentPermissions.Add(acl.Permissions);
             }
 

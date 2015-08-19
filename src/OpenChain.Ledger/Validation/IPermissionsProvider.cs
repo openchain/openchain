@@ -5,6 +5,6 @@ namespace OpenChain.Ledger.Validation
 {
     public interface IPermissionsProvider
     {
-        Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, string recordName);
+        Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, bool recursiveOnly, string recordName);
     }
 }

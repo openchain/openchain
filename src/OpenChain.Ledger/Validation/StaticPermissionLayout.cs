@@ -14,13 +14,13 @@ namespace OpenChain.Ledger.Validation
             this.keyEncoder = keyEncoder;
         }
 
-        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
+        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
-            PermissionSet currentPermissions = PermissionSet.DenyAll;
+            PermissionSet currentPermissions = PermissionSet.Unset;
 
             foreach (Acl acl in permissions)
             {
-                if (acl.IsMatch(authentication, path, recordName))
+                if (acl.IsMatch(authentication, path, recursiveOnly, recordName))
                     currentPermissions = currentPermissions.Add(acl.Permissions);
             }
 

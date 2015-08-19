@@ -1,16 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace OpenChain.Ledger.Validation
 {
+    /// <summary>
+    /// Represents the implicit permission layout where account names contain identities.
+    /// Permissions are set for:
+    ///   - /p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify)
+    ///   - /asset/p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify)
+    ///   - /
+    /// </summary>
     public class DefaultPermissionLayout : IPermissionsProvider
     {
         private readonly bool allowThirdPartyAssets;
         private readonly KeyEncoder keyEncoder;
-        private readonly LedgerPath assetPath = LedgerPath.Parse("/asset/");
         private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh/");
         private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh/");
+        private readonly string AclDataRecordName = "acl";
 
         public DefaultPermissionLayout(bool allowThirdPartyAssets, KeyEncoder keyEncoder)
         {
@@ -18,40 +26,52 @@ namespace OpenChain.Ledger.Validation
             this.keyEncoder = keyEncoder;
         }
 
-        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, string recordName)
+        public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
-            IReadOnlyList<string> identities = authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)).ToList().AsReadOnly();
+            HashSet<string> identities = new HashSet<string>(authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
 
-            // Is the record path under /p2pkh/
-            bool isAccountPath = p2pkhAccountPath.IsStrictParentOf(path);
-            // Is the record path under /asset/
-            bool isAssetPath = assetPath.IsStrictParentOf(path);
-
-            // If the account is /p2pkh/<signed-key>, you can spend from that account, and modify DATA records
-            bool canSpend = isAccountPath && identities.Contains(path.Segments[1]);
-            // If the account is under /p2pkh/<valid-key> or under /asset/, you can send to that account
-            bool validPath = (isAccountPath && keyEncoder.IsP2pkh(path.Segments[1])) || isAssetPath;
-
-            // If the record name is under /asset/p2pkh/<signed-key>, you can issue from that account
-            bool isIssuer = false;
             LedgerPath pathRecordName;
-            if (LedgerPath.TryParse(recordName, out pathRecordName))
+            if (LedgerPath.TryParse(recordName, out pathRecordName) && thirdPartyAssetPath.IsStrictParentOf(pathRecordName))
             {
-                isIssuer = this.allowThirdPartyAssets
-                    && thirdPartyAssetPath.IsStrictParentOf(pathRecordName)
-                    && identities.Contains(pathRecordName.Segments[2]);
+                // If the path is root and the record name is a tird-party asset, issuance is allowed
+                if (allowThirdPartyAssets
+                    && path.Segments.Count == 0
+                    && identities.Contains(pathRecordName.Segments[thirdPartyAssetPath.Segments.Count]))
+                {
+                    return Task.FromResult(new PermissionSet(accountNegative: Access.Permit));
+                }
             }
 
-            // If the path is under /asset/p2pkh/<signed-key>, you can modify DATA records
-            bool isOwnAssetPath = this.allowThirdPartyAssets
-                && thirdPartyAssetPath.IsStrictParentOf(path)
-                && identities.Contains(path.Segments[2]);
+            // Account /p2pkh/[addr]
+            if (p2pkhAccountPath.IsStrictParentOf(path)
+                && path.Segments.Count == p2pkhAccountPath.Segments.Count + 1
+                && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
+            {
+                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != AclDataRecordName
+                    ? Access.Permit : Access.Unset;
 
-            return Task.FromResult(new PermissionSet(
-                accountNegative: isIssuer,
-                accountSpend: canSpend,
-                accountModify: validPath,
-                dataModify: isOwnAssetPath || canSpend));
+                return Task.FromResult(new PermissionSet(
+                    accountModify: Access.Permit,
+                    accountSpend: ownAccount,
+                    dataModify: ownAccount));
+            }
+
+            // Account /asset/p2pkh/[addr]
+            if (allowThirdPartyAssets
+                && thirdPartyAssetPath.IsStrictParentOf(path)
+                && path.Segments.Count == thirdPartyAssetPath.Segments.Count + 1
+                && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
+            {
+                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != AclDataRecordName
+                    ? Access.Permit : Access.Unset;
+
+                return Task.FromResult(new PermissionSet(
+                    accountModify: Access.Permit,
+                    accountSpend: ownAccount,
+                    dataModify: ownAccount));
+            }
+
+            return Task.FromResult(new PermissionSet());
         }
     }
 }

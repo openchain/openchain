@@ -30,16 +30,16 @@ namespace OpenChain.Ledger.Validation
 
                 AccountStatus previousStatus = accounts[mutation.AccountKey];
 
-                if (!accountPermissions.AccountModify)
+                if (accountPermissions.AccountModify != Access.Permit)
                     throw new TransactionInvalidException("AccountModificationUnauthorized");
 
-                if (mutation.Balance < previousStatus.Balance && !accountPermissions.AccountNegative)
+                if (mutation.Balance < previousStatus.Balance && accountPermissions.AccountNegative != Access.Permit)
                 {
                     // Decreasing the balance
                     if (mutation.Balance >= 0)
                     {
                         // Spending existing funds
-                        if (!accountPermissions.AccountSpend)
+                        if (accountPermissions.AccountSpend != Access.Permit)
                             throw new TransactionInvalidException("CannotSpendFromAccount");
                     }
                     else
@@ -51,7 +51,6 @@ namespace OpenChain.Ledger.Validation
             }
         }
 
-
         private async Task ValidateDataMutations(
             IReadOnlyList<KeyValuePair<RecordKey, ByteString>> aliases,
             IReadOnlyList<SignatureEvidence> signedAddresses)
@@ -60,15 +59,27 @@ namespace OpenChain.Ledger.Validation
             {
                 PermissionSet dataRecordPermissions = await GetPermissions(signedAddresses, alias.Key.Path, alias.Key.Name);
 
-                if (!dataRecordPermissions.DataModify)
+                if (dataRecordPermissions.DataModify != Access.Permit)
                     throw new TransactionInvalidException("CannotModifyData");
             }
         }
 
-        private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath asset, string recordName)
+        private async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> signedAddresses, LedgerPath path, string recordName)
         {
-            IList<PermissionSet> permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, asset, recordName)));
-            return permissions.Aggregate(PermissionSet.DenyAll, (accumulator, value) => accumulator.Add(value), result => result);
+            PermissionSet accumulativePermissions = PermissionSet.DenyAll;
+
+            for (int i = 0; i < path.Segments.Count; i++)
+            {
+                bool recursiveOnly = i != path.Segments.Count - 1;
+                PermissionSet[] permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, path, recursiveOnly, recordName)));
+
+                PermissionSet currentLevelPermissions = permissions
+                    .Aggregate(PermissionSet.Unset, (previous, current) => previous.Add(current));
+
+                accumulativePermissions = accumulativePermissions.AddLevel(currentLevelPermissions);
+            }
+
+            return accumulativePermissions;
         }
     }
 }

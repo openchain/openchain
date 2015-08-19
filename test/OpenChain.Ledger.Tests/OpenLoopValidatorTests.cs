@@ -39,43 +39,43 @@ namespace OpenChain.Ledger.Tests
         {
             // Able to spend existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(true, false, true, false),
+                accountPermissions: new PermissionSet(Access.Permitted, Access.Denied, Access.Permitted, Access.Denied),
                 previousBalance: 150,
                 newBalance: 100);
 
             // Able to spend non-existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(true, false, true, false),
+                accountPermissions: new PermissionSet(Access.Permitted, Access.Denied, Access.Permitted, Access.Denied),
                 previousBalance: 100,
                 newBalance: -50);
 
             // Able to spend funds as the owner
             await TestAccountChange(
-                accountPermissions: new PermissionSet(false, true, true, false),
+                accountPermissions: new PermissionSet(Access.Denied, Access.Permitted, Access.Permitted, Access.Denied),
                 previousBalance: 100,
                 newBalance: 50);
 
             // Able to receive funds
             await TestAccountChange(
-                accountPermissions: new PermissionSet(false, false, true, false),
+                accountPermissions: new PermissionSet(Access.Denied, Access.Denied, Access.Permitted, Access.Denied),
                 previousBalance: 50,
                 newBalance: 100);
 
             // Missing the affect balance permission
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(true, true, false, true),
+                accountPermissions: new PermissionSet(Access.Permitted, Access.Permitted, Access.Denied, Access.Permitted),
                 previousBalance: 100,
                 newBalance: 150));
 
             // Missing the permissions to spend from the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(false, false, true, true),
+                accountPermissions: new PermissionSet(Access.Denied, Access.Denied, Access.Permitted, Access.Permitted),
                 previousBalance: 150,
                 newBalance: 100));
 
             // Not able to spend more that the funds on the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(false, true, true, true),
+                accountPermissions: new PermissionSet(Access.Denied, Access.Permitted, Access.Permitted, Access.Permitted),
                 previousBalance: 100,
                 newBalance: -50));
         }
@@ -87,7 +87,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(false, false, false, true)
+                    ["/a/"] = new PermissionSet(Access.Denied, Access.Denied, Access.Denied, Access.Permitted)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
@@ -106,7 +106,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(true, true, true, false)
+                    ["/a/"] = new PermissionSet(Access.Permitted, Access.Permitted, Access.Permitted, Access.Denied)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
@@ -156,7 +156,7 @@ namespace OpenChain.Ledger.Tests
                 this.getPermissions = getPermissions;
             }
 
-            public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, string recordName)
+            public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, bool recursiveOnly, string recordName)
             {
                 Assert.Equal(identities.Select(ConvertEvidence), expectedIdentities, StringComparer.Ordinal);
 

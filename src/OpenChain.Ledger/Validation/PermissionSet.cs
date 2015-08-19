@@ -7,11 +7,17 @@ namespace OpenChain.Ledger.Validation
 {
     public class PermissionSet
     {
-        public static PermissionSet AllowAll { get; } = new PermissionSet(true, true, true, true);
+        public static PermissionSet AllowAll { get; } = new PermissionSet(Access.Permit, Access.Permit, Access.Permit, Access.Permit);
 
-        public static PermissionSet DenyAll { get; } = new PermissionSet(false, false, false, false);
+        public static PermissionSet DenyAll { get; } = new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Deny);
 
-        public PermissionSet(bool accountNegative, bool accountSpend, bool accountModify, bool dataModify)
+        public static PermissionSet Unset { get; } = new PermissionSet(Access.Unset, Access.Unset, Access.Unset, Access.Unset);
+
+        public PermissionSet(
+            Access accountNegative = Access.Unset,
+            Access accountSpend = Access.Unset,
+            Access accountModify = Access.Unset,
+            Access dataModify = Access.Unset)
         {
             this.AccountNegative = accountNegative;
             this.AccountSpend = accountSpend;
@@ -19,30 +25,40 @@ namespace OpenChain.Ledger.Validation
             this.DataModify = dataModify;
         }
 
-        public bool AccountNegative { get; }
+        public Access AccountNegative { get; }
 
-        public bool AccountSpend { get; }
+        public Access AccountSpend { get; }
 
-        public bool AccountModify { get; }
+        public Access AccountModify { get; }
 
-        public bool DataModify { get; }
+        public Access DataModify { get; }
 
         public PermissionSet Add(PermissionSet added)
         {
             return new PermissionSet(
-                accountNegative: AccountNegative || added.AccountNegative,
-                accountSpend: AccountSpend || added.AccountSpend,
-                accountModify: AccountModify || added.AccountModify,
-                dataModify: DataModify || added.DataModify);
+                accountNegative: Or(AccountNegative, added.AccountNegative),
+                accountSpend: Or(AccountSpend, added.AccountSpend),
+                accountModify: Or(AccountModify, added.AccountModify),
+                dataModify: Or(DataModify, added.DataModify));
         }
 
-        public PermissionSet Intersect(PermissionSet other)
+        private static Access Or(Access left, Access right)
+        {
+            if (left == Access.Deny || right == Access.Deny)
+                return Access.Deny;
+            else if (left == Access.Permit || right == Access.Permit)
+                return Access.Permit;
+            else
+                return Access.Unset;
+        }
+
+        public PermissionSet AddLevel(PermissionSet lowerLevel)
         {
             return new PermissionSet(
-                accountNegative: AccountNegative && other.AccountNegative,
-                accountSpend: AccountSpend && other.AccountSpend,
-                accountModify: AccountModify && other.AccountModify,
-                dataModify: DataModify && other.DataModify);
+                accountNegative: lowerLevel.AccountNegative == Access.Unset ? AccountNegative : lowerLevel.AccountNegative,
+                accountSpend: lowerLevel.AccountSpend == Access.Unset ? AccountSpend : lowerLevel.AccountSpend,
+                accountModify: lowerLevel.AccountModify == Access.Unset ? AccountModify : lowerLevel.AccountModify,
+                dataModify: lowerLevel.DataModify == Access.Unset ? DataModify : lowerLevel.DataModify);
         }
     }
 }
