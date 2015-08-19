@@ -130,13 +130,28 @@ namespace OpenChain.Server.Models
                                 assetPath,
                                 true,
                                 StringPattern.MatchAll,
-                                new PermissionSet(Access.Deny, Access.Permit, Access.Deny, Access.Permit)));
+                                new PermissionSet(accountSpend: Access.Permit, dataModify: Access.Permit)));
+
+                            pathPermissions.Add(new Acl(
+                                addresses,
+                                assetPath,
+                                true,
+                                new StringPattern(DynamicPermissionLayout.AclResourceName, PatternMatchingStrategy.Exact),
+                                new PermissionSet(dataModify: Access.Deny)));
+
+                            pathPermissions.Add(new Acl(
+                                new[] { EveryoneSubject.Instance },
+                                assetPath,
+                                true,
+                                new StringPattern(assetPath.FullPath, PatternMatchingStrategy.Prefix),
+                                new PermissionSet(accountModify: Access.Permit)));
+
                             pathPermissions.Add(new Acl(
                                 addresses,
                                 LedgerPath.Parse("/"),
                                 true,
                                 new StringPattern(assetPath.FullPath, PatternMatchingStrategy.Prefix),
-                                new PermissionSet(Access.Permit, Access.Deny, Access.Deny, Access.Deny)));
+                                new PermissionSet(accountNegative: Access.Permit)));
                         }
 
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);

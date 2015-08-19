@@ -39,43 +39,43 @@ namespace OpenChain.Ledger.Tests
         {
             // Able to spend existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permitted, Access.Denied, Access.Permitted, Access.Denied),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny),
                 previousBalance: 150,
                 newBalance: 100);
 
             // Able to spend non-existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permitted, Access.Denied, Access.Permitted, Access.Denied),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny),
                 previousBalance: 100,
                 newBalance: -50);
 
             // Able to spend funds as the owner
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Denied, Access.Permitted, Access.Permitted, Access.Denied),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Deny),
                 previousBalance: 100,
                 newBalance: 50);
 
             // Able to receive funds
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Denied, Access.Denied, Access.Permitted, Access.Denied),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Deny),
                 previousBalance: 50,
                 newBalance: 100);
 
             // Missing the affect balance permission
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permitted, Access.Permitted, Access.Denied, Access.Permitted),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Permit),
                 previousBalance: 100,
                 newBalance: 150));
 
             // Missing the permissions to spend from the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Denied, Access.Denied, Access.Permitted, Access.Permitted),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Permit),
                 previousBalance: 150,
                 newBalance: 100));
 
             // Not able to spend more that the funds on the account
             await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Denied, Access.Permitted, Access.Permitted, Access.Permitted),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Permit),
                 previousBalance: 100,
                 newBalance: -50));
         }
@@ -87,7 +87,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(Access.Denied, Access.Denied, Access.Denied, Access.Permitted)
+                    ["/a/"] = new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Permit)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
@@ -106,7 +106,7 @@ namespace OpenChain.Ledger.Tests
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
-                    ["/a/"] = new PermissionSet(Access.Permitted, Access.Permitted, Access.Permitted, Access.Denied)
+                    ["/a/"] = new PermissionSet(Access.Permit, Access.Permit, Access.Permit, Access.Deny)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();

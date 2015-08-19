@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OpenChain.Ledger.Validation
 {
-    public class P2pkhSubject
+    public class P2pkhSubject : IPermissionSubject
     {
         private readonly KeyEncoder keyEncoder;
 

@@ -18,7 +18,6 @@ namespace OpenChain.Ledger.Validation
         private readonly KeyEncoder keyEncoder;
         private readonly LedgerPath thirdPartyAssetPath = LedgerPath.Parse("/asset/p2pkh/");
         private readonly LedgerPath p2pkhAccountPath = LedgerPath.Parse("/p2pkh/");
-        private readonly string AclDataRecordName = "acl";
 
         public DefaultPermissionLayout(bool allowThirdPartyAssets, KeyEncoder keyEncoder)
         {
@@ -47,7 +46,7 @@ namespace OpenChain.Ledger.Validation
                 && path.Segments.Count == p2pkhAccountPath.Segments.Count + 1
                 && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
             {
-                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != AclDataRecordName
+                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != DynamicPermissionLayout.AclResourceName
                     ? Access.Permit : Access.Unset;
 
                 return Task.FromResult(new PermissionSet(
@@ -62,7 +61,7 @@ namespace OpenChain.Ledger.Validation
                 && path.Segments.Count == thirdPartyAssetPath.Segments.Count + 1
                 && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
             {
-                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != AclDataRecordName
+                Access ownAccount = identities.Contains(path.Segments[path.Segments.Count - 1]) && recordName != DynamicPermissionLayout.AclResourceName
                     ? Access.Permit : Access.Unset;
 
                 return Task.FromResult(new PermissionSet(

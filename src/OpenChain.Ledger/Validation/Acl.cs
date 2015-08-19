@@ -9,7 +9,7 @@ namespace OpenChain.Ledger.Validation
     public class Acl
     {
         public Acl(
-            IEnumerable<P2pkhSubject> subjects,
+            IEnumerable<IPermissionSubject> subjects,
             LedgerPath path,
             bool recursive,
             StringPattern recordName,
@@ -22,7 +22,7 @@ namespace OpenChain.Ledger.Validation
             this.Permissions = permissions;
         }
 
-        public IReadOnlyList<P2pkhSubject> Subjects { get; }
+        public IReadOnlyList<IPermissionSubject> Subjects { get; }
 
         public LedgerPath Path { get; }
 
@@ -58,7 +58,7 @@ namespace OpenChain.Ledger.Validation
 
         public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
-            return Path.IsParentOf(path)
+            return Path.FullPath == path.FullPath
                 && (Path.Segments.Count == path.Segments.Count || Recursive)
                 && (!recursiveOnly || Recursive)
                 && RecordName.IsMatch(recordName)

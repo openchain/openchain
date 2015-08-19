@@ -68,10 +68,11 @@ namespace OpenChain.Ledger.Validation
         {
             PermissionSet accumulativePermissions = PermissionSet.DenyAll;
 
-            for (int i = 0; i < path.Segments.Count; i++)
+            for (int i = 0; i <= path.Segments.Count; i++)
             {
-                bool recursiveOnly = i != path.Segments.Count - 1;
-                PermissionSet[] permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, path, recursiveOnly, recordName)));
+                bool recursiveOnly = i != path.Segments.Count;
+                LedgerPath currentPath = LedgerPath.FromSegments(path.Segments.Take(i).ToArray());
+                PermissionSet[] permissions = await Task.WhenAll(this.permissions.Select(item => item.GetPermissions(signedAddresses, currentPath, recursiveOnly, recordName)));
 
                 PermissionSet currentLevelPermissions = permissions
                     .Aggregate(PermissionSet.Unset, (previous, current) => previous.Add(current));

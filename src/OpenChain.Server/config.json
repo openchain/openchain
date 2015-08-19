@@ -18,6 +18,12 @@
           "addresses": [
             "mtYWSapHLBioZJfXXnQqw45yCuEi37Tkwn"
           ]
+        },
+        {
+          "path": "/asset/test/",
+          "addresses": [
+            "mtPmvh5Vk5CGmezjwVfUtRMALTeykHpBwg"
+          ]
         }
       ],
       "version_byte": 111

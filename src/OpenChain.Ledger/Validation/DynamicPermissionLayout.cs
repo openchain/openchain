@@ -9,6 +9,8 @@ namespace OpenChain.Ledger.Validation
         private readonly ITransactionStore store;
         private readonly KeyEncoder keyEncoder;
 
+        public static string AclResourceName { get; } = "acl";
+
         public DynamicPermissionLayout(ITransactionStore store, KeyEncoder keyEncoder)
         {
             this.store = store;
@@ -19,7 +21,7 @@ namespace OpenChain.Ledger.Validation
         {
             PermissionSet currentPermissions = PermissionSet.DenyAll;
 
-            Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, path, "acl"));
+            Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, path, AclResourceName));
 
             IReadOnlyList<Acl> permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
 
