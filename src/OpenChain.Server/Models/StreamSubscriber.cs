@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Server.Models
 {
-    public class TransactionStreamSubscriber : IStreamSubscriber
+    public class TransactionStreamSubscriber
     {
         private readonly UriBuilder endpoint;
         private readonly ITransactionStore store;

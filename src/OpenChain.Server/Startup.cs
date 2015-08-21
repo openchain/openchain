@@ -72,7 +72,7 @@ namespace OpenChain.Server
             services.AddTransient<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
 
             // Transaction Stream Subscriber
-            services.AddSingleton<IStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
+            services.AddSingleton<TransactionStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
 
             // Anchoring
             services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
@@ -96,7 +96,7 @@ namespace OpenChain.Server
             app.UseMvc();
 
             // Activate singletons
-            app.ApplicationServices.GetService<IStreamSubscriber>();
+            app.ApplicationServices.GetService<TransactionStreamSubscriber>();
             app.ApplicationServices.GetService<IMutationValidator>();
             app.ApplicationServices.GetService<LedgerAnchorWorker>();
 

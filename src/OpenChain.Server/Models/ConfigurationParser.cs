@@ -222,7 +222,7 @@ namespace OpenChain.Server.Models
             return loggerFactory.CreateLogger("General");
         }
 
-        public static IStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)
+        public static TransactionStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)
         {
             ILogger logger = serviceProvider.GetService<ILogger>();
 
