@@ -39,7 +39,6 @@
   "anchoring": {
     "type": "blockchain",
     "key": "91cdqeDi7WZFERoMe2M2zNF8mRrmH1NSxi3A4jfup7KfSNf8vbe",
-    "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",
-    "address": "mqcqncuqfEBaj7jjwHKBqKo76Mzh5J7bZx"
+    "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/"
   }
 }

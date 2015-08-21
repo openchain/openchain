@@ -68,13 +68,16 @@ namespace OpenChain.Server.Models
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IConfiguration anchoring = configuration.GetConfigurationSection("anchoring");
+            ILogger logger = serviceProvider.GetService<ILogger>();
 
             IAnchorRecorder recorder = null;
             switch (anchoring["type"])
             {
                 case "blockchain":
                     NBitcoin.Key key = NBitcoin.Key.Parse(anchoring["key"]);
-                    recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, NBitcoin.Network.TestNet);
+                    NBitcoin.Network network = NBitcoin.Network.TestNet;
+                    logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
+                    recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network);
                     break;
             }
 
