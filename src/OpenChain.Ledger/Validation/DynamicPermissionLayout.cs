@@ -15,6 +15,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace OpenChain.Ledger.Validation
 {
@@ -37,7 +38,18 @@ namespace OpenChain.Ledger.Validation
 
             Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, path, AclResourceName));
 
-            IReadOnlyList<Acl> permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
+            if (record.Value.Value.Count == 0)
+                return PermissionSet.Unset;
+
+            IReadOnlyList<Acl> permissions;
+            try
+            {
+                permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
+            }
+            catch (JsonReaderException)
+            {
+                return PermissionSet.Unset;
+            }
 
             foreach (Acl acl in permissions)
             {

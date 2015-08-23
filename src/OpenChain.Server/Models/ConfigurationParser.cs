@@ -175,7 +175,8 @@ namespace OpenChain.Server.Models
 
                         IPermissionsProvider implicitLayout = new DefaultPermissionLayout(allowThirdPartyAssets, keyEncoder);
                         IPermissionsProvider staticPermissions = new StaticPermissionLayout(pathPermissions, keyEncoder);
-                        return new OpenLoopValidator(new[] { implicitLayout, staticPermissions });
+                        IPermissionsProvider dynamicPermissions = new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder);
+                        return new PermissionBasedValidator(new[] { implicitLayout, staticPermissions, dynamicPermissions });
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                     default:
