@@ -126,13 +126,39 @@ namespace OpenChain.Ledger.Tests
                     ["/a/"] = new PermissionSet(Access.Permit, Access.Permit, Access.Permit, Access.Deny)
                 });
 
-            Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
+            ParsedMutation mutation = new ParsedMutation(
+                new AccountStatus[0],
+                new[] { new KeyValuePair<RecordKey, ByteString>(new RecordKey(RecordType.Data, LedgerPath.Parse("/a/"), "a"), ByteString.Parse("aabb")) });
+
+            await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], new Dictionary<AccountKey, AccountStatus>()));
+        }
+
+        [Fact]
+        public async Task Validate_Inheritance()
+        {
+            TestPermissionsProvider firstValidator = new TestPermissionsProvider(
+                new string[0],
+                new Dictionary<string, PermissionSet>()
+                {
+                    ["/"] = PermissionSet.AllowAll,
+                    ["/a/"] = PermissionSet.AllowAll
+                });
+
+            TestPermissionsProvider secondValidator = new TestPermissionsProvider(
+                new string[0],
+                new Dictionary<string, PermissionSet>()
+                {
+                    ["/"] = PermissionSet.DenyAll,
+                    ["/a/"] = PermissionSet.Unset
+                });
+
+            PermissionBasedValidator validator = new PermissionBasedValidator(new[] { firstValidator, secondValidator });
 
             ParsedMutation mutation = new ParsedMutation(
                 new AccountStatus[0],
                 new[] { new KeyValuePair<RecordKey, ByteString>(new RecordKey(RecordType.Data, LedgerPath.Parse("/a/"), "a"), ByteString.Parse("aabb")) });
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], accounts));
+            await validator.Validate(mutation, new SignatureEvidence[0], new Dictionary<AccountKey, AccountStatus>());
         }
 
         private static async Task TestAccountChange(PermissionSet accountPermissions, long previousBalance, long newBalance)
