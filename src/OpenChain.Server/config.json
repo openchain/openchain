@@ -10,7 +10,7 @@
       "type": "OpenLoop",
       "allow_third_party_assets": true,
       "admin_addresses": [
-        "mqW1C46sfMDB4SusRZR1FkfTZj5R1fUnuh"
+        "mu75S9BSUqqos3bStCx5p5JpjiRwzcjdCa"
       ],
       "issuers": [
         {
@@ -22,7 +22,7 @@
         {
           "path": "/asset/test/",
           "addresses": [
-            "mtPmvh5Vk5CGmezjwVfUtRMALTeykHpBwg"
+            "mmXzN1JZ8ugCmqUzrbGKMYeKAqfacQLBVC"
           ]
         }
       ],
