@@ -18,11 +18,11 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Ledger.Validation
 {
-    public class OpenLoopValidator : IMutationValidator
+    public class PermissionBasedValidator : IMutationValidator
     {
         private readonly IList<IPermissionsProvider> permissions;
 
-        public OpenLoopValidator(IList<IPermissionsProvider> permissions)
+        public PermissionBasedValidator(IList<IPermissionsProvider> permissions)
         {
             this.permissions = permissions;
         }

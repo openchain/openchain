@@ -21,15 +21,16 @@ using Xunit;
 
 namespace OpenChain.Ledger.Tests
 {
-    public class OpenLoopValidatorTests
+    public class PermissionBasedValidatorTests
     {
         [Fact]
         public async Task Validate_ComputeAddress()
         {
-            OpenLoopValidator validator = CreateValidator(
+            PermissionBasedValidator validator = CreateValidator(
                 new string[] { "0123456789abcdef11223344" },
                 new Dictionary<string, PermissionSet>()
                 {
+                    ["/"] = PermissionSet.Unset,
                     ["/a/"] = PermissionSet.AllowAll
                 });
 
@@ -97,10 +98,11 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public async Task Validate_DataMutationSuccess()
         {
-            OpenLoopValidator validator = CreateValidator(
+            PermissionBasedValidator validator = CreateValidator(
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
+                    ["/"] = PermissionSet.Unset,
                     ["/a/"] = new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Permit)
                 });
 
@@ -116,10 +118,11 @@ namespace OpenChain.Ledger.Tests
         [Fact]
         public async Task Validate_DataMutationError()
         {
-            OpenLoopValidator validator = CreateValidator(
+            PermissionBasedValidator validator = CreateValidator(
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
+                    ["/"] = PermissionSet.Unset,
                     ["/a/"] = new PermissionSet(Access.Permit, Access.Permit, Access.Permit, Access.Deny)
                 });
 
@@ -134,10 +137,11 @@ namespace OpenChain.Ledger.Tests
 
         private static async Task TestAccountChange(PermissionSet accountPermissions, long previousBalance, long newBalance)
         {
-            OpenLoopValidator validator = CreateValidator(
+            PermissionBasedValidator validator = CreateValidator(
                 new string[0],
                 new Dictionary<string, PermissionSet>()
                 {
+                    ["/"] = PermissionSet.Unset,
                     ["/a/"] = accountPermissions
                 });
 
@@ -153,10 +157,10 @@ namespace OpenChain.Ledger.Tests
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
         }
 
-        private static OpenLoopValidator CreateValidator(IList<string> identities, Dictionary<string, PermissionSet> getPermissions)
+        private static PermissionBasedValidator CreateValidator(IList<string> identities, Dictionary<string, PermissionSet> getPermissions)
         {
             TestPermissionsProvider permissions = new TestPermissionsProvider(identities, getPermissions);
-            return new OpenLoopValidator(new[] { permissions });
+            return new PermissionBasedValidator(new[] { permissions });
         }
 
         private class TestPermissionsProvider : IPermissionsProvider
