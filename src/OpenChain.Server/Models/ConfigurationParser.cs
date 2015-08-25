@@ -52,6 +52,7 @@ namespace OpenChain.Server.Models
             catch (Exception exception)
             {
                 serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instanciating the transaction store:\n {exception}");
+                throw;
             }
 
             throw new NotSupportedException();
@@ -113,12 +114,9 @@ namespace OpenChain.Server.Models
 
         public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration storage = configuration.GetConfigurationSection("storage");
+            SqliteLedgerQueries store = serviceProvider.GetService<ILedgerQueries>() as SqliteLedgerQueries;
 
-            SqliteLedgerQueries store = new SqliteLedgerQueries(storage["path"]);
-
-            if (storage["type"] == "SQLite")
+            if (store != null)
                 await store.EnsureTables();
         }
 
