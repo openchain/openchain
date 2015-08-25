@@ -353,6 +353,32 @@
           "lib/dnxcore50/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
+      "Microsoft.AspNet.Loader.IIS/1.0.0-beta6": {
+        "dependencies": {
+          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta6",
+          "Microsoft.AspNet.Hosting": "1.0.0-beta6",
+          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6",
+          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta6",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6",
+          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta6",
+          "Microsoft.Win32.Registry": "4.0.0-beta-23109",
+          "System.Diagnostics.Process": "4.0.0-beta-23109",
+          "System.Net.NetworkInformation": "4.0.10-beta-23109",
+          "System.Reflection.Extensions": "4.0.0-beta-23109",
+          "System.Security.Principal.Windows": "4.0.0-beta-23109",
+          "System.Text.Encoding": "4.0.10-beta-23109",
+          "System.Text.Encoding.Extensions": "4.0.10-beta-23109",
+          "System.Threading": "4.0.10-beta-23109",
+          "System.Threading.ThreadPool": "4.0.10-beta-23109"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta6": {},
       "Microsoft.AspNet.Mvc.Abstractions/6.0.0-beta6": {
         "dependencies": {
           "Microsoft.AspNet.Routing": "1.0.0-beta6",
@@ -1241,6 +1267,35 @@
           "lib/DNXCore50/System.Diagnostics.Debug.dll": {}
         }
       },
+      "System.Diagnostics.Process/4.0.0-beta-23109": {
+        "dependencies": {
+          "Microsoft.Win32.Primitives": "4.0.0-beta-23109",
+          "Microsoft.Win32.Registry": "4.0.0-beta-23109",
+          "System.Collections": "4.0.10-beta-23109",
+          "System.Globalization": "4.0.10-beta-23109",
+          "System.IO": "4.0.10-beta-23109",
+          "System.IO.FileSystem": "4.0.0-beta-23109",
+          "System.IO.FileSystem.Primitives": "4.0.0-beta-23109",
+          "System.Resources.ResourceManager": "4.0.0-beta-23109",
+          "System.Runtime": "4.0.20-beta-23109",
+          "System.Runtime.Extensions": "4.0.10-beta-23109",
+          "System.Runtime.Handles": "4.0.0-beta-23109",
+          "System.Runtime.InteropServices": "4.0.20-beta-23109",
+          "System.Security.SecureString": "4.0.0-beta-23109",
+          "System.Text.Encoding": "4.0.10-beta-23109",
+          "System.Text.Encoding.Extensions": "4.0.10-beta-23109",
+          "System.Threading": "4.0.10-beta-23109",
+          "System.Threading.Tasks": "4.0.10-beta-23109",
+          "System.Threading.Thread": "4.0.0-beta-23109",
+          "System.Threading.ThreadPool": "4.0.10-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Diagnostics.Process.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Diagnostics.Process.dll": {}
+        }
+      },
       "System.Diagnostics.Tools/4.0.0-beta-23109": {
         "dependencies": {
           "System.Runtime": "4.0.0-beta-23109"
@@ -1492,6 +1547,17 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Net.Http.dll": {}
+        }
+      },
+      "System.Net.NetworkInformation/4.0.10-beta-23109": {
+        "dependencies": {
+          "System.Private.Networking": "4.0.0-beta-23109"
+        },
+        "compile": {
+          "ref/dotnet/System.Net.NetworkInformation.dll": {}
+        },
+        "runtime": {
+          "lib/DNXCore50/System.Net.NetworkInformation.dll": {}
         }
       },
       "System.Net.Primitives/4.0.10-beta-23109": {
@@ -2549,6 +2615,29 @@
           "lib/dnx451/Microsoft.AspNet.JsonPatch.dll": {}
         }
       },
+      "Microsoft.AspNet.Loader.IIS/1.0.0-beta6": {
+        "dependencies": {
+          "Microsoft.AspNet.DataProtection.Abstractions": "1.0.0-beta6",
+          "Microsoft.AspNet.Hosting": "1.0.0-beta6",
+          "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6",
+          "Microsoft.Framework.Configuration.Ini": "1.0.0-beta6",
+          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6",
+          "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta6"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll": {}
+        }
+      },
+      "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta6": {},
       "Microsoft.AspNet.Mvc.Abstractions/6.0.0-beta6": {
         "dependencies": {
           "Microsoft.AspNet.Routing": "1.0.0-beta6"
@@ -3517,6 +3606,31 @@
         "Microsoft.AspNet.JsonPatch.1.0.0-beta6.nupkg.sha512",
         "Microsoft.AspNet.JsonPatch.nuspec",
         "repo.json"
+      ]
+    },
+    "Microsoft.AspNet.Loader.IIS/1.0.0-beta6": {
+      "serviceable": true,
+      "sha512": "KgthERynEAHQDonKXUIbgDMO4K0/Z0sMr/RsgdHJ1B+0zu2FJNUmvcDqIxnqnGx0nGqpZdkZUV9bHvjsRsM+Jg==",
+      "files": [
+        "lib/dnx451/Microsoft.AspNet.Loader.IIS.dll",
+        "lib/dnx451/Microsoft.AspNet.Loader.IIS.xml",
+        "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.dll",
+        "lib/dnxcore50/Microsoft.AspNet.Loader.IIS.xml",
+        "Microsoft.AspNet.Loader.IIS.1.0.0-beta6.nupkg",
+        "Microsoft.AspNet.Loader.IIS.1.0.0-beta6.nupkg.sha512",
+        "Microsoft.AspNet.Loader.IIS.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Loader.IIS.Interop/1.0.0-beta6": {
+      "serviceable": true,
+      "sha512": "uHMUbBxd47RRMjgnRUulTcOfmF+O++DWcFtBg75uD+ZDMWfHqXKd8pSsaAVDa0PLfzye+bobYezPyAvzi742EA==",
+      "files": [
+        "InteropAssemblies/amd64/Microsoft.AspNet.Loader.IIS.Interop.dll",
+        "InteropAssemblies/x86/Microsoft.AspNet.Loader.IIS.Interop.dll",
+        "Microsoft.AspNet.Loader.IIS.Interop.1.0.0-beta6.nupkg",
+        "Microsoft.AspNet.Loader.IIS.Interop.1.0.0-beta6.nupkg.sha512",
+        "Microsoft.AspNet.Loader.IIS.Interop.nuspec",
+        "tools/AspNet.Loader.dll"
       ]
     },
     "Microsoft.AspNet.Mvc.Abstractions/6.0.0-beta6": {
@@ -4597,6 +4711,29 @@
         "System.Diagnostics.Debug.nuspec"
       ]
     },
+    "System.Diagnostics.Process/4.0.0-beta-23109": {
+      "serviceable": true,
+      "sha512": "egXQs1Y9umuDpVA2Eusger3DHZ92fXfnzYYiLXkE41IIKeabuBo3cAMCzA00LCU9lr/tmaPiebGTSmXzGHHqCw==",
+      "files": [
+        "lib/DNXCore50/System.Diagnostics.Process.dll",
+        "lib/net46/System.Diagnostics.Process.dll",
+        "ref/dotnet/de/System.Diagnostics.Process.xml",
+        "ref/dotnet/es/System.Diagnostics.Process.xml",
+        "ref/dotnet/fr/System.Diagnostics.Process.xml",
+        "ref/dotnet/it/System.Diagnostics.Process.xml",
+        "ref/dotnet/ja/System.Diagnostics.Process.xml",
+        "ref/dotnet/ko/System.Diagnostics.Process.xml",
+        "ref/dotnet/ru/System.Diagnostics.Process.xml",
+        "ref/dotnet/System.Diagnostics.Process.dll",
+        "ref/dotnet/System.Diagnostics.Process.xml",
+        "ref/dotnet/zh-hans/System.Diagnostics.Process.xml",
+        "ref/dotnet/zh-hant/System.Diagnostics.Process.xml",
+        "ref/net46/System.Diagnostics.Process.dll",
+        "System.Diagnostics.Process.4.0.0-beta-23109.nupkg",
+        "System.Diagnostics.Process.4.0.0-beta-23109.nupkg.sha512",
+        "System.Diagnostics.Process.nuspec"
+      ]
+    },
     "System.Diagnostics.Tools/4.0.0-beta-23109": {
       "serviceable": true,
       "sha512": "DqB7rE6Mr0HT/Pxy7NxjVMn3uk4KR+00Y12su+6a5Hz0QXAZrJAXo50GWVaw49+lwmZEJBoaZSBdGKge3jN1sA==",
@@ -4987,6 +5124,28 @@
         "System.Net.Http.4.0.0-beta-23029.nupkg",
         "System.Net.Http.4.0.0-beta-23029.nupkg.sha512",
         "System.Net.Http.nuspec"
+      ]
+    },
+    "System.Net.NetworkInformation/4.0.10-beta-23109": {
+      "sha512": "+C52hc3iiBzD+9C8yshLnUoUE6fo3DGkeoUn0ybMfT5VBDLcCMLlx0MVvJf+tfU7JpA1nUyYxWtWxcnFtbgZ8w==",
+      "files": [
+        "lib/DNXCore50/System.Net.NetworkInformation.dll",
+        "lib/net46/_._",
+        "ref/dotnet/de/System.Net.NetworkInformation.xml",
+        "ref/dotnet/es/System.Net.NetworkInformation.xml",
+        "ref/dotnet/fr/System.Net.NetworkInformation.xml",
+        "ref/dotnet/it/System.Net.NetworkInformation.xml",
+        "ref/dotnet/ja/System.Net.NetworkInformation.xml",
+        "ref/dotnet/ko/System.Net.NetworkInformation.xml",
+        "ref/dotnet/ru/System.Net.NetworkInformation.xml",
+        "ref/dotnet/System.Net.NetworkInformation.dll",
+        "ref/dotnet/System.Net.NetworkInformation.xml",
+        "ref/dotnet/zh-hans/System.Net.NetworkInformation.xml",
+        "ref/dotnet/zh-hant/System.Net.NetworkInformation.xml",
+        "ref/net46/_._",
+        "System.Net.NetworkInformation.4.0.10-beta-23109.nupkg",
+        "System.Net.NetworkInformation.4.0.10-beta-23109.nupkg.sha512",
+        "System.Net.NetworkInformation.nuspec"
       ]
     },
     "System.Net.Primitives/4.0.10-beta-23109": {
@@ -6145,6 +6304,8 @@
       "Microsoft.AspNet.Mvc.Cors >= 6.0.0-beta6",
       "Microsoft.AspNet.Mvc.ViewFeatures >= 6.0.0-beta6",
       "Microsoft.AspNet.Hosting >= 1.0.0-beta6",
+      "Microsoft.AspNet.Loader.IIS >= 1.0.0-beta6",
+      "Microsoft.AspNet.Loader.IIS.Interop >= 1.0.0-beta6",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta6",
       "Microsoft.AspNet.WebSockets.Server >= 1.0.0-beta6",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta6",

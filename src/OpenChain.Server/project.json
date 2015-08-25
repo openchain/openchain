@@ -1,9 +1,10 @@
 {
   "version": "1.0.0-*",
+  "title": "Open Chain",
   "description": "",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
 
-  "webroot": "",
+  "webroot": "Webroot",
   "compilationOptions": { "languageVersion": "csharp6" },
 
   "dependencies": {
@@ -12,6 +13,8 @@
     "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta6",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6",
     "Microsoft.AspNet.Hosting": "1.0.0-beta6",
+    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta6",
+    "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta6",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta6",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",

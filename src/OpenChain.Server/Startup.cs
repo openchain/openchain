@@ -34,12 +34,14 @@ namespace OpenChain.Server
         {
             // Setup Configuration
             configuration = new ConfigurationBuilder()
-                .AddJsonFile($"{env.WebRootPath}/config.json")
+                .AddJsonFile(env.MapPath("App_Data/config.json"))
                 .Build();
         }
 
-        // This method gets called by a runtime.
-        // Use this method to add services to the container
+        /// <summary>
+        /// Adds services to the dependency injection container.
+        /// </summary>
+        /// <param name="services">The collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IConfiguration>(_ => this.configuration);
@@ -78,7 +80,9 @@ namespace OpenChain.Server
             services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
         }
 
-        // Configure is called after ConfigureServices is called.
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
         {
             loggerfactory.AddConsole();

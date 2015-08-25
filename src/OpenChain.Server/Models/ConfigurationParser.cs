@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
@@ -33,10 +34,27 @@ namespace OpenChain.Server.Models
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IConfiguration storage = configuration.GetConfigurationSection("storage");
-            if (storage["type"] == "SQLite")
-                return new SqliteLedgerQueries(storage["path"]);
-            else
-                throw new NotSupportedException();
+
+            try
+            {
+                if (storage["type"] == "SQLite")
+                {
+                    string path = storage["path"];
+                    if (string.IsNullOrEmpty(path))
+                    {
+                        IHostingEnvironment environment = serviceProvider.GetService<IHostingEnvironment>();
+                        path = environment.MapPath("App_Data/ledger.db");
+                    }
+
+                    return new SqliteLedgerQueries(path);
+                }
+            }
+            catch (Exception exception)
+            {
+                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instanciating the transaction store:\n {exception}");
+            }
+
+            throw new NotSupportedException();
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
