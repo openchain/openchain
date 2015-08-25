@@ -39,14 +39,7 @@ namespace OpenChain.Server.Models
             {
                 if (storage["type"] == "SQLite")
                 {
-                    string path = storage["path"];
-                    if (string.IsNullOrEmpty(path))
-                    {
-                        IHostingEnvironment environment = serviceProvider.GetService<IHostingEnvironment>();
-                        path = environment.MapPath("App_Data/ledger.db");
-                    }
-
-                    return new SqliteLedgerQueries(path);
+                    return new SqliteLedgerQueries(GetPathOrDefault(serviceProvider, storage["path"], "App_Data/ledger.db"));
                 }
             }
             catch (Exception exception)
@@ -56,6 +49,19 @@ namespace OpenChain.Server.Models
             }
 
             throw new NotSupportedException();
+        }
+
+        private static string GetPathOrDefault(IServiceProvider serviceProvider, string value, string defaultValue)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                IHostingEnvironment environment = serviceProvider.GetService<IHostingEnvironment>();
+                return environment.MapPath(defaultValue);
+            }
+            else
+            {
+                return value;
+            }
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
@@ -73,7 +79,7 @@ namespace OpenChain.Server.Models
 
             if (storage["type"] == "SQLite")
             {
-                SqliteAnchorBuilder result = new SqliteAnchorBuilder(storage["path"]);
+                SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"], "App_Data/ledger.db"));
                 result.EnsureTables().Wait();
                 return result;
             }
