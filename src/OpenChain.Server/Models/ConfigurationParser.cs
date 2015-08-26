@@ -138,7 +138,7 @@ namespace OpenChain.Server.Models
 
                 switch (validator["type"])
                 {
-                    case "OpenLoop":
+                    case "PermissionBased":
                         byte versionByte = byte.Parse(validator["version_byte"]);
                         KeyEncoder keyEncoder = new KeyEncoder(versionByte);
 
@@ -220,21 +220,6 @@ namespace OpenChain.Server.Models
                 return null;
             else
                 return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>().Get("master_mode:root_url"));
-        }
-
-        public static MasterProperties CreateMasterProperties(IServiceProvider serviceProvider)
-        {
-            IMutationValidator master = serviceProvider.GetService<IMutationValidator>();
-
-            if (master != null)
-            {
-                IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("master_mode").GetConfigurationSection("properties");
-                return new MasterProperties(configuration);
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)

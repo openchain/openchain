@@ -69,8 +69,6 @@ namespace OpenChain.Server
 
             services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
 
-            services.AddSingleton<MasterProperties>(ConfigurationParser.CreateMasterProperties);
-
             services.AddTransient<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
 
             // Transaction Stream Subscriber

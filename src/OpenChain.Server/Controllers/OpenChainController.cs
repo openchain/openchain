@@ -109,32 +109,5 @@ namespace OpenChain.Server.Controllers
                 version = result.Version.ToString()
             });
         }
-
-        [HttpGet("info")]
-        public ActionResult GetLedgerInformation()
-        {
-            TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
-            MasterProperties properties = Context.ApplicationServices.GetService<MasterProperties>();
-
-            if (validator != null)
-            {
-                if (properties != null)
-                    return Json(new
-                    {
-                        root_url = validator.RootUrl,
-                        name = properties.Name,
-                        tos = properties.Tos
-                    });
-                else
-                    return Json(new
-                    {
-                        root_url = validator.RootUrl
-                    });
-            }
-            else
-            {
-                return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
-            }
-        }
     }
 }

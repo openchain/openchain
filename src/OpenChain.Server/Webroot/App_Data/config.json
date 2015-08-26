@@ -7,7 +7,7 @@
   "master_mode": {
     "root_url": "http://localhost:5000/",
     "validator": {
-      "type": "OpenLoop",
+      "type": "PermissionBased",
       "allow_third_party_assets": true,
       "admin_addresses": [
         "mu75S9BSUqqos3bStCx5p5JpjiRwzcjdCa"
@@ -27,10 +27,6 @@
         }
       ],
       "version_byte": 111
-    },
-    "properties": {
-      "name": "Test Ledger",
-      "tos": "The terms of service have not been defined"
     }
   },
   "observer_mode": {
