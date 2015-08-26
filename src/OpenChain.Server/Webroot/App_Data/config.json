@@ -2,7 +2,7 @@
   "enable_transaction_stream": true,
   "storage": {
     "type": "SQLite",
-    "_path": "D:\\ledger.db"
+    "path": "ledger.db"
   },
   "master_mode": {
     "root_url": "http://localhost:5000/",

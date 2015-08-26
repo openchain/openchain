@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace OpenChain.Server.Models
             {
                 if (storage["type"] == "SQLite")
                 {
-                    return new SqliteLedgerQueries(GetPathOrDefault(serviceProvider, storage["path"], "App_Data/ledger.db"));
+                    return new SqliteLedgerQueries(GetPathOrDefault(serviceProvider, storage["path"]));
                 }
             }
             catch (Exception exception)
@@ -49,19 +50,6 @@ namespace OpenChain.Server.Models
             }
 
             throw new NotSupportedException();
-        }
-
-        private static string GetPathOrDefault(IServiceProvider serviceProvider, string value, string defaultValue)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                IHostingEnvironment environment = serviceProvider.GetService<IHostingEnvironment>();
-                return environment.MapPath(defaultValue);
-            }
-            else
-            {
-                return value;
-            }
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
@@ -79,7 +67,7 @@ namespace OpenChain.Server.Models
 
             if (storage["type"] == "SQLite")
             {
-                SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"], "App_Data/ledger.db"));
+                SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"]));
                 result.EnsureTables().Wait();
                 return result;
             }
@@ -153,7 +141,7 @@ namespace OpenChain.Server.Models
                             // Admins have full rights
                             new Acl(adminAddresses, LedgerPath.Parse("/"), true, StringPattern.MatchAll, PermissionSet.AllowAll)
                         };
-                        
+
                         foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
                         {
                             LedgerPath assetPath = LedgerPath.Parse(pair.Value.Get("path"));
@@ -250,6 +238,12 @@ namespace OpenChain.Server.Models
 
                 return streamSubscriber;
             }
+        }
+
+        private static string GetPathOrDefault(IServiceProvider serviceProvider, string path)
+        {
+            IHostingEnvironment environment = serviceProvider.GetService<IHostingEnvironment>();
+            return environment.MapPath(Path.Combine("App_Data", path));
         }
     }
 }
