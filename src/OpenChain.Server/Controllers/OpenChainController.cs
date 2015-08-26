@@ -98,7 +98,7 @@ namespace OpenChain.Server.Controllers
         [HttpGet("value")]
         public async Task<ActionResult> GetValue(string key)
         {
-            ByteString parsedKey = ByteString.Parse(key);
+            ByteString parsedKey = ByteString.Parse(key ?? "");
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
 
