@@ -19,6 +19,10 @@ using Google.Protobuf;
 
 namespace OpenChain
 {
+    /// <summary>
+    /// Contains utility methods used to serialize and deserialize messages such as
+    /// the <see cref="Mutation"/> class and the <see cref="Transaction"/> class.
+    /// </summary>
     public static class MessageSerializer
     {
         private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);

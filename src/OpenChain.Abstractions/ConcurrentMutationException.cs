@@ -16,14 +16,24 @@ using System;
 
 namespace OpenChain
 {
+    /// <summary>
+    /// Represents an error caused by the attempt of modifying a record using the wrong base version.
+    /// </summary>
     public class ConcurrentMutationException : Exception
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConcurrentMutationException"/> class.
+        /// </summary>
+        /// <param name="failedMutation">The failed record mutation.</param>
         public ConcurrentMutationException(Record failedMutation)
             : base($"Version '{failedMutation.Version}' of key '{failedMutation.Key}' no longer exists.")
         {
             this.FailedMutation = failedMutation;
         }
 
+        /// <summary>
+        /// Gets the failed record mutation.
+        /// </summary>
         public Record FailedMutation { get; }
     }
 }

@@ -33,12 +33,20 @@ namespace OpenChain
             Empty = new ByteString(new byte[0]);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <c <see cref="ByteString"/> class from a collection of bytes.
+        /// </summary>
+        /// <param name="data">An enumeration of bytes used to initialize the instance.</param>
         public ByteString(IEnumerable<byte> data)
         {
             this.data = data.ToArray();
             this.Value = new ReadOnlyCollection<byte>(this.data);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <c <see cref="ByteString"/> class from a byte array.
+        /// </summary>
+        /// <param name="data">The byte array used to initialize the instance</param>
         public ByteString(byte[] data)
         {
             this.data = new byte[data.Length];
