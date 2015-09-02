@@ -11,7 +11,7 @@
   },
 
   "dependencies": {
-    "Google.Protobuf": "3.0.0-a20150808-e58cdbd214"
+    "Google.Protobuf": "3.0.0-*"
   },
 
   "frameworks": {

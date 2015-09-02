@@ -3,7 +3,7 @@
   "version": 1,
   "targets": {
     "DNXCore,Version=v5.0": {
-      "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
+      "Google.Protobuf/3.0.0-alpha4": {
         "compile": {
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         },
@@ -218,7 +218,7 @@
       }
     },
     "DNX,Version=v4.5.1": {
-      "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
+      "Google.Protobuf/3.0.0-alpha4": {
         "compile": {
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         },
@@ -228,7 +228,7 @@
       }
     },
     ".NETFramework,Version=v4.5": {
-      "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
+      "Google.Protobuf/3.0.0-alpha4": {
         "compile": {
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         },
@@ -239,16 +239,17 @@
     }
   },
   "libraries": {
-    "Google.Protobuf/3.0.0-a20150808-e58cdbd214": {
-      "sha512": "Pda5VAca4mLrYkOZ2g1CwShT6zieEuucA9jqACQ8PIYNjMIgdkWyJFE3jliQTeAKD+Llo6ZJtjFjATv7fGtRcw==",
+    "Google.Protobuf/3.0.0-alpha4": {
+      "sha512": "BUkc9hdOHfpSpB3WG69CwXJtT+GqLFAJpNWwW0eC29e1Y883EhugEm3kT+6rLJO2VJHT4poR9EqyA0XunuP3FA==",
       "files": [
-        "Google.Protobuf.3.0.0-a20150808-e58cdbd214.nupkg",
-        "Google.Protobuf.3.0.0-a20150808-e58cdbd214.nupkg.sha512",
+        "Google.Protobuf.3.0.0-alpha4.nupkg",
+        "Google.Protobuf.3.0.0-alpha4.nupkg.sha512",
         "Google.Protobuf.nuspec",
         "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll",
         "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.xml",
         "tools/google/protobuf/any.proto",
         "tools/google/protobuf/api.proto",
+        "tools/google/protobuf/descriptor.proto",
         "tools/google/protobuf/duration.proto",
         "tools/google/protobuf/empty.proto",
         "tools/google/protobuf/field_mask.proto",
@@ -257,8 +258,7 @@
         "tools/google/protobuf/timestamp.proto",
         "tools/google/protobuf/type.proto",
         "tools/google/protobuf/wrappers.proto",
-        "tools/protoc.exe",
-        "tools/Schema.cs"
+        "tools/protoc.exe"
       ]
     },
     "System.Collections/4.0.10-beta-23109": {
@@ -774,7 +774,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Google.Protobuf >= 3.0.0-a20150808-e58cdbd214"
+      "Google.Protobuf >= 3.0.0-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Collections >= 4.0.10-beta-23109",
