@@ -49,6 +49,7 @@ namespace OpenChain.Server
             // Setup ASP.NET MVC
             services
                 .AddMvcCore()
+                .AddViews()
                 .AddCors()
                 .AddJsonFormatters();
 
