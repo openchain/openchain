@@ -11,10 +11,10 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-beta6": {
+      "Microsoft.Data.SQLite/1.0.0-beta7": {
         "dependencies": {
-          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6",
-          "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6"
+          "Microsoft.Dnx.Runtime.Abstractions": "1.0.0-beta7",
+          "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta7"
         },
         "frameworkAssemblies": [
           "Microsoft.CSharp",
@@ -30,7 +30,21 @@
           "lib/dnx451/Microsoft.Data.Sqlite.dll": {}
         }
       },
-      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {
+      "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta7": {
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta7": {
         "frameworkAssemblies": [
           "Microsoft.CSharp",
           "mscorlib",
@@ -482,9 +496,9 @@
         "tools/protoc.exe"
       ]
     },
-    "Microsoft.Data.SQLite/1.0.0-beta6": {
+    "Microsoft.Data.SQLite/1.0.0-beta7": {
       "serviceable": true,
-      "sha512": "7yyqsIahqnM+5/9To3vhoYFttNlvDea9ASAayxqN0DxzpMv9Sguty22Qj5yM2DPlY1AGLCGxl0B/Jayp/7ePNQ==",
+      "sha512": "nvxAF969q7zpvqj1Pg9QNbfCUzMTHT3kp/YfbKf/KiebPNRwMzC9zRzlq5+lH8YzvsOdU5FsARBUYv1PYPU3vQ==",
       "files": [
         "lib/dnx451/Microsoft.Data.Sqlite.dll",
         "lib/dnx451/Microsoft.Data.Sqlite.xml",
@@ -494,8 +508,8 @@
         "lib/dotnet/Microsoft.Data.Sqlite.xml",
         "lib/net45/Microsoft.Data.Sqlite.dll",
         "lib/net45/Microsoft.Data.Sqlite.xml",
-        "Microsoft.Data.SQLite.1.0.0-beta6.nupkg",
-        "Microsoft.Data.SQLite.1.0.0-beta6.nupkg.sha512",
+        "Microsoft.Data.SQLite.1.0.0-beta7.nupkg",
+        "Microsoft.Data.SQLite.1.0.0-beta7.nupkg.sha512",
         "Microsoft.Data.SQLite.nuspec",
         "runtimes/win/native/x86/sqlite3.dll",
         "runtimes/win10-arm/native/sqlite3.dll",
@@ -504,9 +518,22 @@
         "runtimes/win-x86/native/sqlite3.dll"
       ]
     },
-    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta6": {
+    "Microsoft.Dnx.Runtime.Abstractions/1.0.0-beta7": {
       "serviceable": true,
-      "sha512": "pNgCgGRkqJ+f8OCN6eRsuOXormaafBec69QvVoKXnlYNwSGU2THLYgkc41li4YofRMgyfPWdnPk2goTtlL5waA==",
+      "sha512": "T/aTQeWKnrC35n69MQmqizwhobfpmGJ0iT8x5R1ifEx3ZFHPIu5OB9Iwc5BRhIrY+/+zwikyQJ1fUSa26NfwxA==",
+      "files": [
+        "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.dll",
+        "lib/dnx451/Microsoft.Dnx.Runtime.Abstractions.xml",
+        "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.dll",
+        "lib/dnxcore50/Microsoft.Dnx.Runtime.Abstractions.xml",
+        "Microsoft.Dnx.Runtime.Abstractions.1.0.0-beta7.nupkg",
+        "Microsoft.Dnx.Runtime.Abstractions.1.0.0-beta7.nupkg.sha512",
+        "Microsoft.Dnx.Runtime.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Framework.DependencyInjection.Abstractions/1.0.0-beta7": {
+      "serviceable": true,
+      "sha512": "uz/EhU7eGLP1kQw+jRljKGKxwC4Upay4ojKDkzKTZTA3OQTBnMoSsqwL+2mKYsu1rAT3OWyNHSu5DYRh9XUYPQ==",
       "files": [
         "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.dll",
         "lib/dnx451/Microsoft.Framework.DependencyInjection.Abstractions.xml",
@@ -514,8 +541,8 @@
         "lib/dotnet/Microsoft.Framework.DependencyInjection.Abstractions.xml",
         "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.dll",
         "lib/net45/Microsoft.Framework.DependencyInjection.Abstractions.xml",
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta6.nupkg",
-        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta6.nupkg.sha512",
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta7.nupkg",
+        "Microsoft.Framework.DependencyInjection.Abstractions.1.0.0-beta7.nupkg.sha512",
         "Microsoft.Framework.DependencyInjection.Abstractions.nuspec",
         "repo.json"
       ]

@@ -34,7 +34,7 @@ namespace OpenChain.Server.Models
         public static ITransactionStore CreateLedgerStore(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration storage = configuration.GetConfigurationSection("storage");
+            IConfiguration storage = configuration.GetSection("storage");
 
             try
             {
@@ -63,7 +63,7 @@ namespace OpenChain.Server.Models
         public static IAnchorBuilder CreateAnchorBuilder(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration storage = configuration.GetConfigurationSection("storage");
+            IConfiguration storage = configuration.GetSection("storage");
 
             if (storage["type"] == "SQLite")
             {
@@ -80,7 +80,7 @@ namespace OpenChain.Server.Models
         public static LedgerAnchorWorker CreateLedgerAnchorWorker(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration anchoring = configuration.GetConfigurationSection("anchoring");
+            IConfiguration anchoring = configuration.GetSection("anchoring");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
             IAnchorRecorder recorder = null;
@@ -116,13 +116,13 @@ namespace OpenChain.Server.Models
 
         public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("master_mode");
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetSection("master_mode");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
             if (configuration["root_url"] != null)
             {
                 logger.LogInformation("Transaction validation mode enabled (Master mode)");
-                IConfiguration validator = configuration.GetConfigurationSection("validator");
+                IConfiguration validator = configuration.GetSection("validator");
 
                 switch (validator["type"])
                 {
@@ -131,8 +131,9 @@ namespace OpenChain.Server.Models
                         KeyEncoder keyEncoder = new KeyEncoder(versionByte);
 
                         P2pkhSubject[] adminAddresses = validator
-                            .GetConfigurationSections("admin_addresses")
-                            .Select(key => validator.GetConfigurationSection("admin_addresses").Get(key.Key))
+                            .GetSection("admin_addresses")
+                            .GetChildren()
+                            .Select(key => key.Value)
                             .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
                             .ToArray();
 
@@ -142,13 +143,14 @@ namespace OpenChain.Server.Models
                             new Acl(adminAddresses, LedgerPath.Parse("/"), true, StringPattern.MatchAll, PermissionSet.AllowAll)
                         };
 
-                        foreach (KeyValuePair<string, IConfiguration> pair in validator.GetConfigurationSections("issuers"))
+                        foreach (IConfigurationSection section in validator.GetSection("issuers").GetChildren())
                         {
-                            LedgerPath assetPath = LedgerPath.Parse(pair.Value.Get("path"));
+                            LedgerPath assetPath = LedgerPath.Parse(section["path"]);
 
-                            P2pkhSubject[] addresses = pair.Value
-                                .GetConfigurationSections("addresses")
-                                .Select(key => pair.Value.GetConfigurationSection("addresses").Get(key.Key))
+                            P2pkhSubject[] addresses = section
+                                .GetSection("addresses")
+                                .GetChildren()
+                                .Select(child => child.Value)
                                 .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
                                 .ToArray();
 
@@ -207,7 +209,7 @@ namespace OpenChain.Server.Models
             if (rulesValidator == null)
                 return null;
             else
-                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>().Get("master_mode:root_url"));
+                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["master_mode:root_url"]);
         }
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)
@@ -229,7 +231,7 @@ namespace OpenChain.Server.Models
             }
             else
             {
-                IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetConfigurationSection("observer_mode");
+                IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetSection("observer_mode");
 
                 string masterUrl = observerMode["master_url"];
                 logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);

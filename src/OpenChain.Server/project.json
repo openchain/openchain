@@ -8,19 +8,19 @@
   "compilationOptions": { "languageVersion": "csharp6" },
 
   "dependencies": {
-    "System.Text.Encoding": "4.0.10-beta-23109",
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta6",
-    "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta6",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6",
-    "Microsoft.AspNet.Hosting": "1.0.0-beta6",
-    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta6",
-    "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta6",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
-    "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta6",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
+    "System.Text.Encoding": "4.0.11-beta-23225",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta7",
+    "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta7",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta7",
+    "Microsoft.AspNet.Hosting": "1.0.0-beta7",
+    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta7",
+    "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
+    "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta7",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
     "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
-    "Kestrel": "1.0.0-beta6",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "1.0.0-*",
     "OpenChain.Ledger": "1.0.0-*",
@@ -30,15 +30,15 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:5000",
-    "kestrel": "Microsoft.AspNet.Hosting --server Kestrel --server.urls http://localhost:5000"
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5000"
   },
 
   "frameworks": {
 
     "dnxcore50": {
       "dependencies": {
-        "System.Runtime.Serialization.Primitives": "4.0.10-beta-23109",
-        "System.Net.WebSockets.Client": "4.0.0-beta-23109"
+        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23225",
+        "System.Net.WebSockets.Client": "4.0.0-beta-23225"
       }
     },
 
