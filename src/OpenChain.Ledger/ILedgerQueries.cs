@@ -17,10 +17,23 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents a set of query operations that can be performed against a transaction store.
+    /// </summary>
     public interface ILedgerQueries
     {
+        /// <summary>
+        /// Returns all the record that have a key starting by the given prefix.
+        /// </summary>
+        /// <param name="prefix">The prefix to query for.</param>
+        /// <returns>A task representing the completion of the operation and containing the matching records.</returns>
         Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix);
 
+        /// <summary>
+        /// Returns a transaction serialized as a <see cref="ByteString"/>, given its hash.
+        /// </summary>
+        /// <param name="mutationHash">The hash of the transaction.</param>
+        /// <returns>A <see cref="ByteString"/> repsentation of the transaction.</returns>
         Task<ByteString> GetTransaction(ByteString mutationHash);
     }
 }

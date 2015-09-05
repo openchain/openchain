@@ -20,6 +20,9 @@ using System.Text.RegularExpressions;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents a path in the ledger.
+    /// </summary>
     public class LedgerPath
     {
         // Only allow alphanumeric characters and characters in the following set: "$-_.+!*'(),".
@@ -31,10 +34,22 @@ namespace OpenChain.Ledger
             this.Segments = new ReadOnlyCollection<string>(segments.ToList());
         }
 
+        /// <summary>
+        /// Gets the string representation of the path.
+        /// </summary>
         public string FullPath { get; }
 
+        /// <summary>
+        /// Gets a list of string representing each segment in the path.
+        /// </summary>
         public IReadOnlyList<string> Segments { get; }
 
+        /// <summary>
+        /// Parses a path represented as a string.
+        /// </summary>
+        /// <param name="path">The string to parse.</param>
+        /// <param name="result">The parsed <see cref="LedgerPath"/>.</param>
+        /// <returns>A boolean indicating whether the value could be parsed successfully.</returns>
         public static bool TryParse(string path, out LedgerPath result)
         {
             result = null;
@@ -54,6 +69,11 @@ namespace OpenChain.Ledger
             return true;
         }
 
+        /// <summary>
+        /// Parses a path represented as a string.
+        /// </summary>
+        /// <param name="path">The string to parse.</param>
+        /// <returns>The parsed <see cref="LedgerPath"/>.</returns>
         public static LedgerPath Parse(string path)
         {
             LedgerPath result;
@@ -74,11 +94,6 @@ namespace OpenChain.Ledger
         public static bool IsValidPathSegment(string path)
         {
             return !invalidCharacter.IsMatch(path);
-        }
-
-        public static bool IsValidPath(string path)
-        {
-            return path.StartsWith("/", StringComparison.Ordinal) && path.Split('/').All(IsValidPathSegment);
         }
 
         public bool IsStrictParentOf(LedgerPath child)

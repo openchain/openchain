@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents valid record types.
+    /// </summary>
     public enum RecordType
     {
         Account = 1,
