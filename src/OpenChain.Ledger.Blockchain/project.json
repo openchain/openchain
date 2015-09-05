@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
+    "System.Net.Http": "4.0.1-beta-23225",
     "OpenChain.Ledger": "1.0.0-*"
   },
 

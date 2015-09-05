@@ -21,7 +21,6 @@
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta7",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
-    "Microsoft.Net.Http.Client": "1.0.0-beta6-10079",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "1.0.0-*",
     "OpenChain.Ledger": "1.0.0-*",

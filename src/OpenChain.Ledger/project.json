@@ -9,7 +9,7 @@
   "dependencies": {
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "1.0.0-*",
-    "Portable.BouncyCastle": "1.8.0-RC1"
+    "Portable.BouncyCastle": "1.8.0-RC2"
   },
 
   "frameworks": {
