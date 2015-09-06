@@ -44,6 +44,8 @@ namespace OpenChain.Server
         /// <param name="services">The collection of services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.BuildServiceProvider().GetService<ILoggerFactory>().AddConsole();
+
             services.AddSingleton<IConfiguration>(_ => this.configuration);
 
             // Setup ASP.NET MVC
@@ -84,8 +86,6 @@ namespace OpenChain.Server
         /// </summary>
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
         {
-            loggerfactory.AddConsole();
-
             app.Map("/stream", managedWebSocketsApp =>
             {
                 if (bool.Parse(configuration["enable_transaction_stream"]))

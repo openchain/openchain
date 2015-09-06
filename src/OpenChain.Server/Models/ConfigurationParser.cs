@@ -45,7 +45,7 @@ namespace OpenChain.Server.Models
             }
             catch (Exception exception)
             {
-                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instanciating the transaction store:\n {exception}");
+                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instantiating the transaction store:\n {exception}");
                 throw;
             }
 
