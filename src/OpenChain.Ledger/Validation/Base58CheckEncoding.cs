@@ -130,6 +130,9 @@ namespace OpenChain.Ledger.Validation
         
         private static byte[] VerifyAndRemoveCheckSum(byte[] data)
         {
+            if (data.Length < CHECK_SUM_SIZE)
+                throw new FormatException("Invalid data size");
+
             var result = ArrayHelpers.SubArray(data, 0, data.Length - CHECK_SUM_SIZE);
             var givenCheckSum = ArrayHelpers.SubArray(data, data.Length - CHECK_SUM_SIZE);
             var correctCheckSum = GetCheckSum(result);
