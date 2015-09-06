@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.1.0-*",
   "description": "",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
@@ -8,8 +8,8 @@
 
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-beta7",
-    "OpenChain.Abstractions": "1.0.0-*",
-    "OpenChain.Ledger": "1.0.0-*"
+    "OpenChain.Abstractions": "0.1.0-*",
+    "OpenChain.Ledger": "0.1.0-*"
   },
 
   "frameworks": {

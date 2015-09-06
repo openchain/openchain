@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.1.0-*",
   "title": "Open Chain",
   "description": "",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
@@ -22,10 +22,10 @@
     "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
     "Newtonsoft.Json": "7.0.1",
-    "OpenChain.Abstractions": "1.0.0-*",
-    "OpenChain.Ledger": "1.0.0-*",
-    "OpenChain.Ledger.Blockchain": "1.0.0-*",
-    "OpenChain.Sqlite": "1.0.0-*"
+    "OpenChain.Abstractions": "0.1.0-*",
+    "OpenChain.Ledger": "0.1.0-*",
+    "OpenChain.Ledger.Blockchain": "0.1.0-*",
+    "OpenChain.Sqlite": "0.1.0-*"
   },
 
   "commands": {
