@@ -72,7 +72,6 @@ namespace OpenChain.Ledger.Validation
         public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
             return Path.FullPath == path.FullPath
-                && (Path.Segments.Count == path.Segments.Count || Recursive)
                 && (!recursiveOnly || Recursive)
                 && RecordName.IsMatch(recordName)
                 && Subjects.Any(subject => subject.IsMatch(authentication));
