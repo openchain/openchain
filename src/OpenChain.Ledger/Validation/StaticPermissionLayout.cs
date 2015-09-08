@@ -20,12 +20,10 @@ namespace OpenChain.Ledger.Validation
     public class StaticPermissionLayout : IPermissionsProvider
     {
         private readonly IList<Acl> permissions;
-        private readonly KeyEncoder keyEncoder;
 
-        public StaticPermissionLayout(IList<Acl> permissions, KeyEncoder keyEncoder)
+        public StaticPermissionLayout(IList<Acl> permissions)
         {
             this.permissions = permissions;
-            this.keyEncoder = keyEncoder;
         }
 
         public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)

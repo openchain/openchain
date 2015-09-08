@@ -19,23 +19,23 @@ namespace OpenChain.Ledger.Tests
 {
     public class AclTests
     {
-        private readonly P2pkhSubject positive = new P2pkhSubject(new[] { "n12RA1iohYEerfXiBixSoERZG8TP8xQFL2" }, 1, new KeyEncoder(111));
-        private readonly SignatureEvidence[] evidence = new[] { new SignatureEvidence(ByteString.Parse("abcdef"), ByteString.Empty) };
-        private readonly LedgerPath path = LedgerPath.Parse("/root/subitem/");
-        private readonly PermissionSet permissions = PermissionSet.AllowAll;
+        private static readonly P2pkhSubject subject = new P2pkhSubject(new[] { "n12RA1iohYEerfXiBixSoERZG8TP8xQFL2" }, 1, new KeyEncoder(111));
+        private static readonly SignatureEvidence[] evidence = new[] { new SignatureEvidence(ByteString.Parse("abcdef"), ByteString.Empty) };
+        private static readonly LedgerPath path = LedgerPath.Parse("/root/subitem/");
+        private static readonly PermissionSet permissions = PermissionSet.AllowAll;
 
         [Fact]
         public void IsMatch_Success()
         {
             // Recursive ACL
-            Acl acl = new Acl(new[] { positive }, path, true, new StringPattern("name", PatternMatchingStrategy.Exact), permissions);
+            Acl acl = new Acl(new[] { subject }, path, true, new StringPattern("name", PatternMatchingStrategy.Exact), permissions);
             // Match (recursiveOnly = true)
             Assert.True(acl.IsMatch(evidence, path, true, "name"));
             // Match (recursiveOnly = false)
             Assert.True(acl.IsMatch(evidence, path, false, "name"));
 
             // Non-recursive ACL
-            acl = new Acl(new[] { positive }, path, false, new StringPattern("name", PatternMatchingStrategy.Exact), permissions);
+            acl = new Acl(new[] { subject }, path, false, new StringPattern("name", PatternMatchingStrategy.Exact), permissions);
             // Match (recursiveOnly = false)
             Assert.True(acl.IsMatch(evidence, path, false, "name"));
             // Error: record non recursive (recursiveOnly = true)

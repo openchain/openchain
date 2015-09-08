@@ -186,7 +186,7 @@ namespace OpenChain.Server.Models
                         bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
 
                         IPermissionsProvider implicitLayout = new DefaultPermissionLayout(allowThirdPartyAssets, keyEncoder);
-                        IPermissionsProvider staticPermissions = new StaticPermissionLayout(pathPermissions, keyEncoder);
+                        IPermissionsProvider staticPermissions = new StaticPermissionLayout(pathPermissions);
                         IPermissionsProvider dynamicPermissions = new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder);
                         return new PermissionBasedValidator(new[] { implicitLayout, staticPermissions, dynamicPermissions });
                     case "Disabled":

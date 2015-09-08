@@ -152,6 +152,11 @@ namespace OpenChain.Ledger.Tests
                     ["/a/"] = PermissionSet.Unset
                 });
 
+            // Level 1: /
+            //   Allow + Deny = Deny
+            // Level 2: /a/
+            //   Allow + Unset = Allow
+            // Result: Allow
             PermissionBasedValidator validator = new PermissionBasedValidator(new[] { firstValidator, secondValidator });
 
             ParsedMutation mutation = new ParsedMutation(
