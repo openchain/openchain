@@ -34,7 +34,7 @@ namespace OpenChain.Server.Models
         {
             if (context.WebSockets.IsWebSocketRequest)
             {
-                string from = context.Request.Query.Get("from");
+                string from = context.Request.Query["from"];
                 ByteString lastLedgerRecordHash;
                 if (string.IsNullOrEmpty(from))
                     lastLedgerRecordHash = null;

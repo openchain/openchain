@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "Microsoft.Data.SQLite": "1.0.0-beta7",
+    "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
     "OpenChain.Abstractions": "0.1.0-*",
     "OpenChain.Ledger": "0.1.0-*"
   },
