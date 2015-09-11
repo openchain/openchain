@@ -20,6 +20,6 @@ namespace OpenChain.Ledger
     {
         Task<bool> CanRecordAnchor();
 
-        Task<ByteString> RecordAnchor(LedgerAnchor anchor);
+        Task RecordAnchor(LedgerAnchor anchor);
     }
 }

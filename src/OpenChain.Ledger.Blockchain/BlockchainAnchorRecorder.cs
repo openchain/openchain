@@ -59,7 +59,7 @@ namespace OpenChain.Ledger.Blockchain
             return true;
         }
 
-        public async Task<ByteString> RecordAnchor(LedgerAnchor anchor)
+        public async Task RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
                 anchorMarker
@@ -93,7 +93,7 @@ namespace OpenChain.Ledger.Blockchain
 
             ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
 
-            return await SubmitTransaction(seriazliedTransaction);
+            await SubmitTransaction(seriazliedTransaction);
         }
 
         private async Task<ByteString> SubmitTransaction(ByteString transaction)

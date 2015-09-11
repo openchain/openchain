@@ -129,18 +129,5 @@ namespace OpenChain.Sqlite
                     ["@transactionCount"] = result.TransactionCount
                 });
         }
-
-        public async Task CommitAnchor(LedgerAnchor anchor, ByteString anchorId)
-        {
-            await ExecuteAsync(@"
-                    UPDATE  Anchors
-                    SET     AnchorId = @anchorId
-                    WHERE   FullLedgerHash = @fullLedgerHash",
-                new Dictionary<string, object>()
-                {
-                    ["@anchorId"] = anchorId.ToByteArray(),
-                    ["@fullLedgerHash"] = anchor.FullStoreHash.ToByteArray()
-                });
-        }
     }
 }

@@ -46,10 +46,7 @@ namespace OpenChain.Server.Models
                         if (anchor != null)
                         {
                             logger.LogInformation($"Recorded anchor for {anchor.TransactionCount} transaction(s)");
-                            ByteString anchorId = await this.anchorRecorder.RecordAnchor(anchor);
-
-                            if (anchorId != null)
-                                await this.anchorBuilder.CommitAnchor(anchor, anchorId);
+                            await this.anchorRecorder.RecordAnchor(anchor);
                         }
                     }
 
