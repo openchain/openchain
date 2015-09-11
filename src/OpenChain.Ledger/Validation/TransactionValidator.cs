@@ -31,11 +31,8 @@ namespace OpenChain.Ledger.Validation
         {
             this.store = store;
             this.validator = validator;
-            this.RootUrl = rootUrl;
             this.ledgerId = new ByteString(Encoding.UTF8.GetBytes(rootUrl));
         }
-
-        public string RootUrl { get; }
 
         public async Task<ByteString> PostTransaction(ByteString rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {
