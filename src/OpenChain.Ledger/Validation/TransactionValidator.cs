@@ -42,13 +42,6 @@ namespace OpenChain.Ledger.Validation
             if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
 
-            // There must not be the same key represented twice
-            var groupedRecords = mutation.Records
-                .GroupBy(record => record.Key, record => record);
-
-            if (groupedRecords.Any(group => group.Count() > 1))
-                throw new TransactionInvalidException("DuplicateKey");
-
             ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
 
             ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
