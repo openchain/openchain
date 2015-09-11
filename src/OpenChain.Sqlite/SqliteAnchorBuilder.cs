@@ -31,7 +31,7 @@ namespace OpenChain.Sqlite
         public override async Task EnsureTables()
         {
             await base.EnsureTables();
-            
+
             SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Anchors
@@ -105,7 +105,7 @@ namespace OpenChain.Sqlite
                     currentHash = sha.ComputeHash(sha.ComputeHash(buffer));
                 }
             }
-            
+
             LedgerAnchor result = new LedgerAnchor(
                 newTransactions[newTransactions.Count - 1],
                 new ByteString(currentHash),
@@ -127,6 +127,19 @@ namespace OpenChain.Sqlite
                     ["@position"] = result.Position.ToByteArray(),
                     ["@fullLedgerHash"] = result.FullStoreHash.ToByteArray(),
                     ["@transactionCount"] = result.TransactionCount
+                });
+        }
+
+        public async Task CommitAnchor(LedgerAnchor anchor, ByteString anchorId)
+        {
+            await ExecuteAsync(@"
+                    UPDATE  Anchors
+                    SET     AnchorId = @anchorId
+                    WHERE   FullLedgerHash = @fullLedgerHash",
+                new Dictionary<string, object>()
+                {
+                    ["@anchorId"] = anchorId.ToByteArray(),
+                    ["@fullLedgerHash"] = anchor.FullStoreHash.ToByteArray()
                 });
         }
     }

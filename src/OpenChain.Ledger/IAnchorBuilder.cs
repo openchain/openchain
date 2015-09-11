@@ -19,5 +19,7 @@ namespace OpenChain.Ledger
     public interface IAnchorBuilder
     {
         Task<LedgerAnchor> CreateAnchor();
+
+        Task CommitAnchor(LedgerAnchor anchor, ByteString anchorId);
     }
 }

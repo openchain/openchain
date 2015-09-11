@@ -39,13 +39,20 @@ namespace OpenChain.Server.Models
             {
                 try
                 {
-                    LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
-
-                    if (anchor != null)
+                    if (await this.anchorRecorder.CanRecordAnchor())
                     {
-                        logger.LogInformation($"Recorded anchor for {anchor.TransactionCount} transaction(s)");
-                        await this.anchorRecorder.RecordAnchor(anchor);
+                        LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+
+                        if (anchor != null)
+                        {
+                            logger.LogInformation($"Recorded anchor for {anchor.TransactionCount} transaction(s)");
+                            ByteString anchorId = await this.anchorRecorder.RecordAnchor(anchor);
+
+                            if (anchorId != null)
+                                await this.anchorBuilder.CommitAnchor(anchor, anchorId);
+                        }
                     }
+
                 }
                 catch (Exception exception)
                 {

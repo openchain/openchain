@@ -36,7 +36,30 @@ namespace OpenChain.Ledger.Blockchain
             this.network = network;
         }
 
-        public async Task RecordAnchor(LedgerAnchor anchor)
+        public async Task<bool> CanRecordAnchor()
+        {
+            HttpClient client = new HttpClient();
+            BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
+            HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/transactions"));
+
+            string body = await response.Content.ReadAsStringAsync();
+
+            JArray outputs = JArray.Parse(body);
+
+            // If a transaction is unconfirmed, we don't
+            foreach (JObject transaction in outputs.Children())
+            {
+                if ((string)transaction["inputs"].First()["addresses"].First() != address.ToString())
+                    continue;
+
+                if ((string)transaction["block_hash"] == null)
+                    return false;
+            }
+
+            return true;
+        }
+
+        public async Task<ByteString> RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
                 anchorMarker
@@ -70,19 +93,19 @@ namespace OpenChain.Ledger.Blockchain
 
             ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
 
-            await SubmitTransaction(seriazliedTransaction);
+            return await SubmitTransaction(seriazliedTransaction);
         }
 
-        private async Task<string> SubmitTransaction(ByteString transaction)
+        private async Task<ByteString> SubmitTransaction(ByteString transaction)
         {
             HttpClient client = new HttpClient();
             StringContent content = new StringContent($"\"{transaction.ToString()}\"");
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PostAsync(new Uri(url, $"sendrawtransaction"), content);
+            HttpResponseMessage response = await client.PostAsync(new Uri(url, "sendrawtransaction"), content);
             response.EnsureSuccessStatusCode();
 
             JToken result = JToken.Parse(await response.Content.ReadAsStringAsync());
-            return (string)result;
+            return ByteString.Parse((string)result);
         }
     }
 }

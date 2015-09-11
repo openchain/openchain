@@ -18,6 +18,8 @@ namespace OpenChain.Ledger
 {
     public interface IAnchorRecorder
     {
-        Task RecordAnchor(LedgerAnchor anchor);
+        Task<bool> CanRecordAnchor();
+
+        Task<ByteString> RecordAnchor(LedgerAnchor anchor);
     }
 }
