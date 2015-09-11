@@ -75,5 +75,18 @@ namespace OpenChain.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 new Record(binaryData[1], binaryData[2], null));
         }
+
+        [Fact]
+        public void Mutation_DuplicateKey()
+        {
+            Assert.Throws<ArgumentNullException>(() => new Mutation(
+                binaryData[0],
+                new[]
+                {
+                    new Record(binaryData[1], binaryData[2], binaryData[3]),
+                    new Record(binaryData[1], binaryData[4], binaryData[5]),
+                },
+                binaryData[6]));
+        }
     }
 }

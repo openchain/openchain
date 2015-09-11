@@ -38,8 +38,19 @@ namespace OpenChain
             this.Records = records.ToList().AsReadOnly();
             this.Metadata = metadata;
 
+            // Records must not be null
             if (this.Records.Any(entry => entry == null))
                 throw new ArgumentNullException(nameof(records));
+
+            // There must not be any duplicate keys
+            HashSet<ByteString> keys = new HashSet<ByteString>();
+            foreach (Record record in this.Records)
+            {
+                if (keys.Contains(record.Key))
+                    throw new ArgumentNullException(nameof(records));
+
+                keys.Add(record.Key);
+            }
         }
 
         /// <summary>
