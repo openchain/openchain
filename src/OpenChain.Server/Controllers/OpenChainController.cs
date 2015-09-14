@@ -84,7 +84,15 @@ namespace OpenChain.Server.Controllers
             catch (TransactionInvalidException exception)
             {
                 logger.LogInformation("Rejected transaction: {0}", exception.Message);
-                return new HttpStatusCodeResult((int)HttpStatusCode.BadRequest);
+
+                JsonResult result = Json(new
+                {
+                    error_code = exception.Reason
+                });
+
+                result.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                return result;
             }
 
             logger.LogInformation("Validated transaction {0}", ledgerRecordHash.ToString());

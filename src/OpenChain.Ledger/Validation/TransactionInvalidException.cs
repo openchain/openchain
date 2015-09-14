@@ -20,6 +20,10 @@ namespace OpenChain.Ledger.Validation
     {
         public TransactionInvalidException(string reason)
             : base(string.Format("The transaction was rejected: {0}.", reason))
-        { }
+        {
+            this.Reason = reason;
+        }
+
+        public string Reason { get; }
     }
 }
