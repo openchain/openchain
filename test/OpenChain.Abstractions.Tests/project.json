@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0-*",
+  "version": "0.2.1-*",
   "description": "",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "OpenChain.Abstractions": "0.2.0-*",
+    "OpenChain.Abstractions": "0.2.1-*",
     "xunit": "2.1.0-rc1-*",
     "xunit.runner.dnx": "2.1.0-beta5-*"
   },

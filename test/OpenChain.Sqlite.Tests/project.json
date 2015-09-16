@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.2.0-*",
+  "version": "0.2.1-*",
   "description": "",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
@@ -9,7 +9,7 @@
   "dependencies": {
     "xunit": "2.1.0-rc1-*",
     "xunit.runner.dnx": "2.1.0-beta5-*",
-    "OpenChain.Sqlite": "0.2.0-*"
+    "OpenChain.Sqlite": "0.2.1-*"
   },
 
   "commands": {

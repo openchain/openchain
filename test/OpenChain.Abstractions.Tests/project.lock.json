@@ -257,7 +257,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "OpenChain.Abstractions/0.2.0": {
+      "OpenChain.Abstractions/0.2.1": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0",
@@ -1347,7 +1347,7 @@
     }
   },
   "libraries": {
-    "OpenChain.Abstractions/0.2.0": {
+    "OpenChain.Abstractions/0.2.1": {
       "type": "project",
       "path": "../../src/OpenChain.Abstractions/project.json"
     },
@@ -3180,7 +3180,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "OpenChain.Abstractions >= 0.2.0-*",
+      "OpenChain.Abstractions >= 0.2.1-*",
       "xunit >= 2.1.0-rc1-*",
       "xunit.runner.dnx >= 2.1.0-beta5-*"
     ],
