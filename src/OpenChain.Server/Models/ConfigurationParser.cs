@@ -87,10 +87,14 @@ namespace OpenChain.Server.Models
             switch (anchoring["type"])
             {
                 case "blockchain":
-                    NBitcoin.Key key = NBitcoin.Key.Parse(anchoring["key"]);
-                    NBitcoin.Network network = NBitcoin.Network.TestNet;
-                    logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
-                    recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network);
+                    string anchorKey = anchoring["key"];
+                    if (!string.IsNullOrEmpty(anchorKey))
+                    {
+                        NBitcoin.Key key = NBitcoin.Key.Parse(anchorKey);
+                        NBitcoin.Network network = NBitcoin.Network.TestNet;
+                        logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
+                        recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network);
+                    }
                     break;
             }
 
@@ -121,6 +125,12 @@ namespace OpenChain.Server.Models
 
             if (configuration["root_url"] != null)
             {
+                if (!Uri.IsWellFormedUriString(configuration["root_url"], UriKind.Absolute))
+                {
+                    string errorMessage = $"The server root URL is not a valid URL: '{configuration["root_url"]}'. Please make sure it is configured correctly.";
+                    throw new InvalidOperationException(errorMessage);
+                }
+
                 logger.LogInformation("Transaction validation mode enabled (Master mode)");
                 IConfiguration validator = configuration.GetSection("validator");
 
