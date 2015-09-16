@@ -1,40 +1,44 @@
 ﻿{
   "enable_transaction_stream": true,
+
   "storage": {
     "type": "SQLite",
     "path": "ledger.db"
   },
+
+  // Define transaction validation parameters
   "master_mode": {
-    "root_url": "http://localhost:5000/",
+    // Required: The root URL where this instance is hosted
+    "root_url": "",
     "validator": {
       "type": "PermissionBased",
       "allow_third_party_assets": true,
+      // Base-58 addresses that must have admin rights
       "admin_addresses": [
-        "mu75S9BSUqqos3bStCx5p5JpjiRwzcjdCa"
       ],
+      // Special issuer, in the following format:
+      //
+      // {
+      //   "path": "",
+      //   "addresses": [
+      //     ""
+      //   ]
+      // }
       "issuers": [
-        {
-          "path": "/asset/btc/",
-          "addresses": [
-            "mtYWSapHLBioZJfXXnQqw45yCuEi37Tkwn"
-          ]
-        },
-        {
-          "path": "/asset/test/",
-          "addresses": [
-            "mmXzN1JZ8ugCmqUzrbGKMYeKAqfacQLBVC"
-          ]
-        }
       ],
       "version_byte": 111
     }
   },
-  "observer_mode": {
-    "master_url": "http://localhost:5000/"
-  },
+
+  // Uncomment this and comment the "master_mode" section to enable observer mode
+  // "observer_mode": {
+  //   "master_url": ""
+  // },
+
   "anchoring": {
     "type": "blockchain",
-    "key": "91cdqeDi7WZFERoMe2M2zNF8mRrmH1NSxi3A4jfup7KfSNf8vbe",
+    // The key used to publish anchors in the Blockchain
+    "key": "",
     "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/"
   }
 }
