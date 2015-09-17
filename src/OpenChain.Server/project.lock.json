@@ -754,6 +754,20 @@
           "lib/dotnet/Microsoft.Framework.Configuration.Json.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
+          "System.Runtime": "4.0.21-beta-23225",
+          "System.Runtime.Serialization.Primitives": "4.0.11-beta-23225"
+        },
+        "compile": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -3133,6 +3147,24 @@
           "lib/dnx451/Microsoft.Framework.Configuration.Json.dll": {}
         }
       },
+      "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Framework.Configuration.Json": "1.0.0-beta7"
+        },
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        },
+        "runtime": {
+          "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll": {}
+        }
+      },
       "Microsoft.Framework.DependencyInjection/1.0.0-beta7": {
         "type": "package",
         "dependencies": {
@@ -4317,6 +4349,21 @@
         "Microsoft.Framework.Configuration.Json.1.0.0-beta7.nupkg",
         "Microsoft.Framework.Configuration.Json.1.0.0-beta7.nupkg.sha512",
         "Microsoft.Framework.Configuration.Json.nuspec",
+        "repo.json"
+      ]
+    },
+    "Microsoft.Framework.Configuration.UserSecrets/1.0.0-beta7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "I4/89xQyH7LKqjteUKpcbPvoCzOhlwTGZV8BnTh1EDPhhWa93+HxjgUyrgQAG1i8AE7E8rDX7IBju2au5MXZJQ==",
+      "files": [
+        "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.dll",
+        "lib/dnx451/Microsoft.Framework.Configuration.UserSecrets.xml",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.dll",
+        "lib/dnxcore50/Microsoft.Framework.Configuration.UserSecrets.xml",
+        "Microsoft.Framework.Configuration.UserSecrets.1.0.0-beta7.nupkg",
+        "Microsoft.Framework.Configuration.UserSecrets.1.0.0-beta7.nupkg.sha512",
+        "Microsoft.Framework.Configuration.UserSecrets.nuspec",
         "repo.json"
       ]
     },
@@ -6927,6 +6974,7 @@
       "Microsoft.AspNet.WebSockets.Server >= 1.0.0-beta7",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta7",
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta7",
+      "Microsoft.Framework.Configuration.UserSecrets >= 1.0.0-beta7",
       "Newtonsoft.Json >= 7.0.1",
       "OpenChain.Abstractions >= 0.2.1-*",
       "OpenChain.Ledger >= 0.2.1-*",

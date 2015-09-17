@@ -17,6 +17,7 @@ using Microsoft.AspNet.Cors;
 using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.WebSockets.Server;
+using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
@@ -30,11 +31,13 @@ namespace OpenChain.Server
     {
         private readonly IConfiguration configuration;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env, IApplicationEnvironment application)
         {
             // Setup Configuration
-            configuration = new ConfigurationBuilder()
+            configuration = new ConfigurationBuilder(application.ApplicationBasePath)
                 .AddJsonFile(env.MapPath("App_Data/config.json"))
+                .AddUserSecrets()
+                .AddEnvironmentVariables()
                 .Build();
         }
 

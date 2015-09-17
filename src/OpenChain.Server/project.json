@@ -21,6 +21,7 @@
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta7",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
     "Newtonsoft.Json": "7.0.1",
     "OpenChain.Abstractions": "0.2.1-*",
     "OpenChain.Ledger": "0.2.1-*",
@@ -52,5 +53,6 @@
     "**.xproj",
     "**.user",
     "**.vspscc"
-  ]
+  ],
+  "userSecretsId": "aspnet5-OpenChain.Server-20150918123232"
 }

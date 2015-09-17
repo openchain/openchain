@@ -123,15 +123,17 @@ namespace OpenChain.Server.Models
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetSection("master_mode");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            if (configuration["root_url"] != null)
+            string rootUrl = configuration["root_url"];
+            if (rootUrl != null)
             {
-                if (!Uri.IsWellFormedUriString(configuration["root_url"], UriKind.Absolute))
+                if (!Uri.IsWellFormedUriString(rootUrl, UriKind.Absolute))
                 {
-                    string errorMessage = $"The server root URL is not a valid URL: '{configuration["root_url"]}'. Please make sure it is configured correctly.";
+                    string errorMessage = $"The server root URL is not a valid URL: '{rootUrl}'. Please make sure it is configured correctly.";
                     throw new InvalidOperationException(errorMessage);
                 }
 
                 logger.LogInformation("Transaction validation mode enabled (Master mode)");
+                logger.LogInformation($"Namespace: {rootUrl}");
                 IConfiguration validator = configuration.GetSection("validator");
 
                 switch (validator["type"])
