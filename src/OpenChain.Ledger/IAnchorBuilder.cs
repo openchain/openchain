@@ -16,8 +16,15 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Provides functionality for creating a database anchor.
+    /// </summary>
     public interface IAnchorBuilder
     {
+        /// <summary>
+        /// Creates a database anchor for the current state of the database.
+        /// </summary>
+        /// <returns>The <see cref="Task{LedgerAnchor}"/> object representing the asynchronous operation.</returns>
         Task<LedgerAnchor> CreateAnchor();
     }
 }

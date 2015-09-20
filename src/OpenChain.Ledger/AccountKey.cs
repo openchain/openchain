@@ -16,6 +16,9 @@ using System;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents the key of an account record.
+    /// </summary>
     public class AccountKey : IEquatable<AccountKey>
     {
         public AccountKey(LedgerPath account, LedgerPath asset)
@@ -31,6 +34,12 @@ namespace OpenChain.Ledger
             this.Key = new RecordKey(RecordType.Account, account, asset.FullPath);
         }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="AccountKey"/> class from an account and asset.
+        /// </summary>
+        /// <param name="account">The account path.</param>
+        /// <param name="asset">The asset path.</param>
+        /// <returns>An instance of the <see cref="AccountKey"/> class representing the account and asset provided.</returns>
         public static AccountKey Parse(string account, string asset)
         {
             return new AccountKey(
@@ -38,10 +47,19 @@ namespace OpenChain.Ledger
                 LedgerPath.Parse(asset));
         }
 
+        /// <summary>
+        /// Gets the <see cref="LedgerPath"/> of the account that this instance represents.
+        /// </summary>
         public LedgerPath Account { get; }
 
+        /// <summary>
+        /// Gets the <see cref="LedgerPath"/> of the asset that this instance represents.
+        /// </summary>
         public LedgerPath Asset { get; }
 
+        /// <summary>
+        /// Gets the <see cref="RecordKey"/> equivalent to this instance.
+        /// </summary>
         public RecordKey Key { get; }
 
         public bool Equals(AccountKey other)

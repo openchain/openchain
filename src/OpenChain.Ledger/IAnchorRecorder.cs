@@ -16,10 +16,22 @@ using System.Threading.Tasks;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Provides functionality for recording a database anchor. 
+    /// </summary>
     public interface IAnchorRecorder
     {
+        /// <summary>
+        /// Indicates whether this instance is ready to record a new database anchor.
+        /// </summary>
+        /// <returns>The <see cref="Task{bool}"/> object representing the asynchronous operation.</returns>
         Task<bool> CanRecordAnchor();
 
+        /// <summary>
+        /// Records a database anchor.
+        /// </summary>
+        /// <param name="anchor">The anchor to be recorded.</param>
+        /// <returns>The <see cref="Task"/> object representing the asynchronous operation.</returns>
         Task RecordAnchor(LedgerAnchor anchor);
     }
 }
