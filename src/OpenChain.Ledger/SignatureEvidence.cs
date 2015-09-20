@@ -14,6 +14,9 @@
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents a digital signature.
+    /// </summary>
     public class SignatureEvidence
     {
         public SignatureEvidence(ByteString publicKey, ByteString signature)
@@ -22,8 +25,14 @@ namespace OpenChain.Ledger
             this.Signature = signature;
         }
 
+        /// <summary>
+        /// Gets the public key corresponding to the signature.
+        /// </summary>
         public ByteString PublicKey { get; }
 
+        /// <summary>
+        /// Gets the digital signature.
+        /// </summary>
         public ByteString Signature { get; }
     }
 }

@@ -14,6 +14,9 @@
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents a database anchor containing the cumulative hash of the data store.
+    /// </summary>
     public class LedgerAnchor
     {
         public LedgerAnchor(ByteString position, ByteString fullStoreHash, long transactionCount)
@@ -23,10 +26,19 @@ namespace OpenChain.Ledger
             TransactionCount = transactionCount;
         }
 
+        /// <summary>
+        /// Gets the hash of the last transaction in the ledger in the current state.
+        /// </summary>
         public ByteString Position { get; }
 
+        /// <summary>
+        /// Gets the cumulative hash of the ledger.
+        /// </summary>
         public ByteString FullStoreHash { get; }
 
+        /// <summary>
+        /// Gets the total count of transactions in the ledger.
+        /// </summary>
         public long TransactionCount { get; }
     }
 }
