@@ -85,9 +85,7 @@ namespace OpenChain.Ledger.Validation
         {
             foreach (SignatureEvidence evidence in authentication)
             {
-                ECKey key = new ECKey(evidence.PublicKey.ToByteArray());
-
-                if (!key.VerifySignature(mutationHash, evidence.Signature.ToByteArray()))
+                if (!evidence.VerifySignature(mutationHash))
                     throw new TransactionInvalidException("InvalidSignature");
             }
         }

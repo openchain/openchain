@@ -34,5 +34,17 @@ namespace OpenChain.Ledger
         /// Gets the digital signature.
         /// </summary>
         public ByteString Signature { get; }
+
+        /// <summary>
+        /// Verify that the signature is valid.
+        /// </summary>
+        /// <param name="mutationHash">The data being signed.</param>
+        /// <returns>A boolean indicating wheather the signature is valid.</returns>
+        public bool VerifySignature(byte[] mutationHash)
+        {
+            ECKey key = new ECKey(PublicKey.ToByteArray());
+
+            return key.VerifySignature(mutationHash, Signature.ToByteArray());
+        }
     }
 }
