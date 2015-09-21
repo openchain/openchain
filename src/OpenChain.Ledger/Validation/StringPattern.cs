@@ -16,8 +16,14 @@ using System;
 
 namespace OpenChain.Ledger.Validation
 {
+    /// <summary>
+    /// Represents a pattern for string matching.
+    /// </summary>
     public class StringPattern
     {
+        /// <summary>
+        /// Gets a pattern matching all strings.
+        /// </summary>
         public static StringPattern MatchAll { get; } = new StringPattern("", PatternMatchingStrategy.Prefix);
 
         public StringPattern(string pattern, PatternMatchingStrategy matchingStrategy)
@@ -25,11 +31,22 @@ namespace OpenChain.Ledger.Validation
             this.Pattern = pattern;
             this.MatchingStrategy = matchingStrategy;
         }
-        
+
+        /// <summary>
+        /// Gets the pattern string.
+        /// </summary>
         public string Pattern { get; }
 
+        /// <summary>
+        /// Gets the matching strategy.
+        /// </summary>
         public PatternMatchingStrategy MatchingStrategy { get; }
 
+        /// <summary>
+        /// Checks if a string matches the pattern.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <returns>A boolean indicating whether the value matches.</returns>
         public bool IsMatch(string value)
         {
             switch (MatchingStrategy)

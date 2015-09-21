@@ -17,6 +17,9 @@ using System.Linq;
 
 namespace OpenChain.Ledger
 {
+    /// <summary>
+    /// Represents a parsed account record.
+    /// </summary>
     public class AccountStatus
     {
         public AccountStatus(AccountKey accountKey, long amount, ByteString version)
@@ -32,6 +35,27 @@ namespace OpenChain.Ledger
             this.Version = version;
         }
 
+        /// <summary>
+        /// Gets the key of the record.
+        /// </summary>
+        public AccountKey AccountKey { get; }
+
+        /// <summary>
+        /// Gets the balance on the account.
+        /// </summary>
+        public long Balance { get; }
+
+        /// <summary>
+        /// Gets the version of the record.
+        /// </summary>
+        public ByteString Version { get; }
+
+        /// <summary>
+        /// Creates an instance of the <see cref="AccountStatus"/> class from an unparsed record.
+        /// </summary>
+        /// <param name="key">The key of the record.</param>
+        /// <param name="record">The record to create the object from.</param>
+        /// <returns>A new instance of the <see cref="AccountStatus"/> class.</returns>
         public static AccountStatus FromRecord(RecordKey key, Record record)
         {
             if (key.RecordType != RecordType.Account)
@@ -47,11 +71,5 @@ namespace OpenChain.Ledger
 
             return new AccountStatus(new AccountKey(key.Path, LedgerPath.Parse(key.Name)), amount, record.Version);
         }
-
-        public AccountKey AccountKey { get; }
-
-        public long Balance { get; }
-
-        public ByteString Version { get; }
     }
 }
