@@ -19,6 +19,9 @@ using Newtonsoft.Json.Linq;
 
 namespace OpenChain.Ledger.Validation
 {
+    /// <summary>
+    /// Represents an access control rule.
+    /// </summary>
     public class Acl
     {
         public Acl(
@@ -35,16 +38,37 @@ namespace OpenChain.Ledger.Validation
             this.Permissions = permissions;
         }
 
+        /// <summary>
+        /// Gets a read-only list of all the subjects of this permission.
+        /// </summary>
         public IReadOnlyList<IPermissionSubject> Subjects { get; }
 
+        /// <summary>
+        /// Gets the path to which this permission applies.
+        /// </summary>
         public LedgerPath Path { get; }
 
+        /// <summary>
+        /// Gets a boolean indicating whether this permission applies recursively.
+        /// </summary>
         public bool Recursive { get; }
 
+        /// <summary>
+        /// Gets a <see cref="StringPattern"/> that matches record names of records to which this permission applies.
+        /// </summary>
         public StringPattern RecordName { get; }
 
+        /// <summary>
+        /// Gets the <see cref="PermissionSet"/> being applied.
+        /// </summary>
         public PermissionSet Permissions { get; }
 
+        /// <summary>
+        /// Parses a permission set from a JSON string.
+        /// </summary>
+        /// <param name="json">The JSON string to parse.</param>
+        /// <param name="keyEncoder">The key encoder to use in the parsed <see cref="Acl"/> objetcs.</param>
+        /// <returns>The parsed list of <see cref="Acl"/> objects.</returns>
         public static IReadOnlyList<Acl> Parse(string json, KeyEncoder keyEncoder)
         {
             JArray document = JArray.Parse(json);
@@ -69,6 +93,14 @@ namespace OpenChain.Ledger.Validation
             return (Access)Enum.Parse(typeof(Access), (string)value);
         }
 
+        /// <summary>
+        /// Checks if the given parameters constitute a match for this <see cref="Acl"/> object.
+        /// </summary>
+        /// <param name="authentication">The signatures available.</param>
+        /// <param name="path">The path of the record being tested.</param>
+        /// <param name="recursiveOnly">Whether this object must be a recursive permission.</param>
+        /// <param name="recordName">The name of the record being tested.</param>
+        /// <returns>A boolean indicating whether the given parameters match.</returns>
         public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
             return Path.FullPath == path.FullPath
