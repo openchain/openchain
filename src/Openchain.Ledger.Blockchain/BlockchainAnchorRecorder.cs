@@ -20,7 +20,7 @@ using System.Threading.Tasks;
 using NBitcoin;
 using Newtonsoft.Json.Linq;
 
-namespace OpenChain.Ledger.Blockchain
+namespace Openchain.Ledger.Blockchain
 {
     public class BlockchainAnchorRecorder : IAnchorRecorder
     {

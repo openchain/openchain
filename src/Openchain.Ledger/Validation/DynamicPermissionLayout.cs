@@ -17,7 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     public class DynamicPermissionLayout : IPermissionsProvider
     {

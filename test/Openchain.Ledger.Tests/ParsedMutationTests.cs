@@ -15,11 +15,11 @@
 using System;
 using System.Linq;
 using System.Text;
-using OpenChain.Ledger.Validation;
+using Openchain.Ledger.Validation;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class ParsedMutationTests
     {

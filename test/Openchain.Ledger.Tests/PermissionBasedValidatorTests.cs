@@ -16,10 +16,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OpenChain.Ledger.Validation;
+using Openchain.Ledger.Validation;
 using Xunit;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class PermissionBasedValidatorTests
     {

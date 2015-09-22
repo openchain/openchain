@@ -16,9 +16,9 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Framework.Logging;
-using OpenChain.Ledger;
+using Openchain.Ledger;
 
-namespace OpenChain.Server.Models
+namespace Openchain.Server.Models
 {
     public class LedgerAnchorWorker
     {

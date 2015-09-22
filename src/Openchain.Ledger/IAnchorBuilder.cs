@@ -14,7 +14,7 @@
 
 using System.Threading.Tasks;
 
-namespace OpenChain.Ledger
+namespace Openchain.Ledger
 {
     /// <summary>
     /// Provides functionality for creating a database anchor.

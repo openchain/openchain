@@ -17,7 +17,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using Google.Protobuf;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Contains utility methods used to serialize and deserialize messages such as

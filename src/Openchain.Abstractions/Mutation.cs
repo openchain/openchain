@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represent a mutation performed on a set of data records.

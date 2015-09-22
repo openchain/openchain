@@ -14,7 +14,7 @@
 
 using System;
 
-namespace OpenChain.Ledger
+namespace Openchain.Ledger
 {
     /// <summary>
     /// Represents the key of an account record.

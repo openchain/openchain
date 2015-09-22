@@ -14,7 +14,7 @@
 
 using System;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represents a transaction affecting the data store.

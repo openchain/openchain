@@ -14,7 +14,7 @@
 
 using Xunit;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class LedgerPathTests
     {

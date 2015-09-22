@@ -18,7 +18,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace OpenChain.Ledger
+namespace Openchain.Ledger
 {
     /// <summary>
     /// Represents a path in the ledger.

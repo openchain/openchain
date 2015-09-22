@@ -14,7 +14,7 @@
 
 using System;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represents a data record identified by a key and a version, and containing a value.

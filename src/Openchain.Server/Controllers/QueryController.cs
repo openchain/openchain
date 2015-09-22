@@ -14,13 +14,13 @@
 
 using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
-using OpenChain.Ledger;
+using Openchain.Ledger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server.Controllers
+namespace Openchain.Server.Controllers
 {
     [EnableCors("Any")]
     [Route("query")]

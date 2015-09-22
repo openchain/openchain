@@ -18,7 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace OpenChain.Sqlite.Tests
+namespace Openchain.Sqlite.Tests
 {
     public class SqliteTransactionStoreTests
     {

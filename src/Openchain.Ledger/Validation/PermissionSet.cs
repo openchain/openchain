@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     public class PermissionSet
     {

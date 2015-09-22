@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     public interface IPermissionsProvider
     {

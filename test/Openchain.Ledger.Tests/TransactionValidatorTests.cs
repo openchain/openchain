@@ -17,10 +17,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenChain.Ledger.Validation;
+using Openchain.Ledger.Validation;
 using Xunit;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class TransactionValidatorTests
     {

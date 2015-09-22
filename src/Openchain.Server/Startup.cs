@@ -21,11 +21,11 @@ using Microsoft.Dnx.Runtime;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using OpenChain.Ledger;
-using OpenChain.Ledger.Validation;
-using OpenChain.Server.Models;
+using Openchain.Ledger;
+using Openchain.Ledger.Validation;
+using Openchain.Server.Models;
 
-namespace OpenChain.Server
+namespace Openchain.Server
 {
     public class Startup
     {

@@ -19,7 +19,7 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace OpenChain.Server.Models
+namespace Openchain.Server.Models
 {
     public class TransactionStreamSubscriber
     {

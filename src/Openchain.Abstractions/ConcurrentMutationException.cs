@@ -14,7 +14,7 @@
 
 using System;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represents an error caused by the attempt of modifying a record using the wrong base version.

@@ -17,7 +17,7 @@ using System.Linq;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class AccountStatusTests
     {

@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace OpenChain.Sqlite.Tests
+namespace Openchain.Sqlite.Tests
 {
     public class SqliteLedgerQueriesTests
     {

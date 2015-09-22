@@ -19,7 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represents an immutable string of binary data.

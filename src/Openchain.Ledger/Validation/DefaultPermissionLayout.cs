@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     /// <summary>
     /// Represents the implicit permission layout where account names contain identities.

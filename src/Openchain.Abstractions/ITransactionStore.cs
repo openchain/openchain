@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OpenChain
+namespace Openchain
 {
     /// <summary>
     /// Represents a data store for key-value pairs.

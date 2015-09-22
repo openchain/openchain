@@ -21,7 +21,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace OpenChain.Messages {
+namespace Openchain.Messages {
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal static partial class Schema {
@@ -46,10 +46,10 @@ namespace OpenChain.Messages {
       descriptor = pbr::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.RecordValue), new[]{ "Data" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Record), new[]{ "Key", "Value", "Version" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Mutation), new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::OpenChain.Messages.Transaction), new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.RecordValue), new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Record), new[]{ "Key", "Value", "Version" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Mutation), new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Transaction), new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +62,7 @@ namespace OpenChain.Messages {
     public static pb::MessageParser<RecordValue> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::OpenChain.Messages.Schema.Descriptor.MessageTypes[0]; }
+      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[0]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -164,7 +164,7 @@ namespace OpenChain.Messages {
     public static pb::MessageParser<Record> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::OpenChain.Messages.Schema.Descriptor.MessageTypes[1]; }
+      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[1]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -197,8 +197,8 @@ namespace OpenChain.Messages {
     }
 
     public const int ValueFieldNumber = 2;
-    private global::OpenChain.Messages.RecordValue value_;
-    public global::OpenChain.Messages.RecordValue Value {
+    private global::Openchain.Messages.RecordValue value_;
+    public global::Openchain.Messages.RecordValue Value {
       get { return value_; }
       set {
         value_ = value;
@@ -281,7 +281,7 @@ namespace OpenChain.Messages {
       }
       if (other.value_ != null) {
         if (value_ == null) {
-          value_ = new global::OpenChain.Messages.RecordValue();
+          value_ = new global::Openchain.Messages.RecordValue();
         }
         Value.MergeFrom(other.Value);
       }
@@ -303,7 +303,7 @@ namespace OpenChain.Messages {
           }
           case 18: {
             if (value_ == null) {
-              value_ = new global::OpenChain.Messages.RecordValue();
+              value_ = new global::Openchain.Messages.RecordValue();
             }
             input.ReadMessage(value_);
             break;
@@ -324,7 +324,7 @@ namespace OpenChain.Messages {
     public static pb::MessageParser<Mutation> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::OpenChain.Messages.Schema.Descriptor.MessageTypes[2]; }
+      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[2]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -357,10 +357,10 @@ namespace OpenChain.Messages {
     }
 
     public const int RecordsFieldNumber = 2;
-    private static readonly pb::FieldCodec<global::OpenChain.Messages.Record> _repeated_records_codec
-        = pb::FieldCodec.ForMessage(18, global::OpenChain.Messages.Record.Parser);
-    private readonly pbc::RepeatedField<global::OpenChain.Messages.Record> records_ = new pbc::RepeatedField<global::OpenChain.Messages.Record>();
-    public pbc::RepeatedField<global::OpenChain.Messages.Record> Records {
+    private static readonly pb::FieldCodec<global::Openchain.Messages.Record> _repeated_records_codec
+        = pb::FieldCodec.ForMessage(18, global::Openchain.Messages.Record.Parser);
+    private readonly pbc::RepeatedField<global::Openchain.Messages.Record> records_ = new pbc::RepeatedField<global::Openchain.Messages.Record>();
+    public pbc::RepeatedField<global::Openchain.Messages.Record> Records {
       get { return records_; }
     }
 
@@ -470,7 +470,7 @@ namespace OpenChain.Messages {
     public static pb::MessageParser<Transaction> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::OpenChain.Messages.Schema.Descriptor.MessageTypes[3]; }
+      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[3]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {

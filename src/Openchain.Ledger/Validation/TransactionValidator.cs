@@ -19,7 +19,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     public class TransactionValidator
     {

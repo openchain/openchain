@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace OpenChain.Tests
+namespace Openchain.Tests
 {
     public class MutationTests
     {

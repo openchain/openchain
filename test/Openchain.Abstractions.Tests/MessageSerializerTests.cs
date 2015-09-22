@@ -17,7 +17,7 @@ using System.Linq;
 using Google.Protobuf;
 using Xunit;
 
-namespace OpenChain.Tests
+namespace Openchain.Tests
 {
     public class MessageSerializerTests
     {

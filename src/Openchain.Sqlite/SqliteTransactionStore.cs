@@ -19,7 +19,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 
-namespace OpenChain.Sqlite
+namespace Openchain.Sqlite
 {
     public class SqliteTransactionStore : ITransactionStore
     {

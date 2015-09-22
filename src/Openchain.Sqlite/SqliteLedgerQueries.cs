@@ -16,9 +16,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
-using OpenChain.Ledger;
+using Openchain.Ledger;
 
-namespace OpenChain.Sqlite
+namespace Openchain.Sqlite
 {
     public class SqliteLedgerQueries : SqliteTransactionStore, ILedgerQueries
     {

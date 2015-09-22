@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace OpenChain.Ledger.Tests
+namespace Openchain.Ledger.Tests
 {
     public class RecordKeyTests
     {

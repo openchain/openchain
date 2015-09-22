@@ -14,7 +14,7 @@
 
 using System.Collections.Generic;
 
-namespace OpenChain.Ledger.Validation
+namespace Openchain.Ledger.Validation
 {
     public class EveryoneSubject : IPermissionSubject
     {

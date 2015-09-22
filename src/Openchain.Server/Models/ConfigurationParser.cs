@@ -22,12 +22,12 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using OpenChain.Ledger;
-using OpenChain.Ledger.Blockchain;
-using OpenChain.Ledger.Validation;
-using OpenChain.Sqlite;
+using Openchain.Ledger;
+using Openchain.Ledger.Blockchain;
+using Openchain.Ledger.Validation;
+using Openchain.Sqlite;
 
-namespace OpenChain.Server.Models
+namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
