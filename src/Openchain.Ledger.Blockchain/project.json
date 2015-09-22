@@ -8,7 +8,7 @@
 
   "dependencies": {
     "System.Net.Http": "4.0.1-beta-23225",
-    "OpenChain.Ledger": "0.2.1-*"
+    "Openchain.Ledger": "0.2.1-*"
   },
 
   "frameworks": {

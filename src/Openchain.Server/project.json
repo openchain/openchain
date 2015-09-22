@@ -23,10 +23,10 @@
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
     "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
     "Newtonsoft.Json": "7.0.1",
-    "OpenChain.Abstractions": "0.2.1-*",
-    "OpenChain.Ledger": "0.2.1-*",
-    "OpenChain.Ledger.Blockchain": "0.2.1-*",
-    "OpenChain.Sqlite": "0.2.1-*"
+    "Openchain.Abstractions": "0.2.1-*",
+    "Openchain.Ledger": "0.2.1-*",
+    "Openchain.Ledger.Blockchain": "0.2.1-*",
+    "Openchain.Sqlite": "0.2.1-*"
   },
 
   "commands": {

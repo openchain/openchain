@@ -12,21 +12,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{62976C02-9AC7-450D-8634-FB01F357F47B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Ledger", "src\OpenChain.Ledger\OpenChain.Ledger.xproj", "{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Ledger", "src\Openchain.Ledger\Openchain.Ledger.xproj", "{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Ledger.Tests", "test\OpenChain.Ledger.Tests\OpenChain.Ledger.Tests.xproj", "{91B5C8B9-602C-4843-A2BE-DA82B3F7449B}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Ledger.Tests", "test\Openchain.Ledger.Tests\Openchain.Ledger.Tests.xproj", "{91B5C8B9-602C-4843-A2BE-DA82B3F7449B}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Sqlite", "src\OpenChain.Sqlite\OpenChain.Sqlite.xproj", "{B76EC900-3DC6-42B0-B480-B758E00507B6}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Sqlite", "src\Openchain.Sqlite\Openchain.Sqlite.xproj", "{B76EC900-3DC6-42B0-B480-B758E00507B6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Sqlite.Tests", "test\OpenChain.Sqlite.Tests\OpenChain.Sqlite.Tests.xproj", "{AC31F4E0-A1AF-4418-823B-8BBD6BADE39F}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Sqlite.Tests", "test\Openchain.Sqlite.Tests\Openchain.Sqlite.Tests.xproj", "{AC31F4E0-A1AF-4418-823B-8BBD6BADE39F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Abstractions", "src\OpenChain.Abstractions\OpenChain.Abstractions.xproj", "{CA9A2FB3-5BB1-4730-A65E-16BD9831F303}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Abstractions", "src\Openchain.Abstractions\Openchain.Abstractions.xproj", "{CA9A2FB3-5BB1-4730-A65E-16BD9831F303}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Abstractions.Tests", "test\OpenChain.Abstractions.Tests\OpenChain.Abstractions.Tests.xproj", "{38A38DEF-1B86-495E-8674-2AA135CE016A}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Abstractions.Tests", "test\Openchain.Abstractions.Tests\Openchain.Abstractions.Tests.xproj", "{38A38DEF-1B86-495E-8674-2AA135CE016A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Server", "src\OpenChain.Server\OpenChain.Server.xproj", "{C24C1145-878A-476A-AC93-6A272BE3D139}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Server", "src\Openchain.Server\Openchain.Server.xproj", "{C24C1145-878A-476A-AC93-6A272BE3D139}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "OpenChain.Ledger.Blockchain", "src\OpenChain.Ledger.Blockchain\OpenChain.Ledger.Blockchain.xproj", "{B392C570-EFCC-4684-B7D8-0A645B49EAED}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Ledger.Blockchain", "src\Openchain.Ledger.Blockchain\Openchain.Ledger.Blockchain.xproj", "{B392C570-EFCC-4684-B7D8-0A645B49EAED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

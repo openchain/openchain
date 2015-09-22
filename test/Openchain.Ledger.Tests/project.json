@@ -7,7 +7,7 @@
   "licenseUrl": "",
 
   "dependencies": {
-    "OpenChain.Ledger": "0.2.1-*",
+    "Openchain.Ledger": "0.2.1-*",
     "xunit": "2.1.0-rc1-*",
     "xunit.runner.dnx": "2.1.0-beta5-*"
   },

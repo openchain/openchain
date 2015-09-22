@@ -9,7 +9,7 @@
   "dependencies": {
     "xunit": "2.1.0-rc1-*",
     "xunit.runner.dnx": "2.1.0-beta5-*",
-    "OpenChain.Sqlite": "0.2.1-*"
+    "Openchain.Sqlite": "0.2.1-*"
   },
 
   "commands": {
