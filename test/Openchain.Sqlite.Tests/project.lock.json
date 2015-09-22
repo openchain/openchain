@@ -276,7 +276,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "OpenChain.Abstractions/0.2.1": {
+      "Openchain.Abstractions/0.2.1": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0",
@@ -286,11 +286,11 @@
           "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23225"
         }
       },
-      "OpenChain.Ledger/0.2.1": {
+      "Openchain.Ledger/0.2.1": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "OpenChain.Abstractions": "0.2.1",
+          "Openchain.Abstractions": "0.2.1",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23225",
           "System.ObjectModel": "4.0.11-beta-23225",
@@ -299,12 +299,12 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23225"
         }
       },
-      "OpenChain.Sqlite/0.2.1": {
+      "Openchain.Sqlite/0.2.1": {
         "type": "project",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
-          "OpenChain.Abstractions": "0.2.1",
-          "OpenChain.Ledger": "0.2.1"
+          "Openchain.Abstractions": "0.2.1",
+          "Openchain.Ledger": "0.2.1"
         }
       },
       "Portable.BouncyCastle/1.8.0-rc2": {
@@ -1445,17 +1445,17 @@
     }
   },
   "libraries": {
-    "OpenChain.Abstractions/0.2.1": {
+    "Openchain.Abstractions/0.2.1": {
       "type": "project",
-      "path": "../../src/OpenChain.Abstractions/project.json"
+      "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "OpenChain.Ledger/0.2.1": {
+    "Openchain.Ledger/0.2.1": {
       "type": "project",
-      "path": "../../src/OpenChain.Ledger/project.json"
+      "path": "../../src/Openchain.Ledger/project.json"
     },
-    "OpenChain.Sqlite/0.2.1": {
+    "Openchain.Sqlite/0.2.1": {
       "type": "project",
-      "path": "../../src/OpenChain.Sqlite/project.json"
+      "path": "../../src/Openchain.Sqlite/project.json"
     },
     "Google.Protobuf/3.0.0-alpha4": {
       "type": "package",
@@ -3372,7 +3372,7 @@
     "": [
       "xunit >= 2.1.0-rc1-*",
       "xunit.runner.dnx >= 2.1.0-beta5-*",
-      "OpenChain.Sqlite >= 0.2.1-*"
+      "Openchain.Sqlite >= 0.2.1-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Collections >= 4.0.11-beta-23225",
