@@ -1,10 +1,10 @@
 {
   "version": "0.2.1-*",
-  "description": "",
+  "description": "Unit tests for the Openchain.Ledger package.",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "projectUrl": "https://www.openchain.org/",
+  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
 
   "dependencies": {
     "Openchain.Ledger": "0.2.1-*",

@@ -1,10 +1,10 @@
 {
   "version": "0.2.1-*",
-  "description": "",
+  "description": "Abstractions and public interfaces used by Openchain.",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "projectUrl": "https://www.openchain.org/",
+  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
   "compilationOptions": {
     "languageVersion": "csharp6",
     "allowUnsafe": false

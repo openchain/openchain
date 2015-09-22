@@ -1,10 +1,10 @@
 {
   "version": "0.2.1-*",
-  "description": "",
+  "description": "Main Openchain ledger management system.",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+  "projectUrl": "https://www.openchain.org/",
+  "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
 
   "dependencies": {
     "Newtonsoft.Json": "7.0.1",
