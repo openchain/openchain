@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1-*",
+  "version": "0.2.2-*",
   "description": "Sqlite implementation of the Openchain storage layer.",
   "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
   "tags": [ "" ],
@@ -8,8 +8,8 @@
 
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
-    "Openchain.Abstractions": "0.2.1-*",
-    "Openchain.Ledger": "0.2.1-*"
+    "Openchain.Abstractions": "0.2.2-*",
+    "Openchain.Ledger": "0.2.2-*"
   },
 
   "frameworks": {
