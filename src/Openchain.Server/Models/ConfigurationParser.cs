@@ -38,7 +38,7 @@ namespace Openchain.Server.Models
 
             try
             {
-                if (storage["type"] == "SQLite")
+                if (storage["type"] == "Sqlite")
                 {
                     return new SqliteLedgerQueries(GetPathOrDefault(serviceProvider, storage["path"]));
                 }
@@ -65,7 +65,7 @@ namespace Openchain.Server.Models
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IConfiguration storage = configuration.GetSection("storage");
 
-            if (storage["type"] == "SQLite")
+            if (storage["type"] == "Sqlite")
             {
                 SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"]));
                 result.EnsureTables().Wait();

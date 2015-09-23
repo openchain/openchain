@@ -2,7 +2,7 @@
   "enable_transaction_stream": true,
 
   "storage": {
-    "type": "SQLite",
+    "type": "Sqlite",
     "path": "ledger.db"
   },
 
