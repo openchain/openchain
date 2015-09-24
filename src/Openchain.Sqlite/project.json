@@ -1,10 +1,12 @@
 {
   "version": "0.2.2-*",
   "description": "Sqlite implementation of the Openchain storage layer.",
-  "authors": [ "Coinprism" ],
+  "authors": [ "Flavien Charlon" ],
+  "owners": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",
   "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
-  "copyright": "Copyright © Coinprism, Inc.",
+  "iconUrl": "https://www.openchain.org/package.png",
+  "copyright": "Copyright © 2015 Coinprism, Inc.",
 
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
