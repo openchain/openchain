@@ -1,10 +1,10 @@
 {
   "version": "0.2.2-*",
-  "title": "Open Chain",
-  "description": "Reference implementation of Openchain Server.",
-  "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
+  "description": "Reference implementation of the Openchain protocol.",
+  "authors": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",
   "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+  "copyright": "Copyright © Coinprism, Inc.",
 
   "webroot": "Webroot",
   "compilationOptions": { "languageVersion": "csharp6" },

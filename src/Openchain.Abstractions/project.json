@@ -1,13 +1,15 @@
 {
   "version": "0.2.2-*",
   "description": "Abstractions and public interfaces used by Openchain.",
-  "authors": [ "Flavien Charlon <flavien@charlon.net>" ],
-  "tags": [ "" ],
+  "authors": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",
   "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
+  "copyright": "Copyright © Coinprism, Inc.",
+
   "compilationOptions": {
     "languageVersion": "csharp6",
-    "allowUnsafe": false
+    "allowUnsafe": false,
+    "warningsAsErrors": true
   },
 
   "dependencies": {
