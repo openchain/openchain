@@ -1057,7 +1057,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.2.2": {
+      "Openchain.Abstractions/0.2.3": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0",
@@ -1067,11 +1067,11 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225"
         }
       },
-      "Openchain.Ledger/0.2.2": {
+      "Openchain.Ledger/0.2.3": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.2.2",
+          "Openchain.Abstractions": "0.2.3",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23225",
           "System.ObjectModel": "4.0.11-beta-23225",
@@ -1080,20 +1080,20 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23225"
         }
       },
-      "Openchain.Ledger.Blockchain/0.2.2": {
+      "Openchain.Ledger.Blockchain/0.2.3": {
         "type": "project",
         "dependencies": {
           "NBitcoin": "2.1.4.6",
-          "Openchain.Ledger": "0.2.2",
+          "Openchain.Ledger": "0.2.3",
           "System.Net.Http": "4.0.1-beta-23225"
         }
       },
-      "Openchain.Sqlite/0.2.2": {
+      "Openchain.Sqlite/0.2.3": {
         "type": "project",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
-          "Openchain.Abstractions": "0.2.2",
-          "Openchain.Ledger": "0.2.2"
+          "Openchain.Abstractions": "0.2.3",
+          "Openchain.Ledger": "0.2.3"
         }
       },
       "Portable.BouncyCastle/1.8.0-rc2": {
@@ -3386,7 +3386,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.2.2": {
+      "Openchain.Abstractions/0.2.3": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
@@ -3396,11 +3396,11 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.2.2": {
+      "Openchain.Ledger/0.2.3": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.2.2",
+          "Openchain.Abstractions": "0.2.3",
           "Portable.BouncyCastle": "1.8.0-RC2"
         },
         "frameworkAssemblies": [
@@ -3408,23 +3408,23 @@
           "System.Numerics"
         ]
       },
-      "Openchain.Ledger.Blockchain/0.2.2": {
+      "Openchain.Ledger.Blockchain/0.2.3": {
         "type": "project",
         "dependencies": {
           "NBitcoin": "2.1.4.6",
-          "Openchain.Ledger": "0.2.2",
+          "Openchain.Ledger": "0.2.3",
           "System.Net.Http": "4.0.1-beta-23225"
         },
         "frameworkAssemblies": [
           "System.Collections"
         ]
       },
-      "Openchain.Sqlite/0.2.2": {
+      "Openchain.Sqlite/0.2.3": {
         "type": "project",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
-          "Openchain.Abstractions": "0.2.2",
-          "Openchain.Ledger": "0.2.2"
+          "Openchain.Abstractions": "0.2.3",
+          "Openchain.Ledger": "0.2.3"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3586,19 +3586,19 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.2.2": {
+    "Openchain.Abstractions/0.2.3": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.2.2": {
+    "Openchain.Ledger/0.2.3": {
       "type": "project",
       "path": "../Openchain.Ledger/project.json"
     },
-    "Openchain.Ledger.Blockchain/0.2.2": {
+    "Openchain.Ledger.Blockchain/0.2.3": {
       "type": "project",
       "path": "../Openchain.Ledger.Blockchain/project.json"
     },
-    "Openchain.Sqlite/0.2.2": {
+    "Openchain.Sqlite/0.2.3": {
       "type": "project",
       "path": "../Openchain.Sqlite/project.json"
     },
@@ -6952,10 +6952,10 @@
       "Microsoft.Framework.Configuration.Json >= 1.0.0-beta7",
       "Microsoft.Framework.Configuration.UserSecrets >= 1.0.0-beta7",
       "Newtonsoft.Json >= 7.0.1",
-      "Openchain.Abstractions >= 0.2.2-*",
-      "Openchain.Ledger >= 0.2.2-*",
-      "Openchain.Ledger.Blockchain >= 0.2.2-*",
-      "Openchain.Sqlite >= 0.2.2-*"
+      "Openchain.Abstractions >= 0.2.3-*",
+      "Openchain.Ledger >= 0.2.3-*",
+      "Openchain.Ledger.Blockchain >= 0.2.3-*",
+      "Openchain.Sqlite >= 0.2.3-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Runtime.Serialization.Primitives >= 4.0.11-beta-23225",
