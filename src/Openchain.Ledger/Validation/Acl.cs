@@ -67,9 +67,10 @@ namespace Openchain.Ledger.Validation
         /// Parses a permission set from a JSON string.
         /// </summary>
         /// <param name="json">The JSON string to parse.</param>
+        /// <param name="path">The path on which these permissions apply.</param>
         /// <param name="keyEncoder">The key encoder to use in the parsed <see cref="Acl"/> objetcs.</param>
         /// <returns>The parsed list of <see cref="Acl"/> objects.</returns>
-        public static IReadOnlyList<Acl> Parse(string json, KeyEncoder keyEncoder)
+        public static IReadOnlyList<Acl> Parse(string json, LedgerPath path, KeyEncoder keyEncoder)
         {
             JArray document = JArray.Parse(json);
 
@@ -77,7 +78,7 @@ namespace Openchain.Ledger.Validation
                 new Acl(
                     ((JArray)root["subjects"]).Children().Select(subject =>
                         new P2pkhSubject(new[] { (string)subject["key"] }, (int)subject["required"], keyEncoder)),
-                    LedgerPath.Parse((string)root["path"]),
+                    path,
                     (bool)root["recursive"],
                     new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),
                     new PermissionSet(

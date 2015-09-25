@@ -34,7 +34,7 @@ namespace Openchain.Ledger.Validation
 
         public async Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> identities, LedgerPath path, bool recursiveOnly, string recordName)
         {
-            PermissionSet currentPermissions = PermissionSet.DenyAll;
+            PermissionSet currentPermissions = PermissionSet.Unset;
 
             Record record = await this.store.GetRecord(new RecordKey(RecordType.Data, path, AclResourceName));
 
@@ -44,7 +44,7 @@ namespace Openchain.Ledger.Validation
             IReadOnlyList<Acl> permissions;
             try
             {
-                permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), keyEncoder);
+                permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), path, keyEncoder);
             }
             catch (JsonReaderException)
             {
