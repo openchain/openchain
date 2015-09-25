@@ -84,7 +84,7 @@
           "System.Collections": "4.0.11-beta-23225",
           "System.Linq": "4.0.1-beta-23225",
           "System.Runtime.Extensions": "4.0.11-beta-23225",
-          "System.Security.Cryptography.Hashing.Algorithms": "4.0.0-beta-23225"
+          "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225"
         }
       },
       "Openchain.Ledger/0.2.2": {
@@ -541,19 +541,6 @@
         },
         "runtime": {
           "lib/DNXCore50/System.Security.Cryptography.Algorithms.dll": {}
-        }
-      },
-      "System.Security.Cryptography.Hashing.Algorithms/4.0.0-beta-23225": {
-        "type": "package",
-        "dependencies": {
-          "System.Runtime": "4.0.0",
-          "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225"
-        },
-        "compile": {
-          "lib/DNXCore50/System.Security.Cryptography.Hashing.Algorithms.dll": {}
-        },
-        "runtime": {
-          "lib/DNXCore50/System.Security.Cryptography.Hashing.Algorithms.dll": {}
         }
       },
       "System.Security.Cryptography.Primitives/4.0.0-beta-23225": {
@@ -2320,17 +2307,6 @@
         "System.Security.Cryptography.Algorithms.4.0.0-beta-23225.nupkg",
         "System.Security.Cryptography.Algorithms.4.0.0-beta-23225.nupkg.sha512",
         "System.Security.Cryptography.Algorithms.nuspec"
-      ]
-    },
-    "System.Security.Cryptography.Hashing.Algorithms/4.0.0-beta-23225": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "XY15yEU8nhSexa/zr4ie3mtlFsPHdQODumfqQwwjBbRlA+jdn0ue8oabzlGy6UsppZWcCZgwpnpDFqiu1aixMg==",
-      "files": [
-        "lib/DNXCore50/System.Security.Cryptography.Hashing.Algorithms.dll",
-        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23225.nupkg",
-        "System.Security.Cryptography.Hashing.Algorithms.4.0.0-beta-23225.nupkg.sha512",
-        "System.Security.Cryptography.Hashing.Algorithms.nuspec"
       ]
     },
     "System.Security.Cryptography.Primitives/4.0.0-beta-23225": {
