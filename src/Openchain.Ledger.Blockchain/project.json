@@ -8,6 +8,11 @@
   "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright © 2015 Coinprism, Inc.",
 
+  "compilationOptions": {
+    "allowUnsafe": false,
+    "warningsAsErrors": true
+  },
+
   "dependencies": {
     "System.Net.Http": "4.0.1-beta-23225",
     "Openchain.Ledger": "0.2.2-*"

@@ -9,7 +9,6 @@
   "copyright": "Copyright © 2015 Coinprism, Inc.",
 
   "compilationOptions": {
-    "languageVersion": "csharp6",
     "allowUnsafe": false,
     "warningsAsErrors": true
   },

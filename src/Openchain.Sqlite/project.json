@@ -8,6 +8,11 @@
   "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright © 2015 Coinprism, Inc.",
 
+  "compilationOptions": {
+    "allowUnsafe": false,
+    "warningsAsErrors": true
+  },
+
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-beta8-15531",
     "Openchain.Abstractions": "0.2.2-*",
