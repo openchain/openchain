@@ -120,7 +120,7 @@ namespace Openchain.Server.Models
 
         public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetSection("master_mode");
+            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetSection("validator_mode");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
             string rootUrl = configuration["root_url"];
@@ -221,7 +221,7 @@ namespace Openchain.Server.Models
             if (rulesValidator == null)
                 return null;
             else
-                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["master_mode:root_url"]);
+                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"]);
         }
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)
