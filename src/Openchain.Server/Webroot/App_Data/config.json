@@ -32,7 +32,7 @@
 
   // Uncomment this and comment the "validator_mode" section to enable observer mode
   // "observer_mode": {
-  //   "master_url": ""
+  //   "upstream_url": ""
   // },
 
   "anchoring": {

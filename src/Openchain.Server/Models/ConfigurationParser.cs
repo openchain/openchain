@@ -245,9 +245,9 @@ namespace Openchain.Server.Models
             {
                 IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetSection("observer_mode");
 
-                string masterUrl = observerMode["master_url"];
-                logger.LogInformation("Stream subscriber enabled, master URL: {0}", masterUrl);
-                TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(masterUrl));
+                string upstreamUrl = observerMode["upstream_url"];
+                logger.LogInformation("Stream subscriber enabled, upstream URL: {0}", upstreamUrl);
+                TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(upstreamUrl));
                 streamSubscriber.Subscribe(CancellationToken.None);
 
                 return streamSubscriber;
