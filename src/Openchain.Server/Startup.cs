@@ -61,6 +61,8 @@ namespace Openchain.Server
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
+            LogStartup(services.BuildServiceProvider().GetService<ILogger>(), services.BuildServiceProvider().GetService<IApplicationEnvironment>());
+
             // CORS Headers
             services.AddCors();
             CorsPolicy policy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().Build();
@@ -82,6 +84,12 @@ namespace Openchain.Server
 
             // Anchoring
             services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
+        }
+
+        private static void LogStartup(ILogger logger, IApplicationEnvironment environment)
+        {
+            logger.LogInformation($"Starting Openchain v{environment.ApplicationVersion}");
+            logger.LogInformation(" ");
         }
 
         /// <summary>

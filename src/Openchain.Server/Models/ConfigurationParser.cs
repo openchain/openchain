@@ -132,7 +132,7 @@ namespace Openchain.Server.Models
                     throw new InvalidOperationException(errorMessage);
                 }
 
-                logger.LogInformation("Transaction validation mode enabled (Master mode)");
+                logger.LogInformation("Current mode: Validator mode");
                 logger.LogInformation($"Namespace: {rootUrl}");
                 IConfiguration validator = configuration.GetSection("validator");
 
@@ -246,7 +246,8 @@ namespace Openchain.Server.Models
                 IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetSection("observer_mode");
 
                 string upstreamUrl = observerMode["upstream_url"];
-                logger.LogInformation("Stream subscriber enabled, upstream URL: {0}", upstreamUrl);
+                logger.LogInformation("Current mode: Observer mode");
+                logger.LogInformation("Upstream URL: {0}", upstreamUrl);
                 TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(upstreamUrl));
                 streamSubscriber.Subscribe(CancellationToken.None);
 
