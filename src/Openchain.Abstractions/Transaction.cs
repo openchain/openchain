@@ -21,6 +21,12 @@ namespace Openchain
     /// </summary>
     public class Transaction
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Transaction"/> class.
+        /// </summary>
+        /// <param name="mutation">The binary representation of the <see cref="Mutation"/> applied by this transaction.</param>
+        /// <param name="timestamp">The timestamp of the transaction.</param>
+        /// <param name="transactionMetadata">The metadata associated with the transaction.</param>
         public Transaction(ByteString mutation, DateTime timestamp, ByteString transactionMetadata)
         {
             if (mutation == null)
@@ -35,7 +41,7 @@ namespace Openchain
         }
 
         /// <summary>
-        /// Gets the binary representation of the mutation applied by this transaction.
+        /// Gets the binary representation of the <see cref="Mutation"/> applied by this transaction.
         /// </summary>
         public ByteString Mutation { get; }
 

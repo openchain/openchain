@@ -34,7 +34,7 @@ namespace Openchain
         }
 
         /// <summary>
-        /// Initializes a new instance of the <c <see cref="ByteString"/> class from a collection of bytes.
+        /// Initializes a new instance of the <see cref="ByteString"/> class from a collection of bytes.
         /// </summary>
         /// <param name="data">An enumeration of bytes used to initialize the instance.</param>
         public ByteString(IEnumerable<byte> data)
@@ -44,7 +44,7 @@ namespace Openchain
         }
 
         /// <summary>
-        /// Initializes a new instance of the <c <see cref="ByteString"/> class from a byte array.
+        /// Initializes a new instance of the <see cref="ByteString"/> class from a byte array.
         /// </summary>
         /// <param name="data">The byte array used to initialize the instance</param>
         public ByteString(byte[] data)

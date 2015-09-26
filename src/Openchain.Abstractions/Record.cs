@@ -21,6 +21,12 @@ namespace Openchain
     /// </summary>
     public class Record
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Record"/> class.
+        /// </summary>
+        /// <param name="key">The key of the record.</param>
+        /// <param name="value">The value of the record.</param>
+        /// <param name="version">The version of the record.</param>
         public Record(ByteString key, ByteString value, ByteString version)
         {
             if (key == null)

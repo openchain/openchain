@@ -23,6 +23,12 @@ namespace Openchain
     /// </summary>
     public class Mutation
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Mutation"/> class.
+        /// </summary>
+        /// <param name="@namespace">The namespace in which the mutation operates.</param>
+        /// <param name="records">A collection of all the records affected by the mutation.</param>
+        /// <param name="metadata">The metadata associated with the mutation.</param>
         public Mutation(ByteString @namespace, IEnumerable<Record> records, ByteString metadata)
         {
             if (@namespace == null)
@@ -59,7 +65,7 @@ namespace Openchain
         public ByteString Namespace { get; }
 
         /// <summary>
-        /// Gets a collection containing all the records being affected by the mutation.
+        /// Gets a collection of all the records affected by the mutation.
         /// </summary>
         public IReadOnlyList<Record> Records { get; }
 
