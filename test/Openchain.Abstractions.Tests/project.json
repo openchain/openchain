@@ -1,5 +1,5 @@
 {
-  "version": "0.2.3-*",
+  "version": "0.3.0-*",
   "description": "Unit tests for the Openchain.Abstractions package.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -9,7 +9,7 @@
   "copyright": "Copyright © 2015 Coinprism, Inc.",
 
   "dependencies": {
-    "Openchain.Abstractions": "0.2.3-*",
+    "Openchain.Abstractions": "0.3.0-*",
     "xunit": "2.1.0-rc1-*",
     "xunit.runner.dnx": "2.1.0-beta5-*"
   },
