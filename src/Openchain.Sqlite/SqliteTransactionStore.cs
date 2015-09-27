@@ -243,20 +243,20 @@ namespace Openchain.Sqlite
             {
                 return await ExecuteAsync(@"
                         SELECT  RawData
-                        FROM    Records
-                        WHERE   Id > (SELECT Id FROM Records WHERE RecordHash = @recordHash)
+                        FROM    Transactions
+                        WHERE   Id > (SELECT Id FROM Transactions WHERE Hash = @hash)
                         ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>()
                     {
-                        ["@recordHash"] = from.ToByteArray()
+                        ["@hash"] = from.ToByteArray()
                     });
             }
             else
             {
                 return await ExecuteAsync(@"
                         SELECT  RawData
-                        FROM    Records
+                        FROM    Transactions
                         ORDER BY Id ASC",
                     selector,
                     new Dictionary<string, object>());
