@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
 using System;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Builder;
+using Microsoft.AspNet.Http;
+using Microsoft.Framework.Logging;
 
 namespace Openchain.Server.Models
 {
@@ -41,6 +42,7 @@ namespace Openchain.Server.Models
                 else
                     lastLedgerRecordHash = ByteString.Parse(from);
 
+                ILogger logger = (ILogger)context.ApplicationServices.GetService(typeof(ILogger));
                 ITransactionStore store = (ITransactionStore)context.ApplicationServices.GetService(typeof(ITransactionStore));
 
                 IObservable<ByteString> stream = store.GetTransactionStream(lastLedgerRecordHash);
@@ -49,7 +51,7 @@ namespace Openchain.Server.Models
                 {
                     ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(new byte[512]);
 
-                    using (Observer observer = new Observer(webSocket, context.RequestAborted))
+                    using (Observer observer = new Observer(webSocket, logger, context.RequestAborted))
                     {
                         using (stream.Subscribe(observer))
                         {
@@ -69,15 +71,17 @@ namespace Openchain.Server.Models
         private class Observer : IObserver<ByteString>, IDisposable
         {
             private readonly WebSocket webSocket;
+            private readonly ILogger logger;
             private Task currentTask = Task.FromResult(0);
             private readonly object currentTaskLock = new object();
             private readonly TaskCompletionSource<int> completed = new TaskCompletionSource<int>();
             private readonly CancellationToken cancel;
             private readonly CancellationTokenRegistration registration;
 
-            public Observer(WebSocket webSocket, CancellationToken cancel)
+            public Observer(WebSocket webSocket, ILogger logger, CancellationToken cancel)
             {
                 this.webSocket = webSocket;
+                this.logger = logger;
                 this.cancel = cancel;
                 this.registration = cancel.Register(() => completed.TrySetResult(0));
             }
@@ -99,6 +103,8 @@ namespace Openchain.Server.Models
 
             public void OnError(Exception error)
             {
+                this.logger.LogError($"An error occured in the transaction stream server: {error.ToString()}");
+
                 QueueTask(async () =>
                 {
                     await webSocket.CloseAsync(
