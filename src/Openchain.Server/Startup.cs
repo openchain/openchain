@@ -109,12 +109,12 @@ namespace Openchain.Server
             // Add MVC to the request pipeline.
             app.UseMvc();
 
+            await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
+
             // Activate singletons
             app.ApplicationServices.GetService<TransactionStreamSubscriber>();
             app.ApplicationServices.GetService<IMutationValidator>();
             app.ApplicationServices.GetService<LedgerAnchorWorker>();
-
-            await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
         }
     }
 }
