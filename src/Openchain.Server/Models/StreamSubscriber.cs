@@ -30,7 +30,12 @@ namespace Openchain.Server.Models
         public TransactionStreamSubscriber(Uri endpoint, ITransactionStore store, ILogger logger)
         {
             this.endpoint = new UriBuilder(endpoint);
-            this.endpoint.Scheme = "ws";
+
+            if (endpoint.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
+                this.endpoint.Scheme = "wss";
+            else
+                this.endpoint.Scheme = "ws";
+
             this.endpoint.Path = this.endpoint.Path.TrimEnd('/') + "/stream";
             this.store = store;
             this.logger = logger;
