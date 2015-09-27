@@ -23,18 +23,17 @@ using Microsoft.Framework.Logging;
 using Newtonsoft.Json.Linq;
 using Openchain.Ledger;
 using Openchain.Ledger.Validation;
-using Openchain.Server.Models;
 
 namespace Openchain.Server.Controllers
 {
     [EnableCors("Any")]
     [Route("")]
-    public class OpenChainController : Controller
+    public class OpenchainController : Controller
     {
         private readonly ITransactionStore store;
         private readonly ILogger logger;
 
-        public OpenChainController(ITransactionStore store, ILogger logger)
+        public OpenchainController(ITransactionStore store, ILogger logger)
         {
             this.store = store;
             this.logger = logger;
