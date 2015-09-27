@@ -62,7 +62,7 @@ namespace Openchain.Server.Controllers
         {
             TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
             if (validator == null)
-                return new HttpStatusCodeResult((int)HttpStatusCode.NotImplemented);
+                return CreateErrorResponse("ValidationDisabled");
 
             ByteString parsedTransaction = ByteString.Parse((string)body["transaction"]);
 
@@ -84,14 +84,7 @@ namespace Openchain.Server.Controllers
             {
                 logger.LogInformation("Rejected transaction: {0}", exception.Message);
 
-                JsonResult result = Json(new
-                {
-                    error_code = exception.Reason
-                });
-
-                result.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                return result;
+                return CreateErrorResponse(exception.Reason);
             }
 
             logger.LogInformation("Validated transaction {0}", ledgerRecordHash.ToString());
@@ -100,6 +93,18 @@ namespace Openchain.Server.Controllers
             {
                 ledger_record = ledgerRecordHash.ToString()
             });
+        }
+
+        private ActionResult CreateErrorResponse(string reason)
+        {
+            JsonResult result = Json(new
+            {
+                error_code = reason
+            });
+
+            result.StatusCode = (int)HttpStatusCode.BadRequest;
+
+            return result;
         }
 
         [HttpGet("value")]
