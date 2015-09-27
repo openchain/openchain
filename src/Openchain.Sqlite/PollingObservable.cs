@@ -67,7 +67,7 @@ namespace Openchain.Sqlite
                         if (lastRecord != null)
                             cursor = new ByteString(MessageSerializer.ComputeHash(lastRecord.ToByteArray()));
 
-                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        await Task.Delay(TimeSpan.FromSeconds(0.2));
                     }
 
                     observer.OnCompleted();
