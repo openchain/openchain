@@ -45,8 +45,13 @@ namespace Openchain.Server.Models
 
                         if (anchor != null)
                         {
-                            logger.LogInformation($"Recorded anchor for {anchor.TransactionCount} transaction(s)");
+                            logger.LogInformation($"Recording anchor for {anchor.TransactionCount} transaction(s)");
+
+                            // Record the anchor
                             await this.anchorRecorder.RecordAnchor(anchor);
+
+                            // Commit the anchor if it has been recorded successfully
+                            await this.anchorBuilder.CommitAnchor(anchor);
                         }
                     }
 
@@ -54,6 +59,9 @@ namespace Openchain.Server.Models
                 catch (Exception exception)
                 {
                     logger.LogError($"Error in the anchor worker:\r\n{exception}");
+
+                    // Wait longer if an error occurred
+                    await Task.Delay(TimeSpan.FromMinutes(1), cancel);
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(10), cancel);

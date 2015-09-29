@@ -26,5 +26,12 @@ namespace Openchain.Ledger
         /// </summary>
         /// <returns>The <see cref="Task{LedgerAnchor}"/> object representing the asynchronous operation.</returns>
         Task<LedgerAnchor> CreateAnchor();
+
+        /// <summary>
+        /// Mark the anchor as successfully recorded in the anchoring medium.
+        /// </summary>
+        /// <param name="anchor">The anchor to commit.</param>
+        /// <returns>The <see cref="Task"/> object representing the asynchronous operation.</returns>
+        Task CommitAnchor(LedgerAnchor anchor);
     }
 }

@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -111,12 +112,10 @@ namespace Openchain.Sqlite
                 new ByteString(currentHash),
                 newTransactions.Count + (lastAnchor != null ? lastAnchor.TransactionCount : 0));
 
-            await RecordAnchor(result);
-
             return result;
         }
 
-        private async Task RecordAnchor(LedgerAnchor result)
+        public async Task CommitAnchor(LedgerAnchor anchor)
         {
             await ExecuteAsync(@"
                     INSERT INTO Anchors
@@ -124,9 +123,9 @@ namespace Openchain.Sqlite
                     VALUES (@position, @fullLedgerHash, @transactionCount)",
                 new Dictionary<string, object>()
                 {
-                    ["@position"] = result.Position.ToByteArray(),
-                    ["@fullLedgerHash"] = result.FullStoreHash.ToByteArray(),
-                    ["@transactionCount"] = result.TransactionCount
+                    ["@position"] = anchor.Position.ToByteArray(),
+                    ["@fullLedgerHash"] = anchor.FullStoreHash.ToByteArray(),
+                    ["@transactionCount"] = anchor.TransactionCount
                 });
         }
     }
