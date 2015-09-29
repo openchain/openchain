@@ -135,8 +135,8 @@ namespace Openchain.Sqlite.Tests
         {
             TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
 
-            await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
-            await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
+            ByteString mutation1 = await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
+            ByteString mutation2 = await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
 
             IObservable<ByteString> stream = this.store.GetTransactionStream(null);
             using (stream.Subscribe(observer))
@@ -146,19 +146,20 @@ namespace Openchain.Sqlite.Tests
 
             Assert.False(observer.Fail);
             Assert.Equal(2, observer.Values.Count);
-            Assert.Equal(98, observer.Values[0].Value.Count);
-            Assert.Equal(98, observer.Values[1].Value.Count);
+            Assert.Equal(mutation1, GetMutationHash(observer.Values[0]));
+            Assert.Equal(mutation2, GetMutationHash(observer.Values[1]));
         }
 
         [Fact]
         public async Task GetTransactionStream_Resume()
         {
-            TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
+            TestObserver observer = new TestObserver() { ExpectedValueCount = 1 };
 
-            ByteString resume = await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
-            await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
+            await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
+            ByteString resumeToken = await this.store.GetLastTransaction();
+            ByteString mutation2 = await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
 
-            IObservable<ByteString> stream = this.store.GetTransactionStream(resume);
+            IObservable<ByteString> stream = this.store.GetTransactionStream(resumeToken);
             using (stream.Subscribe(observer))
                 await observer.Completed.Task;
 
@@ -166,7 +167,7 @@ namespace Openchain.Sqlite.Tests
 
             Assert.False(observer.Fail);
             Assert.Equal(1, observer.Values.Count);
-            Assert.Equal(98, observer.Values[0].Value.Count);
+            Assert.Equal(mutation2, GetMutationHash(observer.Values[0]));
         }
 
         private async Task<ByteString> AddTransaction(params Record[] records)
@@ -188,6 +189,12 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(key, record.Key);
             Assert.Equal(value, record.Value);
             Assert.Equal(version, record.Version);
+        }
+
+        private static ByteString GetMutationHash(ByteString transaction)
+        {
+            return new ByteString(
+                MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(transaction).Mutation.ToByteArray()));
         }
 
         private class TestObserver : IObserver<ByteString>
