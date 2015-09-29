@@ -9,6 +9,7 @@
   "copyright": "Copyright © 2015 Coinprism, Inc.",
 
   "webroot": "Webroot",
+  "userSecretsId": "Openchain.Server",
 
   "dependencies": {
     "System.Text.Encoding": "4.0.11-beta-23225",
@@ -34,7 +35,7 @@
 
   "commands": {
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:8080",
-    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8085"
+    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
   },
 
   "frameworks": {
@@ -56,6 +57,5 @@
     "**.xproj",
     "**.user",
     "**.vspscc"
-  ],
-  "userSecretsId": "aspnet5-OpenChain.Server-20150918123232"
+  ]
 }
