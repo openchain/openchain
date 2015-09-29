@@ -117,6 +117,45 @@ namespace Openchain.Sqlite.Tests
             AssertRecord(records2[0], binaryData[4], binaryData[5], mutationHash);
         }
 
+        [Fact]
+        public async Task GetTransactionStream_FromStart()
+        {
+            TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
+
+            await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
+            await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
+
+            IObservable<ByteString> stream = this.store.GetTransactionStream(null);
+            using (stream.Subscribe(observer))
+                await observer.Completed.Task;
+
+            await observer.Disposed.Task;
+
+            Assert.False(observer.Fail);
+            Assert.Equal(2, observer.Values.Count);
+            Assert.Equal(98, observer.Values[0].Value.Count);
+            Assert.Equal(98, observer.Values[1].Value.Count);
+        }
+
+        [Fact]
+        public async Task GetTransactionStream_Resume()
+        {
+            TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
+
+            ByteString resume = await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
+            await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
+
+            IObservable<ByteString> stream = this.store.GetTransactionStream(resume);
+            using (stream.Subscribe(observer))
+                await observer.Completed.Task;
+
+            await observer.Disposed.Task;
+
+            Assert.False(observer.Fail);
+            Assert.Equal(1, observer.Values.Count);
+            Assert.Equal(98, observer.Values[0].Value.Count);
+        }
+
         private async Task<ByteString> AddTransaction(params Record[] records)
         {
             Mutation mutation = new Mutation(ByteString.Parse("0123"), records, ByteString.Parse("4567"));
@@ -136,6 +175,31 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(key, record.Key);
             Assert.Equal(value, record.Value);
             Assert.Equal(version, record.Version);
+        }
+
+        private class TestObserver : IObserver<ByteString>
+        {
+            public int ExpectedValueCount { get; set; }
+
+            public TaskCompletionSource<int> Completed { get; } = new TaskCompletionSource<int>();
+
+            public TaskCompletionSource<int> Disposed { get; } = new TaskCompletionSource<int>();
+
+            public IList<ByteString> Values { get; } = new List<ByteString>();
+
+            public bool Fail { get; set; }
+
+            public void OnCompleted() => Disposed.SetResult(0);
+
+            public void OnError(Exception error) => Fail = true;
+
+            public void OnNext(ByteString value)
+            {
+                Values.Add(value);
+
+                if (Values.Count == ExpectedValueCount)
+                    this.Completed.SetResult(0);
+            }
         }
     }
 }
