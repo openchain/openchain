@@ -28,12 +28,14 @@ namespace Openchain.Ledger.Blockchain
         private readonly Uri url;
         private readonly Key publishingAddress;
         private readonly Network network;
+        private readonly long satoshiFees;
 
-        public BlockchainAnchorRecorder(Uri url, Key publishingAddress, Network network)
+        public BlockchainAnchorRecorder(Uri url, Key publishingAddress, Network network, long satoshiFees)
         {
             this.url = url;
             this.publishingAddress = publishingAddress;
             this.network = network;
+            this.satoshiFees = satoshiFees;
         }
 
         public async Task<bool> CanRecordAnchor()
@@ -91,7 +93,7 @@ namespace Openchain.Ledger.Blockchain
 
                 Script opReturn = new Script(OpcodeType.OP_RETURN, Op.GetPushOp(anchorPayload));
                 builder.Send(opReturn, 0);
-                builder.SendFees(1000);
+                builder.SendFees(satoshiFees);
                 builder.SetChange(this.publishingAddress.ScriptPubKey, ChangeType.All);
 
                 ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());

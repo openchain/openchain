@@ -91,9 +91,11 @@ namespace Openchain.Server.Models
                     if (!string.IsNullOrEmpty(anchorKey))
                     {
                         NBitcoin.Key key = NBitcoin.Key.Parse(anchorKey);
-                        NBitcoin.Network network = NBitcoin.Network.TestNet;
+                        NBitcoin.Network network = NBitcoin.Network.GetNetworks()
+                            .First(item => item.GetVersionBytes(NBitcoin.Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(anchoring["network_byte"]));
+
                         logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
-                        recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network);
+                        recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network, long.Parse(anchoring["fees"]));
                     }
                     break;
             }
