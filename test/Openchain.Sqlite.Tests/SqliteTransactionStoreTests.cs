@@ -118,6 +118,19 @@ namespace Openchain.Sqlite.Tests
         }
 
         [Fact]
+        public async Task GetLastTransaction_Success()
+        {
+            TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
+
+            await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
+            await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
+
+            ByteString lastTransaction = await this.store.GetLastTransaction();
+
+            Assert.Equal(ByteString.Parse("6e55f997a10bf4f9db8b2e1341c1a402418be3e7496ecb77f364fefecaeaeb43"), lastTransaction);
+        }
+
+        [Fact]
         public async Task GetTransactionStream_FromStart()
         {
             TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
