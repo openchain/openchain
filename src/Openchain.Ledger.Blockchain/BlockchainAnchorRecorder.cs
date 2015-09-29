@@ -38,25 +38,27 @@ namespace Openchain.Ledger.Blockchain
 
         public async Task<bool> CanRecordAnchor()
         {
-            HttpClient client = new HttpClient();
-            BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
-            HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/transactions"));
-
-            string body = await response.Content.ReadAsStringAsync();
-
-            JArray outputs = JArray.Parse(body);
-
-            // If a transaction is unconfirmed, we don't
-            foreach (JObject transaction in outputs.Children())
+            using (HttpClient client = new HttpClient())
             {
-                if ((string)transaction["inputs"].First()["addresses"].First() != address.ToString())
-                    continue;
+                BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
+                HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/transactions"));
 
-                if ((string)transaction["block_hash"] == null)
-                    return false;
+                string body = await response.Content.ReadAsStringAsync();
+
+                JArray outputs = JArray.Parse(body);
+
+                // If a transaction is unconfirmed, we don't
+                foreach (JObject transaction in outputs.Children())
+                {
+                    if ((string)transaction["inputs"].First()["addresses"].First() != address.ToString())
+                        continue;
+
+                    if ((string)transaction["block_hash"] == null)
+                        return false;
+                }
+
+                return true;
             }
-
-            return true;
         }
 
         public async Task RecordAnchor(LedgerAnchor anchor)
@@ -67,45 +69,49 @@ namespace Openchain.Ledger.Blockchain
                 .Concat(anchor.FullStoreHash.ToByteArray())
                 .ToArray();
 
-            HttpClient client = new HttpClient();
-            BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
-            HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/unspents"));
-
-            string body = await response.Content.ReadAsStringAsync();
-
-            JArray outputs = JArray.Parse(body);
-
-            TransactionBuilder builder = new TransactionBuilder();
-            builder.AddKeys(publishingAddress.GetBitcoinSecret(network));
-            foreach (JObject output in outputs)
+            using (HttpClient client = new HttpClient())
             {
-                string transactionHash = (string)output["transaction_hash"];
-                uint outputIndex = (uint)output["output_index"];
-                long amount = (long)output["value"];
+                BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
+                HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/unspents"));
 
-                builder.AddCoins(new Coin(uint256.Parse(transactionHash), outputIndex, new Money(amount), publishingAddress.ScriptPubKey));
+                string body = await response.Content.ReadAsStringAsync();
+
+                JArray outputs = JArray.Parse(body);
+
+                TransactionBuilder builder = new TransactionBuilder();
+                builder.AddKeys(publishingAddress.GetBitcoinSecret(network));
+                foreach (JObject output in outputs)
+                {
+                    string transactionHash = (string)output["transaction_hash"];
+                    uint outputIndex = (uint)output["output_index"];
+                    long amount = (long)output["value"];
+
+                    builder.AddCoins(new Coin(uint256.Parse(transactionHash), outputIndex, new Money(amount), publishingAddress.ScriptPubKey));
+                }
+
+                Script opReturn = new Script(OpcodeType.OP_RETURN, Op.GetPushOp(anchorPayload));
+                builder.Send(opReturn, 0);
+                builder.SendFees(1000);
+                builder.SetChange(this.publishingAddress.ScriptPubKey, ChangeType.All);
+
+                ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
+
+                await SubmitTransaction(seriazliedTransaction);
             }
-
-            Script opReturn = new Script(OpcodeType.OP_RETURN, Op.GetPushOp(anchorPayload));
-            builder.Send(opReturn, 0);
-            builder.SendFees(1000);
-            builder.SetChange(this.publishingAddress.ScriptPubKey, ChangeType.All);
-
-            ByteString seriazliedTransaction = new ByteString(builder.BuildTransaction(true).ToBytes());
-
-            await SubmitTransaction(seriazliedTransaction);
         }
 
         private async Task<ByteString> SubmitTransaction(ByteString transaction)
         {
-            HttpClient client = new HttpClient();
-            StringContent content = new StringContent($"\"{transaction.ToString()}\"");
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await client.PostAsync(new Uri(url, "sendrawtransaction"), content);
-            response.EnsureSuccessStatusCode();
+            using (HttpClient client = new HttpClient())
+            {
+                StringContent content = new StringContent($"\"{transaction.ToString()}\"");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                HttpResponseMessage response = await client.PostAsync(new Uri(url, "sendrawtransaction"), content);
+                response.EnsureSuccessStatusCode();
 
-            JToken result = JToken.Parse(await response.Content.ReadAsStringAsync());
-            return ByteString.Parse((string)result);
+                JToken result = JToken.Parse(await response.Content.ReadAsStringAsync());
+                return ByteString.Parse((string)result);
+            }
         }
     }
 }
