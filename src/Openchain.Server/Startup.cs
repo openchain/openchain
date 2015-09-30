@@ -88,7 +88,7 @@ namespace Openchain.Server
 
         private static void LogStartup(ILogger logger, IApplicationEnvironment environment)
         {
-            logger.LogInformation($"Starting Openchain v{environment.ApplicationVersion}");
+            logger.LogInformation($"Starting Openchain v{environment.ApplicationVersion} ({environment.RuntimeFramework.FullName})");
             logger.LogInformation(" ");
         }
 
