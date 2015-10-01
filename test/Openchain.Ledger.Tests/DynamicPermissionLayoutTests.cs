@@ -113,7 +113,7 @@ namespace Openchain.Ledger.Tests
                 .ToList());
             }
 
-            private ByteString GetValidAcl()
+            private static ByteString GetValidAcl()
             {
                 return new ByteString(
                     Encoding.UTF8.GetBytes(@"
@@ -132,7 +132,7 @@ namespace Openchain.Ledger.Tests
                     "));
             }
 
-            private ByteString GetInvalidAcl()
+            private static ByteString GetInvalidAcl()
             {
                 return new ByteString(
                     Encoding.UTF8.GetBytes(@"[{ ""invalid"" }]"));
