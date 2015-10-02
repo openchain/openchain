@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using Openchain.Ledger.Validation;
 using Xunit;
 
@@ -31,6 +32,14 @@ namespace Openchain.Ledger.Tests
             Assert.True(new StringPattern("name", PatternMatchingStrategy.Prefix).IsMatch("name_suffix"));
             Assert.False(new StringPattern("name", PatternMatchingStrategy.Prefix).IsMatch("nam"));
             Assert.False(new StringPattern("name", PatternMatchingStrategy.Prefix).IsMatch("nams"));
+        }
+
+        [Fact]
+        public void IsMatch_InvalidMatchingStrategy()
+        {
+            StringPattern pattern = new StringPattern("name", (PatternMatchingStrategy)1000);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => pattern.IsMatch("name"));
         }
     }
 }
