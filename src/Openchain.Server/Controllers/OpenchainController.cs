@@ -40,22 +40,22 @@ namespace Openchain.Server.Controllers
         }
 
         /// <summary>
-        /// Format:
+        /// Submit a transaction for validation.
+        /// </summary>
+        /// <param name="body">
+        /// The JSON object in the request body.
+        /// Expected format:
         /// {
-        ///   "transaction": "hex",
-        ///   "authentication": [
+        ///   "transaction": "&lt;string>",
+        ///   "signatures": [
         ///     {
-        ///       "identity": "string",
-        ///       "evidence": [
-        ///         "hex",
-        ///         "hex"
-        ///       ]
+        ///       "pub_key": "&lt;string>",
+        ///       "signature": "&lt;string>"
         ///     },
         ///     ...
         ///   ]
         /// }
-        /// </summary>
-        /// <param name="body"></param>
+        /// </param>
         /// <returns></returns>
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
