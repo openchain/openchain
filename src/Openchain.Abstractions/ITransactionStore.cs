@@ -28,20 +28,20 @@ namespace Openchain
         /// </summary>
         /// <param name="transactions">A collection of serialized <see cref="Transaction"/> to add to the store.</param>
         /// <exception cref="ConcurrentMutationException">A record has been mutated and the transaction is no longer valid.</exception>
-        /// <returns>A task that represents the completion of the operation.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task AddTransactions(IEnumerable<ByteString> transactions);
 
         /// <summary>
         /// Gets the current records for a set of keys.
         /// </summary>
         /// <param name="keys">The keys to query.</param>
-        /// <returns>A task that represents the completion of the operation and contains a list of the corresponding <see cref="Record"/>.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys);
 
         /// <summary>
         /// Gets the hash of the last transaction in the ledger.
         /// </summary>
-        /// <returns>A task that represents the completion of the operation and contains the hash of the last transaction.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<ByteString> GetLastTransaction();
 
         /// <summary>
