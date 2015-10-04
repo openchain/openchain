@@ -68,7 +68,7 @@ namespace Openchain.Ledger.Validation
         /// </summary>
         /// <param name="json">The JSON string to parse.</param>
         /// <param name="path">The path on which these permissions apply.</param>
-        /// <param name="keyEncoder">The key encoder to use in the parsed <see cref="Acl"/> objetcs.</param>
+        /// <param name="keyEncoder">The key encoder to use in the parsed <see cref="Acl"/> objects.</param>
         /// <returns>The parsed list of <see cref="Acl"/> objects.</returns>
         public static IReadOnlyList<Acl> Parse(string json, LedgerPath path, KeyEncoder keyEncoder)
         {
@@ -77,7 +77,7 @@ namespace Openchain.Ledger.Validation
             return ((IEnumerable<JToken>)document).Select(root =>
                 new Acl(
                     ((JArray)root["subjects"]).Children().Select(subject =>
-                        new P2pkhSubject(new[] { (string)subject["key"] }, (int)subject["required"], keyEncoder)),
+                        new P2pkhSubject(((JArray)subject["addresses"]).Select(key => (string)key), (int)subject["required"], keyEncoder)),
                     path,
                     (bool)root["recursive"],
                     new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),

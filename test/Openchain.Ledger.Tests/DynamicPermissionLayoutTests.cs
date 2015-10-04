@@ -118,7 +118,7 @@ namespace Openchain.Ledger.Tests
                 return new ByteString(
                     Encoding.UTF8.GetBytes(@"
                         [{
-                            ""subjects"": [ { ""key"": ""n12RA1iohYEerfXiBixSoERZG8TP8xQFL2"", ""required"": 1 } ],
+                            ""subjects"": [ { ""addresses"": [ ""n12RA1iohYEerfXiBixSoERZG8TP8xQFL2"" ], ""required"": 1 } ],
                             ""recursive"": ""true"",
                             ""record_name"": ""name"",
                             ""record_name_matching"": ""Exact"",
