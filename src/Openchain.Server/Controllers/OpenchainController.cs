@@ -56,7 +56,7 @@ namespace Openchain.Server.Controllers
         ///   ]
         /// }
         /// </param>
-        /// <returns></returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpPost("submit")]
         public async Task<ActionResult> Post([FromBody]JObject body)
         {
