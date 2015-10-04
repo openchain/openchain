@@ -18,6 +18,9 @@ using System.Linq;
 
 namespace Openchain.Ledger
 {
+    /// <summary>
+    /// Represents the metadata object that can be attached to a transaction, and contains signatures for that transaction.
+    /// </summary>
     public class TransactionMetadata
     {
         public TransactionMetadata(IEnumerable<SignatureEvidence> signatures)
@@ -25,6 +28,9 @@ namespace Openchain.Ledger
             this.Signatures = new ReadOnlyCollection<SignatureEvidence>(signatures.ToList());
         }
 
+        /// <summary>
+        /// Gets the list of signatures.
+        /// </summary>
         public IReadOnlyList<SignatureEvidence> Signatures { get; }
     }
 }
