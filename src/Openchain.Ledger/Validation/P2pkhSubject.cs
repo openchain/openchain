@@ -18,6 +18,9 @@ using System.Linq;
 
 namespace Openchain.Ledger.Validation
 {
+    /// <summary>
+    /// Represents an implementation of the <see cref="IPermissionSubject"/> interface based on public key hashes.
+    /// </summary>
     public class P2pkhSubject : IPermissionSubject
     {
         private readonly KeyEncoder keyEncoder;
@@ -29,8 +32,14 @@ namespace Openchain.Ledger.Validation
             this.keyEncoder = keyEncoder;
         }
 
+        /// <summary>
+        /// Gets the list of valid addresses.
+        /// </summary>
         public IReadOnlyList<string> Addresses { get; }
 
+        /// <summary>
+        /// Gets the number of required signatures for a match.
+        /// </summary>
         public int SignaturesRequired { get; }
 
         public bool IsMatch(IReadOnlyList<SignatureEvidence> authentication)

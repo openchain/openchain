@@ -16,6 +16,9 @@ using System.Collections.Generic;
 
 namespace Openchain.Ledger.Validation
 {
+    /// <summary>
+    /// Represents an implementation of the <see cref="IPermissionSubject"/> interface that is always matching.
+    /// </summary>
     public class EveryoneSubject : IPermissionSubject
     {
         public static EveryoneSubject Instance { get; } = new EveryoneSubject();
