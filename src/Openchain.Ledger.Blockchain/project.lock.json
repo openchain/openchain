@@ -47,7 +47,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.3.1": {
+      "Openchain.Abstractions/0.4.0": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0",
@@ -57,11 +57,11 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23225"
         }
       },
-      "Openchain.Ledger/0.3.1": {
+      "Openchain.Ledger/0.4.0": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.3.1",
+          "Openchain.Abstractions": "0.4.0",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23225",
           "System.ObjectModel": "4.0.11-beta-23225",
@@ -807,7 +807,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.3.1": {
+      "Openchain.Abstractions/0.4.0": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
@@ -817,11 +817,11 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.3.1": {
+      "Openchain.Ledger/0.4.0": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.3.1",
+          "Openchain.Abstractions": "0.4.0",
           "Portable.BouncyCastle": "1.8.0-RC2"
         },
         "frameworkAssemblies": [
@@ -1016,7 +1016,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.3.1": {
+      "Openchain.Abstractions/0.4.0": {
         "type": "project",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
@@ -1026,11 +1026,11 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.3.1": {
+      "Openchain.Ledger/0.4.0": {
         "type": "project",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.3.1",
+          "Openchain.Abstractions": "0.4.0",
           "Portable.BouncyCastle": "1.8.0-RC2"
         },
         "frameworkAssemblies": [
@@ -1193,11 +1193,11 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.3.1": {
+    "Openchain.Abstractions/0.4.0": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.3.1": {
+    "Openchain.Ledger/0.4.0": {
       "type": "project",
       "path": "../Openchain.Ledger/project.json"
     },
@@ -3134,7 +3134,7 @@
   "projectFileDependencyGroups": {
     "": [
       "System.Net.Http >= 4.0.1-beta-23225",
-      "Openchain.Ledger >= 0.3.1-*"
+      "Openchain.Ledger >= 0.4.0-*"
     ],
     "DNXCore,Version=v5.0": [
       "NBitcoin >= 2.1.4.6"
