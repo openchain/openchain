@@ -107,7 +107,7 @@ namespace Openchain.Server.Controllers
             return result;
         }
 
-        [HttpGet("value")]
+        [HttpGet("record")]
         public async Task<ActionResult> GetValue(string key)
         {
             ByteString parsedKey = ByteString.Parse(key ?? "");
