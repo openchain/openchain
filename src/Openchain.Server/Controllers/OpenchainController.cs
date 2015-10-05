@@ -75,10 +75,10 @@ namespace Openchain.Server.Controllers
                     ByteString.Parse((string)evidence["signature"])));
             }
 
-            ByteString ledgerRecordHash;
+            ByteString transactionId;
             try
             {
-                ledgerRecordHash = await validator.PostTransaction(parsedTransaction, authentication);
+                transactionId = await validator.PostTransaction(parsedTransaction, authentication);
             }
             catch (TransactionInvalidException exception)
             {
@@ -87,11 +87,11 @@ namespace Openchain.Server.Controllers
                 return CreateErrorResponse(exception.Reason);
             }
 
-            logger.LogInformation("Validated transaction {0}", ledgerRecordHash.ToString());
+            logger.LogInformation("Validated transaction {0}", transactionId.ToString());
 
             return Json(new
             {
-                ledger_record = ledgerRecordHash.ToString()
+                transaction_hash = transactionId.ToString()
             });
         }
 
