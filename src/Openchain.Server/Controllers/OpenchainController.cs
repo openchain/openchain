@@ -46,7 +46,7 @@ namespace Openchain.Server.Controllers
         /// The JSON object in the request body.
         /// Expected format:
         /// {
-        ///   "transaction": "&lt;string>",
+        ///   "mutation": "&lt;string>",
         ///   "signatures": [
         ///     {
         ///       "pub_key": "&lt;string>",
@@ -64,7 +64,7 @@ namespace Openchain.Server.Controllers
             if (validator == null)
                 return CreateErrorResponse("ValidationDisabled");
 
-            ByteString parsedTransaction = ByteString.Parse((string)body["transaction"]);
+            ByteString parsedTransaction = ByteString.Parse((string)body["mutation"]);
 
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
