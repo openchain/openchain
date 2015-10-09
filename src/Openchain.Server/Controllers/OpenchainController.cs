@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -110,7 +111,16 @@ namespace Openchain.Server.Controllers
         [HttpGet("record")]
         public async Task<ActionResult> GetValue(string key)
         {
-            ByteString parsedKey = ByteString.Parse(key ?? "");
+            ByteString parsedKey;
+
+            try
+            {
+                parsedKey = ByteString.Parse(key ?? "");
+            }
+            catch (FormatException)
+            {
+                return new HttpStatusCodeResult(400);
+            }
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
 
