@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Openchain.Ledger;
 using Openchain.Ledger.Validation;
@@ -59,8 +61,22 @@ namespace Openchain.Server.Controllers
         /// </param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpPost("submit")]
-        public async Task<ActionResult> Post([FromBody]JObject body)
+        public async Task<ActionResult> Post()
         {
+            JObject body;
+            try
+            {
+                string bodyContent;
+                using (StreamReader streamReader = new StreamReader(Request.Body))
+                    bodyContent = await streamReader.ReadToEndAsync();
+
+                body = JObject.Parse(bodyContent);
+            }
+            catch (JsonReaderException)
+            {
+                return GetClientError();
+            }
+
             TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
             if (validator == null)
                 return CreateErrorResponse("ValidationDisabled");
