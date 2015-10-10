@@ -65,15 +65,30 @@ namespace Openchain.Server.Controllers
             if (validator == null)
                 return CreateErrorResponse("ValidationDisabled");
 
-            ByteString parsedTransaction = ByteString.Parse((string)body["mutation"]);
-
+            ByteString parsedTransaction;
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
-            foreach (JObject evidence in body["signatures"])
+            if (!(body["mutation"] is JValue && body["signatures"] is JArray))
+                return GetClientError();
+
+            try
             {
-                authentication.Add(new SignatureEvidence(
-                    ByteString.Parse((string)evidence["pub_key"]),
-                    ByteString.Parse((string)evidence["signature"])));
+                parsedTransaction = ByteString.Parse((string)body["mutation"]);
+
+                foreach (JToken signatureItem in body["signatures"])
+                {
+                    JObject evidence = signatureItem as JObject;
+                    if (!(evidence != null && evidence["pub_key"] is JValue && evidence["signature"] is JValue))
+                        return GetClientError();
+
+                    authentication.Add(new SignatureEvidence(
+                        ByteString.Parse((string)evidence["pub_key"]),
+                        ByteString.Parse((string)evidence["signature"])));
+                }
+            }
+            catch (FormatException)
+            {
+                return GetClientError();
             }
 
             ByteString transactionId;
@@ -119,7 +134,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return new HttpStatusCodeResult(400);
+                return GetClientError();
             }
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
@@ -130,6 +145,11 @@ namespace Openchain.Server.Controllers
                 value = result.Value?.ToString(),
                 version = result.Version.ToString()
             });
+        }
+
+        private static ActionResult GetClientError()
+        {
+            return new HttpStatusCodeResult(400);
         }
     }
 }

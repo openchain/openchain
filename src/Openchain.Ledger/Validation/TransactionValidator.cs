@@ -36,8 +36,16 @@ namespace Openchain.Ledger.Validation
 
         public async Task<ByteString> PostTransaction(ByteString rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {
-            // Verify that the mutation set can be deserialized
-            Mutation mutation = MessageSerializer.DeserializeMutation(rawMutation);
+            Mutation mutation;
+            try
+            {
+                // Verify that the mutation can be deserialized
+                mutation = MessageSerializer.DeserializeMutation(rawMutation);
+            }
+            catch (InvalidProtocolBufferException)
+            {
+                throw new TransactionInvalidException("InvalidMutation");
+            }
 
             if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
