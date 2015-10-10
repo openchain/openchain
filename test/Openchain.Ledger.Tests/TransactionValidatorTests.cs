@@ -42,6 +42,16 @@ namespace Openchain.Ledger.Tests
         }
 
         [Fact]
+        public async Task PostTransaction_InvalidMutation()
+        {
+            TransactionValidator validator = CreateValidator(new Dictionary<string, long>());
+            ByteString mutation = ByteString.Parse("aa");
+
+            await Assert.ThrowsAsync<TransactionInvalidException>(
+                () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+        }
+
+        [Fact]
         public async Task PostTransaction_UnbalancedTransaction()
         {
             Dictionary<string, long> accounts = new Dictionary<string, long>()
