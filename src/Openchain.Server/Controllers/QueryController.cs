@@ -42,9 +42,19 @@ namespace Openchain.Server.Controllers
         }
 
         [HttpGet("transaction")]
-        public async Task<ActionResult> GetTransaction(string mutationHash)
+        public async Task<ActionResult> GetTransaction([FromQuery(Name = "mutation_hash")] string mutationHash)
         {
-            ByteString transaction = await this.store.GetTransaction(ByteString.Parse(mutationHash));
+            ByteString parsedMutationHash;
+            try
+            {
+                parsedMutationHash = ByteString.Parse(mutationHash);
+            }
+            catch (FormatException)
+            {
+                return new HttpStatusCodeResult(400);
+            }
+
+            ByteString transaction = await this.store.GetTransaction(parsedMutationHash);
 
             if (transaction == null)
                 return new HttpStatusCodeResult(404);
