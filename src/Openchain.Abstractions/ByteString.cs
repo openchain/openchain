@@ -68,7 +68,7 @@ namespace Openchain
         /// Parses a <see cref="ByteString"/> from a hexadecimal string.
         /// </summary>
         /// <param name="hexValue">The hexadecimal string to parse.</param>
-        /// <returns></returns>
+        /// <returns>The parsed <see cref="ByteString"/> instance.</returns>
         public static ByteString Parse(string hexValue)
         {
             if (hexValue == null)
@@ -98,7 +98,7 @@ namespace Openchain
         /// <summary>
         /// Returns a copy of the instance as an array.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A byte array representing this <see cref="ByteString"/> instance.</returns>
         public byte[] ToByteArray()
         {
             byte[] result = new byte[data.Length];
@@ -119,7 +119,7 @@ namespace Openchain
         /// <summary>
         /// Returns a read-only stream containing the data represented by the current object.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="Stream"/> representing this <see cref="ByteString"/> instance.</returns>
         public Stream ToStream()
         {
             return new MemoryStream(this.data, 0, this.data.Length, false);
