@@ -74,7 +74,7 @@ namespace Openchain.Server.Controllers
             }
             catch (JsonReaderException)
             {
-                return GetClientError();
+                return HttpBadRequest();
             }
 
             TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
@@ -85,7 +85,7 @@ namespace Openchain.Server.Controllers
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
             if (!(body["mutation"] is JValue && body["signatures"] is JArray))
-                return GetClientError();
+                return HttpBadRequest();
 
             try
             {
@@ -95,7 +95,7 @@ namespace Openchain.Server.Controllers
                 {
                     JObject evidence = signatureItem as JObject;
                     if (!(evidence != null && evidence["pub_key"] is JValue && evidence["signature"] is JValue))
-                        return GetClientError();
+                        return HttpBadRequest();
 
                     authentication.Add(new SignatureEvidence(
                         ByteString.Parse((string)evidence["pub_key"]),
@@ -104,7 +104,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return GetClientError();
+                return HttpBadRequest();
             }
 
             ByteString transactionId;
@@ -150,7 +150,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return GetClientError();
+                return HttpBadRequest();
             }
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();
@@ -161,11 +161,6 @@ namespace Openchain.Server.Controllers
                 value = result.Value?.ToString(),
                 version = result.Version.ToString()
             });
-        }
-
-        private static ActionResult GetClientError()
-        {
-            return new HttpStatusCodeResult(400);
         }
     }
 }

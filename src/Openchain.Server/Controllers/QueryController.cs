@@ -51,7 +51,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return new HttpStatusCodeResult(400);
+                return HttpBadRequest();
             }
 
             ByteString transaction = await this.store.GetTransaction(parsedMutationHash);
