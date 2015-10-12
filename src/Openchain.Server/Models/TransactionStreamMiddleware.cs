@@ -22,6 +22,9 @@ using Microsoft.Framework.Logging;
 
 namespace Openchain.Server.Models
 {
+    /// <summary>
+    /// Represents the middleware used to expose the transaction stream.
+    /// </summary>
     public class TransactionStreamMiddleware
     {
         private readonly RequestDelegate next;
@@ -31,6 +34,11 @@ namespace Openchain.Server.Models
             this.next = next;
         }
 
+        /// <summary>
+        /// Handles an incoming HTTP request.
+        /// </summary>
+        /// <param name="context">The current HTTP context.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task Invoke(HttpContext context)
         {
             if (context.WebSockets.IsWebSocketRequest)
