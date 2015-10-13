@@ -202,7 +202,9 @@ namespace Openchain.Server.Models
                         if (bool.Parse(validator["allow_third_party_assets"]))
                             permissionProviders.Add(new P2pkhIssuanceImplicitLayout(keyEncoder));
 
-                        permissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
+                        if (bool.Parse(validator["allow_p2pkh_accounts"]))
+                            permissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
+
                         permissionProviders.Add(new StaticPermissionLayout(pathPermissions));
                         permissionProviders.Add(new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder));
 
