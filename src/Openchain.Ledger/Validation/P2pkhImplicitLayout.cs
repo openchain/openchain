@@ -21,7 +21,8 @@ namespace Openchain.Ledger.Validation
 {
     /// <summary>
     /// Represents the implicit permission layout where account names contain identities.
-    /// Permissions are set for /p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify).
+    /// Permissions are set for:
+    /// - /p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify)
     /// </summary>
     public class P2pkhImplicitLayout : IPermissionsProvider
     {

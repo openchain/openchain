@@ -21,7 +21,10 @@ namespace Openchain.Ledger.Validation
 {
     /// <summary>
     /// Represents the implicit permission layout where account names contain identities.
-    /// Permissions are set for /asset/p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify).
+    /// Permissions are set for:
+    /// - /asset/p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify if the record name
+    ///   matches a third-party asset owned by the current identity)
+    /// - / (AccountNegative if the record name matches a third-party asset owned by the current identity)
     /// </summary>
     public class P2pkhIssuanceImplicitLayout : IPermissionsProvider
     {
@@ -36,6 +39,17 @@ namespace Openchain.Ledger.Validation
         public Task<PermissionSet> GetPermissions(IReadOnlyList<SignatureEvidence> authentication, LedgerPath path, bool recursiveOnly, string recordName)
         {
             HashSet<string> identities = new HashSet<string>(authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
+            LedgerPath pathRecordName;
+
+            // If the path is root and the record name is a tird-party asset owned by the current identity,
+            // arbitrary modification of the balance is allowed
+            if (LedgerPath.TryParse(recordName, out pathRecordName)
+                && thirdPartyAssetPath.IsStrictParentOf(pathRecordName)
+                && path.Segments.Count == 0
+                && identities.Contains(pathRecordName.Segments[thirdPartyAssetPath.Segments.Count]))
+            {
+                return Task.FromResult(new PermissionSet(accountNegative: Access.Permit));
+            }
 
             // Account /asset/p2pkh/[addr]
             if (thirdPartyAssetPath.IsStrictParentOf(path)
