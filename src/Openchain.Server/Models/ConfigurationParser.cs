@@ -197,12 +197,16 @@ namespace Openchain.Server.Models
                                 new PermissionSet(accountNegative: Access.Permit)));
                         }
 
-                        bool allowThirdPartyAssets = bool.Parse(validator["allow_third_party_assets"]);
+                        List<IPermissionsProvider> permissionProviders = new List<IPermissionsProvider>();
 
-                        IPermissionsProvider implicitLayout = new DefaultPermissionLayout(allowThirdPartyAssets, keyEncoder);
-                        IPermissionsProvider staticPermissions = new StaticPermissionLayout(pathPermissions);
-                        IPermissionsProvider dynamicPermissions = new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder);
-                        return new PermissionBasedValidator(new[] { implicitLayout, staticPermissions, dynamicPermissions });
+                        if (bool.Parse(validator["allow_third_party_assets"]))
+                            permissionProviders.Add(new P2pkhIssuanceImplicitLayout(keyEncoder));
+
+                        permissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
+                        permissionProviders.Add(new StaticPermissionLayout(pathPermissions));
+                        permissionProviders.Add(new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder));
+
+                        return new PermissionBasedValidator(permissionProviders);
                     case "Disabled":
                         return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
                     default:
