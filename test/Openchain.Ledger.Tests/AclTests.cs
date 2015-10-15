@@ -66,6 +66,23 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Permit, result[0].Permissions.DataModify);
         }
 
+        [Fact]
+        public void Parse_Defaults()
+        {
+            const string acl = @"[{ ""subjects"": [ ], ""permissions"": { } }]";
+            IReadOnlyList<Acl> result = Acl.Parse(acl, LedgerPath.Parse("/root/path/"), new KeyEncoder(111));
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("", result[0].RecordName.Pattern);
+            Assert.Equal(PatternMatchingStrategy.Prefix, result[0].RecordName.MatchingStrategy);
+            Assert.Equal(true, result[0].Recursive);
+            Assert.Equal(0, result[0].Subjects.Count);
+            Assert.Equal(Access.Unset, result[0].Permissions.AccountModify);
+            Assert.Equal(Access.Unset, result[0].Permissions.AccountSpend);
+            Assert.Equal(Access.Unset, result[0].Permissions.AccountModify);
+            Assert.Equal(Access.Unset, result[0].Permissions.DataModify);
+        }
+
         private static string GetValidAcl()
         {
             return @"
