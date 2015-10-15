@@ -79,8 +79,8 @@ namespace Openchain.Ledger.Validation
                     ((JArray)root["subjects"]).Children().Select(subject =>
                         new P2pkhSubject(((JArray)subject["addresses"]).Select(key => (string)key), (int)subject["required"], keyEncoder)),
                     path,
-                    (bool)root["recursive"],
-                    new StringPattern((string)root["record_name"], (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"])),
+                    (bool?)root["recursive"] ?? true,
+                    new StringPattern((string)root["record_name"] ?? string.Empty, (PatternMatchingStrategy)Enum.Parse(typeof(PatternMatchingStrategy), (string)root["record_name_matching"] ?? "Prefix")),
                     new PermissionSet(
                         accountNegative: Parse(root["permissions"]["account_negative"]),
                         accountSpend: Parse(root["permissions"]["account_spend"]),
