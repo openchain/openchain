@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,10 @@ namespace Openchain.Ledger.Validation
                 permissions = Acl.Parse(Encoding.UTF8.GetString(record.Value.ToByteArray()), path, keyEncoder);
             }
             catch (JsonReaderException)
+            {
+                return PermissionSet.Unset;
+            }
+            catch (InvalidOperationException)
             {
                 return PermissionSet.Unset;
             }
