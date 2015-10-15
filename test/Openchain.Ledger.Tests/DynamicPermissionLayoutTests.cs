@@ -78,6 +78,19 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
+        [Fact]
+        public async Task GetPermissions_JsonComments()
+        {
+            DynamicPermissionLayout layout = new DynamicPermissionLayout(new TestStore(), new KeyEncoder(111));
+
+            PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/comment/"), true, "name");
+
+            Assert.Equal(Access.Unset, result.AccountModify);
+            Assert.Equal(Access.Unset, result.AccountNegative);
+            Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.DataModify);
+        }
+
         private class TestStore : ITransactionStore
         {
             public Task AddTransactions(IEnumerable<ByteString> transactions)
@@ -105,6 +118,10 @@ namespace Openchain.Ledger.Tests
                         else if (recordKey.Path.FullPath == "/root/invalid/")
                         {
                             return new Record(key, GetInvalidAcl(), ByteString.Empty);
+                        }
+                        else if (recordKey.Path.FullPath == "/root/comment/")
+                        {
+                            return new Record(key, GetCommentedAcl(), ByteString.Empty);
                         }
                     }
 
@@ -136,6 +153,12 @@ namespace Openchain.Ledger.Tests
             {
                 return new ByteString(
                     Encoding.UTF8.GetBytes(@"[{ ""invalid"" }]"));
+            }
+
+            private static ByteString GetCommentedAcl()
+            {
+                return new ByteString(
+                    Encoding.UTF8.GetBytes(@"[ /* Comment */ { }]"));
             }
 
             public IObservable<ByteString> GetTransactionStream(ByteString from)
