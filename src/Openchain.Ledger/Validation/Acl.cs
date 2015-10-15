@@ -91,7 +91,12 @@ namespace Openchain.Ledger.Validation
 
         private static Access Parse(JToken value)
         {
-            return (Access)Enum.Parse(typeof(Access), (string)value);
+            string stringValue = (string)value;
+
+            if (stringValue == null)
+                return Access.Unset;
+            else
+                return (Access)Enum.Parse(typeof(Access), stringValue);
         }
 
         /// <summary>
