@@ -12,20 +12,17 @@
   "userSecretsId": "Openchain.Server",
 
   "dependencies": {
-    "System.Text.Encoding": "4.0.11-beta-23225",
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta7",
-    "Microsoft.AspNet.Mvc.Cors": "6.0.0-beta7",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta7",
-    "Microsoft.AspNet.Hosting": "1.0.0-beta7",
-    "Microsoft.AspNet.Loader.IIS": "1.0.0-beta7",
-    "Microsoft.AspNet.Loader.IIS.Interop": "1.0.0-beta7",
-    "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-    "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta7",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
-    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
+    "System.Text.Encoding": "4.0.11-beta-23409",
+    "Microsoft.AspNet.Cors": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta8",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta8",
+    "Microsoft.AspNet.Hosting": "1.0.0-beta8",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
+    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta8",
+    "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta8",
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
     "Newtonsoft.Json": "7.0.1",
     "Openchain.Abstractions": "0.4.1-*",
     "Openchain.Ledger": "0.4.1-*",
@@ -42,8 +39,8 @@
 
     "dnxcore50": {
       "dependencies": {
-        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23225",
-        "System.Net.WebSockets.Client": "4.0.0-beta-23225"
+        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409",
+        "System.Net.WebSockets.Client": "4.0.0-beta-23409"
       }
     },
 
