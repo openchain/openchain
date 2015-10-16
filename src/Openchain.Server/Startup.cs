@@ -13,8 +13,6 @@
 // limitations under the License.
 
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Cors;
-using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.WebSockets.Server;
 using Microsoft.Dnx.Runtime;

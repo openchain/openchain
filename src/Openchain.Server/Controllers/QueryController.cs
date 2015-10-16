@@ -16,14 +16,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Cors.Core;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
 using Openchain.Ledger;
 
 namespace Openchain.Server.Controllers
 {
-    [EnableCors("Any")]
     [Route("query")]
     public class QueryController : Controller
     {

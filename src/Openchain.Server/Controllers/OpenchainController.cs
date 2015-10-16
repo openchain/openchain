@@ -29,7 +29,6 @@ using Openchain.Ledger.Validation;
 
 namespace Openchain.Server.Controllers
 {
-    [EnableCors("Any")]
     [Route("")]
     public class OpenchainController : Controller
     {
@@ -140,7 +139,7 @@ namespace Openchain.Server.Controllers
         }
 
         [HttpGet("record")]
-        public async Task<ActionResult> GetValue(string key)
+        public async Task<ActionResult> GetRecord(string key)
         {
             ByteString parsedKey;
 
