@@ -30,7 +30,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
+    "start": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
   },
 
   "frameworks": {
