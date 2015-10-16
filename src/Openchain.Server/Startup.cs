@@ -34,9 +34,9 @@ namespace Openchain.Server
         public Startup(IHostingEnvironment env, IApplicationEnvironment application)
         {
             // Setup Configuration
-            configuration = new ConfigurationBuilder(application.ApplicationBasePath)
+            configuration = new ConfigurationBuilder()
                 .AddJsonFile(env.MapPath("App_Data/config.json"))
-                .AddUserSecrets()
+                .AddUserSecrets("Openchain.Server")
                 .AddEnvironmentVariables()
                 .Build();
         }
@@ -55,7 +55,6 @@ namespace Openchain.Server
             services
                 .AddMvcCore()
                 .AddViews()
-                .AddCors()
                 .AddJsonFormatters();
 
             // Logger
@@ -65,8 +64,6 @@ namespace Openchain.Server
 
             // CORS Headers
             services.AddCors();
-            CorsPolicy policy = new CorsPolicyBuilder().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().Build();
-            services.ConfigureCors(options => options.AddPolicy("Any", policy));
 
             // Ledger Store
             services.AddTransient<ITransactionStore>(ConfigurationParser.CreateLedgerStore);
@@ -97,6 +94,8 @@ namespace Openchain.Server
         /// </summary>
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
         {
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             app.Map("/stream", managedWebSocketsApp =>
             {
                 if (bool.Parse(configuration["enable_transaction_stream"]))

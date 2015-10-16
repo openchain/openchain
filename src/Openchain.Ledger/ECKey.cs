@@ -69,7 +69,7 @@ namespace Openchain.Ledger
 
                     return new ECDSASignature(((DerInteger)seq[0]).Value, ((DerInteger)seq[1]).Value);
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
                     throw new FormatException("Invalid DER signature", ex);
                 }

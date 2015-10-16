@@ -77,7 +77,7 @@ namespace Openchain.Server.Controllers
                 return HttpBadRequest();
             }
 
-            TransactionValidator validator = Context.ApplicationServices.GetService<TransactionValidator>();
+            TransactionValidator validator = HttpContext.ApplicationServices.GetService<TransactionValidator>();
             if (validator == null)
                 return CreateErrorResponse("ValidationDisabled");
 
