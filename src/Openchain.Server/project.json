@@ -18,7 +18,6 @@
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta8",
     "Microsoft.AspNet.Hosting": "1.0.0-beta8",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta8",
     "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta8",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
@@ -31,8 +30,7 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --server.urls http://localhost:8080",
-    "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
+    "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
   },
 
   "frameworks": {
