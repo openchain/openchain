@@ -64,7 +64,7 @@ namespace Openchain.Server
             services.AddCors();
 
             // Ledger Store
-            services.AddTransient<ITransactionStore>(ConfigurationParser.CreateLedgerStore);
+            services.AddTransient<IStorageEngine>(ConfigurationParser.CreateLedgerStore);
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
@@ -90,7 +90,7 @@ namespace Openchain.Server
         /// <summary>
         /// Configures the services.
         /// </summary>
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, ITransactionStore store)
+        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
         {
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 

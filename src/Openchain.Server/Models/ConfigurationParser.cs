@@ -31,7 +31,7 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
-        public static ITransactionStore CreateLedgerStore(IServiceProvider serviceProvider)
+        public static IStorageEngine CreateLedgerStore(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IConfiguration storage = configuration.GetSection("storage");
@@ -55,7 +55,7 @@ namespace Openchain.Server.Models
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            ITransactionStore store = serviceProvider.GetService<ITransactionStore>();
+            IStorageEngine store = serviceProvider.GetService<IStorageEngine>();
 
             return store as ILedgerQueries;
         }
@@ -206,7 +206,7 @@ namespace Openchain.Server.Models
                             permissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
 
                         permissionProviders.Add(new StaticPermissionLayout(pathPermissions));
-                        permissionProviders.Add(new DynamicPermissionLayout(serviceProvider.GetRequiredService<ITransactionStore>(), keyEncoder));
+                        permissionProviders.Add(new DynamicPermissionLayout(serviceProvider.GetRequiredService<IStorageEngine>(), keyEncoder));
 
                         return new PermissionBasedValidator(permissionProviders);
                     case "Disabled":
@@ -229,7 +229,7 @@ namespace Openchain.Server.Models
             if (rulesValidator == null)
                 return null;
             else
-                return new TransactionValidator(serviceProvider.GetService<ITransactionStore>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"]);
+                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"]);
         }
 
         public static ILogger CreateLogger(IServiceProvider serviceProvider)

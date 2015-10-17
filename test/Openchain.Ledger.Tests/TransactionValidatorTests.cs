@@ -169,7 +169,7 @@ namespace Openchain.Ledger.Tests
             }
         }
 
-        private class TestStore : ITransactionStore
+        private class TestStore : IStorageEngine
         {
             private readonly IDictionary<string, long> accounts;
             private readonly bool exception;

@@ -21,7 +21,7 @@ namespace Openchain
     /// <summary>
     /// Represents a data store for key-value pairs.
     /// </summary>
-    public interface ITransactionStore
+    public interface IStorageEngine
     {
         /// <summary>
         /// Adds a transaction to the store.

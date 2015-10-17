@@ -91,7 +91,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
-        private class TestStore : ITransactionStore
+        private class TestStore : IStorageEngine
         {
             public Task AddTransactions(IEnumerable<ByteString> transactions)
             {

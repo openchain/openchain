@@ -23,11 +23,11 @@ namespace Openchain.Ledger.Validation
 {
     public class TransactionValidator
     {
-        private readonly ITransactionStore store;
+        private readonly IStorageEngine store;
         private readonly ByteString ledgerId;
         private readonly IMutationValidator validator;
 
-        public TransactionValidator(ITransactionStore store, IMutationValidator validator, string rootUrl)
+        public TransactionValidator(IStorageEngine store, IMutationValidator validator, string rootUrl)
         {
             this.store = store;
             this.validator = validator;

@@ -24,10 +24,10 @@ namespace Openchain.Server.Models
     public class TransactionStreamSubscriber
     {
         private readonly UriBuilder endpoint;
-        private readonly ITransactionStore store;
+        private readonly IStorageEngine store;
         private readonly ILogger logger;
 
-        public TransactionStreamSubscriber(Uri endpoint, ITransactionStore store, ILogger logger)
+        public TransactionStreamSubscriber(Uri endpoint, IStorageEngine store, ILogger logger)
         {
             this.endpoint = new UriBuilder(endpoint);
 

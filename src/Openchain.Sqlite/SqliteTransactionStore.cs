@@ -21,7 +21,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteTransactionStore : ITransactionStore
+    public class SqliteTransactionStore : IStorageEngine
     {
         public SqliteTransactionStore(string filename)
         {

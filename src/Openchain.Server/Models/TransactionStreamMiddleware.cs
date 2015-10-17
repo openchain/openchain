@@ -51,7 +51,7 @@ namespace Openchain.Server.Models
                     lastLedgerRecordHash = ByteString.Parse(from);
 
                 ILogger logger = (ILogger)context.ApplicationServices.GetService(typeof(ILogger));
-                ITransactionStore store = (ITransactionStore)context.ApplicationServices.GetService(typeof(ITransactionStore));
+                IStorageEngine store = (IStorageEngine)context.ApplicationServices.GetService(typeof(IStorageEngine));
 
                 IObservable<ByteString> stream = store.GetTransactionStream(lastLedgerRecordHash);
 

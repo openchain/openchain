@@ -32,10 +32,10 @@ namespace Openchain.Server.Controllers
     [Route("")]
     public class OpenchainController : Controller
     {
-        private readonly ITransactionStore store;
+        private readonly IStorageEngine store;
         private readonly ILogger logger;
 
-        public OpenchainController(ITransactionStore store, ILogger logger)
+        public OpenchainController(IStorageEngine store, ILogger logger)
         {
             this.store = store;
             this.logger = logger;

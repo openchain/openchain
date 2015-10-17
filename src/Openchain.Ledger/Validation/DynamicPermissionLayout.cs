@@ -22,12 +22,12 @@ namespace Openchain.Ledger.Validation
 {
     public class DynamicPermissionLayout : IPermissionsProvider
     {
-        private readonly ITransactionStore store;
+        private readonly IStorageEngine store;
         private readonly KeyEncoder keyEncoder;
 
         public static string AclResourceName { get; } = "acl";
 
-        public DynamicPermissionLayout(ITransactionStore store, KeyEncoder keyEncoder)
+        public DynamicPermissionLayout(IStorageEngine store, KeyEncoder keyEncoder)
         {
             this.store = store;
             this.keyEncoder = keyEncoder;
