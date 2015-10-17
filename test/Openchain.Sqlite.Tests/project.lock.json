@@ -189,7 +189,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.1": {
+      "Openchain.Abstractions/0.4.2": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -200,12 +200,12 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23409"
         }
       },
-      "Openchain.Ledger/0.4.1": {
+      "Openchain.Ledger/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.1",
+          "Openchain.Abstractions": "0.4.2",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
@@ -214,13 +214,13 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23409"
         }
       },
-      "Openchain.Sqlite/0.4.1": {
+      "Openchain.Sqlite/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8",
-          "Openchain.Abstractions": "0.4.1",
-          "Openchain.Ledger": "0.4.1"
+          "Openchain.Abstractions": "0.4.2",
+          "Openchain.Ledger": "0.4.2"
         }
       },
       "Portable.BouncyCastle/1.8.0-rc2": {
@@ -1328,7 +1328,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.1": {
+      "Openchain.Abstractions/0.4.2": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -1339,12 +1339,12 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23409"
         }
       },
-      "Openchain.Ledger/0.4.1": {
+      "Openchain.Ledger/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.1",
+          "Openchain.Abstractions": "0.4.2",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
@@ -1353,13 +1353,13 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23409"
         }
       },
-      "Openchain.Sqlite/0.4.1": {
+      "Openchain.Sqlite/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8",
-          "Openchain.Abstractions": "0.4.1",
-          "Openchain.Ledger": "0.4.1"
+          "Openchain.Abstractions": "0.4.2",
+          "Openchain.Ledger": "0.4.2"
         }
       },
       "Portable.BouncyCastle/1.8.0-rc2": {
@@ -2719,7 +2719,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.1": {
+      "Openchain.Abstractions/0.4.2": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.0",
         "dependencies": {
@@ -2730,12 +2730,12 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23409"
         }
       },
-      "Openchain.Ledger/0.4.1": {
+      "Openchain.Ledger/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.1",
+          "Openchain.Abstractions": "0.4.2",
           "Portable.BouncyCastle": "1.8.0-RC2",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
@@ -2744,13 +2744,13 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23409"
         }
       },
-      "Openchain.Sqlite/0.4.1": {
+      "Openchain.Sqlite/0.4.2": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-beta8",
-          "Openchain.Abstractions": "0.4.1",
-          "Openchain.Ledger": "0.4.1"
+          "Openchain.Abstractions": "0.4.2",
+          "Openchain.Ledger": "0.4.2"
         }
       },
       "Portable.BouncyCastle/1.8.0-rc2": {
@@ -3904,15 +3904,15 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.4.1": {
+    "Openchain.Abstractions/0.4.2": {
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.4.1": {
+    "Openchain.Ledger/0.4.2": {
       "type": "project",
       "path": "../../src/Openchain.Ledger/project.json"
     },
-    "Openchain.Sqlite/0.4.1": {
+    "Openchain.Sqlite/0.4.2": {
       "type": "project",
       "path": "../../src/Openchain.Sqlite/project.json"
     },
@@ -6337,9 +6337,9 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Openchain.Sqlite >= 0.4.2-*",
       "xunit >= 2.1.0-rc2-*",
-      "xunit.runner.dnx >= 2.1.0-beta6-*",
-      "Openchain.Sqlite >= 0.4.1-*"
+      "xunit.runner.dnx >= 2.1.0-beta6-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Collections >= 4.0.11-beta-23409",
