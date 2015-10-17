@@ -22,7 +22,7 @@ using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteAnchorBuilder : SqliteTransactionStore, IAnchorBuilder
+    public class SqliteAnchorBuilder : SqliteStorageEngine, IAnchorBuilder
     {
         public SqliteAnchorBuilder(string filename)
             : base(filename)

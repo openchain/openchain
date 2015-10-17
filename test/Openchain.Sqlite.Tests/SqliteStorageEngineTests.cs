@@ -20,15 +20,15 @@ using Xunit;
 
 namespace Openchain.Sqlite.Tests
 {
-    public class SqliteTransactionStoreTests
+    public class SqliteStorageEngineTests
     {
-        private readonly SqliteTransactionStore store;
+        private readonly SqliteStorageEngine store;
         private readonly ByteString[] binaryData =
             Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
-        public SqliteTransactionStoreTests()
+        public SqliteStorageEngineTests()
         {
-            this.store = new SqliteTransactionStore(":memory:");
+            this.store = new SqliteStorageEngine(":memory:");
             this.store.EnsureTables().Wait();
         }
 

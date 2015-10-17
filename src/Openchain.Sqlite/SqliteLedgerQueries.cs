@@ -20,7 +20,7 @@ using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteLedgerQueries : SqliteTransactionStore, ILedgerQueries
+    public class SqliteLedgerQueries : SqliteStorageEngine, ILedgerQueries
     {
         private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
 

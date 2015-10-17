@@ -21,9 +21,9 @@ using Microsoft.Data.Sqlite;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteTransactionStore : IStorageEngine
+    public class SqliteStorageEngine : IStorageEngine
     {
-        public SqliteTransactionStore(string filename)
+        public SqliteStorageEngine(string filename)
         {
             this.Connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString());
             this.Connection.OpenAsync().Wait();
