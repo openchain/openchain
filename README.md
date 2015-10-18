@@ -1,10 +1,16 @@
 # Openchain Reference Implementation
 
+Openchain is an open source distributed ledger technology. It is suited for organizations wishing to issue and manage digital assets in a robust, secure and scalable way. Visit [openchain.org](https://www.openchain.org/) for more information.
+
 The full documentation for Openchain is available at [docs.openchain.org](https://docs.openchain.org/).
 
 ## Installation
 
-Please refer to the [installation instructions](http://openchain.readthedocs.org/en/latest/general/docker-deployment.html).
+Please refer to the [installation guide](http://openchain.readthedocs.org/en/latest/general/docker-deployment.html) to deploy the Openchain server.
+
+## Client
+
+A reference client implementation is available at [wallet.openchain.org](https://wallet.openchain.org/). The source code is available on [GitHub](https://github.com/openchain/wallet).
 
 ## License
 
