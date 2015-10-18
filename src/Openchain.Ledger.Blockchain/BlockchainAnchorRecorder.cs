@@ -67,7 +67,7 @@ namespace Openchain.Ledger.Blockchain
         {
             byte[] anchorPayload =
                 anchorMarker
-                .Concat(BitConverter.GetBytes(anchor.TransactionCount).Reverse())
+                .Concat(BitConverter.GetBytes((ulong)anchor.TransactionCount).Reverse())
                 .Concat(anchor.FullStoreHash.ToByteArray())
                 .ToArray();
 
