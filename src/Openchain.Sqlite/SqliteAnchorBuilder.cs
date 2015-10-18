@@ -22,6 +22,9 @@ using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
+    /// <summary>
+    /// Builds a database anchor from a <see cref="SqliteStorageEngine"/> instance.
+    /// </summary>
     public class SqliteAnchorBuilder : SqliteStorageEngine, IAnchorBuilder
     {
         public SqliteAnchorBuilder(string filename)
@@ -48,6 +51,10 @@ namespace Openchain.Sqlite
             await command.ExecuteNonQueryAsync();
         }
 
+        /// <summary>
+        /// Creates a database anchor for the current state of the database.
+        /// </summary>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task<LedgerAnchor> CreateAnchor()
         {
             IEnumerable<LedgerAnchor> anchors = await ExecuteAsync(@"
@@ -115,6 +122,11 @@ namespace Openchain.Sqlite
             return result;
         }
 
+        /// <summary>
+        /// Marks the anchor as successfully recorded in the anchoring medium.
+        /// </summary>
+        /// <param name="anchor">The anchor to commit.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task CommitAnchor(LedgerAnchor anchor)
         {
             await ExecuteAsync(@"
