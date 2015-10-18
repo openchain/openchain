@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
@@ -101,15 +100,9 @@ namespace Openchain.Server.Models
             }
 
             if (recorder != null)
-            {
-                LedgerAnchorWorker anchorWorker = new LedgerAnchorWorker(serviceProvider.GetRequiredService<IAnchorBuilder>(), recorder, serviceProvider.GetRequiredService<ILogger>());
-                anchorWorker.Run(CancellationToken.None);
-                return anchorWorker;
-            }
+                return new LedgerAnchorWorker(serviceProvider.GetRequiredService<IAnchorBuilder>(), recorder, serviceProvider.GetRequiredService<ILogger>());
             else
-            {
                 return null;
-            }
         }
 
         public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)
@@ -256,10 +249,7 @@ namespace Openchain.Server.Models
                 string upstreamUrl = observerMode["upstream_url"];
                 logger.LogInformation("Current mode: Observer mode");
                 logger.LogInformation("Upstream URL: {0}", upstreamUrl);
-                TransactionStreamSubscriber streamSubscriber = ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(upstreamUrl));
-                streamSubscriber.Subscribe(CancellationToken.None);
-
-                return streamSubscriber;
+                return ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(upstreamUrl));
             }
         }
 

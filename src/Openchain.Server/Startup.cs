@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.WebSockets.Server;
@@ -28,6 +31,7 @@ namespace Openchain.Server
     public class Startup
     {
         private readonly IConfiguration configuration;
+        private static List<Task> runningTasks = new List<Task>();
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment application)
         {
@@ -109,9 +113,15 @@ namespace Openchain.Server
             await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
 
             // Activate singletons
-            app.ApplicationServices.GetService<TransactionStreamSubscriber>();
+            TransactionStreamSubscriber subscriber = app.ApplicationServices.GetService<TransactionStreamSubscriber>();
+            if (subscriber != null)
+                runningTasks.Add(subscriber.Subscribe(CancellationToken.None));
+
             app.ApplicationServices.GetService<IMutationValidator>();
-            app.ApplicationServices.GetService<LedgerAnchorWorker>();
+
+            LedgerAnchorWorker anchorWorker = app.ApplicationServices.GetService<LedgerAnchorWorker>();
+            if (anchorWorker != null)
+                runningTasks.Add(anchorWorker.Run(CancellationToken.None));
         }
     }
 }
