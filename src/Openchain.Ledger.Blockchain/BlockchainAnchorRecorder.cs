@@ -45,6 +45,8 @@ namespace Openchain.Ledger.Blockchain
                 BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
                 HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/transactions"));
 
+                response.EnsureSuccessStatusCode();
+
                 string body = await response.Content.ReadAsStringAsync();
 
                 JArray outputs = JArray.Parse(body);
@@ -75,6 +77,8 @@ namespace Openchain.Ledger.Blockchain
             {
                 BitcoinAddress address = this.publishingAddress.ScriptPubKey.GetDestinationAddress(this.network);
                 HttpResponseMessage response = await client.GetAsync(new Uri(url, $"addresses/{address.ToString()}/unspents"));
+
+                response.EnsureSuccessStatusCode();
 
                 string body = await response.Content.ReadAsStringAsync();
 
