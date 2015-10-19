@@ -98,6 +98,8 @@ namespace Openchain.Server
         {
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
+            app.UseIISPlatformHandler();
+
             app.Map("/stream", managedWebSocketsApp =>
             {
                 if (bool.Parse(configuration["enable_transaction_stream"]))

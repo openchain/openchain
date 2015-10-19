@@ -14,6 +14,7 @@
   "dependencies": {
     "System.Text.Encoding": "4.0.11-beta-23409",
     "Microsoft.AspNet.Cors": "6.0.0-beta8",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
     "Microsoft.AspNet.Mvc.Core": "6.0.0-beta8",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta8",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
