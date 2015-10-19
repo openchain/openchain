@@ -7,11 +7,8 @@
         "ASPNET_ENV": "Development"
       }
     },
-    "web": {
-      "commandName": "web",
-      "environmentVariables": {
-        "ASPNET_ENV": "Development"
-      },
+    "start": {
+      "commandName": "start",
       "sdkVersion": "dnx-coreclr-win-x86.1.0.0-beta8"
     }
   }
