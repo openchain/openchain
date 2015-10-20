@@ -44,7 +44,7 @@ namespace Openchain.Ledger.Blockchain
         /// <summary>
         /// Indicates whether this instance is ready to record a new database anchor.
         /// </summary>
-        /// <returns>The <see cref="Task{bool}"/> object representing the asynchronous operation.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task<bool> CanRecordAnchor()
         {
             using (HttpClient client = new HttpClient())
@@ -76,7 +76,7 @@ namespace Openchain.Ledger.Blockchain
         /// Records a database anchor.
         /// </summary>
         /// <param name="anchor">The anchor to be recorded.</param>
-        /// <returns>The <see cref="Task"/> object representing the asynchronous operation.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
