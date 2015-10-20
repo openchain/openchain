@@ -22,6 +22,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Openchain.Ledger.Blockchain
 {
+    /// <summary>
+    /// Records database anchors in a Blockchain.
+    /// </summary>
     public class BlockchainAnchorRecorder : IAnchorRecorder
     {
         private static readonly byte[] anchorMarker = new byte[] { 0x4f, 0x43 };
@@ -38,6 +41,10 @@ namespace Openchain.Ledger.Blockchain
             this.satoshiFees = satoshiFees;
         }
 
+        /// <summary>
+        /// Indicates whether this instance is ready to record a new database anchor.
+        /// </summary>
+        /// <returns>The <see cref="Task{bool}"/> object representing the asynchronous operation.</returns>
         public async Task<bool> CanRecordAnchor()
         {
             using (HttpClient client = new HttpClient())
@@ -65,6 +72,11 @@ namespace Openchain.Ledger.Blockchain
             }
         }
 
+        /// <summary>
+        /// Records a database anchor.
+        /// </summary>
+        /// <param name="anchor">The anchor to be recorded.</param>
+        /// <returns>The <see cref="Task"/> object representing the asynchronous operation.</returns>
         public async Task RecordAnchor(LedgerAnchor anchor)
         {
             byte[] anchorPayload =
