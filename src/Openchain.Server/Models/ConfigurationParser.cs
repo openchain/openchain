@@ -230,7 +230,7 @@ namespace Openchain.Server.Models
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             ILoggerFactory loggerFactory = serviceProvider.GetService<ILoggerFactory>();
 
-            return loggerFactory.CreateLogger("General");
+            return new DateLogger(loggerFactory.CreateLogger("General"));
         }
 
         public static TransactionStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)
