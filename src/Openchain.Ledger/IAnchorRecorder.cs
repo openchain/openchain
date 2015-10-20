@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace Openchain.Ledger
 {
     /// <summary>
-    /// Provides functionality for recording a database anchor. 
+    /// Provides functionality for recording a database anchor.
     /// </summary>
     public interface IAnchorRecorder
     {
