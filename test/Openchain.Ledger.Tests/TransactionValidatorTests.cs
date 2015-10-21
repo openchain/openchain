@@ -47,8 +47,9 @@ namespace Openchain.Ledger.Tests
             TransactionValidator validator = CreateValidator(new Dictionary<string, long>());
             ByteString mutation = ByteString.Parse("aa");
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("InvalidMutation", exception.Reason);
         }
 
         [Fact]
@@ -68,8 +69,9 @@ namespace Openchain.Ledger.Tests
                 },
                 ByteString.Empty);
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(new ByteString(MessageSerializer.SerializeMutation(mutation)), new SignatureEvidence[0]));
+            Assert.Equal("InvalidMutation", exception.Reason);
         }
 
         [Fact]
@@ -84,8 +86,9 @@ namespace Openchain.Ledger.Tests
             TransactionValidator validator = CreateValidator(accounts);
             ByteString mutation = CreateMutation("http://root/");
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("UnbalancedTransaction", exception.Reason);
         }
 
         [Fact]
@@ -100,8 +103,9 @@ namespace Openchain.Ledger.Tests
             TransactionValidator validator = CreateValidator(accounts);
             ByteString mutation = CreateMutation("http://wrong-root/");
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("InvalidNamespace", exception.Reason);
         }
 
         [Fact]
@@ -120,8 +124,9 @@ namespace Openchain.Ledger.Tests
 
             ByteString mutation = CreateMutation("http://root/");
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("OptimisticConcurrency", exception.Reason);
         }
 
         [Fact]
@@ -140,8 +145,9 @@ namespace Openchain.Ledger.Tests
 
             ByteString mutation = CreateMutation("http://root/");
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("Test", exception.Reason);
         }
 
         private ByteString CreateMutation(string @namespace)
