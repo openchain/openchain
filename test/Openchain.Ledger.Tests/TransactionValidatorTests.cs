@@ -52,6 +52,27 @@ namespace Openchain.Ledger.Tests
         }
 
         [Fact]
+        public async Task PostTransaction_MaxKeySize()
+        {
+            Dictionary<string, long> accounts = new Dictionary<string, long>();
+
+            TransactionValidator validator = CreateValidator(accounts);
+            Mutation mutation = new Mutation(
+                new ByteString(Encoding.UTF8.GetBytes("http://root/")),
+                new Record[]
+                {
+                    new Record(
+                        ByteString.Parse(new string('a', 1025 * 2)),
+                        new ByteString(BitConverter.GetBytes(100L).Reverse()),
+                        ByteString.Empty)
+                },
+                ByteString.Empty);
+
+            await Assert.ThrowsAsync<TransactionInvalidException>(
+                () => validator.PostTransaction(new ByteString(MessageSerializer.SerializeMutation(mutation)), new SignatureEvidence[0]));
+        }
+
+        [Fact]
         public async Task PostTransaction_UnbalancedTransaction()
         {
             Dictionary<string, long> accounts = new Dictionary<string, long>()
