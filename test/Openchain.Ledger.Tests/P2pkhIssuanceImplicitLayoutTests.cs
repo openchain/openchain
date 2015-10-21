@@ -61,5 +61,34 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Permit, result.AccountSpend);
             Assert.Equal(Access.Permit, result.DataModify);
         }
+
+        [Fact]
+        public async Task GetPermissions_AclRecord()
+        {
+            P2pkhIssuanceImplicitLayout layout = new P2pkhIssuanceImplicitLayout(new KeyEncoder(111));
+
+            PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse($"/asset/p2pkh/{address}/"), true, $"acl");
+
+            Assert.Equal(Access.Permit, result.AccountModify);
+            Assert.Equal(Access.Unset, result.AccountNegative);
+            Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.DataModify);
+        }
+
+        [Theory]
+        [InlineData("/asset/p2pkh/")]
+        [InlineData("/asset/p2pkh/abc/")]
+        [InlineData("/other/")]
+        public async Task GetPermissions_NoPermissions(string value)
+        {
+            P2pkhIssuanceImplicitLayout layout = new P2pkhIssuanceImplicitLayout(new KeyEncoder(111));
+
+            PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse(value), true, $"/asset-path/");
+
+            Assert.Equal(Access.Unset, result.AccountModify);
+            Assert.Equal(Access.Unset, result.AccountNegative);
+            Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.DataModify);
+        }
     }
 }

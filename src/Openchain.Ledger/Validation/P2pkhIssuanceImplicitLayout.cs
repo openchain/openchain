@@ -22,7 +22,7 @@ namespace Openchain.Ledger.Validation
     /// <summary>
     /// Represents the implicit permission layout where account names contain identities.
     /// Permissions are set for:
-    /// - /asset/p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify if the record name
+    /// - /asset/p2pkh/[addr]/ (AccountModify and optionally AccountSpend and DataModify if the record name
     ///   matches a third-party asset owned by the current identity)
     /// - / (AccountNegative if the record name matches a third-party asset owned by the current identity)
     /// </summary>
@@ -51,7 +51,7 @@ namespace Openchain.Ledger.Validation
                 return Task.FromResult(new PermissionSet(accountNegative: Access.Permit));
             }
 
-            // Account /asset/p2pkh/[addr]
+            // Account /asset/p2pkh/[addr]/
             if (thirdPartyAssetPath.IsStrictParentOf(path)
                 && path.Segments.Count == thirdPartyAssetPath.Segments.Count + 1
                 && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
