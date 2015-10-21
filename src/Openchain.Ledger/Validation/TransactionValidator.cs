@@ -23,6 +23,8 @@ namespace Openchain.Ledger.Validation
 {
     public class TransactionValidator
     {
+        private static readonly int MaxKeySize = 1024;
+
         private readonly IStorageEngine store;
         private readonly ByteString ledgerId;
         private readonly IMutationValidator validator;
@@ -49,6 +51,9 @@ namespace Openchain.Ledger.Validation
 
             if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
+
+            if (mutation.Records.Any(record => record.Key.Value.Count > MaxKeySize))
+                throw new TransactionInvalidException("InvalidMutation");
 
             ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
 
