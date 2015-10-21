@@ -22,7 +22,7 @@ namespace Openchain.Ledger.Validation
     /// <summary>
     /// Represents the implicit permission layout where account names contain identities.
     /// Permissions are set for:
-    /// - /p2pkh/[addr] (AccountModify and optionally AccountSpend and DataModify)
+    /// - /p2pkh/[addr]/ (AccountModify and optionally AccountSpend and DataModify)
     /// </summary>
     public class P2pkhImplicitLayout : IPermissionsProvider
     {
@@ -38,7 +38,7 @@ namespace Openchain.Ledger.Validation
         {
             HashSet<string> identities = new HashSet<string>(authentication.Select(evidence => keyEncoder.GetPubKeyHash(evidence.PublicKey)), StringComparer.Ordinal);
 
-            // Account /p2pkh/[addr]
+            // Account /p2pkh/[addr]/
             if (p2pkhAccountPath.IsStrictParentOf(path)
                 && path.Segments.Count == p2pkhAccountPath.Segments.Count + 1
                 && keyEncoder.IsP2pkh(path.Segments[path.Segments.Count - 1]))
