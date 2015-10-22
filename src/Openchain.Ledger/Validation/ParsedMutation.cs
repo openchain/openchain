@@ -55,17 +55,23 @@ namespace Openchain.Ledger.Validation
                         case RecordType.Data:
                             dataRecords.Add(new KeyValuePair<RecordKey, ByteString>(key, record.Value));
                             break;
-                        default:
-                            throw new TransactionInvalidException("InvalidRecord");
                     }
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "keyData")
                 {
                     throw new TransactionInvalidException("NonCanonicalSerialization");
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "path")
                 {
                     throw new TransactionInvalidException("InvalidPath");
+                }
+                catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "recordType")
+                {
+                    throw new TransactionInvalidException("InvalidRecord");
+                }
+                catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "record")
+                {
+                    throw new TransactionInvalidException("InvalidRecord");
                 }
             }
 
