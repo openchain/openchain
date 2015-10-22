@@ -73,39 +73,41 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public void Parse_InvalidRecord()
         {
+            TransactionInvalidException exception;
+
             // Invalid number of components
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
+            exception = Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 SerializeString("/the/account/:ACC"),
                 SerializeInt(100),
                 binaryData[3])));
+            Assert.Equal("NonCanonicalSerialization", exception.Reason);
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/the/asset/:ASDEF:/other/path/"),
+            // Unknown record
+            exception = Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
+                SerializeString("/the/asset/:INVALID:/other/path/"),
                 SerializeString("Definition"),
                 binaryData[3])));
+            Assert.Equal("InvalidRecord", exception.Reason);
 
             // Invalid path
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
+            exception = Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 SerializeString("the/account/:ACC:/the/asset/"),
                 SerializeInt(100),
                 binaryData[3])));
+            Assert.Equal("InvalidPath", exception.Reason);
 
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
+            exception = Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 SerializeString("/the/account/:ACC:the/asset/"),
                 SerializeInt(100),
                 binaryData[3])));
+            Assert.Equal("InvalidPath", exception.Reason);
 
             // Invalid account balance
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
+            exception = Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
                 SerializeString("/the/account/:ACC:/the/asset/"),
                 SerializeString("01"),
                 binaryData[3])));
-
-            // Invalid alias
-            Assert.Throws<TransactionInvalidException>(() => Parse(new Record(
-                SerializeString("/aka/alias/:ALIAS"),
-                SerializeString("the/path"),
-                binaryData[3])));
+            Assert.Equal("InvalidRecord", exception.Reason);
         }
 
         private ParsedMutation Parse(params Record[] records)
