@@ -52,6 +52,8 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task Validate_AccountMutation()
         {
+            TransactionInvalidException exception;
+
             // Able to spend existing funds as the issuer
             await TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny),
@@ -77,22 +79,25 @@ namespace Openchain.Ledger.Tests
                 newBalance: 100);
 
             // Missing the affect balance permission
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
+            exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Permit),
                 previousBalance: 100,
                 newBalance: 150));
+            Assert.Equal("AccountModificationUnauthorized", exception.Reason);
 
             // Missing the permissions to spend from the account
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
+            exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Permit),
                 previousBalance: 150,
                 newBalance: 100));
+            Assert.Equal("CannotSpendFromAccount", exception.Reason);
 
-            // Not able to spend more that the funds on the account
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
+            // Not able to spend more than the funds on the account
+            exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Permit),
                 previousBalance: 100,
                 newBalance: -50));
+            Assert.Equal("CannotIssueAsset", exception.Reason);
         }
 
         [Fact]
@@ -130,7 +135,9 @@ namespace Openchain.Ledger.Tests
                 new AccountStatus[0],
                 new[] { new KeyValuePair<RecordKey, ByteString>(new RecordKey(RecordType.Data, LedgerPath.Parse("/a/"), "a"), ByteString.Parse("aabb")) });
 
-            await Assert.ThrowsAsync<TransactionInvalidException>(() => validator.Validate(mutation, new SignatureEvidence[0], new Dictionary<AccountKey, AccountStatus>()));
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(() =>
+                validator.Validate(mutation, new SignatureEvidence[0], new Dictionary<AccountKey, AccountStatus>()));
+            Assert.Equal("CannotModifyData", exception.Reason);
         }
 
         [Fact]
