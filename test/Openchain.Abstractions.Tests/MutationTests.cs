@@ -49,37 +49,44 @@ namespace Openchain.Tests
         [Fact]
         public void Mutation_ArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mutation(
+            ArgumentNullException exception;
+            exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 null,
                 new[] { new Record(binaryData[1], binaryData[2], binaryData[3]) },
                 binaryData[4]));
+            Assert.Equal("namespace", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() => new Mutation(
+            exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 binaryData[0],
                 null,
                 binaryData[4]));
+            Assert.Equal("records", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() => new Mutation(
+            exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 binaryData[0],
                 new[] { new Record(binaryData[1], binaryData[2], binaryData[3]) },
                 null));
+            Assert.Equal("metadata", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() => new Mutation(
+            exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 binaryData[0],
                 new[] { new Record(binaryData[1], binaryData[2], binaryData[3]), null },
                 binaryData[4]));
+            Assert.Equal("records", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() =>
+            exception = Assert.Throws<ArgumentNullException>(() =>
                 new Record(null, binaryData[2], binaryData[3]));
+            Assert.Equal("key", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() =>
+            exception = Assert.Throws<ArgumentNullException>(() =>
                 new Record(binaryData[1], binaryData[2], null));
+            Assert.Equal("version", exception.ParamName);
         }
 
         [Fact]
         public void Mutation_DuplicateKey()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mutation(
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 binaryData[0],
                 new[]
                 {
@@ -87,6 +94,7 @@ namespace Openchain.Tests
                     new Record(binaryData[1], binaryData[4], binaryData[5]),
                 },
                 binaryData[6]));
+            Assert.Equal("records", exception.ParamName);
         }
     }
 }
