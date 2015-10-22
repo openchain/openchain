@@ -150,6 +150,49 @@ namespace Openchain.Ledger.Tests
             Assert.Equal("Test", exception.Reason);
         }
 
+        [Fact]
+        public async Task Validate_ValidSignature()
+        {
+            Dictionary<string, long> accounts = new Dictionary<string, long>()
+            {
+                ["/account/1/"] = 90,
+                ["/account/2/"] = 110,
+            };
+
+            TransactionValidator validator = CreateValidator(accounts);
+            ByteString mutation = CreateMutation("http://root/");
+
+            SignatureEvidence signature = new SignatureEvidence(
+                ByteString.Parse("0213b0006543d4ab6e79f49559fbfb18e9d73596d63f39e2f12ebc2c9d51e2eb06"),
+                ByteString.Parse("304402200c7fba6b623efd7e52731a11e6d7b99c2ae752c0f950b7a444ef7fb80162498c02202b01c74a4a04fb120860494de09bd6848f088927a7b07e3c3925b3894c8c89d4"));
+
+            ByteString result = await validator.PostTransaction(mutation, new[] { signature });
+
+            Assert.Equal(32, result.Value.Count);
+            Assert.Equal(ByteString.Parse("b27982ff2a4fa0c163da8651ca1902e27b651e68a6d0a4f6bff4a78d7dcf718d").ToByteArray(), MessageSerializer.ComputeHash(mutation.ToByteArray()));
+        }
+
+        [Fact]
+        public async Task Validate_InvalidSignature()
+        {
+            Dictionary<string, long> accounts = new Dictionary<string, long>()
+            {
+                ["/account/1/"] = 90,
+                ["/account/2/"] = 110,
+            };
+
+            TransactionValidator validator = CreateValidator(accounts);
+            ByteString mutation = CreateMutation("http://root/");
+
+            SignatureEvidence signature = new SignatureEvidence(
+                ByteString.Parse("0013b0006543d4ab6e79f49559fbfb18e9d73596d63f39e2f12ebc2c9d51e2eb06"),
+                ByteString.Parse("304402200c7fba6b623efd7e52731a11e6d7b99c2ae752c0f950b7a444ef7fb80162498c02202b01c74a4a04fb120860494de09bd6848f088927a7b07e3c3925b3894c8c89d4"));
+
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
+                () => validator.PostTransaction(mutation, new[] { signature }));
+            Assert.Equal("InvalidSignature", exception.Reason);
+        }
+
         private ByteString CreateMutation(string @namespace)
         {
             Mutation mutation = new Mutation(
