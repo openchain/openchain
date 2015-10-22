@@ -52,6 +52,7 @@ namespace Openchain.Ledger.Tests
         [Theory]
         [InlineData("/asset/p2pkh/")]
         [InlineData("/asset/p2pkh/abc/")]
+        [InlineData("/p2pkh/mgToXgKQqY3asA76uYU82BXMLGrHNm5ZD9/sub/")]
         [InlineData("/other/")]
         public async Task GetPermissions_NoPermissions(string value)
         {
