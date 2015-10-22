@@ -24,16 +24,16 @@ namespace Openchain.Ledger.Tests
 {
     public class TransactionValidatorTests
     {
+        private static readonly Dictionary<string, long> defaultAccounts = new Dictionary<string, long>()
+        {
+            ["/account/1/"] = 90,
+            ["/account/2/"] = 110,
+        };
+
         [Fact]
         public async Task PostTransaction_Success()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
-            TransactionValidator validator = CreateValidator(accounts);
+            TransactionValidator validator = CreateValidator(defaultAccounts);
             ByteString mutation = CreateMutation("http://root/");
 
             ByteString result = await validator.PostTransaction(mutation, new SignatureEvidence[0]);
@@ -94,13 +94,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task PostTransaction_InvalidNamespace()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
-            TransactionValidator validator = CreateValidator(accounts);
+            TransactionValidator validator = CreateValidator(defaultAccounts);
             ByteString mutation = CreateMutation("http://wrong-root/");
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
@@ -111,14 +105,8 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task PostTransaction_ConcurrencyException()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
             TransactionValidator validator = new TransactionValidator(
-                new TestStore(accounts, true),
+                new TestStore(defaultAccounts, true),
                 new TestValidator(false),
                 "http://root/");
 
@@ -132,14 +120,8 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task PostTransaction_ValidationException()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
             TransactionValidator validator = new TransactionValidator(
-                new TestStore(accounts, false),
+                new TestStore(defaultAccounts, false),
                 new TestValidator(true),
                 "http://root/");
 
@@ -153,13 +135,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task Validate_ValidSignature()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
-            TransactionValidator validator = CreateValidator(accounts);
+            TransactionValidator validator = CreateValidator(defaultAccounts);
             ByteString mutation = CreateMutation("http://root/");
 
             SignatureEvidence signature = new SignatureEvidence(
@@ -175,13 +151,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task Validate_InvalidSignature()
         {
-            Dictionary<string, long> accounts = new Dictionary<string, long>()
-            {
-                ["/account/1/"] = 90,
-                ["/account/2/"] = 110,
-            };
-
-            TransactionValidator validator = CreateValidator(accounts);
+            TransactionValidator validator = CreateValidator(defaultAccounts);
             ByteString mutation = CreateMutation("http://root/");
 
             SignatureEvidence signature = new SignatureEvidence(
