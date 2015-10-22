@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 
 namespace Openchain.Ledger.Validation
 {
@@ -59,18 +58,22 @@ namespace Openchain.Ledger.Validation
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "keyData")
                 {
+                    // Deserializing and re-serializing the record gives a different result
                     throw new TransactionInvalidException("NonCanonicalSerialization");
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "path")
                 {
+                    // The path is invalid
                     throw new TransactionInvalidException("InvalidPath");
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "recordType")
                 {
+                    // The specified record type is unknown
                     throw new TransactionInvalidException("InvalidRecord");
                 }
                 catch (ArgumentOutOfRangeException ex) when (ex.ParamName == "record")
                 {
+                    // The value of an ACC record could not be deserialized
                     throw new TransactionInvalidException("InvalidRecord");
                 }
             }
