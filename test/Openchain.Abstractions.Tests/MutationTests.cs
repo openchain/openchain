@@ -50,6 +50,7 @@ namespace Openchain.Tests
         public void Mutation_ArgumentNullException()
         {
             ArgumentNullException exception;
+
             exception = Assert.Throws<ArgumentNullException>(() => new Mutation(
                 null,
                 new[] { new Record(binaryData[1], binaryData[2], binaryData[3]) },

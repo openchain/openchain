@@ -39,15 +39,19 @@ namespace Openchain.Tests
         [Fact]
         public void Transaction_ArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new Transaction(
+            ArgumentNullException exception;
+
+            exception = Assert.Throws<ArgumentNullException>(() => new Transaction(
                 null,
                 new DateTime(1, 2, 3, 4, 5, 6),
                 binaryData[1]));
+            Assert.Equal("mutation", exception.ParamName);
 
-            Assert.Throws<ArgumentNullException>(() => new Transaction(
+            exception = Assert.Throws<ArgumentNullException>(() => new Transaction(
                 binaryData[0],
                 new DateTime(1, 2, 3, 4, 5, 6),
                 null));
+            Assert.Equal("transactionMetadata", exception.ParamName);
         }
     }
 }
