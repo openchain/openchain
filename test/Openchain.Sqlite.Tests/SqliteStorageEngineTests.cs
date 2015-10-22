@@ -80,10 +80,10 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task AddTransaction_InsertError()
         {
-            await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+            ConcurrentMutationException exception1 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[0], binaryData[1], binaryData[2])));
 
-            await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+            ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[3], null, binaryData[4])));
 
             IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
@@ -91,8 +91,10 @@ namespace Openchain.Sqlite.Tests
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], ByteString.Empty, ByteString.Empty);
+            AssertRecord(exception1.FailedMutation, binaryData[0], binaryData[1], binaryData[2]);
             Assert.Equal(1, records2.Count);
             AssertRecord(records2[0], binaryData[3], ByteString.Empty, ByteString.Empty);
+            AssertRecord(exception2.FailedMutation, binaryData[3], null, binaryData[4]);
         }
 
         [Fact]
@@ -102,10 +104,10 @@ namespace Openchain.Sqlite.Tests
                 new Record(binaryData[0], binaryData[1], ByteString.Empty),
                 new Record(binaryData[4], binaryData[5], ByteString.Empty));
 
-            await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+            ConcurrentMutationException exception1 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[0], binaryData[2], binaryData[3])));
 
-            await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+            ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[4], null, binaryData[6])));
 
             IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
@@ -113,8 +115,10 @@ namespace Openchain.Sqlite.Tests
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
+            AssertRecord(exception1.FailedMutation, binaryData[0], binaryData[2], binaryData[3]);
             Assert.Equal(1, records2.Count);
             AssertRecord(records2[0], binaryData[4], binaryData[5], mutationHash);
+            AssertRecord(exception2.FailedMutation, binaryData[4], null, binaryData[6]);
         }
 
         [Fact]
