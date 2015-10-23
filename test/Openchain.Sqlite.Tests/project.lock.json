@@ -206,7 +206,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.2",
-          "Portable.BouncyCastle": "1.8.0-RC2",
+          "Portable.BouncyCastle": "1.8.0-rc4",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
           "System.Runtime.Numerics": "4.0.1-beta-23409",
@@ -223,21 +223,23 @@
           "Openchain.Ledger": "0.4.2"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc2": {
+      "Portable.BouncyCastle/1.8.0-rc4": {
         "type": "package",
         "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.Diagnostics.Debug": "4.0.0",
-          "System.Globalization": "4.0.0",
-          "System.IO": "4.0.0",
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.IO.FileSystem": "4.0.0",
+          "System.IO.FileSystem.Primitives": "4.0.0",
           "System.Linq": "4.0.0",
-          "System.Reflection": "4.0.0",
+          "System.Reflection": "4.0.10",
           "System.Reflection.Extensions": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Text.Encoding": "4.0.10",
+          "System.Threading": "4.0.10",
+          "System.Threading.Tasks": "4.0.10"
         },
         "compile": {
           "lib/dotnet/crypto.dll": {}
@@ -1345,7 +1347,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.2",
-          "Portable.BouncyCastle": "1.8.0-RC2",
+          "Portable.BouncyCastle": "1.8.0-rc4",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
           "System.Runtime.Numerics": "4.0.1-beta-23409",
@@ -1362,21 +1364,23 @@
           "Openchain.Ledger": "0.4.2"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc2": {
+      "Portable.BouncyCastle/1.8.0-rc4": {
         "type": "package",
         "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.Diagnostics.Debug": "4.0.0",
-          "System.Globalization": "4.0.0",
-          "System.IO": "4.0.0",
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.IO.FileSystem": "4.0.0",
+          "System.IO.FileSystem.Primitives": "4.0.0",
           "System.Linq": "4.0.0",
-          "System.Reflection": "4.0.0",
+          "System.Reflection": "4.0.10",
           "System.Reflection.Extensions": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Text.Encoding": "4.0.10",
+          "System.Threading": "4.0.10",
+          "System.Threading.Tasks": "4.0.10"
         },
         "compile": {
           "lib/dotnet/crypto.dll": {}
@@ -2736,7 +2740,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.2",
-          "Portable.BouncyCastle": "1.8.0-RC2",
+          "Portable.BouncyCastle": "1.8.0-rc4",
           "System.Dynamic.Runtime": "4.0.11-beta-23409",
           "System.ObjectModel": "4.0.11-beta-23409",
           "System.Runtime.Numerics": "4.0.1-beta-23409",
@@ -2753,21 +2757,23 @@
           "Openchain.Ledger": "0.4.2"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc2": {
+      "Portable.BouncyCastle/1.8.0-rc4": {
         "type": "package",
         "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.Diagnostics.Debug": "4.0.0",
-          "System.Globalization": "4.0.0",
-          "System.IO": "4.0.0",
+          "System.Collections": "4.0.10",
+          "System.Diagnostics.Debug": "4.0.10",
+          "System.Globalization": "4.0.10",
+          "System.IO": "4.0.10",
+          "System.IO.FileSystem": "4.0.0",
+          "System.IO.FileSystem.Primitives": "4.0.0",
           "System.Linq": "4.0.0",
-          "System.Reflection": "4.0.0",
+          "System.Reflection": "4.0.10",
           "System.Reflection.Extensions": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
+          "System.Runtime": "4.0.20",
+          "System.Runtime.Extensions": "4.0.10",
+          "System.Text.Encoding": "4.0.10",
+          "System.Threading": "4.0.10",
+          "System.Threading.Tasks": "4.0.10"
         },
         "compile": {
           "lib/dotnet/crypto.dll": {}
@@ -4151,21 +4157,48 @@
         "tools/install.ps1"
       ]
     },
-    "Portable.BouncyCastle/1.8.0-rc2": {
+    "Portable.BouncyCastle/1.8.0-rc4": {
       "type": "package",
-      "sha512": "9Vcz7TWdRDpj6xmUfgoqE/MvMZYMw4OdmL8qumwmUmk1DyL6/T/fDDpW1EiUBgN1ubuSUOdix+Y9fB7Rxzl6oQ==",
+      "sha512": "b4oKeCcX3Riy4aLFhPiVzWf3QCp3lvGktewTtftWTxhUhUGyU9F5IVXM8/bRQ9cmh8I/DAZs+fphdAu93IpvbA==",
       "files": [
         "lib/dotnet/crypto.dll",
         "lib/dotnet/crypto.pdb",
         "lib/dotnet/crypto.xml",
+        "lib/MonoAndroid/crypto.dll",
+        "lib/MonoAndroid/crypto.pdb",
+        "lib/MonoAndroid/crypto.xml",
+        "lib/MonoTouch/crypto.dll",
+        "lib/MonoTouch/crypto.pdb",
+        "lib/MonoTouch/crypto.xml",
+        "lib/net45/crypto.dll",
+        "lib/net45/crypto.pdb",
+        "lib/net45/crypto.xml",
+        "lib/net46/crypto.dll",
+        "lib/net46/crypto.pdb",
+        "lib/net46/crypto.xml",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
         "lib/portable-net4+sl5+wp8+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
         "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.dll",
         "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.pdb",
         "lib/portable-net45+win8+wpa81+MonoTouch10+MonoAndroid10+xamarinmac20+xamarinios10/crypto.xml",
-        "Portable.BouncyCastle.1.8.0-rc2.nupkg",
-        "Portable.BouncyCastle.1.8.0-rc2.nupkg.sha512",
+        "lib/uap10.0/crypto.dll",
+        "lib/uap10.0/crypto.pdb",
+        "lib/uap10.0/crypto.xml",
+        "lib/win8/crypto.dll",
+        "lib/win8/crypto.pdb",
+        "lib/win8/crypto.xml",
+        "lib/wpa81/crypto.dll",
+        "lib/wpa81/crypto.pdb",
+        "lib/wpa81/crypto.xml",
+        "lib/XamarinIos/crypto.dll",
+        "lib/XamarinIos/crypto.pdb",
+        "lib/XamarinIos/crypto.xml",
+        "lib/XamarinMac/crypto.dll",
+        "lib/XamarinMac/crypto.pdb",
+        "lib/XamarinMac/crypto.xml",
+        "Portable.BouncyCastle.1.8.0-rc4.nupkg",
+        "Portable.BouncyCastle.1.8.0-rc4.nupkg.sha512",
         "Portable.BouncyCastle.nuspec",
         "Readme.html"
       ]
