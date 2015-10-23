@@ -145,7 +145,6 @@ namespace Openchain.Ledger.Tests
             ByteString result = await validator.PostTransaction(mutation, new[] { signature });
 
             Assert.Equal(32, result.Value.Count);
-            Assert.Equal(ByteString.Parse("b27982ff2a4fa0c163da8651ca1902e27b651e68a6d0a4f6bff4a78d7dcf718d").ToByteArray(), MessageSerializer.ComputeHash(mutation.ToByteArray()));
         }
 
         [Fact]
