@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
+
 namespace Openchain.Ledger
 {
     /// <summary>
@@ -42,7 +44,20 @@ namespace Openchain.Ledger
         /// <returns>A boolean indicating wheather the signature is valid.</returns>
         public bool VerifySignature(byte[] mutationHash)
         {
-            ECKey key = new ECKey(PublicKey.ToByteArray());
+            ECKey key;
+
+            try
+            {
+                key = new ECKey(PublicKey.ToByteArray());
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return false;
+            }
 
             return key.VerifySignature(mutationHash, Signature.ToByteArray());
         }
