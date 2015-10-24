@@ -33,6 +33,14 @@ namespace Openchain.Sqlite.Tests
         }
 
         [Fact]
+        public async Task CreateAnchor_ZeroTransaction()
+        {
+            LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+
+            Assert.Null(anchor);
+        }
+
+        [Fact]
         public async Task CreateAnchor_OneTransaction()
         {
             ByteString hash = await AddRecord("key1");
@@ -42,6 +50,35 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(1, anchor.TransactionCount);
             Assert.Equal(hash, anchor.Position);
             Assert.Equal(CombineHashes(new ByteString(new byte[32]), hash), anchor.FullStoreHash);
+        }
+
+        [Fact]
+        public async Task CreateAnchor_TwoTransactions()
+        {
+            ByteString hash1 = await AddRecord("key1");
+            ByteString hash2 = await AddRecord("key2");
+            ByteString expectedCumulativeHash = CombineHashes(CombineHashes(new ByteString(new byte[32]), hash1), hash2);
+
+            LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+
+            Assert.Equal(2, anchor.TransactionCount);
+            Assert.Equal(hash2, anchor.Position);
+            Assert.Equal(expectedCumulativeHash, anchor.FullStoreHash);
+        }
+
+        [Fact]
+        public async Task CreateAnchor_OnePlusOneTransaction()
+        {
+            ByteString hash1 = await AddRecord("key1");
+            await this.anchorBuilder.CreateAnchor();
+            ByteString hash2 = await AddRecord("key2");
+            ByteString expectedCumulativeHash = CombineHashes(CombineHashes(new ByteString(new byte[32]), hash1), hash2);
+
+            LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+
+            Assert.Equal(2, anchor.TransactionCount);
+            Assert.Equal(hash2, anchor.Position);
+            Assert.Equal(expectedCumulativeHash, anchor.FullStoreHash);
         }
 
         private async Task<ByteString> AddRecord(string key)
