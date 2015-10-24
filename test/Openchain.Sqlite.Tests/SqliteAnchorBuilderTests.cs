@@ -70,7 +70,7 @@ namespace Openchain.Sqlite.Tests
         public async Task CreateAnchor_OnePlusOneTransaction()
         {
             ByteString hash1 = await AddRecord("key1");
-            await this.anchorBuilder.CreateAnchor();
+            await this.anchorBuilder.CommitAnchor(await this.anchorBuilder.CreateAnchor());
             ByteString hash2 = await AddRecord("key2");
             ByteString expectedCumulativeHash = CombineHashes(CombineHashes(new ByteString(new byte[32]), hash1), hash2);
 
@@ -79,6 +79,17 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(2, anchor.TransactionCount);
             Assert.Equal(hash2, anchor.Position);
             Assert.Equal(expectedCumulativeHash, anchor.FullStoreHash);
+        }
+
+        [Fact]
+        public async Task CreateAnchor_RepeatSameAnchor()
+        {
+            ByteString hash = await AddRecord("key1");
+            await this.anchorBuilder.CommitAnchor(await this.anchorBuilder.CreateAnchor());
+
+            LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+
+            Assert.Null(anchor);
         }
 
         private async Task<ByteString> AddRecord(string key)
