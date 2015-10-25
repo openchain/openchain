@@ -19,16 +19,6 @@
       // Base-58 addresses that must have admin rights
       "admin_addresses": [
       ],
-      // Special issuer, in the following format:
-      //
-      // {
-      //   "path": "",
-      //   "addresses": [
-      //     ""
-      //   ]
-      // }
-      "issuers": [
-      ],
       "version_byte": 76
     }
   },
