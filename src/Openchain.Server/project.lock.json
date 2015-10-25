@@ -980,7 +980,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -1031,7 +1031,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         }
@@ -3025,7 +3025,7 @@
           "lib/dnx451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -3077,7 +3077,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         },
@@ -4195,7 +4195,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -4246,7 +4246,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         }
@@ -6604,7 +6604,7 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -6655,7 +6655,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         }
@@ -9042,7 +9042,7 @@
           "lib/dnx451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -9094,7 +9094,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         },
@@ -10247,7 +10247,7 @@
           "lib/dnx451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -10299,7 +10299,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "NBitcoin": "2.1.4.6",
+          "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.2",
           "System.Net.Http": "4.0.1-beta-23409"
         },
@@ -11402,9 +11402,9 @@
         "ref/net46/Microsoft.Win32.Registry.dll"
       ]
     },
-    "NBitcoin/2.1.4.6": {
+    "NBitcoin/2.1.5.2": {
       "type": "package",
-      "sha512": "UCoAL7S54mxH9Ma3+uCsmXBUx0+RUfpJqOv1Ud649Ga1WlTWZym9A0Zu3DXPtWtePwdePOnomp3pJ2VgiVHy2Q==",
+      "sha512": "CJqYkM84ikUKFWGQHit+iHdunqdekuJWsiYsm+Dj8NxIdIhB3QbdgYZijKDlZ/OORZyYIWaGQKfr23khS2KSWw==",
       "files": [
         "lib/MonoAndroid/NBitcoin.BouncyCastle.dll",
         "lib/MonoAndroid/NBitcoin.BouncyCastle.pdb",
@@ -11435,8 +11435,8 @@
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
-        "NBitcoin.2.1.4.6.nupkg",
-        "NBitcoin.2.1.4.6.nupkg.sha512",
+        "NBitcoin.2.1.5.2.nupkg",
+        "NBitcoin.2.1.5.2.nupkg.sha512",
         "NBitcoin.nuspec"
       ]
     },

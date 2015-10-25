@@ -12,7 +12,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -561,7 +561,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -650,7 +650,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -752,7 +752,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -1434,7 +1434,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "compile": {
           "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
@@ -2103,7 +2103,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -2198,7 +2198,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -2293,7 +2293,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -2388,7 +2388,7 @@
           "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
         }
       },
-      "NBitcoin/2.1.4.6": {
+      "NBitcoin/2.1.5.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "6.0.1",
@@ -2538,9 +2538,9 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "NBitcoin/2.1.4.6": {
+    "NBitcoin/2.1.5.2": {
       "type": "package",
-      "sha512": "UCoAL7S54mxH9Ma3+uCsmXBUx0+RUfpJqOv1Ud649Ga1WlTWZym9A0Zu3DXPtWtePwdePOnomp3pJ2VgiVHy2Q==",
+      "sha512": "CJqYkM84ikUKFWGQHit+iHdunqdekuJWsiYsm+Dj8NxIdIhB3QbdgYZijKDlZ/OORZyYIWaGQKfr23khS2KSWw==",
       "files": [
         "lib/MonoAndroid/NBitcoin.BouncyCastle.dll",
         "lib/MonoAndroid/NBitcoin.BouncyCastle.pdb",
@@ -2571,8 +2571,8 @@
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
         "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
-        "NBitcoin.2.1.4.6.nupkg",
-        "NBitcoin.2.1.4.6.nupkg.sha512",
+        "NBitcoin.2.1.5.2.nupkg",
+        "NBitcoin.2.1.5.2.nupkg.sha512",
         "NBitcoin.nuspec"
       ]
     },
@@ -3985,17 +3985,14 @@
   "projectFileDependencyGroups": {
     "": [
       "System.Net.Http >= 4.0.1-beta-23409",
+      "NBitcoin >= 2.1.5.2",
       "Openchain.Ledger >= 0.4.2-*"
     ],
-    "DNXCore,Version=v5.0": [
-      "NBitcoin >= 2.1.4.6"
-    ],
+    "DNXCore,Version=v5.0": [],
     "DNX,Version=v4.5.1": [
-      "NBitcoin >= 2.1.4.6",
       "fx/System.Collections >= 4.0.0"
     ],
     ".NETFramework,Version=v4.5": [
-      "NBitcoin >= 2.1.4.6",
       "fx/System.Collections >= 4.0.0"
     ]
   }
