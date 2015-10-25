@@ -15,31 +15,25 @@
 
   "dependencies": {
     "System.Net.Http": "4.0.1-beta-23409",
+    "NBitcoin": "2.1.5.2",
     "Openchain.Ledger": "0.4.2-*"
   },
 
   "frameworks": {
     "dnxcore50": {
       "dependencies": {
-        "NBitcoin": "2.1.4.6"
       }
     },
 
     "dnx451": {
       "frameworkAssemblies": {
         "System.Collections": "4.0.0.0"
-      },
-      "dependencies": {
-        "NBitcoin": "2.1.4.6"
       }
     },
 
     "net45": {
       "frameworkAssemblies": {
         "System.Collections": "4.0.0.0"
-      },
-      "dependencies": {
-        "NBitcoin": "2.1.4.6"
       }
     }
 
