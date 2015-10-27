@@ -32,6 +32,11 @@ namespace Openchain.Server.Controllers
             this.store = store;
         }
 
+        /// <summary>
+        /// Gets all the records at a specific path.
+        /// </summary>
+        /// <param name="account">The path to query for.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("account")]
         public async Task<ActionResult> GetAccount(string account)
         {
@@ -40,6 +45,11 @@ namespace Openchain.Server.Controllers
             return Json(accounts.Select(GetAccountJson).ToArray());
         }
 
+        /// <summary>
+        /// Gets a raw transaction given its mutation hash.
+        /// </summary>
+        /// <param name="mutationHash">The mutation hash.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("transaction")]
         public async Task<ActionResult> GetTransaction([FromQuery(Name = "mutation_hash")] string mutationHash)
         {
@@ -61,6 +71,11 @@ namespace Openchain.Server.Controllers
                 return Json(new { raw = transaction.ToString() });
         }
 
+        /// <summary>
+        /// Gets all the record under a given path (includes sub-paths).
+        /// </summary>
+        /// <param name="account">The path to query for.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("subaccounts")]
         public async Task<ActionResult> GetSubaccounts(string account)
         {
