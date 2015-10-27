@@ -42,7 +42,7 @@ namespace Openchain.Server.Controllers
         }
 
         /// <summary>
-        /// Submit a transaction for validation.
+        /// Submits a transaction for validation.
         /// </summary>
         /// <param name="body">
         /// The JSON object in the request body.
@@ -138,6 +138,11 @@ namespace Openchain.Server.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Gets the key, value and version of a given record.
+        /// </summary>
+        /// <param name="key">The hex-encoded key of the record being queried.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("record")]
         public async Task<ActionResult> GetRecord(string key)
         {
