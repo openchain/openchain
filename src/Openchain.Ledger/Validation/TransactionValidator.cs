@@ -52,6 +52,9 @@ namespace Openchain.Ledger.Validation
             if (!mutation.Namespace.Equals(this.ledgerId))
                 throw new TransactionInvalidException("InvalidNamespace");
 
+            if (mutation.Records.Count == 0)
+                throw new TransactionInvalidException("InvalidMutation");
+
             if (mutation.Records.Any(record => record.Key.Value.Count > MaxKeySize))
                 throw new TransactionInvalidException("InvalidMutation");
 
