@@ -40,6 +40,17 @@ namespace Openchain.Sqlite
                     ALTER TABLE Records ADD COLUMN Name TEXT;
                     ALTER TABLE Records ADD COLUMN Type INTEGER;",
                     new Dictionary<string, object>());
+
+                // Index of transactions affecting a given record
+                await ExecuteAsync(
+                    @"
+                    CREATE TABLE IF NOT EXISTS RecordTransactions
+                    (
+                        RecordKey BLOB,
+                        TransactionHash BLOB,
+                        PRIMARY KEY (RecordKey, TransactionHash)
+                    );",
+                    new Dictionary<string, object>());
             }
             catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
             { }
@@ -83,12 +94,13 @@ namespace Openchain.Sqlite
                 });
         }
 
-        protected override async Task AddTransaction(Mutation mutation)
+        protected override async Task AddTransaction(byte[] transactionHash, Mutation mutation)
         {
             foreach (Record record in mutation.Records)
             {
                 RecordKey key = RecordKey.Parse(record.Key);
-                    await ExecuteAsync(@"
+
+                await ExecuteAsync(@"
                         UPDATE  Records
                         SET     Type = @type,
                                 Name = @name
@@ -98,6 +110,16 @@ namespace Openchain.Sqlite
                         ["@key"] = record.Key.ToByteArray(),
                         ["@type"] = (int)key.RecordType,
                         ["@name"] = key.Name
+                    });
+
+                await ExecuteAsync(@"
+                        INSERT INTO RecordTransactions
+                        (RecordKey, TransactionHash)
+                        VALUES (@recordKey, @transactionHash)",
+                    new Dictionary<string, object>()
+                    {
+                        ["@recordKey"] = record.Key.ToByteArray(),
+                        ["@transactionHash"] = transactionHash
                     });
             }
         }

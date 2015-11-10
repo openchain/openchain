@@ -86,14 +86,14 @@ namespace Openchain.Sqlite
                             ["@rawData"] = rawTransactionBuffer
                         });
 
-                    await AddTransaction(mutation);
+                    await AddTransaction(transactionHash, mutation);
                 }
 
                 context.Commit();
             }
         }
 
-        protected virtual Task AddTransaction(Mutation mutation)
+        protected virtual Task AddTransaction(byte[] transactionHash, Mutation mutation)
         {
             return Task.FromResult(0);
         }
@@ -264,7 +264,7 @@ namespace Openchain.Sqlite
         }
 
         #endregion
-        
+
         #region Private Methods
 
         protected async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
