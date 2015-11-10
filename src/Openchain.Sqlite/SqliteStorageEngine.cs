@@ -86,7 +86,7 @@ namespace Openchain.Sqlite
                             ["@rawData"] = rawTransactionBuffer
                         });
 
-                    await AddTransaction(transactionHash, mutation);
+                    await AddTransaction(mutationHash, mutation);
                 }
 
                 context.Commit();

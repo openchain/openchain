@@ -44,11 +44,11 @@ namespace Openchain.Sqlite
                 // Index of transactions affecting a given record
                 await ExecuteAsync(
                     @"
-                    CREATE TABLE IF NOT EXISTS RecordTransactions
+                    CREATE TABLE IF NOT EXISTS RecordMutations
                     (
                         RecordKey BLOB,
-                        TransactionHash BLOB,
-                        PRIMARY KEY (RecordKey, TransactionHash)
+                        MutationHash BLOB,
+                        PRIMARY KEY (RecordKey, MutationHash)
                     );",
                     new Dictionary<string, object>());
             }
@@ -94,7 +94,7 @@ namespace Openchain.Sqlite
                 });
         }
 
-        protected override async Task AddTransaction(byte[] transactionHash, Mutation mutation)
+        protected override async Task AddTransaction(byte[] mutationHash, Mutation mutation)
         {
             foreach (Record record in mutation.Records)
             {
@@ -113,13 +113,13 @@ namespace Openchain.Sqlite
                     });
 
                 await ExecuteAsync(@"
-                        INSERT INTO RecordTransactions
-                        (RecordKey, TransactionHash)
-                        VALUES (@recordKey, @transactionHash)",
+                        INSERT INTO RecordMutations
+                        (RecordKey, MutationHash)
+                        VALUES (@recordKey, @mutationHash)",
                     new Dictionary<string, object>()
                     {
                         ["@recordKey"] = record.Key.ToByteArray(),
-                        ["@transactionHash"] = transactionHash
+                        ["@mutationHash"] = mutationHash
                     });
             }
         }
