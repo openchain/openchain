@@ -37,6 +37,7 @@ namespace Openchain.Sqlite.Tests
         public async Task AddTransaction_InsertSuccess()
         {
             await AddRecords(
+                ByteString.Empty,
                 "/:DATA:/e",
                 "/:DATA:/",
                 "/:DATA:.",
@@ -49,15 +50,29 @@ namespace Openchain.Sqlite.Tests
             Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:DATA:/"));
         }
 
-        private async Task AddRecords(params string[] keys)
+        [Fact]
+        public async Task GetRecordMutations_Success()
+        {
+            ByteString mutation1 = await AddRecords(ByteString.Empty, "/:DATA:name");
+            await AddRecords(ByteString.Empty, "/:DATA:other");
+            ByteString mutation2 = await AddRecords(mutation1, "/:DATA:name");
+
+            IReadOnlyList<ByteString> result = await store.GetRecordMutations(new ByteString(Encoding.UTF8.GetBytes("/:DATA:name")));
+
+            Assert.Equal<ByteString>(new[] { mutation1, mutation2 }, result);
+        }
+
+        private async Task<ByteString> AddRecords(ByteString version, params string[] keys)
         {
             Mutation mutation = new Mutation(
                 ByteString.Empty,
                 keys.Select(key => new Record(
                     new ByteString(Encoding.UTF8.GetBytes(key)),
                     ByteString.Empty,
-                    ByteString.Empty)),
+                    version)),
                 ByteString.Empty);
+
+            byte[] serializedMutation = MessageSerializer.SerializeMutation(mutation);
 
             Transaction transaction = new Transaction(
                 new ByteString(MessageSerializer.SerializeMutation(mutation)),
@@ -65,6 +80,8 @@ namespace Openchain.Sqlite.Tests
                 ByteString.Empty);
 
             await store.AddTransactions(new[] { new ByteString(MessageSerializer.SerializeTransaction(transaction)) });
+
+            return new ByteString(MessageSerializer.ComputeHash(serializedMutation));
         }
     }
 }
