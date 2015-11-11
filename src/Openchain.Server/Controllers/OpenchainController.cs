@@ -144,7 +144,9 @@ namespace Openchain.Server.Controllers
         /// <param name="key">The hex-encoded key of the record being queried.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("record")]
-        public async Task<ActionResult> GetRecord(string key)
+        public async Task<ActionResult> GetRecord(
+            [FromQuery(Name = "key")]
+            string key)
         {
             ByteString parsedKey;
 

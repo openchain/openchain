@@ -38,7 +38,9 @@ namespace Openchain.Server.Controllers
         /// <param name="account">The path to query for.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("account")]
-        public async Task<ActionResult> GetAccount(string account)
+        public async Task<ActionResult> GetAccount(
+            [FromQuery(Name = "account")]
+            string account)
         {
             IReadOnlyList<AccountStatus> accounts = await this.store.GetAccount(account);
 
@@ -51,7 +53,9 @@ namespace Openchain.Server.Controllers
         /// <param name="mutationHash">The mutation hash.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("transaction")]
-        public async Task<ActionResult> GetTransaction([FromQuery(Name = "mutation_hash")] string mutationHash)
+        public async Task<ActionResult> GetTransaction(
+            [FromQuery(Name = "mutation_hash")]
+            string mutationHash)
         {
             ByteString parsedMutationHash;
             try
@@ -77,7 +81,9 @@ namespace Openchain.Server.Controllers
         /// <param name="account">The path to query for.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("subaccounts")]
-        public async Task<ActionResult> GetSubaccounts(string account)
+        public async Task<ActionResult> GetSubaccounts(
+            [FromQuery(Name = "account")]
+            string account)
         {
             LedgerPath path;
             if (!LedgerPath.TryParse(account, out path))
@@ -101,7 +107,9 @@ namespace Openchain.Server.Controllers
         /// <param name="key">The key of the record of which mutations are being retrieved.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("recordmutations")]
-        public async Task<ActionResult> GetRecordMutations(string key)
+        public async Task<ActionResult> GetRecordMutations(
+            [FromQuery(Name = "key")]
+            string key)
         {
             ByteString accountKey;
             try
