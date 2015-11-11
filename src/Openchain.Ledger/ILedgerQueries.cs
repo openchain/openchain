@@ -26,16 +26,21 @@ namespace Openchain.Ledger
         /// Returns all the record that have a key starting by the given prefix.
         /// </summary>
         /// <param name="prefix">The prefix to query for.</param>
-        /// <returns>A task representing the completion of the operation and containing the matching records.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix);
 
         /// <summary>
         /// Returns a transaction serialized as a <see cref="ByteString"/>, given its hash.
         /// </summary>
         /// <param name="mutationHash">The hash of the transaction.</param>
-        /// <returns>A <see cref="ByteString"/> repsentation of the transaction.</returns>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<ByteString> GetTransaction(ByteString mutationHash);
 
+        /// <summary>
+        /// Returns a list of mutation hashes that have affected a given record.
+        /// </summary>
+        /// <param name="recordKey">The key of the record of which mutations are being retrieved.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<IReadOnlyList<ByteString>> GetRecordMutations(ByteString recordKey);
     }
 }
