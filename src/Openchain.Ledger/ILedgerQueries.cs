@@ -35,5 +35,7 @@ namespace Openchain.Ledger
         /// <param name="mutationHash">The hash of the transaction.</param>
         /// <returns>A <see cref="ByteString"/> repsentation of the transaction.</returns>
         Task<ByteString> GetTransaction(ByteString mutationHash);
+
+        Task<IReadOnlyList<ByteString>> GetRecordMutations(ByteString recordKey);
     }
 }

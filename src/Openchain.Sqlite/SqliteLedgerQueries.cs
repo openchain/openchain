@@ -95,6 +95,19 @@ namespace Openchain.Sqlite
                 });
         }
 
+        public async Task<IReadOnlyList<ByteString>> GetRecordMutations(ByteString recordKey)
+        {
+            return await ExecuteAsync(@"
+                    SELECT  MutationHash
+                    FROM    RecordMutations
+                    WHERE   RecordKey = @recordKey",
+                reader => new ByteString((byte[])reader.GetValue(0)),
+                new Dictionary<string, object>()
+                {
+                    ["@recordKey"] = recordKey.ToByteArray()
+                });
+        }
+
         protected override async Task AddTransaction(long transactionId, byte[] mutationHash, Mutation mutation)
         {
             foreach (Record record in mutation.Records)
