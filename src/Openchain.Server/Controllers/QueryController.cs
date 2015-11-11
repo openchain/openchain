@@ -95,6 +95,11 @@ namespace Openchain.Server.Controllers
             }).ToArray());
         }
 
+        /// <summary>
+        /// Gets all the mutations that have affected a given record.
+        /// </summary>
+        /// <param name="key">The key of the record of which mutations are being retrieved.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("recordmutations")]
         public async Task<ActionResult> GetRecordMutations(string key)
         {
