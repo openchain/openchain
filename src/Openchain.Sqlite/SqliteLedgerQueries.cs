@@ -47,8 +47,9 @@ namespace Openchain.Sqlite
                     CREATE TABLE IF NOT EXISTS RecordMutations
                     (
                         RecordKey BLOB,
+                        TransactionId INTEGER,
                         MutationHash BLOB,
-                        PRIMARY KEY (RecordKey, MutationHash)
+                        PRIMARY KEY (RecordKey, TransactionId)
                     );",
                     new Dictionary<string, object>());
             }
@@ -83,7 +84,7 @@ namespace Openchain.Sqlite
                     SELECT  Key, Value, Version
                     FROM    Records
                     WHERE   Key >= @from AND Key < @to",
-            reader => new Record(
+                reader => new Record(
                     new ByteString((byte[])reader.GetValue(0)),
                     reader.GetValue(1) == null ? ByteString.Empty : new ByteString((byte[])reader.GetValue(1)),
                     new ByteString((byte[])reader.GetValue(2))),
@@ -94,7 +95,7 @@ namespace Openchain.Sqlite
                 });
         }
 
-        protected override async Task AddTransaction(byte[] mutationHash, Mutation mutation)
+        protected override async Task AddTransaction(long transactionId, byte[] mutationHash, Mutation mutation)
         {
             foreach (Record record in mutation.Records)
             {
@@ -114,11 +115,12 @@ namespace Openchain.Sqlite
 
                 await ExecuteAsync(@"
                         INSERT INTO RecordMutations
-                        (RecordKey, MutationHash)
-                        VALUES (@recordKey, @mutationHash)",
+                        (RecordKey, TransactionId, MutationHash)
+                        VALUES (@recordKey, @transactionId, @mutationHash)",
                     new Dictionary<string, object>()
                     {
                         ["@recordKey"] = record.Key.ToByteArray(),
+                        ["@transactionId"] = transactionId,
                         ["@mutationHash"] = mutationHash
                     });
             }

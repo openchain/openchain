@@ -75,10 +75,13 @@ namespace Openchain.Sqlite
 
                     await UpdateAccounts(mutation, mutationHash);
 
-                    await ExecuteAsync(@"
+                    IReadOnlyList<long> rowId = await ExecuteAsync(@"
                             INSERT INTO Transactions
                             (Hash, MutationHash, RawData)
-                            VALUES (@hash, @mutationHash, @rawData)",
+                            VALUES (@hash, @mutationHash, @rawData);
+
+                            SELECT last_insert_rowid();",
+                        reader => (long)reader.GetValue(0),
                         new Dictionary<string, object>()
                         {
                             ["@hash"] = transactionHash,
@@ -86,14 +89,14 @@ namespace Openchain.Sqlite
                             ["@rawData"] = rawTransactionBuffer
                         });
 
-                    await AddTransaction(mutationHash, mutation);
+                    await AddTransaction(rowId[0], mutationHash, mutation);
                 }
 
                 context.Commit();
             }
         }
 
-        protected virtual Task AddTransaction(byte[] transactionHash, Mutation mutation)
+        protected virtual Task AddTransaction(long transactionId, byte[] transactionHash, Mutation mutation)
         {
             return Task.FromResult(0);
         }
