@@ -95,6 +95,27 @@ namespace Openchain.Server.Controllers
             }).ToArray());
         }
 
+        [HttpGet("recordmutations")]
+        public async Task<ActionResult> GetRecordMutations(string key)
+        {
+            ByteString accountKey;
+            try
+            {
+                accountKey = ByteString.Parse(key);
+            }
+            catch (FormatException)
+            {
+                return HttpBadRequest();
+            }
+
+            IReadOnlyList<ByteString> mutations = await this.store.GetRecordMutations(accountKey);
+
+            return Json(mutations.Select(result => new
+            {
+                mutation_hash = result.ToString()
+            }).ToArray());
+        }
+
         private object GetAccountJson(AccountStatus account)
         {
             return new
