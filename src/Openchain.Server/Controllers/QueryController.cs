@@ -162,6 +162,39 @@ namespace Openchain.Server.Controllers
             }).ToArray());
         }
 
+        [HttpGet("recordversion")]
+        public async Task<ActionResult> GetRecordVersion(
+            [FromQuery(Name = "key")]
+            string key,
+            [FromQuery(Name = "version")]
+            string version)
+        {
+            ByteString parsedKey;
+            ByteString parsedVersion;
+
+            try
+            {
+                parsedKey = ByteString.Parse(key ?? "");
+                parsedVersion = ByteString.Parse(version ?? "");
+            }
+            catch (FormatException)
+            {
+                return HttpBadRequest();
+            }
+
+            Record record = await this.store.GetRecordVersion(parsedKey, parsedVersion);
+
+            if (record == null)
+                return HttpNotFound();
+            else
+                return Json(new
+                {
+                    key = record.Key.ToString(),
+                    value = record.Value.ToString(),
+                    version = parsedVersion.ToString()
+                });
+        }
+
         private object GetAccountJson(AccountStatus account)
         {
             return new
