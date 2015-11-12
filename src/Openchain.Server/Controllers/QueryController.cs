@@ -162,6 +162,12 @@ namespace Openchain.Server.Controllers
             }).ToArray());
         }
 
+        /// <summary>
+        /// Gets a specific version of a record.
+        /// </summary>
+        /// <param name="key">The key of the record being queried.</param>
+        /// <param name="version">The version of the record being queried.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("recordversion")]
         public async Task<ActionResult> GetRecordVersion(
             [FromQuery(Name = "key")]
