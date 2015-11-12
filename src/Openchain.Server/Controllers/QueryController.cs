@@ -55,7 +55,9 @@ namespace Openchain.Server.Controllers
         [HttpGet("transaction")]
         public async Task<ActionResult> GetTransaction(
             [FromQuery(Name = "mutation_hash")]
-            string mutationHash)
+            string mutationHash,
+            [FromQuery(Name = "format")]
+            string format = "raw")
         {
             ByteString parsedMutationHash;
             try
@@ -72,7 +74,35 @@ namespace Openchain.Server.Controllers
             if (transaction == null)
                 return new HttpStatusCodeResult(404);
             else
-                return Json(new { raw = transaction.ToString() });
+            {
+                if (format == "raw")
+                    return Json(new { raw = transaction.ToString() });
+                else
+                    return TransactionToJson(transaction);
+            }
+        }
+
+        private JsonResult TransactionToJson(ByteString rawData)
+        {
+            Transaction transaction = MessageSerializer.DeserializeTransaction(rawData);
+            Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
+
+            return Json(new
+            {
+                mutation = new
+                {
+                    @namespace = mutation.Namespace.ToString(),
+                    records = mutation.Records.Select(record => new
+                    {
+                        key = record.Key.ToString(),
+                        value = record.Value?.ToString(),
+                        version = record.Version.ToString()
+                    }).ToArray(),
+                    metadata = mutation.Metadata.ToString()
+                },
+                timestamp = transaction.Timestamp,
+                transaction_metadata = transaction.TransactionMetadata.ToString()
+            });
         }
 
         /// <summary>
