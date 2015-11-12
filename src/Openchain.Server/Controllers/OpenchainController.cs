@@ -80,7 +80,7 @@ namespace Openchain.Server.Controllers
             if (validator == null)
                 return CreateErrorResponse("ValidationDisabled");
 
-            ByteString parsedTransaction;
+            ByteString parsedMutation;
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
             if (!(body["mutation"] is JValue && body["signatures"] is JArray))
@@ -88,7 +88,7 @@ namespace Openchain.Server.Controllers
 
             try
             {
-                parsedTransaction = ByteString.Parse((string)body["mutation"]);
+                parsedMutation = ByteString.Parse((string)body["mutation"]);
 
                 foreach (JToken signatureItem in body["signatures"])
                 {
@@ -109,7 +109,7 @@ namespace Openchain.Server.Controllers
             ByteString transactionId;
             try
             {
-                transactionId = await validator.PostTransaction(parsedTransaction, authentication);
+                transactionId = await validator.PostTransaction(parsedMutation, authentication);
             }
             catch (TransactionInvalidException exception)
             {
@@ -122,7 +122,8 @@ namespace Openchain.Server.Controllers
 
             return Json(new
             {
-                transaction_hash = transactionId.ToString()
+                transaction_hash = transactionId.ToString(),
+                mutation_hash = new ByteString(MessageSerializer.ComputeHash(parsedMutation.ToByteArray())).ToString()
             });
         }
 
