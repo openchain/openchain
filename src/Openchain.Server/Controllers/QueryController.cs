@@ -51,6 +51,7 @@ namespace Openchain.Server.Controllers
         /// Gets a raw transaction given its mutation hash.
         /// </summary>
         /// <param name="mutationHash">The mutation hash.</param>
+        /// <param name="format">The output format ("raw" or "json").</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("transaction")]
         public async Task<ActionResult> GetTransaction(
