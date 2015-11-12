@@ -31,11 +31,40 @@ namespace Openchain.Ledger
                 .ToList()
                 .AsReadOnly();
         }
-        
+
         public static async Task<IReadOnlyList<Record>> GetSubaccounts(this ILedgerQueries queries, string rootAccount)
         {
             ByteString prefix = new ByteString(Encoding.UTF8.GetBytes(rootAccount));
             return await queries.GetKeyStartingFrom(prefix);
+        }
+
+        public static async Task<Record> GetRecordVersion(this ILedgerQueries queries, ByteString key, ByteString version)
+        {
+            if (version.Value.Count == 0)
+            {
+                return new Record(key, ByteString.Empty, ByteString.Empty);
+            }
+            else
+            {
+                ByteString rawTransaction = await queries.GetTransaction(version);
+
+                if (rawTransaction == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
+                    Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
+
+                    Record result = mutation.Records.FirstOrDefault(record => record.Key.Equals(key) && record.Value != null);
+
+                    if (result == null)
+                        return null;
+                    else
+                        return result;
+                }
+            }
         }
     }
 }
