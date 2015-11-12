@@ -90,6 +90,8 @@ namespace Openchain.Server.Controllers
 
             return Json(new
             {
+                transaction_hash = new ByteString(MessageSerializer.ComputeHash(rawData.ToByteArray())).ToString(),
+                mutation_hash = new ByteString(MessageSerializer.ComputeHash(transaction.Mutation.ToByteArray())).ToString(),
                 mutation = new
                 {
                     @namespace = mutation.Namespace.ToString(),
