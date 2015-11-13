@@ -1,5 +1,5 @@
 {
-  "version": "0.4.3-rc1-*",
+  "version": "0.4.3-*",
   "description": "Main Openchain ledger management system.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -15,7 +15,7 @@
 
   "dependencies": {
     "Newtonsoft.Json": "7.0.1",
-    "Openchain.Abstractions": "0.4.3-rc1-*",
+    "Openchain.Abstractions": "0.4.3-*",
     "Portable.BouncyCastle": "1.8.0-rc4"
   },
 
