@@ -37,6 +37,38 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(ByteString.Parse("cd"), record.Version);
         }
 
+        [Fact]
+        public async Task GetRecordVersion_InitialVersion()
+        {
+            this.store = new TestLedgerQueries(CreateTransaction("a", "b"));
+
+            Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("b")), ByteString.Empty);
+
+            Assert.Equal(new ByteString(Encoding.UTF8.GetBytes("b")), record.Key);
+            Assert.Equal(ByteString.Empty, record.Value);
+            Assert.Equal(ByteString.Empty, record.Version);
+        }
+
+        [Fact]
+        public async Task GetRecordVersion_NonExistingTransaction()
+        {
+            this.store = new TestLedgerQueries(null);
+
+            Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("b")), ByteString.Parse("1234"));
+
+            Assert.Null(record);
+        }
+
+        [Fact]
+        public async Task GetRecordVersion_NonExistingMutation()
+        {
+            this.store = new TestLedgerQueries(CreateTransaction("a", "b"));
+
+            Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("c")), ByteString.Parse("1234"));
+
+            Assert.Null(record);
+        }
+
         private ByteString CreateTransaction(params string[] keys)
         {
             Mutation mutation = new Mutation(
