@@ -32,7 +32,8 @@ namespace Openchain.Ledger.Tests
                 CreateRecord("/path/to/account/:ACC:/asset/", 1),
                 CreateRecord("/path/to/account/sub/:ACC:/asset/", 2),
                 CreateRecord("/path/to/:ACC:/asset/", 3),
-                CreateRecord("/path/to/account/:DATA:/asset/", 4));
+                CreateRecord("/path/to/account/:DATA:/asset/", 4),
+                CreateRecord("/path/to/accounting/:ACC:/asset/", 5));
 
             IReadOnlyList<AccountStatus> result = await this.store.GetAccount("/path/to/account/");
 
@@ -40,6 +41,30 @@ namespace Openchain.Ledger.Tests
             Assert.Equal("/path/to/account/:ACC:/asset/", result[0].AccountKey.Key.ToString());
             Assert.Equal(1, result[0].Balance);
             Assert.Equal(ByteString.Parse("1234"), result[0].Version);
+        }
+
+        [Fact]
+        public async Task GetSubaccounts_Success()
+        {
+            this.store = new GetKeyStartingFromLedgerQueries(
+                CreateRecord("/path/to/account/:ACC:/asset/", 1),
+                CreateRecord("/path/to/account/sub/:ACC:/asset/", 2),
+                CreateRecord("/path/to/:ACC:/asset/", 3),
+                CreateRecord("/path/to/account/:DATA:/asset/", 4),
+                CreateRecord("/path/to/accounting/:ACC:/asset/", 5));
+
+            IReadOnlyList<Record> result = await this.store.GetSubaccounts("/path/to/account/");
+
+            Assert.Equal(3, result.Count);
+            Assert.Equal("/path/to/account/:ACC:/asset/", Encoding.UTF8.GetString(result[0].Key.Value.ToArray()));
+            Assert.Equal(1, BitConverter.ToInt64(result[0].Value.Value.Reverse().ToArray(), 0));
+            Assert.Equal(ByteString.Parse("1234"), result[0].Version);
+            Assert.Equal("/path/to/account/sub/:ACC:/asset/", Encoding.UTF8.GetString(result[1].Key.Value.ToArray()));
+            Assert.Equal(2, BitConverter.ToInt64(result[1].Value.Value.Reverse().ToArray(), 0));
+            Assert.Equal(ByteString.Parse("1234"), result[1].Version);
+            Assert.Equal("/path/to/account/:DATA:/asset/", Encoding.UTF8.GetString(result[2].Key.Value.ToArray()));
+            Assert.Equal(4, BitConverter.ToInt64(result[2].Value.Value.Reverse().ToArray(), 0));
+            Assert.Equal(ByteString.Parse("1234"), result[2].Version);
         }
 
         [Fact]
