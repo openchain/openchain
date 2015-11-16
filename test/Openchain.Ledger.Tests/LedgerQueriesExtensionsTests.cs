@@ -26,9 +26,26 @@ namespace Openchain.Ledger.Tests
         private ILedgerQueries store;
 
         [Fact]
+        public async Task GetAccount_Success()
+        {
+            this.store = new GetKeyStartingFromLedgerQueries(
+                CreateRecord("/path/to/account/:ACC:/asset/", 1),
+                CreateRecord("/path/to/account/sub/:ACC:/asset/", 2),
+                CreateRecord("/path/to/:ACC:/asset/", 3),
+                CreateRecord("/path/to/account/:DATA:/asset/", 4));
+
+            IReadOnlyList<AccountStatus> result = await this.store.GetAccount("/path/to/account/");
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("/path/to/account/:ACC:/asset/", result[0].AccountKey.Key.ToString());
+            Assert.Equal(1, result[0].Balance);
+            Assert.Equal(ByteString.Parse("1234"), result[0].Version);
+        }
+
+        [Fact]
         public async Task GetRecordVersion_Success()
         {
-            this.store = new TestLedgerQueries(CreateTransaction("a", "b"));
+            this.store = new GetTransactionLedgerQueries(CreateTransaction("a", "b"));
 
             Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("b")), ByteString.Parse("1234"));
 
@@ -40,7 +57,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task GetRecordVersion_InitialVersion()
         {
-            this.store = new TestLedgerQueries(CreateTransaction("a", "b"));
+            this.store = new GetTransactionLedgerQueries(CreateTransaction("a", "b"));
 
             Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("b")), ByteString.Empty);
 
@@ -52,7 +69,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task GetRecordVersion_NonExistingTransaction()
         {
-            this.store = new TestLedgerQueries(null);
+            this.store = new GetTransactionLedgerQueries(null);
 
             Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("b")), ByteString.Parse("1234"));
 
@@ -62,7 +79,7 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task GetRecordVersion_NonExistingMutation()
         {
-            this.store = new TestLedgerQueries(CreateTransaction("a", "b"));
+            this.store = new GetTransactionLedgerQueries(CreateTransaction("a", "b"));
 
             Record record = await this.store.GetRecordVersion(new ByteString(Encoding.UTF8.GetBytes("c")), ByteString.Parse("1234"));
 
@@ -89,11 +106,44 @@ namespace Openchain.Ledger.Tests
             return new ByteString(MessageSerializer.SerializeTransaction(transaction));
         }
 
-        private class TestLedgerQueries : ILedgerQueries
+        private static Record CreateRecord(string key, long value)
+        {
+            return new Record(
+                new ByteString(Encoding.UTF8.GetBytes(key)),
+                new ByteString(BitConverter.GetBytes(value).Reverse()),
+                ByteString.Parse("1234"));
+        }
+
+        private class GetKeyStartingFromLedgerQueries : ILedgerQueries
+        {
+            private readonly IList<Record> records;
+
+            public GetKeyStartingFromLedgerQueries(params Record[] records)
+            {
+                this.records = records;
+            }
+
+            public Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix)
+            {
+                return Task.FromResult((IReadOnlyList<Record>)records.Where(record => record.Key.ToString().StartsWith(prefix.ToString())).ToList());
+            }
+
+            public Task<IReadOnlyList<ByteString>> GetRecordMutations(ByteString recordKey)
+            {
+                throw new NotImplementedException();
+            }
+
+            public Task<ByteString> GetTransaction(ByteString mutationHash)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private class GetTransactionLedgerQueries : ILedgerQueries
         {
             private readonly ByteString transaction;
 
-            public TestLedgerQueries(ByteString transaction)
+            public GetTransactionLedgerQueries(ByteString transaction)
             {
                 this.transaction = transaction;
             }
