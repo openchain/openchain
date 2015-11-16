@@ -99,5 +99,18 @@ namespace Openchain.Tests
 
             Assert.Throws<NotSupportedException>(() => data.ToStream().WriteByte(1));
         }
+
+        [Fact]
+        public void Equals_Success()
+        {
+            Assert.True(ByteString.Parse("abcd").Equals(ByteString.Parse("abcd")));
+            Assert.False(ByteString.Parse("abcd").Equals(ByteString.Parse("abce")));
+            Assert.False(ByteString.Parse("abcd").Equals(ByteString.Parse("abcdef")));
+            Assert.False(ByteString.Parse("abcdef").Equals(ByteString.Parse("abcd")));
+            Assert.False(ByteString.Parse("abcd").Equals(null));
+
+            Assert.True(ByteString.Parse("abcd").Equals((object)ByteString.Parse("abcd")));
+            Assert.False(ByteString.Parse("abcd").Equals(4));
+        }
     }
 }
