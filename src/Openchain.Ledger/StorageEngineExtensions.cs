@@ -32,10 +32,5 @@ namespace Openchain.Ledger
 
             return records.Select(record => AccountStatus.FromRecord(RecordKey.Parse(record.Key), record)).ToDictionary(account => account.AccountKey, account => account);
         }
-
-        public static async Task<AccountStatus> GetAccount(this IStorageEngine store, AccountKey account)
-        {
-            return (await store.GetAccounts(new[] { account })).First().Value;
-        }
     }
 }
