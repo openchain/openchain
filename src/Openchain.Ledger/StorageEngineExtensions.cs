@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace Openchain.Ledger
 {
-    public static class TransactionStoreExtensions
+    public static class StorageEngineExtensions
     {
         public static async Task<Record> GetRecord(this IStorageEngine store, RecordKey key)
         {
