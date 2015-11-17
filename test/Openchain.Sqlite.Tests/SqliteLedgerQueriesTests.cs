@@ -97,6 +97,13 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(mutation, new ByteString(MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(result).Mutation.ToByteArray())));
         }
 
+        [Fact]
+        public async Task EnsureTables_MultipleCalls()
+        {
+            // This must not throw
+            await this.store.EnsureTables();
+        }
+
         private Task<ByteString> AddRecords(params string[] keys)
         {
             return AddRecords(ByteString.Empty, ByteString.Empty, keys);
