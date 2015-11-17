@@ -12,12 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using Xunit;
 
 namespace Openchain.Ledger.Tests
 {
     public class AccountKeyTests
     {
+        [Fact]
+        public void AccountKey_Success()
+        {
+            AccountKey result = new AccountKey(LedgerPath.Parse("/path/"), LedgerPath.Parse("/asset/"));
+
+            Assert.Equal("/path/", result.Account.FullPath);
+            Assert.Equal("/asset/", result.Asset.FullPath);
+        }
+
+        [Fact]
+        public void AccountKey_ArgumentNullException()
+        {
+            ArgumentNullException exception;
+
+            exception = Assert.Throws<ArgumentNullException>(() => new AccountKey(null, LedgerPath.Parse("/asset/")));
+            Assert.Equal("account", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => new AccountKey(LedgerPath.Parse("/path/"), null));
+            Assert.Equal("asset", exception.ParamName);
+        }
+
         [Fact]
         public void Equals_Success()
         {
