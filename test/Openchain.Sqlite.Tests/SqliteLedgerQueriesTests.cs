@@ -36,8 +36,19 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task AddTransaction_InsertSuccess()
         {
+            await AddRecords("/:DATA:/name");
+
+            IList<Record> result = await store.GetRecords(new[] { new ByteString(Encoding.UTF8.GetBytes("/:DATA:/name")) });
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
+            Assert.Equal(ByteString.Empty, result[0].Value);
+        }
+
+        [Fact]
+        public async Task GetKeyStartingFrom_Success()
+        {
             await AddRecords(
-                ByteString.Empty,
                 "/:DATA:/e",
                 "/:DATA:/",
                 "/:DATA:.",
@@ -51,11 +62,23 @@ namespace Openchain.Sqlite.Tests
         }
 
         [Fact]
+        public async Task GetKeyStartingFrom_NonEmptyValues()
+        {
+            await AddRecords(ByteString.Empty, binaryData[0], "/:DATA:/name");
+
+            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:/")));
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
+            Assert.Equal(binaryData[0], result[0].Value);
+        }
+
+        [Fact]
         public async Task GetRecordMutations_Success()
         {
-            ByteString mutation1 = await AddRecords(ByteString.Empty, "/:DATA:name");
-            await AddRecords(ByteString.Empty, "/:DATA:other");
-            ByteString mutation2 = await AddRecords(mutation1, "/:DATA:name");
+            ByteString mutation1 = await AddRecords("/:DATA:name");
+            await AddRecords("/:DATA:other");
+            ByteString mutation2 = await AddRecords(mutation1, ByteString.Empty, "/:DATA:name");
 
             IReadOnlyList<ByteString> result = await store.GetRecordMutations(new ByteString(Encoding.UTF8.GetBytes("/:DATA:name")));
 
@@ -65,22 +88,27 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task GetTransaction_Success()
         {
-            await AddRecords(ByteString.Empty, "/:DATA:name1");
-            ByteString mutation = await AddRecords(ByteString.Empty, "/:DATA:name2");
-            await AddRecords(ByteString.Empty, "/:DATA:name3");
+            await AddRecords("/:DATA:name1");
+            ByteString mutation = await AddRecords("/:DATA:name2");
+            await AddRecords("/:DATA:name3");
 
             ByteString result = await store.GetTransaction(mutation);
 
             Assert.Equal(mutation, new ByteString(MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(result).Mutation.ToByteArray())));
         }
 
-        private async Task<ByteString> AddRecords(ByteString version, params string[] keys)
+        private Task<ByteString> AddRecords(params string[] keys)
+        {
+            return AddRecords(ByteString.Empty, ByteString.Empty, keys);
+        }
+
+        private async Task<ByteString> AddRecords(ByteString version, ByteString value, params string[] keys)
         {
             Mutation mutation = new Mutation(
                 ByteString.Empty,
                 keys.Select(key => new Record(
                     new ByteString(Encoding.UTF8.GetBytes(key)),
-                    ByteString.Empty,
+                    value,
                     version)),
                 ByteString.Empty);
 
