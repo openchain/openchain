@@ -165,7 +165,7 @@ namespace Openchain.Sqlite
                                     ["@version"] = transactionHash
                                 });
                         }
-                        catch (SqliteException exception) when (exception.Message == "constraint failed")
+                        catch (SqliteException exception) when (exception.Message.Contains("UNIQUE constraint failed: Records.Key"))
                         {
                             throw new ConcurrentMutationException(record);
                         }
