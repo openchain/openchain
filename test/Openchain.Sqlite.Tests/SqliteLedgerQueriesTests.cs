@@ -62,6 +62,18 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal<ByteString>(new[] { mutation1, mutation2 }, result);
         }
 
+        [Fact]
+        public async Task GetTransaction_Success()
+        {
+            await AddRecords(ByteString.Empty, "/:DATA:name1");
+            ByteString mutation = await AddRecords(ByteString.Empty, "/:DATA:name2");
+            await AddRecords(ByteString.Empty, "/:DATA:name3");
+
+            ByteString result = await store.GetTransaction(mutation);
+
+            Assert.Equal(mutation, new ByteString(MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(result).Mutation.ToByteArray())));
+        }
+
         private async Task<ByteString> AddRecords(ByteString version, params string[] keys)
         {
             Mutation mutation = new Mutation(
