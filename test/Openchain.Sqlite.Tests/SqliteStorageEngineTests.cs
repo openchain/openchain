@@ -22,7 +22,7 @@ namespace Openchain.Sqlite.Tests
 {
     public class SqliteStorageEngineTests
     {
-        private readonly SqliteStorageEngine store;
+        private SqliteStorageEngine store;
         private readonly ByteString[] binaryData =
             Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
@@ -183,6 +183,23 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(mutation2, GetMutationHash(observer.Values[0]));
         }
 
+        [Fact]
+        public async Task GetTransactionStream_Error()
+        {
+            // Create a new storage engine with no table so that any query will throw an exception
+            this.store = new SqliteStorageEngine(":memory:");
+            TestObserver observer = new TestObserver() { ExpectedValueCount = 1 };
+
+            IObservable<ByteString> stream = this.store.GetTransactionStream(null);
+            using (stream.Subscribe(observer))
+                await observer.Completed.Task;
+
+            await observer.Disposed.Task;
+
+            Assert.True(observer.Fail);
+            Assert.Equal(0, observer.Values.Count);
+        }
+
         private async Task<ByteString> AddTransaction(params Record[] records)
         {
             Mutation mutation = new Mutation(ByteString.Parse("0123"), records, ByteString.Parse("4567"));
@@ -224,7 +241,12 @@ namespace Openchain.Sqlite.Tests
 
             public void OnCompleted() => Disposed.SetResult(0);
 
-            public void OnError(Exception error) => Fail = true;
+            public void OnError(Exception error)
+            {
+                Fail = true;
+                this.Completed.SetResult(0);
+                Disposed.SetResult(0);
+            }
 
             public void OnNext(ByteString value)
             {
