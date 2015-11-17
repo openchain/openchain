@@ -80,21 +80,24 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task AddTransaction_InsertError()
         {
+            ByteString mutationHash = await AddTransaction(
+                new Record(binaryData[0], binaryData[1], ByteString.Empty));
+
             ConcurrentMutationException exception1 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new Record(binaryData[0], binaryData[1], binaryData[2])));
+                new Record(binaryData[0], binaryData[2], ByteString.Empty)));
 
             ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new Record(binaryData[3], null, binaryData[4])));
+                new Record(binaryData[4], null, binaryData[5])));
 
             IList<Record> records1 = await this.store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[3] });
+            IList<Record> records2 = await this.store.GetRecords(new[] { binaryData[4] });
 
             Assert.Equal(1, records1.Count);
-            AssertRecord(records1[0], binaryData[0], ByteString.Empty, ByteString.Empty);
-            AssertRecord(exception1.FailedMutation, binaryData[0], binaryData[1], binaryData[2]);
+            AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
+            AssertRecord(exception1.FailedMutation, binaryData[0], binaryData[2], ByteString.Empty);
             Assert.Equal(1, records2.Count);
-            AssertRecord(records2[0], binaryData[3], ByteString.Empty, ByteString.Empty);
-            AssertRecord(exception2.FailedMutation, binaryData[3], null, binaryData[4]);
+            AssertRecord(records2[0], binaryData[4], ByteString.Empty, ByteString.Empty);
+            AssertRecord(exception2.FailedMutation, binaryData[4], null, binaryData[5]);
         }
 
         [Fact]
