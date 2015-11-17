@@ -49,6 +49,9 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public void Parse_Error()
         {
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() => RecordKey.Parse(null));
+            Assert.Equal("keyData", exception.ParamName);
+
             // Invalid structure
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 RecordKey.Parse(new ByteString(Encoding.UTF8.GetBytes("/account/name/"))));
