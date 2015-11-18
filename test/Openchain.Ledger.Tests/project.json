@@ -6,7 +6,7 @@
   "projectUrl": "https://www.openchain.org/",
   "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
   "iconUrl": "https://www.openchain.org/package.png",
-  "copyright": "Copyright © 2015 Coinprism, Inc.",
+  "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
   "dependencies": {
     "Openchain.Ledger": "0.4.4-rc1-*",
