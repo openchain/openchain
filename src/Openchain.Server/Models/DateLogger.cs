@@ -14,7 +14,7 @@
 
 using System;
 using System.Globalization;
-using Microsoft.Framework.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Openchain.Server.Models
 {
