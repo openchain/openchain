@@ -10,8 +10,8 @@
 
   "dependencies": {
     "Openchain.Ledger": "0.4.4-rc1-*",
-    "xunit": "2.1.0-rc2-*",
-    "xunit.runner.dnx": "2.1.0-beta6-*"
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-*"
   },
 
   "commands": {
