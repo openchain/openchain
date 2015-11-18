@@ -175,7 +175,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNXCore,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -1210,7 +1210,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNXCore,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -2527,7 +2527,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNXCore,Version=v5.0",
+        "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
