@@ -4522,6 +4522,8 @@
     ],
     ".NETFramework,Version=v4.6": [
       "fx/System.Data >= 4.0.0",
+      "fx/System.Runtime >= 4.0.20",
+      "fx/System.Threading.Tasks >= 4.0.10",
       "fx/System.Xml >= 4.0.0"
     ]
   }
