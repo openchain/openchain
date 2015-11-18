@@ -3006,7 +3006,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -3017,7 +3017,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -3030,7 +3030,7 @@
       },
       "Openchain.Ledger.Blockchain/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.4-rc1",
@@ -3042,7 +3042,7 @@
       },
       "Openchain.Sqlite/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -9099,7 +9099,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -9110,7 +9110,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -9123,7 +9123,7 @@
       },
       "Openchain.Ledger.Blockchain/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.4-rc1",
@@ -9135,7 +9135,7 @@
       },
       "Openchain.Sqlite/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -10282,7 +10282,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -10293,7 +10293,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -10306,7 +10306,7 @@
       },
       "Openchain.Ledger.Blockchain/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "NBitcoin": "2.1.5.2",
           "Openchain.Ledger": "0.4.4-rc1",
@@ -10318,7 +10318,7 @@
       },
       "Openchain.Sqlite/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.4.4-rc1",

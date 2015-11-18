@@ -379,7 +379,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1": {
+    ".NETFramework,Version=v4.5.1": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -415,7 +415,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -426,96 +426,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Numerics"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "NBitcoin/2.1.5.2": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Openchain.Ledger/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -1463,7 +1374,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x86": {
+    ".NETFramework,Version=v4.5.1/win7-x86": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -1499,7 +1410,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -1510,7 +1421,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -1558,7 +1469,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x64": {
+    ".NETFramework,Version=v4.5.1/win7-x64": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -1594,7 +1505,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -1605,197 +1516,7 @@
       },
       "Openchain.Ledger/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Numerics"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "compile": {
-          "ref/dotnet/_._": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x86": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "NBitcoin/2.1.5.2": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Openchain.Ledger/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Numerics"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "compile": {
-          "ref/dotnet/_._": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x64": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "NBitcoin/2.1.5.2": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Openchain.Ledger/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
@@ -3264,10 +2985,7 @@
       "Openchain.Ledger >= 0.4.4-rc1-*"
     ],
     ".NETPlatform,Version=v5.4": [],
-    "DNX,Version=v4.5.1": [
-      "fx/System.Collections >= 4.0.0"
-    ],
-    ".NETFramework,Version=v4.5": [
+    ".NETFramework,Version=v4.5.1": [
       "fx/System.Collections >= 4.0.0"
     ]
   }

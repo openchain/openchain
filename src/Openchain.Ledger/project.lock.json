@@ -330,7 +330,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1": {
+    ".NETFramework,Version=v4.5.1": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -351,47 +351,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -1206,7 +1166,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x86": {
+    ".NETFramework,Version=v4.5.1/win7-x86": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -1227,7 +1187,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -1246,7 +1206,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x64": {
+    ".NETFramework,Version=v4.5.1/win7-x64": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -1267,87 +1227,7 @@
       },
       "Openchain.Abstractions/0.4.4-rc1": {
         "type": "project",
-        "framework": "DNX,Version=v4.5.1",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x86": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
-        "dependencies": {
-          "Google.Protobuf": "3.0.0"
-        },
-        "frameworkAssemblies": [
-          "System.IO",
-          "System.Runtime"
-        ]
-      },
-      "Portable.BouncyCastle/1.8.0-rc4": {
-        "type": "package",
-        "compile": {
-          "lib/net45/crypto.dll": {}
-        },
-        "runtime": {
-          "lib/net45/crypto.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x64": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
-      "Openchain.Abstractions/0.4.4-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
+        "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Google.Protobuf": "3.0.0"
         },
@@ -2604,11 +2484,7 @@
       "System.Text.Encoding >= 4.0.11-beta-23516",
       "System.Text.RegularExpressions >= 4.0.11-beta-23516"
     ],
-    "DNX,Version=v4.5.1": [
-      "fx/System.IO >= 4.0.0",
-      "fx/System.Numerics >= 4.0.0"
-    ],
-    ".NETFramework,Version=v4.5": [
+    ".NETFramework,Version=v4.5.1": [
       "fx/System.IO >= 4.0.0",
       "fx/System.Numerics >= 4.0.0"
     ]

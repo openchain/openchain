@@ -170,18 +170,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5": {
+    ".NETFramework,Version=v4.5.1": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -640,7 +629,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x86": {
+    ".NETFramework,Version=v4.5.1/win7-x86": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -651,29 +640,7 @@
         }
       }
     },
-    "DNX,Version=v4.5.1/win7-x64": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x86": {
-      "Google.Protobuf/3.0.0-alpha4": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+netcore45+wpa81+wp8/Google.Protobuf.dll": {}
-        }
-      }
-    },
-    ".NETFramework,Version=v4.5/win7-x64": {
+    ".NETFramework,Version=v4.5.1/win7-x64": {
       "Google.Protobuf/3.0.0-alpha4": {
         "type": "package",
         "compile": {
@@ -1495,13 +1462,9 @@
       "System.Runtime.Extensions >= 4.0.11-beta-23516",
       "System.Security.Cryptography.Algorithms >= 4.0.0-beta-23516"
     ],
-    "DNX,Version=v4.5.1": [
+    ".NETFramework,Version=v4.5.1": [
       "fx/System.IO >= 4.0.0",
       "fx/System.Runtime >= 4.0.10"
-    ],
-    ".NETFramework,Version=v4.5": [
-      "fx/System.IO >= 4.0.0",
-      "fx/System.Runtime >= 4.0.0"
     ]
   }
 }
