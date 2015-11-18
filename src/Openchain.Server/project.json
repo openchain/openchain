@@ -12,16 +12,16 @@
   "userSecretsId": "Openchain.Server",
 
   "dependencies": {
-    "System.Text.Encoding": "4.0.11-beta-23409",
-    "Microsoft.AspNet.Cors": "6.0.0-beta8",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-beta8",
-    "Microsoft.AspNet.Mvc.Core": "6.0.0-beta8",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta8",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta8",
-    "Microsoft.AspNet.WebSockets.Server": "1.0.0-beta8",
-    "Microsoft.Framework.Logging.Console": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.Json": "1.0.0-beta8",
-    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta8",
+    "System.Text.Encoding": "4.0.11-beta-23516",
+    "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc.Core": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
+    "Microsoft.AspNet.WebSockets.Server": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
     "Newtonsoft.Json": "7.0.1",
     "Openchain.Abstractions": "0.4.4-rc1-*",
     "Openchain.Ledger": "0.4.4-rc1-*",
@@ -37,8 +37,8 @@
 
     "dnxcore50": {
       "dependencies": {
-        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23409",
-        "System.Net.WebSockets.Client": "4.0.0-beta-23409"
+        "System.Runtime.Serialization.Primitives": "4.0.11-beta-23516",
+        "System.Net.WebSockets.Client": "4.0.0-beta-23516"
       }
     },
 

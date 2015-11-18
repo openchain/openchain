@@ -14,7 +14,7 @@
   },
 
   "dependencies": {
-    "Microsoft.Data.SQLite": "1.0.0-beta8",
+    "Microsoft.Data.SQLite": "1.0.0-rc1-final",
     "Openchain.Abstractions": "0.4.4-rc1-*",
     "Openchain.Ledger": "0.4.4-rc1-*"
   },
