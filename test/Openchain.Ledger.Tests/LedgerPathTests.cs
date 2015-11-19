@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using Xunit;
 
 namespace Openchain.Ledger.Tests
@@ -103,6 +104,21 @@ namespace Openchain.Ledger.Tests
             path = LedgerPath.FromSegments("a", "b");
             Assert.Equal("/a/b/", path.FullPath);
             Assert.Equal<string>(new[] { "a", "b" }, path.Segments);
+        }
+
+        [Fact]
+        public void FromSegments_ArgumentOutOfRangeException()
+        {
+            ArgumentOutOfRangeException exception;
+
+            exception = Assert.Throws<ArgumentOutOfRangeException>(() => LedgerPath.FromSegments("@"));
+            Assert.Equal("segments", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentOutOfRangeException>(() => LedgerPath.FromSegments(null));
+            Assert.Equal("segments", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentOutOfRangeException>(() => LedgerPath.FromSegments(""));
+            Assert.Equal("segments", exception.ParamName);
         }
 
         [Fact]
