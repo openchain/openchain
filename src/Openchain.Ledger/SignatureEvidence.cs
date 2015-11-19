@@ -59,7 +59,14 @@ namespace Openchain.Ledger
                 return false;
             }
 
-            return key.VerifySignature(mutationHash, Signature.ToByteArray());
+            try
+            {
+                return key.VerifySignature(mutationHash, Signature.ToByteArray());
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

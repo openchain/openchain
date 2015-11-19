@@ -63,7 +63,7 @@ namespace Openchain.Ledger
                 try
                 {
                     Asn1InputStream decoder = new Asn1InputStream(signature);
-                    var seq = decoder.ReadObject() as DerSequence;
+                    DerSequence seq = decoder.ReadObject() as DerSequence;
                     if (seq == null || seq.Count != 2)
                         throw new FormatException("Invalid DER signature");
 
