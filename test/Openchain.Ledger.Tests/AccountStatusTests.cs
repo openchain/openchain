@@ -25,6 +25,29 @@ namespace Openchain.Ledger.Tests
             Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         [Fact]
+        public void AccountStatus_Success()
+        {
+            AccountStatus status = new AccountStatus(AccountKey.Parse("/account/", "/asset/"), 1, ByteString.Parse("ab"));
+
+            Assert.Equal("/account/", status.AccountKey.Account.FullPath);
+            Assert.Equal("/asset/", status.AccountKey.Asset.FullPath);
+            Assert.Equal(1, status.Balance);
+            Assert.Equal(ByteString.Parse("ab"), status.Version);
+        }
+
+        [Fact]
+        public void AccountStatus_ArgumentNullException()
+        {
+            ArgumentNullException exception;
+
+            exception = Assert.Throws<ArgumentNullException>(() => new AccountStatus(null, 1, ByteString.Parse("ab")));
+            Assert.Equal("accountKey", exception.ParamName);
+
+            exception = Assert.Throws<ArgumentNullException>(() => new AccountStatus(AccountKey.Parse("/account/", "/asset/"), 1, null));
+            Assert.Equal("version", exception.ParamName);
+        }
+
+        [Fact]
         public void FromRecord_Set()
         {
             Record record = new Record(
