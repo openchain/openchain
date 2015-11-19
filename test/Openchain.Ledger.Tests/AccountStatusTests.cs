@@ -14,6 +14,7 @@
 
 using System;
 using System.Linq;
+using System.Text;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 
@@ -77,6 +78,16 @@ namespace Openchain.Ledger.Tests
             Assert.Equal("/the/asset/", status.AccountKey.Asset.FullPath);
             Assert.Equal(0, status.Balance);
             Assert.Equal(binaryData[1], status.Version);
+        }
+
+        [Fact]
+        public void FromRecord_InvalidRecordType()
+        {
+            RecordKey key = new RecordKey(RecordType.Data, LedgerPath.Parse("/path/"), "name");
+            Record record = new Record(key.ToBinary(), ByteString.Empty, binaryData[1]);
+
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() => AccountStatus.FromRecord(key, record));
+            Assert.Equal("key", exception.ParamName);
         }
 
         private static ByteString SerializeInt(long value)
