@@ -127,7 +127,7 @@ namespace Openchain.Ledger.Validation
 
             return dataWithCheckSum;
         }
-        
+
         private static byte[] VerifyAndRemoveCheckSum(byte[] data)
         {
             if (data.Length < CHECK_SUM_SIZE)
@@ -156,20 +156,6 @@ namespace Openchain.Ledger.Validation
 
         private class ArrayHelpers
         {
-            public static T[] ConcatArrays<T>(params T[][] arrays)
-            {
-                var result = new T[arrays.Sum(arr => arr.Length)];
-                var offset = 0;
-
-                foreach (var arr in arrays)
-                {
-                    Buffer.BlockCopy(arr, 0, result, offset, arr.Length);
-                    offset += arr.Length;
-                }
-
-                return result;
-            }
-
             public static T[] ConcatArrays<T>(T[] arr1, T[] arr2)
             {
                 var result = new T[arr1.Length + arr2.Length];
@@ -192,7 +178,6 @@ namespace Openchain.Ledger.Validation
                 return SubArray(arr, start, arr.Length - start);
             }
         }
-
     }
 }
 
