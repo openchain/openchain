@@ -32,6 +32,7 @@ namespace Openchain.Ledger.Tests
                 CreateRecord("/path/to/account/:ACC:/asset/", 1),
                 CreateRecord("/path/to/account/sub/:ACC:/asset/", 2),
                 CreateRecord("/path/to/:ACC:/asset/", 3),
+                new Record(new ByteString(Encoding.UTF8.GetBytes("/path/to/account/:ACC:/empty/")), ByteString.Empty, ByteString.Parse("1234")),
                 CreateRecord("/path/to/account/:DATA:/asset/", 4),
                 CreateRecord("/path/to/accounting/:ACC:/asset/", 5));
 
