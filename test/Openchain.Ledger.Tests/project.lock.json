@@ -179,7 +179,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4",
+          "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
           "System.Runtime.Numerics": "4.0.1-beta-23516",
@@ -187,7 +187,7 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc4": {
+      "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -1214,7 +1214,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4",
+          "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
           "System.Runtime.Numerics": "4.0.1-beta-23516",
@@ -1222,7 +1222,7 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc4": {
+      "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -2531,7 +2531,7 @@
         "dependencies": {
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.4.4-rc1",
-          "Portable.BouncyCastle": "1.8.0-rc4",
+          "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
           "System.Runtime.Numerics": "4.0.1-beta-23516",
@@ -2539,7 +2539,7 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Portable.BouncyCastle/1.8.0-rc4": {
+      "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -3869,9 +3869,9 @@
         "tools/install.ps1"
       ]
     },
-    "Portable.BouncyCastle/1.8.0-rc4": {
+    "Portable.BouncyCastle/1.8.0": {
       "type": "package",
-      "sha512": "b4oKeCcX3Riy4aLFhPiVzWf3QCp3lvGktewTtftWTxhUhUGyU9F5IVXM8/bRQ9cmh8I/DAZs+fphdAu93IpvbA==",
+      "sha512": "MqzBSMh7/aKcQGsJlcLT8WjApuojJMb7fKbL9ZMt4vNyMOppKcdzw5v76oRRTykQqZrDDtGUI6tXt+8+3fqCKA==",
       "files": [
         "lib/dotnet/crypto.dll",
         "lib/dotnet/crypto.pdb",
@@ -3909,8 +3909,8 @@
         "lib/XamarinMac/crypto.dll",
         "lib/XamarinMac/crypto.pdb",
         "lib/XamarinMac/crypto.xml",
-        "Portable.BouncyCastle.1.8.0-rc4.nupkg",
-        "Portable.BouncyCastle.1.8.0-rc4.nupkg.sha512",
+        "Portable.BouncyCastle.1.8.0.nupkg",
+        "Portable.BouncyCastle.1.8.0.nupkg.sha512",
         "Portable.BouncyCastle.nuspec",
         "Readme.html"
       ]
