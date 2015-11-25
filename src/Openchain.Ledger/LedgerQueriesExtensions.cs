@@ -27,6 +27,7 @@ namespace Openchain.Ledger
             IReadOnlyList<Record> records = await queries.GetKeyStartingFrom(prefix);
 
             return records
+                .Where(record => !record.Value.Equals(ByteString.Empty))
                 .Select(record => AccountStatus.FromRecord(RecordKey.Parse(record.Key), record))
                 .ToList()
                 .AsReadOnly();
