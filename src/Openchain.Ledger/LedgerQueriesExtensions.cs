@@ -36,7 +36,12 @@ namespace Openchain.Ledger
         public static async Task<IReadOnlyList<Record>> GetSubaccounts(this ILedgerQueries queries, string rootAccount)
         {
             ByteString prefix = new ByteString(Encoding.UTF8.GetBytes(rootAccount));
-            return await queries.GetKeyStartingFrom(prefix);
+            IReadOnlyList<Record> records = await queries.GetKeyStartingFrom(prefix);
+
+            return records
+                .Where(record => !record.Value.Equals(ByteString.Empty))
+                .ToList()
+                .AsReadOnly();
         }
 
         public static async Task<Record> GetRecordVersion(this ILedgerQueries queries, ByteString key, ByteString version)
