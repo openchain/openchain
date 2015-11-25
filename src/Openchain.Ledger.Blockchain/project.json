@@ -15,7 +15,7 @@
 
   "dependencies": {
     "System.Net.Http": "4.0.1-beta-23516",
-    "NBitcoin": "2.1.5.2",
+    "NBitcoin": "2.1.5.9",
     "Openchain.Ledger": "0.4.4-rc1-*"
   },
 
