@@ -8,7 +8,6 @@
   "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "webroot": "Webroot",
   "userSecretsId": "Openchain.Server",
 
   "dependencies": {
