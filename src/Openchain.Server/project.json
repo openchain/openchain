@@ -1,5 +1,5 @@
 {
-  "version": "0.4.4-rc1-*",
+  "version": "0.4.4-*",
   "description": "Reference implementation of the Openchain protocol.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -22,10 +22,10 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
     "Newtonsoft.Json": "7.0.1",
-    "Openchain.Abstractions": "0.4.4-rc1-*",
-    "Openchain.Ledger": "0.4.4-rc1-*",
-    "Openchain.Ledger.Blockchain": "0.4.4-rc1-*",
-    "Openchain.Sqlite": "0.4.4-rc1-*"
+    "Openchain.Abstractions": "0.4.4-*",
+    "Openchain.Ledger": "0.4.4-*",
+    "Openchain.Ledger.Blockchain": "0.4.4-*",
+    "Openchain.Sqlite": "0.4.4-*"
   },
 
   "commands": {
