@@ -162,7 +162,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1080,7 +1080,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -2345,7 +2345,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -3434,7 +3434,7 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.4.4": {
+    "Openchain.Abstractions/0.4.5-rc1": {
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
@@ -6106,7 +6106,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Abstractions >= 0.4.4-*",
+      "Openchain.Abstractions >= 0.4.5-rc1-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-*"
     ],

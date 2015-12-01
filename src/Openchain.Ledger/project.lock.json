@@ -21,7 +21,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -349,7 +349,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -389,7 +389,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -787,7 +787,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1185,7 +1185,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1225,7 +1225,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.4.4": {
+      "Openchain.Abstractions/0.4.5-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1248,7 +1248,7 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.4.4": {
+    "Openchain.Abstractions/0.4.5-rc1": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
@@ -2474,7 +2474,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Newtonsoft.Json >= 7.0.1",
-      "Openchain.Abstractions >= 0.4.4-*",
+      "Openchain.Abstractions >= 0.4.5-rc1-*",
       "Portable.BouncyCastle >= 1.8.0"
     ],
     ".NETPlatform,Version=v5.4": [
