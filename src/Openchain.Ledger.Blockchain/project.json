@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.4.4-*",
+  "version": "0.4.5-rc1-*",
   "description": "Blockchain-based anchoring for Openchain.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -16,7 +16,7 @@
   "dependencies": {
     "System.Net.Http": "4.0.1-beta-23516",
     "NBitcoin": "2.1.5.9",
-    "Openchain.Ledger": "0.4.4-*"
+    "Openchain.Ledger": "0.4.5-rc1-*"
   },
 
   "frameworks": {
