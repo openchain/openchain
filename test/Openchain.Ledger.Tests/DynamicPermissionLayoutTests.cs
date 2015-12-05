@@ -36,6 +36,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Permit, result.AccountModify);
             Assert.Equal(Access.Permit, result.AccountNegative);
             Assert.Equal(Access.Permit, result.AccountSpend);
+            Assert.Equal(Access.Permit, result.AccountCreate);
             Assert.Equal(Access.Permit, result.DataModify);
         }
 
@@ -49,6 +50,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.AccountModify);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.AccountCreate);
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
@@ -62,6 +64,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.AccountModify);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.AccountCreate);
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
@@ -75,6 +78,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.AccountModify);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.AccountCreate);
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
@@ -88,6 +92,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result.AccountModify);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
+            Assert.Equal(Access.Unset, result.AccountCreate);
             Assert.Equal(Access.Unset, result.DataModify);
         }
 
@@ -143,6 +148,7 @@ namespace Openchain.Ledger.Tests
                                 ""account_negative"": ""Permit"",
                                 ""account_spend"": ""Permit"",
                                 ""account_modify"": ""Permit"",
+                                ""account_create"": ""Permit"",
                                 ""data_modify"": ""Permit""
                             }
                         }]

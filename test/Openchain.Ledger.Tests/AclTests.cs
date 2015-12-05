@@ -63,6 +63,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Permit, result[0].Permissions.AccountModify);
             Assert.Equal(Access.Permit, result[0].Permissions.AccountSpend);
             Assert.Equal(Access.Permit, result[0].Permissions.AccountModify);
+            Assert.Equal(Access.Permit, result[0].Permissions.AccountCreate);
             Assert.Equal(Access.Permit, result[0].Permissions.DataModify);
         }
 
@@ -80,6 +81,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(Access.Unset, result[0].Permissions.AccountModify);
             Assert.Equal(Access.Unset, result[0].Permissions.AccountSpend);
             Assert.Equal(Access.Unset, result[0].Permissions.AccountModify);
+            Assert.Equal(Access.Unset, result[0].Permissions.AccountCreate);
             Assert.Equal(Access.Unset, result[0].Permissions.DataModify);
         }
 
@@ -95,6 +97,7 @@ namespace Openchain.Ledger.Tests
                         ""account_negative"": ""Permit"",
                         ""account_spend"": ""Permit"",
                         ""account_modify"": ""Permit"",
+                        ""account_create"": ""Permit"",
                         ""data_modify"": ""Permit""
                     }
                 }]
