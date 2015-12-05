@@ -46,7 +46,7 @@ namespace Openchain.Ledger.Validation
 
                 if (mutation.Version.Equals(ByteString.Empty))
                 {
-                    if (accountPermissions.AccountModify != Access.Permit && accountPermissions.AccountCreate != Access.Permit)
+                    if (accountPermissions.AccountCreate != Access.Permit)
                         throw new TransactionInvalidException("AccountCreationUnauthorized");
                 }
                 else
