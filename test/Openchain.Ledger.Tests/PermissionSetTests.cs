@@ -52,6 +52,7 @@ namespace Openchain.Ledger.Tests
             Assert.Equal(expected, permissions.AccountModify);
             Assert.Equal(expected, permissions.AccountNegative);
             Assert.Equal(expected, permissions.AccountSpend);
+            Assert.Equal(expected, permissions.AccountCreate);
             Assert.Equal(expected, permissions.DataModify);
         }
     }
