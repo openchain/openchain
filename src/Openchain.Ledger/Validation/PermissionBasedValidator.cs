@@ -44,8 +44,16 @@ namespace Openchain.Ledger.Validation
 
                 AccountStatus previousStatus = accounts[mutation.AccountKey];
 
-                if (accountPermissions.AccountModify != Access.Permit)
-                    throw new TransactionInvalidException("AccountModificationUnauthorized");
+                if (mutation.Version.Equals(ByteString.Empty))
+                {
+                    if (accountPermissions.AccountModify != Access.Permit && accountPermissions.AccountCreate != Access.Permit)
+                        throw new TransactionInvalidException("AccountCreationUnauthorized");
+                }
+                else
+                {
+                    if (accountPermissions.AccountModify != Access.Permit)
+                        throw new TransactionInvalidException("AccountModificationUnauthorized");
+                }
 
                 if (mutation.Balance < previousStatus.Balance && accountPermissions.AccountNegative != Access.Permit)
                 {
