@@ -85,6 +85,7 @@ namespace Openchain.Ledger.Validation
                         accountNegative: Parse(root["permissions"]["account_negative"]),
                         accountSpend: Parse(root["permissions"]["account_spend"]),
                         accountModify: Parse(root["permissions"]["account_modify"]),
+                        accountCreate: Parse(root["permissions"]["account_create"]),
                         dataModify: Parse(root["permissions"]["data_modify"]))))
                 .ToList();
         }
