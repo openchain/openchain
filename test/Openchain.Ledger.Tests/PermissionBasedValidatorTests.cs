@@ -56,45 +56,45 @@ namespace Openchain.Ledger.Tests
 
             // Able to spend existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny, Access.Deny),
                 previousBalance: 150,
                 newBalance: 100);
 
             // Able to spend non-existing funds as the issuer
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Deny, Access.Permit, Access.Deny, Access.Deny),
                 previousBalance: 100,
                 newBalance: -50);
 
             // Able to spend funds as the owner
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Deny),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Deny, Access.Deny),
                 previousBalance: 100,
                 newBalance: 50);
 
             // Able to receive funds
             await TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Deny),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Deny, Access.Deny),
                 previousBalance: 50,
                 newBalance: 100);
 
             // Missing the affect balance permission
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Permit),
+                accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Permit, Access.Permit),
                 previousBalance: 100,
                 newBalance: 150));
             Assert.Equal("AccountModificationUnauthorized", exception.Reason);
 
             // Missing the permissions to spend from the account
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Permit),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Permit, Access.Permit),
                 previousBalance: 150,
                 newBalance: 100));
             Assert.Equal("CannotSpendFromAccount", exception.Reason);
 
             // Not able to spend more than the funds on the account
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
-                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Permit),
+                accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Permit, Access.Permit),
                 previousBalance: 100,
                 newBalance: -50));
             Assert.Equal("CannotIssueAsset", exception.Reason);
@@ -108,7 +108,7 @@ namespace Openchain.Ledger.Tests
                 new Dictionary<string, PermissionSet>()
                 {
                     ["/"] = PermissionSet.Unset,
-                    ["/a/"] = new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Permit)
+                    ["/a/"] = new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Deny, Access.Permit)
                 });
 
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>();
