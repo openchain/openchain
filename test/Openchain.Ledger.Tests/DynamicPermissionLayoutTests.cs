@@ -33,11 +33,7 @@ namespace Openchain.Ledger.Tests
 
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/subitem/"), true, "name");
 
-            Assert.Equal(Access.Permit, result.AccountModify);
-            Assert.Equal(Access.Permit, result.AccountNegative);
-            Assert.Equal(Access.Permit, result.AccountSpend);
-            Assert.Equal(Access.Permit, result.AccountCreate);
-            Assert.Equal(Access.Permit, result.DataModify);
+            AssertPermissionSet(Access.Permit, result);
         }
 
         [Fact]
@@ -47,11 +43,7 @@ namespace Openchain.Ledger.Tests
 
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/subitem/"), true, "other");
 
-            Assert.Equal(Access.Unset, result.AccountModify);
-            Assert.Equal(Access.Unset, result.AccountNegative);
-            Assert.Equal(Access.Unset, result.AccountSpend);
-            Assert.Equal(Access.Unset, result.AccountCreate);
-            Assert.Equal(Access.Unset, result.DataModify);
+            AssertPermissionSet(Access.Unset, result);
         }
 
         [Fact]
@@ -61,11 +53,7 @@ namespace Openchain.Ledger.Tests
 
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/other/"), true, "name");
 
-            Assert.Equal(Access.Unset, result.AccountModify);
-            Assert.Equal(Access.Unset, result.AccountNegative);
-            Assert.Equal(Access.Unset, result.AccountSpend);
-            Assert.Equal(Access.Unset, result.AccountCreate);
-            Assert.Equal(Access.Unset, result.DataModify);
+            AssertPermissionSet(Access.Unset, result);
         }
 
         [Fact]
@@ -75,11 +63,7 @@ namespace Openchain.Ledger.Tests
 
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/invalid/"), true, "name");
 
-            Assert.Equal(Access.Unset, result.AccountModify);
-            Assert.Equal(Access.Unset, result.AccountNegative);
-            Assert.Equal(Access.Unset, result.AccountSpend);
-            Assert.Equal(Access.Unset, result.AccountCreate);
-            Assert.Equal(Access.Unset, result.DataModify);
+            AssertPermissionSet(Access.Unset, result);
         }
 
         [Fact]
@@ -89,11 +73,16 @@ namespace Openchain.Ledger.Tests
 
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse("/root/comment/"), true, "name");
 
-            Assert.Equal(Access.Unset, result.AccountModify);
-            Assert.Equal(Access.Unset, result.AccountNegative);
-            Assert.Equal(Access.Unset, result.AccountSpend);
-            Assert.Equal(Access.Unset, result.AccountCreate);
-            Assert.Equal(Access.Unset, result.DataModify);
+            AssertPermissionSet(Access.Unset, result);
+        }
+
+        private void AssertPermissionSet(Access expected, PermissionSet permissions)
+        {
+            Assert.Equal(expected, permissions.AccountModify);
+            Assert.Equal(expected, permissions.AccountNegative);
+            Assert.Equal(expected, permissions.AccountSpend);
+            Assert.Equal(expected, permissions.AccountCreate);
+            Assert.Equal(expected, permissions.DataModify);
         }
 
         private class TestStore : IStorageEngine
