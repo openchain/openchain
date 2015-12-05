@@ -55,7 +55,7 @@ namespace Openchain.Ledger.Validation
                         throw new TransactionInvalidException("AccountModificationUnauthorized");
                 }
 
-                if (mutation.Balance < previousStatus.Balance && accountPermissions.AccountNegative != Access.Permit)
+                if (mutation.Balance <= previousStatus.Balance && accountPermissions.AccountNegative != Access.Permit)
                 {
                     // Decreasing the balance
                     if (mutation.Balance >= 0)
