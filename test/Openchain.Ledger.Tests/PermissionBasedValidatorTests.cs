@@ -78,12 +78,27 @@ namespace Openchain.Ledger.Tests
                 previousBalance: 50,
                 newBalance: 100);
 
+            // Able to create a new account record
+            await TestAccountChange(
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Deny, Access.Permit, Access.Deny),
+                previousBalance: 50,
+                newBalance: 100,
+                emptyVersion: true);
+
             // Missing the affect balance permission
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Permit, Access.Permit),
                 previousBalance: 100,
                 newBalance: 150));
             Assert.Equal("AccountModificationUnauthorized", exception.Reason);
+
+            // Missing the create account permission
+            exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
+                accountPermissions: new PermissionSet(Access.Permit, Access.Permit, Access.Deny, Access.Deny, Access.Permit),
+                previousBalance: 100,
+                newBalance: 150,
+                emptyVersion: true));
+            Assert.Equal("AccountCreationUnauthorized", exception.Reason);
 
             // Missing the permissions to spend from the account
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
@@ -173,7 +188,7 @@ namespace Openchain.Ledger.Tests
             await validator.Validate(mutation, new SignatureEvidence[0], new Dictionary<AccountKey, AccountStatus>());
         }
 
-        private static async Task TestAccountChange(PermissionSet accountPermissions, long previousBalance, long newBalance)
+        private static async Task TestAccountChange(PermissionSet accountPermissions, long previousBalance, long newBalance, bool emptyVersion = false)
         {
             PermissionBasedValidator validator = CreateValidator(
                 new string[0],
@@ -183,13 +198,15 @@ namespace Openchain.Ledger.Tests
                     ["/a/"] = accountPermissions
                 });
 
+            ByteString version = emptyVersion ? ByteString.Empty : ByteString.Parse("abcdef");
+
             Dictionary<AccountKey, AccountStatus> accounts = new Dictionary<AccountKey, AccountStatus>()
             {
-                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), previousBalance, ByteString.Empty)
+                [AccountKey.Parse("/a/", "/b/")] = new AccountStatus(AccountKey.Parse("/a/", "/b/"), previousBalance, version)
             };
 
             ParsedMutation mutation = new ParsedMutation(
-                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), newBalance, ByteString.Empty) },
+                new[] { new AccountStatus(AccountKey.Parse("/a/", "/b/"), newBalance, version) },
                 new KeyValuePair<RecordKey, ByteString>[0]);
 
             await validator.Validate(mutation, new SignatureEvidence[0], accounts);
