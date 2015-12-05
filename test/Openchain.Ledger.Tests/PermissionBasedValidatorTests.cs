@@ -107,6 +107,12 @@ namespace Openchain.Ledger.Tests
                 newBalance: 100));
             Assert.Equal("CannotSpendFromAccount", exception.Reason);
 
+            exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
+                accountPermissions: new PermissionSet(Access.Deny, Access.Deny, Access.Permit, Access.Permit, Access.Permit),
+                previousBalance: 100,
+                newBalance: 100));
+            Assert.Equal("CannotSpendFromAccount", exception.Reason);
+
             // Not able to spend more than the funds on the account
             exception = await Assert.ThrowsAsync<TransactionInvalidException>(() => TestAccountChange(
                 accountPermissions: new PermissionSet(Access.Deny, Access.Permit, Access.Permit, Access.Permit, Access.Permit),
