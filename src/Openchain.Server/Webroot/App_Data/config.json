@@ -34,6 +34,6 @@
     "key": "",
     "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",
     "network_byte": 111,
-    "fees": 1000
+    "fees": 5000
   }
 }
