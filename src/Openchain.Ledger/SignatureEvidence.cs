@@ -58,6 +58,10 @@ namespace Openchain.Ledger
             {
                 return false;
             }
+            catch (FormatException)
+            {
+                return false;
+            }
 
             try
             {
