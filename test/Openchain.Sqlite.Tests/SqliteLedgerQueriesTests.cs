@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Openchain.Ledger;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests
@@ -95,6 +96,30 @@ namespace Openchain.Sqlite.Tests
             ByteString result = await store.GetTransaction(mutation);
 
             Assert.Equal(mutation, new ByteString(MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(result).Mutation.ToByteArray())));
+        }
+
+        [Fact]
+        public async Task GetAllRecords_Success()
+        {
+            await AddRecords("/a/:DATA:name1");
+            await AddRecords("/b/:DATA:name2");
+            await AddRecords("/c/:DATA:name3");
+            await AddRecords("/d/:DATA:name3");
+            await AddRecords("/e/:DATA:/path/1/");
+            await AddRecords("/f/:ACC:/path/1/");
+            await AddRecords("/g/:ACC:/path/2/");
+
+            IReadOnlyList<Record> result1 = await store.GetAllRecords(RecordType.Data, "/path/1/");
+            IReadOnlyList<Record> result2 = await store.GetAllRecords(RecordType.Data, "name3");
+            IReadOnlyList<Record> result3 = await store.GetAllRecords(RecordType.Account, "/path/1/");
+
+            Assert.Equal(1, result1.Count);
+            Assert.Equal("/e/", RecordKey.Parse(result1[0].Key).Path.FullPath);
+            Assert.Equal(2, result2.Count);
+            Assert.Equal("/c/", RecordKey.Parse(result2[0].Key).Path.FullPath);
+            Assert.Equal("/d/", RecordKey.Parse(result2[1].Key).Path.FullPath);
+            Assert.Equal(1, result3.Count);
+            Assert.Equal("/f/", RecordKey.Parse(result3[0].Key).Path.FullPath);
         }
 
         [Fact]
