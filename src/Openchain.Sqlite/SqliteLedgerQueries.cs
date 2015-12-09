@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteLedgerQueries : SqliteStorageEngine, ILedgerQueries
+    public class SqliteLedgerQueries : SqliteStorageEngine, ILedgerQueries, ILedgerIndexes
     {
         private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
 
@@ -137,6 +138,23 @@ namespace Openchain.Sqlite
                         ["@mutationHash"] = mutationHash
                     });
             }
+        }
+
+        public async Task<IReadOnlyList<Record>> GetAllRecords(RecordType type, string name)
+        {
+            return await ExecuteAsync(@"
+                    SELECT  Key, Value, Version
+                    FROM    Records
+                    WHERE   Name = @name AND Type = @type",
+                reader => new Record(
+                    new ByteString((byte[])reader.GetValue(0)),
+                    reader.GetValue(1) == null ? ByteString.Empty : new ByteString((byte[])reader.GetValue(1)),
+                    new ByteString((byte[])reader.GetValue(2))),
+                new Dictionary<string, object>()
+                {
+                    ["@name"] = name,
+                    ["@type"] = (byte)type
+                });
         }
     }
 }
