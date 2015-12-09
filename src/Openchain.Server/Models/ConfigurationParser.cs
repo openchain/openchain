@@ -59,6 +59,13 @@ namespace Openchain.Server.Models
             return store as ILedgerQueries;
         }
 
+        public static ILedgerIndexes CreateLedgerIndexes(IServiceProvider serviceProvider)
+        {
+            IStorageEngine store = serviceProvider.GetService<IStorageEngine>();
+
+            return store as ILedgerIndexes;
+        }
+
         public static IAnchorBuilder CreateAnchorBuilder(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();

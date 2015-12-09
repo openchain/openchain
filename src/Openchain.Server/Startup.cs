@@ -73,6 +73,8 @@ namespace Openchain.Server
 
             services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
+            services.AddTransient<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
+
             services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder);
 
             services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
