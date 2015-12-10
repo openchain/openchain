@@ -78,46 +78,6 @@ namespace Openchain.Sqlite.Tests
         }
 
         [Fact]
-        public async Task AddTransaction_Multiple()
-        {
-            IList<Record> records1 = new Record[]
-            {
-                new Record(binaryData[0], binaryData[1], ByteString.Empty),
-                new Record(binaryData[2], binaryData[3], ByteString.Empty),
-            };
-
-            ByteString mutation1 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records1, ByteString.Empty)));
-            ByteString mutationHash1 = new ByteString(MessageSerializer.ComputeHash(mutation1.ToByteArray()));
-
-            IList<Record> records2 = new Record[]
-            {
-                new Record(binaryData[2], binaryData[5], mutationHash1),
-                new Record(binaryData[6], binaryData[7], ByteString.Empty),
-            };
-
-            ByteString mutation2 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records2, ByteString.Empty)));
-            ByteString mutationHash2 = new ByteString(MessageSerializer.ComputeHash(mutation2.ToByteArray()));
-
-            // Submit both transactions at once
-            await this.store.AddTransactions(new[]
-            {
-                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation1, new DateTime(), ByteString.Empty))),
-                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation2, new DateTime(), ByteString.Empty)))
-            });
-
-            IList<Record> result1 = await this.store.GetRecords(new[] { binaryData[0] });
-            IList<Record> result2 = await this.store.GetRecords(new[] { binaryData[2] });
-            IList<Record> result3 = await this.store.GetRecords(new[] { binaryData[6] });
-
-            Assert.Equal(1, result1.Count);
-            AssertRecord(result1[0], binaryData[0], binaryData[1], mutationHash1);
-            Assert.Equal(1, result2.Count);
-            AssertRecord(result2[0], binaryData[2], binaryData[5], mutationHash2);
-            Assert.Equal(1, result3.Count);
-            AssertRecord(result3[0], binaryData[6], binaryData[7], mutationHash2);
-        }
-
-        [Fact]
         public async Task AddTransaction_InsertError()
         {
             ByteString mutationHash = await AddTransaction(
@@ -162,6 +122,80 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(1, records2.Count);
             AssertRecord(records2[0], binaryData[4], binaryData[5], mutationHash);
             AssertRecord(exception2.FailedMutation, binaryData[4], null, binaryData[6]);
+        }
+
+
+        [Fact]
+        public async Task AddTransaction_MultipleTransactionsSuccess()
+        {
+            IList<Record> records1 = new Record[]
+            {
+                new Record(binaryData[0], binaryData[1], ByteString.Empty),
+                new Record(binaryData[2], binaryData[3], ByteString.Empty),
+            };
+
+            ByteString mutation1 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records1, ByteString.Empty)));
+            ByteString mutationHash1 = new ByteString(MessageSerializer.ComputeHash(mutation1.ToByteArray()));
+
+            IList<Record> records2 = new Record[]
+            {
+                new Record(binaryData[2], binaryData[5], mutationHash1),
+                new Record(binaryData[6], binaryData[7], ByteString.Empty),
+            };
+
+            ByteString mutation2 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records2, ByteString.Empty)));
+            ByteString mutationHash2 = new ByteString(MessageSerializer.ComputeHash(mutation2.ToByteArray()));
+
+            // Submit both transactions at once
+            await this.store.AddTransactions(new[]
+            {
+                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation1, new DateTime(), ByteString.Empty))),
+                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation2, new DateTime(), ByteString.Empty)))
+            });
+
+            IList<Record> result1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> result2 = await this.store.GetRecords(new[] { binaryData[2] });
+            IList<Record> result3 = await this.store.GetRecords(new[] { binaryData[6] });
+
+            AssertRecord(result1[0], binaryData[0], binaryData[1], mutationHash1);
+            AssertRecord(result2[0], binaryData[2], binaryData[5], mutationHash2);
+            AssertRecord(result3[0], binaryData[6], binaryData[7], mutationHash2);
+        }
+
+        [Fact]
+        public async Task AddTransaction_MultipleTransactionsError()
+        {
+            IList<Record> records1 = new Record[]
+            {
+                new Record(binaryData[0], binaryData[1], ByteString.Empty),
+                new Record(binaryData[2], binaryData[3], ByteString.Empty),
+            };
+
+            ByteString mutation1 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records1, ByteString.Empty)));
+
+            IList<Record> records2 = new Record[]
+            {
+                new Record(binaryData[2], binaryData[5], ByteString.Empty),
+                new Record(binaryData[6], binaryData[7], ByteString.Empty),
+            };
+
+            ByteString mutation2 = new ByteString(MessageSerializer.SerializeMutation(new Mutation(ByteString.Empty, records2, ByteString.Empty)));
+
+            // Submit both transactions at once
+            ConcurrentMutationException exception = await Assert.ThrowsAsync<ConcurrentMutationException>(() => this.store.AddTransactions(new[]
+            {
+                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation1, new DateTime(), ByteString.Empty))),
+                new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation2, new DateTime(), ByteString.Empty)))
+            }));
+
+            IList<Record> result1 = await this.store.GetRecords(new[] { binaryData[0] });
+            IList<Record> result2 = await this.store.GetRecords(new[] { binaryData[2] });
+            IList<Record> result3 = await this.store.GetRecords(new[] { binaryData[6] });
+
+            AssertRecord(exception.FailedMutation, binaryData[2], binaryData[5], ByteString.Empty);
+            AssertRecord(result1[0], binaryData[0], ByteString.Empty, ByteString.Empty);
+            AssertRecord(result2[0], binaryData[2], ByteString.Empty, ByteString.Empty);
+            AssertRecord(result3[0], binaryData[6], ByteString.Empty, ByteString.Empty);
         }
 
         [Fact]
