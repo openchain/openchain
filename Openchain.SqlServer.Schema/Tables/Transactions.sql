@@ -5,4 +5,7 @@
     [TransactionHash] BINARY(32) NOT NULL,
     [MutationHash] BINARY(32) NOT NULL,
     [RawData] VARBINARY(MAX) NOT NULL,
+
+    CONSTRAINT [PK_Transactions]
+    PRIMARY KEY ([Id]),
 )

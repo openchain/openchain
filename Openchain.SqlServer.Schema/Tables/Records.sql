@@ -7,4 +7,7 @@
     [Version] VARBINARY(32) NOT NULL,
     [Name] VARCHAR(512) NOT NULL,
     [Type] TINYINT NOT NULL,
+
+    CONSTRAINT [PK_Records]
+    PRIMARY KEY ([Id]),
 )
