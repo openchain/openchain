@@ -193,6 +193,12 @@ namespace Openchain.Server.Controllers
                 });
         }
 
+        /// <summary>
+        /// Gets all records with a given type and name.
+        /// </summary>
+        /// <param name="recordName">The name of the records being queried.</param>
+        /// <param name="recordType">The type of the records being queried.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("recordsbyname")]
         public async Task<ActionResult> GetRecordsByName(
             [FromQuery(Name = "name")]
