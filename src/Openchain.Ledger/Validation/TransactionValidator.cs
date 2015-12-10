@@ -23,7 +23,7 @@ namespace Openchain.Ledger.Validation
 {
     public class TransactionValidator
     {
-        private static readonly int MaxKeySize = 1024;
+        private static readonly int MaxKeySize = 512;
 
         private readonly IStorageEngine store;
         private readonly ByteString ledgerId;

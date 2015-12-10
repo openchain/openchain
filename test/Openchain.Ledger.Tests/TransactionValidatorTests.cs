@@ -63,7 +63,7 @@ namespace Openchain.Ledger.Tests
                 new Record[]
                 {
                     new Record(
-                        ByteString.Parse(new string('a', 1025 * 2)),
+                        ByteString.Parse(new string('a', 513 * 2)),
                         new ByteString(BitConverter.GetBytes(100L).Reverse()),
                         ByteString.Empty)
                 },
