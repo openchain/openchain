@@ -9,3 +9,12 @@
     CONSTRAINT [PK_Transactions]
     PRIMARY KEY ([Id]),
 )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_Transactions_TransactionHash]
+ON [Openchain].[Transactions] ([Instance], [TransactionHash])
+GO
+
+CREATE NONCLUSTERED INDEX [IX_Transactions_MutationHash]
+ON [Openchain].[Transactions] ([Instance], [MutationHash])
+GO
