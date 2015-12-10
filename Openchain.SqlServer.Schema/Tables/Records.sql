@@ -11,3 +11,9 @@
     CONSTRAINT [PK_Records]
     PRIMARY KEY ([Id]),
 )
+GO
+
+CREATE NONCLUSTERED INDEX [IX_Records_Key]
+ON [Openchain].[Records] ([Instance], [Key])
+INCLUDE ([Value], [Version])
+GO
