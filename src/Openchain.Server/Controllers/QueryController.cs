@@ -26,10 +26,12 @@ namespace Openchain.Server.Controllers
     public class QueryController : Controller
     {
         private readonly ILedgerQueries store;
+        private readonly ILedgerIndexes indexes;
 
-        public QueryController(ILedgerQueries store)
+        public QueryController(ILedgerQueries store, ILedgerIndexes indexes)
         {
             this.store = store;
+            this.indexes = indexes;
         }
 
         /// <summary>
@@ -95,12 +97,7 @@ namespace Openchain.Server.Controllers
                 mutation = new
                 {
                     @namespace = mutation.Namespace.ToString(),
-                    records = mutation.Records.Select(record => new
-                    {
-                        key = record.Key.ToString(),
-                        value = record.Value?.ToString(),
-                        version = record.Version.ToString()
-                    }).ToArray(),
+                    records = mutation.Records.Select(GetRecordJson).ToArray(),
                     metadata = mutation.Metadata.ToString()
                 },
                 timestamp = transaction.Timestamp,
@@ -126,12 +123,7 @@ namespace Openchain.Server.Controllers
 
             IReadOnlyList<Record> accounts = await this.store.GetSubaccounts(directory.FullPath);
 
-            return Json(accounts.Select(result => new
-            {
-                key = result.Key.ToString(),
-                value = result.Value.ToString(),
-                version = result.Version.ToString()
-            }).ToArray());
+            return Json(accounts.Select(GetRecordJson).ToArray());
         }
 
         /// <summary>
@@ -201,6 +193,31 @@ namespace Openchain.Server.Controllers
                 });
         }
 
+        [HttpGet("recordsbyname")]
+        public async Task<ActionResult> GetRecordsByName(
+            [FromQuery(Name = "name")]
+            string recordName,
+            [FromQuery(Name = "type")]
+            string recordType)
+        {
+            if (recordName == null)
+                return HttpBadRequest();
+
+            RecordKey record;
+            try
+            {
+                record = RecordKey.ParseRecord(recordType, LedgerPath.FromSegments(), recordName);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return HttpBadRequest();
+            }
+
+            IReadOnlyList<Record> records = await this.indexes.GetAllRecords(record.RecordType, record.Name);
+
+            return Json(records.Select(GetRecordJson).ToArray());
+        }
+
         private object GetAccountJson(AccountStatus account)
         {
             return new
@@ -209,6 +226,16 @@ namespace Openchain.Server.Controllers
                 asset = account.AccountKey.Asset.FullPath,
                 balance = account.Balance.ToString(),
                 version = account.Version.ToString()
+            };
+        }
+
+        private object GetRecordJson(Record record)
+        {
+            return new
+            {
+                key = record.Key.ToString(),
+                value = record.Value?.ToString(),
+                version = record.Version.ToString()
             };
         }
 
