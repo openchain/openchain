@@ -59,11 +59,13 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Openchain.sql" />
     <Build Include="Tables\Records.sql" />
     <Build Include="Tables\Transactions.sql" />
     <Build Include="Tables\RecordMutations.sql" />
+    <Build Include="Types\RecordMutation.sql" />
   </ItemGroup>
 </Project>
