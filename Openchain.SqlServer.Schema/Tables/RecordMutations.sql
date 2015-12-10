@@ -10,3 +10,4 @@
     CONSTRAINT [FK_RecordMutations_Transactions]
     FOREIGN KEY ([TransactionId]) REFERENCES [Openchain].[Transactions] ([Id]),
 )
+GO
