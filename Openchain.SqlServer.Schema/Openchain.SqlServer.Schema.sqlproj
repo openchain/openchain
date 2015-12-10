@@ -61,5 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Openchain.sql" />
+    <Build Include="Tables\Records.sql" />
+    <Build Include="Tables\Transactions.sql" />
+    <Build Include="Tables\RecordMutations.sql" />
   </ItemGroup>
 </Project>
