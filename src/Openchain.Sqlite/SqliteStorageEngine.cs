@@ -14,6 +14,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
@@ -62,7 +63,7 @@ namespace Openchain.Sqlite
 
         public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
-            using (SqliteTransaction context = Connection.BeginTransaction(System.Data.IsolationLevel.Serializable))
+            using (SqliteTransaction context = Connection.BeginTransaction(IsolationLevel.Serializable))
             {
                 foreach (ByteString rawTransaction in transactions)
                 {

@@ -25,11 +25,13 @@ namespace Openchain.Sqlite
 {
     public class SqlServerStorageEngine : IStorageEngine
     {
+        private readonly int instanceId;
         private readonly TimeSpan commandTimeout;
 
-        public SqlServerStorageEngine(string connectionString, TimeSpan commandTimeout)
+        public SqlServerStorageEngine(string connectionString, int instanceId, TimeSpan commandTimeout)
         {
             this.Connection = new SqlConnection(connectionString);
+            this.instanceId = instanceId;
             this.commandTimeout = commandTimeout;
         }
 
@@ -37,9 +39,41 @@ namespace Openchain.Sqlite
 
         #region AddTransactions
 
-        public Task AddTransactions(IEnumerable<ByteString> transactions)
+        public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
-            throw new NotSupportedException();
+            using (SqlTransaction context = Connection.BeginTransaction(IsolationLevel.ReadCommitted))
+            {
+                foreach (ByteString rawTransaction in transactions)
+                {
+                    byte[] rawTransactionBuffer = rawTransaction.ToByteArray();
+                    Transaction transaction = MessageSerializer.DeserializeTransaction(rawTransaction);
+                    byte[] transactionHash = MessageSerializer.ComputeHash(rawTransactionBuffer);
+
+                    byte[] mutationHash = MessageSerializer.ComputeHash(transaction.Mutation.ToByteArray());
+                    Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
+
+                    await ExecuteQuery<long>(
+                        "EXEC [Openchain].[AddTransaction]",
+                        reader => (long)reader[0],
+                        new Dictionary<string, object>()
+                        {
+                            ["instance"] = this.instanceId,
+                            ["transactionHash"] = transactionHash,
+                            ["mutationHash"] = mutationHash,
+                            ["rawData"] = rawTransactionBuffer,
+                            ["records"] = mutation.Records.Select(record =>
+                            {
+                                SqlDataRecord result = new SqlDataRecord();
+                                result.SetBytes(0, 0, record.Key.ToByteArray(), 0, record.Key.Value.Count);
+                                result.SetBytes(1, 0, record.Value.ToByteArray(), 0, record.Value.Value.Count);
+                                result.SetBytes(2, 0, record.Version.ToByteArray(), 0, record.Version.Value.Count);
+                                result.SetString(3, "");
+                                result.SetByte(4, 0);
+                                return result;
+                            })
+                        });
+                }
+            }
         }
 
         #endregion
@@ -104,13 +138,12 @@ namespace Openchain.Sqlite
             command.CommandTimeout = (int)commandTimeout.TotalSeconds;
 
             foreach (KeyValuePair<string, object> parameter in parameters)
-                command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
-        }
+            {
+                SqlParameter sqlParameter = command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
 
-        private void SetTableParameters(string key, string typeName, IEnumerable<SqlDataRecord> records, SqlCommand command)
-        {
-            SqlParameter sqlParameter = command.Parameters.Add(new SqlParameter(key, records));
-            sqlParameter.TypeName = typeName;
+                if (parameter.Value is IEnumerable<SqlDataRecord>)
+                    sqlParameter.TypeName = "Openchain.RecordMutation";
+            }
         }
 
         #endregion
