@@ -17,12 +17,15 @@ AS
         INSERT ([Instance], [Key], [Value], [Version], [Name], [Type])
         VALUES (@instance, Source.[Key], Source.[Value], @mutationHash, Source.[Name], Source.[Type]);
 
-    DECLARE @transactionId AS BIGINT
+    DECLARE @insertedIds TABLE (TransactionId BIGINT)
 
     INSERT INTO [Openchain].[Transactions]
     ([Instance], [TransactionHash], [MutationHash], [RawData])
-    OUTPUT Inserted.[Id] INTO @transactionId
+    OUTPUT Inserted.[Id] INTO @insertedIds
     VALUES (@instance, @transactionHash, @mutationHash, @rawData);
+
+    DECLARE @transactionId AS BIGINT
+    SELECT TOP(1) @transactionId = [TransactionId] FROM @insertedIds
 
     INSERT INTO [Openchain].[RecordMutations]
     ([Instance], [RecordKey], [TransactionId])
