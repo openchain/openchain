@@ -53,7 +53,7 @@ namespace Openchain.Sqlite
                     Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
 
                     await ExecuteQuery<long>(
-                        "EXEC [Openchain].[AddTransaction]",
+                        "EXEC [Openchain].[AddTransaction] @instance, @transactionHash, @mutationHash, @rawData, @records;",
                         reader => (long)reader[0],
                         new Dictionary<string, object>()
                         {
@@ -73,6 +73,8 @@ namespace Openchain.Sqlite
                             })
                         });
                 }
+
+                context.Commit();
             }
         }
 
