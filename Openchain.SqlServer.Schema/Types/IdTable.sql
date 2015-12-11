@@ -1,0 +1,5 @@
+﻿CREATE TYPE [Openchain].[IdTable] AS TABLE
+(
+    [Id] VARBINARY(512) NOT NULL PRIMARY KEY
+)
+GO
