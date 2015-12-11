@@ -39,7 +39,7 @@ namespace Openchain.Sqlite
         {
             new SqlMetaData("Id", SqlDbType.VarBinary, 512),
         };
-        
+
         public SqlServerStorageEngine(string connectionString, int instanceId, TimeSpan commandTimeout)
         {
             this.Connection = new SqlConnection(connectionString);
@@ -109,20 +109,30 @@ namespace Openchain.Sqlite
 
         public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
-            return (await ExecuteQuery<Record>(
+            List<ByteString> keyList = new List<ByteString>(keys);
+
+            IReadOnlyList<Record> records = await ExecuteQuery<Record>(
                 "EXEC [Openchain].[GetRecords] @instance, @ids;",
                 reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
                 new Dictionary<string, object>()
                 {
                     ["instance"] = this.instanceId,
                     ["type:ids"] = "Openchain.IdTable",
-                    ["ids"] = keys.Select(key =>
+                    ["ids"] = keyList.Select(key =>
                     {
-                        SqlDataRecord result = new SqlDataRecord(idMetadata);
-                        result.SetBytes(0, 0, key.ToByteArray(), 0, key.Value.Count);
-                        return result;
+                        SqlDataRecord record = new SqlDataRecord(idMetadata);
+                        record.SetBytes(0, 0, key.ToByteArray(), 0, key.Value.Count);
+                        return record;
                     }).ToList()
-                })).ToList();
+                });
+
+            Dictionary<ByteString, Record> result = records.ToDictionary(record => record.Key);
+
+            foreach (ByteString key in keyList)
+                if (!result.ContainsKey(key))
+                    result.Add(key, new Record(key, ByteString.Empty, ByteString.Empty));
+
+            return result.Values.ToList();
         }
 
         #endregion
