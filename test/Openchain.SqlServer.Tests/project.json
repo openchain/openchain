@@ -1,0 +1,30 @@
+﻿{
+  "version": "0.5.0-rc1-*",
+  "description": "Unit tests for the Openchain.SqlServer package.",
+  "authors": [ "Flavien Charlon" ],
+  "owners": [ "Coinprism" ],
+  "projectUrl": "https://www.openchain.org/",
+  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+  "iconUrl": "https://www.openchain.org/package.png",
+  "copyright": "Copyright © 2015 Coinprism, Inc.",
+
+  "dependencies": {
+    "Openchain.Abstractions.Tests": "0.5.0-rc1-*",
+    "Openchain.SqlServer": "0.5.0-rc1-*",
+    "xunit": "2.1.0",
+    "xunit.runner.dnx": "2.1.0-rc1-*"
+  },
+
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+
+  "frameworks": {
+    "dnxcore50": {
+      "dependencies": {
+        "System.Collections": "4.0.11-beta-23516",
+        "System.Linq": "4.0.1-beta-23516"
+      }
+    }
+  }
+}
