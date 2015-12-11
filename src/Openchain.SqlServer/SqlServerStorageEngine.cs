@@ -69,9 +69,9 @@ namespace Openchain.Sqlite
                     byte[] mutationHash = MessageSerializer.ComputeHash(transaction.Mutation.ToByteArray());
                     Mutation mutation = MessageSerializer.DeserializeMutation(transaction.Mutation);
 
-                    await ExecuteQuery<long>(
+                    IReadOnlyList<Record> conflicts = await ExecuteQuery<Record>(
                         "EXEC [Openchain].[AddTransaction] @instance, @transactionHash, @mutationHash, @rawData, @records;",
-                        reader => (long)reader[0],
+                        reader => mutation.Records.First(record => record.Key.Equals(new ByteString((byte[])reader[0]))),
                         new Dictionary<string, object>()
                         {
                             ["instance"] = this.instanceId,
@@ -97,6 +97,9 @@ namespace Openchain.Sqlite
                             }).ToList()
                         },
                         context);
+
+                    if (conflicts.Count > 0)
+                        throw new ConcurrentMutationException(conflicts[0]);
                 }
 
                 context.Commit();
