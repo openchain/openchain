@@ -27,7 +27,7 @@ namespace Openchain.Sqlite
     {
         private readonly int instanceId;
         private readonly TimeSpan commandTimeout;
-        private readonly SqlMetaData[] metadata = new[]
+        private readonly SqlMetaData[] recordMutationMetadata = new[]
         {
             new SqlMetaData("Key", SqlDbType.VarBinary, 512),
             new SqlMetaData("Value", SqlDbType.VarBinary, SqlMetaData.Max),
@@ -35,7 +35,11 @@ namespace Openchain.Sqlite
             new SqlMetaData("Name", SqlDbType.VarChar, 512),
             new SqlMetaData("Type", SqlDbType.TinyInt),
         };
-
+        private readonly SqlMetaData[] idMetadata = new[]
+        {
+            new SqlMetaData("Id", SqlDbType.VarBinary, 512),
+        };
+        
         public SqlServerStorageEngine(string connectionString, int instanceId, TimeSpan commandTimeout)
         {
             this.Connection = new SqlConnection(connectionString);
@@ -74,9 +78,10 @@ namespace Openchain.Sqlite
                             ["transactionHash"] = transactionHash,
                             ["mutationHash"] = mutationHash,
                             ["rawData"] = rawTransactionBuffer,
+                            ["type:records"] = "Openchain.RecordMutationTable",
                             ["records"] = mutation.Records.Select(record =>
                             {
-                                SqlDataRecord result = new SqlDataRecord(metadata);
+                                SqlDataRecord result = new SqlDataRecord(recordMutationMetadata);
 
                                 result.SetBytes(0, 0, record.Key.ToByteArray(), 0, record.Key.Value.Count);
 
@@ -102,9 +107,22 @@ namespace Openchain.Sqlite
 
         #region GetRecords
 
-        public Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
+        public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
-            throw new NotSupportedException();
+            return (await ExecuteQuery<Record>(
+                "EXEC [Openchain].[GetRecords] @instance, @ids;",
+                reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId,
+                    ["type:ids"] = "Openchain.IdTable",
+                    ["ids"] = keys.Select(key =>
+                    {
+                        SqlDataRecord result = new SqlDataRecord(idMetadata);
+                        result.SetBytes(0, 0, key.ToByteArray(), 0, key.Value.Count);
+                        return result;
+                    }).ToList()
+                })).ToList();
         }
 
         #endregion
@@ -162,12 +180,15 @@ namespace Openchain.Sqlite
 
             foreach (KeyValuePair<string, object> parameter in parameters)
             {
-                SqlParameter sqlParameter = command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
-
-                if (parameter.Value is IEnumerable<SqlDataRecord>)
+                if (!parameter.Key.StartsWith("type:", StringComparison.Ordinal))
                 {
-                    sqlParameter.TypeName = "Openchain.RecordMutation";
-                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                    SqlParameter sqlParameter = command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
+
+                    if (parameter.Value is IEnumerable<SqlDataRecord>)
+                    {
+                        sqlParameter.TypeName = (string)parameters[$"type:{parameter.Key}"];
+                        sqlParameter.SqlDbType = SqlDbType.Structured;
+                    }
                 }
             }
         }
