@@ -27,6 +27,14 @@ namespace Openchain.Sqlite
     {
         private readonly int instanceId;
         private readonly TimeSpan commandTimeout;
+        private readonly SqlMetaData[] metadata = new[]
+        {
+            new SqlMetaData("Key", SqlDbType.VarBinary, 512),
+            new SqlMetaData("Value", SqlDbType.VarBinary, SqlMetaData.Max),
+            new SqlMetaData("Version", SqlDbType.VarBinary, 32),
+            new SqlMetaData("Name", SqlDbType.VarChar, 512),
+            new SqlMetaData("Type", SqlDbType.TinyInt),
+        };
 
         public SqlServerStorageEngine(string connectionString, int instanceId, TimeSpan commandTimeout)
         {
@@ -36,6 +44,11 @@ namespace Openchain.Sqlite
         }
 
         protected SqlConnection Connection { get; }
+
+        public Task OpenConnection()
+        {
+            return Connection.OpenAsync();
+        }
 
         #region AddTransactions
 
@@ -63,15 +76,22 @@ namespace Openchain.Sqlite
                             ["rawData"] = rawTransactionBuffer,
                             ["records"] = mutation.Records.Select(record =>
                             {
-                                SqlDataRecord result = new SqlDataRecord();
+                                SqlDataRecord result = new SqlDataRecord(metadata);
+
                                 result.SetBytes(0, 0, record.Key.ToByteArray(), 0, record.Key.Value.Count);
-                                result.SetBytes(1, 0, record.Value.ToByteArray(), 0, record.Value.Value.Count);
+
+                                if (record.Value == null)
+                                    result.SetDBNull(1);
+                                else
+                                    result.SetBytes(1, 0, record.Value.ToByteArray(), 0, record.Value.Value.Count);
+
                                 result.SetBytes(2, 0, record.Version.ToByteArray(), 0, record.Version.Value.Count);
                                 result.SetString(3, "");
                                 result.SetByte(4, 0);
                                 return result;
-                            })
-                        });
+                            }).ToList()
+                        },
+                        context);
                 }
 
                 context.Commit();
@@ -109,12 +129,13 @@ namespace Openchain.Sqlite
 
         #region Private Methods
 
-        public async Task<IReadOnlyList<T>> ExecuteQuery<T>(string query, Func<SqlDataReader, T> readRecord, IDictionary<string, object> parameters)
+        public async Task<IReadOnlyList<T>> ExecuteQuery<T>(string query, Func<SqlDataReader, T> readRecord, IDictionary<string, object> parameters, SqlTransaction transaction = null)
         {
             List<T> result = new List<T>();
 
             using (SqlCommand command = new SqlCommand(query, this.Connection))
             {
+                command.Transaction = transaction;
                 SetQueryParameters(parameters, command);
                 using (SqlDataReader reader = await command.ExecuteReaderAsync(CommandBehavior.Default | CommandBehavior.SingleResult))
                 {
@@ -144,7 +165,10 @@ namespace Openchain.Sqlite
                 SqlParameter sqlParameter = command.Parameters.Add(new SqlParameter(parameter.Key, parameter.Value));
 
                 if (parameter.Value is IEnumerable<SqlDataRecord>)
+                {
                     sqlParameter.TypeName = "Openchain.RecordMutation";
+                    sqlParameter.SqlDbType = SqlDbType.Structured;
+                }
             }
         }
 
