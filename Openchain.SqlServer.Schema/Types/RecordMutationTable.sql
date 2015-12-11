@@ -1,6 +1,6 @@
-﻿CREATE TYPE [Openchain].[RecordMutation] AS TABLE
+﻿CREATE TYPE [Openchain].[RecordMutationTable] AS TABLE
 (
-    [Key] VARBINARY(512) NOT NULL,
+    [Key] VARBINARY(512) NOT NULL PRIMARY KEY,
     [Value] VARBINARY(MAX) NULL,
     [Version] VARBINARY(32) NOT NULL,
     [Name] VARCHAR(512) NOT NULL,

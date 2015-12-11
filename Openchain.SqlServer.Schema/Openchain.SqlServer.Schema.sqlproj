@@ -68,6 +68,6 @@
     <Build Include="Tables\Records.sql" />
     <Build Include="Tables\Transactions.sql" />
     <Build Include="Tables\RecordMutations.sql" />
-    <Build Include="Types\RecordMutation.sql" />
+    <Build Include="Types\RecordMutationTable.sql" />
   </ItemGroup>
 </Project>

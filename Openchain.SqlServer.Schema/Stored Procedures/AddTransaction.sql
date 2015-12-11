@@ -3,13 +3,16 @@
     @transactionHash BINARY(32),
     @mutationHash BINARY(32),
     @rawData VARBINARY(MAX),
-    @records [Openchain].[RecordMutation] READONLY
+    @records [Openchain].[RecordMutationTable] READONLY
 AS
     SET XACT_ABORT ON
     SET NOCOUNT ON
 
     MERGE [Openchain].[Records] AS Target
-    USING @records AS Source
+    USING
+        (SELECT [Key], [Value], [Version], [Name], [Type]
+        FROM @records
+        WHERE [Value] IS NOT NULL) AS Source
     ON (Target.[Instance] = @instance) AND (Target.[Key] = Source.[Key]) AND (Target.[Version] = Source.[Version])
     WHEN MATCHED THEN
         UPDATE SET Target.[Value] = Source.[Value], Target.[Version] = @mutationHash
