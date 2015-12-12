@@ -267,25 +267,6 @@ namespace Openchain.Sqlite.Tests
             Assert.Equal(mutation2, GetMutationHash(observer.Values[0]));
         }
 
-        [Fact]
-        public async Task GetTransactionStream_Error()
-        {
-            // Create a new storage engine with no table so that any query will throw an exception
-            this.Store = CreateNewEngine();
-            TestObserver observer = new TestObserver() { ExpectedValueCount = 1 };
-
-            IObservable<ByteString> stream = this.Store.GetTransactionStream(null);
-            using (stream.Subscribe(observer))
-                await observer.Completed.Task;
-
-            await observer.Disposed.Task;
-
-            Assert.True(observer.Fail);
-            Assert.Equal(0, observer.Values.Count);
-        }
-
-        protected abstract IStorageEngine CreateNewEngine();
-
         private async Task<ByteString> AddTransaction(params Record[] records)
         {
             Mutation mutation = new Mutation(ByteString.Parse("0123"), records, ByteString.Parse("4567"));
