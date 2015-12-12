@@ -2,6 +2,7 @@
     @instance INT,
     @ids [Openchain].[IdTable] READONLY
 AS
+    SET NOCOUNT ON
 
     SELECT [Key], [Value], [Version]
     FROM [Openchain].[Records]
