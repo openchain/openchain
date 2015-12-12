@@ -194,6 +194,21 @@ namespace Openchain.Sqlite.Tests
         }
 
         [Fact]
+        public async Task GetRecords_MultipleRecords()
+        {
+            ByteString mutationHash = await AddTransaction(
+                new Record(binaryData[0], binaryData[1], ByteString.Empty),
+                new Record(binaryData[2], binaryData[3], ByteString.Empty));
+
+            IList<Record> records = await this.Store.GetRecords(new[] { binaryData[0], binaryData[2], binaryData[4] });
+
+            Assert.Equal(3, records.Count);
+            AssertRecord(records.First(record => record.Key.Equals(binaryData[0])), binaryData[0], binaryData[1], mutationHash);
+            AssertRecord(records.First(record => record.Key.Equals(binaryData[2])), binaryData[2], binaryData[3], mutationHash);
+            AssertRecord(records.First(record => record.Key.Equals(binaryData[4])), binaryData[4], ByteString.Empty, ByteString.Empty);
+        }
+
+        [Fact]
         public async Task GetLastTransaction_Success()
         {
             await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
