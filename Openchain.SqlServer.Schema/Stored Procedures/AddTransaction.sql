@@ -5,8 +5,8 @@
     @rawData VARBINARY(MAX),
     @records [Openchain].[RecordMutationTable] READONLY
 AS
-    SET XACT_ABORT ON
-    SET NOCOUNT ON
+    SET XACT_ABORT ON;
+    SET NOCOUNT ON;
 
     SELECT UpdatedRecords.[Key]
     FROM @records AS UpdatedRecords
@@ -14,9 +14,7 @@ AS
     WHERE UpdatedRecords.[Version] <> ISNULL(Records.[Version], CAST(0x AS VARBINARY(32)));
 
     IF @@Rowcount > 0
-    BEGIN;
         RETURN;
-    END;
 
     MERGE [Openchain].[Records] AS Target
     USING
@@ -45,4 +43,4 @@ AS
     SELECT @instance, Records.[Key], @transactionId
     FROM @records AS Records;
 
-RETURN
+RETURN;
