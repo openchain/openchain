@@ -15,16 +15,17 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.SqlServer.Server;
+using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
     public class SqlServerStorageEngine : IStorageEngine
     {
+        private static readonly int transactionPageCount = 5;
         private readonly int instanceId;
         private readonly TimeSpan commandTimeout;
         private readonly SqlMetaData[] recordMutationMetadata = new[]
@@ -47,7 +48,7 @@ namespace Openchain.Sqlite
             this.commandTimeout = commandTimeout;
         }
 
-        protected SqlConnection Connection { get; }
+        public SqlConnection Connection { get; }
 
         public Task OpenConnection()
         {
@@ -161,7 +162,21 @@ namespace Openchain.Sqlite
 
         public IObservable<ByteString> GetTransactionStream(ByteString from)
         {
-            throw new NotSupportedException();
+            return new PollingObservable(from, this.GetTransactions);
+        }
+
+        private async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
+        {
+            return await ExecuteQuery<ByteString>(
+                "EXEC [Openchain].[GetTransactionLog] @instance, @from, @count;",
+                reader => new ByteString((byte[])reader[0]),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId,
+                    ["from"] = from == null ? (object)DBNull.Value : from.ToByteArray(),
+                    ["type:from"] = SqlDbType.VarBinary,
+                    ["count"] = transactionPageCount
+                });
         }
 
         #endregion
@@ -209,6 +224,10 @@ namespace Openchain.Sqlite
                     {
                         sqlParameter.TypeName = (string)parameters[$"type:{parameter.Key}"];
                         sqlParameter.SqlDbType = SqlDbType.Structured;
+                    }
+                    else if (parameters.ContainsKey($"type:{parameter.Key}"))
+                    {
+                        sqlParameter.SqlDbType = (SqlDbType)parameters[$"type:{parameter.Key}"];
                     }
                 }
             }
