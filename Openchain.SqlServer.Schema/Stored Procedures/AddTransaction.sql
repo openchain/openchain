@@ -17,16 +17,21 @@ AS
         RETURN;
 
     MERGE [Openchain].[Records] AS Target
-    USING
-        (SELECT [Key], [Value], [Version], [Name], [Type]
-        FROM @records
-        WHERE [Value] IS NOT NULL) AS Source
+    USING @records AS Source
     ON (Target.[Instance] = @instance) AND (Target.[Key] = Source.[Key])
     WHEN MATCHED THEN
-        UPDATE SET Target.[Value] = Source.[Value], Target.[Version] = @mutationHash
+        UPDATE SET
+            Target.[Value] = ISNULL(Source.[Value], Target.[Value]),
+            Target.[Version] = IIF(Source.[Value] IS NULL, Source.[Version], @mutationHash)
     WHEN NOT MATCHED THEN
         INSERT ([Instance], [Key], [Value], [Version], [Name], [Type])
-        VALUES (@instance, Source.[Key], Source.[Value], @mutationHash, Source.[Name], Source.[Type]);
+        VALUES (
+            @instance,
+            Source.[Key],
+            ISNULL(Source.[Value], CAST(0x AS VARBINARY(32))),
+            IIF(Source.[Value] IS NULL, Source.[Version], @mutationHash),
+            Source.[Name],
+            Source.[Type]);
 
     DECLARE @insertedIds TABLE (TransactionId BIGINT);
 
