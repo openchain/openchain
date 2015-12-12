@@ -11,6 +11,11 @@
 )
 GO
 
+
+CREATE NONCLUSTERED INDEX [IX_Transactions_Id]
+ON [Openchain].[Transactions] ([Instance], [Id])
+GO
+
 CREATE NONCLUSTERED INDEX [IX_Transactions_TransactionHash]
 ON [Openchain].[Transactions] ([Instance], [TransactionHash])
 GO
