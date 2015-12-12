@@ -23,10 +23,5 @@ namespace Openchain.Sqlite.Tests
 
             this.Store = store;
         }
-
-        protected override IStorageEngine CreateNewEngine()
-        {
-            return new SqliteStorageEngine(":memory:");
-        }
     }
 }

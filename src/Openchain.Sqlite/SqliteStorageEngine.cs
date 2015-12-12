@@ -238,10 +238,10 @@ namespace Openchain.Sqlite
 
         public IObservable<ByteString> GetTransactionStream(ByteString from)
         {
-            return new PollingObservable(from, this.GetLedgerRecords);
+            return new PollingObservable(from, this.GetTransactions);
         }
 
-        private async Task<IReadOnlyList<ByteString>> GetLedgerRecords(ByteString from)
+        private async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
         {
             Func<DbDataReader, ByteString> selector = reader => new ByteString((byte[])reader.GetValue(0));
             if (from != null)

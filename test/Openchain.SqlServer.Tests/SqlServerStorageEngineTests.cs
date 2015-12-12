@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.Data.SqlClient;
 
 namespace Openchain.Sqlite.Tests
 {
@@ -24,15 +25,20 @@ namespace Openchain.Sqlite.Tests
         {
             Random rnd = new Random();
             this.instanceId = rnd.Next(0, int.MaxValue);
-            
-            this.Store = CreateNewEngine();
-        }
 
-        protected override IStorageEngine CreateNewEngine()
-        {
             SqlServerStorageEngine engine = new SqlServerStorageEngine("Data Source=.;Initial Catalog=Openchain;Integrated Security=True", this.instanceId, TimeSpan.FromSeconds(10));
             engine.OpenConnection().Wait();
-            return engine;
+
+            SqlCommand command = engine.Connection.CreateCommand();
+            command.CommandText = @"
+                DELETE FROM [Openchain].[RecordMutations];
+                DELETE FROM [Openchain].[Records];
+                DELETE FROM [Openchain].[Transactions];
+            ";
+
+            command.ExecuteNonQuery();
+
+            this.Store = engine;
         }
     }
 }
