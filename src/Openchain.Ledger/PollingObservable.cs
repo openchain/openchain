@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Openchain.Sqlite
+namespace Openchain.Ledger
 {
     public class PollingObservable : IObservable<ByteString>
     {
