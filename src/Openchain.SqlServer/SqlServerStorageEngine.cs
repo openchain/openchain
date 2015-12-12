@@ -58,7 +58,7 @@ namespace Openchain.Sqlite
 
         public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
-            using (SqlTransaction context = Connection.BeginTransaction(IsolationLevel.ReadCommitted))
+            using (SqlTransaction context = Connection.BeginTransaction(IsolationLevel.Snapshot))
             {
                 foreach (ByteString rawTransaction in transactions)
                 {
