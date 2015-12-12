@@ -142,9 +142,17 @@ namespace Openchain.Sqlite
 
         #region GetLastTransaction
 
-        public Task<ByteString> GetLastTransaction()
+        public async Task<ByteString> GetLastTransaction()
         {
-            throw new NotSupportedException();
+            IReadOnlyList<ByteString> records = await ExecuteQuery<ByteString>(
+                "EXEC [Openchain].[GetLastTransaction] @instance;",
+                reader => new ByteString((byte[])reader[0]),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId
+                });
+
+            return records.FirstOrDefault() ?? ByteString.Empty;
         }
 
         #endregion
