@@ -33,7 +33,7 @@ namespace Openchain.Sqlite
 
         protected SqliteConnection Connection { get; }
 
-        #region EnsureTables
+        #region Initialize
 
         public virtual async Task Initialize()
         {

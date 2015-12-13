@@ -51,10 +51,15 @@ namespace Openchain.SqlServer
 
         public SqlConnection Connection { get; }
 
-        public Task Initialize()
+        #region Initialize
+
+        public async Task Initialize()
         {
-            return Connection.OpenAsync();
+            if (Connection.State == ConnectionState.Closed)
+                await Connection.OpenAsync();
         }
+
+        #endregion
 
         #region AddTransactions
 
