@@ -23,7 +23,7 @@ namespace Openchain.Tests
     public abstract class BaseStorageEngineTests
     {
         private readonly ByteString[] binaryData =
-            Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
+            Enumerable.Range(0, 20).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
 
         protected IStorageEngine Store { get; set; }
 
@@ -76,23 +76,26 @@ namespace Openchain.Tests
         public async Task AddTransaction_InsertError()
         {
             ByteString mutationHash = await AddTransaction(
-                new Record(binaryData[0], binaryData[1], ByteString.Empty));
+                new Record(binaryData[0], binaryData[1], ByteString.Empty),
+                new Record(binaryData[3], binaryData[4], ByteString.Empty));
 
+            // Actual version: Non empty / Provided version: Empty (Write)
             ConcurrentMutationException exception1 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[0], binaryData[2], ByteString.Empty)));
 
+            // Actual version: Non empty / Provided version: Empty (Version check)
             ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
-                new Record(binaryData[4], null, binaryData[5])));
+                new Record(binaryData[3], null, ByteString.Empty)));
 
             IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[4] });
+            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[3] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
             AssertRecord(exception1.FailedMutation, binaryData[0], binaryData[2], ByteString.Empty);
             Assert.Equal(1, records2.Count);
-            AssertRecord(records2[0], binaryData[4], ByteString.Empty, ByteString.Empty);
-            AssertRecord(exception2.FailedMutation, binaryData[4], null, binaryData[5]);
+            AssertRecord(records2[0], binaryData[3], binaryData[4], mutationHash);
+            AssertRecord(exception2.FailedMutation, binaryData[3], null, ByteString.Empty);
         }
 
         [Fact]
@@ -102,14 +105,26 @@ namespace Openchain.Tests
                 new Record(binaryData[0], binaryData[1], ByteString.Empty),
                 new Record(binaryData[4], binaryData[5], ByteString.Empty));
 
+            // Actual version: Non empty / Provided version: Non empty, invalid (Write)
             ConcurrentMutationException exception1 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[0], binaryData[2], binaryData[3])));
 
+            // Actual version: Non empty / Provided version: Non empty, invalid (Version check)
             ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[4], null, binaryData[6])));
 
+            // Actual version: Empty / Provided version: Non empty (Write)
+            ConcurrentMutationException exception3 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+                new Record(binaryData[8], binaryData[9], binaryData[10])));
+
+            // Actual version: Empty / Provided version: Non empty (Version check)
+            ConcurrentMutationException exception4 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
+                new Record(binaryData[12], null, binaryData[14])));
+
             IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
             IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[4] });
+            IList<Record> records3 = await this.Store.GetRecords(new[] { binaryData[8] });
+            IList<Record> records4 = await this.Store.GetRecords(new[] { binaryData[12] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
@@ -117,8 +132,13 @@ namespace Openchain.Tests
             Assert.Equal(1, records2.Count);
             AssertRecord(records2[0], binaryData[4], binaryData[5], mutationHash);
             AssertRecord(exception2.FailedMutation, binaryData[4], null, binaryData[6]);
+            Assert.Equal(1, records3.Count);
+            AssertRecord(records3[0], binaryData[8], ByteString.Empty, ByteString.Empty);
+            AssertRecord(exception3.FailedMutation, binaryData[8], binaryData[9], binaryData[10]);
+            Assert.Equal(1, records4.Count);
+            AssertRecord(records4[0], binaryData[12], ByteString.Empty, ByteString.Empty);
+            AssertRecord(exception4.FailedMutation, binaryData[12], null, binaryData[14]);
         }
-
 
         [Fact]
         public async Task AddTransaction_MultipleTransactionsSuccess()
