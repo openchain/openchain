@@ -54,9 +54,21 @@ namespace Openchain.SqlServer
                 });
         }
 
-        public Task<ByteString> GetTransaction(ByteString mutationHash)
+        public async Task<ByteString> GetTransaction(ByteString mutationHash)
         {
-            throw new NotImplementedException();
+            IReadOnlyList<ByteString> result = await ExecuteQuery<ByteString>(
+                "EXEC [Openchain].[GetTransaction] @instance, @mutationHash;",
+                reader => new ByteString((byte[])reader[0]),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId,
+                    ["mutationHash"] = mutationHash.ToByteArray()
+                });
+
+            if (result.Count > 0)
+                return result[0];
+            else
+                return null;
         }
 
         public Task<IReadOnlyList<Record>> GetAllRecords(RecordType type, string name)
