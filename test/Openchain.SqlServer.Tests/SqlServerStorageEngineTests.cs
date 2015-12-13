@@ -15,19 +15,18 @@
 using System;
 using System.Data.SqlClient;
 using Openchain.Tests;
+using Xunit;
 
 namespace Openchain.SqlServer.Tests
 {
+    [Collection("SQL Server Tests")]
     public class SqlServerStorageEngineTests : BaseStorageEngineTests
     {
         private readonly int instanceId;
 
         public SqlServerStorageEngineTests()
         {
-            Random rnd = new Random();
-            this.instanceId = rnd.Next(0, int.MaxValue);
-
-            SqlServerStorageEngine engine = new SqlServerStorageEngine("Data Source=.;Initial Catalog=Openchain;Integrated Security=True", this.instanceId, TimeSpan.FromSeconds(10));
+            SqlServerStorageEngine engine = new SqlServerStorageEngine("Data Source=.;Initial Catalog=Openchain;Integrated Security=True", 1, TimeSpan.FromSeconds(10));
             engine.OpenConnection().Wait();
 
             SqlCommand command = engine.Connection.CreateCommand();
