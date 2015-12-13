@@ -98,6 +98,14 @@ namespace Openchain.Ledger.Tests
         }
 
         [Fact]
+        public async Task GetTransaction_NotFound()
+        {
+            ByteString result = await Queries.GetTransaction(binaryData[0]);
+
+            Assert.Null(result);
+        }
+
+        [Fact]
         public async Task GetAllRecords_Success()
         {
             await AddRecords("/a/:DATA:name1");
