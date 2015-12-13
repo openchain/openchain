@@ -213,15 +213,6 @@ namespace Openchain.SqlServer
             return result.AsReadOnly();
         }
 
-        public async Task<int> ExecuteNonQuery(string query, IDictionary<string, object> parameters)
-        {
-            using (SqlCommand command = new SqlCommand(query, this.Connection))
-            {
-                SetQueryParameters(parameters, command);
-                return await command.ExecuteNonQueryAsync();
-            }
-        }
-
         private void SetQueryParameters(IDictionary<string, object> parameters, SqlCommand command)
         {
             command.CommandTimeout = (int)commandTimeout.TotalSeconds;
