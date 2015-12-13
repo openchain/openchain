@@ -35,10 +35,10 @@ namespace Openchain.Tests
                 new Record(binaryData[2], null, ByteString.Empty),
                 new Record(binaryData[4], ByteString.Empty, ByteString.Empty));
 
-            IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[2] });
-            IList<Record> records3 = await this.Store.GetRecords(new[] { binaryData[4] });
-            IList<Record> records4 = await this.Store.GetRecords(new[] { binaryData[6] });
+            IReadOnlyList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[2] });
+            IReadOnlyList<Record> records3 = await this.Store.GetRecords(new[] { binaryData[4] });
+            IReadOnlyList<Record> records4 = await this.Store.GetRecords(new[] { binaryData[6] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
@@ -63,8 +63,8 @@ namespace Openchain.Tests
                 new Record(binaryData[0], binaryData[2], mutationHash1),
                 new Record(binaryData[3], null, mutationHash2));
 
-            IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[3] });
+            IReadOnlyList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[3] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[2], mutationHash3);
@@ -87,8 +87,8 @@ namespace Openchain.Tests
             ConcurrentMutationException exception2 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[3], null, ByteString.Empty)));
 
-            IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[3] });
+            IReadOnlyList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[3] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
@@ -121,10 +121,10 @@ namespace Openchain.Tests
             ConcurrentMutationException exception4 = await Assert.ThrowsAsync<ConcurrentMutationException>(() => AddTransaction(
                 new Record(binaryData[12], null, binaryData[14])));
 
-            IList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[4] });
-            IList<Record> records3 = await this.Store.GetRecords(new[] { binaryData[8] });
-            IList<Record> records4 = await this.Store.GetRecords(new[] { binaryData[12] });
+            IReadOnlyList<Record> records1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> records2 = await this.Store.GetRecords(new[] { binaryData[4] });
+            IReadOnlyList<Record> records3 = await this.Store.GetRecords(new[] { binaryData[8] });
+            IReadOnlyList<Record> records4 = await this.Store.GetRecords(new[] { binaryData[12] });
 
             Assert.Equal(1, records1.Count);
             AssertRecord(records1[0], binaryData[0], binaryData[1], mutationHash);
@@ -168,9 +168,9 @@ namespace Openchain.Tests
                 new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation2, new DateTime(), ByteString.Empty)))
             });
 
-            IList<Record> result1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> result2 = await this.Store.GetRecords(new[] { binaryData[2] });
-            IList<Record> result3 = await this.Store.GetRecords(new[] { binaryData[6] });
+            IReadOnlyList<Record> result1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> result2 = await this.Store.GetRecords(new[] { binaryData[2] });
+            IReadOnlyList<Record> result3 = await this.Store.GetRecords(new[] { binaryData[6] });
 
             AssertRecord(result1[0], binaryData[0], binaryData[1], mutationHash1);
             AssertRecord(result2[0], binaryData[2], binaryData[5], mutationHash2);
@@ -203,9 +203,9 @@ namespace Openchain.Tests
                 new ByteString(MessageSerializer.SerializeTransaction(new Transaction(mutation2, new DateTime(), ByteString.Empty)))
             }));
 
-            IList<Record> result1 = await this.Store.GetRecords(new[] { binaryData[0] });
-            IList<Record> result2 = await this.Store.GetRecords(new[] { binaryData[2] });
-            IList<Record> result3 = await this.Store.GetRecords(new[] { binaryData[6] });
+            IReadOnlyList<Record> result1 = await this.Store.GetRecords(new[] { binaryData[0] });
+            IReadOnlyList<Record> result2 = await this.Store.GetRecords(new[] { binaryData[2] });
+            IReadOnlyList<Record> result3 = await this.Store.GetRecords(new[] { binaryData[6] });
 
             AssertRecord(exception.FailedMutation, binaryData[2], binaryData[5], ByteString.Empty);
             AssertRecord(result1[0], binaryData[0], ByteString.Empty, ByteString.Empty);
@@ -220,7 +220,7 @@ namespace Openchain.Tests
                 new Record(binaryData[0], binaryData[1], ByteString.Empty),
                 new Record(binaryData[2], binaryData[3], ByteString.Empty));
 
-            IList<Record> records = await this.Store.GetRecords(new[] { binaryData[0], binaryData[2], binaryData[4] });
+            IReadOnlyList<Record> records = await this.Store.GetRecords(new[] { binaryData[0], binaryData[2], binaryData[4] });
 
             Assert.Equal(3, records.Count);
             AssertRecord(records.First(record => record.Key.Equals(binaryData[0])), binaryData[0], binaryData[1], mutationHash);

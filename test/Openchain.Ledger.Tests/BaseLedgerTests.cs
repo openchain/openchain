@@ -38,7 +38,7 @@ namespace Openchain.Ledger.Tests
         {
             await AddRecords("/:DATA:/name");
 
-            IList<Record> result = await Engine.GetRecords(new[] { new ByteString(Encoding.UTF8.GetBytes("/:DATA:/name")) });
+            IReadOnlyList<Record> result = await Engine.GetRecords(new[] { new ByteString(Encoding.UTF8.GetBytes("/:DATA:/name")) });
 
             Assert.Equal(1, result.Count);
             Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));

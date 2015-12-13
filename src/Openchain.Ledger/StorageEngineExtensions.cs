@@ -22,13 +22,13 @@ namespace Openchain.Ledger
     {
         public static async Task<Record> GetRecord(this IStorageEngine store, RecordKey key)
         {
-            IList<Record> result = await store.GetRecords(new[] { key.ToBinary() });
+            IReadOnlyList<Record> result = await store.GetRecords(new[] { key.ToBinary() });
             return result[0];
         }
 
         public static async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> GetAccounts(this IStorageEngine store, IEnumerable<AccountKey> accounts)
         {
-            IList<Record> records = await store.GetRecords(accounts.Select(account => account.Key.ToBinary()));
+            IReadOnlyList<Record> records = await store.GetRecords(accounts.Select(account => account.Key.ToBinary()));
 
             return records.Select(record => AccountStatus.FromRecord(RecordKey.Parse(record.Key), record)).ToDictionary(account => account.AccountKey, account => account);
         }

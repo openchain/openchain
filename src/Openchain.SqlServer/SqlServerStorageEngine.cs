@@ -123,7 +123,7 @@ namespace Openchain.SqlServer
 
         #region GetRecords
 
-        public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
+        public async Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
             List<ByteString> keyList = new List<ByteString>(keys);
 
@@ -148,7 +148,7 @@ namespace Openchain.SqlServer
                 if (!result.ContainsKey(key))
                     result.Add(key, new Record(key, ByteString.Empty, ByteString.Empty));
 
-            return result.Values.ToList();
+            return result.Values.ToList().AsReadOnly();
         }
 
         #endregion

@@ -180,7 +180,7 @@ namespace Openchain.Sqlite
 
         #region GetRecords
 
-        public async Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
+        public async Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys)
         {
             Dictionary<ByteString, Record> result = new Dictionary<ByteString, Record>();
 

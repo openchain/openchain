@@ -42,7 +42,7 @@ namespace Openchain
         /// </summary>
         /// <param name="keys">The keys to query.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys);
+        Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys);
 
         /// <summary>
         /// Gets the hash of the last transaction in the ledger.

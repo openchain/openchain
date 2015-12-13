@@ -102,9 +102,9 @@ namespace Openchain.Ledger.Tests
                 throw new NotImplementedException();
             }
 
-            public Task<IList<Record>> GetRecords(IEnumerable<ByteString> keys)
+            public Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys)
             {
-                return Task.FromResult<IList<Record>>(keys.Select(key =>
+                return Task.FromResult<IReadOnlyList<Record>>(keys.Select(key =>
                 {
                     RecordKey recordKey = RecordKey.Parse(key);
 
