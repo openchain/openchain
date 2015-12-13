@@ -14,7 +14,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Openchain.Ledger;
 
@@ -71,9 +70,22 @@ namespace Openchain.SqlServer
                 return null;
         }
 
-        public Task<IReadOnlyList<Record>> GetAllRecords(RecordType type, string name)
+        public async Task<IReadOnlyList<Record>> GetAllRecords(RecordType type, string name)
         {
-            throw new NotImplementedException();
+            return await ExecuteQuery<Record>(
+                "EXEC [Openchain].[GetAllRecords] @instance, @recordType, @recordName;",
+                reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId,
+                    ["recordType"] = (byte)type,
+                    ["recordName"] = name
+                });
+        }
+
+        protected override RecordKey ParseRecordKey(ByteString key)
+        {
+            return RecordKey.Parse(key);
         }
     }
 }
