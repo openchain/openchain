@@ -71,6 +71,7 @@
     <Build Include="Stored Procedures\GetRecordMutations.sql" />
     <Build Include="Stored Procedures\GetRecords.sql" />
     <Build Include="Stored Procedures\GetRecordsFromKeyPrefix.sql" />
+    <Build Include="Stored Procedures\GetTransaction.sql" />
     <Build Include="Stored Procedures\GetTransactionLog.sql" />
     <Build Include="Tables\Records.sql" />
     <Build Include="Tables\Transactions.sql" />
