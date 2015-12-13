@@ -21,7 +21,7 @@ using System.Threading.Tasks;
 using Microsoft.SqlServer.Server;
 using Openchain.Ledger;
 
-namespace Openchain.Sqlite
+namespace Openchain.SqlServer
 {
     public class SqlServerStorageEngine : IStorageEngine
     {
