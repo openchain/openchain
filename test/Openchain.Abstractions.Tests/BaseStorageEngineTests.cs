@@ -18,7 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Openchain.Sqlite.Tests
+namespace Openchain.Tests
 {
     public abstract class BaseStorageEngineTests
     {

@@ -14,8 +14,9 @@
 
 using System;
 using System.Data.SqlClient;
+using Openchain.Tests;
 
-namespace Openchain.Sqlite.Tests
+namespace Openchain.SqlServer.Tests
 {
     public class SqlServerStorageEngineTests : BaseStorageEngineTests
     {
