@@ -22,7 +22,7 @@ namespace Openchain.Sqlite.Tests
     {
         public SqliteLedgerQueriesTests()
         {
-            SqliteLedgerQueries store = new SqliteLedgerQueries(":memory:");
+            SqliteLedger store = new SqliteLedger(":memory:");
             store.EnsureTables().Wait();
 
             this.Engine = store;
@@ -33,7 +33,7 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task EnsureTables_MultipleCalls()
         {
-            SqliteLedgerQueries store = new SqliteLedgerQueries(":memory:");
+            SqliteLedger store = new SqliteLedger(":memory:");
 
             // This must not throw
             await store.EnsureTables();

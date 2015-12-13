@@ -39,7 +39,7 @@ namespace Openchain.Server.Models
             {
                 if (storage["type"] == "Sqlite")
                 {
-                    return new SqliteLedgerQueries(GetPathOrDefault(serviceProvider, storage["path"]));
+                    return new SqliteLedger(GetPathOrDefault(serviceProvider, storage["path"]));
                 }
             }
             catch (Exception exception)
@@ -114,7 +114,7 @@ namespace Openchain.Server.Models
 
         public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)
         {
-            SqliteLedgerQueries store = serviceProvider.GetService<ILedgerQueries>() as SqliteLedgerQueries;
+            SqliteLedger store = serviceProvider.GetService<ILedgerQueries>() as SqliteLedger;
 
             if (store != null)
                 await store.EnsureTables();
