@@ -121,6 +121,14 @@ namespace Openchain.Ledger.Tests
             Assert.Equal("/f/", RecordKey.Parse(result3[0].Key).Path.FullPath);
         }
 
+        [Fact]
+        public async Task Initialize_MultipleCalls()
+        {
+            // This must not throw
+            await Engine.Initialize();
+            await Engine.Initialize();
+        }
+
         private Task<ByteString> AddRecords(params string[] keys)
         {
             return AddRecords(ByteString.Empty, ByteString.Empty, keys);

@@ -29,15 +29,5 @@ namespace Openchain.Sqlite.Tests
             this.Queries = store;
             this.Indexes = store;
         }
-
-        [Fact]
-        public async Task EnsureTables_MultipleCalls()
-        {
-            SqliteLedger store = new SqliteLedger(":memory:");
-
-            // This must not throw
-            await store.Initialize();
-            await store.Initialize();
-        }
     }
 }
