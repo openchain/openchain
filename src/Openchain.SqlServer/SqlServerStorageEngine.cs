@@ -26,6 +26,7 @@ namespace Openchain.SqlServer
     public class SqlServerStorageEngine : IStorageEngine
     {
         private static readonly int transactionPageCount = 5;
+        private static readonly RecordKey defaultRecordKey = new RecordKey((RecordType)0, LedgerPath.FromSegments(), "");
         private readonly int instanceId;
         private readonly TimeSpan commandTimeout;
         private readonly SqlMetaData[] recordMutationMetadata = new[]
@@ -84,6 +85,7 @@ namespace Openchain.SqlServer
                             {
                                 SqlDataRecord result = new SqlDataRecord(recordMutationMetadata);
 
+                                RecordKey key = ParseRecordKey(record.Key);
                                 result.SetBytes(0, 0, record.Key.ToByteArray(), 0, record.Key.Value.Count);
 
                                 if (record.Value == null)
@@ -92,8 +94,8 @@ namespace Openchain.SqlServer
                                     result.SetBytes(1, 0, record.Value.ToByteArray(), 0, record.Value.Value.Count);
 
                                 result.SetBytes(2, 0, record.Version.ToByteArray(), 0, record.Version.Value.Count);
-                                result.SetString(3, "");
-                                result.SetByte(4, 0);
+                                result.SetString(3, key.Name);
+                                result.SetByte(4, (byte)key.RecordType);
                                 return result;
                             }).ToList()
                         },
@@ -105,6 +107,11 @@ namespace Openchain.SqlServer
 
                 context.Commit();
             }
+        }
+
+        protected virtual RecordKey ParseRecordKey(ByteString key)
+        {
+            return defaultRecordKey;
         }
 
         #endregion
