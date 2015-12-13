@@ -12,148 +12,32 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Openchain.Ledger;
+using Openchain.Ledger.Tests;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests
 {
-    public class SqliteLedgerQueriesTests
+    public class SqliteLedgerQueriesTests : BaseLedgerTests
     {
-        private readonly SqliteLedgerQueries store;
-        private readonly ByteString[] binaryData =
-            Enumerable.Range(0, 10).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
-
         public SqliteLedgerQueriesTests()
         {
-            this.store = new SqliteLedgerQueries(":memory:");
-            this.store.EnsureTables().Wait();
-        }
+            SqliteLedgerQueries store = new SqliteLedgerQueries(":memory:");
+            store.EnsureTables().Wait();
 
-        [Fact]
-        public async Task AddTransaction_InsertSuccess()
-        {
-            await AddRecords("/:DATA:/name");
-
-            IList<Record> result = await store.GetRecords(new[] { new ByteString(Encoding.UTF8.GetBytes("/:DATA:/name")) });
-
-            Assert.Equal(1, result.Count);
-            Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
-            Assert.Equal(ByteString.Empty, result[0].Value);
-        }
-
-        [Fact]
-        public async Task GetKeyStartingFrom_Success()
-        {
-            await AddRecords(
-                "/:DATA:/e",
-                "/:DATA:/",
-                "/:DATA:.",
-                "/:DATA:0");
-
-            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:/")));
-
-            Assert.Equal(2, result.Count);
-            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:DATA:/e"));
-            Assert.True(result.Any(record => Encoding.UTF8.GetString(record.Key.ToByteArray()) == "/:DATA:/"));
-        }
-
-        [Fact]
-        public async Task GetKeyStartingFrom_NonEmptyValues()
-        {
-            await AddRecords(ByteString.Empty, binaryData[0], "/:DATA:/name");
-
-            IReadOnlyList<Record> result = await store.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:/")));
-
-            Assert.Equal(1, result.Count);
-            Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
-            Assert.Equal(binaryData[0], result[0].Value);
-        }
-
-        [Fact]
-        public async Task GetRecordMutations_Success()
-        {
-            ByteString mutation1 = await AddRecords("/:DATA:name");
-            await AddRecords("/:DATA:other");
-            ByteString mutation2 = await AddRecords(mutation1, ByteString.Empty, "/:DATA:name");
-
-            IReadOnlyList<ByteString> result = await store.GetRecordMutations(new ByteString(Encoding.UTF8.GetBytes("/:DATA:name")));
-
-            Assert.Equal<ByteString>(new[] { mutation1, mutation2 }, result);
-        }
-
-        [Fact]
-        public async Task GetTransaction_Success()
-        {
-            await AddRecords("/:DATA:name1");
-            ByteString mutation = await AddRecords("/:DATA:name2");
-            await AddRecords("/:DATA:name3");
-
-            ByteString result = await store.GetTransaction(mutation);
-
-            Assert.Equal(mutation, new ByteString(MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(result).Mutation.ToByteArray())));
-        }
-
-        [Fact]
-        public async Task GetAllRecords_Success()
-        {
-            await AddRecords("/a/:DATA:name1");
-            await AddRecords("/b/:DATA:name2");
-            await AddRecords("/c/:DATA:name3");
-            await AddRecords("/d/:DATA:name3");
-            await AddRecords("/e/:DATA:/path/1/");
-            await AddRecords("/f/:ACC:/path/1/");
-            await AddRecords("/g/:ACC:/path/2/");
-
-            IReadOnlyList<Record> result1 = await store.GetAllRecords(RecordType.Data, "/path/1/");
-            IReadOnlyList<Record> result2 = await store.GetAllRecords(RecordType.Data, "name3");
-            IReadOnlyList<Record> result3 = await store.GetAllRecords(RecordType.Account, "/path/1/");
-
-            Assert.Equal(1, result1.Count);
-            Assert.Equal("/e/", RecordKey.Parse(result1[0].Key).Path.FullPath);
-            Assert.Equal(2, result2.Count);
-            Assert.Equal("/c/", RecordKey.Parse(result2[0].Key).Path.FullPath);
-            Assert.Equal("/d/", RecordKey.Parse(result2[1].Key).Path.FullPath);
-            Assert.Equal(1, result3.Count);
-            Assert.Equal("/f/", RecordKey.Parse(result3[0].Key).Path.FullPath);
+            this.Engine = store;
+            this.Queries = store;
+            this.Indexes = store;
         }
 
         [Fact]
         public async Task EnsureTables_MultipleCalls()
         {
+            SqliteLedgerQueries store = new SqliteLedgerQueries(":memory:");
+
             // This must not throw
-            await this.store.EnsureTables();
-        }
-
-        private Task<ByteString> AddRecords(params string[] keys)
-        {
-            return AddRecords(ByteString.Empty, ByteString.Empty, keys);
-        }
-
-        private async Task<ByteString> AddRecords(ByteString version, ByteString value, params string[] keys)
-        {
-            Mutation mutation = new Mutation(
-                ByteString.Empty,
-                keys.Select(key => new Record(
-                    new ByteString(Encoding.UTF8.GetBytes(key)),
-                    value,
-                    version)),
-                ByteString.Empty);
-
-            byte[] serializedMutation = MessageSerializer.SerializeMutation(mutation);
-
-            Transaction transaction = new Transaction(
-                new ByteString(MessageSerializer.SerializeMutation(mutation)),
-                new DateTime(),
-                ByteString.Empty);
-
-            await store.AddTransactions(new[] { new ByteString(MessageSerializer.SerializeTransaction(transaction)) });
-
-            return new ByteString(MessageSerializer.ComputeHash(serializedMutation));
+            await store.EnsureTables();
+            await store.EnsureTables();
         }
     }
 }
