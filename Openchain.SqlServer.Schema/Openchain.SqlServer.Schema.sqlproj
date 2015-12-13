@@ -67,6 +67,7 @@
   <ItemGroup>
     <Build Include="Openchain.sql" />
     <Build Include="Stored Procedures\AddTransaction.sql" />
+    <Build Include="Stored Procedures\GetAllRecords.sql" />
     <Build Include="Stored Procedures\GetLastTransaction.sql" />
     <Build Include="Stored Procedures\GetRecordMutations.sql" />
     <Build Include="Stored Procedures\GetRecords.sql" />

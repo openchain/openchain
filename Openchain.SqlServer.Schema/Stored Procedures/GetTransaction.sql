@@ -8,4 +8,4 @@ AS
     FROM [Openchain].[Transactions]
     WHERE Transactions.[Instance] = @instance AND Transactions.[MutationHash] = @mutationHash;
 
-RETURN
+RETURN;

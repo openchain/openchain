@@ -9,4 +9,4 @@ AS
     INNER JOIN [Openchain].[Transactions] ON RecordMutations.[TransactionId] = Transactions.[Id]
     WHERE RecordMutations.[Instance] = @instance AND RecordMutations.[RecordKey] = @recordKey;
 
-RETURN
+RETURN;

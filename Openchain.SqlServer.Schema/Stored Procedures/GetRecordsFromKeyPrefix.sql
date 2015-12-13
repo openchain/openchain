@@ -4,7 +4,7 @@
 AS
     SET NOCOUNT ON;
 
-    SELECT [Key], [Value], [Version]
+    SELECT Records.[Key], Records.[Value], Records.[Version]
     FROM [Openchain].[Records]
     WHERE Records.[Instance] = @instance AND LEFT(Records.[Key], LEN(@prefix)) = @prefix;
 
