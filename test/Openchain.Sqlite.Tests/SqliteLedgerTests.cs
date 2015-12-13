@@ -18,9 +18,9 @@ using Xunit;
 
 namespace Openchain.Sqlite.Tests
 {
-    public class SqliteLedgerQueriesTests : BaseLedgerTests
+    public class SqliteLedgerTests : BaseLedgerTests
     {
-        public SqliteLedgerQueriesTests()
+        public SqliteLedgerTests()
         {
             SqliteLedger store = new SqliteLedger(":memory:");
             store.EnsureTables().Wait();
