@@ -22,13 +22,24 @@ namespace Openchain.SqlServer
 {
     public class SqlServerLedger : SqlServerStorageEngine, ILedgerQueries, ILedgerIndexes
     {
+        private readonly int instanceId;
+
         public SqlServerLedger(string connectionString, int instanceId, TimeSpan commandTimeout)
             : base(connectionString, instanceId, commandTimeout)
-        { }
-
-        public Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix)
         {
-            throw new NotImplementedException();
+            this.instanceId = instanceId;
+        }
+
+        public async Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix)
+        {
+            return await ExecuteQuery<Record>(
+                "EXEC [Openchain].[GetRecordsFromKeyPrefix] @instance, @prefix;",
+                reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
+                new Dictionary<string, object>()
+                {
+                    ["instance"] = this.instanceId,
+                    ["prefix"] = prefix.ToByteArray()
+                });
         }
 
         public Task<IReadOnlyList<ByteString>> GetRecordMutations(ByteString recordKey)
