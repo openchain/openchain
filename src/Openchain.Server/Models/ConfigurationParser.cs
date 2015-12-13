@@ -74,7 +74,7 @@ namespace Openchain.Server.Models
             if (storage["type"] == "Sqlite")
             {
                 SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"]));
-                result.EnsureTables().Wait();
+                result.Initialize().Wait();
                 return result;
             }
             else
@@ -117,7 +117,7 @@ namespace Openchain.Server.Models
             SqliteLedger store = serviceProvider.GetService<ILedgerQueries>() as SqliteLedger;
 
             if (store != null)
-                await store.EnsureTables();
+                await store.Initialize();
         }
 
         public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)

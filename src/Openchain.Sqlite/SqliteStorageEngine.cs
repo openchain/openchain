@@ -35,7 +35,7 @@ namespace Openchain.Sqlite
 
         #region EnsureTables
 
-        public virtual async Task EnsureTables()
+        public virtual async Task Initialize()
         {
             SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"

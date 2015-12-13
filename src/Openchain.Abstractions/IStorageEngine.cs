@@ -24,6 +24,12 @@ namespace Openchain
     public interface IStorageEngine
     {
         /// <summary>
+        /// Initialize the storage engine.
+        /// </summary>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        Task Initialize();
+
+        /// <summary>
         /// Adds a transaction to the store.
         /// </summary>
         /// <param name="transactions">A collection of serialized <see cref="Transaction"/> to add to the store.</param>

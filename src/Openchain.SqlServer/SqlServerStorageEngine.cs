@@ -51,7 +51,7 @@ namespace Openchain.SqlServer
 
         public SqlConnection Connection { get; }
 
-        public Task OpenConnection()
+        public Task Initialize()
         {
             return Connection.OpenAsync();
         }

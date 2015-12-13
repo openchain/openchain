@@ -23,7 +23,7 @@ namespace Openchain.Sqlite.Tests
         public SqliteLedgerTests()
         {
             SqliteLedger store = new SqliteLedger(":memory:");
-            store.EnsureTables().Wait();
+            store.Initialize().Wait();
 
             this.Engine = store;
             this.Queries = store;
@@ -36,8 +36,8 @@ namespace Openchain.Sqlite.Tests
             SqliteLedger store = new SqliteLedger(":memory:");
 
             // This must not throw
-            await store.EnsureTables();
-            await store.EnsureTables();
+            await store.Initialize();
+            await store.Initialize();
         }
     }
 }

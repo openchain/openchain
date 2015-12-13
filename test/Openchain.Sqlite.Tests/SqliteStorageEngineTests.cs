@@ -21,7 +21,7 @@ namespace Openchain.Sqlite.Tests
         public SqliteStorageEngineTests()
         {
             SqliteStorageEngine store = new SqliteStorageEngine(":memory:");
-            store.EnsureTables().Wait();
+            store.Initialize().Wait();
 
             this.Store = store;
         }

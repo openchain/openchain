@@ -235,6 +235,11 @@ namespace Openchain.Ledger.Tests
                 this.exception = exception;
             }
 
+            public Task Initialize()
+            {
+                throw new NotImplementedException();
+            }
+
             public Task AddTransactions(IEnumerable<ByteString> transactions)
             {
                 if (this.exception)

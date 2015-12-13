@@ -31,9 +31,9 @@ namespace Openchain.Sqlite
         {
         }
 
-        public override async Task EnsureTables()
+        public override async Task Initialize()
         {
-            await base.EnsureTables();
+            await base.Initialize();
 
             SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"

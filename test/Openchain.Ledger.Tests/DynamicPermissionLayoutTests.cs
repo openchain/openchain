@@ -87,6 +87,11 @@ namespace Openchain.Ledger.Tests
 
         private class TestStore : IStorageEngine
         {
+            public Task Initialize()
+            {
+                throw new NotImplementedException();
+            }
+
             public Task AddTransactions(IEnumerable<ByteString> transactions)
             {
                 throw new NotImplementedException();

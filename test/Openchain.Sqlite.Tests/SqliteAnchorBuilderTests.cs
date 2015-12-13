@@ -29,7 +29,7 @@ namespace Openchain.Sqlite.Tests
         public SqliteAnchorBuilderTests()
         {
             this.anchorBuilder = new SqliteAnchorBuilder(":memory:");
-            this.anchorBuilder.EnsureTables().Wait();
+            this.anchorBuilder.Initialize().Wait();
         }
 
         [Fact]
