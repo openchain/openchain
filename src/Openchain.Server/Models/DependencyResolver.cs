@@ -15,26 +15,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Reflection;
-using Microsoft.Extensions.PlatformAbstractions;
-using Microsoft.Extensions.Configuration;
 using System.Linq.Expressions;
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Openchain.Server.Models
 {
     public class DependencyResolver<T>
         where T : class
     {
-        private ConstructorInfo constructor;
-        private object[] invokeParameters;
+        private readonly Func<T> builder;
 
         public DependencyResolver(IAssemblyLoadContextAccessor assemblyLoader, string assemblyName, IDictionary<string, string> parameters)
         {
             Assembly assembly = assemblyLoader.Default.Load(assemblyName);
 
             if (assembly != null)
-                FindConstructor(assembly, parameters);
+                this.builder = FindConstructor(assembly, parameters);
+            else
+                this.builder = null;
         }
 
         public static DependencyResolver<T> Create(IConfiguration config, IAssemblyLoadContextAccessor assemblyLoader)
@@ -49,36 +49,34 @@ namespace Openchain.Server.Models
 
         public T Build()
         {
-            if (constructor == null)
+            if (builder == null)
                 return null;
             else
-                return (T)constructor.Invoke(invokeParameters);
+                return builder();
         }
 
-        private void FindConstructor(Assembly assembly, IDictionary<string, string> parameters)
+        private static Func<T> FindConstructor(Assembly assembly, IDictionary<string, string> parameters)
         {
             Type type = assembly.GetTypes().FirstOrDefault(item => typeof(T).IsAssignableFrom(item));
 
             if (type == null)
-                return;
+                return null;
 
             foreach (ConstructorInfo constructor in type.GetConstructors())
             {
-                object[] result = Activate(constructor, parameters);
+                Expression[] result = Activate(constructor, parameters);
                 if (result != null)
-                {
-                    this.constructor = constructor;
-                    this.invokeParameters = result;
-                    return;
-                }
+                    return Expression.Lambda<Func<T>>(Expression.New(constructor, result)).Compile();
             }
+
+            return null;
         }
 
-        private static object[] Activate(ConstructorInfo constructor, IDictionary<string, string> parameters)
+        private static Expression[] Activate(ConstructorInfo constructor, IDictionary<string, string> parameters)
         {
             ParameterInfo[] constructorParameters = constructor.GetParameters();
 
-            object[] invokeParameters = new object[constructorParameters.Length];
+            Expression[] invokeParameters = new Expression[constructorParameters.Length];
 
             for (int i = 0; i < constructorParameters.Length; i++)
             {
@@ -88,7 +86,7 @@ namespace Openchain.Server.Models
 
                 if (constructorParameters[i].ParameterType == typeof(string))
                 {
-                    invokeParameters[i] = value;
+                    invokeParameters[i] = Expression.Constant(value);
                 }
                 else
                 {
