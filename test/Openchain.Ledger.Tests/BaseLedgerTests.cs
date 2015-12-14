@@ -64,12 +64,12 @@ namespace Openchain.Ledger.Tests
         [Fact]
         public async Task GetKeyStartingFrom_NonEmptyValues()
         {
-            await AddRecords(ByteString.Empty, binaryData[0], "/:DATA:/name");
+            await AddRecords(ByteString.Empty, binaryData[0], "/:DATA:name");
 
-            IReadOnlyList<Record> result = await Queries.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:/")));
+            IReadOnlyList<Record> result = await Queries.GetKeyStartingFrom(new ByteString(Encoding.UTF8.GetBytes("/:DATA:n")));
 
             Assert.Equal(1, result.Count);
-            Assert.Equal("/:DATA:/name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
+            Assert.Equal("/:DATA:name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
             Assert.Equal(binaryData[0], result[0].Value);
         }
 
@@ -127,6 +127,18 @@ namespace Openchain.Ledger.Tests
             Assert.Equal("/d/", RecordKey.Parse(result2[1].Key).Path.FullPath);
             Assert.Equal(1, result3.Count);
             Assert.Equal("/f/", RecordKey.Parse(result3[0].Key).Path.FullPath);
+        }
+
+        [Fact]
+        public async Task GetAllRecords_NonEmptyValues()
+        {
+            await AddRecords(ByteString.Empty, binaryData[0], "/:DATA:name");
+
+            IReadOnlyList<Record> result = await Indexes.GetAllRecords(RecordType.Data, "name");
+
+            Assert.Equal(1, result.Count);
+            Assert.Equal("/:DATA:name", Encoding.UTF8.GetString(result[0].Key.ToByteArray()));
+            Assert.Equal(binaryData[0], result[0].Value);
         }
 
         [Fact]
