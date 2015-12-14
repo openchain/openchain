@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [Openchain].[GetRecordsFromKeyPrefix]
+﻿CREATE PROCEDURE [Openchain].[GetRecordRange]
     @instance INT,
     @from VARBINARY(512),
     @to VARBINARY(512)

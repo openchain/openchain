@@ -70,8 +70,8 @@
     <Build Include="Stored Procedures\GetAllRecords.sql" />
     <Build Include="Stored Procedures\GetLastTransaction.sql" />
     <Build Include="Stored Procedures\GetRecordMutations.sql" />
+    <Build Include="Stored Procedures\GetRecordRange.sql" />
     <Build Include="Stored Procedures\GetRecords.sql" />
-    <Build Include="Stored Procedures\GetRecordsFromKeyPrefix.sql" />
     <Build Include="Stored Procedures\GetTransaction.sql" />
     <Build Include="Stored Procedures\GetTransactionLog.sql" />
     <Build Include="Tables\Records.sql" />

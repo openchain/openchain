@@ -36,7 +36,7 @@ namespace Openchain.SqlServer
             to[to.Length - 1]++;
 
             return await ExecuteQuery<Record>(
-                "EXEC [Openchain].[GetRecordsFromKeyPrefix] @instance, @from, @to;",
+                "EXEC [Openchain].[GetRecordRange] @instance, @from, @to;",
                 reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
                 new Dictionary<string, object>()
                 {
