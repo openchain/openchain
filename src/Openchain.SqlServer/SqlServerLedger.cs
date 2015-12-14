@@ -31,13 +31,18 @@ namespace Openchain.SqlServer
 
         public async Task<IReadOnlyList<Record>> GetKeyStartingFrom(ByteString prefix)
         {
+            byte[] from = prefix.ToByteArray();
+            byte[] to = prefix.ToByteArray();
+            to[to.Length - 1]++;
+
             return await ExecuteQuery<Record>(
-                "EXEC [Openchain].[GetRecordsFromKeyPrefix] @instance, @prefix;",
+                "EXEC [Openchain].[GetRecordsFromKeyPrefix] @instance, @from, @to;",
                 reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
                 new Dictionary<string, object>()
                 {
                     ["instance"] = this.instanceId,
-                    ["prefix"] = prefix.ToByteArray()
+                    ["from"] = from,
+                    ["to"] = to
                 });
         }
 
