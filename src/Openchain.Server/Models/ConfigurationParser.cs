@@ -31,7 +31,7 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
-        public static Func<IServiceProvider, IStorageEngine> CreateLedgerStore(IServiceProvider serviceProvider)
+        public static Func<IServiceProvider, IStorageEngine> CreateStorageEngine(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();

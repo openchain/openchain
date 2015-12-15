@@ -69,11 +69,11 @@ namespace Openchain.Server
             services.AddCors();
 
             // Ledger Store
-            services.AddTransient<IStorageEngine>(ConfigurationParser.CreateLedgerStore(services.BuildServiceProvider()));
+            services.AddScoped<IStorageEngine>(ConfigurationParser.CreateStorageEngine(services.BuildServiceProvider()));
 
-            services.AddTransient<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
+            services.AddScoped<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
-            services.AddTransient<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
+            services.AddScoped<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
 
             services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder(services.BuildServiceProvider()));
 

@@ -25,13 +25,21 @@ namespace Openchain.Server.Controllers
     [Route("query")]
     public class QueryController : Controller
     {
+        private readonly IStorageEngine storageEngine;
         private readonly ILedgerQueries store;
         private readonly ILedgerIndexes indexes;
 
-        public QueryController(ILedgerQueries store, ILedgerIndexes indexes)
+        public QueryController(IStorageEngine storageEngine, ILedgerQueries store, ILedgerIndexes indexes)
         {
+            this.storageEngine = storageEngine;
             this.store = store;
             this.indexes = indexes;
+        }
+
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            await this.storageEngine.Initialize();
+            await base.OnActionExecutionAsync(context, next);
         }
 
         /// <summary>

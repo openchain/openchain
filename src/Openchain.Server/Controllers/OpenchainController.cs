@@ -19,6 +19,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -38,6 +39,12 @@ namespace Openchain.Server.Controllers
         {
             this.store = store;
             this.logger = logger;
+        }
+
+        public override async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            await this.store.Initialize();
+            await base.OnActionExecutionAsync(context, next);
         }
 
         /// <summary>
