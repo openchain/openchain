@@ -26,8 +26,7 @@ namespace Openchain.Sqlite
 
         public SqliteLedger(string filename)
             : base(filename)
-        {
-        }
+        { }
 
         public override async Task Initialize()
         {

@@ -24,17 +24,14 @@ namespace Openchain.Sqlite
     /// <summary>
     /// Builds a database anchor from a <see cref="SqliteStorageEngine"/> instance.
     /// </summary>
-    public class SqliteAnchorBuilder : SqliteStorageEngine, IAnchorBuilder
+    public class SqliteAnchorBuilder : SqliteBase, IAnchorBuilder
     {
         public SqliteAnchorBuilder(string filename)
             : base(filename)
-        {
-        }
+        { }
 
-        public override async Task Initialize()
+        public async Task Initialize()
         {
-            await base.Initialize();
-
             SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Anchors
@@ -54,7 +51,7 @@ namespace Openchain.Sqlite
         /// Creates a database anchor for the current state of the database.
         /// </summary>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task<LedgerAnchor> CreateAnchor()
+        public async Task<LedgerAnchor> CreateAnchor(IStorageEngine storage)
         {
             IEnumerable<LedgerAnchor> anchors = await ExecuteAsync(@"
                     SELECT  Position, FullLedgerHash, TransactionCount

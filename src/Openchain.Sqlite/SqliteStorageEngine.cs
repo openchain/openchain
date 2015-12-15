@@ -23,20 +23,18 @@ using Openchain.Ledger;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteStorageEngine : IStorageEngine
+    public class SqliteStorageEngine : SqliteBase, IStorageEngine
     {
         public SqliteStorageEngine(string filename)
-        {
-            this.Connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString());
-            this.Connection.OpenAsync().Wait();
-        }
-
-        protected SqliteConnection Connection { get; }
+            : base(filename)
+        { }
 
         #region Initialize
 
         public virtual async Task Initialize()
         {
+            await Connection.OpenAsync();
+
             SqliteCommand command = Connection.CreateCommand();
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Transactions
@@ -266,39 +264,6 @@ namespace Openchain.Sqlite
                     selector,
                     new Dictionary<string, object>());
             }
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        protected async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
-        {
-            SqliteCommand query = Connection.CreateCommand();
-            query.CommandText = commandText;
-
-            foreach (KeyValuePair<string, object> parameter in parameters)
-                query.Parameters.AddWithValue(parameter.Key, parameter.Value);
-
-            List<T> result = new List<T>();
-            using (DbDataReader reader = await query.ExecuteReaderAsync())
-            {
-                while (await reader.ReadAsync())
-                    result.Add(selector(reader));
-            }
-
-            return result.AsReadOnly();
-        }
-
-        protected async Task<int> ExecuteAsync(string commandText, IDictionary<string, object> parameters)
-        {
-            SqliteCommand query = Connection.CreateCommand();
-            query.CommandText = commandText;
-
-            foreach (KeyValuePair<string, object> parameter in parameters)
-                query.Parameters.AddWithValue(parameter.Key, parameter.Value);
-
-            return await query.ExecuteNonQueryAsync();
         }
 
         #endregion
