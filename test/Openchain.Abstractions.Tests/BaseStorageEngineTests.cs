@@ -248,43 +248,29 @@ namespace Openchain.Tests
         }
 
         [Fact]
-        public async Task GetTransactionStream_FromStart()
+        public async Task GetTransactions_FromStart()
         {
-            TestObserver observer = new TestObserver() { ExpectedValueCount = 2 };
-
             ByteString mutation1 = await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
             ByteString mutation2 = await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
 
-            IObservable<ByteString> stream = this.Store.GetTransactionStream(null);
-            using (stream.Subscribe(observer))
-                await observer.Completed.Task;
+            IReadOnlyList<ByteString> transactions = await this.Store.GetTransactions(null);
 
-            await observer.Disposed.Task;
-
-            Assert.False(observer.Fail);
-            Assert.Equal(2, observer.Values.Count);
-            Assert.Equal(mutation1, GetMutationHash(observer.Values[0]));
-            Assert.Equal(mutation2, GetMutationHash(observer.Values[1]));
+            Assert.Equal(2, transactions.Count);
+            Assert.Equal(mutation1, GetMutationHash(transactions[0]));
+            Assert.Equal(mutation2, GetMutationHash(transactions[1]));
         }
 
         [Fact]
-        public async Task GetTransactionStream_Resume()
+        public async Task GetTransactions_Resume()
         {
-            TestObserver observer = new TestObserver() { ExpectedValueCount = 1 };
-
             await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
             ByteString resumeToken = await this.Store.GetLastTransaction();
             ByteString mutation2 = await AddTransaction(new Record(binaryData[2], binaryData[3], ByteString.Empty));
 
-            IObservable<ByteString> stream = this.Store.GetTransactionStream(resumeToken);
-            using (stream.Subscribe(observer))
-                await observer.Completed.Task;
+            IReadOnlyList<ByteString> transactions = await this.Store.GetTransactions(resumeToken);
 
-            await observer.Disposed.Task;
-
-            Assert.False(observer.Fail);
-            Assert.Equal(1, observer.Values.Count);
-            Assert.Equal(mutation2, GetMutationHash(observer.Values[0]));
+            Assert.Equal(1, transactions.Count);
+            Assert.Equal(mutation2, GetMutationHash(transactions[0]));
         }
 
         private async Task<ByteString> AddTransaction(params Record[] records)
@@ -312,36 +298,6 @@ namespace Openchain.Tests
         {
             return new ByteString(
                 MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(transaction).Mutation.ToByteArray()));
-        }
-
-        private class TestObserver : IObserver<ByteString>
-        {
-            public int ExpectedValueCount { get; set; }
-
-            public TaskCompletionSource<int> Completed { get; } = new TaskCompletionSource<int>();
-
-            public TaskCompletionSource<int> Disposed { get; } = new TaskCompletionSource<int>();
-
-            public IList<ByteString> Values { get; } = new List<ByteString>();
-
-            public bool Fail { get; set; }
-
-            public void OnCompleted() => Disposed.SetResult(0);
-
-            public void OnError(Exception error)
-            {
-                Fail = true;
-                this.Completed.SetResult(0);
-                Disposed.SetResult(0);
-            }
-
-            public void OnNext(ByteString value)
-            {
-                Values.Add(value);
-
-                if (Values.Count == ExpectedValueCount)
-                    this.Completed.SetResult(0);
-            }
         }
     }
 }

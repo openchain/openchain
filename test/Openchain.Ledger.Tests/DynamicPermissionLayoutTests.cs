@@ -161,7 +161,7 @@ namespace Openchain.Ledger.Tests
                     Encoding.UTF8.GetBytes(@"[ /* Comment */ { }]"));
             }
 
-            public IObservable<ByteString> GetTransactionStream(ByteString from)
+            public Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
             {
                 throw new NotImplementedException();
             }

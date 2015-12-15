@@ -266,7 +266,7 @@ namespace Openchain.Ledger.Tests
                 .ToList());
             }
 
-            public IObservable<ByteString> GetTransactionStream(ByteString from)
+            public Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
             {
                 throw new NotImplementedException();
             }
