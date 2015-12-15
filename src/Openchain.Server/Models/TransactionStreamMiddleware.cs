@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Http;
 using Microsoft.Extensions.Logging;
+using Openchain.Ledger;
 
 namespace Openchain.Server.Models
 {
@@ -53,7 +54,7 @@ namespace Openchain.Server.Models
                 ILogger logger = (ILogger)context.ApplicationServices.GetService(typeof(ILogger));
                 IStorageEngine store = (IStorageEngine)context.ApplicationServices.GetService(typeof(IStorageEngine));
 
-                IObservable<ByteString> stream = store.GetTransactionStream(lastLedgerRecordHash);
+                IObservable<ByteString> stream = new PollingObservable(lastLedgerRecordHash, store.GetTransactions);
 
                 using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
                 {

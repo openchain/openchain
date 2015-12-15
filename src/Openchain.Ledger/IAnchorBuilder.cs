@@ -21,11 +21,13 @@ namespace Openchain.Ledger
     /// </summary>
     public interface IAnchorBuilder
     {
+        Task Initialize();
+
         /// <summary>
         /// Creates a database anchor for the current state of the database.
         /// </summary>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task<LedgerAnchor> CreateAnchor();
+        Task<LedgerAnchor> CreateAnchor(IStorageEngine storageEngine);
 
         /// <summary>
         /// Marks the anchor as successfully recorded in the anchoring medium.

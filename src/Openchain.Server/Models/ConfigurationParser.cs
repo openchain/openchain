@@ -104,7 +104,7 @@ namespace Openchain.Server.Models
             }
 
             if (recorder != null)
-                return new LedgerAnchorWorker(serviceProvider.GetRequiredService<IAnchorBuilder>(), recorder, serviceProvider.GetRequiredService<ILogger>());
+                return new LedgerAnchorWorker(serviceProvider);
             else
                 return null;
         }

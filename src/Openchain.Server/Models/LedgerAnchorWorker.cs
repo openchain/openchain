@@ -15,6 +15,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Openchain.Ledger;
 
@@ -22,36 +23,37 @@ namespace Openchain.Server.Models
 {
     public class LedgerAnchorWorker
     {
-        private readonly IAnchorBuilder anchorBuilder;
-        private readonly IAnchorRecorder anchorRecorder;
-        private readonly ILogger logger;
+        private readonly IServiceProvider services;
 
-        public LedgerAnchorWorker(IAnchorBuilder anchorBuilder, IAnchorRecorder anchorRecorder, ILogger logger)
+        public LedgerAnchorWorker(IServiceProvider services)
         {
-            this.anchorBuilder = anchorBuilder;
-            this.anchorRecorder = anchorRecorder;
-            this.logger = logger;
+            this.services = services;
         }
 
         public async Task Run(CancellationToken cancel)
         {
             while (!cancel.IsCancellationRequested)
             {
+                ILogger logger = services.GetService<ILogger>();
+                IAnchorRecorder anchorRecorder = services.GetService<IAnchorRecorder>();
+                IAnchorBuilder anchorBuilder = services.GetService<IAnchorBuilder>();
+                IStorageEngine storageEngine = services.GetService<IStorageEngine>();
+
                 try
                 {
-                    if (await this.anchorRecorder.CanRecordAnchor())
+                    if (await anchorRecorder.CanRecordAnchor())
                     {
-                        LedgerAnchor anchor = await this.anchorBuilder.CreateAnchor();
+                        LedgerAnchor anchor = await anchorBuilder.CreateAnchor(storageEngine);
 
                         if (anchor != null)
                         {
                             logger.LogInformation($"Recording anchor for {anchor.TransactionCount} transaction(s)");
 
                             // Record the anchor
-                            await this.anchorRecorder.RecordAnchor(anchor);
+                            await anchorRecorder.RecordAnchor(anchor);
 
                             // Commit the anchor if it has been recorded successfully
-                            await this.anchorBuilder.CommitAnchor(anchor);
+                            await anchorBuilder.CommitAnchor(anchor);
                         }
                     }
 
