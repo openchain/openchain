@@ -24,6 +24,7 @@ namespace Openchain.Sqlite.Tests
         {
             SqliteLedger store = new SqliteLedger(":memory:");
             store.Initialize().Wait();
+            SqliteStorageEngineBuilder.InitializeTables(store.Connection).Wait();
 
             this.Engine = store;
             this.Queries = store;

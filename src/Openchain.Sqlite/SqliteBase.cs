@@ -27,7 +27,7 @@ namespace Openchain.Sqlite
             this.Connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString());
         }
 
-        protected SqliteConnection Connection { get; }
+        public SqliteConnection Connection { get; }
 
         protected async Task<IReadOnlyList<T>> ExecuteAsync<T>(string commandText, Func<DbDataReader, T> selector, IDictionary<string, object> parameters)
         {

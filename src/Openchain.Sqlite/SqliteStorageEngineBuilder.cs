@@ -22,7 +22,7 @@ namespace Openchain.Sqlite
 {
     public class SqliteStorageEngineBuilder : IComponentBuilder<SqliteLedger>
     {
-        private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
+        private static readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
         private string filename;
 
         public string Name { get; } = "Sqlite";
@@ -46,10 +46,16 @@ namespace Openchain.Sqlite
 
             using (SqliteConnection connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString()))
             {
-                await connection.OpenAsync();
+                await InitializeTables(connection);
+            }
+        }
 
-                SqliteCommand command = connection.CreateCommand();
-                command.CommandText = @"
+        public static async Task InitializeTables(SqliteConnection connection)
+        {
+            await connection.OpenAsync();
+
+            SqliteCommand command = connection.CreateCommand();
+            command.CommandText = @"
                     CREATE TABLE IF NOT EXISTS Transactions
                     (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -65,23 +71,23 @@ namespace Openchain.Sqlite
                         Version BLOB
                     );";
 
-                await command.ExecuteNonQueryAsync();
+            await command.ExecuteNonQueryAsync();
 
-                try
-                {
-                    command = connection.CreateCommand();
-                    command.CommandText = @"
+            try
+            {
+                command = connection.CreateCommand();
+                command.CommandText = @"
                         ALTER TABLE Records ADD COLUMN Name TEXT;
                         ALTER TABLE Records ADD COLUMN Type INTEGER;";
 
-                    await command.ExecuteNonQueryAsync();
-                }
-                catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
-                { }
+                await command.ExecuteNonQueryAsync();
+            }
+            catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
+            { }
 
-                // Index of transactions affecting a given record
-                command = connection.CreateCommand();
-                command.CommandText = @"
+            // Index of transactions affecting a given record
+            command = connection.CreateCommand();
+            command.CommandText = @"
                     CREATE TABLE IF NOT EXISTS RecordMutations
                     (
                         RecordKey BLOB,
@@ -90,8 +96,7 @@ namespace Openchain.Sqlite
                         PRIMARY KEY (RecordKey, TransactionId)
                     );";
 
-                await command.ExecuteNonQueryAsync();
-            }
+            await command.ExecuteNonQueryAsync();
         }
     }
 }

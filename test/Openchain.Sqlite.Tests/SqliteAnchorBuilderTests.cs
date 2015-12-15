@@ -33,6 +33,7 @@ namespace Openchain.Sqlite.Tests
             this.anchorBuilder.Initialize().Wait();
             this.storageEngine = new SqliteStorageEngine(":memory:");
             this.storageEngine.Initialize().Wait();
+            SqliteStorageEngineBuilder.InitializeTables(this.storageEngine.Connection).Wait();
         }
 
         [Fact]
