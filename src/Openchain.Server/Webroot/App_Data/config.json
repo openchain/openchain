@@ -2,10 +2,8 @@
   "enable_transaction_stream": true,
 
   "storage": {
-    "type": "Openchain.Sqlite",
-    "settings": {
-      "filename": "ledger.db"
-    }
+    "provider": "Sqlite",
+    "path": "ledger.db"
   },
 
   // Define transaction validation parameters
