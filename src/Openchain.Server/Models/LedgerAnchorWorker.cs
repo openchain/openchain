@@ -32,26 +32,38 @@ namespace Openchain.Server.Models
 
         public async Task Run(CancellationToken cancel)
         {
+            IServiceScopeFactory scopeFactory = services.GetService<IServiceScopeFactory>();
+            ILogger logger = services.GetRequiredService<ILogger>();
+
             while (!cancel.IsCancellationRequested)
             {
-                ILogger logger = services.GetService<ILogger>();
-                IAnchorRecorder anchorRecorder = services.GetService<IAnchorRecorder>();
-                IAnchorBuilder anchorBuilder = services.GetService<IAnchorBuilder>();
-                IStorageEngine storageEngine = services.GetService<IStorageEngine>();
-
-                try
+                using (IServiceScope scope = scopeFactory.CreateScope())
                 {
-                    await storageEngine.Initialize();
-                    await anchorBuilder.Initialize();
+                    IAnchorRecorder anchorRecorder = scope.ServiceProvider.GetService<IAnchorRecorder>();
+                    IAnchorBuilder anchorBuilder = scope.ServiceProvider.GetService<IAnchorBuilder>();
 
-                    await Loop(storageEngine, anchorRecorder, anchorBuilder, logger, cancel);
-                }
-                catch (Exception exception)
-                {
-                    logger.LogError($"Error in the anchor worker:\r\n{exception}");
+                    if (anchorRecorder == null || anchorBuilder == null)
+                    {
+                        logger.LogInformation("Anchoring disabled");
+                        return;
+                    }
 
-                    // Wait longer if an error occurred
-                    await Task.Delay(TimeSpan.FromMinutes(1), cancel);
+                    IStorageEngine storageEngine = scope.ServiceProvider.GetRequiredService<IStorageEngine>();
+
+                    try
+                    {
+                        await storageEngine.Initialize();
+                        await anchorBuilder.Initialize();
+
+                        await Loop(storageEngine, anchorRecorder, anchorBuilder, logger, cancel);
+                    }
+                    catch (Exception exception)
+                    {
+                        logger.LogError($"Error in the anchor worker:\r\n{exception}");
+
+                        // Wait longer if an error occurred
+                        await Task.Delay(TimeSpan.FromMinutes(1), cancel);
+                    }
                 }
             }
         }
