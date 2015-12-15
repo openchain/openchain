@@ -24,7 +24,7 @@ namespace Openchain
     public interface IStorageEngine : IDisposable
     {
         /// <summary>
-        /// Initialize the storage engine.
+        /// Initializes the storage engine.
         /// </summary>
         /// <returns>The task object representing the asynchronous operation.</returns>
         Task Initialize();
