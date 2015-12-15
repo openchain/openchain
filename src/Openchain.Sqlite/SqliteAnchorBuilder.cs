@@ -72,48 +72,34 @@ namespace Openchain.Sqlite
             byte[] currentHash;
             if (lastAnchor != null)
             {
-                newTransactions = await ExecuteAsync(@"
-                        SELECT  Hash
-                        FROM    Transactions
-                        WHERE   Id > (SELECT Id FROM Transactions WHERE Hash = @hash)
-                        ORDER BY Id",
-                    reader => new ByteString((byte[])reader.GetValue(0)),
-                    new Dictionary<string, object>()
-                    {
-                        ["@hash"] = lastAnchor.Position.ToByteArray()
-                    });
-
+                newTransactions = await storage.GetTransactions(lastAnchor.Position);
                 currentHash = lastAnchor.FullStoreHash.ToByteArray();
             }
             else
             {
-                newTransactions = await ExecuteAsync(@"
-                        SELECT  Hash
-                        FROM    Transactions
-                        ORDER BY Id",
-                    reader => new ByteString((byte[])reader.GetValue(0)),
-                    new Dictionary<string, object>());
-
+                newTransactions = await storage.GetTransactions(null);
                 currentHash = new byte[32];
             }
 
             if (newTransactions.Count == 0)
                 return null;
 
+            byte[] position = currentHash;
             byte[] buffer = new byte[64];
             using (SHA256 sha = SHA256.Create())
             {
-                foreach (ByteString transactionHash in newTransactions)
+                foreach (ByteString rawTransaction in newTransactions)
                 {
                     currentHash.CopyTo(buffer, 0);
-                    transactionHash.CopyTo(buffer, 32);
+                    position = MessageSerializer.ComputeHash(rawTransaction.ToByteArray());
+                    position.CopyTo(buffer, 32);
 
                     currentHash = sha.ComputeHash(sha.ComputeHash(buffer));
                 }
             }
 
             LedgerAnchor result = new LedgerAnchor(
-                newTransactions[newTransactions.Count - 1],
+                new ByteString(position),
                 new ByteString(currentHash),
                 newTransactions.Count + (lastAnchor != null ? lastAnchor.TransactionCount : 0));
 
