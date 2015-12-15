@@ -21,6 +21,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Openchain.Ledger;
 using Openchain.Ledger.Blockchain;
 using Openchain.Ledger.Validation;
@@ -30,25 +31,21 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
-        public static IStorageEngine CreateLedgerStore(IServiceProvider serviceProvider)
+        public static Func<IServiceProvider, IStorageEngine> CreateLedgerStore(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration storage = configuration.GetSection("storage");
+            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
 
             try
             {
-                if (storage["type"] == "Sqlite")
-                {
-                    return new SqliteLedger(GetPathOrDefault(serviceProvider, storage["path"]));
-                }
+                DependencyResolver<IStorageEngine> resolver = DependencyResolver<IStorageEngine>.Create(configuration.GetSection("storage"), assemblyLoader);
+                return _ => resolver.Build();
             }
             catch (Exception exception)
             {
                 serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instantiating the transaction store:\n {exception}");
                 throw;
             }
-
-            throw new NotSupportedException();
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)

@@ -64,15 +64,15 @@ namespace Openchain.Server.Models
 
             foreach (ConstructorInfo constructor in type.GetConstructors())
             {
-                Expression[] result = Activate(constructor, parameters);
-                if (result != null)
-                    return Expression.Lambda<Func<T>>(Expression.New(constructor, result)).Compile();
+                Expression[] constructorParameters = GetConstructorParameters(constructor, parameters);
+                if (constructorParameters != null)
+                    return Expression.Lambda<Func<T>>(Expression.New(constructor, constructorParameters)).Compile();
             }
 
             return null;
         }
 
-        private static Expression[] Activate(ConstructorInfo constructor, IDictionary<string, string> parameters)
+        private static Expression[] GetConstructorParameters(ConstructorInfo constructor, IDictionary<string, string> parameters)
         {
             ParameterInfo[] constructorParameters = constructor.GetParameters();
 
