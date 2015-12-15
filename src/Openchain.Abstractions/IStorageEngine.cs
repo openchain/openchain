@@ -51,10 +51,10 @@ namespace Openchain
         Task<ByteString> GetLastTransaction();
 
         /// <summary>
-        /// Gets the transactions following the one whose hash has been provided.
+        /// Get an ordered list of transactions from a given point.
         /// </summary>
-        /// <param name="from">The hash of the transaction to start streaming from.</param>
-        /// <returns>An observable representing the transaction stream.</returns>
-        IObservable<ByteString> GetTransactionStream(ByteString from);
+        /// <param name="from">The hash of the transaction to start from.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
+        Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from);
     }
 }

@@ -170,14 +170,9 @@ namespace Openchain.SqlServer
 
         #endregion
 
-        #region GetTransactionStream
+        #region GetTransactions
 
-        public IObservable<ByteString> GetTransactionStream(ByteString from)
-        {
-            return new PollingObservable(from, this.GetTransactions);
-        }
-
-        private async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
+        public async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
         {
             return await ExecuteQuery<ByteString>(
                 "EXEC [Openchain].[GetTransactionLog] @instance, @from, @count;",

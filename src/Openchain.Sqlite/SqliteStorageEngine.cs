@@ -232,14 +232,9 @@ namespace Openchain.Sqlite
 
         #endregion
 
-        #region GetTransactionStream
+        #region GetTransactions
 
-        public IObservable<ByteString> GetTransactionStream(ByteString from)
-        {
-            return new PollingObservable(from, this.GetTransactions);
-        }
-
-        private async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
+        public async Task<IReadOnlyList<ByteString>> GetTransactions(ByteString from)
         {
             Func<DbDataReader, ByteString> selector = reader => new ByteString((byte[])reader.GetValue(0));
             if (from != null)
