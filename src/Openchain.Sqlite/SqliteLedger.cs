@@ -22,39 +22,9 @@ namespace Openchain.Sqlite
 {
     public class SqliteLedger : SqliteStorageEngine, ILedgerQueries, ILedgerIndexes
     {
-        private readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
-
         public SqliteLedger(string filename)
             : base(filename)
         { }
-
-        public override async Task Initialize()
-        {
-            await base.Initialize();
-
-            try
-            {
-                await ExecuteAsync(
-                    @"
-                    ALTER TABLE Records ADD COLUMN Name TEXT;
-                    ALTER TABLE Records ADD COLUMN Type INTEGER;",
-                    new Dictionary<string, object>());
-
-                // Index of transactions affecting a given record
-                await ExecuteAsync(
-                    @"
-                    CREATE TABLE IF NOT EXISTS RecordMutations
-                    (
-                        RecordKey BLOB,
-                        TransactionId INTEGER,
-                        MutationHash BLOB,
-                        PRIMARY KEY (RecordKey, TransactionId)
-                    );",
-                    new Dictionary<string, object>());
-            }
-            catch (SqliteException exception) when (exception.Message == columnAlreadyExistsMessage)
-            { }
-        }
 
         public async Task<ByteString> GetTransaction(ByteString mutationHash)
         {

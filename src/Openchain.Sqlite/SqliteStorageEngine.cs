@@ -31,29 +31,9 @@ namespace Openchain.Sqlite
 
         #region Initialize
 
-        public virtual async Task Initialize()
+        public async Task Initialize()
         {
             await Connection.OpenAsync();
-
-            SqliteCommand command = Connection.CreateCommand();
-            command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Transactions
-                (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Hash BLOB UNIQUE,
-                    MutationHash BLOB UNIQUE,
-                    RawData BLOB
-                );
-
-                CREATE TABLE IF NOT EXISTS Records
-                (
-                    Key BLOB PRIMARY KEY,
-                    Value BLOB,
-                    Version BLOB
-                );
-            ";
-
-            await command.ExecuteNonQueryAsync();
         }
 
         #endregion
