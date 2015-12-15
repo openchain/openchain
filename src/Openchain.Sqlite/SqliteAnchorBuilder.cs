@@ -30,6 +30,10 @@ namespace Openchain.Sqlite
             : base(filename)
         { }
 
+        /// <summary>
+        /// Initializes the instance.
+        /// </summary>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task Initialize()
         {
             await Connection.OpenAsync();
@@ -52,6 +56,7 @@ namespace Openchain.Sqlite
         /// <summary>
         /// Creates a database anchor for the current state of the database.
         /// </summary>
+        /// <param name="storageEngine">The source of transactions to use.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task<LedgerAnchor> CreateAnchor(IStorageEngine storage)
         {
