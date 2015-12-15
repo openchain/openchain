@@ -63,30 +63,30 @@ namespace Openchain.Server.Models
             return store as ILedgerIndexes;
         }
 
-        public static IAnchorBuilder CreateAnchorBuilder(IServiceProvider serviceProvider)
+        public static Func<IServiceProvider, IAnchorBuilder> CreateAnchorBuilder(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration storage = configuration.GetSection("storage");
+            IConfiguration recording = configuration.GetSection("anchoring").GetSection("recording");
+            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
 
-            if (storage["type"] == "Sqlite")
+            try
             {
-                SqliteAnchorBuilder result = new SqliteAnchorBuilder(GetPathOrDefault(serviceProvider, storage["path"]));
-                result.Initialize().Wait();
-                return result;
+                DependencyResolver<IAnchorBuilder> resolver = DependencyResolver<IAnchorBuilder>.Create(recording, assemblyLoader);
+                return _ => resolver.Build();
             }
-            else
+            catch (Exception exception)
             {
-                throw new NotSupportedException();
+                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instantiating the anchor builder:\n {exception}");
+                throw;
             }
         }
 
-        public static LedgerAnchorWorker CreateLedgerAnchorWorker(IServiceProvider serviceProvider)
+        public static IAnchorRecorder CreateAnchorRecorder(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IConfiguration anchoring = configuration.GetSection("anchoring");
             ILogger logger = serviceProvider.GetService<ILogger>();
 
-            IAnchorRecorder recorder = null;
             switch (anchoring["type"])
             {
                 case "blockchain":
@@ -98,15 +98,17 @@ namespace Openchain.Server.Models
                             .First(item => item.GetVersionBytes(NBitcoin.Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(anchoring["network_byte"]));
 
                         logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
-                        recorder = new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network, long.Parse(anchoring["fees"]));
+                        return new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network, long.Parse(anchoring["fees"]));
                     }
                     break;
             }
 
-            if (recorder != null)
-                return new LedgerAnchorWorker(serviceProvider);
-            else
-                return null;
+            return null;
+        }
+
+        public static LedgerAnchorWorker CreateLedgerAnchorWorker(IServiceProvider serviceProvider)
+        {
+            return new LedgerAnchorWorker(serviceProvider);
         }
 
         public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)

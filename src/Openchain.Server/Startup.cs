@@ -75,7 +75,9 @@ namespace Openchain.Server
 
             services.AddTransient<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
 
-            services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder);
+            services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder(services.BuildServiceProvider()));
+
+            services.AddTransient<IAnchorRecorder>(ConfigurationParser.CreateAnchorRecorder);
 
             services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
 

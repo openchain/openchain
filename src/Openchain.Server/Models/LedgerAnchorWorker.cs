@@ -41,22 +41,10 @@ namespace Openchain.Server.Models
 
                 try
                 {
-                    if (await anchorRecorder.CanRecordAnchor())
-                    {
-                        LedgerAnchor anchor = await anchorBuilder.CreateAnchor(storageEngine);
+                    await storageEngine.Initialize();
+                    await anchorBuilder.Initialize();
 
-                        if (anchor != null)
-                        {
-                            logger.LogInformation($"Recording anchor for {anchor.TransactionCount} transaction(s)");
-
-                            // Record the anchor
-                            await anchorRecorder.RecordAnchor(anchor);
-
-                            // Commit the anchor if it has been recorded successfully
-                            await anchorBuilder.CommitAnchor(anchor);
-                        }
-                    }
-
+                    await Loop(storageEngine, anchorRecorder, anchorBuilder, logger, cancel);
                 }
                 catch (Exception exception)
                 {
@@ -64,6 +52,28 @@ namespace Openchain.Server.Models
 
                     // Wait longer if an error occurred
                     await Task.Delay(TimeSpan.FromMinutes(1), cancel);
+                }
+            }
+        }
+
+        private async Task Loop(IStorageEngine storageEngine, IAnchorRecorder anchorRecorder, IAnchorBuilder anchorBuilder, ILogger logger, CancellationToken cancel)
+        {
+            while (!cancel.IsCancellationRequested)
+            {
+                if (await anchorRecorder.CanRecordAnchor())
+                {
+                    LedgerAnchor anchor = await anchorBuilder.CreateAnchor(storageEngine);
+
+                    if (anchor != null)
+                    {
+                        logger.LogInformation($"Recording anchor for {anchor.TransactionCount} transaction(s)");
+
+                        // Record the anchor
+                        await anchorRecorder.RecordAnchor(anchor);
+
+                        // Commit the anchor if it has been recorded successfully
+                        await anchorBuilder.CommitAnchor(anchor);
+                    }
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(10), cancel);
