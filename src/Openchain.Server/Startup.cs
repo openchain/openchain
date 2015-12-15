@@ -44,11 +44,16 @@ namespace Openchain.Server
                 .Build();
         }
 
+        public void ConfigureServices(IServiceCollection services)
+        {
+            ConfigureServicesAsync(services).Wait();
+        }
+
         /// <summary>
         /// Adds services to the dependency injection container.
         /// </summary>
         /// <param name="services">The collection of services.</param>
-        public void ConfigureServices(IServiceCollection services)
+        public async Task ConfigureServicesAsync(IServiceCollection services)
         {
             services.BuildServiceProvider().GetService<ILoggerFactory>().AddConsole();
 
@@ -69,13 +74,13 @@ namespace Openchain.Server
             services.AddCors();
 
             // Ledger Store
-            services.AddScoped<IStorageEngine>(ConfigurationParser.CreateStorageEngine(services.BuildServiceProvider()));
+            services.AddScoped<IStorageEngine>(await ConfigurationParser.CreateStorageEngine(services.BuildServiceProvider()));
 
             services.AddScoped<ILedgerQueries>(ConfigurationParser.CreateLedgerQueries);
 
             services.AddScoped<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
 
-            services.AddTransient<IAnchorBuilder>(ConfigurationParser.CreateAnchorBuilder(services.BuildServiceProvider()));
+            services.AddTransient<IAnchorBuilder>(await ConfigurationParser.CreateAnchorBuilder(services.BuildServiceProvider()));
 
             services.AddTransient<IAnchorRecorder>(ConfigurationParser.CreateAnchorRecorder);
 

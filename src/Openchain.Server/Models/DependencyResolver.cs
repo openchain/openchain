@@ -14,87 +14,79 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
+using Newtonsoft.Json.Linq;
+using Openchain.Ledger;
 
 namespace Openchain.Server.Models
 {
     public class DependencyResolver<T>
         where T : class
     {
-        private readonly Func<T> builder;
+        private readonly IComponentBuilder<T> builder;
+        private readonly Task initialize;
 
-        public DependencyResolver(IAssemblyLoadContextAccessor assemblyLoader, string assemblyName, IDictionary<string, string> parameters)
+        public DependencyResolver(IAssemblyLoadContextAccessor assemblyLoader, string basePath, IDictionary<string, string> parameters)
         {
-            Assembly assembly = assemblyLoader.Default.Load(assemblyName);
+            IList<Assembly> assemblies = LoadAllAssemblies(basePath, assemblyLoader);
 
-            if (assembly != null)
-                this.builder = FindConstructor(assembly, parameters);
-            else
-                this.builder = null;
+            this.builder = FindBuilder(assemblies, parameters);
+
+            if (this.builder != null)
+                initialize = this.builder.Initialize(parameters);
         }
 
-        public static DependencyResolver<T> Create(IConfiguration config, IAssemblyLoadContextAccessor assemblyLoader)
+        private IComponentBuilder<T> FindBuilder(IList<Assembly> assemblies, IDictionary<string, string> parameters)
+        {
+            return (from assembly in assemblies
+                    from type in assembly.GetTypes()
+                    where typeof(IComponentBuilder<T>).IsAssignableFrom(type)
+                    let instance = (IComponentBuilder<T>)type.GetConstructor(Type.EmptyTypes).Invoke(new object[0])
+                    where instance.Name == parameters["provider"]
+                    select instance)
+                    .FirstOrDefault();
+        }
+
+        public static DependencyResolver<T> Create(IConfiguration config, IApplicationEnvironment application, IAssemblyLoadContextAccessor assemblyLoader)
         {
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-            foreach (IConfigurationSection section in config.GetSection("settings").GetChildren())
+            foreach (IConfigurationSection section in config.GetChildren())
                 parameters.Add(section.Key, section.Value);
 
-            return new DependencyResolver<T>(assemblyLoader, config["type"], parameters);
+            return new DependencyResolver<T>(assemblyLoader, application.ApplicationBasePath, parameters);
         }
 
-        public T Build()
+        public async Task<Func<IServiceProvider, T>> Build()
         {
             if (builder == null)
-                return null;
+            {
+                return _ => null;
+            }
             else
-                return builder();
+            {
+                await initialize;
+                return builder.Build;
+            }
         }
 
-        private static Func<T> FindConstructor(Assembly assembly, IDictionary<string, string> parameters)
+        private static IList<Assembly> LoadAllAssemblies(string projectPath, IAssemblyLoadContextAccessor assemblyLoader)
         {
-            Type type = assembly.GetTypes().FirstOrDefault(item => typeof(T).IsAssignableFrom(item));
+            string projectFilePath = Path.Combine(projectPath, "project.json");
+            JObject configurationFile = JObject.Parse(File.ReadAllText(projectFilePath));
 
-            if (type == null)
-                return null;
+            JObject dependencies = (JObject)configurationFile["dependencies"];
 
-            foreach (ConstructorInfo constructor in type.GetConstructors())
-            {
-                Expression[] constructorParameters = GetConstructorParameters(constructor, parameters);
-                if (constructorParameters != null)
-                    return Expression.Lambda<Func<T>>(Expression.New(constructor, constructorParameters)).Compile();
-            }
-
-            return null;
-        }
-
-        private static Expression[] GetConstructorParameters(ConstructorInfo constructor, IDictionary<string, string> parameters)
-        {
-            ParameterInfo[] constructorParameters = constructor.GetParameters();
-
-            Expression[] invokeParameters = new Expression[constructorParameters.Length];
-
-            for (int i = 0; i < constructorParameters.Length; i++)
-            {
-                string value;
-                if (!parameters.TryGetValue(constructorParameters[i].Name, out value))
-                    return null;
-
-                if (constructorParameters[i].ParameterType == typeof(string))
-                {
-                    invokeParameters[i] = Expression.Constant(value);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            return invokeParameters;
+            return dependencies.Properties()
+                .Select(property => property.Name)
+                .Where(name => name.StartsWith("Openchain."))
+                .Select(name => assemblyLoader.Default.Load(name))
+                .ToList();
         }
     }
 }

@@ -31,15 +31,16 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
-        public static Func<IServiceProvider, IStorageEngine> CreateStorageEngine(IServiceProvider serviceProvider)
+        public static async Task<Func<IServiceProvider, IStorageEngine>> CreateStorageEngine(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
             IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
 
             try
             {
-                DependencyResolver<IStorageEngine> resolver = DependencyResolver<IStorageEngine>.Create(configuration.GetSection("storage"), assemblyLoader);
-                return _ => resolver.Build();
+                DependencyResolver<IStorageEngine> resolver = DependencyResolver<IStorageEngine>.Create(configuration.GetSection("storage"), application, assemblyLoader);
+                return await resolver.Build();
             }
             catch (Exception exception)
             {
@@ -50,29 +51,25 @@ namespace Openchain.Server.Models
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IStorageEngine store = serviceProvider.GetService<IStorageEngine>();
-
-            return store as ILedgerQueries;
+            return serviceProvider.GetService<IStorageEngine>() as ILedgerQueries;
         }
 
         public static ILedgerIndexes CreateLedgerIndexes(IServiceProvider serviceProvider)
         {
-            IStorageEngine store = serviceProvider.GetService<IStorageEngine>();
-
-            return store as ILedgerIndexes;
+            return serviceProvider.GetService<IStorageEngine>() as ILedgerIndexes;
         }
 
-        public static Func<IServiceProvider, IAnchorBuilder> CreateAnchorBuilder(IServiceProvider serviceProvider)
+        public static async Task<Func<IServiceProvider, IAnchorBuilder>> CreateAnchorBuilder(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
+            IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
             IConfiguration recording = configuration.GetSection("anchoring").GetSection("recording");
             IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
 
             try
             {
-                DependencyResolver<IAnchorBuilder> resolver = DependencyResolver<IAnchorBuilder>.Create(recording, assemblyLoader);
-                return _ => resolver.Build();
+                DependencyResolver<IAnchorBuilder> resolver = DependencyResolver<IAnchorBuilder>.Create(recording, application, assemblyLoader);
+                return await resolver.Build();
             }
             catch (Exception exception)
             {
