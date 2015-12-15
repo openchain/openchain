@@ -270,6 +270,9 @@ namespace Openchain.Ledger.Tests
             {
                 throw new NotImplementedException();
             }
+
+            public void Dispose()
+            { }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Openchain
     /// <summary>
     /// Represents a data store for key-value pairs.
     /// </summary>
-    public interface IStorageEngine
+    public interface IStorageEngine : IDisposable
     {
         /// <summary>
         /// Initialize the storage engine.

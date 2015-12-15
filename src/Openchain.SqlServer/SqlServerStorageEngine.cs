@@ -188,6 +188,15 @@ namespace Openchain.SqlServer
 
         #endregion
 
+        #region Dispose
+
+        public void Dispose()
+        {
+            Connection.Dispose();
+        }
+
+        #endregion
+
         #region Private Methods
 
         public async Task<IReadOnlyList<T>> ExecuteQuery<T>(string query, Func<SqlDataReader, T> readRecord, IDictionary<string, object> parameters, SqlTransaction transaction = null)

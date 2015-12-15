@@ -20,7 +20,7 @@ using Microsoft.Data.Sqlite;
 
 namespace Openchain.Sqlite
 {
-    public class SqliteBase
+    public class SqliteBase : IDisposable
     {
         public SqliteBase(string filename)
         {
@@ -56,6 +56,11 @@ namespace Openchain.Sqlite
                 query.Parameters.AddWithValue(parameter.Key, parameter.Value);
 
             return await query.ExecuteNonQueryAsync();
+        }
+
+        public void Dispose()
+        {
+            Connection.Dispose();
         }
     }
 }
