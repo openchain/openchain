@@ -21,7 +21,6 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using Openchain.Ledger;
 using Openchain.Ledger.Blockchain;
 using Openchain.Ledger.Validation;
@@ -31,22 +30,9 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
-        public static async Task<Func<IServiceProvider, IStorageEngine>> CreateStorageEngine(IServiceProvider serviceProvider)
+        public static Task<Func<IServiceProvider, IStorageEngine>> CreateStorageEngine(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
-            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
-
-            try
-            {
-                DependencyResolver<IStorageEngine> resolver = DependencyResolver<IStorageEngine>.Create(configuration.GetSection("storage"), application, assemblyLoader);
-                return await resolver.Build();
-            }
-            catch (Exception exception)
-            {
-                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instantiating the transaction store:\n {exception}");
-                throw;
-            }
+            return DependencyResolver<IStorageEngine>.Create(serviceProvider, "storage");
         }
 
         public static ILedgerQueries CreateLedgerQueries(IServiceProvider serviceProvider)
@@ -59,23 +45,9 @@ namespace Openchain.Server.Models
             return serviceProvider.GetService<IStorageEngine>() as ILedgerIndexes;
         }
 
-        public static async Task<Func<IServiceProvider, IAnchorState>> CreateAnchorState(IServiceProvider serviceProvider)
+        public static Task<Func<IServiceProvider, IAnchorState>> CreateAnchorState(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
-            IConfiguration recording = configuration.GetSection("anchoring").GetSection("storage");
-            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
-
-            try
-            {
-                DependencyResolver<IAnchorState> resolver = DependencyResolver<IAnchorState>.Create(recording, application, assemblyLoader);
-                return await resolver.Build();
-            }
-            catch (Exception exception)
-            {
-                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while instantiating the anchor builder:\n {exception}");
-                throw;
-            }
+            return DependencyResolver<IAnchorState>.Create(serviceProvider, "anchoring:storage");
         }
 
         public static IAnchorRecorder CreateAnchorRecorder(IServiceProvider serviceProvider)

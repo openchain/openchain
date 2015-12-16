@@ -19,6 +19,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Linq;
 using Openchain.Ledger;
@@ -52,14 +54,32 @@ namespace Openchain.Server.Models
                     .FirstOrDefault();
         }
 
-        public static DependencyResolver<T> Create(IConfiguration config, IApplicationEnvironment application, IAssemblyLoadContextAccessor assemblyLoader)
+        public static async Task<Func<IServiceProvider, T>> Create(IServiceProvider serviceProvider, string configurationPath)
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
+            IApplicationEnvironment application = serviceProvider.GetRequiredService<IApplicationEnvironment>();
+            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>();
+            IConfigurationSection rootSection = configuration.GetSection(configurationPath);
 
-            foreach (IConfigurationSection section in config.GetChildren())
-                parameters.Add(section.Key, section.Value);
+            try
+            {
+                Dictionary<string, string> parameters = new Dictionary<string, string>();
 
-            return new DependencyResolver<T>(assemblyLoader, application.ApplicationBasePath, parameters);
+                foreach (IConfigurationSection section in rootSection.GetChildren())
+                    parameters.Add(section.Key, section.Value);
+
+                DependencyResolver<T> resolver = new DependencyResolver<T>(assemblyLoader, application.ApplicationBasePath, parameters);
+
+                if (resolver.builder == null)
+                    serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");
+
+                return await resolver.Build();
+            }
+            catch (Exception exception)
+            {
+                serviceProvider.GetRequiredService<ILogger>().LogError($"Error while creating {typeof(T).FullName} from the '{configurationPath}' configuration section:\n {exception}");
+                throw;
+            }
         }
 
         public async Task<Func<IServiceProvider, T>> Build()
