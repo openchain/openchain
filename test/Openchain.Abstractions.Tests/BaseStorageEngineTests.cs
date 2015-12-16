@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Openchain.Tests
 {
-    public abstract class BaseStorageEngineTests
+    public abstract class BaseStorageEngineTests : IDisposable
     {
         private readonly ByteString[] binaryData =
             Enumerable.Range(0, 20).Select(index => new ByteString(Enumerable.Range(0, 32).Select(i => (byte)index))).ToArray();
@@ -298,6 +298,11 @@ namespace Openchain.Tests
         {
             return new ByteString(
                 MessageSerializer.ComputeHash(MessageSerializer.DeserializeTransaction(transaction).Mutation.ToByteArray()));
+        }
+
+        public void Dispose()
+        {
+            this.Store.Dispose();
         }
     }
 }
