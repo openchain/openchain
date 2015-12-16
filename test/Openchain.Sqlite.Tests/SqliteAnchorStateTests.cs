@@ -31,6 +31,8 @@ namespace Openchain.Sqlite.Tests
         {
             this.anchorBuilder = new SqliteAnchorState(":memory:");
             this.anchorBuilder.Initialize().Wait();
+            SqliteAnchorStateBuilder.InitializeTables(this.anchorBuilder.Connection).Wait();
+
             this.storageEngine = new SqliteStorageEngine(":memory:");
             this.storageEngine.Initialize().Wait();
             SqliteStorageEngineBuilder.InitializeTables(this.storageEngine.Connection).Wait();
