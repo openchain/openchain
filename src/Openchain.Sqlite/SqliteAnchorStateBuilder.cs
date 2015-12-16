@@ -14,8 +14,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.DependencyInjection;
 using Openchain.Ledger;
 
 namespace Openchain.Sqlite
@@ -34,9 +37,9 @@ namespace Openchain.Sqlite
             return new SqliteAnchorState(filename);
         }
 
-        public async Task Initialize(IDictionary<string, string> parameters)
+        public async Task Initialize(IServiceProvider serviceProvider, IDictionary<string, string> parameters)
         {
-            filename = parameters["path"];
+            filename = SqliteStorageEngineBuilder.GetPathOrDefault(serviceProvider, parameters["path"]);
 
             using (SqliteConnection connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString()))
             {

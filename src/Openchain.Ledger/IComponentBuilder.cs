@@ -22,7 +22,7 @@ namespace Openchain.Ledger
     {
         string Name { get; }
 
-        Task Initialize(IDictionary<string, string> parameters);
+        Task Initialize(IServiceProvider serviceProvider, IDictionary<string, string> parameters);
 
         T Build(IServiceProvider serviceProvider);
     }

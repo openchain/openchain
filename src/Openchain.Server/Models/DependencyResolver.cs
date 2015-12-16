@@ -33,14 +33,14 @@ namespace Openchain.Server.Models
         private readonly IComponentBuilder<T> builder;
         private readonly Task initialize;
 
-        public DependencyResolver(IAssemblyLoadContextAccessor assemblyLoader, string basePath, IDictionary<string, string> parameters)
+        public DependencyResolver(IServiceProvider serviceProvider, string basePath, IDictionary<string, string> parameters)
         {
-            IList<Assembly> assemblies = LoadAllAssemblies(basePath, assemblyLoader);
+            IList<Assembly> assemblies = LoadAllAssemblies(basePath, serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>());
 
             this.builder = FindBuilder(assemblies, parameters);
 
             if (this.builder != null)
-                initialize = this.builder.Initialize(parameters);
+                initialize = this.builder.Initialize(serviceProvider, parameters);
         }
 
         private IComponentBuilder<T> FindBuilder(IList<Assembly> assemblies, IDictionary<string, string> parameters)
@@ -58,7 +58,6 @@ namespace Openchain.Server.Models
         {
             IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
             IApplicationEnvironment application = serviceProvider.GetRequiredService<IApplicationEnvironment>();
-            IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>();
             IConfigurationSection rootSection = configuration.GetSection(configurationPath);
 
             try
@@ -68,7 +67,7 @@ namespace Openchain.Server.Models
                 foreach (IConfigurationSection section in rootSection.GetChildren())
                     parameters.Add(section.Key, section.Value);
 
-                DependencyResolver<T> resolver = new DependencyResolver<T>(assemblyLoader, application.ApplicationBasePath, parameters);
+                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ApplicationBasePath, parameters);
 
                 if (resolver.builder == null)
                     serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");
