@@ -15,6 +15,7 @@
 
   "dependencies": {
     "Microsoft.Data.SQLite": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
     "Openchain.Abstractions": "0.5.0-rc1-*",
     "Openchain.Ledger": "0.5.0-rc1-*"
   },
