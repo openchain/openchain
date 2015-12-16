@@ -19,7 +19,7 @@ namespace Openchain.Ledger
     /// <summary>
     /// Provides functionality for creating a database anchor.
     /// </summary>
-    public interface IAnchorBuilder
+    public interface IAnchorState
     {
         /// <summary>
         /// Initializes the instance.

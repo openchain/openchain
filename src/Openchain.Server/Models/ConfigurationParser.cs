@@ -59,7 +59,7 @@ namespace Openchain.Server.Models
             return serviceProvider.GetService<IStorageEngine>() as ILedgerIndexes;
         }
 
-        public static async Task<Func<IServiceProvider, IAnchorBuilder>> CreateAnchorBuilder(IServiceProvider serviceProvider)
+        public static async Task<Func<IServiceProvider, IAnchorState>> CreateAnchorState(IServiceProvider serviceProvider)
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
@@ -68,7 +68,7 @@ namespace Openchain.Server.Models
 
             try
             {
-                DependencyResolver<IAnchorBuilder> resolver = DependencyResolver<IAnchorBuilder>.Create(recording, application, assemblyLoader);
+                DependencyResolver<IAnchorState> resolver = DependencyResolver<IAnchorState>.Create(recording, application, assemblyLoader);
                 return await resolver.Build();
             }
             catch (Exception exception)

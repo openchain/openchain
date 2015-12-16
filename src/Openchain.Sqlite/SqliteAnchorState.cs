@@ -24,7 +24,7 @@ namespace Openchain.Sqlite
     /// <summary>
     /// Persists information about the latest known anchor.
     /// </summary>
-    public class SqliteAnchorState : SqliteBase, IAnchorBuilder
+    public class SqliteAnchorState : SqliteBase, IAnchorState
     {
         public SqliteAnchorState(string filename)
             : base(filename)

@@ -40,9 +40,9 @@ namespace Openchain.Server.Models
                 using (IServiceScope scope = scopeFactory.CreateScope())
                 {
                     IAnchorRecorder anchorRecorder = scope.ServiceProvider.GetService<IAnchorRecorder>();
-                    IAnchorBuilder anchorBuilder = scope.ServiceProvider.GetService<IAnchorBuilder>();
+                    IAnchorState anchorState = scope.ServiceProvider.GetService<IAnchorState>();
 
-                    if (anchorRecorder == null || anchorBuilder == null)
+                    if (anchorRecorder == null || anchorState == null)
                     {
                         logger.LogInformation("Anchoring disabled");
                         return;
@@ -53,9 +53,9 @@ namespace Openchain.Server.Models
                     try
                     {
                         await storageEngine.Initialize();
-                        await anchorBuilder.Initialize();
+                        await anchorState.Initialize();
 
-                        await Loop(storageEngine, anchorRecorder, anchorBuilder, logger, cancel);
+                        await Loop(storageEngine, anchorRecorder, anchorState, logger, cancel);
                     }
                     catch (Exception exception)
                     {
@@ -68,13 +68,13 @@ namespace Openchain.Server.Models
             }
         }
 
-        private async Task Loop(IStorageEngine storageEngine, IAnchorRecorder anchorRecorder, IAnchorBuilder anchorBuilder, ILogger logger, CancellationToken cancel)
+        private async Task Loop(IStorageEngine storageEngine, IAnchorRecorder anchorRecorder, IAnchorState anchorState, ILogger logger, CancellationToken cancel)
         {
             while (!cancel.IsCancellationRequested)
             {
                 if (await anchorRecorder.CanRecordAnchor())
                 {
-                    LedgerAnchor anchor = await anchorBuilder.CreateAnchor(storageEngine);
+                    LedgerAnchor anchor = await anchorState.CreateAnchor(storageEngine);
 
                     if (anchor != null)
                     {
@@ -84,7 +84,7 @@ namespace Openchain.Server.Models
                         await anchorRecorder.RecordAnchor(anchor);
 
                         // Commit the anchor if it has been recorded successfully
-                        await anchorBuilder.CommitAnchor(anchor);
+                        await anchorState.CommitAnchor(anchor);
                     }
                 }
 

@@ -80,7 +80,7 @@ namespace Openchain.Server
 
             services.AddScoped<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
 
-            services.AddTransient<IAnchorBuilder>(await ConfigurationParser.CreateAnchorBuilder(services.BuildServiceProvider()));
+            services.AddTransient<IAnchorState>(await ConfigurationParser.CreateAnchorState(services.BuildServiceProvider()));
 
             services.AddTransient<IAnchorRecorder>(ConfigurationParser.CreateAnchorRecorder);
 
