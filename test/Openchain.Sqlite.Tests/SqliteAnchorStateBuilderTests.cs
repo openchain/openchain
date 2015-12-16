@@ -15,6 +15,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests
@@ -33,7 +34,7 @@ namespace Openchain.Sqlite.Tests
             Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteAnchorStateBuilder builder = new SqliteAnchorStateBuilder();
 
-            await builder.Initialize(parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
 
             SqliteAnchorState ledger = builder.Build(null);
 
@@ -46,7 +47,7 @@ namespace Openchain.Sqlite.Tests
             Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteAnchorStateBuilder builder = new SqliteAnchorStateBuilder();
 
-            await builder.Initialize(parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
 
             SqliteAnchorState ledger = builder.Build(null);
 
