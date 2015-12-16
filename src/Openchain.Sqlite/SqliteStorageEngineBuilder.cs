@@ -25,12 +25,7 @@ namespace Openchain.Sqlite
         private static readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
         private string filename;
 
-        public string Name { get; } = "Sqlite";
-
-        public SqliteStorageEngineBuilder(string filename)
-        {
-            this.filename = filename;
-        }
+        public string Name { get; } = "SQLite";
 
         public SqliteStorageEngineBuilder()
         { }
