@@ -1046,6 +1046,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
@@ -3046,6 +3047,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
@@ -4195,6 +4197,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
@@ -6654,6 +6657,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
@@ -9142,6 +9146,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
@@ -10326,6 +10331,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
