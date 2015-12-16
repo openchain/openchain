@@ -1022,7 +1022,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -3020,7 +3020,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"
@@ -4171,7 +4171,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -6630,7 +6630,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -9116,7 +9116,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"
@@ -10300,7 +10300,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"

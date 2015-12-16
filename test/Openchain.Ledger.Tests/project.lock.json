@@ -65,22 +65,6 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Collections.Concurrent": "4.0.11-beta-23516",
-          "System.Threading": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        }
-      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -193,7 +177,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -1099,22 +1083,6 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Collections.Concurrent": "4.0.11-beta-23516",
-          "System.Threading": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        }
-      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1245,7 +1213,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -2461,22 +2429,6 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Collections.Concurrent": "4.0.11-beta-23516",
-          "System.Threading": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
-        }
-      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2607,7 +2559,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
           "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
@@ -3834,22 +3786,6 @@
         "Microsoft.Dnx.Testing.Abstractions.1.0.0-rc1-final.nupkg",
         "Microsoft.Dnx.Testing.Abstractions.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Dnx.Testing.Abstractions.nuspec"
-      ]
-    },
-    "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "S/+s3fq85j21H5nYOvh1fIt1arl8F5lZ7Ryiw/qend83yHQwIQbBs+dip9FhqiPmAn6Dz3UhW0likQQurfEsLQ==",
-      "files": [
-        "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll",
-        "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.xml",
-        "lib/net451/Microsoft.Extensions.DependencyInjection.dll",
-        "lib/net451/Microsoft.Extensions.DependencyInjection.xml",
-        "lib/netcore50/Microsoft.Extensions.DependencyInjection.dll",
-        "lib/netcore50/Microsoft.Extensions.DependencyInjection.xml",
-        "Microsoft.Extensions.DependencyInjection.1.0.0-rc1-final.nupkg",
-        "Microsoft.Extensions.DependencyInjection.1.0.0-rc1-final.nupkg.sha512",
-        "Microsoft.Extensions.DependencyInjection.nuspec"
       ]
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
