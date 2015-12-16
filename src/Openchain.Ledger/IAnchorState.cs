@@ -28,11 +28,10 @@ namespace Openchain.Ledger
         Task Initialize();
 
         /// <summary>
-        /// Creates a database anchor for the current state of the database.
+        /// Gets the last known anchor.
         /// </summary>
-        /// <param name="storageEngine">The source of transactions to use.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task<LedgerAnchor> CreateAnchor(IStorageEngine storageEngine);
+        Task<LedgerAnchor> GetLastAnchor();
 
         /// <summary>
         /// Marks the anchor as successfully recorded in the anchoring medium.

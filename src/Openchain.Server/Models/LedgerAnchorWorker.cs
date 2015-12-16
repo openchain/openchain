@@ -55,7 +55,14 @@ namespace Openchain.Server.Models
                         await storageEngine.Initialize();
                         await anchorState.Initialize();
 
-                        await Loop(storageEngine, anchorRecorder, anchorState, logger, cancel);
+                        AnchorBuilder anchorBuilder = new AnchorBuilder(storageEngine, anchorRecorder, anchorState);
+
+                        while (!cancel.IsCancellationRequested)
+                        {
+                            await anchorBuilder.RecordAnchor();
+
+                            await Task.Delay(TimeSpan.FromSeconds(10), cancel);
+                        }
                     }
                     catch (Exception exception)
                     {
@@ -65,30 +72,6 @@ namespace Openchain.Server.Models
                         await Task.Delay(TimeSpan.FromMinutes(1), cancel);
                     }
                 }
-            }
-        }
-
-        private async Task Loop(IStorageEngine storageEngine, IAnchorRecorder anchorRecorder, IAnchorState anchorState, ILogger logger, CancellationToken cancel)
-        {
-            while (!cancel.IsCancellationRequested)
-            {
-                if (await anchorRecorder.CanRecordAnchor())
-                {
-                    LedgerAnchor anchor = await anchorState.CreateAnchor(storageEngine);
-
-                    if (anchor != null)
-                    {
-                        logger.LogInformation($"Recording anchor for {anchor.TransactionCount} transaction(s)");
-
-                        // Record the anchor
-                        await anchorRecorder.RecordAnchor(anchor);
-
-                        // Commit the anchor if it has been recorded successfully
-                        await anchorState.CommitAnchor(anchor);
-                    }
-                }
-
-                await Task.Delay(TimeSpan.FromSeconds(10), cancel);
             }
         }
     }

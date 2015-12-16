@@ -14,9 +14,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Microsoft.Data.Sqlite;
 using Openchain.Ledger;
 
 namespace Openchain.Sqlite
@@ -40,11 +38,10 @@ namespace Openchain.Sqlite
         }
 
         /// <summary>
-        /// Creates a database anchor for the current state of the database.
+        /// Gets the last known anchor.
         /// </summary>
-        /// <param name="storageEngine">The source of transactions to use.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        public async Task<LedgerAnchor> CreateAnchor(IStorageEngine storage)
+        public async Task<LedgerAnchor> GetLastAnchor()
         {
             IEnumerable<LedgerAnchor> anchors = await ExecuteAsync(@"
                     SELECT  Position, FullLedgerHash, TransactionCount
@@ -57,44 +54,7 @@ namespace Openchain.Sqlite
                     reader.GetInt64(2)),
                 new Dictionary<string, object>());
 
-            LedgerAnchor lastAnchor = anchors.FirstOrDefault();
-
-            IReadOnlyList<ByteString> newTransactions;
-            byte[] currentHash;
-            if (lastAnchor != null)
-            {
-                newTransactions = await storage.GetTransactions(lastAnchor.Position);
-                currentHash = lastAnchor.FullStoreHash.ToByteArray();
-            }
-            else
-            {
-                newTransactions = await storage.GetTransactions(null);
-                currentHash = new byte[32];
-            }
-
-            if (newTransactions.Count == 0)
-                return null;
-
-            byte[] position = currentHash;
-            byte[] buffer = new byte[64];
-            using (SHA256 sha = SHA256.Create())
-            {
-                foreach (ByteString rawTransaction in newTransactions)
-                {
-                    currentHash.CopyTo(buffer, 0);
-                    position = MessageSerializer.ComputeHash(rawTransaction.ToByteArray());
-                    position.CopyTo(buffer, 32);
-
-                    currentHash = sha.ComputeHash(sha.ComputeHash(buffer));
-                }
-            }
-
-            LedgerAnchor result = new LedgerAnchor(
-                new ByteString(position),
-                new ByteString(currentHash),
-                newTransactions.Count + (lastAnchor != null ? lastAnchor.TransactionCount : 0));
-
-            return result;
+            return anchors.FirstOrDefault();
         }
 
         /// <summary>
