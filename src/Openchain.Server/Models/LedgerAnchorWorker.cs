@@ -59,7 +59,10 @@ namespace Openchain.Server.Models
 
                         while (!cancel.IsCancellationRequested)
                         {
-                            await anchorBuilder.RecordAnchor();
+                            LedgerAnchor anchor = await anchorBuilder.RecordAnchor();
+
+                            if (anchor != null)
+                                logger.LogInformation($"Recorded an anchor for {anchor.TransactionCount} transactions: {anchor.FullStoreHash.ToString()}");
 
                             await Task.Delay(TimeSpan.FromSeconds(10), cancel);
                         }
