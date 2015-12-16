@@ -9,6 +9,7 @@
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
   "dependencies": {
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
     "Openchain.Abstractions.Tests": "0.5.0-rc1-*",
     "Openchain.Ledger.Tests": "0.5.0-rc1-*",
     "Openchain.Sqlite": "0.5.0-rc1-*",

@@ -12,9 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.AspNet.FileProviders;
+using Microsoft.AspNet.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests
@@ -33,7 +37,7 @@ namespace Openchain.Sqlite.Tests
             Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteStorageEngineBuilder builder = new SqliteStorageEngineBuilder();
 
-            await builder.Initialize(parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
 
             SqliteLedger ledger = builder.Build(null);
 
@@ -46,7 +50,7 @@ namespace Openchain.Sqlite.Tests
             Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteStorageEngineBuilder builder = new SqliteStorageEngineBuilder();
 
-            await builder.Initialize(parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
 
             SqliteLedger ledger = builder.Build(null);
 
@@ -54,6 +58,25 @@ namespace Openchain.Sqlite.Tests
             await SqliteStorageEngineBuilder.InitializeTables(ledger.Connection);
 
             Assert.Equal(ConnectionState.Open, ledger.Connection.State);
+        }
+
+        [Fact]
+        public void GetPathOrDefault_Success()
+        {
+            IServiceProvider services = new ServiceCollection().AddInstance<IHostingEnvironment>(new TestHostingEnvironment()).BuildServiceProvider();
+
+            string result = SqliteStorageEngineBuilder.GetPathOrDefault(services, "data.db");
+
+            Assert.Equal(@"\path\App_Data\data.db", result);
+        }
+
+        private class TestHostingEnvironment : IHostingEnvironment
+        {
+            public string EnvironmentName { get; set; } = "test";
+
+            public IFileProvider WebRootFileProvider { get; set; } = null;
+
+            public string WebRootPath { get; set; } = @"\path";
         }
     }
 }
