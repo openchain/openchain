@@ -47,7 +47,7 @@ namespace Openchain.Server.Models
                     from type in assembly.GetTypes()
                     where typeof(IComponentBuilder<T>).IsAssignableFrom(type)
                     let instance = (IComponentBuilder<T>)type.GetConstructor(Type.EmptyTypes).Invoke(new object[0])
-                    where instance.Name == parameters["provider"]
+                    where parameters.ContainsKey("provider") && instance.Name.Equals(parameters["provider"], StringComparison.OrdinalIgnoreCase)
                     select instance)
                     .FirstOrDefault();
         }

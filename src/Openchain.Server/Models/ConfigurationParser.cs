@@ -63,7 +63,7 @@ namespace Openchain.Server.Models
         {
             IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
             IApplicationEnvironment application = serviceProvider.GetService<IApplicationEnvironment>();
-            IConfiguration recording = configuration.GetSection("anchoring").GetSection("recording");
+            IConfiguration recording = configuration.GetSection("anchoring").GetSection("storage");
             IAssemblyLoadContextAccessor assemblyLoader = serviceProvider.GetService<IAssemblyLoadContextAccessor>();
 
             try

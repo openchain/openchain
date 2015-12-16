@@ -37,20 +37,6 @@ namespace Openchain.Sqlite
         public async Task Initialize()
         {
             await Connection.OpenAsync();
-
-            SqliteCommand command = Connection.CreateCommand();
-            command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS Anchors
-                (
-                    Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Position BLOB UNIQUE,
-                    FullLedgerHash BLOB,
-                    TransactionCount INT,
-                    AnchorId BLOB
-                );
-            ";
-
-            await command.ExecuteNonQueryAsync();
         }
 
         /// <summary>

@@ -2,7 +2,7 @@
   "enable_transaction_stream": true,
 
   "storage": {
-    "provider": "Sqlite",
+    "provider": "SQLite",
     "path": "ledger.db"
   },
 
@@ -35,11 +35,9 @@
     "bitcoin_api_url": "https://testnet.api.coinprism.com/v1/",
     "network_byte": 111,
     "fees": 5000,
-    "recording": {
-      "type": "Openchain.Sqlite",
-      "settings": {
-        "filename": "anchors.db"
-      }
+    "storage": {
+      "provider": "SQLite",
+      "path": "anchors.db"
     }
   }
 }
