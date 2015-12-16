@@ -22,14 +22,14 @@ using Xunit;
 
 namespace Openchain.Sqlite.Tests
 {
-    public class SqliteAnchorBuilderTests
+    public class SqliteAnchorStateTests
     {
         private readonly SqliteStorageEngine storageEngine;
-        private readonly SqliteAnchorBuilder anchorBuilder;
+        private readonly SqliteAnchorState anchorBuilder;
 
-        public SqliteAnchorBuilderTests()
+        public SqliteAnchorStateTests()
         {
-            this.anchorBuilder = new SqliteAnchorBuilder(":memory:");
+            this.anchorBuilder = new SqliteAnchorState(":memory:");
             this.anchorBuilder.Initialize().Wait();
             this.storageEngine = new SqliteStorageEngine(":memory:");
             this.storageEngine.Initialize().Wait();
