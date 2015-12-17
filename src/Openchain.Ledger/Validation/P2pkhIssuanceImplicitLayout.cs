@@ -61,6 +61,7 @@ namespace Openchain.Ledger.Validation
 
                 return Task.FromResult(new PermissionSet(
                     accountModify: Access.Permit,
+                    accountCreate: Access.Permit,
                     accountSpend: ownAccount,
                     dataModify: ownAccount));
             }
