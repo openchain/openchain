@@ -28,6 +28,11 @@ namespace Openchain.Server.Models
 {
     public static class ConfigurationParser
     {
+        public static ILogger CreateLogger(IServiceProvider serviceProvider)
+        {
+            return new DateLogger(serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("General"));
+        }
+
         public static Task<Func<IServiceProvider, IStorageEngine>> CreateStorageEngine(IServiceProvider serviceProvider)
         {
             return DependencyResolver<IStorageEngine>.Create(serviceProvider, "storage");
@@ -48,42 +53,14 @@ namespace Openchain.Server.Models
             return DependencyResolver<IAnchorState>.Create(serviceProvider, "anchoring:storage");
         }
 
-        public static IAnchorRecorder CreateAnchorRecorder(IServiceProvider serviceProvider)
+        public static Task<Func<IServiceProvider, IAnchorRecorder>> CreateAnchorRecorder(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            IConfiguration anchoring = configuration.GetSection("anchoring");
-            ILogger logger = serviceProvider.GetService<ILogger>();
-
-            switch (anchoring["type"])
-            {
-                case "blockchain":
-                    string anchorKey = anchoring["key"];
-                    if (!string.IsNullOrEmpty(anchorKey))
-                    {
-                        NBitcoin.Key key = NBitcoin.Key.Parse(anchorKey);
-                        NBitcoin.Network network = NBitcoin.Network.GetNetworks()
-                            .First(item => item.GetVersionBytes(NBitcoin.Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(anchoring["network_byte"]));
-
-                        logger.LogInformation($"Starting Blockchain anchor (address: {key.PubKey.GetAddress(network).ToString()})");
-                        return new BlockchainAnchorRecorder(new Uri(anchoring["bitcoin_api_url"]), key, network, long.Parse(anchoring["fees"]));
-                    }
-                    break;
-            }
-
-            return null;
+            return DependencyResolver<IAnchorRecorder>.Create(serviceProvider, "anchoring");
         }
 
         public static LedgerAnchorWorker CreateLedgerAnchorWorker(IServiceProvider serviceProvider)
         {
             return new LedgerAnchorWorker(serviceProvider);
-        }
-
-        public static async Task InitializeLedgerStore(IServiceProvider serviceProvider)
-        {
-            SqliteLedger store = serviceProvider.GetService<ILedgerQueries>() as SqliteLedger;
-
-            if (store != null)
-                await store.Initialize();
         }
 
         public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
@@ -156,14 +133,6 @@ namespace Openchain.Server.Models
                 return null;
             else
                 return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"]);
-        }
-
-        public static ILogger CreateLogger(IServiceProvider serviceProvider)
-        {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>();
-            ILoggerFactory loggerFactory = serviceProvider.GetService<ILoggerFactory>();
-
-            return new DateLogger(loggerFactory.CreateLogger("General"));
         }
 
         public static TransactionStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)

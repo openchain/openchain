@@ -82,7 +82,7 @@ namespace Openchain.Server
 
             services.AddTransient<IAnchorState>(await ConfigurationParser.CreateAnchorState(services.BuildServiceProvider()));
 
-            services.AddTransient<IAnchorRecorder>(ConfigurationParser.CreateAnchorRecorder);
+            services.AddTransient<IAnchorRecorder>(await ConfigurationParser.CreateAnchorRecorder(services.BuildServiceProvider()));
 
             services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
 
@@ -121,8 +121,6 @@ namespace Openchain.Server
 
             // Add MVC to the request pipeline.
             app.UseMvc();
-
-            await ConfigurationParser.InitializeLedgerStore(app.ApplicationServices);
 
             // Activate singletons
             TransactionStreamSubscriber subscriber = app.ApplicationServices.GetService<TransactionStreamSubscriber>();
