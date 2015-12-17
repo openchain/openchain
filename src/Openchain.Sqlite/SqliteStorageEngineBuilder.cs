@@ -30,9 +30,6 @@ namespace Openchain.Sqlite
 
         public string Name { get; } = "SQLite";
 
-        public SqliteStorageEngineBuilder()
-        { }
-
         public SqliteLedger Build(IServiceProvider serviceProvider)
         {
             return new SqliteLedger(filename);

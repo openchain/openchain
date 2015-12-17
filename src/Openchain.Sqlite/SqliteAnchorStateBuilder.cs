@@ -29,9 +29,6 @@ namespace Openchain.Sqlite
 
         public string Name { get; } = "SQLite";
 
-        public SqliteAnchorStateBuilder()
-        { }
-
         public SqliteAnchorState Build(IServiceProvider serviceProvider)
         {
             return new SqliteAnchorState(filename);
