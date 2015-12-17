@@ -20,9 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Openchain.Ledger;
-using Openchain.Ledger.Blockchain;
 using Openchain.Ledger.Validation;
-using Openchain.Sqlite;
 
 namespace Openchain.Server.Models
 {
@@ -63,66 +61,9 @@ namespace Openchain.Server.Models
             return new LedgerAnchorWorker(serviceProvider);
         }
 
-        public static IMutationValidator CreateRulesValidator(IServiceProvider serviceProvider)
+        public static Task<Func<IServiceProvider, IMutationValidator>> CreateRulesValidator(IServiceProvider serviceProvider)
         {
-            IConfiguration configuration = serviceProvider.GetService<IConfiguration>().GetSection("validator_mode");
-            ILogger logger = serviceProvider.GetService<ILogger>();
-
-            string rootUrl = configuration["root_url"];
-            if (rootUrl != null)
-            {
-                if (!Uri.IsWellFormedUriString(rootUrl, UriKind.Absolute))
-                {
-                    string errorMessage = $"The server root URL is not a valid URL: '{rootUrl}'. Please make sure it is configured correctly.";
-                    throw new InvalidOperationException(errorMessage);
-                }
-
-                logger.LogInformation("Current mode: Validator mode");
-                logger.LogInformation($"Namespace: {rootUrl}");
-                IConfiguration validator = configuration.GetSection("validator");
-
-                switch (validator["type"])
-                {
-                    case "PermissionBased":
-                        byte versionByte = byte.Parse(validator["version_byte"]);
-                        KeyEncoder keyEncoder = new KeyEncoder(versionByte);
-
-                        P2pkhSubject[] adminAddresses = validator
-                            .GetSection("admin_addresses")
-                            .GetChildren()
-                            .Select(key => key.Value)
-                            .Select(address => new P2pkhSubject(new[] { address }, 1, keyEncoder))
-                            .ToArray();
-
-                        List<Acl> pathPermissions = new List<Acl>()
-                        {
-                            // Admins have full rights
-                            new Acl(adminAddresses, LedgerPath.Parse("/"), true, StringPattern.MatchAll, PermissionSet.AllowAll)
-                        };
-
-                        List<IPermissionsProvider> permissionProviders = new List<IPermissionsProvider>();
-
-                        if (bool.Parse(validator["allow_third_party_assets"]))
-                            permissionProviders.Add(new P2pkhIssuanceImplicitLayout(keyEncoder));
-
-                        if (bool.Parse(validator["allow_p2pkh_accounts"]))
-                            permissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
-
-                        permissionProviders.Add(new StaticPermissionLayout(pathPermissions));
-                        permissionProviders.Add(new DynamicPermissionLayout(serviceProvider.GetRequiredService<IStorageEngine>(), keyEncoder));
-
-                        return new PermissionBasedValidator(permissionProviders);
-                    case "Disabled":
-                        return ActivatorUtilities.CreateInstance<NullValidator>(serviceProvider, true);
-                    default:
-                        return null;
-                }
-            }
-            else
-            {
-                logger.LogInformation("Transaction validation mode disabled (Slave mode)");
-                return null;
-            }
+            return DependencyResolver<IMutationValidator>.Create(serviceProvider, "validator_mode:validator");
         }
 
         public static TransactionValidator CreateTransactionValidator(IServiceProvider serviceProvider)
@@ -130,9 +71,21 @@ namespace Openchain.Server.Models
             IMutationValidator rulesValidator = serviceProvider.GetService<IMutationValidator>();
 
             if (rulesValidator == null)
+            {
                 return null;
+            }
             else
-                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"]);
+            {
+                string rootUrl = serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"];
+
+                if (!Uri.IsWellFormedUriString(rootUrl, UriKind.Absolute))
+                {
+                    string errorMessage = $"The server root URL is not a valid URL: '{rootUrl}'. Please make sure it is configured correctly.";
+                    throw new InvalidOperationException(errorMessage);
+                }
+
+                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, rootUrl);
+            }
         }
 
         public static TransactionStreamSubscriber CreateStreamSubscriber(IServiceProvider serviceProvider)

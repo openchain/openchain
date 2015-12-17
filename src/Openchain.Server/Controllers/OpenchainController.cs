@@ -33,11 +33,13 @@ namespace Openchain.Server.Controllers
     public class OpenchainController : Controller
     {
         private readonly IStorageEngine store;
+        private readonly TransactionValidator validator;
         private readonly ILogger logger;
 
-        public OpenchainController(IStorageEngine store, ILogger logger)
+        public OpenchainController(IStorageEngine store, TransactionValidator validator, ILogger logger)
         {
             this.store = store;
+            this.validator = validator;
             this.logger = logger;
         }
 
@@ -68,6 +70,9 @@ namespace Openchain.Server.Controllers
         [HttpPost("submit")]
         public async Task<ActionResult> Post()
         {
+            if (validator == null)
+                return CreateErrorResponse("ValidationDisabled");
+
             JObject body;
             try
             {
@@ -81,10 +86,6 @@ namespace Openchain.Server.Controllers
             {
                 return HttpBadRequest();
             }
-
-            TransactionValidator validator = HttpContext.ApplicationServices.GetService<TransactionValidator>();
-            if (validator == null)
-                return CreateErrorResponse("ValidationDisabled");
 
             ByteString parsedMutation;
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();

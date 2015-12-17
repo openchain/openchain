@@ -80,13 +80,13 @@ namespace Openchain.Server
 
             services.AddScoped<ILedgerIndexes>(ConfigurationParser.CreateLedgerIndexes);
 
-            services.AddTransient<IAnchorState>(await ConfigurationParser.CreateAnchorState(services.BuildServiceProvider()));
+            services.AddScoped<IAnchorState>(await ConfigurationParser.CreateAnchorState(services.BuildServiceProvider()));
 
-            services.AddTransient<IAnchorRecorder>(await ConfigurationParser.CreateAnchorRecorder(services.BuildServiceProvider()));
+            services.AddScoped<IAnchorRecorder>(await ConfigurationParser.CreateAnchorRecorder(services.BuildServiceProvider()));
 
-            services.AddSingleton<IMutationValidator>(ConfigurationParser.CreateRulesValidator);
+            services.AddScoped<IMutationValidator>(await ConfigurationParser.CreateRulesValidator(services.BuildServiceProvider()));
 
-            services.AddTransient<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
+            services.AddScoped<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
 
             // Transaction Stream Subscriber
             services.AddSingleton<TransactionStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
