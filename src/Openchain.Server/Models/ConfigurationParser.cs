@@ -102,9 +102,14 @@ namespace Openchain.Server.Models
                 IConfiguration observerMode = serviceProvider.GetService<IConfiguration>().GetSection("observer_mode");
 
                 string upstreamUrl = observerMode["upstream_url"];
+
+                if (string.IsNullOrEmpty(upstreamUrl))
+                    throw new InvalidOperationException("Observer mode is enabled but no upstream URL has been specified.");
+
                 logger.LogInformation("Current mode: Observer mode");
                 logger.LogInformation("Upstream URL: {0}", upstreamUrl);
-                return ActivatorUtilities.CreateInstance<TransactionStreamSubscriber>(serviceProvider, new Uri(upstreamUrl));
+
+                return new TransactionStreamSubscriber(new Uri(upstreamUrl), serviceProvider);
             }
         }
     }

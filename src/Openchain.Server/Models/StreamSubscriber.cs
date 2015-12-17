@@ -17,6 +17,7 @@ using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Openchain.Server.Models
@@ -24,10 +25,9 @@ namespace Openchain.Server.Models
     public class TransactionStreamSubscriber
     {
         private readonly UriBuilder endpoint;
-        private readonly IStorageEngine store;
-        private readonly ILogger logger;
+        private readonly IServiceProvider services;
 
-        public TransactionStreamSubscriber(Uri endpoint, IStorageEngine store, ILogger logger)
+        public TransactionStreamSubscriber(Uri endpoint, IServiceProvider services)
         {
             this.endpoint = new UriBuilder(endpoint);
 
@@ -37,8 +37,7 @@ namespace Openchain.Server.Models
                 this.endpoint.Scheme = "ws";
 
             this.endpoint.Path = this.endpoint.Path.TrimEnd('/') + "/stream";
-            this.store = store;
-            this.logger = logger;
+            this.services = services;
         }
 
         public async Task Subscribe(CancellationToken cancel)
@@ -46,30 +45,39 @@ namespace Openchain.Server.Models
             byte[] buffer = new byte[1024 * 1024];
             ArraySegment<byte> segment = new ArraySegment<byte>(buffer);
 
-            ByteString currentRecord = await this.store.GetLastTransaction();
+            IServiceScopeFactory scopeFactory = services.GetService<IServiceScopeFactory>();
+            ILogger logger = services.GetRequiredService<ILogger>();
 
             while (!cancel.IsCancellationRequested)
             {
                 try
                 {
-                    ClientWebSocket socket = new ClientWebSocket();
-
-                    this.endpoint.Query = string.Format("from={0}", currentRecord.ToString());
-
-                    logger.LogInformation("Connecting to {0}", this.endpoint.Uri);
-
-                    await socket.ConnectAsync(this.endpoint.Uri, cancel);
-
-                    while (true)
+                    using (IServiceScope scope = scopeFactory.CreateScope())
                     {
-                        WebSocketReceiveResult result = await socket.ReceiveAsync(segment, cancel);
-                        if (result.MessageType == WebSocketMessageType.Close)
-                            break;
+                        IStorageEngine storageEngine = scope.ServiceProvider.GetRequiredService<IStorageEngine>();
+                        await storageEngine.Initialize();
 
-                        ByteString record = new ByteString(buffer.Take(result.Count));
-                        await store.AddTransactions(new[] { record });
+                        ByteString currentRecord = await storageEngine.GetLastTransaction();
 
-                        currentRecord = new ByteString(MessageSerializer.ComputeHash(record.ToByteArray()));
+                        ClientWebSocket socket = new ClientWebSocket();
+
+                        this.endpoint.Query = string.Format("from={0}", currentRecord.ToString());
+
+                        logger.LogInformation("Connecting to {0}", this.endpoint.Uri);
+
+                        await socket.ConnectAsync(this.endpoint.Uri, cancel);
+
+                        while (true)
+                        {
+                            WebSocketReceiveResult result = await socket.ReceiveAsync(segment, cancel);
+                            if (result.MessageType == WebSocketMessageType.Close)
+                                break;
+
+                            ByteString record = new ByteString(buffer.Take(result.Count));
+                            await storageEngine.AddTransactions(new[] { record });
+
+                            currentRecord = new ByteString(MessageSerializer.ComputeHash(record.ToByteArray()));
+                        }
                     }
                 }
                 catch (Exception exception)
