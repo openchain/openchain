@@ -127,6 +127,9 @@ namespace Openchain.SqlServer
         {
             List<ByteString> keyList = new List<ByteString>(keys);
 
+            if (keyList.Count == 0)
+                return new Record[0];
+
             IReadOnlyList<Record> records = await ExecuteQuery<Record>(
                 "EXEC [Openchain].[GetRecords] @instance, @ids;",
                 reader => new Record(new ByteString((byte[])reader[0]), new ByteString((byte[])reader[1]), new ByteString((byte[])reader[2])),
