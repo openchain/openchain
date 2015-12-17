@@ -15,6 +15,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -22,6 +24,10 @@ namespace Openchain.Sqlite.Tests
 {
     public class SqliteAnchorStateBuilderTests
     {
+        private readonly IConfigurationSection configuration =
+            new ConfigurationRoot(new[] { new MemoryConfigurationProvider(new Dictionary<string, string>() { ["config:path"] = ":memory:" }) })
+            .GetSection("config");
+
         [Fact]
         public void Name_Success()
         {
@@ -31,10 +37,9 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task Build_Success()
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteAnchorStateBuilder builder = new SqliteAnchorStateBuilder();
 
-            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), configuration);
 
             SqliteAnchorState ledger = builder.Build(null);
 
@@ -44,10 +49,9 @@ namespace Openchain.Sqlite.Tests
         [Fact]
         public async Task InitializeTables_CallTwice()
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>() { ["path"] = ":memory:" };
             SqliteAnchorStateBuilder builder = new SqliteAnchorStateBuilder();
 
-            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), parameters);
+            await builder.Initialize(new ServiceCollection().BuildServiceProvider(), configuration);
 
             SqliteAnchorState ledger = builder.Build(null);
 
