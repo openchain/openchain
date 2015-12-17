@@ -18,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace Openchain.Ledger
 {
+    /// <summary>
+    /// Handles the calculation of ledger anchors and records them on the target medium.
+    /// </summary>
     public class AnchorBuilder
     {
         private readonly IStorageEngine storageEngine;
@@ -31,6 +34,11 @@ namespace Openchain.Ledger
             this.anchorState = anchorState;
         }
 
+        /// <summary>
+        /// Determines whether a new anchor should be calculated and recorded,
+        /// and does it if it is the case.
+        /// </summary>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         public async Task<LedgerAnchor> RecordAnchor()
         {
             if (await anchorRecorder.CanRecordAnchor())
