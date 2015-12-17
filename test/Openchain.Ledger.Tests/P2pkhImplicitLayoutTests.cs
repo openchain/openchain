@@ -31,6 +31,7 @@ namespace Openchain.Ledger.Tests
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse($"/p2pkh/{address}/"), true, $"/asset-path/");
 
             Assert.Equal(Access.Permit, result.AccountModify);
+            Assert.Equal(Access.Permit, result.AccountCreate);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Permit, result.AccountSpend);
             Assert.Equal(Access.Permit, result.DataModify);
@@ -44,6 +45,7 @@ namespace Openchain.Ledger.Tests
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse($"/p2pkh/mgToXgKQqY3asA76uYU82BXMLGrHNm5ZD9/"), true, $"/asset-path/");
 
             Assert.Equal(Access.Permit, result.AccountModify);
+            Assert.Equal(Access.Permit, result.AccountCreate);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
             Assert.Equal(Access.Unset, result.DataModify);
@@ -61,6 +63,7 @@ namespace Openchain.Ledger.Tests
             PermissionSet result = await layout.GetPermissions(evidence, LedgerPath.Parse(value), true, $"/asset-path/");
 
             Assert.Equal(Access.Unset, result.AccountModify);
+            Assert.Equal(Access.Unset, result.AccountCreate);
             Assert.Equal(Access.Unset, result.AccountNegative);
             Assert.Equal(Access.Unset, result.AccountSpend);
             Assert.Equal(Access.Unset, result.DataModify);
