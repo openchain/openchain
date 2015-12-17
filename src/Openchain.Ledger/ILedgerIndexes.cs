@@ -17,8 +17,17 @@ using System.Threading.Tasks;
 
 namespace Openchain.Ledger
 {
+    /// <summary>
+    /// Represents a set of advanced operations that can be performed against a transaction store.
+    /// </summary>
     public interface ILedgerIndexes
     {
+        /// <summary>
+        /// Returns all records with a particular name and type.
+        /// </summary>
+        /// <param name="type">The type of the records to return.</param>
+        /// <param name="name">The name of the records to return.</param>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         Task<IReadOnlyList<Record>> GetAllRecords(RecordType type, string name);
     }
 }
