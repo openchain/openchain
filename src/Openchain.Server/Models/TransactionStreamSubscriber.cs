@@ -13,6 +13,7 @@
 // limitations under the License.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
@@ -69,14 +70,33 @@ namespace Openchain.Server.Models
 
                         while (true)
                         {
-                            WebSocketReceiveResult result = await socket.ReceiveAsync(segment, cancel);
-                            if (result.MessageType == WebSocketMessageType.Close)
-                                break;
+                            ByteString transaction;
 
-                            ByteString record = new ByteString(buffer.Take(result.Count));
-                            await storageEngine.AddTransactions(new[] { record });
+                            using (MemoryStream stream = new MemoryStream(1024))
+                            {
+                                WebSocketReceiveResult result;
 
-                            currentRecord = new ByteString(MessageSerializer.ComputeHash(record.ToByteArray()));
+                                do
+                                {
+                                    result = await socket.ReceiveAsync(segment, cancel);
+                                    if (result.MessageType == WebSocketMessageType.Close)
+                                        break;
+
+                                    stream.Write(segment.Array, segment.Offset, result.Count);
+
+                                } while (!result.EndOfMessage);
+
+                                stream.Seek(0, SeekOrigin.Begin);
+
+                                using (BinaryReader reader = new BinaryReader(stream))
+                                {
+                                    transaction = new ByteString(reader.ReadBytes((int)stream.Length));
+                                }
+                            }
+
+                            await storageEngine.AddTransactions(new[] { transaction });
+
+                            currentRecord = new ByteString(MessageSerializer.ComputeHash(transaction.ToByteArray()));
                         }
                     }
                 }
