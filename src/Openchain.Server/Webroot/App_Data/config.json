@@ -11,7 +11,7 @@
     // Required: The root URL where this instance is hosted
     "root_url": "",
     "validator": {
-      "type": "PermissionBased",
+      "provider": "PermissionBased",
       // Enable /p2pkh/<address>/ accounts
       "allow_p2pkh_accounts": true,
       // Enable /asset/p2pkh/<address>/ accounts
