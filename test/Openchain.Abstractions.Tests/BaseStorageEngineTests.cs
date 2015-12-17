@@ -229,6 +229,14 @@ namespace Openchain.Tests
         }
 
         [Fact]
+        public async Task GetRecords_NoRecord()
+        {
+            IReadOnlyList<Record> records = await this.Store.GetRecords(new ByteString[0]);
+
+            Assert.Equal(0, records.Count);
+        }
+
+        [Fact]
         public async Task GetLastTransaction_Success()
         {
             await AddTransaction(new Record(binaryData[0], binaryData[1], ByteString.Empty));
