@@ -19,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace Openchain.Ledger
 {
+    /// <summary>
+    /// Represents an observable collection constructed through polling.
+    /// </summary>
     public class PollingObservable : IObservable<ByteString>
     {
         private readonly Func<ByteString, Task<IReadOnlyList<ByteString>>> query;
@@ -30,6 +33,12 @@ namespace Openchain.Ledger
             this.query = query;
         }
 
+        /// <summary>
+        /// Notifies the provider that an observer is to receive notifications.
+        /// </summary>
+        /// <param name="observer">The object that is to receive notifications.</param>
+        /// <returns>A reference to an interface that allows observers to stop receiving notifications
+        /// before the provider has finished sending them.</returns>
         public IDisposable Subscribe(IObserver<ByteString> observer)
         {
             Subscription subscription = new Subscription(this, observer);
