@@ -65,6 +65,26 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Diagnostics.Debug": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
+          "System.Resources.ResourceManager": "4.0.1-beta-23516",
+          "System.Runtime.Extensions": "4.0.11-beta-23516",
+          "System.Runtime.InteropServices": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -76,6 +96,22 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Collections.Concurrent": "4.0.11-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "System.Threading.Tasks": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
@@ -1193,6 +1229,26 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Diagnostics.Debug": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
+          "System.Resources.ResourceManager": "4.0.1-beta-23516",
+          "System.Runtime.Extensions": "4.0.11-beta-23516",
+          "System.Runtime.InteropServices": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -1204,6 +1260,22 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Collections.Concurrent": "4.0.11-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "System.Threading.Tasks": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
@@ -2802,6 +2874,26 @@
           "lib/dotnet5.4/Microsoft.Dnx.Testing.Abstractions.dll": {}
         }
       },
+      "Microsoft.Extensions.Configuration/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Diagnostics.Debug": "4.0.11-beta-23516",
+          "System.IO": "4.0.11-beta-23516",
+          "System.IO.FileSystem": "4.0.1-beta-23516",
+          "System.Resources.ResourceManager": "4.0.1-beta-23516",
+          "System.Runtime.Extensions": "4.0.11-beta-23516",
+          "System.Runtime.InteropServices": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2813,6 +2905,22 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Configuration.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Collections.Concurrent": "4.0.11-beta-23516",
+          "System.Threading": "4.0.11-beta-23516",
+          "System.Threading.Tasks": "4.0.11-beta-23516"
+        },
+        "compile": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
@@ -4438,6 +4546,22 @@
         "Microsoft.Dnx.Testing.Abstractions.nuspec"
       ]
     },
+    "Microsoft.Extensions.Configuration/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "2ayWzqMVGWjr8o8bOSnIsyQbi9sLz9Ya8+YM+9tM/ivSnLHuN7TNHNfJv4jTyRZvoOafdh5Ivlc/OdmsZPXlQQ==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.dll",
+        "lib/dotnet5.4/Microsoft.Extensions.Configuration.xml",
+        "lib/net451/Microsoft.Extensions.Configuration.dll",
+        "lib/net451/Microsoft.Extensions.Configuration.xml",
+        "lib/netcore50/Microsoft.Extensions.Configuration.dll",
+        "lib/netcore50/Microsoft.Extensions.Configuration.xml",
+        "Microsoft.Extensions.Configuration.1.0.0-rc1-final.nupkg",
+        "Microsoft.Extensions.Configuration.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.Extensions.Configuration.nuspec"
+      ]
+    },
     "Microsoft.Extensions.Configuration.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -4452,6 +4576,22 @@
         "Microsoft.Extensions.Configuration.Abstractions.1.0.0-rc1-final.nupkg",
         "Microsoft.Extensions.Configuration.Abstractions.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Extensions.Configuration.Abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.DependencyInjection/1.0.0-rc1-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "S/+s3fq85j21H5nYOvh1fIt1arl8F5lZ7Ryiw/qend83yHQwIQbBs+dip9FhqiPmAn6Dz3UhW0likQQurfEsLQ==",
+      "files": [
+        "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/dotnet5.4/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/net451/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net451/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/netcore50/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/netcore50/Microsoft.Extensions.DependencyInjection.xml",
+        "Microsoft.Extensions.DependencyInjection.1.0.0-rc1-final.nupkg",
+        "Microsoft.Extensions.DependencyInjection.1.0.0-rc1-final.nupkg.sha512",
+        "Microsoft.Extensions.DependencyInjection.nuspec"
       ]
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/1.0.0-rc1-final": {
@@ -7603,6 +7743,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
+      "Microsoft.Extensions.Configuration >= 1.0.0-rc1-final",
+      "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final",
       "Openchain.Abstractions.Tests >= 0.5.0-rc1-*",
       "Openchain.Ledger.Tests >= 0.5.0-rc1-*",
       "Openchain.SqlServer >= 0.5.0-rc1-*",
