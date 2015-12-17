@@ -36,7 +36,7 @@ namespace Openchain.Server.Controllers
         private readonly TransactionValidator validator;
         private readonly ILogger logger;
 
-        public OpenchainController(IStorageEngine store, TransactionValidator validator, ILogger logger)
+        public OpenchainController(IStorageEngine store, ILogger logger, TransactionValidator validator = null)
         {
             this.store = store;
             this.validator = validator;
