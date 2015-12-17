@@ -13,11 +13,11 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Sqlite;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Openchain.Ledger;
 
@@ -35,9 +35,9 @@ namespace Openchain.Sqlite
             return new SqliteLedger(filename);
         }
 
-        public async Task Initialize(IServiceProvider serviceProvider, IDictionary<string, string> parameters)
+        public async Task Initialize(IServiceProvider serviceProvider, IConfigurationSection configuration)
         {
-            filename = GetPathOrDefault(serviceProvider, parameters["path"]);
+            filename = GetPathOrDefault(serviceProvider, configuration["path"]);
 
             using (SqliteConnection connection = new SqliteConnection(new SqliteConnectionStringBuilder() { DataSource = filename }.ToString()))
             {

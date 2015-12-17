@@ -13,8 +13,8 @@
 // limitations under the License.
 
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Openchain.Ledger
 {
@@ -22,7 +22,7 @@ namespace Openchain.Ledger
     {
         string Name { get; }
 
-        Task Initialize(IServiceProvider serviceProvider, IDictionary<string, string> parameters);
+        Task Initialize(IServiceProvider serviceProvider, IConfigurationSection configuration);
 
         T Build(IServiceProvider serviceProvider);
     }

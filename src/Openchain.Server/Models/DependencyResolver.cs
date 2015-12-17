@@ -33,23 +33,23 @@ namespace Openchain.Server.Models
         private readonly IComponentBuilder<T> builder;
         private readonly Task initialize;
 
-        public DependencyResolver(IServiceProvider serviceProvider, string basePath, IDictionary<string, string> parameters)
+        public DependencyResolver(IServiceProvider serviceProvider, string basePath, IConfigurationSection configuration)
         {
             IList<Assembly> assemblies = LoadAllAssemblies(basePath, serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>());
 
-            this.builder = FindBuilder(assemblies, parameters);
+            this.builder = FindBuilder(assemblies, configuration);
 
             if (this.builder != null)
-                initialize = this.builder.Initialize(serviceProvider, parameters);
+                initialize = this.builder.Initialize(serviceProvider, configuration);
         }
 
-        private IComponentBuilder<T> FindBuilder(IList<Assembly> assemblies, IDictionary<string, string> parameters)
+        private IComponentBuilder<T> FindBuilder(IList<Assembly> assemblies, IConfigurationSection configuration)
         {
             return (from assembly in assemblies
                     from type in assembly.GetTypes()
                     where typeof(IComponentBuilder<T>).IsAssignableFrom(type)
                     let instance = (IComponentBuilder<T>)type.GetConstructor(Type.EmptyTypes).Invoke(new object[0])
-                    where parameters.ContainsKey("provider") && instance.Name.Equals(parameters["provider"], StringComparison.OrdinalIgnoreCase)
+                    where instance.Name.Equals(configuration["provider"], StringComparison.OrdinalIgnoreCase)
                     select instance)
                     .FirstOrDefault();
         }
@@ -62,12 +62,7 @@ namespace Openchain.Server.Models
 
             try
             {
-                Dictionary<string, string> parameters = new Dictionary<string, string>();
-
-                foreach (IConfigurationSection section in rootSection.GetChildren())
-                    parameters.Add(section.Key, section.Value);
-
-                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ApplicationBasePath, parameters);
+                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ApplicationBasePath, rootSection);
 
                 if (resolver.builder == null)
                     serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");

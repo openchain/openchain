@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NBitcoin;
@@ -46,22 +47,20 @@ namespace Openchain.Ledger.Blockchain
             }
         }
 
-        public Task Initialize(IServiceProvider serviceProvider, IDictionary<string, string> parameters)
+        public Task Initialize(IServiceProvider serviceProvider, IConfigurationSection configuration)
         {
-            if (parameters.ContainsKey("key"))
-            {
-                string anchorKey = parameters["key"];
-                if (anchorKey != "")
-                {
-                    key = Key.Parse(anchorKey);
-                    network = Network.GetNetworks()
-                        .First(item => item.GetVersionBytes(Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(parameters["network_byte"]));
+            string anchorKey = configuration["key"];
 
-                    apiUrl = new Uri(parameters["bitcoin_api_url"]);
-                    fees = long.Parse(parameters["fees"]);
-                }
+            if (!string.IsNullOrEmpty(anchorKey))
+            {
+                this.key = Key.Parse(anchorKey);
+                this.network = Network.GetNetworks()
+                    .First(item => item.GetVersionBytes(Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(configuration["network_byte"]));
+
+                this.apiUrl = new Uri(configuration["bitcoin_api_url"]);
+                this.fees = long.Parse(configuration["fees"]);
             }
-            
+
             return Task.FromResult(0);
         }
     }
