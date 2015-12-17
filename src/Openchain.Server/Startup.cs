@@ -122,6 +122,9 @@ namespace Openchain.Server
             // Add MVC to the request pipeline.
             app.UseMvc();
 
+            // Verify the transaction validator
+            app.ApplicationServices.GetService<TransactionValidator>();
+
             // Activate singletons
             TransactionStreamSubscriber subscriber = app.ApplicationServices.GetService<TransactionStreamSubscriber>();
             if (subscriber != null)
