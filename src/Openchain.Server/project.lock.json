@@ -1037,6 +1037,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
@@ -3035,6 +3036,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
@@ -4188,6 +4190,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
@@ -6648,6 +6651,7 @@
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
@@ -9134,6 +9138,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
@@ -10319,6 +10324,7 @@
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
           "NBitcoin": "2.1.5.9",
           "Openchain.Ledger": "0.5.0-rc1",
           "System.Net.Http": "4.0.1-beta-23516"
