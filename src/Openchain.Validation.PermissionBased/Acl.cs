@@ -16,8 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Openchain.Ledger;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     /// <summary>
     /// Represents an access control rule.

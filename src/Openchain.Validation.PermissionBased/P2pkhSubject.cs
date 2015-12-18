@@ -15,8 +15,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Openchain.Ledger;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     /// <summary>
     /// Represents an implementation of the <see cref="IPermissionSubject"/> interface based on public key hashes.

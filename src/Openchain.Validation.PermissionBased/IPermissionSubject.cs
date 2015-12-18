@@ -13,8 +13,9 @@
 // limitations under the License.
 
 using System.Collections.Generic;
+using Openchain.Ledger;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     public interface IPermissionSubject
     {

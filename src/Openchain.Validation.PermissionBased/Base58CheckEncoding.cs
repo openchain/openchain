@@ -17,7 +17,7 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     /// <summary>
     /// Base58Check Encoding / Decoding (Bitcoin-style)

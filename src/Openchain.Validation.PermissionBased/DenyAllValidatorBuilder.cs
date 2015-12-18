@@ -15,8 +15,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Openchain.Ledger;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     public class DenyAllValidatorBuilder : IComponentBuilder<PermissionBasedValidator>
     {

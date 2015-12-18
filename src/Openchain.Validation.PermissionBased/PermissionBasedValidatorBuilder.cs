@@ -18,8 +18,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Openchain.Ledger;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     public class PermissionBasedValidatorBuilder : IComponentBuilder<PermissionBasedValidator>
     {

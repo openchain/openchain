@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     /// <summary>
     /// Represents a pattern for string matching.

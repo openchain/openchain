@@ -16,7 +16,7 @@ using System;
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Validation.PermissionBased
 {
     public class KeyEncoder
     {
