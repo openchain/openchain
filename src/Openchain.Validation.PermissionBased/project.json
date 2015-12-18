@@ -13,6 +13,11 @@
     "warningsAsErrors": true
   },
 
+  "dependencies": {
+    "Openchain.Abstractions": "0.5.0-rc1-*",
+    "Openchain.Ledger": "0.5.0-rc1-*"
+  },
+
   "frameworks": {
     "net451": { },
 
