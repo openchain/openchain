@@ -1054,6 +1054,19 @@
           "Openchain.Ledger": "0.5.0-rc1"
         }
       },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
+        }
+      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "dependencies": {
@@ -3061,6 +3074,14 @@
           "System.Xml"
         ]
       },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1"
+        }
+      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -4207,6 +4228,19 @@
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
+        }
+      },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -6669,6 +6703,19 @@
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Openchain.Ledger": "0.5.0-rc1"
+        }
+      },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.CSharp": "4.0.1-beta-23516",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1",
+          "System.Collections": "4.0.11-beta-23516",
+          "System.Linq": "4.0.1-beta-23516",
+          "System.Runtime": "4.0.21-beta-23516",
+          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -9166,6 +9213,14 @@
           "System.Xml"
         ]
       },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1"
+        }
+      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -10353,6 +10408,14 @@
           "System.Xml"
         ]
       },
+      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Ledger": "0.5.0-rc1"
+        }
+      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -10466,6 +10529,10 @@
     "Openchain.Sqlite/0.5.0-rc1": {
       "type": "project",
       "path": "../Openchain.Sqlite/project.json"
+    },
+    "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+      "type": "project",
+      "path": "../Openchain.Validation.PermissionBased/project.json"
     },
     "Google.Protobuf/3.0.0-alpha4": {
       "type": "package",
@@ -14997,7 +15064,8 @@
       "Openchain.Abstractions >= 0.5.0-rc1-*",
       "Openchain.Ledger >= 0.5.0-rc1-*",
       "Openchain.Ledger.Blockchain >= 0.5.0-rc1-*",
-      "Openchain.Sqlite >= 0.5.0-rc1-*"
+      "Openchain.Sqlite >= 0.5.0-rc1-*",
+      "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Runtime.Serialization.Primitives >= 4.0.11-beta-23516",
