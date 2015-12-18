@@ -13,10 +13,9 @@
 // limitations under the License.
 
 using System.Linq;
-using Openchain.Ledger.Validation;
 using Xunit;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Validation.PermissionBased.Tests
 {
     public class Base58CheckEncodingTests
     {

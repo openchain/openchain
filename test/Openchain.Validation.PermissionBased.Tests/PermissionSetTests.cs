@@ -15,7 +15,7 @@
 using Openchain.Ledger.Validation;
 using Xunit;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Validation.PermissionBased.Tests
 {
     public class PermissionSetTests
     {

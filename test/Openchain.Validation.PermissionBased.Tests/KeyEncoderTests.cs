@@ -12,10 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using Openchain.Ledger.Validation;
 using Xunit;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Validation.PermissionBased.Tests
 {
     public class KeyEncoderTests
     {

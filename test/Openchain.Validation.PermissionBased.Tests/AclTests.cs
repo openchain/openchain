@@ -13,10 +13,10 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Openchain.Ledger.Validation;
+using Openchain.Ledger;
 using Xunit;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Validation.PermissionBased.Tests
 {
     public class AclTests
     {
