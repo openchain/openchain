@@ -24,7 +24,7 @@ namespace Openchain.SqlServer.Tests
     {
         public SqlServerStorageEngineTests()
         {
-            SqlServerStorageEngine engine = new SqlServerStorageEngine("Data Source=.;Initial Catalog=Openchain;Integrated Security=True", 1, TimeSpan.FromSeconds(10));
+            SqlServerStorageEngine engine = new SqlServerStorageEngine(ConfigurationManager.GetSetting("sql_connection_string"), 1, TimeSpan.FromSeconds(10));
             engine.Initialize().Wait();
 
             SqlCommand command = engine.Connection.CreateCommand();

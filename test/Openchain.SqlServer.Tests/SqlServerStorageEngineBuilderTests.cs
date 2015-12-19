@@ -24,7 +24,7 @@ namespace Openchain.SqlServer.Tests
     public class SqlServerStorageEngineBuilderTests
     {
         private readonly IConfigurationSection configuration =
-            new ConfigurationRoot(new[] { new MemoryConfigurationProvider(new Dictionary<string, string>() { ["config:connection_string"] = "Data Source=.;Initial Catalog=Openchain;Integrated Security=True" }) })
+            new ConfigurationRoot(new[] { new MemoryConfigurationProvider(new Dictionary<string, string>() { ["config:connection_string"] = ConfigurationManager.GetSetting("sql_connection_string") }) })
             .GetSection("config");
 
         [Fact]

@@ -24,7 +24,7 @@ namespace Openchain.SqlServer.Tests
     {
         public SqlServerLedgerTests()
         {
-            SqlServerLedger engine = new SqlServerLedger("Data Source=.;Initial Catalog=Openchain;Integrated Security=True", 1, TimeSpan.FromSeconds(10));
+            SqlServerLedger engine = new SqlServerLedger(ConfigurationManager.GetSetting("sql_connection_string"), 1, TimeSpan.FromSeconds(10));
             engine.Initialize().Wait();
 
             SqlCommand command = engine.Connection.CreateCommand();
