@@ -80,7 +80,7 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -206,7 +206,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -632,7 +632,7 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -735,7 +735,7 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -861,7 +861,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1363,7 +1363,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1770,9 +1770,9 @@
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.5.0-rc1": {
+    "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
-      "path": "../Openchain.Ledger/project.json"
+      "path": "../Openchain.Infrastructure/project.json"
     },
     "Google.Protobuf/3.0.0-alpha4": {
       "type": "package",
@@ -3315,7 +3315,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Openchain.Abstractions >= 0.5.0-rc1-*",
-      "Openchain.Ledger >= 0.5.0-rc1-*"
+      "Openchain.Infrastructure >= 0.5.0-rc1-*"
     ],
     ".NETFramework,Version=v4.5.1": [],
     ".NETPlatform,Version=v5.4": [

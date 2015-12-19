@@ -226,7 +226,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -248,7 +248,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Ledger": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -1329,7 +1329,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1351,7 +1351,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Ledger": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -2742,7 +2742,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -2764,7 +2764,7 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Ledger": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -3919,9 +3919,9 @@
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.5.0-rc1": {
+    "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
-      "path": "../../src/Openchain.Ledger/project.json"
+      "path": "../../src/Openchain.Infrastructure/project.json"
     },
     "Openchain.Validation.PermissionBased/0.5.0-rc1": {
       "type": "project",

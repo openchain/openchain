@@ -199,7 +199,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1262,7 +1262,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -2635,7 +2635,7 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Ledger/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -3799,9 +3799,9 @@
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Ledger/0.5.0-rc1": {
+    "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
-      "path": "../../src/Openchain.Ledger/project.json"
+      "path": "../../src/Openchain.Infrastructure/project.json"
     },
     "Google.Protobuf/3.0.0-alpha4": {
       "type": "package",
@@ -3823,6 +3823,8 @@
         "tools/google/protobuf/timestamp.proto",
         "tools/google/protobuf/type.proto",
         "tools/google/protobuf/wrappers.proto",
+        "tools/PaymentProtocolStructures.cs",
+        "tools/PaymentProtocolStructures.proto",
         "tools/protoc.exe"
       ]
     },
@@ -6690,7 +6692,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Ledger >= 0.5.0-rc1-*",
+      "Openchain.Infrastructure >= 0.5.0-rc1-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-*"
     ],
