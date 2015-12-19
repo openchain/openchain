@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System.Threading.Tasks;
-using Openchain.Ledger.Validation;
+using Openchain.Ledger;
 using Xunit;
 
 namespace Openchain.Validation.PermissionBased.Tests

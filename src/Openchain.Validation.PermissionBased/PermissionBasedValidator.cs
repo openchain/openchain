@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Openchain.Ledger;
-using Openchain.Ledger.Validation;
 
 namespace Openchain.Validation.PermissionBased
 {

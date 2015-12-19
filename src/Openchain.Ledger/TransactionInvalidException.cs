@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Ledger
 {
     public class TransactionInvalidException : Exception
     {

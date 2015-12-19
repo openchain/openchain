@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Openchain.Ledger.Validation
+namespace Openchain.Ledger
 {
     public class ParsedMutation
     {

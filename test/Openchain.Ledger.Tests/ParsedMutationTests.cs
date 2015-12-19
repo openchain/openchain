@@ -15,7 +15,6 @@
 using System;
 using System.Linq;
 using System.Text;
-using Openchain.Ledger.Validation;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 

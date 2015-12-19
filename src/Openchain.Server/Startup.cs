@@ -23,7 +23,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Openchain.Ledger;
-using Openchain.Ledger.Validation;
 using Openchain.Server.Models;
 
 namespace Openchain.Server

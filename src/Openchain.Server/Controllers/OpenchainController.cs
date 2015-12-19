@@ -24,7 +24,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Openchain.Ledger;
-using Openchain.Ledger.Validation;
 
 namespace Openchain.Server.Controllers
 {
