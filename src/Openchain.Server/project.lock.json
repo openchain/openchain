@@ -1018,6 +1018,16 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -1032,16 +1042,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
         }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -3032,6 +3032,19 @@
           "System.Runtime"
         ]
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -3045,19 +3058,6 @@
         "frameworkAssemblies": [
           "System.IO",
           "System.Numerics"
-        ]
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
         ]
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -4194,6 +4194,16 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -4208,16 +4218,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
         }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -6669,6 +6669,16 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETPlatform,Version=v5.4",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        }
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -6683,16 +6693,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
         }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -9171,6 +9171,19 @@
           "System.Runtime"
         ]
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -9184,19 +9197,6 @@
         "frameworkAssemblies": [
           "System.IO",
           "System.Numerics"
-        ]
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
         ]
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -10366,6 +10366,19 @@
           "System.Runtime"
         ]
       },
+      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "NBitcoin": "2.1.5.9",
+          "Openchain.Infrastructure": "0.5.0-rc1",
+          "System.Net.Http": "4.0.1-beta-23516"
+        },
+        "frameworkAssemblies": [
+          "System.Collections"
+        ]
+      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -10379,19 +10392,6 @@
         "frameworkAssemblies": [
           "System.IO",
           "System.Numerics"
-        ]
-      },
-      "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
         ]
       },
       "Openchain.Sqlite/0.5.0-rc1": {
@@ -10518,13 +10518,13 @@
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
+    "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
+      "type": "project",
+      "path": "../Openchain.Anchoring.Blockchain/project.json"
+    },
     "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
       "path": "../Openchain.Infrastructure/project.json"
-    },
-    "Openchain.Ledger.Blockchain/0.5.0-rc1": {
-      "type": "project",
-      "path": "../Openchain.Ledger.Blockchain/project.json"
     },
     "Openchain.Sqlite/0.5.0-rc1": {
       "type": "project",
@@ -15063,7 +15063,7 @@
       "Newtonsoft.Json >= 7.0.1",
       "Openchain.Abstractions >= 0.5.0-rc1-*",
       "Openchain.Infrastructure >= 0.5.0-rc1-*",
-      "Openchain.Ledger.Blockchain >= 0.5.0-rc1-*",
+      "Openchain.Anchoring.Blockchain >= 0.5.0-rc1-*",
       "Openchain.Sqlite >= 0.5.0-rc1-*",
       "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*"
     ],
