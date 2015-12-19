@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {

@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public class TransactionInvalidException : Exception
     {

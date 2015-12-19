@@ -19,6 +19,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using NBitcoin;
 using Newtonsoft.Json.Linq;
+using Openchain.Infrastructure;
 
 namespace Openchain.Ledger.Blockchain
 {

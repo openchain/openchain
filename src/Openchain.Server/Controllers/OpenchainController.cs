@@ -23,7 +23,7 @@ using Microsoft.AspNet.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Server.Controllers
 {

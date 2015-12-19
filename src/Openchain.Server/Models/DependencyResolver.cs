@@ -23,7 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Linq;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Server.Models
 {

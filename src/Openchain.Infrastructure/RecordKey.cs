@@ -15,7 +15,7 @@
 using System;
 using System.Text;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Represents the key for a record.

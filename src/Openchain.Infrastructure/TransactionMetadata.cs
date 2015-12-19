@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Represents the metadata object that can be attached to a transaction, and contains signatures for that transaction.

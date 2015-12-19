@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Server.Models
 {

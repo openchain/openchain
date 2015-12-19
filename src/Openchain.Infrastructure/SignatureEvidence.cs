@@ -14,7 +14,7 @@
 
 using System;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Represents a digital signature.

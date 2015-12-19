@@ -23,7 +23,7 @@
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
     "Newtonsoft.Json": "7.0.1",
     "Openchain.Abstractions": "0.5.0-rc1-*",
-    "Openchain.Ledger": "0.5.0-rc1-*",
+    "Openchain.Infrastructure": "0.5.0-rc1-*",
     "Openchain.Ledger.Blockchain": "0.5.0-rc1-*",
     "Openchain.Sqlite": "0.5.0-rc1-*",
     "Openchain.Validation.PermissionBased": "0.5.0-rc1-*"

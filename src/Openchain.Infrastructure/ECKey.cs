@@ -22,7 +22,7 @@ using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Math.EC;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public class ECKey
     {

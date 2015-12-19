@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Represents a set of query operations that can be performed against a transaction store.

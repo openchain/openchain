@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 using Xunit;
 
 namespace Openchain.Validation.PermissionBased.Tests

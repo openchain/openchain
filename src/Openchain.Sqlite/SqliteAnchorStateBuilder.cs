@@ -16,7 +16,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Sqlite
 {

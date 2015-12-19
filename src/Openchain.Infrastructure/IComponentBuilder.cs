@@ -16,7 +16,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public interface IComponentBuilder<out T>
     {

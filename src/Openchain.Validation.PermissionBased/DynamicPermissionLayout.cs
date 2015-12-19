@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {

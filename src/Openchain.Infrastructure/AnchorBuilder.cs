@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Handles the calculation of ledger anchors and records them on the target medium.

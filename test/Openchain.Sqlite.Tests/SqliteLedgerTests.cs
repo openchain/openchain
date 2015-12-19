@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System.Threading.Tasks;
-using Openchain.Ledger.Tests;
+using Openchain.Infrastructure.Tests;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests

@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public class ParsedMutation
     {

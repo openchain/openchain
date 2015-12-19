@@ -17,7 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public static class LedgerQueriesExtensions
     {

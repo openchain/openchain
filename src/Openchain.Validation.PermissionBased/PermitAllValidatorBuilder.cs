@@ -16,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {

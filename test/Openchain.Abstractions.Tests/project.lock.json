@@ -3458,6 +3458,8 @@
         "tools/google/protobuf/timestamp.proto",
         "tools/google/protobuf/type.proto",
         "tools/google/protobuf/wrappers.proto",
+        "tools/PaymentProtocolStructures.cs",
+        "tools/PaymentProtocolStructures.proto",
         "tools/protoc.exe"
       ]
     },

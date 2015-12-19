@@ -1,6 +1,6 @@
 {
   "version": "0.5.0-rc1-*",
-  "description": "Unit tests for the Openchain.Ledger package.",
+  "description": "Unit tests for the Openchain.Infrastructure package.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",
@@ -9,7 +9,7 @@
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
   "dependencies": {
-    "Openchain.Ledger": "0.5.0-rc1-*",
+    "Openchain.Infrastructure": "0.5.0-rc1-*",
     "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-*"
   },

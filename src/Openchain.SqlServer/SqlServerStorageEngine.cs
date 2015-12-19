@@ -19,7 +19,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.SqlServer.Server;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.SqlServer
 {

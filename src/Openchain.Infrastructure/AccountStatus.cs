@@ -15,7 +15,7 @@
 using System;
 using System.Linq;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     /// <summary>
     /// Represents a parsed account record.

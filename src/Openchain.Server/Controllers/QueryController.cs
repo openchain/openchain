@@ -18,7 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Filters;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Server.Controllers
 {

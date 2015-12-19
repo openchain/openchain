@@ -1,6 +1,6 @@
 ﻿{
   "version": "0.5.0-rc1-*",
-  "description": "Unit tests for the Openchain.Ledger package.",
+  "description": "Unit tests for the Openchain.Infrastructure package.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",

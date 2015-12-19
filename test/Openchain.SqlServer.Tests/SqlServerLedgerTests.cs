@@ -14,7 +14,7 @@
 
 using System;
 using System.Data.SqlClient;
-using Openchain.Ledger.Tests;
+using Openchain.Infrastructure.Tests;
 using Xunit;
 
 namespace Openchain.SqlServer.Tests

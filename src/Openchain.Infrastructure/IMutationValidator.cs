@@ -15,7 +15,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Openchain.Ledger
+namespace Openchain.Infrastructure
 {
     public interface IMutationValidator
     {

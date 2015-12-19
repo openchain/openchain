@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 using Xunit;
 
 namespace Openchain.Validation.PermissionBased.Tests

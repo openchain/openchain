@@ -14,7 +14,7 @@
 
 using System.Linq;
 using System.Threading.Tasks;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests

@@ -19,7 +19,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Sqlite
 {

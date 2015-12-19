@@ -18,7 +18,7 @@ using System.Text;
 using Assert = Xunit.Assert;
 using Fact = Xunit.FactAttribute;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Infrastructure.Tests
 {
     public class ParsedMutationTests
     {

@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Openchain.Ledger.Tests
+namespace Openchain.Infrastructure.Tests
 {
     public class PollingObservableTests
     {

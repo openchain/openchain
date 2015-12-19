@@ -13,7 +13,7 @@
 // limitations under the License.
 
 using System.Collections.Generic;
-using Openchain.Ledger;
+using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {
