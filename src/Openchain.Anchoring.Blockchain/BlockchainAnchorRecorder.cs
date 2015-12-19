@@ -21,7 +21,7 @@ using NBitcoin;
 using Newtonsoft.Json.Linq;
 using Openchain.Infrastructure;
 
-namespace Openchain.Ledger.Blockchain
+namespace Openchain.Anchoring.Blockchain
 {
     /// <summary>
     /// Records database anchors in a Blockchain.

@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 using NBitcoin;
 using Openchain.Infrastructure;
 
-namespace Openchain.Ledger.Blockchain
+namespace Openchain.Anchoring.Blockchain
 {
     public class BlockchainAnchorRecorderBuilder : IComponentBuilder<BlockchainAnchorRecorder>
     {
