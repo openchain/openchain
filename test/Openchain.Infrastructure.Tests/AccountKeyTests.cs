@@ -50,6 +50,12 @@ namespace Openchain.Infrastructure.Tests
         }
 
         [Fact]
+        public void Equals_Object()
+        {
+            Assert.True(AccountKey.Parse("/abc/", "/def/").Equals((object)AccountKey.Parse("/abc/", "/def/")));
+        }
+
+        [Fact]
         public void GetHashCode_Success()
         {
             Assert.Equal(AccountKey.Parse("/abc/", "/def/").GetHashCode(), AccountKey.Parse("/abc/", "/def/").GetHashCode());
