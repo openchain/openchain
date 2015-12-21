@@ -9,7 +9,8 @@
   // Define transaction validation parameters
   "validator_mode": {
     // Required: The root URL where this instance is hosted
-    "root_url": "",
+    "root_urls": [
+    ],
     "validator": {
       "provider": "PermissionBased",
       // Enable /p2pkh/<address>/ accounts
