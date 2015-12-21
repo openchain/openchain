@@ -30,9 +30,10 @@ namespace Openchain
         Task Initialize();
 
         /// <summary>
-        /// Adds a transaction to the store.
+        /// Adds multiple transactions to the store.
+        /// Either all transactions are committed or none are.
         /// </summary>
-        /// <param name="transactions">A collection of serialized <see cref="Transaction"/> to add to the store.</param>
+        /// <param name="transactions">A collection of serialized <see cref="Transaction"/> objects to add to the store.</param>
         /// <exception cref="ConcurrentMutationException">A record has been mutated and the transaction is no longer valid.</exception>
         /// <returns>The task object representing the asynchronous operation.</returns>
         Task AddTransactions(IEnumerable<ByteString> transactions);
@@ -51,7 +52,7 @@ namespace Openchain
         Task<ByteString> GetLastTransaction();
 
         /// <summary>
-        /// Get an ordered list of transactions from a given point.
+        /// Gets an ordered list of transactions from a given point.
         /// </summary>
         /// <param name="from">The hash of the transaction to start from.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
