@@ -13,6 +13,8 @@
 // limitations under the License.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -73,15 +75,17 @@ namespace Openchain.Server.Models
             }
             else
             {
-                string rootUrl = serviceProvider.GetService<IConfiguration>()["validator_mode:root_url"];
+                IConfigurationSection rootUrlsSection = serviceProvider.GetService<IConfiguration>().GetSection("validator_mode:root_urls");
 
-                if (!Uri.IsWellFormedUriString(rootUrl, UriKind.Absolute))
+                List<string> urls = rootUrlsSection.GetChildren().Select(section => section.Value).ToList();
+
+                if (urls.Count == 0)
                 {
-                    string errorMessage = $"The server root URL is not a valid URL: '{rootUrl}'. Please make sure it is configured correctly.";
-                    throw new InvalidOperationException(errorMessage);
+                    serviceProvider.GetService<ILogger>().LogWarning(
+                        $"No root URL is configured, this instance will not be able to validate transactions");
                 }
 
-                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, rootUrl);
+                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, urls);
             }
         }
 

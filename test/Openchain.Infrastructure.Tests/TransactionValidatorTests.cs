@@ -123,7 +123,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionValidator validator = new TransactionValidator(
                 new TestStore(defaultAccounts, true),
                 new TestValidator(false),
-                "http://root/");
+                new[] { "http://root/" });
 
             ByteString mutation = CreateMutation("http://root/");
 
@@ -138,7 +138,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionValidator validator = new TransactionValidator(
                 new TestStore(defaultAccounts, false),
                 new TestValidator(true),
-                "http://root/");
+                new[] { "http://root/" });
 
             ByteString mutation = CreateMutation("http://root/");
 
@@ -202,7 +202,7 @@ namespace Openchain.Infrastructure.Tests
             return new TransactionValidator(
                 new TestStore(accounts, false),
                 new TestValidator(false),
-                "http://root/");
+                new[] { "http://root/" });
         }
 
         private class TestValidator : IMutationValidator
