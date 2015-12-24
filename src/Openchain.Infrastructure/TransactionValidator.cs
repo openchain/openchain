@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf;
 
@@ -26,14 +25,14 @@ namespace Openchain.Infrastructure
         private static readonly int MaxKeySize = 512;
 
         private readonly IStorageEngine store;
-        private readonly HashSet<ByteString> validNamespaces;
+        private readonly ByteString validNamespace;
         private readonly IMutationValidator validator;
 
-        public TransactionValidator(IStorageEngine store, IMutationValidator validator, IEnumerable<string> rootUrls)
+        public TransactionValidator(IStorageEngine store, IMutationValidator validator, ByteString validNamespace)
         {
             this.store = store;
             this.validator = validator;
-            this.validNamespaces = new HashSet<ByteString>(rootUrls.Select(url => new ByteString(Encoding.UTF8.GetBytes(url))));
+            this.validNamespace = validNamespace;
         }
 
         public async Task<ByteString> PostTransaction(ByteString rawMutation, IReadOnlyList<SignatureEvidence> authentication)
@@ -49,7 +48,7 @@ namespace Openchain.Infrastructure
                 throw new TransactionInvalidException("InvalidMutation");
             }
 
-            if (!this.validNamespaces.Contains(mutation.Namespace))
+            if (!mutation.Namespace.Equals(this.validNamespace))
                 throw new TransactionInvalidException("InvalidNamespace");
 
             if (mutation.Records.Count == 0)

@@ -15,6 +15,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -65,6 +66,25 @@ namespace Openchain.Server.Models
             return DependencyResolver<IMutationValidator>.Create(serviceProvider, "validator_mode:validator");
         }
 
+        public static GlobalSettings CreateGlobalSettings(IServiceProvider serviceProvider)
+        {
+            string instanceSeed = serviceProvider.GetService<IConfiguration>().GetSection("validator_mode")["instance_seed"];
+
+            ByteString validNamespace;
+            if (string.IsNullOrEmpty(instanceSeed))
+            {
+                serviceProvider.GetService<ILogger>().LogWarning(
+                    $"No root URL is configured, this instance is not able to validate transactions");
+                validNamespace = null;
+            }
+            else
+            {
+                validNamespace = new ByteString(MessageSerializer.ComputeHash(Encoding.UTF8.GetBytes(instanceSeed)).Take(8).ToArray());
+            }
+
+            return new GlobalSettings(validNamespace);
+        }
+
         public static TransactionValidator CreateTransactionValidator(IServiceProvider serviceProvider)
         {
             IMutationValidator rulesValidator = serviceProvider.GetService<IMutationValidator>();
@@ -75,17 +95,12 @@ namespace Openchain.Server.Models
             }
             else
             {
-                IConfigurationSection rootUrlsSection = serviceProvider.GetService<IConfiguration>().GetSection("validator_mode:root_urls");
+                GlobalSettings globalSettings = serviceProvider.GetService<GlobalSettings>();
 
-                List<string> urls = rootUrlsSection.GetChildren().Select(section => section.Value).ToList();
-
-                if (urls.Count == 0)
-                {
-                    serviceProvider.GetService<ILogger>().LogWarning(
-                        $"No root URL is configured, this instance will not be able to validate transactions");
-                }
-
-                return new TransactionValidator(serviceProvider.GetService<IStorageEngine>(), rulesValidator, urls);
+                if (globalSettings.Namespace == null)
+                    return null;
+                else
+                    return new TransactionValidator(serviceProvider.GetRequiredService<IStorageEngine>(), rulesValidator, globalSettings.Namespace);
             }
         }
 

@@ -87,6 +87,8 @@ namespace Openchain.Server
 
             services.AddScoped<TransactionValidator>(ConfigurationParser.CreateTransactionValidator);
 
+            services.AddSingleton<GlobalSettings>(ConfigurationParser.CreateGlobalSettings);
+
             // Transaction Stream Subscriber
             services.AddSingleton<TransactionStreamSubscriber>(ConfigurationParser.CreateStreamSubscriber);
 
