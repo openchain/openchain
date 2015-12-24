@@ -15,7 +15,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,6 +22,8 @@ namespace Openchain.Infrastructure.Tests
 {
     public class TransactionValidatorTests
     {
+        private static readonly ByteString validNamespace = ByteString.Parse("abcdef");
+        private static readonly ByteString invalidNamespace = ByteString.Parse("abcdef00");
         private static readonly Dictionary<string, long> defaultAccounts = new Dictionary<string, long>()
         {
             ["/account/1/"] = 90,
@@ -33,7 +34,7 @@ namespace Openchain.Infrastructure.Tests
         public async Task PostTransaction_Success()
         {
             TransactionValidator validator = CreateValidator(defaultAccounts);
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             ByteString result = await validator.PostTransaction(mutation, new SignatureEvidence[0]);
 
@@ -58,7 +59,7 @@ namespace Openchain.Infrastructure.Tests
 
             TransactionValidator validator = CreateValidator(accounts);
             Mutation mutation = new Mutation(
-                new ByteString(Encoding.UTF8.GetBytes("http://root/")),
+                validNamespace,
                 new Record[]
                 {
                     new Record(
@@ -80,7 +81,7 @@ namespace Openchain.Infrastructure.Tests
 
             TransactionValidator validator = CreateValidator(accounts);
             Mutation mutation = new Mutation(
-                new ByteString(Encoding.UTF8.GetBytes("http://root/")),
+                validNamespace,
                 new Record[0],
                 ByteString.Empty);
 
@@ -99,7 +100,7 @@ namespace Openchain.Infrastructure.Tests
             };
 
             TransactionValidator validator = CreateValidator(accounts);
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
@@ -110,7 +111,7 @@ namespace Openchain.Infrastructure.Tests
         public async Task PostTransaction_InvalidNamespace()
         {
             TransactionValidator validator = CreateValidator(defaultAccounts);
-            ByteString mutation = CreateMutation("http://wrong-root/");
+            ByteString mutation = CreateMutation(invalidNamespace);
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
@@ -123,9 +124,9 @@ namespace Openchain.Infrastructure.Tests
             TransactionValidator validator = new TransactionValidator(
                 new TestStore(defaultAccounts, true),
                 new TestValidator(false),
-                new[] { "http://root/" });
+                validNamespace);
 
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
@@ -138,9 +139,9 @@ namespace Openchain.Infrastructure.Tests
             TransactionValidator validator = new TransactionValidator(
                 new TestStore(defaultAccounts, false),
                 new TestValidator(true),
-                new[] { "http://root/" });
+                validNamespace);
 
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
@@ -151,11 +152,11 @@ namespace Openchain.Infrastructure.Tests
         public async Task Validate_ValidSignature()
         {
             TransactionValidator validator = CreateValidator(defaultAccounts);
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             SignatureEvidence signature = new SignatureEvidence(
                 ByteString.Parse("0213b0006543d4ab6e79f49559fbfb18e9d73596d63f39e2f12ebc2c9d51e2eb06"),
-                ByteString.Parse("304402200c7fba6b623efd7e52731a11e6d7b99c2ae752c0f950b7a444ef7fb80162498c02202b01c74a4a04fb120860494de09bd6848f088927a7b07e3c3925b3894c8c89d4"));
+                ByteString.Parse("3045022100e2ecc27c2e0d19329a0c7ad37e20fde00e64be235b2e7e86d285c18ff9c1e5b102200efa46125e057136f5008f4aa15a07e5ae4a0fcb2d00aa37862e246abbee74ab"));
 
             ByteString result = await validator.PostTransaction(mutation, new[] { signature });
 
@@ -166,21 +167,21 @@ namespace Openchain.Infrastructure.Tests
         public async Task Validate_InvalidSignature()
         {
             TransactionValidator validator = CreateValidator(defaultAccounts);
-            ByteString mutation = CreateMutation("http://root/");
+            ByteString mutation = CreateMutation(validNamespace);
 
             SignatureEvidence signature = new SignatureEvidence(
                 ByteString.Parse("0013b0006543d4ab6e79f49559fbfb18e9d73596d63f39e2f12ebc2c9d51e2eb06"),
-                ByteString.Parse("304402200c7fba6b623efd7e52731a11e6d7b99c2ae752c0f950b7a444ef7fb80162498c02202b01c74a4a04fb120860494de09bd6848f088927a7b07e3c3925b3894c8c89d4"));
+                ByteString.Parse("3045022100e2ecc27c2e0d19329a0c7ad37e20fde00e64be235b2e7e86d285c18ff9c1e5b102200efa46125e057136f5008f4aa15a07e5ae4a0fcb2d00aa37862e246abbee74ab"));
 
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new[] { signature }));
             Assert.Equal("InvalidSignature", exception.Reason);
         }
 
-        private ByteString CreateMutation(string @namespace)
+        private ByteString CreateMutation(ByteString @namespace)
         {
             Mutation mutation = new Mutation(
-                new ByteString(Encoding.UTF8.GetBytes(@namespace)),
+                @namespace,
                 new Record[]
                 {
                     new Record(
@@ -202,7 +203,7 @@ namespace Openchain.Infrastructure.Tests
             return new TransactionValidator(
                 new TestStore(accounts, false),
                 new TestValidator(false),
-                new[] { "http://root/" });
+                validNamespace);
         }
 
         private class TestValidator : IMutationValidator
