@@ -66,6 +66,12 @@ namespace Openchain.Infrastructure.Tests
                 ByteString.Parse("300680044164616D"));
 
             Assert.False(evidence.VerifySignature(payload.ToByteArray()));
+
+            evidence = new SignatureEvidence(
+                publicKey,
+                ByteString.Parse("0304066e5dc0"));
+
+            Assert.False(evidence.VerifySignature(payload.ToByteArray()));
         }
 
         [Fact]
