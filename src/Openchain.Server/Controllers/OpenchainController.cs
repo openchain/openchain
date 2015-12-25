@@ -174,5 +174,17 @@ namespace Openchain.Server.Controllers
                 version = result.Version.ToString()
             });
         }
+
+        [HttpGet("info")]
+        public ActionResult GetChainInfo()
+        {
+            if (validator == null)
+                return Json(new { });
+            else
+                return Json(new
+                {
+                    @namespace = validator.Namespace.ToString()
+                });
+        }
     }
 }

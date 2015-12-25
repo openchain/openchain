@@ -25,15 +25,16 @@ namespace Openchain.Infrastructure
         private static readonly int MaxKeySize = 512;
 
         private readonly IStorageEngine store;
-        private readonly ByteString validNamespace;
         private readonly IMutationValidator validator;
 
-        public TransactionValidator(IStorageEngine store, IMutationValidator validator, ByteString validNamespace)
+        public TransactionValidator(IStorageEngine store, IMutationValidator validator, ByteString @namespace)
         {
             this.store = store;
             this.validator = validator;
-            this.validNamespace = validNamespace;
+            this.Namespace = @namespace;
         }
+
+        public ByteString Namespace { get; }
 
         public async Task<ByteString> PostTransaction(ByteString rawMutation, IReadOnlyList<SignatureEvidence> authentication)
         {
@@ -48,7 +49,7 @@ namespace Openchain.Infrastructure
                 throw new TransactionInvalidException("InvalidMutation");
             }
 
-            if (!mutation.Namespace.Equals(this.validNamespace))
+            if (!mutation.Namespace.Equals(this.Namespace))
                 throw new TransactionInvalidException("InvalidNamespace");
 
             if (mutation.Records.Count == 0)
