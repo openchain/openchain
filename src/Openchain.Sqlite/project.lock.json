@@ -477,13 +477,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -503,7 +503,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
@@ -1555,7 +1554,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -1581,7 +1580,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
@@ -2119,13 +2117,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -2145,7 +2143,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
@@ -3430,13 +3427,13 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -3456,7 +3453,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
@@ -4752,7 +4748,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -4778,7 +4774,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
@@ -5327,7 +5322,7 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
+      "Newtonsoft.Json/6.0.6": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -5353,7 +5348,6 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Newtonsoft.Json": "7.0.1",
           "Openchain.Abstractions": "0.5.0-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
@@ -5877,9 +5871,9 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Newtonsoft.Json/7.0.1": {
+    "Newtonsoft.Json/6.0.6": {
       "type": "package",
-      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
+      "sha512": "w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -5889,12 +5883,14 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
+        "lib/netcore45/Newtonsoft.Json.dll",
+        "lib/netcore45/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.7.0.1.nupkg",
-        "Newtonsoft.Json.7.0.1.nupkg.sha512",
+        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.6.0.6.nupkg",
+        "Newtonsoft.Json.6.0.6.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]

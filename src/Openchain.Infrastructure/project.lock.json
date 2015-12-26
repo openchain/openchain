@@ -56,15 +56,6 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
-        }
-      },
       "Openchain.Abstractions/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -444,15 +435,6 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
       "Openchain.Abstractions/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -526,15 +508,6 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -969,15 +942,6 @@
         },
         "runtime": {
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -1418,15 +1382,6 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        }
-      },
       "Openchain.Abstractions/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -1504,15 +1459,6 @@
         },
         "runtime": {
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
-        }
-      },
-      "Newtonsoft.Json/7.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/net45/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "Openchain.Abstractions/0.5.0-rc1": {
@@ -1611,28 +1557,6 @@
         "Microsoft.Extensions.Primitives.1.0.0-rc1-final.nupkg",
         "Microsoft.Extensions.Primitives.1.0.0-rc1-final.nupkg.sha512",
         "Microsoft.Extensions.Primitives.nuspec"
-      ]
-    },
-    "Newtonsoft.Json/7.0.1": {
-      "type": "package",
-      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
-      "files": [
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.7.0.1.nupkg",
-        "Newtonsoft.Json.7.0.1.nupkg.sha512",
-        "Newtonsoft.Json.nuspec",
-        "tools/install.ps1"
       ]
     },
     "Portable.BouncyCastle/1.8.0": {
@@ -2958,7 +2882,6 @@
     "": [
       "Microsoft.Extensions.Configuration.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc1-final",
-      "Newtonsoft.Json >= 7.0.1",
       "Openchain.Abstractions >= 0.5.0-rc1-*",
       "Portable.BouncyCastle >= 1.8.0"
     ],
