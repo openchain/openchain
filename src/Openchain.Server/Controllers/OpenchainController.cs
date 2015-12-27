@@ -175,6 +175,10 @@ namespace Openchain.Server.Controllers
             });
         }
 
+        /// <summary>
+        /// Gets information about the Openchain instance.
+        /// </summary>
+        /// <returns>The task object representing the asynchronous operation.</returns>
         [HttpGet("info")]
         public ActionResult GetChainInfo()
         {
