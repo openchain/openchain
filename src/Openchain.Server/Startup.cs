@@ -137,5 +137,7 @@ namespace Openchain.Server
             if (anchorWorker != null)
                 runningTasks.Add(anchorWorker.Run(CancellationToken.None));
         }
+
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
