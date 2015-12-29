@@ -8,7 +8,7 @@
 
   // Define transaction validation parameters
   "validator_mode": {
-    // Required: The root URL where this instance is hosted
+    // Required: A random string used to generate the chain namespace
     "instance_seed": "",
     "validator": {
       "provider": "PermissionBased",
