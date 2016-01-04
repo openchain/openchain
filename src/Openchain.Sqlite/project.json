@@ -1,6 +1,6 @@
 {
   "version": "0.5.0-rc1-*",
-  "description": "Sqlite implementation of the Openchain storage layer.",
+  "description": "SQLite implementation of the Openchain storage layer.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
   "projectUrl": "https://www.openchain.org/",

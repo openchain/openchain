@@ -13,8 +13,8 @@
 
   // Define transaction validation parameters
   "validator_mode": {
-    // Required: The root URL where this instance is hosted
-    //"instance_seed": "http://localhost:8080/",
+    // Required: A random string used to generate the chain namespace
+    "instance_seed": "",
     "validator": {
       "provider": "PermissionBased",
       // Enable /p2pkh/<address>/ accounts
