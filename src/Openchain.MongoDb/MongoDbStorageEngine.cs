@@ -65,7 +65,6 @@ namespace Openchain.MongoDb
                         MutationHash = mutationHash,
                         TransactionHash = transactionHash,
                         RawData = rawTransactionBuffer,
-                        Records = records,
                         LockTimestamp = DateTime.UtcNow,
                         InitialRecords = new List<MongoDbRecord>()
                     };

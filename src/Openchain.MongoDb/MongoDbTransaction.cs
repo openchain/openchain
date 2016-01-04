@@ -61,12 +61,6 @@ namespace Openchain.MongoDb
             set;
         }
 
-        public List<byte[]> Records
-        {
-            get;
-            set;
-        }
-
         public List<MongoDbRecord> InitialRecords
         {
             get;
@@ -84,6 +78,10 @@ namespace Openchain.MongoDb
             get;
             set;
         }
+
+        [BsonExtraElements]
+        public BsonDocument Extra { get; set; }
+
     }
 
 }

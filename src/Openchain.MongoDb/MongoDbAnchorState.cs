@@ -29,6 +29,9 @@ namespace Openchain.MongoDb
         public byte[] FullLedgerHash { get; set; }
         public long TransactionCount { get; set; }
         public BsonTimestamp Timestamp { get; set; } = new BsonTimestamp(0);
+
+        [BsonExtraElements]
+        public BsonDocument Extra { get; set; }
     }
 
     /// <summary>
