@@ -34,6 +34,8 @@ namespace Openchain.MongoDb
             {
                 ConnectionString = configuration["connection_string"],
                 Database = configuration["database"] ?? "openchain",
+                ReadRetryCount = 10,
+                ReadLoopDelay = TimeSpan.FromMilliseconds(50)                
             };
             var s = configuration["stale_transaction_delay"] ?? "00:01:00";
             config.StaleTransactionDelay = TimeSpan.Parse(s);
