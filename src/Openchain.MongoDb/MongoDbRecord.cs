@@ -48,5 +48,7 @@ namespace Openchain.MongoDb
             get;
             set;
         }
+
+        public byte[] TransactionLock { get; set; }
     }
 }

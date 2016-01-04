@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace Openchain.MongoDb
 {
     public class MongoDbLedger : MongoDbStorageEngine, ILedgerQueries, ILedgerIndexes
     {
-        public MongoDbLedger(string connectionString, string database): base (connectionString, database)
+        public MongoDbLedger(MongoDbStorageEngineConfiguration config, ILogger logger): base(config, logger)
         {
         }
 
