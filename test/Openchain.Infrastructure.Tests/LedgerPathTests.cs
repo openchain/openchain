@@ -65,6 +65,8 @@ namespace Openchain.Infrastructure.Tests
         // Empty segment
         [InlineData("/abc//def/")]
         [InlineData("/abc/def//")]
+        // Null
+        [InlineData(null)]
         public void TryParse_Invalid(string value)
         {
             LedgerPath path;
