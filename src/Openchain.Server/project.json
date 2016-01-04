@@ -47,7 +47,11 @@
       }
     },
 
-    "dnx451": { }
+    "dnx451": {
+      "dependencies": {
+        "Openchain.MongoDb": "0.5.0-rc1-*"
+      }
+    }
   },
 
   "exclude": [

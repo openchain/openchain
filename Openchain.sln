@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}"
 EndProject
@@ -39,6 +39,10 @@ EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Infrastructure.Tests", "test\Openchain.Infrastructure.Tests\Openchain.Infrastructure.Tests.xproj", "{91B5C8B9-602C-4843-A2BE-DA82B3F7449B}"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Anchoring.Blockchain", "src\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.xproj", "{B392C570-EFCC-4684-B7D8-0A645B49EAED}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.MongoDb", "src\Openchain.MongoDb\Openchain.MongoDb.xproj", "{D4652647-234B-4B32-935F-3E192C1E7401}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.MongoDb.Tests", "test\Openchain.MongoDb.Tests\Openchain.MongoDb.Tests.xproj", "{F4804AFC-37F3-4A63-8363-BB72881E5AE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +104,14 @@ Global
 		{B392C570-EFCC-4684-B7D8-0A645B49EAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B392C570-EFCC-4684-B7D8-0A645B49EAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B392C570-EFCC-4684-B7D8-0A645B49EAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4652647-234B-4B32-935F-3E192C1E7401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4652647-234B-4B32-935F-3E192C1E7401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4652647-234B-4B32-935F-3E192C1E7401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4652647-234B-4B32-935F-3E192C1E7401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,5 +130,7 @@ Global
 		{F348FDBD-8D12-4CD7-B55B-2E52FCFA8C71} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{91B5C8B9-602C-4843-A2BE-DA82B3F7449B} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{B392C570-EFCC-4684-B7D8-0A645B49EAED} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
+		{D4652647-234B-4B32-935F-3E192C1E7401} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 	EndGlobalSection
 EndGlobal

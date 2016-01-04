@@ -35,7 +35,10 @@ namespace Openchain.Server.Models
 
         public DependencyResolver(IServiceProvider serviceProvider, string basePath, IConfigurationSection configuration)
         {
-            IList<Assembly> assemblies = LoadAllAssemblies(basePath, serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>());
+            IList<Assembly> assemblies = LoadAllAssemblies(basePath,
+                serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>(),
+                configuration.Get<string[]>("extensions")??new string[0]
+                );
 
             this.builder = FindBuilder(assemblies, configuration);
 
@@ -89,16 +92,16 @@ namespace Openchain.Server.Models
             }
         }
 
-        private static IList<Assembly> LoadAllAssemblies(string projectPath, IAssemblyLoadContextAccessor assemblyLoader)
+        private static IList<Assembly> LoadAllAssemblies(string projectPath, IAssemblyLoadContextAccessor assemblyLoader, 
+            string[] extensions)
         {
             string projectFilePath = Path.Combine(projectPath, "project.json");
             JObject configurationFile = JObject.Parse(File.ReadAllText(projectFilePath));
-
             JObject dependencies = (JObject)configurationFile["dependencies"];
-
             return dependencies.Properties()
                 .Select(property => property.Name)
                 .Where(name => name.StartsWith("Openchain."))
+                .Concat(extensions)
                 .Select(name => assemblyLoader.Default.Load(name))
                 .ToList();
         }

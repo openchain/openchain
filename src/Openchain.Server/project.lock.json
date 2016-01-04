@@ -1722,7 +1722,7 @@
           "lib/dotnet5.4/System.Runtime.Numerics.dll": {}
         }
       },
-      "System.Runtime.Serialization.Primitives/4.1.0-beta-23427": {
+      "System.Runtime.Serialization.Primitives/4.1.0-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Resources.ResourceManager": "4.0.0",
@@ -2997,6 +2997,40 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
+      "MongoDB.Bson/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        }
+      },
+      "MongoDB.Driver/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0",
+          "MongoDB.Driver.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        }
+      },
+      "MongoDB.Driver.Core/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        }
+      },
       "NBitcoin/2.1.5.9": {
         "type": "package",
         "dependencies": {
@@ -3058,6 +3092,16 @@
           "System.IO",
           "System.Numerics"
         ]
+      },
+      "Openchain.MongoDb/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "MongoDB.Driver": "2.2.0",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1"
+        }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
         "type": "project",
@@ -5324,7 +5368,7 @@
           "lib/dotnet5.4/System.Runtime.Numerics.dll": {}
         }
       },
-      "System.Runtime.Serialization.Primitives/4.1.0-beta-23427": {
+      "System.Runtime.Serialization.Primitives/4.1.0-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Resources.ResourceManager": "4.0.0",
@@ -7799,7 +7843,7 @@
           "lib/dotnet5.4/System.Runtime.Numerics.dll": {}
         }
       },
-      "System.Runtime.Serialization.Primitives/4.1.0-beta-23427": {
+      "System.Runtime.Serialization.Primitives/4.1.0-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Resources.ResourceManager": "4.0.0",
@@ -9136,6 +9180,40 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
+      "MongoDB.Bson/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        }
+      },
+      "MongoDB.Driver/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0",
+          "MongoDB.Driver.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        }
+      },
+      "MongoDB.Driver.Core/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        }
+      },
       "NBitcoin/2.1.5.9": {
         "type": "package",
         "dependencies": {
@@ -9197,6 +9275,16 @@
           "System.IO",
           "System.Numerics"
         ]
+      },
+      "Openchain.MongoDb/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "MongoDB.Driver": "2.2.0",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1"
+        }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
         "type": "project",
@@ -10331,6 +10419,40 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
+      "MongoDB.Bson/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Bson.dll": {}
+        }
+      },
+      "MongoDB.Driver/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0",
+          "MongoDB.Driver.Core": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.dll": {}
+        }
+      },
+      "MongoDB.Driver.Core/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MongoDB.Bson": "2.2.0"
+        },
+        "compile": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net45/MongoDB.Driver.Core.dll": {}
+        }
+      },
       "NBitcoin/2.1.5.9": {
         "type": "package",
         "dependencies": {
@@ -10392,6 +10514,16 @@
           "System.IO",
           "System.Numerics"
         ]
+      },
+      "Openchain.MongoDb/0.5.0-rc1": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.5.1",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+          "MongoDB.Driver": "2.2.0",
+          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Infrastructure": "0.5.0-rc1"
+        }
       },
       "Openchain.Sqlite/0.5.0-rc1": {
         "type": "project",
@@ -10525,6 +10657,10 @@
     "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
       "path": "../Openchain.Infrastructure/project.json"
+    },
+    "Openchain.MongoDb/0.5.0-rc1": {
+      "type": "project",
+      "path": "../Openchain.MongoDb/project.json"
     },
     "Openchain.Sqlite/0.5.0-rc1": {
       "type": "project",
@@ -11452,6 +11588,41 @@
         "ref/dotnet5.2/zh-hans/Microsoft.Win32.Registry.xml",
         "ref/dotnet5.2/zh-hant/Microsoft.Win32.Registry.xml",
         "ref/net46/Microsoft.Win32.Registry.dll"
+      ]
+    },
+    "MongoDB.Bson/2.2.0": {
+      "type": "package",
+      "sha512": "6fvXPrbQwEkz8UsyZo+POmT+hkkUlW9C6tqRUmecOGBdKPtZGexLjtizlFgBfkRy4Z6iB0O6Xss09n7BR6oixQ==",
+      "files": [
+        "lib/net45/MongoDB.Bson.dll",
+        "lib/net45/MongoDB.Bson.XML",
+        "License.rtf",
+        "MongoDB.Bson.2.2.0.nupkg",
+        "MongoDB.Bson.2.2.0.nupkg.sha512",
+        "MongoDB.Bson.nuspec"
+      ]
+    },
+    "MongoDB.Driver/2.2.0": {
+      "type": "package",
+      "sha512": "5o1vF9nTn4jGmtoQhGwyJpDCZzVmn0vtMv6WtTueKmHtgFXHA544a9RLusaFa300g6kdsLuPGhxl8kMNeqbNJA==",
+      "files": [
+        "lib/net45/MongoDB.Driver.dll",
+        "lib/net45/MongoDB.Driver.XML",
+        "License.rtf",
+        "MongoDB.Driver.2.2.0.nupkg",
+        "MongoDB.Driver.2.2.0.nupkg.sha512",
+        "MongoDB.Driver.nuspec"
+      ]
+    },
+    "MongoDB.Driver.Core/2.2.0": {
+      "type": "package",
+      "sha512": "63D9bTpRvsNAxfkFFxrYvhzex5o+F42+JjzGHrQen2nrf21o9DSbiwWhz94AsMhhxv6kHW5Y2x4d+BW89qvLTg==",
+      "files": [
+        "lib/net45/MongoDB.Driver.Core.dll",
+        "License.rtf",
+        "MongoDB.Driver.Core.2.2.0.nupkg",
+        "MongoDB.Driver.Core.2.2.0.nupkg.sha512",
+        "MongoDB.Driver.Core.nuspec"
       ]
     },
     "NBitcoin/2.1.5.9": {
@@ -14166,10 +14337,10 @@
         "System.Runtime.Numerics.nuspec"
       ]
     },
-    "System.Runtime.Serialization.Primitives/4.1.0-beta-23427": {
+    "System.Runtime.Serialization.Primitives/4.1.0-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "/MNlmuIhVMaMOdLrHxWpMQJcrSGfflRhZ+37s7GFIab36Wu4sgq82k3P9t8MjfcQ3nASePzqlb0M4hsV0uEh7Q==",
+      "sha512": "Dsl95PE2vyGIy9voclfTVKSqYD8O4PjsMS+TV0bM3N1xNraS2BBaChGk1stGmf04cn2/xA3cZyh80bkZL+v1/Q==",
       "files": [
         "lib/dotnet5.4/System.Runtime.Serialization.Primitives.dll",
         "lib/MonoAndroid10/_._",
@@ -14222,8 +14393,8 @@
         "ref/wpa81/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
-        "System.Runtime.Serialization.Primitives.4.1.0-beta-23427.nupkg",
-        "System.Runtime.Serialization.Primitives.4.1.0-beta-23427.nupkg.sha512",
+        "System.Runtime.Serialization.Primitives.4.1.0-beta-23516.nupkg",
+        "System.Runtime.Serialization.Primitives.4.1.0-beta-23516.nupkg.sha512",
         "System.Runtime.Serialization.Primitives.nuspec"
       ]
     },
@@ -15071,6 +15242,8 @@
       "System.Runtime.Serialization.Primitives >= 4.0.11-beta-23516",
       "System.Net.WebSockets.Client >= 4.0.0-beta-23516"
     ],
-    "DNX,Version=v4.5.1": []
+    "DNX,Version=v4.5.1": [
+      "Openchain.MongoDb >= 0.5.0-rc1-*"
+    ]
   }
 }

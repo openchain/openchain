@@ -1,0 +1,21 @@
+{
+  "version": "0.5.0-rc1-*",
+  "description": "Openchain.MongoDb Class Library",
+  "authors": [ "Frédéric" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "net451": {
+      "dependencies": {
+        "MongoDB.Driver": "2.2.0"
+      }
+    }
+
+  },
+  "dependencies": {
+    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+    "Openchain.Abstractions": "0.5.0-rc1-*",
+    "Openchain.Infrastructure": "0.5.0-rc1-*"
+  }
+}
