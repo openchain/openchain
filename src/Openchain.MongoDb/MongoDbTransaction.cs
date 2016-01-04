@@ -81,7 +81,9 @@ namespace Openchain.MongoDb
 
         [BsonExtraElements]
         public BsonDocument Extra { get; set; }
+        public List<byte[]> AddedRecords { get; set; }
 
+        public byte[] LockToken { get; set; }
     }
 
 }

@@ -21,3 +21,5 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("d4652647-234b-4b32-935f-3e192c1e7401")]
+
+[assembly: InternalsVisibleTo("Openchain.MongoDb.Tests")]

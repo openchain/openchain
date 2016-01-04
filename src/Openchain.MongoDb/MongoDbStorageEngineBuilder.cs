@@ -14,6 +14,7 @@ namespace Openchain.MongoDb
         public string Database { get; set; }
         public TimeSpan ReadLoopDelay { get; set; }
         public int ReadRetryCount { get; set; }
+        public bool RunRollbackThread { get; set; } = true;
         public TimeSpan StaleTransactionDelay { get; set; }
     }
     public class MongoDbStorageEngineBuilder : IComponentBuilder<MongoDbLedger>
@@ -36,13 +37,9 @@ namespace Openchain.MongoDb
             };
             var s = configuration["stale_transaction_delay"] ?? "00:01:00";
             config.StaleTransactionDelay = TimeSpan.Parse(s);
-            using (var m = new MongoDbLedger(config, serviceProvider.GetRequiredService<ILogger>()))
+            using (var m = new MongoDbStorageEngine(config, serviceProvider.GetRequiredService<ILogger>()))
             {
-                await m.TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.Timestamp), new CreateIndexOptions{Background = true, Unique = true});
-                await m.TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.MutationHash), new CreateIndexOptions{Background = true, Unique = true});
-                await m.TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.Records), new CreateIndexOptions { Background = true, Unique = false });
-                await m.RecordCollection.Indexes.CreateOneAsync(Builders<MongoDbRecord>.IndexKeys.Ascending(x => x.Type).Ascending(x => x.Name), new CreateIndexOptions{Background = true});
-                await m.RecordCollection.Indexes.CreateOneAsync(Builders<MongoDbRecord>.IndexKeys.Ascending(x => x.KeyS), new CreateIndexOptions{Background = true});
+                await m.CreateIndexes();
             }
         }
     }

@@ -42,6 +42,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.Anchoring.Blockch
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.MongoDb", "src\Openchain.MongoDb\Openchain.MongoDb.xproj", "{D4652647-234B-4B32-935F-3E192C1E7401}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Openchain.MongoDb.Tests", "test\Openchain.MongoDb.Tests\Openchain.MongoDb.Tests.xproj", "{F4804AFC-37F3-4A63-8363-BB72881E5AE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,6 +108,10 @@ Global
 		{D4652647-234B-4B32-935F-3E192C1E7401}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4652647-234B-4B32-935F-3E192C1E7401}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4652647-234B-4B32-935F-3E192C1E7401}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +131,6 @@ Global
 		{91B5C8B9-602C-4843-A2BE-DA82B3F7449B} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{B392C570-EFCC-4684-B7D8-0A645B49EAED} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
 		{D4652647-234B-4B32-935F-3E192C1E7401} = {69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}
+		{F4804AFC-37F3-4A63-8363-BB72881E5AE7} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 	EndGlobalSection
 EndGlobal

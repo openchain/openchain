@@ -51,6 +51,14 @@ namespace Openchain.Infrastructure.Tests
             Assert.Equal(ByteString.Parse("0101"), observer.Values[3]);
         }
 
+        static Task<T> FromExAsync<T>(Exception ex)
+        {
+            var ei = System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(ex);
+            var task = new Task<T>(() => { ei.Throw(); return default(T); });
+            task.RunSynchronously();
+            return task;
+        }
+
         [Fact]
         public async Task Subscribe_Error()
         {
@@ -58,7 +66,7 @@ namespace Openchain.Infrastructure.Tests
 
             Func<ByteString, Task<IReadOnlyList<ByteString>>> query = delegate (ByteString start)
             {
-                return Task.FromException<IReadOnlyList<ByteString>>(new ArithmeticException());
+                return FromExAsync<IReadOnlyList<ByteString>>(new ArithmeticException());
             };
 
             IObservable<ByteString> stream = new PollingObservable(ByteString.Empty, query);

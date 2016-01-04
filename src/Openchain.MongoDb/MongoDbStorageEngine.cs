@@ -43,10 +43,12 @@ namespace Openchain.MongoDb
             TransactionCollection = Database.GetCollection<MongoDbTransaction>("transactions");
             PendingTransactionCollection = Database.GetCollection<MongoDbPendingTransaction>("pending_transactions");
         }
-
+        
         public async Task AddTransactions(IEnumerable<ByteString> transactions)
         {
             List<byte[]> transactionHashes = new List<byte[]>();
+            List<Record> lockedRecords = new List<Record>();
+            byte[] lockToken = Guid.NewGuid().ToByteArray();
             try {
                 foreach (ByteString rawTransaction in transactions)
                 {
@@ -66,43 +68,72 @@ namespace Openchain.MongoDb
                         TransactionHash = transactionHash,
                         RawData = rawTransactionBuffer,
                         LockTimestamp = DateTime.UtcNow,
-                        InitialRecords = new List<MongoDbRecord>()
+                        InitialRecords = new List<MongoDbRecord>(),
+                        AddedRecords = new List<byte[]>(),
+                        LockToken = lockToken
                     };
                     await PendingTransactionCollection.InsertOneAsync(ptr);
 
                     // lock records
                     foreach (var r in mutation.Records)
                     {
-                        var previous=await LockRecord(transactionHash, r);
-                        if (previous != null) ptr.InitialRecords.Add(previous);
+                        var previous = await LockRecord(lockToken, r);
+                        if (previous != null)
+                        {
+                            ptr.InitialRecords.Add(previous);
+                            lockedRecords.Add(r);
+                        }
+                        else
+                            if (r.Value != null)
+                            {
+                                ptr.AddedRecords.Add(r.Key.ToByteArray());
+                                lockedRecords.Add(r);
+                            }
                     }
 
                     // save original records
-                    await PendingTransactionCollection.UpdateOneAsync(x => x.TransactionHash.Equals(transactionHash),
-                        Builders<MongoDbPendingTransaction>.Update.Set(x => x.InitialRecords, ptr.InitialRecords));
+                    await PendingTransactionCollection.UpdateOneAsync(
+                        x => x.TransactionHash.Equals(transactionHash),
+                        Builders<MongoDbPendingTransaction>.Update
+                            .Set(x => x.InitialRecords, ptr.InitialRecords)
+                            .Set(x => x.AddedRecords, ptr.AddedRecords)
+                    );
 
                     // update records
                     foreach (var rec in mutation.Records)
                     {
-                        RecordKey key = RecordKey.Parse(rec.Key);
-                        var r = new MongoDbRecord { Key = rec.Key.ToByteArray(), KeyS = Encoding.UTF8.GetString(rec.Key.ToByteArray()), Value = rec.Value?.ToByteArray(), Version = rec.Version.ToByteArray(), Path = key.Path.Segments.ToArray(), Type = key.RecordType, Name = key.Name };
+                        MongoDbRecord r = BuildMongoDbRecord(rec);
                         if (r.Value == null)
                         {
-                            var res = await RecordCollection.CountAsync(x => x.Key.Equals(r.Key) && x.Version.Equals(r.Version));
-                            if ((r.Version.Length == 0 && res != 0) || (r.Version.Length != 0 && res != 1))
-                                throw new ConcurrentMutationException(rec);
+                            if (r.Version.Length == 0) // No record expected
+                            {
+                                var res = await RecordCollection.CountAsync(x => x.Key.Equals(r.Key));
+                                if (res != 0) // a record exists
+                                    throw new ConcurrentMutationException(rec);
+                            }
+                            else
+                            {   // specific version expected
+                                var res = await RecordCollection.CountAsync(x => x.Key.Equals(r.Key) && x.Version.Equals(r.Version));
+                                if (res != 1) // expected version not found
+                                    throw new ConcurrentMutationException(rec);
+                            }
                         }
                         else
                         {
                             if (r.Version.Length == 0)
                             {
                                 r.Version = mutationHash;
-                                await RecordCollection.InsertOneAsync(r);
+                                r.TransactionLock = lockToken;
+                                try {
+                                    await RecordCollection.InsertOneAsync(r);
+                                } catch (MongoWriteException ex) when (ex.WriteError.Category == ServerErrorCategory.DuplicateKey) {
+                                    throw new ConcurrentMutationException(rec);
+                                }
                             }
                             else
                             {
                                 var res = await RecordCollection.UpdateOneAsync(
-                                    x => x.Key.Equals(r.Key) && x.Version.Equals(r.Version) && x.TransactionLock.Equals(transactionHash),
+                                    x => x.Key.Equals(r.Key) && x.Version.Equals(r.Version) && x.TransactionLock.Equals(lockToken),
                                     Builders<MongoDbRecord>.Update
                                         .Set(x => x.Value, r.Value)
                                         .Set(x => x.Version, mutationHash)
@@ -122,15 +153,23 @@ namespace Openchain.MongoDb
                         Records = records
                     };
                     await TransactionCollection.InsertOneAsync(tr);
+                }
 
-                    // unlock records
-                    foreach (var r in mutation.Records)
+                // unlock records
+                List<ByteString> l = new List<ByteString>();
+                foreach (var r in lockedRecords)
+                {
+                    if (!l.Contains(r.Key))
                     {
-                        await UnlockRecord(transactionHash, r);
+                        await UnlockRecord(lockToken, r);
+                        l.Add(r.Key);
                     }
+                }
 
-                    // remove pending transaction
-                    await PendingTransactionCollection.DeleteOneAsync(x => x.TransactionHash.Equals(transactionHash));
+                // remove pending transaction
+                foreach (var hash in transactionHashes)
+                {
+                    await PendingTransactionCollection.DeleteOneAsync(x => x.TransactionHash.Equals(hash));
                 }
             } catch (Exception ex1)
             {
@@ -147,16 +186,26 @@ namespace Openchain.MongoDb
             }
         }
 
-        private async Task<MongoDbRecord> LockRecord(byte[] transactionHash, Record r)
+        protected virtual MongoDbRecord BuildMongoDbRecord(Record rec)
+        {
+            var r = new MongoDbRecord { Key = rec.Key.ToByteArray(),
+                KeyS = Encoding.UTF8.GetString(rec.Key.ToByteArray()),
+                Value = rec.Value?.ToByteArray(),
+                Version = rec.Version.ToByteArray()
+            };
+            return r;
+        }
+
+        private async Task<MongoDbRecord> LockRecord(byte[] lockToken, Record r)
         {
             var key = r.Key.ToByteArray();
             var version = r.Version.ToByteArray();
             if (version.Length != 0)
             {
                 var res = await RecordCollection.FindOneAndUpdateAsync(
-                    x => x.Key.Equals(key) && x.Version.Equals(version) && x.TransactionLock == null,
+                    x => x.Key.Equals(key) && x.Version.Equals(version) && (x.TransactionLock == null || x.TransactionLock.Equals(lockToken)),
                     Builders<MongoDbRecord>.Update
-                        .Set(x => x.TransactionLock, transactionHash)
+                        .Set(x => x.TransactionLock, lockToken)
                 );
                 if (res == null)
                     throw new ConcurrentMutationException(r);
@@ -165,20 +214,16 @@ namespace Openchain.MongoDb
             return null;
         }
 
-        private async Task UnlockRecord(byte[] transactionHash, Record r)
+        private async Task UnlockRecord(byte[] lockToken, Record r)
         {
             var key = r.Key.ToByteArray();
-            var version = r.Version.ToByteArray();
-            if (version.Length != 0)
-            {
-                var res = await RecordCollection.UpdateOneAsync(
-                    x => x.Key.Equals(key) && x.TransactionLock == transactionHash,
-                    Builders<MongoDbRecord>.Update
-                        .Unset(x => x.TransactionLock)
-                );
-                if (res.ModifiedCount != 1 || res.MatchedCount != 1)
-                    throw new ConcurrentMutationException(r);
-            }
+            var res = await RecordCollection.UpdateOneAsync(
+                x => x.Key.Equals(key) && x.TransactionLock == lockToken,
+                Builders<MongoDbRecord>.Update
+                    .Unset(x => x.TransactionLock)
+            );
+            if (res.ModifiedCount != 1 || res.MatchedCount != 1)
+                throw new ConcurrentMutationException(r);
         }
         
         private async Task RollbackTransaction(byte[] hash)
@@ -196,8 +241,15 @@ namespace Openchain.MongoDb
                     foreach (var r in trn.InitialRecords)
                     {
                         await RecordCollection.FindOneAndUpdateAsync(
-                            x => x.Key.Equals(r.Key) && x.TransactionLock.Equals(hash),
+                            x => x.Key.Equals(r.Key) && x.TransactionLock.Equals(trn.LockToken),
                             Builders<MongoDbRecord>.Update.Set(x => x.Value, r.Value).Set(x => x.Version, r.Version).Unset(x => x.TransactionLock)
+                        );
+                    }
+
+                    foreach (var r in trn.AddedRecords)
+                    {
+                        await RecordCollection.FindOneAndDeleteAsync(
+                            x => x.Key.Equals(r) && x.TransactionLock.Equals(trn.LockToken)
                         );
                     }
 
@@ -227,7 +279,7 @@ namespace Openchain.MongoDb
         public async Task<ByteString> GetLastTransaction()
         {
             var res = await TransactionCollection.Find(x => true).SortByDescending(x => x.Timestamp).FirstOrDefaultAsync();
-            return res == null ? null : new ByteString(res.RawData);
+            return res == null ? ByteString.Empty : new ByteString(res.TransactionHash);
         }
 
         public async Task<IReadOnlyList<Record>> GetRecords(IEnumerable<ByteString> keys)
@@ -252,6 +304,7 @@ namespace Openchain.MongoDb
                                 throw new Exception("Lock timeout reading record " + cmpkey.ToString());
                             await Task.Delay(Configuration.ReadLoopDelay);
                             replay = true;
+                            retryCount--;
                         }
                         else
                         {
@@ -319,7 +372,18 @@ namespace Openchain.MongoDb
         public async Task Initialize()
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         {
-            StartWorkerTaskIfNeeded();
+            if (Configuration.RunRollbackThread)
+                StartWorkerTaskIfNeeded();
         }
+
+        internal async Task CreateIndexes()
+        {
+            await TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.Timestamp), new CreateIndexOptions { Background = true, Unique = true });
+            await TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.MutationHash), new CreateIndexOptions { Background = true, Unique = true });
+            await TransactionCollection.Indexes.CreateOneAsync(Builders<MongoDbTransaction>.IndexKeys.Ascending(x => x.Records), new CreateIndexOptions { Background = true, Unique = false });
+            await RecordCollection.Indexes.CreateOneAsync(Builders<MongoDbRecord>.IndexKeys.Ascending(x => x.Type).Ascending(x => x.Name), new CreateIndexOptions { Background = true });
+            await RecordCollection.Indexes.CreateOneAsync(Builders<MongoDbRecord>.IndexKeys.Ascending(x => x.KeyS), new CreateIndexOptions { Background = true });
+        }
+
     }
 }
