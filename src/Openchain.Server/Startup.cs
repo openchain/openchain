@@ -107,7 +107,11 @@ namespace Openchain.Server
         /// </summary>
         public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
         {
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(builder => builder
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .WithExposedHeaders("Content-Range", "Content-Length", "Content-Encoding"));
 
             app.UseIISPlatformHandler();
 
