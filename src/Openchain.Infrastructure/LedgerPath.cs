@@ -53,6 +53,10 @@ namespace Openchain.Infrastructure
         public static bool TryParse(string path, out LedgerPath result)
         {
             result = null;
+
+            if (path == null)
+                return false;
+
             string[] segments = path.Split('/');
             if (segments.Length < 2 || segments[0] != string.Empty || segments[segments.Length - 1] != string.Empty)
                 return false;
