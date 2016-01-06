@@ -73,7 +73,7 @@ namespace Openchain.Server.Models
             if (string.IsNullOrEmpty(instanceSeed))
             {
                 serviceProvider.GetService<ILogger>().LogWarning(
-                    $"No root URL is configured, this instance is not able to validate transactions");
+                    $"No instance seed is configured, this instance is not able to validate transactions");
                 validNamespace = null;
             }
             else
