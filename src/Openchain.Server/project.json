@@ -8,8 +8,6 @@
   "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "userSecretsId": "Openchain.Server",
-
   "compilationOptions": {
     "allowUnsafe": false,
     "emitEntryPoint": true
@@ -30,10 +28,6 @@
     "Openchain.Infrastructure": "0.5.0-rc1-*"
   },
 
-  "commands": {
-    "start": "Microsoft.AspNet.Hosting --webroot \"Webroot\" --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
-  },
-
   "frameworks": {
 
     "dnxcore50": {
@@ -43,14 +37,5 @@
     },
 
     "dnx451": { }
-  },
-
-  "exclude": [
-  ],
-
-  "publishExclude": [
-    "**.xproj",
-    "**.user",
-    "**.vspscc"
-  ]
+  }
 }
