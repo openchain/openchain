@@ -98,7 +98,7 @@ namespace Openchain.Server.Models
 
             return dependencies.Properties()
                 .Select(property => property.Name)
-                .Where(name => name.StartsWith("Openchain."))
+                .Where(name => name != "Openchain.Server")
                 .Select(name => assemblyLoader.Default.Load(name))
                 .ToList();
         }
