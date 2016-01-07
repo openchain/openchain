@@ -52,7 +52,7 @@ namespace Openchain.Validation.PermissionBased
             {
                 return PermissionSet.Unset;
             }
-            catch (InvalidOperationException)
+            catch (NullReferenceException)
             {
                 return PermissionSet.Unset;
             }
