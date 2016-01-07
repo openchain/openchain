@@ -215,7 +215,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -226,13 +226,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -241,14 +241,14 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+      "Openchain.Validation.PermissionBased/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Infrastructure": "0.5.0",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -1318,7 +1318,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1329,13 +1329,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -1344,14 +1344,14 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+      "Openchain.Validation.PermissionBased/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Infrastructure": "0.5.0",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -2731,7 +2731,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -2742,13 +2742,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -2757,14 +2757,14 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+      "Openchain.Validation.PermissionBased/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Infrastructure": "0.5.0",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime": "4.0.21-beta-23516",
@@ -3915,15 +3915,15 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0-rc1": {
+    "Openchain.Abstractions/0.5.0": {
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Infrastructure/0.5.0-rc1": {
+    "Openchain.Infrastructure/0.5.0": {
       "type": "project",
       "path": "../../src/Openchain.Infrastructure/project.json"
     },
-    "Openchain.Validation.PermissionBased/0.5.0-rc1": {
+    "Openchain.Validation.PermissionBased/0.5.0": {
       "type": "project",
       "path": "../../src/Openchain.Validation.PermissionBased/project.json"
     },
@@ -6866,7 +6866,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*",
+      "Openchain.Validation.PermissionBased >= 0.5.0-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-*"
     ],

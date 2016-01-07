@@ -56,7 +56,7 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -435,7 +435,7 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -510,7 +510,7 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -944,7 +944,7 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1382,7 +1382,7 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1461,7 +1461,7 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -1484,7 +1484,7 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0-rc1": {
+    "Openchain.Abstractions/0.5.0": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
@@ -2882,7 +2882,7 @@
     "": [
       "Microsoft.Extensions.Configuration.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc1-final",
-      "Openchain.Abstractions >= 0.5.0-rc1-*",
+      "Openchain.Abstractions >= 0.5.0-*",
       "Portable.BouncyCastle >= 1.8.0"
     ],
     ".NETPlatform,Version=v5.4": [

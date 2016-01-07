@@ -188,7 +188,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -199,13 +199,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -1250,7 +1250,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -1261,13 +1261,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -2622,7 +2622,7 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0-rc1": {
+      "Openchain.Abstractions/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
@@ -2633,13 +2633,13 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0-rc1": {
+      "Openchain.Infrastructure/0.5.0": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
+          "Openchain.Abstractions": "0.5.0",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -3792,11 +3792,11 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0-rc1": {
+    "Openchain.Abstractions/0.5.0": {
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Infrastructure/0.5.0-rc1": {
+    "Openchain.Infrastructure/0.5.0": {
       "type": "project",
       "path": "../../src/Openchain.Infrastructure/project.json"
     },
@@ -6689,7 +6689,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Infrastructure >= 0.5.0-rc1-*",
+      "Openchain.Infrastructure >= 0.5.0-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-*"
     ],
