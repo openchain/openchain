@@ -1,0 +1,28 @@
+﻿{
+  "entryPoint": "Openchain.Server",
+
+  "dependencies": {
+    "Openchain.Server": "0.5.0-rc1",
+
+    "Openchain.Sqlite": "0.5.0-rc1",
+    "Openchain.Validation.PermissionBased": "0.5.0-rc1",
+    "Openchain.Anchoring.Blockchain": "0.5.0-rc1"
+  },
+
+  "userSecretsId": "Openchain.Server",
+
+  "commands": {
+    "start": "Microsoft.AspNet.Hosting --webroot \"Webroot\" --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
+  },
+
+  "frameworks": {
+    "dnxcore50": { },
+    "dnx451": { }
+  },
+
+  "publishExclude": [
+    "**.xproj",
+    "**.user",
+    "**.vspscc"
+  ]
+}
