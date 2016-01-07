@@ -554,32 +554,6 @@
           "lib/dotnet5.4/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11-beta-23516",
-          "System.ComponentModel": "4.0.1-beta-23516",
-          "System.Data.Common": "4.0.1-beta-23516",
-          "System.Diagnostics.Debug": "4.0.11-beta-23516",
-          "System.Globalization": "4.0.11-beta-23516",
-          "System.IO.FileSystem": "4.0.1-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Reflection": "4.1.0-beta-23516",
-          "System.Resources.ResourceManager": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Runtime.Extensions": "4.0.11-beta-23516",
-          "System.Runtime.Handles": "4.0.1-beta-23516",
-          "System.Runtime.InteropServices": "4.0.21-beta-23516",
-          "System.Text.Encoding": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -985,19 +959,6 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -1018,16 +979,6 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        }
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -1041,30 +992,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.1-beta-23516",
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -1134,23 +1061,6 @@
         },
         "runtime": {
           "lib/dotnet5.4/System.Collections.Concurrent.dll": {}
-        }
-      },
-      "System.Collections.NonGeneric/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Diagnostics.Debug": "4.0.10",
-          "System.Globalization": "4.0.10",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Threading": "4.0.10"
-        },
-        "compile": {
-          "ref/dotnet/System.Collections.NonGeneric.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/System.Collections.NonGeneric.dll": {}
         }
       },
       "System.ComponentModel/4.0.1-beta-23516": {
@@ -1230,26 +1140,6 @@
         },
         "compile": {
           "ref/dotnet5.1/System.Console.dll": {}
-        }
-      },
-      "System.Data.Common/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.10",
-          "System.Collections.NonGeneric": "4.0.0",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Text.RegularExpressions": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.1/System.Data.Common.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/System.Data.Common.dll": {}
         }
       },
       "System.Diagnostics.Contracts/4.0.1-beta-23516": {
@@ -1457,19 +1347,6 @@
           "ref/dotnet5.4/System.Linq.Expressions.dll": {}
         }
       },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.IO": "4.0.0",
-          "System.Net.Primitives": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.2/System.Net.Http.dll": {}
-        }
-      },
       "System.Net.Primitives/4.0.11-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -1545,7 +1422,7 @@
           "ref/dnxcore50/_._": {}
         }
       },
-      "System.Reflection/4.1.0-beta-23516": {
+      "System.Reflection/4.1.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.IO": "4.0.0",
@@ -1553,7 +1430,7 @@
           "System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/dotnet5.4/System.Reflection.dll": {}
+          "ref/dotnet/System.Reflection.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Reflection.dll": {}
@@ -2575,25 +2452,6 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "System.Data"
-        ],
-        "compile": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -2997,21 +2855,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -3032,19 +2875,6 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
-        ]
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -3059,29 +2889,6 @@
           "System.Numerics"
         ]
       },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        },
-        "frameworkAssemblies": [
-          "System.Data",
-          "System.Xml"
-        ]
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -3089,15 +2896,6 @@
         },
         "runtime": {
           "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
         }
       },
       "System.Diagnostics.DiagnosticSource/4.0.0-beta-23516": {
@@ -3116,18 +2914,6 @@
       },
       "System.Diagnostics.Tracing/4.0.0": {
         "type": "package",
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
         "compile": {
           "ref/net45/_._": {}
         },
@@ -3727,35 +3513,6 @@
           "lib/dotnet5.4/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11-beta-23516",
-          "System.ComponentModel": "4.0.1-beta-23516",
-          "System.Data.Common": "4.0.1-beta-23516",
-          "System.Diagnostics.Debug": "4.0.11-beta-23516",
-          "System.Globalization": "4.0.11-beta-23516",
-          "System.IO.FileSystem": "4.0.1-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Reflection": "4.1.0-beta-23516",
-          "System.Resources.ResourceManager": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Runtime.Extensions": "4.0.11-beta-23516",
-          "System.Runtime.Handles": "4.0.1-beta-23516",
-          "System.Runtime.InteropServices": "4.0.21-beta-23516",
-          "System.Text.Encoding": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        },
-        "native": {
-          "runtimes/win7-x86/native/sqlite3.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -4161,19 +3918,6 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -4194,16 +3938,6 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        }
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -4217,30 +3951,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.1-beta-23516",
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -4401,33 +4111,6 @@
         },
         "runtime": {
           "runtimes/win7/lib/dotnet5.4/System.IO.FileSystem.Watcher.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.Primitives": "4.0.0",
-          "System.Collections": "4.0.10",
-          "System.Diagnostics.Debug": "4.0.10",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.10",
-          "System.IO.Compression": "4.0.0",
-          "System.Net.Primitives": "4.0.10",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Runtime.Handles": "4.0.0",
-          "System.Runtime.InteropServices": "4.0.20",
-          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23516",
-          "System.Text.Encoding": "4.0.10",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.10"
-        },
-        "compile": {
-          "ref/dotnet/_._": {}
-        },
-        "runtime": {
-          "runtimes/win7/lib/DNXCore50/System.Net.Http.dll": {}
         }
       },
       "runtime.win7.System.Net.Primitives/4.0.11-beta-23516": {
@@ -4739,26 +4422,6 @@
           "ref/dotnet5.1/System.Console.dll": {}
         }
       },
-      "System.Data.Common/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.10",
-          "System.Collections.NonGeneric": "4.0.0",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Text.RegularExpressions": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.1/System.Data.Common.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/System.Data.Common.dll": {}
-        }
-      },
       "System.Diagnostics.Contracts/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -4916,26 +4579,6 @@
           "lib/DNXCore50/System.IO.dll": {}
         }
       },
-      "System.IO.Compression/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.IO": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Runtime.InteropServices": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet/System.IO.Compression.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/System.IO.Compression.dll": {}
-        }
-      },
       "System.IO.FileSystem/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -4995,19 +4638,6 @@
         },
         "compile": {
           "ref/dotnet5.4/System.Linq.Expressions.dll": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.IO": "4.0.0",
-          "System.Net.Primitives": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.2/System.Net.Http.dll": {}
         }
       },
       "System.Net.Primitives/4.0.11-beta-23516": {
@@ -5132,7 +4762,7 @@
           "ref/dnxcore50/_._": {}
         }
       },
-      "System.Reflection/4.1.0-beta-23516": {
+      "System.Reflection/4.1.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.IO": "4.0.0",
@@ -5140,7 +4770,7 @@
           "System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/dotnet5.4/System.Reflection.dll": {}
+          "ref/dotnet/System.Reflection.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Reflection.dll": {}
@@ -6202,35 +5832,6 @@
           "lib/dotnet5.4/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.11-beta-23516",
-          "System.ComponentModel": "4.0.1-beta-23516",
-          "System.Data.Common": "4.0.1-beta-23516",
-          "System.Diagnostics.Debug": "4.0.11-beta-23516",
-          "System.Globalization": "4.0.11-beta-23516",
-          "System.IO.FileSystem": "4.0.1-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Reflection": "4.1.0-beta-23516",
-          "System.Resources.ResourceManager": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Runtime.Extensions": "4.0.11-beta-23516",
-          "System.Runtime.Handles": "4.0.1-beta-23516",
-          "System.Runtime.InteropServices": "4.0.21-beta-23516",
-          "System.Text.Encoding": "4.0.11-beta-23516",
-          "System.Threading.Tasks": "4.0.11-beta-23516"
-        },
-        "compile": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/Microsoft.Data.Sqlite.dll": {}
-        },
-        "native": {
-          "runtimes/win7-x64/native/sqlite3.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -6636,19 +6237,6 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "compile": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll": {},
-          "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -6669,16 +6257,6 @@
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        }
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
@@ -6692,30 +6270,6 @@
           "System.Runtime.Numerics": "4.0.1-beta-23516",
           "System.Text.Encoding": "4.0.11-beta-23516",
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
-        }
-      },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETPlatform,Version=v5.4",
-        "dependencies": {
-          "Microsoft.CSharp": "4.0.1-beta-23516",
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Collections": "4.0.11-beta-23516",
-          "System.Linq": "4.0.1-beta-23516",
-          "System.Runtime": "4.0.21-beta-23516",
-          "System.Threading": "4.0.11-beta-23516"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -6876,33 +6430,6 @@
         },
         "runtime": {
           "runtimes/win7/lib/dotnet5.4/System.IO.FileSystem.Watcher.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Win32.Primitives": "4.0.0",
-          "System.Collections": "4.0.10",
-          "System.Diagnostics.Debug": "4.0.10",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.10",
-          "System.IO.Compression": "4.0.0",
-          "System.Net.Primitives": "4.0.10",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Runtime.Handles": "4.0.0",
-          "System.Runtime.InteropServices": "4.0.20",
-          "System.Security.Cryptography.X509Certificates": "4.0.0-beta-23516",
-          "System.Text.Encoding": "4.0.10",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.10"
-        },
-        "compile": {
-          "ref/dotnet/_._": {}
-        },
-        "runtime": {
-          "runtimes/win7/lib/DNXCore50/System.Net.Http.dll": {}
         }
       },
       "runtime.win7.System.Net.Primitives/4.0.11-beta-23516": {
@@ -7214,26 +6741,6 @@
           "ref/dotnet5.1/System.Console.dll": {}
         }
       },
-      "System.Data.Common/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.10",
-          "System.Collections.NonGeneric": "4.0.0",
-          "System.Globalization": "4.0.10",
-          "System.IO": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.20",
-          "System.Runtime.Extensions": "4.0.10",
-          "System.Text.RegularExpressions": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.1/System.Data.Common.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet5.4/System.Data.Common.dll": {}
-        }
-      },
       "System.Diagnostics.Contracts/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -7391,26 +6898,6 @@
           "lib/DNXCore50/System.IO.dll": {}
         }
       },
-      "System.IO.Compression/4.0.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.0.0",
-          "System.IO": "4.0.0",
-          "System.Resources.ResourceManager": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Runtime.Extensions": "4.0.0",
-          "System.Runtime.InteropServices": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet/System.IO.Compression.dll": {}
-        },
-        "runtime": {
-          "lib/dotnet/System.IO.Compression.dll": {}
-        }
-      },
       "System.IO.FileSystem/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
@@ -7470,19 +6957,6 @@
         },
         "compile": {
           "ref/dotnet5.4/System.Linq.Expressions.dll": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "dependencies": {
-          "System.IO": "4.0.0",
-          "System.Net.Primitives": "4.0.0",
-          "System.Runtime": "4.0.0",
-          "System.Text.Encoding": "4.0.0",
-          "System.Threading.Tasks": "4.0.0"
-        },
-        "compile": {
-          "ref/dotnet5.2/System.Net.Http.dll": {}
         }
       },
       "System.Net.Primitives/4.0.11-beta-23516": {
@@ -7607,7 +7081,7 @@
           "ref/dnxcore50/_._": {}
         }
       },
-      "System.Reflection/4.1.0-beta-23516": {
+      "System.Reflection/4.1.0-beta-23225": {
         "type": "package",
         "dependencies": {
           "System.IO": "4.0.0",
@@ -7615,7 +7089,7 @@
           "System.Runtime": "4.0.20"
         },
         "compile": {
-          "ref/dotnet5.4/System.Reflection.dll": {}
+          "ref/dotnet/System.Reflection.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Reflection.dll": {}
@@ -8711,28 +8185,6 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "System.Data"
-        ],
-        "compile": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        },
-        "native": {
-          "runtimes/win7-x86/native/sqlite3.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -9136,21 +8588,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -9171,19 +8608,6 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
-        ]
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -9198,29 +8622,6 @@
           "System.Numerics"
         ]
       },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        },
-        "frameworkAssemblies": [
-          "System.Data",
-          "System.Xml"
-        ]
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -9228,21 +8629,6 @@
         },
         "runtime": {
           "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "compile": {
-          "ref/dotnet/_._": {}
         }
       },
       "System.Diagnostics.DiagnosticSource/4.0.0-beta-23516": {
@@ -9261,18 +8647,6 @@
       },
       "System.Diagnostics.Tracing/4.0.0": {
         "type": "package",
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
         "compile": {
           "ref/net45/_._": {}
         },
@@ -9906,28 +9280,6 @@
           "lib/net451/Microsoft.AspNet.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core",
-          "System.Data"
-        ],
-        "compile": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        },
-        "runtime": {
-          "lib/net451/Microsoft.Data.Sqlite.dll": {}
-        },
-        "native": {
-          "runtimes/win7-x64/native/sqlite3.dll": {}
-        }
-      },
       "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
         "type": "package",
         "dependencies": {
@@ -10331,21 +9683,6 @@
           "lib/net451/Microsoft.Net.Http.Headers.dll": {}
         }
       },
-      "NBitcoin/2.1.5.9": {
-        "type": "package",
-        "dependencies": {
-          "Newtonsoft.Json": "6.0.1",
-          "protobuf-net": "2.0.0.668"
-        },
-        "compile": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        },
-        "runtime": {
-          "lib/net45/NBitcoin.BouncyCastle.dll": {},
-          "lib/net45/NBitcoin.dll": {}
-        }
-      },
       "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
@@ -10366,19 +9703,6 @@
           "System.Runtime"
         ]
       },
-      "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
-          "NBitcoin": "2.1.5.9",
-          "Openchain.Infrastructure": "0.5.0-rc1",
-          "System.Net.Http": "4.0.1-beta-23516"
-        },
-        "frameworkAssemblies": [
-          "System.Collections"
-        ]
-      },
       "Openchain.Infrastructure/0.5.0-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
@@ -10393,29 +9717,6 @@
           "System.Numerics"
         ]
       },
-      "Openchain.Sqlite/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
-          "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        },
-        "frameworkAssemblies": [
-          "System.Data",
-          "System.Xml"
-        ]
-      },
-      "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-        "type": "project",
-        "framework": ".NETFramework,Version=v4.5.1",
-        "dependencies": {
-          "Newtonsoft.Json": "7.0.1",
-          "Openchain.Abstractions": "0.5.0-rc1",
-          "Openchain.Infrastructure": "0.5.0-rc1"
-        }
-      },
       "Portable.BouncyCastle/1.8.0": {
         "type": "package",
         "compile": {
@@ -10423,21 +9724,6 @@
         },
         "runtime": {
           "lib/net45/crypto.dll": {}
-        }
-      },
-      "protobuf-net/2.0.0.668": {
-        "type": "package",
-        "compile": {
-          "lib/net40/protobuf-net.dll": {}
-        },
-        "runtime": {
-          "lib/net40/protobuf-net.dll": {}
-        }
-      },
-      "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "compile": {
-          "ref/dotnet/_._": {}
         }
       },
       "System.Diagnostics.DiagnosticSource/4.0.0-beta-23516": {
@@ -10456,18 +9742,6 @@
       },
       "System.Diagnostics.Tracing/4.0.0": {
         "type": "package",
-        "compile": {
-          "ref/net45/_._": {}
-        },
-        "runtime": {
-          "lib/net45/_._": {}
-        }
-      },
-      "System.Net.Http/4.0.1-beta-23516": {
-        "type": "package",
-        "frameworkAssemblies": [
-          "System.Net.Http"
-        ],
         "compile": {
           "ref/net45/_._": {}
         },
@@ -10518,21 +9792,9 @@
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
-    "Openchain.Anchoring.Blockchain/0.5.0-rc1": {
-      "type": "project",
-      "path": "../Openchain.Anchoring.Blockchain/project.json"
-    },
     "Openchain.Infrastructure/0.5.0-rc1": {
       "type": "project",
       "path": "../Openchain.Infrastructure/project.json"
-    },
-    "Openchain.Sqlite/0.5.0-rc1": {
-      "type": "project",
-      "path": "../Openchain.Sqlite/project.json"
-    },
-    "Openchain.Validation.PermissionBased/0.5.0-rc1": {
-      "type": "project",
-      "path": "../Openchain.Validation.PermissionBased/project.json"
     },
     "Google.Protobuf/3.0.0-alpha4": {
       "type": "package",
@@ -11025,29 +10287,6 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Microsoft.Data.SQLite/1.0.0-rc1-final": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "54F32OBWIWMIpeKggCMEX+Bp/TiAiKzBaQ4z+IRr61eNSnJhxMnLE/QWDs5YbCtbDlWIB4+VBC1rnT8PFGCtdw==",
-      "files": [
-        "build/net451/Microsoft.Data.Sqlite.props",
-        "build/netcore50/Microsoft.Data.Sqlite.targets",
-        "build/netcore50/win10-arm/native/sqlite3.dll",
-        "build/netcore50/win10-x64/native/sqlite3.dll",
-        "build/netcore50/win10-x86/native/sqlite3.dll",
-        "lib/dotnet5.4/Microsoft.Data.Sqlite.dll",
-        "lib/dotnet5.4/Microsoft.Data.Sqlite.xml",
-        "lib/net451/Microsoft.Data.Sqlite.dll",
-        "lib/net451/Microsoft.Data.Sqlite.xml",
-        "lib/netcore50/Microsoft.Data.Sqlite.dll",
-        "lib/netcore50/Microsoft.Data.Sqlite.xml",
-        "Microsoft.Data.SQLite.1.0.0-rc1-final.nupkg",
-        "Microsoft.Data.SQLite.1.0.0-rc1-final.nupkg.sha512",
-        "Microsoft.Data.SQLite.nuspec",
-        "runtimes/win7-x64/native/sqlite3.dll",
-        "runtimes/win7-x86/native/sqlite3.dll"
-      ]
-    },
     "Microsoft.Dnx.Compilation.Abstractions/1.0.0-rc1-final": {
       "type": "package",
       "serviceable": true,
@@ -11454,44 +10693,6 @@
         "ref/net46/Microsoft.Win32.Registry.dll"
       ]
     },
-    "NBitcoin/2.1.5.9": {
-      "type": "package",
-      "sha512": "cYiNxr05BDO77qjognjyniOv5lVJIO6/0iLj/GouP5Zogl1oGtqXb6jFTb+5BAjxpTfrVXoNLBBo+xPiwnAczw==",
-      "files": [
-        "lib/MonoAndroid/NBitcoin.BouncyCastle.dll",
-        "lib/MonoAndroid/NBitcoin.BouncyCastle.pdb",
-        "lib/MonoAndroid/NBitcoin.dll",
-        "lib/MonoAndroid/NBitcoin.pdb",
-        "lib/MonoAndroid/NBitcoin.XML",
-        "lib/MonoAndroid/Newtonsoft.Json.dll",
-        "lib/MonoAndroid/Newtonsoft.Json.pdb",
-        "lib/MonoAndroid/Newtonsoft.Json.xml",
-        "lib/net45/NBitcoin.BouncyCastle.dll",
-        "lib/net45/NBitcoin.BouncyCastle.pdb",
-        "lib/net45/NBitcoin.dll",
-        "lib/net45/NBitcoin.pdb",
-        "lib/net45/NBitcoin.XML",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.pdb",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.pdb",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.XML",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
-        "lib/portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.dll",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.BouncyCastle.pdb",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.dll",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.pdb",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/NBitcoin.XML",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.dll",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.pdb",
-        "lib/portable-net45+win+wpa81+Xamarin.iOS10+MonoAndroid10+MonoTouch10/Newtonsoft.Json.xml",
-        "NBitcoin.2.1.5.9.nupkg",
-        "NBitcoin.2.1.5.9.nupkg.sha512",
-        "NBitcoin.nuspec"
-      ]
-    },
     "Newtonsoft.Json/7.0.1": {
       "type": "package",
       "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
@@ -11558,55 +10759,6 @@
         "Portable.BouncyCastle.1.8.0.nupkg.sha512",
         "Portable.BouncyCastle.nuspec",
         "Readme.html"
-      ]
-    },
-    "protobuf-net/2.0.0.668": {
-      "type": "package",
-      "sha512": "Lgj+Kf1+RV0utKxX9u1WEcymPGrbWrj/AwFmFADFLLa/LLdc1ji2MIGcecFRAGUu6UO8BRbdjZAIYWvLlN1B/A==",
-      "files": [
-        "lib/net20/protobuf-net.dll",
-        "lib/net20/protobuf-net.pdb",
-        "lib/net20/protobuf-net.xml",
-        "lib/net20-cf/protobuf-net.dll",
-        "lib/net20-cf/protobuf-net.pdb",
-        "lib/net20-cf/protobuf-net.xml",
-        "lib/net30/protobuf-net.dll",
-        "lib/net30/protobuf-net.pdb",
-        "lib/net30/protobuf-net.xml",
-        "lib/net35/protobuf-net.dll",
-        "lib/net35/protobuf-net.pdb",
-        "lib/net35/protobuf-net.xml",
-        "lib/net35-cf/protobuf-net.dll",
-        "lib/net35-cf/protobuf-net.pdb",
-        "lib/net35-cf/protobuf-net.xml",
-        "lib/net40/protobuf-net.dll",
-        "lib/net40/protobuf-net.pdb",
-        "lib/net40/protobuf-net.xml",
-        "lib/net40-cf/protobuf-net.dll",
-        "lib/net40-cf/protobuf-net.pdb",
-        "lib/net40-cf/protobuf-net.xml",
-        "lib/netcore45/protobuf-net.dll",
-        "lib/netcore45/protobuf-net.pdb",
-        "lib/netcore45/protobuf-net.pri",
-        "lib/netcore45/protobuf-net.XML",
-        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.dll",
-        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.pdb",
-        "lib/portable-sl4+net40+wp7+windows8/protobuf-net.xml",
-        "lib/sl3-wp/protobuf-net.dll",
-        "lib/sl3-wp/protobuf-net.pdb",
-        "lib/sl3-wp/protobuf-net.xml",
-        "lib/sl4/protobuf-net.dll",
-        "lib/sl4/protobuf-net.pdb",
-        "lib/sl4/protobuf-net.xml",
-        "lib/sl4-windowsphone71/protobuf-net.dll",
-        "lib/sl4-windowsphone71/protobuf-net.pdb",
-        "lib/sl4-windowsphone71/protobuf-net.xml",
-        "lib/windowsphone8/protobuf-net.dll",
-        "lib/windowsphone8/protobuf-net.pdb",
-        "lib/windowsphone8/protobuf-net.xml",
-        "protobuf-net.2.0.0.668.nupkg",
-        "protobuf-net.2.0.0.668.nupkg.sha512",
-        "protobuf-net.nuspec"
       ]
     },
     "runtime.any.System.Linq.Expressions/4.0.11-beta-23516": {
@@ -11720,19 +10872,6 @@
         "runtimes/win7/lib/win8/_._",
         "runtimes/win7/lib/wp8/_._",
         "runtimes/win7/lib/wpa81/_._"
-      ]
-    },
-    "runtime.win7.System.Net.Http/4.0.1-beta-23516": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "bCVvitLtx/FGp/F14Yvq6Zkb05n6dwRleYNCSAnnX8YpNTKuKYpBJhEpMBUaOjalsM4lqMfE/kd99LtbZRHaiw==",
-      "files": [
-        "ref/dotnet/_._",
-        "runtime.win7.System.Net.Http.4.0.1-beta-23516.nupkg",
-        "runtime.win7.System.Net.Http.4.0.1-beta-23516.nupkg.sha512",
-        "runtime.win7.System.Net.Http.nuspec",
-        "runtimes/win7/lib/DNXCore50/System.Net.Http.dll",
-        "runtimes/win7/lib/netcore50/System.Net.Http.dll"
       ]
     },
     "runtime.win7.System.Net.Primitives/4.0.11-beta-23516": {
@@ -12287,38 +11426,6 @@
         "System.Console.4.0.0-beta-23516.nupkg",
         "System.Console.4.0.0-beta-23516.nupkg.sha512",
         "System.Console.nuspec"
-      ]
-    },
-    "System.Data.Common/4.0.1-beta-23516": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "fMYiiL3/cXaozWH08y/kB25BZf6eBf5EWxBZnjDECNBRkaJgsa4/0S6543NK11UpsWYYHBUFsX4roSq8GddkpA==",
-      "files": [
-        "lib/dotnet5.4/System.Data.Common.dll",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net46/System.Data.Common.dll",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "ref/dotnet5.1/de/System.Data.Common.xml",
-        "ref/dotnet5.1/es/System.Data.Common.xml",
-        "ref/dotnet5.1/fr/System.Data.Common.xml",
-        "ref/dotnet5.1/it/System.Data.Common.xml",
-        "ref/dotnet5.1/ja/System.Data.Common.xml",
-        "ref/dotnet5.1/ko/System.Data.Common.xml",
-        "ref/dotnet5.1/ru/System.Data.Common.xml",
-        "ref/dotnet5.1/System.Data.Common.dll",
-        "ref/dotnet5.1/System.Data.Common.xml",
-        "ref/dotnet5.1/zh-hans/System.Data.Common.xml",
-        "ref/dotnet5.1/zh-hant/System.Data.Common.xml",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net46/System.Data.Common.dll",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "System.Data.Common.4.0.1-beta-23516.nupkg",
-        "System.Data.Common.4.0.1-beta-23516.nupkg.sha512",
-        "System.Data.Common.nuspec"
       ]
     },
     "System.Diagnostics.Contracts/4.0.1-beta-23516": {
@@ -12915,46 +12022,6 @@
         "System.IO.nuspec"
       ]
     },
-    "System.IO.Compression/4.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "S+ljBE3py8pujTrsOOYHtDg2cnAifn6kBu/pfh1hMWIXd8DoVh0ADTA6Puv4q+nYj+Msm6JoFLNwuRSmztbsDQ==",
-      "files": [
-        "lib/dotnet/System.IO.Compression.dll",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/netcore50/System.IO.Compression.dll",
-        "lib/win8/_._",
-        "lib/wpa81/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "ref/dotnet/de/System.IO.Compression.xml",
-        "ref/dotnet/es/System.IO.Compression.xml",
-        "ref/dotnet/fr/System.IO.Compression.xml",
-        "ref/dotnet/it/System.IO.Compression.xml",
-        "ref/dotnet/ja/System.IO.Compression.xml",
-        "ref/dotnet/ko/System.IO.Compression.xml",
-        "ref/dotnet/ru/System.IO.Compression.xml",
-        "ref/dotnet/System.IO.Compression.dll",
-        "ref/dotnet/System.IO.Compression.xml",
-        "ref/dotnet/zh-hans/System.IO.Compression.xml",
-        "ref/dotnet/zh-hant/System.IO.Compression.xml",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/netcore50/System.IO.Compression.dll",
-        "ref/netcore50/System.IO.Compression.xml",
-        "ref/win8/_._",
-        "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "runtime.json",
-        "System.IO.Compression.4.0.0.nupkg",
-        "System.IO.Compression.4.0.0.nupkg.sha512",
-        "System.IO.Compression.nuspec"
-      ]
-    },
     "System.IO.FileSystem/4.0.1-beta-23516": {
       "type": "package",
       "serviceable": true,
@@ -13151,45 +12218,6 @@
         "System.Linq.Expressions.4.0.11-beta-23516.nupkg",
         "System.Linq.Expressions.4.0.11-beta-23516.nupkg.sha512",
         "System.Linq.Expressions.nuspec"
-      ]
-    },
-    "System.Net.Http/4.0.1-beta-23516": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "WbmX0jo84S72GVhRbKtBBUkx2dQ1hzb4TRSLfaiktRh7QKnSP9ctzTxBvXghWQ6GnswBzTHnuc69msImZH5b6A==",
-      "files": [
-        "lib/net45/_._",
-        "lib/win8/_._",
-        "lib/wpa81/_._",
-        "ref/dotnet5.2/de/System.Net.Http.xml",
-        "ref/dotnet5.2/es/System.Net.Http.xml",
-        "ref/dotnet5.2/fr/System.Net.Http.xml",
-        "ref/dotnet5.2/it/System.Net.Http.xml",
-        "ref/dotnet5.2/ja/System.Net.Http.xml",
-        "ref/dotnet5.2/ko/System.Net.Http.xml",
-        "ref/dotnet5.2/ru/System.Net.Http.xml",
-        "ref/dotnet5.2/System.Net.Http.dll",
-        "ref/dotnet5.2/System.Net.Http.xml",
-        "ref/dotnet5.2/zh-hans/System.Net.Http.xml",
-        "ref/dotnet5.2/zh-hant/System.Net.Http.xml",
-        "ref/net45/_._",
-        "ref/netcore50/de/System.Net.Http.xml",
-        "ref/netcore50/es/System.Net.Http.xml",
-        "ref/netcore50/fr/System.Net.Http.xml",
-        "ref/netcore50/it/System.Net.Http.xml",
-        "ref/netcore50/ja/System.Net.Http.xml",
-        "ref/netcore50/ko/System.Net.Http.xml",
-        "ref/netcore50/ru/System.Net.Http.xml",
-        "ref/netcore50/System.Net.Http.dll",
-        "ref/netcore50/System.Net.Http.xml",
-        "ref/netcore50/zh-hans/System.Net.Http.xml",
-        "ref/netcore50/zh-hant/System.Net.Http.xml",
-        "ref/win8/_._",
-        "ref/wpa81/_._",
-        "runtime.json",
-        "System.Net.Http.4.0.1-beta-23516.nupkg",
-        "System.Net.Http.4.0.1-beta-23516.nupkg.sha512",
-        "System.Net.Http.nuspec"
       ]
     },
     "System.Net.Primitives/4.0.11-beta-23516": {
@@ -13470,67 +12498,27 @@
         "System.Private.Uri.nuspec"
       ]
     },
-    "System.Reflection/4.1.0-beta-23516": {
+    "System.Reflection/4.1.0-beta-23225": {
       "type": "package",
       "serviceable": true,
-      "sha512": "wfrnDfk8p2cqJQY3TTHsJRmf3cE3wa6BacncCn4dO58lVwQNNe9ASdLrLJZlMviAjx8+1fUpj6NX7leIOyaBJA==",
+      "sha512": "WbLtaCxoe5XdqEyZuGpemSQ8YBJ8cj11zx+yxOxJfHbNrmu7oMQ29+J50swaqg3soUc3BVBMqfIhb/7gocDHQA==",
       "files": [
         "lib/DNXCore50/System.Reflection.dll",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/net46/System.Reflection.dll",
+        "lib/net46/_._",
         "lib/netcore50/System.Reflection.dll",
-        "lib/win8/_._",
-        "lib/wp80/_._",
-        "lib/wpa81/_._",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
-        "ref/dotnet5.1/de/System.Reflection.xml",
-        "ref/dotnet5.1/es/System.Reflection.xml",
-        "ref/dotnet5.1/fr/System.Reflection.xml",
-        "ref/dotnet5.1/it/System.Reflection.xml",
-        "ref/dotnet5.1/ja/System.Reflection.xml",
-        "ref/dotnet5.1/ko/System.Reflection.xml",
-        "ref/dotnet5.1/ru/System.Reflection.xml",
-        "ref/dotnet5.1/System.Reflection.dll",
-        "ref/dotnet5.1/System.Reflection.xml",
-        "ref/dotnet5.1/zh-hans/System.Reflection.xml",
-        "ref/dotnet5.1/zh-hant/System.Reflection.xml",
-        "ref/dotnet5.4/de/System.Reflection.xml",
-        "ref/dotnet5.4/es/System.Reflection.xml",
-        "ref/dotnet5.4/fr/System.Reflection.xml",
-        "ref/dotnet5.4/it/System.Reflection.xml",
-        "ref/dotnet5.4/ja/System.Reflection.xml",
-        "ref/dotnet5.4/ko/System.Reflection.xml",
-        "ref/dotnet5.4/ru/System.Reflection.xml",
-        "ref/dotnet5.4/System.Reflection.dll",
-        "ref/dotnet5.4/System.Reflection.xml",
-        "ref/dotnet5.4/zh-hans/System.Reflection.xml",
-        "ref/dotnet5.4/zh-hant/System.Reflection.xml",
+        "ref/dotnet/System.Reflection.dll",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/net46/System.Reflection.dll",
-        "ref/netcore50/de/System.Reflection.xml",
-        "ref/netcore50/es/System.Reflection.xml",
-        "ref/netcore50/fr/System.Reflection.xml",
-        "ref/netcore50/it/System.Reflection.xml",
-        "ref/netcore50/ja/System.Reflection.xml",
-        "ref/netcore50/ko/System.Reflection.xml",
-        "ref/netcore50/ru/System.Reflection.xml",
-        "ref/netcore50/System.Reflection.dll",
-        "ref/netcore50/System.Reflection.xml",
-        "ref/netcore50/zh-hans/System.Reflection.xml",
-        "ref/netcore50/zh-hant/System.Reflection.xml",
-        "ref/win8/_._",
-        "ref/wp80/_._",
-        "ref/wpa81/_._",
+        "ref/net46/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "runtimes/win8-aot/lib/netcore50/System.Reflection.dll",
-        "System.Reflection.4.1.0-beta-23516.nupkg",
-        "System.Reflection.4.1.0-beta-23516.nupkg.sha512",
+        "System.Reflection.4.1.0-beta-23225.nupkg",
+        "System.Reflection.4.1.0-beta-23225.nupkg.sha512",
         "System.Reflection.nuspec"
       ]
     },
@@ -15061,11 +14049,7 @@
       "Microsoft.Extensions.Configuration.Json >= 1.0.0-rc1-final",
       "Microsoft.Extensions.Configuration.UserSecrets >= 1.0.0-rc1-final",
       "Newtonsoft.Json >= 7.0.1",
-      "Openchain.Abstractions >= 0.5.0-rc1-*",
-      "Openchain.Infrastructure >= 0.5.0-rc1-*",
-      "Openchain.Anchoring.Blockchain >= 0.5.0-rc1-*",
-      "Openchain.Sqlite >= 0.5.0-rc1-*",
-      "Openchain.Validation.PermissionBased >= 0.5.0-rc1-*"
+      "Openchain.Infrastructure >= 0.5.0-rc1-*"
     ],
     "DNXCore,Version=v5.0": [
       "System.Runtime.Serialization.Primitives >= 4.0.11-beta-23516",
