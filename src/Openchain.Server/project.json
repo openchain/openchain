@@ -24,7 +24,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0-rc1-final",
-    "Newtonsoft.Json": "7.0.1",
+    "Newtonsoft.Json": "8.0.1",
     "Openchain.Infrastructure": "0.5.0-rc1-*"
   },
 
