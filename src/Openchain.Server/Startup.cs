@@ -29,8 +29,9 @@ namespace Openchain.Server
 {
     public class Startup
     {
+        private static readonly string version = "0.5.0-rc1";
+        private List<Task> runningTasks = new List<Task>();
         private readonly IConfiguration configuration;
-        private static List<Task> runningTasks = new List<Task>();
 
         public Startup(IHostingEnvironment env, IApplicationEnvironment application)
         {
@@ -98,7 +99,7 @@ namespace Openchain.Server
 
         private static void LogStartup(ILogger logger, IApplicationEnvironment environment)
         {
-            logger.LogInformation($"Starting Openchain v{environment.ApplicationVersion} ({environment.RuntimeFramework.FullName})");
+            logger.LogInformation($"Starting Openchain v{version} ({environment.RuntimeFramework.FullName})");
             logger.LogInformation(" ");
         }
 
