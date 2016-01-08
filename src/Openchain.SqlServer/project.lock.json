@@ -3366,7 +3366,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Abstractions >= 0.5.1-rc1-*",
       "Openchain.Infrastructure >= 0.5.1-rc1-*"
     ],
     ".NETPlatform,Version=v5.4": [

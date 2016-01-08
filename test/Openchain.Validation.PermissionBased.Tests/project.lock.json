@@ -247,7 +247,6 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
@@ -1350,7 +1349,6 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
@@ -2763,7 +2761,6 @@
         "dependencies": {
           "Microsoft.CSharp": "4.0.1-beta-23516",
           "Newtonsoft.Json": "8.0.1",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",

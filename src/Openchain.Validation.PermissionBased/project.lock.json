@@ -3309,7 +3309,6 @@
   "projectFileDependencyGroups": {
     "": [
       "Newtonsoft.Json >= 8.0.1",
-      "Openchain.Abstractions >= 0.5.1-rc1-*",
       "Openchain.Infrastructure >= 0.5.1-rc1-*"
     ],
     ".NETFramework,Version=v4.5.1": [],

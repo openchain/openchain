@@ -580,7 +580,6 @@
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
@@ -2190,7 +2189,6 @@
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
@@ -4223,7 +4221,6 @@
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.1-rc1",
           "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
