@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.5.0-*",
+  "version": "0.5.1-rc1-*",
   "description": "SQL Server implementation of the Openchain storage layer.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -14,8 +14,8 @@
   },
 
   "dependencies": {
-    "Openchain.Abstractions": "0.5.0-*",
-    "Openchain.Infrastructure": "0.5.0-*"
+    "Openchain.Abstractions": "0.5.1-rc1-*",
+    "Openchain.Infrastructure": "0.5.1-rc1-*"
   },
 
   "frameworks": {

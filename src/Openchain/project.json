@@ -2,11 +2,11 @@
   "entryPoint": "Openchain.Server",
 
   "dependencies": {
-    "Openchain.Server": "0.5.0",
+    "Openchain.Server": "0.5.1-rc1",
 
-    "Openchain.Sqlite": "0.5.0",
-    "Openchain.Validation.PermissionBased": "0.5.0",
-    "Openchain.Anchoring.Blockchain": "0.5.0"
+    "Openchain.Sqlite": "0.5.1-rc1",
+    "Openchain.Validation.PermissionBased": "0.5.1-rc1",
+    "Openchain.Anchoring.Blockchain": "0.5.1-rc1"
   },
 
   "userSecretsId": "Openchain.Server",

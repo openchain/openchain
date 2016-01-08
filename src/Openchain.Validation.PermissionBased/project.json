@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.5.0-*",
+  "version": "0.5.1-rc1-*",
   "description": "Permission-based validation provider for Openchain.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -15,8 +15,8 @@
 
   "dependencies": {
     "Newtonsoft.Json": "8.0.1",
-    "Openchain.Abstractions": "0.5.0-*",
-    "Openchain.Infrastructure": "0.5.0-*"
+    "Openchain.Abstractions": "0.5.1-rc1-*",
+    "Openchain.Infrastructure": "0.5.1-rc1-*"
   },
 
   "frameworks": {
