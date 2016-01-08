@@ -56,24 +56,24 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -513,24 +513,24 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
           "System.Runtime"
         ]
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
         "frameworkAssemblies": [
@@ -602,24 +602,24 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -1126,24 +1126,24 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -1654,24 +1654,24 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
           "System.Runtime"
         ]
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
         "frameworkAssemblies": [
@@ -1747,24 +1747,24 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
           "System.Runtime"
         ]
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0"
         },
         "frameworkAssemblies": [
@@ -1784,11 +1784,11 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0": {
+    "Openchain.Abstractions/0.5.1-rc1": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
-    "Openchain.Infrastructure/0.5.0": {
+    "Openchain.Infrastructure/0.5.1-rc1": {
       "type": "project",
       "path": "../Openchain.Infrastructure/project.json"
     },
@@ -3366,8 +3366,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Openchain.Abstractions >= 0.5.0-*",
-      "Openchain.Infrastructure >= 0.5.0-*"
+      "Openchain.Abstractions >= 0.5.1-rc1-*",
+      "Openchain.Infrastructure >= 0.5.1-rc1-*"
     ],
     ".NETPlatform,Version=v5.4": [
       "System.Data.Common >= 4.0.1-beta-23516",

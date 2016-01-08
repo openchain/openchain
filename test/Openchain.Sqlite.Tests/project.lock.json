@@ -526,35 +526,35 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Abstractions.Tests/0.5.0": {
+      "Openchain.Abstractions.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -563,25 +563,25 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Infrastructure.Tests/0.5.0": {
+      "Openchain.Infrastructure.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Infrastructure": "0.5.0",
+          "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Sqlite/0.5.0": {
+      "Openchain.Sqlite/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
-          "Openchain.Infrastructure": "0.5.0"
+          "Openchain.Abstractions": "0.5.1-rc1",
+          "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -2136,35 +2136,35 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Abstractions.Tests/0.5.0": {
+      "Openchain.Abstractions.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -2173,25 +2173,25 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Infrastructure.Tests/0.5.0": {
+      "Openchain.Infrastructure.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Infrastructure": "0.5.0",
+          "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Sqlite/0.5.0": {
+      "Openchain.Sqlite/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
-          "Openchain.Infrastructure": "0.5.0"
+          "Openchain.Abstractions": "0.5.1-rc1",
+          "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -4169,35 +4169,35 @@
           "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
           "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
         }
       },
-      "Openchain.Abstractions.Tests/0.5.0": {
+      "Openchain.Abstractions.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Infrastructure/0.5.0": {
+      "Openchain.Infrastructure/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
+          "Openchain.Abstractions": "0.5.1-rc1",
           "Portable.BouncyCastle": "1.8.0",
           "System.Dynamic.Runtime": "4.0.11-beta-23516",
           "System.ObjectModel": "4.0.11-beta-23516",
@@ -4206,25 +4206,25 @@
           "System.Text.RegularExpressions": "4.0.11-beta-23516"
         }
       },
-      "Openchain.Infrastructure.Tests/0.5.0": {
+      "Openchain.Infrastructure.Tests/0.5.1-rc1": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "Openchain.Infrastructure": "0.5.0",
+          "Openchain.Infrastructure": "0.5.1-rc1",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "xunit": "2.1.0",
           "xunit.runner.dnx": "2.1.0-rc1"
         }
       },
-      "Openchain.Sqlite/0.5.0": {
+      "Openchain.Sqlite/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
           "Microsoft.AspNet.Hosting": "1.0.0-rc1-final",
           "Microsoft.Data.SQLite": "1.0.0-rc1-final",
-          "Openchain.Abstractions": "0.5.0",
-          "Openchain.Infrastructure": "0.5.0"
+          "Openchain.Abstractions": "0.5.1-rc1",
+          "Openchain.Infrastructure": "0.5.1-rc1"
         }
       },
       "Portable.BouncyCastle/1.8.0": {
@@ -5659,23 +5659,23 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0": {
+    "Openchain.Abstractions/0.5.1-rc1": {
       "type": "project",
       "path": "../../src/Openchain.Abstractions/project.json"
     },
-    "Openchain.Abstractions.Tests/0.5.0": {
+    "Openchain.Abstractions.Tests/0.5.1-rc1": {
       "type": "project",
       "path": "../Openchain.Abstractions.Tests/project.json"
     },
-    "Openchain.Infrastructure/0.5.0": {
+    "Openchain.Infrastructure/0.5.1-rc1": {
       "type": "project",
       "path": "../../src/Openchain.Infrastructure/project.json"
     },
-    "Openchain.Infrastructure.Tests/0.5.0": {
+    "Openchain.Infrastructure.Tests/0.5.1-rc1": {
       "type": "project",
       "path": "../Openchain.Infrastructure.Tests/project.json"
     },
-    "Openchain.Sqlite/0.5.0": {
+    "Openchain.Sqlite/0.5.1-rc1": {
       "type": "project",
       "path": "../../src/Openchain.Sqlite/project.json"
     },
@@ -9392,9 +9392,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.Extensions.DependencyInjection >= 1.0.0-rc1-final",
-      "Openchain.Abstractions.Tests >= 0.5.0-*",
-      "Openchain.Infrastructure.Tests >= 0.5.0-*",
-      "Openchain.Sqlite >= 0.5.0-*",
+      "Openchain.Abstractions.Tests >= 0.5.1-rc1-*",
+      "Openchain.Infrastructure.Tests >= 0.5.1-rc1-*",
+      "Openchain.Sqlite >= 0.5.1-rc1-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-*"
     ],

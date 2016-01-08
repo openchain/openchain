@@ -56,11 +56,11 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
@@ -435,11 +435,11 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
@@ -510,11 +510,11 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
@@ -944,11 +944,11 @@
           "lib/dotnet5.4/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETPlatform,Version=v5.4",
         "dependencies": {
-          "Google.Protobuf": "3.0.0",
+          "Google.Protobuf": "3.0.0-alpha4",
           "System.Collections": "4.0.11-beta-23516",
           "System.Linq": "4.0.1-beta-23516",
           "System.Runtime.Extensions": "4.0.11-beta-23516",
@@ -1382,11 +1382,11 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
@@ -1461,11 +1461,11 @@
           "lib/net451/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Openchain.Abstractions/0.5.0": {
+      "Openchain.Abstractions/0.5.1-rc1": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
-          "Google.Protobuf": "3.0.0"
+          "Google.Protobuf": "3.0.0-alpha4"
         },
         "frameworkAssemblies": [
           "System.IO",
@@ -1484,7 +1484,7 @@
     }
   },
   "libraries": {
-    "Openchain.Abstractions/0.5.0": {
+    "Openchain.Abstractions/0.5.1-rc1": {
       "type": "project",
       "path": "../Openchain.Abstractions/project.json"
     },
@@ -1508,6 +1508,8 @@
         "tools/google/protobuf/timestamp.proto",
         "tools/google/protobuf/type.proto",
         "tools/google/protobuf/wrappers.proto",
+        "tools/PaymentProtocolStructures.cs",
+        "tools/PaymentProtocolStructures.proto",
         "tools/protoc.exe"
       ]
     },
@@ -2882,7 +2884,7 @@
     "": [
       "Microsoft.Extensions.Configuration.Abstractions >= 1.0.0-rc1-final",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 1.0.0-rc1-final",
-      "Openchain.Abstractions >= 0.5.0-*",
+      "Openchain.Abstractions >= 0.5.1-rc1-*",
       "Portable.BouncyCastle >= 1.8.0"
     ],
     ".NETPlatform,Version=v5.4": [
