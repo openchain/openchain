@@ -23,33 +23,34 @@ using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
 namespace Openchain.Messages {
 
+  /// <summary>Holder for reflection information generated from schema.proto</summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  internal static partial class Schema {
+  internal static partial class SchemaReflection {
 
     #region Descriptor
+    /// <summary>File descriptor for schema.proto</summary>
     public static pbr::FileDescriptor Descriptor {
       get { return descriptor; }
     }
     private static pbr::FileDescriptor descriptor;
 
-    static Schema() {
+    static SchemaReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SEk9wZW5DaGFpbi5NZXNzYWdlcyIbCgtSZWNvcmRW", 
-            "YWx1ZRIMCgRkYXRhGAEgASgMIlYKBlJlY29yZBILCgNrZXkYASABKAwSLgoF", 
-            "dmFsdWUYAiABKAsyHy5PcGVuQ2hhaW4uTWVzc2FnZXMuUmVjb3JkVmFsdWUS", 
-            "DwoHdmVyc2lvbhgDIAEoDCJcCghNdXRhdGlvbhIRCgluYW1lc3BhY2UYASAB", 
-            "KAwSKwoHcmVjb3JkcxgCIAMoCzIaLk9wZW5DaGFpbi5NZXNzYWdlcy5SZWNv", 
-            "cmQSEAoIbWV0YWRhdGEYAyABKAwiUAoLVHJhbnNhY3Rpb24SEAoIbXV0YXRp", 
-            "b24YASABKAwSEQoJdGltZXN0YW1wGAIgASgDEhwKFHRyYW5zYWN0aW9uX21l", 
-            "dGFkYXRhGAMgASgMYgZwcm90bzM="));
-      descriptor = pbr::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
+            "CgxzY2hlbWEucHJvdG8SCU9wZW5jaGFpbiIbCgtSZWNvcmRWYWx1ZRIMCgRk",
+            "YXRhGAEgASgMIk0KBlJlY29yZBILCgNrZXkYASABKAwSJQoFdmFsdWUYAiAB",
+            "KAsyFi5PcGVuY2hhaW4uUmVjb3JkVmFsdWUSDwoHdmVyc2lvbhgDIAEoDCJT",
+            "CghNdXRhdGlvbhIRCgluYW1lc3BhY2UYASABKAwSIgoHcmVjb3JkcxgCIAMo",
+            "CzIRLk9wZW5jaGFpbi5SZWNvcmQSEAoIbWV0YWRhdGEYAyABKAwiUAoLVHJh",
+            "bnNhY3Rpb24SEAoIbXV0YXRpb24YASABKAwSEQoJdGltZXN0YW1wGAIgASgD",
+            "EhwKFHRyYW5zYWN0aW9uX21ldGFkYXRhGAMgASgMYgZwcm90bzM="));
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.RecordValue), new[]{ "Data" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Record), new[]{ "Key", "Value", "Version" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Mutation), new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Transaction), new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.RecordValue), global::Openchain.Messages.RecordValue.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Record), global::Openchain.Messages.Record.Parser, new[]{ "Key", "Value", "Version" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Mutation), global::Openchain.Messages.Mutation.Parser, new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Transaction), global::Openchain.Messages.Transaction.Parser, new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
           }));
     }
     #endregion
@@ -62,7 +63,7 @@ namespace Openchain.Messages {
     public static pb::MessageParser<RecordValue> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[0]; }
+      get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[0]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -83,6 +84,7 @@ namespace Openchain.Messages {
       return new RecordValue(this);
     }
 
+    /// <summary>Field number for the "data" field.</summary>
     public const int DataFieldNumber = 1;
     private pb::ByteString data_ = pb::ByteString.Empty;
     public pb::ByteString Data {
@@ -114,7 +116,7 @@ namespace Openchain.Messages {
     }
 
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -164,7 +166,7 @@ namespace Openchain.Messages {
     public static pb::MessageParser<Record> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[1]; }
+      get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[1]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -187,6 +189,7 @@ namespace Openchain.Messages {
       return new Record(this);
     }
 
+    /// <summary>Field number for the "key" field.</summary>
     public const int KeyFieldNumber = 1;
     private pb::ByteString key_ = pb::ByteString.Empty;
     public pb::ByteString Key {
@@ -196,6 +199,7 @@ namespace Openchain.Messages {
       }
     }
 
+    /// <summary>Field number for the "value" field.</summary>
     public const int ValueFieldNumber = 2;
     private global::Openchain.Messages.RecordValue value_;
     public global::Openchain.Messages.RecordValue Value {
@@ -205,6 +209,7 @@ namespace Openchain.Messages {
       }
     }
 
+    /// <summary>Field number for the "version" field.</summary>
     public const int VersionFieldNumber = 3;
     private pb::ByteString version_ = pb::ByteString.Empty;
     public pb::ByteString Version {
@@ -240,7 +245,7 @@ namespace Openchain.Messages {
     }
 
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -324,7 +329,7 @@ namespace Openchain.Messages {
     public static pb::MessageParser<Mutation> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[2]; }
+      get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[2]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -347,6 +352,7 @@ namespace Openchain.Messages {
       return new Mutation(this);
     }
 
+    /// <summary>Field number for the "namespace" field.</summary>
     public const int NamespaceFieldNumber = 1;
     private pb::ByteString namespace_ = pb::ByteString.Empty;
     public pb::ByteString Namespace {
@@ -356,6 +362,7 @@ namespace Openchain.Messages {
       }
     }
 
+    /// <summary>Field number for the "records" field.</summary>
     public const int RecordsFieldNumber = 2;
     private static readonly pb::FieldCodec<global::Openchain.Messages.Record> _repeated_records_codec
         = pb::FieldCodec.ForMessage(18, global::Openchain.Messages.Record.Parser);
@@ -364,6 +371,7 @@ namespace Openchain.Messages {
       get { return records_; }
     }
 
+    /// <summary>Field number for the "metadata" field.</summary>
     public const int MetadataFieldNumber = 3;
     private pb::ByteString metadata_ = pb::ByteString.Empty;
     public pb::ByteString Metadata {
@@ -399,7 +407,7 @@ namespace Openchain.Messages {
     }
 
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -470,7 +478,7 @@ namespace Openchain.Messages {
     public static pb::MessageParser<Transaction> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[3]; }
+      get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[3]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -493,6 +501,7 @@ namespace Openchain.Messages {
       return new Transaction(this);
     }
 
+    /// <summary>Field number for the "mutation" field.</summary>
     public const int MutationFieldNumber = 1;
     private pb::ByteString mutation_ = pb::ByteString.Empty;
     public pb::ByteString Mutation {
@@ -502,6 +511,7 @@ namespace Openchain.Messages {
       }
     }
 
+    /// <summary>Field number for the "timestamp" field.</summary>
     public const int TimestampFieldNumber = 2;
     private long timestamp_;
     public long Timestamp {
@@ -511,6 +521,7 @@ namespace Openchain.Messages {
       }
     }
 
+    /// <summary>Field number for the "transaction_metadata" field.</summary>
     public const int TransactionMetadataFieldNumber = 3;
     private pb::ByteString transactionMetadata_ = pb::ByteString.Empty;
     public pb::ByteString TransactionMetadata {
@@ -546,7 +557,7 @@ namespace Openchain.Messages {
     }
 
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     public void WriteTo(pb::CodedOutputStream output) {

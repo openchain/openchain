@@ -112,8 +112,8 @@ namespace Openchain.Infrastructure
             transactionMetadataBuilder.Signatures.Add(metadata.Signatures.Select(
                 signature => new Messages.TransactionMetadata.Types.SignatureEvidence()
                 {
-                    PublicKey = Google.Protobuf.ByteString.Unsafe.FromBytes(signature.PublicKey.ToByteArray()),
-                    Signature = Google.Protobuf.ByteString.Unsafe.FromBytes(signature.Signature.ToByteArray())
+                    PublicKey = Google.Protobuf.ByteString.CopyFrom(signature.PublicKey.ToByteArray()),
+                    Signature = Google.Protobuf.ByteString.CopyFrom(signature.Signature.ToByteArray())
                 }));
 
             return transactionMetadataBuilder.ToByteArray();

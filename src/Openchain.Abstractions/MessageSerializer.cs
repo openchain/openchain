@@ -70,13 +70,13 @@ namespace Openchain
             mutation.MergeFrom(data.ToProtocolBuffers());
             
             return new Mutation(
-                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(mutation.Namespace)),
+                new ByteString(mutation.Namespace.ToByteArray()),
                 mutation.Records.Select(
                     record => new Record(
-                        new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Key)),
-                        record.Value != null ? new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Value.Data)) : null,
-                        new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(record.Version)))),
-                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(mutation.Metadata)));
+                        new ByteString(record.Key.ToByteArray()),
+                        record.Value != null ? new ByteString(record.Value.Data.ToByteArray()) : null,
+                        new ByteString(record.Version.ToByteArray()))),
+                new ByteString(mutation.Metadata.ToByteArray()));
         }
 
         /// <summary>
@@ -107,9 +107,9 @@ namespace Openchain
             transaction.MergeFrom(data.ToProtocolBuffers());
 
             return new Transaction(
-                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(transaction.Mutation)),
+                new ByteString(transaction.Mutation.ToByteArray()),
                 epoch + TimeSpan.FromSeconds(transaction.Timestamp),
-                new ByteString(Google.Protobuf.ByteString.Unsafe.GetBuffer(transaction.TransactionMetadata)));
+                new ByteString(transaction.TransactionMetadata.ToByteArray()));
         }
         
         /// <summary>

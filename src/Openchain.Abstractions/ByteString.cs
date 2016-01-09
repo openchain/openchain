@@ -117,7 +117,7 @@ namespace Openchain
 
         internal Google.Protobuf.ByteString ToProtocolBuffers()
         {
-            return Google.Protobuf.ByteString.Unsafe.FromBytes(this.data);
+            return Google.Protobuf.ByteString.CopyFrom(this.data);
         }
 
         /// <summary>

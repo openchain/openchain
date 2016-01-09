@@ -21,29 +21,31 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Openchain.Messages {
+namespace Openchain.Infrastructure.Messages {
 
+  /// <summary>Holder for reflection information generated from schema.proto</summary>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  internal static partial class Schema {
+  internal static partial class SchemaReflection {
 
     #region Descriptor
+    /// <summary>File descriptor for schema.proto</summary>
     public static pbr::FileDescriptor Descriptor {
       get { return descriptor; }
     }
     private static pbr::FileDescriptor descriptor;
 
-    static Schema() {
+    static SchemaReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CgxzY2hlbWEucHJvdG8SCU9wZW5DaGFpbiKXAQoTVHJhbnNhY3Rpb25NZXRh", 
-            "ZGF0YRJECgpzaWduYXR1cmVzGAEgAygLMjAuT3BlbkNoYWluLlRyYW5zYWN0", 
-            "aW9uTWV0YWRhdGEuU2lnbmF0dXJlRXZpZGVuY2UaOgoRU2lnbmF0dXJlRXZp", 
-            "ZGVuY2USEgoKcHVibGljX2tleRgBIAEoDBIRCglzaWduYXR1cmUYAiABKAxi", 
+            "CgxzY2hlbWEucHJvdG8SCU9wZW5jaGFpbiKXAQoTVHJhbnNhY3Rpb25NZXRh",
+            "ZGF0YRJECgpzaWduYXR1cmVzGAEgAygLMjAuT3BlbmNoYWluLlRyYW5zYWN0",
+            "aW9uTWV0YWRhdGEuU2lnbmF0dXJlRXZpZGVuY2UaOgoRU2lnbmF0dXJlRXZp",
+            "ZGVuY2USEgoKcHVibGljX2tleRgBIAEoDBIRCglzaWduYXR1cmUYAiABKAxi",
             "BnByb3RvMw=="));
-      descriptor = pbr::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
+      descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.TransactionMetadata), new[]{ "Signatures" }, null, null, new pbr::GeneratedCodeInfo[] { new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence), new[]{ "PublicKey", "Signature" }, null, null, null)})
+            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata), global::Openchain.Infrastructure.Messages.TransactionMetadata.Parser, new[]{ "Signatures" }, null, null, new pbr::GeneratedCodeInfo[] { new pbr::GeneratedCodeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence), global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence.Parser, new[]{ "PublicKey", "Signature" }, null, null, null)})
           }));
     }
     #endregion
@@ -56,7 +58,7 @@ namespace Openchain.Messages {
     public static pb::MessageParser<TransactionMetadata> Parser { get { return _parser; } }
 
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Openchain.Messages.Schema.Descriptor.MessageTypes[0]; }
+      get { return global::Openchain.Infrastructure.Messages.SchemaReflection.Descriptor.MessageTypes[0]; }
     }
 
     pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -77,11 +79,12 @@ namespace Openchain.Messages {
       return new TransactionMetadata(this);
     }
 
+    /// <summary>Field number for the "signatures" field.</summary>
     public const int SignaturesFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence> _repeated_signatures_codec
-        = pb::FieldCodec.ForMessage(10, global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence.Parser);
-    private readonly pbc::RepeatedField<global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence> signatures_ = new pbc::RepeatedField<global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence>();
-    public pbc::RepeatedField<global::Openchain.Messages.TransactionMetadata.Types.SignatureEvidence> Signatures {
+    private static readonly pb::FieldCodec<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> _repeated_signatures_codec
+        = pb::FieldCodec.ForMessage(10, global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence.Parser);
+    private readonly pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> signatures_ = new pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence>();
+    public pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> Signatures {
       get { return signatures_; }
     }
 
@@ -107,7 +110,7 @@ namespace Openchain.Messages {
     }
 
     public override string ToString() {
-      return pb::JsonFormatter.Default.Format(this);
+      return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
     public void WriteTo(pb::CodedOutputStream output) {
@@ -143,15 +146,16 @@ namespace Openchain.Messages {
     }
 
     #region Nested types
+    /// <summary>Container for nested types declared in the TransactionMetadata message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    internal static partial class Types {
+    public static partial class Types {
       [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      internal sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
+      public sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
         private static readonly pb::MessageParser<SignatureEvidence> _parser = new pb::MessageParser<SignatureEvidence>(() => new SignatureEvidence());
         public static pb::MessageParser<SignatureEvidence> Parser { get { return _parser; } }
 
         public static pbr::MessageDescriptor Descriptor {
-          get { return global::Openchain.Messages.TransactionMetadata.Descriptor.NestedTypes[0]; }
+          get { return global::Openchain.Infrastructure.Messages.TransactionMetadata.Descriptor.NestedTypes[0]; }
         }
 
         pbr::MessageDescriptor pb::IMessage.Descriptor {
@@ -173,6 +177,7 @@ namespace Openchain.Messages {
           return new SignatureEvidence(this);
         }
 
+        /// <summary>Field number for the "public_key" field.</summary>
         public const int PublicKeyFieldNumber = 1;
         private pb::ByteString publicKey_ = pb::ByteString.Empty;
         public pb::ByteString PublicKey {
@@ -182,6 +187,7 @@ namespace Openchain.Messages {
           }
         }
 
+        /// <summary>Field number for the "signature" field.</summary>
         public const int SignatureFieldNumber = 2;
         private pb::ByteString signature_ = pb::ByteString.Empty;
         public pb::ByteString Signature {
@@ -215,7 +221,7 @@ namespace Openchain.Messages {
         }
 
         public override string ToString() {
-          return pb::JsonFormatter.Default.Format(this);
+          return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
         public void WriteTo(pb::CodedOutputStream output) {
