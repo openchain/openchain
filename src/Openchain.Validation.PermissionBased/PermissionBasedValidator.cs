@@ -28,10 +28,12 @@ namespace Openchain.Validation.PermissionBased
             this.permissions = permissions;
         }
 
-        public async Task Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
+        public async Task<IList<Mutation>> Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
         {
             await ValidateAccountMutations(mutation.AccountMutations, accounts, authentication);
             await ValidateDataMutations(mutation.DataRecords, authentication);
+
+            return new Mutation[0];
         }
 
         private async Task ValidateAccountMutations(

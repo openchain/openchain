@@ -49,6 +49,46 @@ namespace Openchain.Infrastructure
                 throw new TransactionInvalidException("InvalidMutation");
             }
 
+            ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
+
+            IReadOnlyDictionary<AccountKey, AccountStatus> accounts = await ValidateMutation(mutation, parsedMutation);
+
+            ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
+
+            DateTime date = DateTime.UtcNow;
+
+            IList<Mutation> generatedMutations = await this.validator.Validate(parsedMutation, authentication, accounts);
+
+            TransactionMetadata metadata = new TransactionMetadata(authentication);
+
+            byte[] rawMetadata = SerializeMetadata(metadata);
+
+            Transaction transaction = new Transaction(rawMutation, date, new ByteString(rawMetadata));
+            byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
+
+            List<ByteString> transactions = new List<ByteString>() { new ByteString(serializedTransaction) };
+
+            transactions.AddRange(await Task.WhenAll(generatedMutations.Select(async generatedMutation =>
+            {
+                await ValidateMutation(generatedMutation, ParsedMutation.Parse(generatedMutation));
+                Transaction generatedTransaction = new Transaction(new ByteString(MessageSerializer.SerializeMutation(generatedMutation)), date, ByteString.Empty);
+                return new ByteString(MessageSerializer.SerializeTransaction(generatedTransaction));
+            })));
+
+            try
+            {
+                await this.store.AddTransactions(transactions);
+            }
+            catch (ConcurrentMutationException)
+            {
+                throw new TransactionInvalidException("OptimisticConcurrency");
+            }
+
+            return new ByteString(MessageSerializer.ComputeHash(serializedTransaction));
+        }
+
+        private async Task<IReadOnlyDictionary<AccountKey, AccountStatus>> ValidateMutation(Mutation mutation, ParsedMutation parsedMutation)
+        {
             if (!mutation.Namespace.Equals(this.Namespace))
                 throw new TransactionInvalidException("InvalidNamespace");
 
@@ -57,10 +97,6 @@ namespace Openchain.Infrastructure
 
             if (mutation.Records.Any(record => record.Key.Value.Count > MaxKeySize))
                 throw new TransactionInvalidException("InvalidMutation");
-
-            ValidateAuthentication(authentication, MessageSerializer.ComputeHash(rawMutation.ToByteArray()));
-
-            ParsedMutation parsedMutation = ParsedMutation.Parse(mutation);
 
             // All assets must have an overall zero balance
 
@@ -74,27 +110,7 @@ namespace Openchain.Infrastructure
             if (groups.Any(group => group != 0))
                 throw new TransactionInvalidException("UnbalancedTransaction");
 
-            DateTime date = DateTime.UtcNow;
-
-            await this.validator.Validate(parsedMutation, authentication, accounts);
-
-            TransactionMetadata metadata = new TransactionMetadata(authentication);
-
-            byte[] rawMetadata = SerializeMetadata(metadata);
-
-            Transaction transaction = new Transaction(rawMutation, date, new ByteString(rawMetadata));
-            byte[] serializedTransaction = MessageSerializer.SerializeTransaction(transaction);
-
-            try
-            {
-                await this.store.AddTransactions(new[] { new ByteString(serializedTransaction) });
-            }
-            catch (ConcurrentMutationException)
-            {
-                throw new TransactionInvalidException("OptimisticConcurrency");
-            }
-
-            return new ByteString(MessageSerializer.ComputeHash(serializedTransaction));
+            return accounts;
         }
 
         private static void ValidateAuthentication(IReadOnlyList<SignatureEvidence> authentication, byte[] mutationHash)

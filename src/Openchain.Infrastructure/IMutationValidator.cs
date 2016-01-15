@@ -29,6 +29,6 @@ namespace Openchain.Infrastructure
         /// <param name="authentication">Authentication data provided along with the mutation.</param>
         /// <param name="accounts">Dictionary containing the current version of records being affected.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        Task Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts);
+        Task<IList<Mutation>> Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts);
     }
 }
