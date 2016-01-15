@@ -30,6 +30,8 @@ namespace Openchain.Infrastructure.Tests
             ["/account/2/"] = 110,
         };
 
+        private TestStore store;
+
         [Fact]
         public async Task PostTransaction_Success()
         {
@@ -39,6 +41,21 @@ namespace Openchain.Infrastructure.Tests
             ByteString result = await validator.PostTransaction(mutation, new SignatureEvidence[0]);
 
             Assert.Equal(32, result.Value.Count);
+            Assert.Equal(1, store.AddedTransactions.Count);
+        }
+
+        [Fact]
+        public async Task PostTransaction_GenerateValidMutations()
+        {
+            Mutation generatedMutation = MessageSerializer.DeserializeMutation(CreateMutation(validNamespace));
+
+            TransactionValidator validator = CreateValidator(defaultAccounts, generatedMutation);
+            ByteString mutation = CreateMutation(validNamespace);
+
+            ByteString result = await validator.PostTransaction(mutation, new SignatureEvidence[0]);
+
+            Assert.Equal(32, result.Value.Count);
+            Assert.Equal(2, store.AddedTransactions.Count);
         }
 
         [Fact]
@@ -50,6 +67,21 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
             Assert.Equal("InvalidMutation", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
+        }
+
+        [Fact]
+        public async Task PostTransaction_GenerateInvalidMutations()
+        {
+            Mutation generatedMutation = MessageSerializer.DeserializeMutation(CreateMutation(invalidNamespace));
+
+            TransactionValidator validator = CreateValidator(defaultAccounts, generatedMutation);
+            ByteString mutation = CreateMutation(validNamespace);
+
+            TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
+                () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
+            Assert.Equal("InvalidNamespace", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
@@ -63,7 +95,7 @@ namespace Openchain.Infrastructure.Tests
                 new Record[]
                 {
                     new Record(
-                        ByteString.Parse(new string('a', 513 * 2)),
+                        new AccountKey(LedgerPath.Parse("/"), LedgerPath.Parse($"/{new string('a', 512)}/")).Key.ToBinary(),
                         new ByteString(BitConverter.GetBytes(100L).Reverse()),
                         ByteString.Empty)
                 },
@@ -72,6 +104,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(new ByteString(MessageSerializer.SerializeMutation(mutation)), new SignatureEvidence[0]));
             Assert.Equal("InvalidMutation", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
@@ -88,6 +121,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(new ByteString(MessageSerializer.SerializeMutation(mutation)), new SignatureEvidence[0]));
             Assert.Equal("InvalidMutation", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
@@ -105,6 +139,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
             Assert.Equal("UnbalancedTransaction", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
@@ -116,13 +151,15 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
             Assert.Equal("InvalidNamespace", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
         public async Task PostTransaction_ConcurrencyException()
         {
+            this.store = new TestStore(defaultAccounts, true);
             TransactionValidator validator = new TransactionValidator(
-                new TestStore(defaultAccounts, true),
+                this.store,
                 new TestValidator(false),
                 validNamespace);
 
@@ -131,13 +168,15 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
             Assert.Equal("OptimisticConcurrency", exception.Reason);
+            Assert.Equal(1, store.AddedTransactions.Count);
         }
 
         [Fact]
         public async Task PostTransaction_ValidationException()
         {
+            this.store = new TestStore(defaultAccounts, false);
             TransactionValidator validator = new TransactionValidator(
-                new TestStore(defaultAccounts, false),
+                this.store,
                 new TestValidator(true),
                 validNamespace);
 
@@ -146,6 +185,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new SignatureEvidence[0]));
             Assert.Equal("Test", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         [Fact]
@@ -161,6 +201,7 @@ namespace Openchain.Infrastructure.Tests
             ByteString result = await validator.PostTransaction(mutation, new[] { signature });
 
             Assert.Equal(32, result.Value.Count);
+            Assert.Equal(1, store.AddedTransactions.Count);
         }
 
         [Fact]
@@ -176,6 +217,7 @@ namespace Openchain.Infrastructure.Tests
             TransactionInvalidException exception = await Assert.ThrowsAsync<TransactionInvalidException>(
                 () => validator.PostTransaction(mutation, new[] { signature }));
             Assert.Equal("InvalidSignature", exception.Reason);
+            Assert.Equal(null, store.AddedTransactions);
         }
 
         private ByteString CreateMutation(ByteString @namespace)
@@ -198,29 +240,32 @@ namespace Openchain.Infrastructure.Tests
             return new ByteString(MessageSerializer.SerializeMutation(mutation));
         }
 
-        private TransactionValidator CreateValidator(IDictionary<string, long> accounts)
+        private TransactionValidator CreateValidator(IDictionary<string, long> accounts, params Mutation[] mutations)
         {
+            this.store = new TestStore(accounts, false);
             return new TransactionValidator(
-                new TestStore(accounts, false),
-                new TestValidator(false),
+                this.store,
+                new TestValidator(false, mutations),
                 validNamespace);
         }
 
         private class TestValidator : IMutationValidator
         {
             private readonly bool exception;
+            private readonly Mutation[] mutations;
 
-            public TestValidator(bool exception)
+            public TestValidator(bool exception, params Mutation[] mutations)
             {
                 this.exception = exception;
+                this.mutations = mutations;
             }
 
-            public Task Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
+            public Task<IList<Mutation>> Validate(ParsedMutation mutation, IReadOnlyList<SignatureEvidence> authentication, IReadOnlyDictionary<AccountKey, AccountStatus> accounts)
             {
                 if (exception)
                     throw new TransactionInvalidException("Test");
                 else
-                    return Task.FromResult(true);
+                    return Task.FromResult<IList<Mutation>>(mutations);
             }
         }
 
@@ -235,6 +280,8 @@ namespace Openchain.Infrastructure.Tests
                 this.exception = exception;
             }
 
+            public IList<ByteString> AddedTransactions { get; private set; }
+
             public Task Initialize()
             {
                 throw new NotImplementedException();
@@ -242,6 +289,8 @@ namespace Openchain.Infrastructure.Tests
 
             public Task AddTransactions(IEnumerable<ByteString> transactions)
             {
+                this.AddedTransactions = transactions.ToList();
+
                 if (this.exception)
                     throw new ConcurrentMutationException(new Record(ByteString.Empty, ByteString.Empty, ByteString.Empty));
                 else
