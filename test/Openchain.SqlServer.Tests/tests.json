@@ -1,3 +1,3 @@
 ﻿{
-  "sql_connection_string": "Data Source=.;Initial Catalog=Openchain;Integrated Security=True"
+  "sql_connection_string": "Data Source=.;Initial Catalog=OpenchainTests;Integrated Security=True"
 }

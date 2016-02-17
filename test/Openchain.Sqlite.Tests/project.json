@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.5.1-rc1-*",
+  "version": "0.5.1-*",
   "description": "Unit tests for the Openchain.Sqlite package.",
   "authors": [ "Flavien Charlon" ],
   "owners": [ "Coinprism" ],
@@ -10,9 +10,9 @@
 
   "dependencies": {
     "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
-    "Openchain.Abstractions.Tests": "0.5.1-rc1-*",
-    "Openchain.Infrastructure.Tests": "0.5.1-rc1-*",
-    "Openchain.Sqlite": "0.5.1-rc1-*",
+    "Openchain.Abstractions.Tests": "0.5.1-*",
+    "Openchain.Infrastructure.Tests": "0.5.1-*",
+    "Openchain.Sqlite": "0.5.1-*",
     "xunit": "2.1.0",
     "xunit.runner.dnx": "2.1.0-rc1-*"
   },
