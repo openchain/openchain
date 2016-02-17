@@ -54,6 +54,8 @@ namespace Openchain.Server.Models
                 ILogger logger = (ILogger)context.ApplicationServices.GetService(typeof(ILogger));
                 IStorageEngine store = (IStorageEngine)context.ApplicationServices.GetService(typeof(IStorageEngine));
 
+                await store.Initialize();
+
                 IObservable<ByteString> stream = new PollingObservable(lastLedgerRecordHash, store.GetTransactions);
 
                 using (WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync())
