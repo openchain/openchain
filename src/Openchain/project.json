@@ -1,7 +1,17 @@
 ﻿{
   "entryPoint": "Openchain.Server",
 
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+
   "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    },
+
     "Openchain.Server": "0.5.1",
 
     "Openchain.Sqlite": "0.5.1",
@@ -11,18 +21,24 @@
 
   "userSecretsId": "Openchain.Server",
 
-  "commands": {
-    "start": "Microsoft.AspNet.Hosting --webroot \"Webroot\" --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080"
-  },
-
   "frameworks": {
-    "dnxcore50": { },
-    "dnx451": { }
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
   },
 
-  "publishExclude": [
-    "**.xproj",
-    "**.user",
-    "**.vspscc"
-  ]
+  "publishOptions": {
+    "exclude": [
+      "**.xproj",
+      "**.user",
+      "**.vspscc"
+    ],
+    "include": [
+      "data"
+    ]
+  }
 }

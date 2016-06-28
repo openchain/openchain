@@ -2,32 +2,40 @@
   "version": "0.5.1-*",
   "description": "Permission-based validation provider for Openchain.",
   "authors": [ "Flavien Charlon" ],
-  "owners": [ "Coinprism" ],
-  "projectUrl": "https://www.openchain.org/",
-  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
-  "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "compilationOptions": {
+  "packOptions": {
+    "owners": [ "Coinprism" ],
+    "projectUrl": "https://www.openchain.org/",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+    "iconUrl": "https://www.openchain.org/package.png"
+  },
+
+  "buildOptions": {
     "allowUnsafe": false,
     "warningsAsErrors": true
   },
 
   "dependencies": {
-    "Newtonsoft.Json": "8.0.1",
+    "Newtonsoft.Json": "9.0.1",
     "Openchain.Infrastructure": "0.5.1-*"
   },
 
   "frameworks": {
     "net451": { },
 
-    "dotnet5.4": {
+    "netstandard1.3": {
       "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
+        //"Microsoft.CSharp": "4.0.1",
+        //"System.Collections": "4.0.11-beta-23516",
+        //"System.Linq": "4.0.1-beta-23516",
+        //"System.Threading": "4.0.11-beta-23516"
+      },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     }
   }
 }

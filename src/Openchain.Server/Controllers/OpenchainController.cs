@@ -18,8 +18,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -82,14 +82,14 @@ namespace Openchain.Server.Controllers
             }
             catch (JsonReaderException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             ByteString parsedMutation;
             List<SignatureEvidence> authentication = new List<SignatureEvidence>();
 
             if (!(body["mutation"] is JValue && body["signatures"] is JArray))
-                return HttpBadRequest();
+                return BadRequest();
 
             try
             {
@@ -99,7 +99,7 @@ namespace Openchain.Server.Controllers
                 {
                     JObject evidence = signatureItem as JObject;
                     if (!(evidence != null && evidence["pub_key"] is JValue && evidence["signature"] is JValue))
-                        return HttpBadRequest();
+                        return BadRequest();
 
                     authentication.Add(new SignatureEvidence(
                         ByteString.Parse((string)evidence["pub_key"]),
@@ -108,7 +108,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             ByteString transactionId;
@@ -162,7 +162,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             Record result = (await this.store.GetRecords(new[] { parsedKey })).First();

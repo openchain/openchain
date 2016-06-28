@@ -17,7 +17,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,7 +37,7 @@ namespace Openchain.Server.Models
 
         public DependencyResolver(IServiceProvider serviceProvider, string basePath, IConfigurationSection configuration)
         {
-            IList<Assembly> assemblies = LoadAllAssemblies(basePath, serviceProvider.GetRequiredService<IAssemblyLoadContextAccessor>());
+            IList<Assembly> assemblies = LoadAllAssemblies(basePath);
 
             this.builder = FindBuilder(assemblies, configuration);
 
@@ -57,12 +59,12 @@ namespace Openchain.Server.Models
         public static async Task<Func<IServiceProvider, T>> Create(IServiceProvider serviceProvider, string configurationPath)
         {
             IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            IApplicationEnvironment application = serviceProvider.GetRequiredService<IApplicationEnvironment>();
+            IHostingEnvironment application = serviceProvider.GetRequiredService<IHostingEnvironment>();
             IConfigurationSection rootSection = configuration.GetSection(configurationPath);
 
             try
             {
-                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ApplicationBasePath, rootSection);
+                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ContentRootPath, rootSection);
 
                 if (resolver.builder == null)
                     serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");
@@ -89,7 +91,7 @@ namespace Openchain.Server.Models
             }
         }
 
-        private static IList<Assembly> LoadAllAssemblies(string projectPath, IAssemblyLoadContextAccessor assemblyLoader)
+        private static IList<Assembly> LoadAllAssemblies(string projectPath)
         {
             string projectFilePath = Path.Combine(projectPath, "project.json");
             JObject configurationFile = JObject.Parse(File.ReadAllText(projectFilePath));
@@ -99,7 +101,7 @@ namespace Openchain.Server.Models
             return dependencies.Properties()
                 .Select(property => property.Name)
                 .Where(name => name != "Openchain.Server")
-                .Select(name => assemblyLoader.Default.Load(name))
+                .Select(name => AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(name)))
                 .ToList();
         }
     }

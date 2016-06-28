@@ -16,8 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Mvc;
-using Microsoft.AspNet.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Openchain.Infrastructure;
 
 namespace Openchain.Server.Controllers
@@ -77,13 +77,13 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             ByteString transaction = await this.store.GetTransaction(parsedMutationHash);
 
             if (transaction == null)
-                return new HttpStatusCodeResult(404);
+                return StatusCode(404);
             else
             {
                 if (format == "raw")
@@ -125,7 +125,7 @@ namespace Openchain.Server.Controllers
         {
             LedgerPath path;
             if (!LedgerPath.TryParse(account, out path))
-                return HttpBadRequest();
+                return BadRequest();
 
             LedgerPath directory = LedgerPath.FromSegments(path.Segments.ToArray());
 
@@ -151,7 +151,7 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             IReadOnlyList<ByteString> mutations = await this.store.GetRecordMutations(accountKey);
@@ -185,13 +185,13 @@ namespace Openchain.Server.Controllers
             }
             catch (FormatException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             Record record = await this.store.GetRecordVersion(parsedKey, parsedVersion);
 
             if (record == null)
-                return HttpNotFound();
+                return NotFound();
             else
                 return Json(new
                 {
@@ -215,7 +215,7 @@ namespace Openchain.Server.Controllers
             string recordType)
         {
             if (recordName == null)
-                return HttpBadRequest();
+                return BadRequest();
 
             RecordKey record;
             try
@@ -224,7 +224,7 @@ namespace Openchain.Server.Controllers
             }
             catch (ArgumentOutOfRangeException)
             {
-                return HttpBadRequest();
+                return BadRequest();
             }
 
             IReadOnlyList<Record> records = await this.indexes.GetAllRecords(record.RecordType, record.Name);
@@ -259,7 +259,7 @@ namespace Openchain.Server.Controllers
 
             if (context.Exception is NotSupportedException)
             {
-                context.Result = new HttpStatusCodeResult(501);
+                context.Result = StatusCode(501);
                 context.ExceptionHandled = true;
             }
         }

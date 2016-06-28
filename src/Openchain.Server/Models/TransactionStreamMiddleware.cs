@@ -16,8 +16,8 @@ using System;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Openchain.Infrastructure;
 
@@ -51,8 +51,8 @@ namespace Openchain.Server.Models
                 else
                     lastLedgerRecordHash = ByteString.Parse(from);
 
-                ILogger logger = (ILogger)context.ApplicationServices.GetService(typeof(ILogger));
-                IStorageEngine store = (IStorageEngine)context.ApplicationServices.GetService(typeof(IStorageEngine));
+                ILogger logger = (ILogger)context.RequestServices.GetService(typeof(ILogger));
+                IStorageEngine store = (IStorageEngine)context.RequestServices.GetService(typeof(IStorageEngine));
 
                 await store.Initialize();
 

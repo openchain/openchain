@@ -2,13 +2,16 @@
   "version": "0.5.1-*",
   "description": "Abstractions and public interfaces used by Openchain.",
   "authors": [ "Flavien Charlon" ],
-  "owners": [ "Coinprism" ],
-  "projectUrl": "https://www.openchain.org/",
-  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
-  "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "compilationOptions": {
+  "packOptions": {
+    "owners": [ "Coinprism" ],
+    "projectUrl": "https://www.openchain.org/",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+    "iconUrl": "https://www.openchain.org/package.png"
+  },
+
+  "buildOptions": {
     "allowUnsafe": false,
     "warningsAsErrors": true
   },
@@ -18,13 +21,19 @@
   },
 
   "frameworks": {
-    "dotnet5.4": {
+
+    "netstandard1.3": {
       "dependencies": {
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime.Extensions": "4.0.11-beta-23516",
-        "System.Security.Cryptography.Algorithms": "4.0.0-beta-23516"
-      }
+        "System.Collections": "4.0.11",
+        "System.Linq": "4.1.0",
+        "System.Runtime.Extensions": "4.1.0",
+        "System.Security.Cryptography.Algorithms": "4.2.0"
+      },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     },
 
     "net451": {

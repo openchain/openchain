@@ -2,33 +2,36 @@
   "version": "0.5.1-*",
   "description": "Main Openchain ledger management system.",
   "authors": [ "Flavien Charlon" ],
-  "owners": [ "Coinprism" ],
-  "projectUrl": "https://www.openchain.org/",
-  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
-  "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "compilationOptions": {
-    "allowUnsafe": false,
-    "warningsAsErrors": true
+  "packOptions": {
+    "owners": [ "Coinprism" ],
+    "projectUrl": "https://www.openchain.org/",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+    "iconUrl": "https://www.openchain.org/package.png"
   },
 
   "dependencies": {
-    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Openchain.Abstractions": "0.5.1-*",
     "Portable.BouncyCastle": "1.8.0"
   },
 
   "frameworks": {
-    "dotnet5.4": {
+    "netstandard1.3": {
       "dependencies": {
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
-        "System.ObjectModel": "4.0.11-beta-23516",
-        "System.Runtime.Numerics": "4.0.1-beta-23516",
-        "System.Text.Encoding": "4.0.11-beta-23516",
-        "System.Text.RegularExpressions": "4.0.11-beta-23516"
-      }
+        "System.Dynamic.Runtime": "4.0.11",
+        "System.ObjectModel": "4.0.12",
+        "System.Runtime.Numerics": "4.0.1",
+        "System.Text.Encoding": "4.0.11",
+        "System.Text.RegularExpressions": "4.1.0"
+      },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
     },
 
     "net451": {

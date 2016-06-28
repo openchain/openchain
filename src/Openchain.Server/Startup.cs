@@ -15,9 +15,9 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.WebSockets.Server;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.WebSockets.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -33,12 +33,12 @@ namespace Openchain.Server
         private List<Task> runningTasks = new List<Task>();
         private readonly IConfiguration configuration;
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment application)
+        public Startup(IHostingEnvironment env, IHostingEnvironment application)
         {
             // Setup Configuration
             configuration = new ConfigurationBuilder()
-                .SetBasePath(application.ApplicationBasePath)
-                .AddJsonFile(env.MapPath("App_Data/config.json"))
+                .SetBasePath(application.ContentRootPath)
+                .AddJsonFile("data/config.json")
                 .AddUserSecrets()
                 .AddEnvironmentVariables()
                 .Build();
@@ -68,7 +68,7 @@ namespace Openchain.Server
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
-            LogStartup(services.BuildServiceProvider().GetService<ILogger>(), services.BuildServiceProvider().GetService<IApplicationEnvironment>());
+            LogStartup(services.BuildServiceProvider().GetService<ILogger>(), services.BuildServiceProvider().GetService<IHostingEnvironment>());
 
             // CORS Headers
             services.AddCors();
@@ -97,24 +97,22 @@ namespace Openchain.Server
             services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
         }
 
-        private static void LogStartup(ILogger logger, IApplicationEnvironment environment)
+        private static void LogStartup(ILogger logger, IHostingEnvironment environment)
         {
-            logger.LogInformation($"Starting Openchain v{version} ({environment.RuntimeFramework.FullName})");
+            logger.LogInformation($"Starting Openchain v{version}");
             logger.LogInformation(" ");
         }
 
         /// <summary>
         /// Configures the services.
         /// </summary>
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
         {
             app.UseCors(builder => builder
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowAnyOrigin()
                 .WithExposedHeaders("Content-Range", "Content-Length", "Content-Encoding"));
-
-            app.UseIISPlatformHandler();
 
             app.Map("/stream", managedWebSocketsApp =>
             {
@@ -142,7 +140,5 @@ namespace Openchain.Server
             if (anchorWorker != null)
                 runningTasks.Add(anchorWorker.Run(CancellationToken.None));
         }
-
-        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }

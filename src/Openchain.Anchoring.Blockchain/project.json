@@ -2,31 +2,51 @@
   "version": "0.5.1-*",
   "description": "Blockchain-based anchoring for Openchain.",
   "authors": [ "Flavien Charlon" ],
-  "owners": [ "Coinprism" ],
-  "projectUrl": "https://www.openchain.org/",
-  "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
-  "iconUrl": "https://www.openchain.org/package.png",
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
 
-  "compilationOptions": {
+  "packOptions": {
+    "owners": [ "Coinprism" ],
+    "projectUrl": "https://www.openchain.org/",
+    "licenseUrl": "https://www.apache.org/licenses/LICENSE-2.0",
+    "iconUrl": "https://www.openchain.org/package.png"
+  },
+
+  "buildOptions": {
     "allowUnsafe": false,
     "warningsAsErrors": true
   },
+  
+  "runtimeOptions": {
+    "gcServer": true
+  },
 
   "dependencies": {
-    "System.Net.Http": "4.0.1-beta-23516",
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
     "NBitcoin": "2.1.5.9",
     "Openchain.Infrastructure": "0.5.1-*"
   },
 
   "frameworks": {
-    "dotnet5.4": { },
+    "netstandard1.3": {
+      "dependencies": {
+        "System.Net.Http": "4.1.0"
+      },
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    },
 
     "net451": {
       "frameworkAssemblies": {
+        "System.Net.Http": "4.0.0.0",
         "System.Collections": "4.0.0.0"
       }
     }
+  },
+
+  "scripts": {
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }

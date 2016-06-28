@@ -15,7 +15,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -99,7 +99,7 @@ namespace Openchain.Sqlite
             if (path != ":memory:")
             {
                 IHostingEnvironment environment = serviceProvider.GetRequiredService<IHostingEnvironment>();
-                return environment.MapPath(Path.Combine("App_Data", path));
+                return environment.WebRootFileProvider.GetFileInfo(Path.Combine("App_Data", path)).PhysicalPath;
             }
             else
             {

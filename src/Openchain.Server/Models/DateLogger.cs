@@ -27,9 +27,9 @@ namespace Openchain.Server.Models
             this.logger = logger;
         }
 
-        public IDisposable BeginScopeImpl(object state)
+        public IDisposable BeginScope<TState>(TState state)
         {
-            return this.logger.BeginScopeImpl(state);
+            return this.logger.BeginScope(state);
         }
 
         public bool IsEnabled(LogLevel logLevel)
@@ -47,6 +47,11 @@ namespace Openchain.Server.Models
                 state,
                 exception,
                 (logState, ex) => $"[{date}] {formatter(logState, ex)}");
+        }
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
