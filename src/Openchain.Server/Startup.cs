@@ -29,17 +29,17 @@ namespace Openchain.Server
 {
     public class Startup
     {
-        private static readonly string version = "0.5.1";
+        private static readonly string version = "0.6.0-rc";
         private List<Task> runningTasks = new List<Task>();
         private readonly IConfiguration configuration;
 
-        public Startup(IHostingEnvironment env, IHostingEnvironment application)
+        public Startup(IHostingEnvironment application)
         {
             // Setup Configuration
             configuration = new ConfigurationBuilder()
                 .SetBasePath(application.ContentRootPath)
                 .AddJsonFile("data/config.json")
-                .AddUserSecrets()
+                //.AddUserSecrets()
                 .AddEnvironmentVariables()
                 .Build();
         }

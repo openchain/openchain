@@ -12,11 +12,11 @@
       "type": "platform"
     },
 
-    "Openchain.Server": "0.5.1",
+    "Openchain.Server": "0.6.0-rc",
 
-    "Openchain.Sqlite": "0.5.1",
-    "Openchain.Validation.PermissionBased": "0.5.1",
-    "Openchain.Anchoring.Blockchain": "0.5.1"
+    "Openchain.Sqlite": "0.6.0-rc",
+    "Openchain.Validation.PermissionBased": "0.6.0-rc",
+    "Openchain.Anchoring.Blockchain": "0.6.0-rc"
   },
 
   "userSecretsId": "Openchain.Server",
