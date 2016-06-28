@@ -23,8 +23,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
-using Newtonsoft.Json.Linq;
 using Openchain.Infrastructure;
 
 namespace Openchain.Server.Models
@@ -64,7 +62,7 @@ namespace Openchain.Server.Models
 
             try
             {
-                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, application.ContentRootPath, rootSection);
+                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), rootSection);
 
                 if (resolver.builder == null)
                     serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");
@@ -93,15 +91,13 @@ namespace Openchain.Server.Models
 
         private static IList<Assembly> LoadAllAssemblies(string projectPath)
         {
-            string projectFilePath = Path.Combine(projectPath, "project.json");
-            JObject configurationFile = JObject.Parse(File.ReadAllText(projectFilePath));
-
-            JObject dependencies = (JObject)configurationFile["dependencies"];
-
-            return dependencies.Properties()
-                .Select(property => property.Name)
-                .Where(name => name != "Openchain.Server")
-                .Select(name => AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(name)))
+            return Directory.EnumerateFiles(projectPath)
+                .Where(name =>
+                    Path.GetFileName(name).StartsWith("Openchain.", StringComparison.OrdinalIgnoreCase)
+                    && Path.GetFileNameWithoutExtension(name) != "Openchain.Server"
+                    && Path.GetFileNameWithoutExtension(name) != "Openchain"
+                    && Path.GetExtension(name).Equals(".dll", StringComparison.OrdinalIgnoreCase))
+                .Select(file => AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(projectPath, file)))
                 .ToList();
         }
     }

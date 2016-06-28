@@ -25,7 +25,7 @@ namespace Openchain.Sqlite
 {
     public class SqliteStorageEngineBuilder : IComponentBuilder<SqliteLedger>
     {
-        private static readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'";
+        private static readonly string columnAlreadyExistsMessage = "SQLite Error 1: 'duplicate column name: Name'.";
         private string filename;
 
         public string Name { get; } = "SQLite";
@@ -99,7 +99,7 @@ namespace Openchain.Sqlite
             if (path != ":memory:")
             {
                 IHostingEnvironment environment = serviceProvider.GetRequiredService<IHostingEnvironment>();
-                return environment.WebRootFileProvider.GetFileInfo(Path.Combine("App_Data", path)).PhysicalPath;
+                return environment.ContentRootFileProvider.GetFileInfo(Path.Combine("data", path)).PhysicalPath;
             }
             else
             {

@@ -37,7 +37,7 @@ namespace Openchain.Server.Models
             return this.logger.IsEnabled(logLevel);
         }
 
-        public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             string date = DateTime.UtcNow.ToString("u", CultureInfo.InvariantCulture);
 
@@ -47,11 +47,6 @@ namespace Openchain.Server.Models
                 state,
                 exception,
                 (logState, ex) => $"[{date}] {formatter(logState, ex)}");
-        }
-
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-        {
-            throw new NotImplementedException();
         }
     }
 }

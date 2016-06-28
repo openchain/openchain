@@ -6,6 +6,10 @@
     "preserveCompilationContext": true
   },
 
+  "runtimeOptions": {
+    "gcServer": true
+  },
+
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -16,7 +20,7 @@
 
     "Openchain.Sqlite": "0.6.0-rc",
     "Openchain.Validation.PermissionBased": "0.6.0-rc",
-    "Openchain.Anchoring.Blockchain": "0.6.0-rc"
+    //"Openchain.Anchoring.Blockchain": "0.6.0-rc"
   },
 
   "userSecretsId": "Openchain.Server",
@@ -40,5 +44,9 @@
     "include": [
       "data"
     ]
+  },
+
+  "scripts": {
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   }
 }

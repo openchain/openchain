@@ -39,7 +39,7 @@ namespace Openchain.Server
             configuration = new ConfigurationBuilder()
                 .SetBasePath(application.ContentRootPath)
                 .AddJsonFile("data/config.json")
-                //.AddUserSecrets()
+                .AddUserSecrets()
                 .AddEnvironmentVariables()
                 .Build();
         }
