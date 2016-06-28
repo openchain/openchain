@@ -25,7 +25,7 @@ namespace Openchain.Sqlite.Tests
     public class SqliteAnchorStateBuilderTests
     {
         private readonly IConfigurationSection configuration =
-            new ConfigurationRoot(new[] { new MemoryConfigurationProvider(new Dictionary<string, string>() { ["config:path"] = ":memory:" }) })
+            new ConfigurationRoot(new[] { new MemoryConfigurationProvider(new MemoryConfigurationSource() { InitialData = new Dictionary<string, string>() { ["config:path"] = ":memory:" } }) })
             .GetSection("config");
 
         [Fact]
