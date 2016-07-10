@@ -1,5 +1,5 @@
 {
-  "version": "0.6.1-*",
+  "version": "0.6.2-*",
   "description": "Abstractions and public interfaces used by Openchain.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",

@@ -10,12 +10,12 @@
       "type": "platform"
     },
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-    "Openchain.Server": "0.6.1",
+    "Openchain.Server": "0.6.2",
 
-    "Openchain.Anchoring.Blockchain": "0.6.1",
-    "Openchain.Sqlite": "0.6.1",
-    "Openchain.SqlServer": "0.6.1",
-    "Openchain.Validation.PermissionBased": "0.6.1"
+    "Openchain.Anchoring.Blockchain": "0.6.2",
+    "Openchain.Sqlite": "0.6.2",
+    "Openchain.SqlServer": "0.6.2",
+    "Openchain.Validation.PermissionBased": "0.6.2"
   },
 
   "frameworks": {
