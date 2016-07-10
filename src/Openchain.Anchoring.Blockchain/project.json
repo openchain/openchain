@@ -18,8 +18,7 @@
 
   "dependencies": {
     "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-    "Newtonsoft.Json": "9.0.1",
-    "NBitcoin": "2.1.5.9",
+    "NBitcoin": "3.0.0.37",
     "Openchain.Infrastructure": "0.6.0-rc"
   },
 
@@ -31,7 +30,7 @@
       "imports": [
         "dotnet5.6",
         "dnxcore50",
-        "portable-net45+win8"
+        "portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10"
       ]
     },
 

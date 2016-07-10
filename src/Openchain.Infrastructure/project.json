@@ -15,7 +15,7 @@
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
     "Openchain.Abstractions": "0.6.0-rc",
-    "Portable.BouncyCastle": "1.8.0"
+    "Portable.BouncyCastle": "1.8.1.1"
   },
 
   "frameworks": {

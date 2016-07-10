@@ -1,13 +1,7 @@
 ﻿{
-  "entryPoint": "Openchain.Server",
-
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true
-  },
-
-  "runtimeOptions": {
-    "gcServer": true
   },
 
   "dependencies": {
@@ -20,7 +14,7 @@
 
     "Openchain.Sqlite": "0.6.0-rc",
     "Openchain.Validation.PermissionBased": "0.6.0-rc",
-    //"Openchain.Anchoring.Blockchain": "0.6.0-rc"
+    "Openchain.Anchoring.Blockchain": "0.6.0-rc"
   },
 
   "userSecretsId": "Openchain.Server",
@@ -30,7 +24,7 @@
       "imports": [
         "dotnet5.6",
         "dnxcore50",
-        "portable-net45+win8"
+        "portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10"
       ]
     }
   },
