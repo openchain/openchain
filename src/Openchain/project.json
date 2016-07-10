@@ -18,8 +18,6 @@
     "Openchain.Anchoring.Blockchain": "0.6.0"
   },
 
-  "userSecretsId": "Openchain.Server",
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": [
