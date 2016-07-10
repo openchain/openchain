@@ -17,7 +17,6 @@
   },
 
   "dependencies": {
-    "System.Runtime.Loader": "4.0.0",
     "Microsoft.AspNetCore.Mvc.Cors": "1.0.0",
     "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
@@ -41,6 +40,9 @@
         "dnxcore50",
         "portable-net45+win8"
       ]
+    },
+
+    "net451": { 
     }
   }
 }

@@ -17,11 +17,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Loader;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
 using Openchain.Infrastructure;
 
@@ -91,13 +91,9 @@ namespace Openchain.Server.Models
 
         private static IList<Assembly> LoadAllAssemblies(string projectPath)
         {
-            return Directory.EnumerateFiles(projectPath)
-                .Where(name =>
-                    Path.GetFileName(name).StartsWith("Openchain.", StringComparison.OrdinalIgnoreCase)
-                    && Path.GetFileNameWithoutExtension(name) != "Openchain.Server"
-                    && !Path.GetFileNameWithoutExtension(name).Equals("Openchain", StringComparison.OrdinalIgnoreCase)
-                    && Path.GetExtension(name).Equals(".dll", StringComparison.OrdinalIgnoreCase))
-                .Select(file => AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(projectPath, file)))
+            return DependencyContext.Default.RuntimeLibraries
+                .Where(library => library.Name.StartsWith("Openchain.", StringComparison.OrdinalIgnoreCase))
+                .Select(library => Assembly.Load(new AssemblyName(library.Name)))
                 .ToList();
         }
     }
