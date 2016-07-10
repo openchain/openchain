@@ -9,12 +9,13 @@
       "version": "1.0.0",
       "type": "platform"
     },
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
 
-    "Openchain.Server": "0.6.0-rc",
+    "Openchain.Server": "0.6.0",
 
-    "Openchain.Sqlite": "0.6.0-rc",
-    "Openchain.Validation.PermissionBased": "0.6.0-rc",
-    "Openchain.Anchoring.Blockchain": "0.6.0-rc"
+    "Openchain.Sqlite": "0.6.0",
+    "Openchain.Validation.PermissionBased": "0.6.0",
+    "Openchain.Anchoring.Blockchain": "0.6.0"
   },
 
   "userSecretsId": "Openchain.Server",

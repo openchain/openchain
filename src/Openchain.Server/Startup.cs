@@ -27,7 +27,7 @@ namespace Openchain.Server
 {
     public class Startup
     {
-        private static readonly string version = "0.6.0-rc";
+        private static readonly string version = "0.6.0";
         private List<Task> runningTasks = new List<Task>();
         private readonly IConfiguration configuration;
 

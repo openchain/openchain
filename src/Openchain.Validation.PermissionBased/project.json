@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.6.0-rc-*",
+  "version": "0.6.0-*",
   "description": "Permission-based validation provider for Openchain.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
@@ -18,7 +18,7 @@
 
   "dependencies": {
     "Newtonsoft.Json": "9.0.1",
-    "Openchain.Infrastructure": "0.6.0-rc"
+    "Openchain.Infrastructure": "0.6.0"
   },
 
   "frameworks": {
@@ -26,10 +26,6 @@
 
     "netstandard1.3": {
       "dependencies": {
-        //"Microsoft.CSharp": "4.0.1",
-        //"System.Collections": "4.0.11-beta-23516",
-        //"System.Linq": "4.0.1-beta-23516",
-        //"System.Threading": "4.0.11-beta-23516"
       },
       "imports": [
         "dotnet5.6",

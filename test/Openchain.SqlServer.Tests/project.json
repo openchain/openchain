@@ -1,5 +1,5 @@
 ﻿{
-  "version": "0.6.0-rc-*",
+  "version": "0.6.0-*",
   "description": "Unit tests for the Openchain.SqlServer package.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright © 2015 Coinprism, Inc.",
@@ -21,9 +21,9 @@
     "Microsoft.Extensions.Configuration": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.DependencyInjection": "1.0.0",
-    "Openchain.Abstractions.Tests": "0.6.0-rc",
-    "Openchain.Infrastructure.Tests": "0.6.0-rc",
-    "Openchain.SqlServer": "0.6.0-rc",
+    "Openchain.Abstractions.Tests": "0.6.0",
+    "Openchain.Infrastructure.Tests": "0.6.0",
+    "Openchain.SqlServer": "0.6.0",
     "xunit": "2.2.0-beta2-build3300",
     "dotnet-test-xunit": "2.2.0-preview2-build1029"
   },
