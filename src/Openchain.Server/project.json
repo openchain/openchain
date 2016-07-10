@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0-*",
+  "version": "0.6.1-*",
   "description": "Reference implementation of the Openchain protocol.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
@@ -27,7 +27,7 @@
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0",
     "Newtonsoft.Json": "9.0.1",
-    "Openchain.Infrastructure": "0.6.0"
+    "Openchain.Infrastructure": "0.6.1"
   },
 
   "frameworks": {

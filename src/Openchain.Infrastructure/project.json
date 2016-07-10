@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0-*",
+  "version": "0.6.1-*",
   "description": "Main Openchain ledger management system.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
@@ -14,7 +14,7 @@
   "dependencies": {
     "Microsoft.Extensions.Configuration.Abstractions": "1.0.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
-    "Openchain.Abstractions": "0.6.0",
+    "Openchain.Abstractions": "0.6.1",
     "Portable.BouncyCastle": "1.8.1.1"
   },
 
