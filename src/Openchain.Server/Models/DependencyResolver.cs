@@ -62,7 +62,7 @@ namespace Openchain.Server.Models
 
             try
             {
-                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), rootSection);
+                DependencyResolver<T> resolver = new DependencyResolver<T>(serviceProvider, new FileInfo(Assembly.GetEntryAssembly().Location).Directory.FullName, rootSection);
 
                 if (resolver.builder == null)
                     serviceProvider.GetRequiredService<ILogger>().LogWarning($"Unable to find a provider for {typeof(T).FullName} from the '{configurationPath}' configuration section.");
@@ -95,7 +95,7 @@ namespace Openchain.Server.Models
                 .Where(name =>
                     Path.GetFileName(name).StartsWith("Openchain.", StringComparison.OrdinalIgnoreCase)
                     && Path.GetFileNameWithoutExtension(name) != "Openchain.Server"
-                    && Path.GetFileNameWithoutExtension(name) != "Openchain"
+                    && !Path.GetFileNameWithoutExtension(name).Equals("Openchain", StringComparison.OrdinalIgnoreCase)
                     && Path.GetExtension(name).Equals(".dll", StringComparison.OrdinalIgnoreCase))
                 .Select(file => AssemblyLoadContext.Default.LoadFromAssemblyPath(Path.Combine(projectPath, file)))
                 .ToList();
