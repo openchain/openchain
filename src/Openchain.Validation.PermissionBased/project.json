@@ -25,13 +25,7 @@
     "net451": { },
 
     "netstandard1.3": {
-      "dependencies": {
-      },
-      "imports": [
-        "dotnet5.6",
-        "dnxcore50",
-        "portable-net45+win8"
-      ]
+      "dependencies": { }
     }
   }
 }

@@ -24,7 +24,6 @@ using scg = global::System.Collections.Generic;
 namespace Openchain.Messages {
 
   /// <summary>Holder for reflection information generated from schema.proto</summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal static partial class SchemaReflection {
 
     #region Descriptor
@@ -46,40 +45,45 @@ namespace Openchain.Messages {
             "EhwKFHRyYW5zYWN0aW9uX21ldGFkYXRhGAMgASgMYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.RecordValue), global::Openchain.Messages.RecordValue.Parser, new[]{ "Data" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Record), global::Openchain.Messages.Record.Parser, new[]{ "Key", "Value", "Version" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Mutation), global::Openchain.Messages.Mutation.Parser, new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Messages.Transaction), global::Openchain.Messages.Transaction.Parser, new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Messages.RecordValue), global::Openchain.Messages.RecordValue.Parser, new[]{ "Data" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Messages.Record), global::Openchain.Messages.Record.Parser, new[]{ "Key", "Value", "Version" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Messages.Mutation), global::Openchain.Messages.Mutation.Parser, new[]{ "Namespace", "Records", "Metadata" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Messages.Transaction), global::Openchain.Messages.Transaction.Parser, new[]{ "Mutation", "Timestamp", "TransactionMetadata" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class RecordValue : pb::IMessage<RecordValue> {
     private static readonly pb::MessageParser<RecordValue> _parser = new pb::MessageParser<RecordValue>(() => new RecordValue());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<RecordValue> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[0]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RecordValue() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RecordValue(RecordValue other) : this() {
       data_ = other.data_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public RecordValue Clone() {
       return new RecordValue(this);
     }
@@ -87,17 +91,20 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "data" field.</summary>
     public const int DataFieldNumber = 1;
     private pb::ByteString data_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Data {
       get { return data_; }
       set {
-        data_ = pb::Preconditions.CheckNotNull(value, "value");
+        data_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RecordValue);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(RecordValue other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -109,16 +116,19 @@ namespace Openchain.Messages {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Data.Length != 0) hash ^= Data.GetHashCode();
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Data.Length != 0) {
         output.WriteRawTag(10);
@@ -126,6 +136,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Data.Length != 0) {
@@ -134,6 +145,7 @@ namespace Openchain.Messages {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(RecordValue other) {
       if (other == null) {
         return;
@@ -143,6 +155,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -160,31 +173,36 @@ namespace Openchain.Messages {
 
   }
 
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class Record : pb::IMessage<Record> {
     private static readonly pb::MessageParser<Record> _parser = new pb::MessageParser<Record>(() => new Record());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Record> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[1]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Record() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Record(Record other) : this() {
       key_ = other.key_;
       Value = other.value_ != null ? other.Value.Clone() : null;
       version_ = other.version_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Record Clone() {
       return new Record(this);
     }
@@ -192,16 +210,18 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "key" field.</summary>
     public const int KeyFieldNumber = 1;
     private pb::ByteString key_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Key {
       get { return key_; }
       set {
-        key_ = pb::Preconditions.CheckNotNull(value, "value");
+        key_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "value" field.</summary>
     public const int ValueFieldNumber = 2;
     private global::Openchain.Messages.RecordValue value_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Openchain.Messages.RecordValue Value {
       get { return value_; }
       set {
@@ -212,17 +232,20 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "version" field.</summary>
     public const int VersionFieldNumber = 3;
     private pb::ByteString version_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Version {
       get { return version_; }
       set {
-        version_ = pb::Preconditions.CheckNotNull(value, "value");
+        version_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Record);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(Record other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -236,6 +259,7 @@ namespace Openchain.Messages {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Key.Length != 0) hash ^= Key.GetHashCode();
@@ -244,10 +268,12 @@ namespace Openchain.Messages {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Key.Length != 0) {
         output.WriteRawTag(10);
@@ -263,6 +289,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Key.Length != 0) {
@@ -277,6 +304,7 @@ namespace Openchain.Messages {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(Record other) {
       if (other == null) {
         return;
@@ -295,6 +323,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -323,31 +352,36 @@ namespace Openchain.Messages {
 
   }
 
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class Mutation : pb::IMessage<Mutation> {
     private static readonly pb::MessageParser<Mutation> _parser = new pb::MessageParser<Mutation>(() => new Mutation());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Mutation> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[2]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mutation() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mutation(Mutation other) : this() {
       namespace_ = other.namespace_;
       records_ = other.records_.Clone();
       metadata_ = other.metadata_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Mutation Clone() {
       return new Mutation(this);
     }
@@ -355,10 +389,11 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "namespace" field.</summary>
     public const int NamespaceFieldNumber = 1;
     private pb::ByteString namespace_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Namespace {
       get { return namespace_; }
       set {
-        namespace_ = pb::Preconditions.CheckNotNull(value, "value");
+        namespace_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -367,6 +402,7 @@ namespace Openchain.Messages {
     private static readonly pb::FieldCodec<global::Openchain.Messages.Record> _repeated_records_codec
         = pb::FieldCodec.ForMessage(18, global::Openchain.Messages.Record.Parser);
     private readonly pbc::RepeatedField<global::Openchain.Messages.Record> records_ = new pbc::RepeatedField<global::Openchain.Messages.Record>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Openchain.Messages.Record> Records {
       get { return records_; }
     }
@@ -374,17 +410,20 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "metadata" field.</summary>
     public const int MetadataFieldNumber = 3;
     private pb::ByteString metadata_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Metadata {
       get { return metadata_; }
       set {
-        metadata_ = pb::Preconditions.CheckNotNull(value, "value");
+        metadata_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Mutation);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(Mutation other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -398,6 +437,7 @@ namespace Openchain.Messages {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Namespace.Length != 0) hash ^= Namespace.GetHashCode();
@@ -406,10 +446,12 @@ namespace Openchain.Messages {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Namespace.Length != 0) {
         output.WriteRawTag(10);
@@ -422,6 +464,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Namespace.Length != 0) {
@@ -434,6 +477,7 @@ namespace Openchain.Messages {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(Mutation other) {
       if (other == null) {
         return;
@@ -447,6 +491,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -472,31 +517,36 @@ namespace Openchain.Messages {
 
   }
 
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class Transaction : pb::IMessage<Transaction> {
     private static readonly pb::MessageParser<Transaction> _parser = new pb::MessageParser<Transaction>(() => new Transaction());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<Transaction> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Openchain.Messages.SchemaReflection.Descriptor.MessageTypes[3]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Transaction() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Transaction(Transaction other) : this() {
       mutation_ = other.mutation_;
       timestamp_ = other.timestamp_;
       transactionMetadata_ = other.transactionMetadata_;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public Transaction Clone() {
       return new Transaction(this);
     }
@@ -504,16 +554,18 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "mutation" field.</summary>
     public const int MutationFieldNumber = 1;
     private pb::ByteString mutation_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString Mutation {
       get { return mutation_; }
       set {
-        mutation_ = pb::Preconditions.CheckNotNull(value, "value");
+        mutation_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     /// <summary>Field number for the "timestamp" field.</summary>
     public const int TimestampFieldNumber = 2;
     private long timestamp_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public long Timestamp {
       get { return timestamp_; }
       set {
@@ -524,17 +576,20 @@ namespace Openchain.Messages {
     /// <summary>Field number for the "transaction_metadata" field.</summary>
     public const int TransactionMetadataFieldNumber = 3;
     private pb::ByteString transactionMetadata_ = pb::ByteString.Empty;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pb::ByteString TransactionMetadata {
       get { return transactionMetadata_; }
       set {
-        transactionMetadata_ = pb::Preconditions.CheckNotNull(value, "value");
+        transactionMetadata_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as Transaction);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(Transaction other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -548,6 +603,7 @@ namespace Openchain.Messages {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       if (Mutation.Length != 0) hash ^= Mutation.GetHashCode();
@@ -556,10 +612,12 @@ namespace Openchain.Messages {
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       if (Mutation.Length != 0) {
         output.WriteRawTag(10);
@@ -575,6 +633,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       if (Mutation.Length != 0) {
@@ -589,6 +648,7 @@ namespace Openchain.Messages {
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(Transaction other) {
       if (other == null) {
         return;
@@ -604,6 +664,7 @@ namespace Openchain.Messages {
       }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {

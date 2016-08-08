@@ -24,7 +24,6 @@ using scg = global::System.Collections.Generic;
 namespace Openchain.Infrastructure.Messages {
 
   /// <summary>Holder for reflection information generated from schema.proto</summary>
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal static partial class SchemaReflection {
 
     #region Descriptor
@@ -44,37 +43,42 @@ namespace Openchain.Infrastructure.Messages {
             "BnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedCodeInfo(null, new pbr::GeneratedCodeInfo[] {
-            new pbr::GeneratedCodeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata), global::Openchain.Infrastructure.Messages.TransactionMetadata.Parser, new[]{ "Signatures" }, null, null, new pbr::GeneratedCodeInfo[] { new pbr::GeneratedCodeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence), global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence.Parser, new[]{ "PublicKey", "Signature" }, null, null, null)})
+          new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata), global::Openchain.Infrastructure.Messages.TransactionMetadata.Parser, new[]{ "Signatures" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence), global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence.Parser, new[]{ "PublicKey", "Signature" }, null, null, null)})
           }));
     }
     #endregion
 
   }
   #region Messages
-  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   internal sealed partial class TransactionMetadata : pb::IMessage<TransactionMetadata> {
     private static readonly pb::MessageParser<TransactionMetadata> _parser = new pb::MessageParser<TransactionMetadata>(() => new TransactionMetadata());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pb::MessageParser<TransactionMetadata> Parser { get { return _parser; } }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
       get { return global::Openchain.Infrastructure.Messages.SchemaReflection.Descriptor.MessageTypes[0]; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     pbr::MessageDescriptor pb::IMessage.Descriptor {
       get { return Descriptor; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public TransactionMetadata() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public TransactionMetadata(TransactionMetadata other) : this() {
       signatures_ = other.signatures_.Clone();
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public TransactionMetadata Clone() {
       return new TransactionMetadata(this);
     }
@@ -84,14 +88,17 @@ namespace Openchain.Infrastructure.Messages {
     private static readonly pb::FieldCodec<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> _repeated_signatures_codec
         = pb::FieldCodec.ForMessage(10, global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence.Parser);
     private readonly pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> signatures_ = new pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::Openchain.Infrastructure.Messages.TransactionMetadata.Types.SignatureEvidence> Signatures {
       get { return signatures_; }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as TransactionMetadata);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public bool Equals(TransactionMetadata other) {
       if (ReferenceEquals(other, null)) {
         return false;
@@ -103,26 +110,31 @@ namespace Openchain.Infrastructure.Messages {
       return true;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
       hash ^= signatures_.GetHashCode();
       return hash;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override string ToString() {
       return pb::JsonFormatter.ToDiagnosticString(this);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
       signatures_.WriteTo(output, _repeated_signatures_codec);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
       size += signatures_.CalculateSize(_repeated_signatures_codec);
       return size;
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(TransactionMetadata other) {
       if (other == null) {
         return;
@@ -130,6 +142,7 @@ namespace Openchain.Infrastructure.Messages {
       signatures_.Add(other.signatures_);
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void MergeFrom(pb::CodedInputStream input) {
       uint tag;
       while ((tag = input.ReadTag()) != 0) {
@@ -147,32 +160,37 @@ namespace Openchain.Infrastructure.Messages {
 
     #region Nested types
     /// <summary>Container for nested types declared in the TransactionMetadata message type.</summary>
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public static partial class Types {
-      [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-      public sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    internal static partial class Types {
+      internal sealed partial class SignatureEvidence : pb::IMessage<SignatureEvidence> {
         private static readonly pb::MessageParser<SignatureEvidence> _parser = new pb::MessageParser<SignatureEvidence>(() => new SignatureEvidence());
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pb::MessageParser<SignatureEvidence> Parser { get { return _parser; } }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public static pbr::MessageDescriptor Descriptor {
           get { return global::Openchain.Infrastructure.Messages.TransactionMetadata.Descriptor.NestedTypes[0]; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         pbr::MessageDescriptor pb::IMessage.Descriptor {
           get { return Descriptor; }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public SignatureEvidence() {
           OnConstruction();
         }
 
         partial void OnConstruction();
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public SignatureEvidence(SignatureEvidence other) : this() {
           publicKey_ = other.publicKey_;
           signature_ = other.signature_;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public SignatureEvidence Clone() {
           return new SignatureEvidence(this);
         }
@@ -180,27 +198,31 @@ namespace Openchain.Infrastructure.Messages {
         /// <summary>Field number for the "public_key" field.</summary>
         public const int PublicKeyFieldNumber = 1;
         private pb::ByteString publicKey_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pb::ByteString PublicKey {
           get { return publicKey_; }
           set {
-            publicKey_ = pb::Preconditions.CheckNotNull(value, "value");
+            publicKey_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
           }
         }
 
         /// <summary>Field number for the "signature" field.</summary>
         public const int SignatureFieldNumber = 2;
         private pb::ByteString signature_ = pb::ByteString.Empty;
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public pb::ByteString Signature {
           get { return signature_; }
           set {
-            signature_ = pb::Preconditions.CheckNotNull(value, "value");
+            signature_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override bool Equals(object other) {
           return Equals(other as SignatureEvidence);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public bool Equals(SignatureEvidence other) {
           if (ReferenceEquals(other, null)) {
             return false;
@@ -213,6 +235,7 @@ namespace Openchain.Infrastructure.Messages {
           return true;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override int GetHashCode() {
           int hash = 1;
           if (PublicKey.Length != 0) hash ^= PublicKey.GetHashCode();
@@ -220,10 +243,12 @@ namespace Openchain.Infrastructure.Messages {
           return hash;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public override string ToString() {
           return pb::JsonFormatter.ToDiagnosticString(this);
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void WriteTo(pb::CodedOutputStream output) {
           if (PublicKey.Length != 0) {
             output.WriteRawTag(10);
@@ -235,6 +260,7 @@ namespace Openchain.Infrastructure.Messages {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public int CalculateSize() {
           int size = 0;
           if (PublicKey.Length != 0) {
@@ -246,6 +272,7 @@ namespace Openchain.Infrastructure.Messages {
           return size;
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(SignatureEvidence other) {
           if (other == null) {
             return;
@@ -258,6 +285,7 @@ namespace Openchain.Infrastructure.Messages {
           }
         }
 
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
         public void MergeFrom(pb::CodedInputStream input) {
           uint tag;
           while ((tag = input.ReadTag()) != 0) {

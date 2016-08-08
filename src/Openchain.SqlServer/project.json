@@ -25,12 +25,7 @@
       "dependencies": {
         "System.Data.Common": "4.1.0",
         "System.Data.SqlClient": "4.1.0"
-      },
-      "imports": [
-        "dotnet5.6",
-        "dnxcore50",
-        "portable-net45+win8"
-      ]
+      }
     },
 
     "net451": {

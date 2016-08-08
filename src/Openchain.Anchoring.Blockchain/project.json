@@ -18,12 +18,12 @@
 
   "dependencies": {
     "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-    "NBitcoin": "3.0.0.37",
+    "NBitcoin": "3.0.0.43",
     "Openchain.Infrastructure": "0.6.2"
   },
 
   "frameworks": {
-    "netstandard1.3": {
+    "netstandard1.6": {
       "dependencies": {
         "System.Net.Http": "4.1.0"
       },
