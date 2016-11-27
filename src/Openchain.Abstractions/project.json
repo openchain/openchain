@@ -2,7 +2,7 @@
   "version": "0.6.3-*",
   "description": "Abstractions and public interfaces used by Openchain.",
   "authors": [ "Flavien Charlon" ],
-  "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
+  "copyright": "Copyright © 2015 Coinprism, Inc.",
 
   "packOptions": {
     "owners": [ "Coinprism" ],
@@ -17,7 +17,7 @@
   },
 
   "dependencies": {
-    "Google.Protobuf": "3.0.0-beta4"
+    "Google.Protobuf": "3.1.0"
   },
 
   "frameworks": {
