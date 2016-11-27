@@ -1,5 +1,5 @@
 {
-  "version": "0.6.3-*",
+  "version": "0.7.0-*",
   "description": "SQLite implementation of the Openchain storage layer.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
@@ -19,7 +19,7 @@
   "dependencies": {
     "Microsoft.Data.SQLite": "1.1.*",
     "Microsoft.AspNetCore.Hosting": "1.1.*",
-    "Openchain.Infrastructure": "0.6.3"
+    "Openchain.Infrastructure": "0.7.0"
   },
 
   "frameworks": {
