@@ -26,12 +26,7 @@
     "netstandard1.3": {
       "dependencies": {
         "System.Net.Http": "4.3.0"
-      },
-      "imports": [
-        "dotnet5.6",
-        "dnxcore50",
-        "portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10"
-      ]
+      }
     },
 
     "net451": {

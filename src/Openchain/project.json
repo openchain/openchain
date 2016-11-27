@@ -19,13 +19,7 @@
   },
 
   "frameworks": {
-    "netcoreapp1.1": {
-      "imports": [
-        "dotnet5.6",
-        "dnxcore50",
-        "portable-net45+win+wpa81+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10"
-      ]
-    }
+    "netcoreapp1.1": { }
   },
 
   "publishOptions": {
