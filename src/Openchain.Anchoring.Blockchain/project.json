@@ -17,15 +17,15 @@
   },
 
   "dependencies": {
-    "Microsoft.Extensions.Logging.Abstractions": "1.0.0",
-    "NBitcoin": "3.0.0.43",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.*",
+    "NBitcoin": "3.0.0.76",
     "Openchain.Infrastructure": "0.6.3"
   },
 
   "frameworks": {
-    "netstandard1.6": {
+    "netstandard1.3": {
       "dependencies": {
-        "System.Net.Http": "4.1.0"
+        "System.Net.Http": "4.3.0"
       },
       "imports": [
         "dotnet5.6",

@@ -17,8 +17,8 @@
   },
 
   "dependencies": {
-    "Microsoft.Data.SQLite": "1.0.0",
-    "Microsoft.AspNetCore.Hosting": "1.0.0",
+    "Microsoft.Data.SQLite": "1.1.*",
+    "Microsoft.AspNetCore.Hosting": "1.1.*",
     "Openchain.Infrastructure": "0.6.3"
   },
 

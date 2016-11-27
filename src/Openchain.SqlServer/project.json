@@ -23,8 +23,8 @@
   "frameworks": {
     "netstandard1.3": {
       "dependencies": {
-        "System.Data.Common": "4.1.0",
-        "System.Data.SqlClient": "4.1.0"
+        "System.Data.Common": "4.3.0",
+        "System.Data.SqlClient": "4.3.0"
       }
     },
 
