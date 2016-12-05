@@ -116,7 +116,7 @@ namespace Openchain.Server
             {
                 if (bool.Parse(configuration["enable_transaction_stream"]))
                 {
-                    managedWebSocketsApp.UseWebSockets(new WebSocketOptions() { ReplaceFeature = true });
+                    managedWebSocketsApp.UseWebSockets();
                     managedWebSocketsApp.Use(next => new TransactionStreamMiddleware(next).Invoke);
                 }
             });
