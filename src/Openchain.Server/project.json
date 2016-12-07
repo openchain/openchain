@@ -1,5 +1,5 @@
 {
-  "version": "0.7.0-*",
+  "version": "0.7.1-*",
   "description": "Reference implementation of the Openchain protocol.",
   "authors": [ "Flavien Charlon" ],
   "copyright": "Copyright \u00A9 2015 Coinprism, Inc.",
