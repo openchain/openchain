@@ -1,0 +1,12 @@
+#:C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Server\Openchain.Server.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Sqlite\Openchain.Sqlite.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.SqlServer\Openchain.SqlServer.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain\Openchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Validation.PermissionBased\Openchain.Validation.PermissionBased.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Abstractions\Openchain.Abstractions.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.Server\Openchain.Server.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.Sqlite\Openchain.Sqlite.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.SqlServer\Openchain.SqlServer.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj
+C:\Users\Robert\Desktop\openchain\src\Openchain.Validation.PermissionBased\Openchain.Validation.PermissionBased.xproj|C:\Users\Robert\Desktop\openchain\src\Openchain.Infrastructure\Openchain.Infrastructure.xproj
