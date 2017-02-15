@@ -10,7 +10,7 @@
       "type": "platform"
     },
     "Microsoft.AspNetCore.Server.IISIntegration": "1.1.*",
-    "Openchain.Server": "0.7.0",
+    "Openchain.Server": "0.7.1",
 
     "Openchain.Anchoring.Blockchain": "0.7.0",
     "Openchain.Sqlite": "0.7.0",
