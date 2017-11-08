@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>Openchain</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>Openchain</PackageId>
+    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="data\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+    <None Update="**.xproj;**.user;**.vspscc">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Openchain.Server\Openchain.Server.csproj" />
+    <ProjectReference Include="..\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.csproj" />
+    <ProjectReference Include="..\Openchain.Sqlite\Openchain.Sqlite.csproj" />
+    <ProjectReference Include="..\Openchain.SqlServer\Openchain.SqlServer.csproj" />
+    <ProjectReference Include="..\Openchain.Validation.PermissionBased\Openchain.Validation.PermissionBased.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>

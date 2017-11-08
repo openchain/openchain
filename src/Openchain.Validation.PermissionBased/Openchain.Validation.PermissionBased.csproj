@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Permission-based validation provider for Openchain.</Description>
+    <Copyright>Copyright © 2015 Coinprism, Inc.</Copyright>
+    <VersionPrefix>0.7.0</VersionPrefix>
+    <Authors>Flavien Charlon</Authors>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AssemblyName>Openchain.Validation.PermissionBased</AssemblyName>
+    <PackageId>Openchain.Validation.PermissionBased</PackageId>
+    <PackageIconUrl>https://www.openchain.org/package.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.openchain.org/</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Openchain.Infrastructure\Openchain.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+</Project>

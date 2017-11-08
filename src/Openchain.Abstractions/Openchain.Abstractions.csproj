@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Abstractions and public interfaces used by Openchain.</Description>
+    <Copyright>Copyright © 2015 Coinprism, Inc.</Copyright>
+    <VersionPrefix>0.7.0</VersionPrefix>
+    <Authors>Flavien Charlon</Authors>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AssemblyName>Openchain.Abstractions</AssemblyName>
+    <PackageId>Openchain.Abstractions</PackageId>
+    <PackageIconUrl>https://www.openchain.org/package.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.openchain.org/</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <RootNamespace>Openchain.Abstractions</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Collections" Version="4.3.0" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
