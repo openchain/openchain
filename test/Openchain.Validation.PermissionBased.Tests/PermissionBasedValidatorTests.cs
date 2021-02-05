@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Openchain.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Openchain.Infrastructure;
 using Xunit;
 
 namespace Openchain.Validation.PermissionBased.Tests

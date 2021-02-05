@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Google.Protobuf;
 using System;
 using System.Linq;
-using Google.Protobuf;
 using Xunit;
 
 namespace Openchain.Tests

@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using NBitcoin;
+using Newtonsoft.Json.Linq;
+using Openchain.Infrastructure;
 using System;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using NBitcoin;
-using Newtonsoft.Json.Linq;
-using Openchain.Infrastructure;
 
 namespace Openchain.Anchoring.Blockchain
 {
@@ -97,7 +97,9 @@ namespace Openchain.Anchoring.Blockchain
 
                 JArray outputs = JArray.Parse(body);
 
-                TransactionBuilder builder = new TransactionBuilder();
+                //Changed the builder constructor
+                //TODO: make sure transa
+                TransactionBuilder builder = Network.Main.CreateTransactionBuilder();
                 builder.AddKeys(publishingAddress.GetBitcoinSecret(network));
                 foreach (JObject output in outputs)
                 {
@@ -109,7 +111,7 @@ namespace Openchain.Anchoring.Blockchain
                 }
 
                 Script opReturn = new Script(OpcodeType.OP_RETURN, Op.GetPushOp(anchorPayload));
-                builder.Send(opReturn, 0);
+                builder.Send(opReturn, 0L);
                 builder.SendFees(satoshiFees);
                 builder.SetChange(this.publishingAddress.ScriptPubKey, ChangeType.All);
 

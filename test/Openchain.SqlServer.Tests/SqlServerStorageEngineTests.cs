@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Openchain.Tests;
 using System;
 using System.Data.SqlClient;
-using Openchain.Tests;
 using Xunit;
 
 namespace Openchain.SqlServer.Tests

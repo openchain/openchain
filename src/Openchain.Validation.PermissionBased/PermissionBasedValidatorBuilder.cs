@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Openchain.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {
@@ -54,7 +54,7 @@ namespace Openchain.Validation.PermissionBased
                 // Admins have full rights
                 new Acl(adminAddresses, LedgerPath.Parse("/"), true, StringPattern.MatchAll, PermissionSet.AllowAll)
             };
-            
+
             if (bool.Parse(configuration["allow_third_party_assets"]))
                 this.staticPermissionProviders.Add(new P2pkhIssuanceImplicitLayout(keyEncoder));
 
@@ -62,7 +62,7 @@ namespace Openchain.Validation.PermissionBased
                 this.staticPermissionProviders.Add(new P2pkhImplicitLayout(keyEncoder));
 
             this.staticPermissionProviders.Add(new StaticPermissionLayout(pathPermissions));
-            
+
             return Task.FromResult(0);
         }
     }

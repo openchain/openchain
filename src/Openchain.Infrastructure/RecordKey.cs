@@ -59,12 +59,12 @@ namespace Openchain.Infrastructure
             string[] parts = Encoding.UTF8.GetString(key, 0, key.Length).Split(new[] { ':' }, 3);
             if (parts.Length != 3)
                 throw new ArgumentOutOfRangeException(nameof(keyData));
-            
+
             RecordKey result = ParseRecord(
                 parts[1],
                 LedgerPath.Parse(parts[0]),
                 parts[2]);
-            
+
             // The byte representation of reencoded value must match the input
             if (!result.ToBinary().Equals(keyData))
                 throw new ArgumentOutOfRangeException(nameof(keyData));

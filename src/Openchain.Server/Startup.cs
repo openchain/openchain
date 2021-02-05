@@ -12,9 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +19,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Openchain.Infrastructure;
 using Openchain.Server.Models;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Openchain.Server
 {
@@ -53,13 +53,21 @@ namespace Openchain.Server
         /// <param name="services">The collection of services.</param>
         public async Task ConfigureServicesAsync(IServiceCollection services)
         {
-            services.BuildServiceProvider().GetService<ILoggerFactory>().AddConsole();
+
+            //TODO: review this fix; make sure logging is still ok
+            //services.BuildServiceProvider().GetService<ILoggerFactory>().AddConsole();
+
+            services.AddLogging(opt =>
+            {
+                opt.AddConsole();
+            });
+
 
             services.AddSingleton<IConfiguration>(_ => this.configuration);
 
             // Setup ASP.NET MVC
             services
-                .AddMvcCore()
+                .AddMvcCore(options => options.EnableEndpointRouting = false)
                 .AddViews()
                 .AddJsonFormatters();
 
