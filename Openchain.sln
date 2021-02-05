@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26114.2
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{69F65B5A-AA9C-4D9B-8F70-0D0D33052D87}"
 EndProject
@@ -11,31 +11,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{F2E02870
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Openchain.SqlServer.Schema", "tools\Openchain.SqlServer.Schema\Openchain.SqlServer.Schema.sqlproj", "{B7AE3B37-042A-4083-B227-CBE1FAF40644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain", "src\Openchain\Openchain.csproj", "{0B51B7A7-00C6-4FD3-B5B2-E1E3E4F5575D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain", "src\Openchain\Openchain.csproj", "{0B51B7A7-00C6-4FD3-B5B2-E1E3E4F5575D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Abstractions", "src\Openchain.Abstractions\Openchain.Abstractions.csproj", "{C6EA4222-7169-43C0-9ED5-BC3D78FB3878}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Abstractions", "src\Openchain.Abstractions\Openchain.Abstractions.csproj", "{C6EA4222-7169-43C0-9ED5-BC3D78FB3878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Anchoring.Blockchain", "src\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.csproj", "{C5A6D844-B795-4365-8D8D-40373AEF32D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Anchoring.Blockchain", "src\Openchain.Anchoring.Blockchain\Openchain.Anchoring.Blockchain.csproj", "{C5A6D844-B795-4365-8D8D-40373AEF32D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Infrastructure", "src\Openchain.Infrastructure\Openchain.Infrastructure.csproj", "{D80B32CF-E0B8-4041-80D8-1D330A276AE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Infrastructure", "src\Openchain.Infrastructure\Openchain.Infrastructure.csproj", "{D80B32CF-E0B8-4041-80D8-1D330A276AE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Server", "src\Openchain.Server\Openchain.Server.csproj", "{F7CBF373-04FF-42C7-B6BF-0699C3941F9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Server", "src\Openchain.Server\Openchain.Server.csproj", "{F7CBF373-04FF-42C7-B6BF-0699C3941F9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Sqlite", "src\Openchain.Sqlite\Openchain.Sqlite.csproj", "{B1A4434C-35E9-4EDE-AEE5-7ADE823713AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Sqlite", "src\Openchain.Sqlite\Openchain.Sqlite.csproj", "{B1A4434C-35E9-4EDE-AEE5-7ADE823713AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.SqlServer", "src\Openchain.SqlServer\Openchain.SqlServer.csproj", "{C947476A-3D48-47F3-9CFB-2E1093020A21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.SqlServer", "src\Openchain.SqlServer\Openchain.SqlServer.csproj", "{C947476A-3D48-47F3-9CFB-2E1093020A21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Validation.PermissionBased", "src\Openchain.Validation.PermissionBased\Openchain.Validation.PermissionBased.csproj", "{08877DE4-4666-4BF3-8A33-D4E4DAB809EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Validation.PermissionBased", "src\Openchain.Validation.PermissionBased\Openchain.Validation.PermissionBased.csproj", "{08877DE4-4666-4BF3-8A33-D4E4DAB809EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Abstractions.Tests", "test\Openchain.Abstractions.Tests\Openchain.Abstractions.Tests.csproj", "{5816DA6D-AD62-49CC-A44D-A3840E991CD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Abstractions.Tests", "test\Openchain.Abstractions.Tests\Openchain.Abstractions.Tests.csproj", "{5816DA6D-AD62-49CC-A44D-A3840E991CD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Infrastructure.Tests", "test\Openchain.Infrastructure.Tests\Openchain.Infrastructure.Tests.csproj", "{2C3AA9D6-FD8E-4167-B1C5-1CCF06E06D0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Infrastructure.Tests", "test\Openchain.Infrastructure.Tests\Openchain.Infrastructure.Tests.csproj", "{2C3AA9D6-FD8E-4167-B1C5-1CCF06E06D0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Sqlite.Tests", "test\Openchain.Sqlite.Tests\Openchain.Sqlite.Tests.csproj", "{FB251EE2-AC67-4C63-A161-BC61EB669E46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Sqlite.Tests", "test\Openchain.Sqlite.Tests\Openchain.Sqlite.Tests.csproj", "{FB251EE2-AC67-4C63-A161-BC61EB669E46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.SqlServer.Tests", "test\Openchain.SqlServer.Tests\Openchain.SqlServer.Tests.csproj", "{E87A3BFD-9F65-41CD-A257-B0D33ACDFDE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.SqlServer.Tests", "test\Openchain.SqlServer.Tests\Openchain.SqlServer.Tests.csproj", "{E87A3BFD-9F65-41CD-A257-B0D33ACDFDE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Openchain.Validation.PermissionBased.Tests", "test\Openchain.Validation.PermissionBased.Tests\Openchain.Validation.PermissionBased.Tests.csproj", "{67C96103-F42C-4EC3-A57B-86577F702D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Openchain.Validation.PermissionBased.Tests", "test\Openchain.Validation.PermissionBased.Tests\Openchain.Validation.PermissionBased.Tests.csproj", "{67C96103-F42C-4EC3-A57B-86577F702D22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,5 +120,8 @@ Global
 		{FB251EE2-AC67-4C63-A161-BC61EB669E46} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{E87A3BFD-9F65-41CD-A257-B0D33ACDFDE9} = {62976C02-9AC7-450D-8634-FB01F357F47B}
 		{67C96103-F42C-4EC3-A57B-86577F702D22} = {62976C02-9AC7-450D-8634-FB01F357F47B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B102926-878B-4C43-AE50-400EFACA6036}
 	EndGlobalSection
 EndGlobal

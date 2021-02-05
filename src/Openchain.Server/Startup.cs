@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using Openchain.Infrastructure;
 using Openchain.Server.Models;
 using System.Collections.Generic;
@@ -31,7 +33,7 @@ namespace Openchain.Server
         private List<Task> runningTasks = new List<Task>();
         private readonly IConfiguration configuration;
 
-        public Startup(IHostingEnvironment application)
+        public Startup(IWebHostEnvironment application)
         {
             // Setup Configuration
             configuration = new ConfigurationBuilder()
@@ -69,12 +71,12 @@ namespace Openchain.Server
             services
                 .AddMvcCore(options => options.EnableEndpointRouting = false)
                 .AddViews()
-                .AddJsonFormatters();
+                .AddNewtonsoftJson();
 
             // Logger
             services.AddTransient<ILogger>(ConfigurationParser.CreateLogger);
 
-            LogStartup(services.BuildServiceProvider().GetService<ILogger>(), services.BuildServiceProvider().GetService<IHostingEnvironment>());
+            LogStartup(services.BuildServiceProvider().GetService<ILogger>(), services.BuildServiceProvider().GetService<IWebHostEnvironment>());
 
             // CORS Headers
             services.AddCors();
@@ -103,7 +105,7 @@ namespace Openchain.Server
             services.AddSingleton<LedgerAnchorWorker>(ConfigurationParser.CreateLedgerAnchorWorker);
         }
 
-        private static void LogStartup(ILogger logger, IHostingEnvironment environment)
+        private static void LogStartup(ILogger logger, IWebHostEnvironment environment)
         {
             logger.LogInformation($"Starting Openchain v{version}");
             logger.LogInformation(" ");
@@ -112,7 +114,7 @@ namespace Openchain.Server
         /// <summary>
         /// Configures the services.
         /// </summary>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerfactory, IConfiguration configuration, IStorageEngine store)
         {
             app.UseCors(builder => builder
                 .AllowAnyHeader()

@@ -57,7 +57,7 @@ namespace Openchain.Server.Models
         public static async Task<Func<IServiceProvider, T>> Create(IServiceProvider serviceProvider, string configurationPath)
         {
             IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            IHostingEnvironment application = serviceProvider.GetRequiredService<IHostingEnvironment>();
+            IWebHostEnvironment application = serviceProvider.GetRequiredService<IWebHostEnvironment>();
             IConfigurationSection rootSection = configuration.GetSection(configurationPath);
 
             try
