@@ -68,7 +68,7 @@ namespace Openchain
         {
             Messages.Mutation mutation = new Messages.Mutation();
             mutation.MergeFrom(data.ToProtocolBuffers());
-            
+
             return new Mutation(
                 new ByteString(mutation.Namespace.ToByteArray()),
                 mutation.Records.Select(
@@ -111,7 +111,7 @@ namespace Openchain
                 epoch + TimeSpan.FromSeconds(transaction.Timestamp),
                 new ByteString(transaction.TransactionMetadata.ToByteArray()));
         }
-        
+
         /// <summary>
         /// Calculates the hash of an array of bytes.
         /// </summary>

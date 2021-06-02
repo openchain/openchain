@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 using Microsoft.Extensions.Logging;
 using Openchain.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Openchain.Server.Models
 {
@@ -57,7 +57,7 @@ namespace Openchain.Server.Models
         public static async Task<Func<IServiceProvider, T>> Create(IServiceProvider serviceProvider, string configurationPath)
         {
             IConfiguration configuration = serviceProvider.GetRequiredService<IConfiguration>();
-            IHostingEnvironment application = serviceProvider.GetRequiredService<IHostingEnvironment>();
+            IWebHostEnvironment application = serviceProvider.GetRequiredService<IWebHostEnvironment>();
             IConfigurationSection rootSection = configuration.GetSection(configurationPath);
 
             try

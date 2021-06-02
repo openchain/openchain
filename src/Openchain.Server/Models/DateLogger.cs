@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
-using Microsoft.Extensions.Logging;
 
 namespace Openchain.Server.Models
 {

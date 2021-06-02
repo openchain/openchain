@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NBitcoin;
 using Openchain.Infrastructure;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Openchain.Anchoring.Blockchain
 {
@@ -37,7 +37,7 @@ namespace Openchain.Anchoring.Blockchain
             if (key != null)
             {
                 serviceProvider.GetRequiredService<ILogger>().LogInformation(
-                    $"Blockchain anchoring configured to publish at address: {key.PubKey.GetAddress(network).ToString()}");
+                    $"Blockchain anchoring configured to publish at address: {key.PubKey.GetAddress(ScriptPubKeyType.Legacy, network).ToString()}");
 
                 return new BlockchainAnchorRecorder(apiUrl, key, network, fees);
             }
@@ -53,9 +53,9 @@ namespace Openchain.Anchoring.Blockchain
 
             if (!string.IsNullOrEmpty(anchorKey))
             {
-                this.key = Key.Parse(anchorKey);
                 this.network = Network.GetNetworks()
-                    .First(item => item.GetVersionBytes(Base58Type.PUBKEY_ADDRESS)[0] == byte.Parse(configuration["network_byte"]));
+                    .First(item => item.GetVersionBytes(Base58Type.PUBKEY_ADDRESS, true)[0] == byte.Parse(configuration["network_byte"]));
+                this.key = Key.Parse(anchorKey, this.network);
 
                 this.apiUrl = new Uri(configuration["bitcoin_api_url"]);
                 this.fees = long.Parse(configuration["fees"]);

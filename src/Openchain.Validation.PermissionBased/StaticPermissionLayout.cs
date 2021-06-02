@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Openchain.Infrastructure;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {

@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Microsoft.SqlServer.Server;
+using Openchain.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.SqlServer.Server;
-using Openchain.Infrastructure;
 
 namespace Openchain.SqlServer
 {

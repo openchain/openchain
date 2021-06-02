@@ -12,17 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Primitives;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Openchain.Sqlite.Tests
@@ -107,6 +107,11 @@ namespace Openchain.Sqlite.Tests
             public IFileInfo GetFileInfo(string subpath) => new TestFileInfo(root + subpath) { PhysicalPath = root + subpath };
 
             public IChangeToken Watch(string filter) => null;
+
+            IChangeToken IFileProvider.Watch(string filter)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public class TestFileInfo : IFileInfo

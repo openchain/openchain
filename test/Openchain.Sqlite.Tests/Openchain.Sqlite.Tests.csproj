@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Unit tests for the Openchain.Sqlite package.</Description>
+    <Copyright>Copyright © 2015 Coinprism, Inc.</Copyright>
+    <VersionPrefix>0.7.0</VersionPrefix>
+    <Authors>Flavien Charlon</Authors>
+	<TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>Openchain.Sqlite.Tests</AssemblyName>
+    <PackageId>Openchain.Sqlite.Tests</PackageId>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <PackageIconUrl>https://www.openchain.org/package.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.openchain.org/</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50;portable-net45+win8</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Openchain.Abstractions.Tests\Openchain.Abstractions.Tests.csproj" />
+    <ProjectReference Include="..\Openchain.Infrastructure.Tests\Openchain.Infrastructure.Tests.csproj" />
+    <ProjectReference Include="..\..\src\Openchain.Sqlite\Openchain.Sqlite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+  </ItemGroup>
+
+</Project>

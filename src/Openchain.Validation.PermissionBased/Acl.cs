@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using Newtonsoft.Json.Linq;
+using Openchain.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using Openchain.Infrastructure;
 
 namespace Openchain.Validation.PermissionBased
 {
